@@ -37,7 +37,7 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, "onChang
     /** The tab selected first when uncontrolled. */
     defaultValue?: string;
     onValueChange?(value: string): void;
-    /** `segmented` raises the chosen tab in a well (Commandr's switcher); `line` underlines it.
+    /** `segmented` raises the chosen tab in a well; `line` underlines it.
      * @default "segmented" */
     variant?: "segmented" | "line";
     children: ReactNode;

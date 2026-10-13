@@ -18,7 +18,7 @@ export interface StepsProps {
     /** The index of the step in progress. Steps before it are done. Use items.length when every step is done.
      * @default 0 */
     current?: number;
-    /** `vertical` is Commandr's first-run checklist; `horizontal` is a compact progress strip.
+    /** `vertical` is a first-run checklist; `horizontal` is a compact progress strip.
      * @default "vertical" */
     orientation?: "vertical" | "horizontal";
     /** A heading above a vertical list, with a "2 of 4 done" count beside it. */

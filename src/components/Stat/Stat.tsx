@@ -44,7 +44,7 @@ function Sparkline({ values }: { values: number[] }) {
     );
 }
 
-/** One headline number with its label, change and trend, like Commandr's overview cards. */
+/** One headline number with its label, change and trend, for overview cards. */
 export function Stat({ label, value, icon, change, changeTone, description, trend, className }: StatProps) {
     const tone = changeTone ?? (change?.startsWith("+") ? "positive" : /^[-−]/.test(change ?? "") ? "negative" : "neutral");
     const rising = change ? !/^[-−]/.test(change) : false;

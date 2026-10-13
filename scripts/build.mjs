@@ -149,7 +149,9 @@ fs.writeFileSync(path.join(dist, "tokens.css"), tokensCss);
 fs.writeFileSync(path.join(dist, "components.css"), componentsCss);
 fs.writeFileSync(path.join(dist, "styles.css"), `${tokensCss}\n${componentsCss}`);
 fs.copyFileSync(path.join(root, "src/styles/tailwind.css"), path.join(dist, "tailwind.css"));
-fs.copyFileSync(path.join(root, "tokens/tokens.json"), path.join(dist, "tokens.json"));
+// The published tokens leave out "meta", which records where they were synced from.
+const { meta, ...publishedTokens } = JSON.parse(fs.readFileSync(path.join(root, "tokens/tokens.json"), "utf8"));
+fs.writeFileSync(path.join(dist, "tokens.json"), `${JSON.stringify(publishedTokens, null, 2)}\n`);
 fs.writeFileSync(
     path.join(dist, "fonts.css"),
     `/* Inter and Geist Mono, self-hosted variable fonts (SIL Open Font License 1.1). */\n@import "@fontsource-variable/inter";\n@import "@fontsource-variable/geist-mono";\n`,

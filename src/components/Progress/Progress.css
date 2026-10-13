@@ -60,7 +60,7 @@
     transition: width var(--ow-duration-slow) var(--ow-ease-standard);
 }
 
-/* Unknown length: a segment sliding across, like Commandr's licence check. */
+/* Unknown length: a segment sliding across. */
 .ow-progress__track--indeterminate .ow-progress__fill {
     width: 37%;
     animation: ow-progress-slide 1.3s var(--ow-ease-standard) infinite;

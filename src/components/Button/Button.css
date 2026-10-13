@@ -295,7 +295,7 @@
     border-bottom-right-radius: 0;
 }
 
-/* CloseButton: Commandr's dialog close, a quiet square that darkens on hover. */
+/* CloseButton: a quiet square that darkens on hover, for dialogs and panels. */
 .ow-close-button {
     display: inline-flex;
     flex-shrink: 0;

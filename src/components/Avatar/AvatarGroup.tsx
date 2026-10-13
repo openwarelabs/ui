@@ -45,7 +45,7 @@ export interface UserProps {
     className?: string;
 }
 
-/** A person: avatar, name and a line about them, as in Commandr's account menu. */
+/** A person: avatar, name and a line about them, as in an account menu. */
 export function User({ name, description, src, size = "md", className }: UserProps) {
     return (
         <div className={cx("ow-user", `ow-user--${size}`, className)}>

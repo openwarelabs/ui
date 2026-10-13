@@ -1,0 +1,36 @@
+// Makes the declarations tsc writes to dist/ work under every TypeScript module resolution, not only "bundler":
+//   *.d.ts   ESM types: relative imports get the .js (or /index.js) Node needs, so "node16" and "nodenext" find them
+//   *.d.cts  the same types for require(), pointing at each other with .cjs, so CommonJS projects get CommonJS types
+// package.json's exports send "import" to index.d.ts and "require" to index.d.cts.
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const dist = path.join(path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."), "dist");
+
+const declarations = fs
+    .readdirSync(dist, { recursive: true })
+    .map(String)
+    .filter((file) => file.endsWith(".d.ts"))
+    .map((file) => path.join(dist, file));
+
+// from "./x", import("./x"), export * from "../y": every relative specifier in a declaration.
+const specifier = /((?:from|import)\s*\(?\s*)(["'])(\.{1,2}\/[^"']*)\2/g;
+
+/** "./components/Button/Button" → "./components/Button/Button.js"; a folder → "./folder/index.js". */
+function withExtension(file, target, extension) {
+    if (/\.(c|m)?js$/.test(target)) return target.replace(/\.(c|m)?js$/, extension);
+    const resolved = path.resolve(path.dirname(file), target);
+    if (fs.existsSync(`${resolved}.d.ts`)) return `${target}${extension}`;
+    if (fs.existsSync(path.join(resolved, "index.d.ts"))) return `${target}/index${extension}`;
+    throw new Error(`${path.relative(dist, file)}: can't find the declaration for "${target}"`);
+}
+
+for (const file of declarations) {
+    const text = fs.readFileSync(file, "utf8");
+    const rewrite = (extension) => text.replace(specifier, (_, before, quote, target) => `${before}${quote}${withExtension(file, target, extension)}${quote}`);
+    fs.writeFileSync(file, rewrite(".js"));
+    fs.writeFileSync(file.replace(/\.d\.ts$/, ".d.cts"), rewrite(".cjs"));
+}
+
+console.log(`types: ${declarations.length} declarations, as .d.ts for import and .d.cts for require`);

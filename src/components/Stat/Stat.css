@@ -1,4 +1,4 @@
-/* Stat: Commandr's overview card. A muted label, a big tabular number, a change and an optional trend line. */
+/* Stat: an overview card. A muted label, a big tabular number, a change and an optional trend line. */
 .ow-stat {
     display: grid;
     min-width: 0;

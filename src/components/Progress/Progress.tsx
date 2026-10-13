@@ -16,7 +16,7 @@ export interface ProgressBarProps {
     showValue?: boolean;
     /** The text shown and read out for the value, e.g. "3 of 8 stages". Defaults to a percentage. */
     valueLabel?: string;
-    /** sm is 4px, Commandr's pipeline bar; md is 8px.
+    /** sm is 4px, for a pipeline bar; md is 8px.
      * @default "sm" */
     size?: "sm" | "md";
     /** @default "primary" */

@@ -131,7 +131,7 @@
     box-shadow: none;
 }
 
-/* The ✕ sits on the corner, as in Commandr. */
+/* The ✕ sits on the corner. */
 .ow-toaster.ow-toaster [data-sonner-toast][data-styled="true"] [data-close-button] {
     width: 22px;
     height: 22px;

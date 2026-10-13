@@ -42,7 +42,7 @@ const formatSize = (bytes: number) =>
     bytes >= 1_048_576 ? `${Math.round(bytes / 104_857.6) / 10} MB` : `${Math.round(bytes / 1024)} KB`;
 
 /**
- * Commandr's folder drop zone, for files: drop them on it, or press it to pick them.
+ * A drop zone for files: drop them on it, or press it to pick them.
  * It checks the type and size and says what was wrong.
  */
 export function FileDropZone({

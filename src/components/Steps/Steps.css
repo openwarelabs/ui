@@ -1,4 +1,4 @@
-/* Steps: Commandr's setup checklist (vertical) and a compact strip (horizontal). */
+/* Steps: a setup checklist (vertical) and a compact strip (horizontal). */
 .ow-steps--vertical {
     border: 1px solid var(--ow-border);
     border-radius: var(--ow-radius-container);

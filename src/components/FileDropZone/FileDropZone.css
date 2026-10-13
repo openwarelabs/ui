@@ -1,4 +1,4 @@
-/* FileDropZone: Commandr's folder drop zone, a dashed well that turns primary while something is dragged over it. */
+/* FileDropZone: a dashed well that turns primary while something is dragged over it. */
 .ow-dropzone {
     display: flex;
     min-height: 128px;

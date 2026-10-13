@@ -79,7 +79,7 @@ export interface CodeBlockProps {
     className?: string;
 }
 
-/** Code on Commandr's night ground, the same in both themes, with a copy button. */
+/** Code on a night ground, the same in both themes, with a copy button. */
 export function CodeBlock({ code, html, title, language, showLineNumbers = false, copyable = true, maxHeight, className }: CodeBlockProps) {
     const hasHeader = title !== undefined || language !== undefined;
     const lines = code.replace(/\n$/, "").split("\n");

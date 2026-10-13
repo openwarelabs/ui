@@ -11,10 +11,10 @@ import tailwind from "../snippets/tailwind.css?highlight";
 import toaster from "../snippets/toaster.tsx?highlight";
 
 const managers = [
-    { id: "npm", command: "npm install github:openwarelabs/ui" },
-    { id: "pnpm", command: "pnpm add github:openwarelabs/ui" },
-    { id: "yarn", command: "yarn add github:openwarelabs/ui" },
-    { id: "bun", command: "bun add github:openwarelabs/ui" },
+    { id: "npm", command: "npm install @openwarelabs/ui" },
+    { id: "pnpm", command: "pnpm add @openwarelabs/ui" },
+    { id: "yarn", command: "yarn add @openwarelabs/ui" },
+    { id: "bun", command: "bun add @openwarelabs/ui" },
 ];
 
 function NewProject() {
@@ -64,7 +64,7 @@ export function Installation() {
                 </ul>
             </Section>
 
-            <Section id="install" title="Install the package" description="It isn't on npm yet, so install it from GitHub. It builds itself on install.">
+            <Section id="install" title="Install the package" description="It's on npm as @openwarelabs/ui, with types for every setup.">
                 <Tabs defaultValue="npm" variant="line" className="docs-install-tabs">
                     <TabList aria-label="Package manager">
                         {managers.map((manager) => (

@@ -54,7 +54,7 @@ function allFolders(nodes: FileTreeNode[], parent?: string): string[] {
 }
 
 /**
- * Commandr's project structure explorer: folders open and close, files can be selected.
+ * A project structure explorer: folders open and close, files can be selected.
  * Up and Down move, Right opens a folder or goes into it, Left closes it or goes to its parent.
  */
 export function FileTree({

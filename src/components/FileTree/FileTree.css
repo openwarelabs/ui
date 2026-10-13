@@ -1,4 +1,4 @@
-/* FileTree: Commandr's structure explorer. Monospace names, hairline guides, a tinted selected file. */
+/* FileTree: a project structure explorer. Monospace names, hairline guides, a tinted selected file. */
 .ow-tree,
 .ow-tree__group {
     margin: 0;

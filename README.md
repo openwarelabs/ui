@@ -1,6 +1,6 @@
 # Openware UI
 
-React components and design tokens with Commandr's look: a midnight brand colour, a brass accent kept small, cool slate surfaces, tactile buttons that press in, and Inter. Light and dark themes, and a brand colour you can swap.
+React components and design tokens with a quiet, tactile look: a midnight brand colour, a brass accent kept small, cool slate surfaces, buttons that press in, and Inter. Light and dark themes, and a brand colour you can swap.
 
 ## Docs
 
@@ -19,7 +19,7 @@ To add a block, list it in `docs/app/blocks.tsx` and write `docs/blocks/<categor
 ## Install in a project
 
 ```sh
-npm install github:openwarelabs/ui      # until it's on npm: builds itself on install
+npm install @openwarelabs/ui
 ```
 
 React 18 or 19 is a peer dependency. Toasts come from [sonner](https://sonner.emilkowal.ski) and the colour picker from [react-colorful](https://github.com/omgovich/react-colorful), both installed with it.
@@ -86,7 +86,7 @@ The docs' header has a colour picker that does this live, and the Theming page s
 
 **Tailwind v4**: `@import "@openwarelabs/ui/tailwind.css";` after `@import "tailwindcss";` gives you `bg-surface`, `text-text-muted`, `rounded-container`, `p-lg`, `font-action`, `shadow-menu` and the rest, plus a `dark:` variant tied to `data-theme="dark"`.
 
-**No bundler?** `dist/openware-ui.iife.js` sets `window.OpenwareUI`, reading React from `window.React`.
+**No bundler?** `dist/openware-ui.iife.js` sets `window.OpenwareUI`, reading React from `window.React`. A CDN serves it straight from npm: `https://cdn.jsdelivr.net/npm/@openwarelabs/ui/dist/openware-ui.iife.js`, with `dist/styles.css` beside it.
 
 ## Rules worth keeping
 
@@ -98,4 +98,4 @@ The docs' header has a colour picker that does this live, and the Theming page s
 
 ## Credits
 
-Built from the components and styles of Commandr. Icons drawn inside the components are Lucide shapes (ISC). Inter and Geist Mono are under the SIL Open Font License 1.1. Toasts use sonner and the colour picker uses react-colorful, both under the MIT licence.
+Icons drawn inside the components are Lucide shapes (ISC). Inter and Geist Mono are under the SIL Open Font License 1.1. Toasts use sonner and the colour picker uses react-colorful, both under the MIT licence.

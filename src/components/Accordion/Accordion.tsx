@@ -111,7 +111,7 @@ export interface DisclosureProps {
     className?: string;
 }
 
-/** A section that opens and closes under its title, like Commandr's "3 files changed". */
+/** A section that opens and closes under its title, like "3 files changed" in a code review. */
 export function Disclosure({
     open,
     defaultOpen = false,
