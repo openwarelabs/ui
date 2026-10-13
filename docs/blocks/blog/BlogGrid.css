@@ -1,0 +1,488 @@
+.blog-grid,
+.blog-grid *,
+.blog-grid *::before,
+.blog-grid *::after {
+    box-sizing: border-box;
+}
+
+.blog-grid {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.blog-grid__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+.blog-grid__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 28px 40px;
+}
+
+.blog-grid__filter {
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.blog-grid__posts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin: 56px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.blog-grid__post.ow-card {
+    position: relative;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    border-radius: var(--ow-radius-card);
+    padding: 6px;
+    transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.blog-grid__post.ow-card:hover {
+    border-color: var(--ow-border-strong);
+}
+
+.blog-grid__post.ow-card:has(.blog-grid__link:focus-visible) {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.blog-grid__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 18px 16px 14px;
+}
+
+.blog-grid__meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+}
+
+.blog-grid__post-title {
+    margin: 14px 0 0;
+    font-size: 19px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+}
+
+/* The title's link covers the whole card, so anywhere on it opens the post. */
+.blog-grid__link {
+    color: inherit;
+    text-decoration: none;
+    outline: none;
+}
+
+.blog-grid__link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+}
+
+.blog-grid__excerpt {
+    margin: 8px 0 22px;
+    color: var(--ow-text-muted);
+    font-size: 14.5px;
+    line-height: 1.55;
+    text-wrap: pretty;
+}
+
+.blog-grid__byline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: auto;
+    border-top: 1px solid var(--ow-border);
+    padding-top: 14px;
+}
+
+.blog-grid__read {
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+}
+
+.blog-grid__footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 48px;
+}
+
+/* Covers: drawn from the brand scale on a dot grid. Night covers stay midnight in both themes; day covers are a
+   wash of the brand over the surface, so they follow the theme. Shapes are sized in cqw, so they scale with the card. */
+.blog-grid__cover {
+    --blog-grid-ink: var(--ow-primary-text);
+    --blog-grid-dot: color-mix(in srgb, var(--ow-primary-text) 18%, transparent);
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    flex-shrink: 0;
+    border-radius: var(--ow-radius-container);
+    background: color-mix(in srgb, var(--ow-primary) 7%, var(--ow-surface));
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ow-primary-text) 10%, transparent);
+    container-type: inline-size;
+    isolation: isolate;
+}
+
+.blog-grid__cover::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(var(--blog-grid-dot) 1px, transparent 1.5px);
+    background-position: center;
+    background-size: 14px 14px;
+}
+
+.blog-grid__cover--orbit,
+.blog-grid__cover--bars,
+.blog-grid__cover--glyph {
+    --blog-grid-ink: var(--ow-brand-300);
+    --blog-grid-dot: color-mix(in srgb, var(--ow-brand-300) 20%, transparent);
+    background: linear-gradient(165deg, var(--ow-brand-600), var(--ow-brand-800) 75%);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ow-brand-300) 14%, transparent);
+}
+
+.blog-grid__shape {
+    position: absolute;
+    display: block;
+}
+
+.blog-grid__brass {
+    position: absolute;
+    display: block;
+    width: 2.4cqw;
+    height: 2.4cqw;
+    border-radius: 50%;
+    background: var(--ow-brass);
+}
+
+/* Orbit: an agent at the centre, work circling it. */
+.blog-grid__ring {
+    top: 50%;
+    left: 50%;
+    border: 1px solid color-mix(in srgb, var(--blog-grid-ink) 50%, transparent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.blog-grid__ring--1 {
+    width: 24cqw;
+    height: 24cqw;
+}
+
+.blog-grid__ring--2 {
+    width: 40cqw;
+    height: 40cqw;
+    border-color: color-mix(in srgb, var(--blog-grid-ink) 34%, transparent);
+}
+
+.blog-grid__ring--3 {
+    width: 56cqw;
+    height: 56cqw;
+    border-color: color-mix(in srgb, var(--blog-grid-ink) 20%, transparent);
+}
+
+.blog-grid__core {
+    top: 50%;
+    left: 50%;
+    width: 11cqw;
+    height: 11cqw;
+    border-radius: 3cqw;
+    background: linear-gradient(180deg, var(--ow-brand-300), var(--ow-brand-500));
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 40%, transparent);
+    transform: translate(-50%, -50%);
+}
+
+.blog-grid__cover--orbit .blog-grid__brass {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-38deg) translateX(20cqw);
+}
+
+.blog-grid__moon {
+    top: 50%;
+    left: 50%;
+    width: 1.6cqw;
+    height: 1.6cqw;
+    border-radius: 50%;
+    background: var(--ow-brand-200);
+    transform: translate(-50%, -50%) rotate(152deg) translateX(28cqw);
+}
+
+/* Diff: two panes of changed lines, a comment pinned to one. */
+.blog-grid__pane {
+    display: grid;
+    width: 44cqw;
+    align-content: start;
+    gap: 2.2cqw;
+    border: 1px solid color-mix(in srgb, var(--blog-grid-ink) 22%, transparent);
+    border-radius: 2.4cqw;
+    background: var(--ow-surface);
+    padding: 4cqw 3.6cqw;
+}
+
+.blog-grid__pane--back {
+    top: 11cqw;
+    left: 17cqw;
+    height: 34cqw;
+}
+
+.blog-grid__pane--front {
+    top: 21cqw;
+    left: 39cqw;
+    height: 30cqw;
+}
+
+.blog-grid__line {
+    position: relative;
+    display: block;
+    height: 1.7cqw;
+    border-radius: 1cqw;
+    background: color-mix(in srgb, var(--blog-grid-ink) 18%, transparent);
+}
+
+.blog-grid__line--added {
+    background: color-mix(in srgb, var(--blog-grid-ink) 55%, transparent);
+}
+
+.blog-grid__line--removed {
+    background: color-mix(in srgb, var(--blog-grid-ink) 9%, transparent);
+}
+
+.blog-grid__cover--diff .blog-grid__brass {
+    top: 50%;
+    right: -4.4cqw;
+    transform: translateY(-50%);
+}
+
+/* Bars: deploys a week, climbing. */
+.blog-grid__chart {
+    right: 16cqw;
+    bottom: 13cqw;
+    left: 16cqw;
+    display: flex;
+    height: 40cqw;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-bottom: 1px solid color-mix(in srgb, var(--blog-grid-ink) 40%, transparent);
+}
+
+.blog-grid__bar {
+    position: relative;
+    display: block;
+    width: 6cqw;
+    border-radius: 1.4cqw 1.4cqw 0 0;
+    background: color-mix(in srgb, var(--blog-grid-ink) 30%, transparent);
+}
+
+.blog-grid__bar:nth-child(1) {
+    height: 26%;
+}
+
+.blog-grid__bar:nth-child(2) {
+    height: 38%;
+}
+
+.blog-grid__bar:nth-child(3) {
+    height: 33%;
+}
+
+.blog-grid__bar:nth-child(4) {
+    height: 54%;
+    background: color-mix(in srgb, var(--blog-grid-ink) 45%, transparent);
+}
+
+.blog-grid__bar:nth-child(5) {
+    height: 68%;
+    background: color-mix(in srgb, var(--blog-grid-ink) 60%, transparent);
+}
+
+.blog-grid__bar:nth-child(6) {
+    height: 88%;
+    background: linear-gradient(180deg, var(--ow-brand-200), var(--ow-brand-400));
+}
+
+.blog-grid__bar .blog-grid__brass {
+    top: -4.4cqw;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Horizon: a customer story, the company's mark rising over calm water. */
+.blog-grid__sun {
+    bottom: 42%;
+    left: 50%;
+    width: 34cqw;
+    height: 17cqw;
+    border-radius: 17cqw 17cqw 0 0;
+    background: linear-gradient(180deg, var(--blog-grid-ink), color-mix(in srgb, var(--blog-grid-ink) 55%, transparent));
+    transform: translateX(-50%);
+}
+
+.blog-grid__sun .blog-grid__brass {
+    right: -12cqw;
+    bottom: 0.6cqw;
+    width: 2cqw;
+    height: 2cqw;
+}
+
+.blog-grid__water {
+    top: 58%;
+    left: 50%;
+    display: grid;
+    justify-items: center;
+    gap: 2.6cqw;
+    width: 52cqw;
+    transform: translateX(-50%);
+}
+
+.blog-grid__water span {
+    display: block;
+    height: 1px;
+    background: color-mix(in srgb, var(--blog-grid-ink) 50%, transparent);
+}
+
+.blog-grid__water span:nth-child(1) {
+    width: 100%;
+}
+
+.blog-grid__water span:nth-child(2) {
+    width: 62%;
+}
+
+.blog-grid__water span:nth-child(3) {
+    width: 34%;
+}
+
+.blog-grid__wordmark {
+    bottom: 5.5cqw;
+    left: 6cqw;
+    display: flex;
+    align-items: center;
+    gap: 1.4cqw;
+    color: var(--blog-grid-ink);
+    font-size: 3.6cqw;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.02em;
+}
+
+.blog-grid__wordmark::before {
+    content: "";
+    width: 2.8cqw;
+    height: 2.8cqw;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.blog-grid__cover--tiles .blog-grid__wordmark::before {
+    border-radius: 0.6cqw;
+}
+
+/* Glyph: braces for an engineering post, with one brass key inside. */
+.blog-grid__braces {
+    top: 50%;
+    left: 50%;
+    color: color-mix(in srgb, var(--blog-grid-ink) 80%, transparent);
+    font-family: var(--ow-font-mono);
+    font-size: 40cqw;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    white-space: pre;
+    transform: translate(-50%, -54%);
+}
+
+.blog-grid__cover--glyph .blog-grid__brass {
+    top: 50%;
+    left: 50%;
+    width: 3.2cqw;
+    height: 3.2cqw;
+    transform: translate(-50%, -50%);
+}
+
+/* Tiles: three tools folded into one. */
+.blog-grid__tools {
+    top: 50%;
+    left: 21cqw;
+    display: grid;
+    gap: 3.4cqw;
+    transform: translateY(-50%);
+}
+
+.blog-grid__tool {
+    position: relative;
+    display: block;
+    width: 8cqw;
+    height: 8cqw;
+    border: 1px solid color-mix(in srgb, var(--blog-grid-ink) 45%, transparent);
+    border-radius: 2cqw;
+    background: var(--ow-surface);
+}
+
+/* Each tool's line runs right, into the one they became. */
+.blog-grid__tool::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 20cqw;
+    border-top: 1px dashed color-mix(in srgb, var(--blog-grid-ink) 45%, transparent);
+}
+
+.blog-grid__one {
+    top: 50%;
+    left: 49cqw;
+    width: 30cqw;
+    height: 30cqw;
+    border-radius: 6cqw;
+    background: linear-gradient(180deg, var(--ow-brand-500), var(--ow-brand-700));
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
+    transform: translateY(-50%);
+}
+
+.blog-grid__one .blog-grid__brass {
+    top: 3.6cqw;
+    right: 3.6cqw;
+}
+
+@media (max-width: 1024px) {
+    .blog-grid__posts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .blog-grid {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .blog-grid__posts {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+        margin-top: 36px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .blog-grid__post.ow-card {
+        transition: none;
+    }
+}

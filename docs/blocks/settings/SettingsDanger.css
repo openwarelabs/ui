@@ -1,0 +1,99 @@
+/* The last section of a project's settings: actions that are hard or impossible to take back, on a card edged in red. */
+.settings-danger,
+.settings-danger *,
+.settings-danger *::before,
+.settings-danger *::after {
+    box-sizing: border-box;
+}
+
+.settings-danger {
+    background: var(--ow-canvas);
+    padding: 48px 32px 56px;
+    color: var(--ow-text);
+}
+
+.settings-danger__inner {
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+.settings-danger__header {
+    margin-bottom: 20px;
+}
+
+.settings-danger__title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+}
+
+.settings-danger__text {
+    margin: 4px 0 0;
+    color: var(--ow-text-muted);
+    text-wrap: pretty;
+}
+
+.settings-danger__code {
+    border-radius: var(--ow-radius-sm);
+    background: var(--ow-code-ground);
+    padding: 1px 5px;
+    color: var(--ow-text);
+    font-family: var(--ow-font-mono);
+    font-size: 0.9em;
+}
+
+.settings-danger__card {
+    border-color: var(--ow-danger-border);
+    padding: 2px 20px;
+}
+
+/* The last row, the one that can't be undone, sits on a faint wash of red. */
+.settings-danger__card .ow-settings-row:last-child {
+    margin: 0 -20px -2px;
+    border-radius: 0 0 calc(var(--ow-radius-container) - 1px) calc(var(--ow-radius-container) - 1px);
+    background: var(--ow-danger-surface);
+    padding: 14px 20px 16px;
+}
+
+.settings-danger__gone {
+    padding: 36px 20px;
+}
+
+/* The confirmation. */
+.settings-danger__contents {
+    display: grid;
+    gap: 6px;
+    margin: -4px 0 4px;
+    padding: 0 0 0 18px;
+    color: var(--ow-text-soft);
+}
+
+.settings-danger__contents strong {
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+    font-variant-numeric: tabular-nums;
+}
+
+.settings-danger__confirm {
+    font-family: var(--ow-font-mono);
+    font-size: 13px;
+}
+
+@media (max-width: 760px) {
+    .settings-danger {
+        padding: 28px var(--ow-page-gutter) 40px;
+    }
+    .settings-danger__card {
+        padding: 2px 16px;
+    }
+    .settings-danger__card .ow-settings-row:last-child {
+        margin: 0 -16px -2px;
+        padding: 14px 16px 16px;
+    }
+    .settings-danger__card .ow-settings-row__control {
+        flex: 1 1 100%;
+        justify-content: flex-start;
+    }
+}

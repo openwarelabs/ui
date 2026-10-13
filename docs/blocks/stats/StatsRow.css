@@ -1,0 +1,128 @@
+.stats-row,
+.stats-row *,
+.stats-row *::before,
+.stats-row *::after {
+    box-sizing: border-box;
+}
+
+.stats-row {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.stats-row__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+/* Four numbers split by hairlines; the number shows first, though the label comes first in the markup. */
+.stats-row__list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 64px 0 0;
+}
+
+.stats-row__item {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 24px;
+    text-align: center;
+}
+
+.stats-row__item + .stats-row__item {
+    border-left: 1px solid var(--ow-border);
+}
+
+.stats-row__value {
+    margin: 0;
+    font-size: 60px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    letter-spacing: -0.045em;
+    white-space: nowrap;
+}
+
+.stats-row__unit {
+    margin-left: 0.06em;
+    color: var(--ow-text-muted);
+    font-size: 0.5em;
+    letter-spacing: -0.02em;
+}
+
+.stats-row__label {
+    color: var(--ow-text-muted);
+    font-size: 15px;
+    line-height: 1.45;
+    text-wrap: balance;
+}
+
+.stats-row__note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 48px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+}
+
+/* A brass dot, the section's one touch of colour. */
+.stats-row__note::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--ow-brass);
+}
+
+@media (max-width: 1024px) {
+    .stats-row__value {
+        font-size: 48px;
+    }
+    .stats-row__item {
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 900px) {
+    .stats-row__list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .stats-row__item {
+        padding: 28px 16px;
+    }
+    .stats-row__item + .stats-row__item {
+        border-left: 0;
+    }
+    .stats-row__item:nth-child(even) {
+        border-left: 1px solid var(--ow-border);
+    }
+    .stats-row__item:nth-child(n + 3) {
+        border-top: 1px solid var(--ow-border);
+    }
+}
+
+@media (max-width: 760px) {
+    .stats-row {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .stats-row__list {
+        margin-top: 40px;
+    }
+    .stats-row__item {
+        padding: 24px 12px;
+    }
+    .stats-row__value {
+        font-size: 40px;
+    }
+    .stats-row__label {
+        font-size: 14px;
+    }
+    .stats-row__note {
+        margin-top: 32px;
+    }
+}

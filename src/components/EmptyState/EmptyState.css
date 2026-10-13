@@ -1,0 +1,57 @@
+/* EmptyState: centred, at most 360px of text, an icon tile above. */
+.ow-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--ow-space-lg);
+    padding: var(--ow-space-7xl) var(--ow-space-2xl);
+    text-align: center;
+}
+
+.ow-empty--bordered {
+    border: 1.5px dashed var(--ow-border-strong);
+    border-radius: var(--ow-radius-container);
+}
+
+.ow-empty__icon {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-surface-muted);
+    color: var(--ow-text-muted);
+}
+
+.ow-empty__text {
+    display: grid;
+    max-width: 360px;
+    gap: var(--ow-space-2xs);
+}
+
+.ow-empty__title {
+    margin: 0;
+    color: var(--ow-text);
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.3;
+    text-wrap: balance;
+}
+
+.ow-empty__description {
+    margin: 0;
+    color: var(--ow-text-muted);
+    font-size: 14px;
+    line-height: 1.55;
+    text-wrap: pretty;
+}
+
+.ow-empty__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--ow-space-sm);
+    margin-top: var(--ow-space-2xs);
+}

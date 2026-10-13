@@ -1,0 +1,412 @@
+.changelog,
+.changelog *,
+.changelog *::before,
+.changelog *::after {
+    box-sizing: border-box;
+}
+
+.changelog {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.changelog__inner {
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+.changelog__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px 40px;
+}
+
+.changelog__subscribe {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    font-size: 14px;
+}
+
+.changelog__subscribe .ow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.changelog__subscribe svg {
+    color: var(--ow-icon);
+}
+
+.changelog__list {
+    margin: 64px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Each release: when on the left, what on the right, joined by the rail. */
+.changelog__release {
+    display: grid;
+    grid-template-columns: 184px minmax(0, 1fr);
+}
+
+.changelog__when {
+    display: grid;
+    align-content: start;
+    justify-items: start;
+    gap: 6px;
+    padding: 2px 24px 0 0;
+}
+
+.changelog__version {
+    font-family: var(--ow-font-mono);
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.changelog__date {
+    color: var(--ow-text-muted);
+    font-size: 13.5px;
+}
+
+.changelog__body {
+    position: relative;
+    border-left: 1px solid var(--ow-border);
+    padding: 0 0 72px 40px;
+}
+
+.changelog__release:last-child .changelog__body {
+    border-left-color: transparent;
+    padding-bottom: 0;
+}
+
+/* The rail fades out under the last release instead of stopping dead. */
+.changelog__release:last-child .changelog__body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -1px;
+    width: 1px;
+    height: 120px;
+    background: linear-gradient(var(--ow-border), transparent);
+}
+
+.changelog__node {
+    position: absolute;
+    top: 7px;
+    left: -6px;
+    width: 11px;
+    height: 11px;
+    border: 2px solid var(--ow-border-strong);
+    border-radius: 50%;
+    background: var(--ow-paper);
+}
+
+.changelog__release:first-child .changelog__node {
+    border-color: var(--ow-paper);
+    background: var(--ow-brass);
+    box-shadow: 0 0 0 1px var(--ow-brass);
+}
+
+.changelog__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+}
+
+.changelog__summary {
+    max-width: 620px;
+    margin: 10px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 16px;
+    line-height: 1.6;
+    text-wrap: pretty;
+}
+
+.changelog__groups {
+    display: grid;
+    gap: 18px;
+    margin-top: 28px;
+}
+
+.changelog__group {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+    align-items: start;
+}
+
+.changelog__group .ow-badge {
+    margin-top: 1px;
+}
+
+.changelog__items {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.changelog__items li {
+    position: relative;
+    padding-left: 16px;
+    color: var(--ow-text-soft);
+    font-size: 15px;
+    line-height: 1.55;
+    text-wrap: pretty;
+}
+
+.changelog__items li::before {
+    content: "";
+    position: absolute;
+    top: 0.72em;
+    left: 0;
+    width: 5px;
+    height: 1px;
+    background: var(--ow-text-muted);
+}
+
+.changelog__more {
+    display: flex;
+    margin: 48px 0 0 224px;
+}
+
+/* The headline change, drawn: a small window of the product on a dot grid. */
+.changelog__visual {
+    max-width: 620px;
+    margin-top: 24px;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-card);
+    background-color: var(--ow-canvas);
+    background-image: radial-gradient(var(--ow-dot) 1px, transparent 1.4px);
+    background-size: 18px 18px;
+    padding: 28px;
+}
+
+.changelog__pr {
+    display: grid;
+    gap: 14px;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: 16px 18px;
+    box-shadow: var(--ow-shadow-control);
+}
+
+.changelog__pr-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.changelog__pr-head > svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--ow-success-text);
+}
+
+.changelog__pr-title {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+    gap: 3px;
+}
+
+.changelog__pr-name {
+    font-size: 14.5px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.changelog__pr-branch {
+    overflow: hidden;
+    color: var(--ow-text-muted);
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.changelog__steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    border-top: 1px solid var(--ow-border);
+    padding-top: 12px;
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+}
+
+.changelog__steps span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.changelog__steps svg {
+    color: var(--ow-success-text);
+}
+
+.changelog__pr-foot {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+}
+
+.changelog__agent {
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-primary-border);
+    border-radius: 50%;
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.changelog__diffstat {
+    margin-left: auto;
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+}
+
+.changelog__added {
+    color: var(--ow-success-text);
+}
+
+.changelog__removed {
+    margin-left: 6px;
+    color: var(--ow-danger-text);
+}
+
+.changelog__deploys {
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    box-shadow: var(--ow-shadow-control);
+}
+
+.changelog__deploy {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    font-size: 13.5px;
+}
+
+.changelog__deploy .ow-badge {
+    justify-self: end;
+}
+
+.changelog__deploy + .changelog__deploy {
+    border-top: 1px solid var(--ow-border);
+}
+
+.changelog__deploy-name {
+    display: grid;
+    min-width: 0;
+    gap: 2px;
+}
+
+.changelog__deploy-name strong {
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.changelog__deploy-name span {
+    overflow: hidden;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.changelog__deploy--warm {
+    background: var(--ow-surface-muted);
+}
+
+/* Keeps the badges in one column when a row has no button. */
+.changelog__deploy-spacer {
+    width: 104px;
+}
+
+@media (max-width: 760px) {
+    .changelog {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .changelog__list {
+        margin-top: 44px;
+    }
+    .changelog__release {
+        position: relative;
+        grid-template-columns: minmax(0, 1fr);
+        border-left: 1px solid var(--ow-border);
+        padding: 0 0 56px 24px;
+    }
+    .changelog__release:last-child {
+        border-left-color: transparent;
+        padding-bottom: 0;
+    }
+    .changelog__when {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px 12px;
+        margin-bottom: 10px;
+        padding: 0;
+    }
+    .changelog__body,
+    .changelog__release:last-child .changelog__body {
+        position: static;
+        border-left: 0;
+        padding: 0;
+    }
+    .changelog__release:last-child .changelog__body::after {
+        top: 0;
+        left: -1px;
+    }
+    .changelog__node {
+        top: 4px;
+    }
+    .changelog__title {
+        font-size: 21px;
+    }
+    .changelog__summary {
+        font-size: 15px;
+    }
+    .changelog__group {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+    }
+    .changelog__visual {
+        margin-right: -4px;
+        padding: 14px;
+    }
+    .changelog__pr {
+        padding: 14px;
+    }
+    .changelog__pr-head .ow-badge {
+        display: none;
+    }
+    .changelog__deploy {
+        grid-template-columns: minmax(0, 1fr) auto;
+        padding: 12px;
+    }
+    .changelog__deploy .ow-button,
+    .changelog__deploy-spacer,
+    .changelog__for {
+        display: none;
+    }
+    .changelog__more {
+        margin: 36px 0 0 24px;
+    }
+}

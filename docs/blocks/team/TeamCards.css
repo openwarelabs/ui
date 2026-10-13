@@ -1,0 +1,129 @@
+.team-cards,
+.team-cards *,
+.team-cards *::before,
+.team-cards *::after {
+    box-sizing: border-box;
+}
+
+.team-cards {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.team-cards__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+.team-cards__list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin: 56px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.team-cards__card.ow-card {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    border-radius: var(--ow-radius-card);
+    padding: 24px 24px 16px;
+}
+
+.team-cards__head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* The library's largest Avatar is 36px; cards like a bigger face. */
+.team-cards__avatar.ow-avatar {
+    width: 56px;
+    height: 56px;
+    font-size: 18px;
+}
+
+.team-cards__who {
+    min-width: 0;
+}
+
+.team-cards__name {
+    margin: 0;
+    font-size: 16px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.01em;
+}
+
+.team-cards__role {
+    margin: 2px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 14px;
+}
+
+.team-cards__about {
+    flex: 1;
+    margin: 20px 0 0;
+    color: var(--ow-text-soft);
+    font-size: 14.5px;
+    line-height: 1.6;
+    text-wrap: pretty;
+}
+
+.team-cards__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 20px;
+    border-top: 1px solid var(--ow-border);
+    padding-top: 12px;
+}
+
+.team-cards__place {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+}
+
+.team-cards__place svg {
+    color: var(--ow-icon);
+}
+
+.team-cards__links {
+    display: flex;
+    gap: 2px;
+    margin-right: -6px;
+}
+
+.team-cards__links a {
+    color: var(--ow-text-muted);
+}
+
+.team-cards__links a:hover {
+    color: var(--ow-text);
+}
+
+@media (max-width: 1024px) {
+    .team-cards__list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .team-cards {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .team-cards__list {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+        margin-top: 40px;
+    }
+    .team-cards__card.ow-card {
+        padding: 20px 20px 12px;
+    }
+}

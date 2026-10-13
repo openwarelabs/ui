@@ -1,0 +1,107 @@
+/* NumberField: − value + in one field. */
+.ow-number-field {
+    display: inline-flex;
+    width: 100%;
+    max-width: 200px;
+    height: 40px;
+    align-items: stretch;
+    overflow: hidden;
+    border: 1px solid var(--ow-border-strong);
+    border-radius: var(--ow-radius-form);
+    background: var(--ow-surface);
+    color: var(--ow-text);
+    transition-property: border-color, box-shadow, opacity;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-number-field--sm {
+    max-width: 150px;
+    height: 32px;
+}
+
+.ow-number-field:focus-within {
+    border-color: var(--ow-focus-border);
+    box-shadow: var(--ow-shadow-focus);
+}
+
+.ow-number-field:has(.ow-number-field__input:focus-visible) {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-number-field--invalid {
+    border-color: var(--ow-danger-line);
+}
+
+.ow-number-field--invalid:focus-within {
+    border-color: var(--ow-danger-solid);
+    box-shadow: var(--ow-shadow-focus-danger);
+}
+
+.ow-number-field--disabled {
+    cursor: not-allowed;
+    opacity: 0.62;
+}
+
+.ow-number-field__input {
+    min-width: 0;
+    flex: 1;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    padding: 0 var(--ow-space-xs);
+    color: inherit;
+    font: inherit;
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    outline: 0;
+}
+
+.ow-number-field--sm .ow-number-field__input {
+    font-size: 13px;
+}
+
+.ow-number-field__step {
+    display: inline-flex;
+    width: 36px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    color: var(--ow-text-muted);
+    cursor: pointer;
+    transition-property: color, background-color;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-number-field--sm .ow-number-field__step {
+    width: 28px;
+}
+
+.ow-number-field__step:first-child {
+    border-right: 1px solid var(--ow-border);
+}
+
+.ow-number-field__step:last-child {
+    border-left: 1px solid var(--ow-border);
+}
+
+.ow-number-field__step:hover:not(:disabled) {
+    background: var(--ow-surface-muted);
+    color: var(--ow-text);
+}
+
+.ow-number-field__step:active:not(:disabled) {
+    background: var(--ow-hover);
+}
+
+.ow-number-field__step:disabled {
+    color: var(--ow-text-disabled);
+    cursor: not-allowed;
+}

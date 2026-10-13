@@ -1,0 +1,212 @@
+.pricing-single,
+.pricing-single *,
+.pricing-single *::before,
+.pricing-single *::after {
+    box-sizing: border-box;
+}
+
+.pricing-single {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.pricing-single__inner {
+    display: flex;
+    max-width: var(--ow-page-max);
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+/* What's included on the left; the price on an inset panel on the right. */
+.pricing-single__card {
+    display: grid;
+    width: 100%;
+    max-width: 1000px;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 8px;
+    margin-top: 64px;
+    border-radius: var(--ow-radius-card);
+    padding: 8px;
+}
+
+.pricing-single__details {
+    padding: 32px 32px 36px;
+}
+
+.pricing-single__name {
+    margin: 0;
+    font-size: 24px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.02em;
+}
+
+.pricing-single__description {
+    max-width: 480px;
+    margin: 10px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.pricing-single__included {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 32px 0 0;
+    color: var(--ow-primary-text);
+    font-size: 13px;
+    font-weight: var(--ow-weight-emphasis);
+    white-space: nowrap;
+}
+
+.pricing-single__included::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: var(--ow-border);
+}
+
+.pricing-single__features {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 24px;
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pricing-single__features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--ow-text-soft);
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.pricing-single__features svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: var(--ow-primary-text);
+}
+
+.pricing-single__offer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: calc(var(--ow-radius-card) - 6px);
+    background: var(--ow-canvas);
+    padding: 40px 32px;
+    text-align: center;
+}
+
+.pricing-single__offer-label {
+    margin: 0;
+    color: var(--ow-text-soft);
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.pricing-single__price {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 8px;
+    margin: 20px 0 0;
+}
+
+.pricing-single__amount {
+    font-size: 64px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.045em;
+    font-variant-numeric: tabular-nums;
+}
+
+.pricing-single__currency {
+    color: var(--ow-text-muted);
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: 0.02em;
+}
+
+.pricing-single__unit {
+    margin: 8px 0 28px;
+    color: var(--ow-text-muted);
+    font-size: 14px;
+}
+
+.pricing-single__fine {
+    margin: 16px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+    line-height: 1.5;
+    text-wrap: balance;
+}
+
+.pricing-single__promises {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 32px;
+    margin: 28px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pricing-single__promises li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ow-text-muted);
+    font-size: 13.5px;
+}
+
+.pricing-single__promises svg {
+    color: var(--ow-icon);
+}
+
+@media (max-width: 1024px) {
+    .pricing-single__card {
+        grid-template-columns: minmax(0, 1fr) 300px;
+    }
+    .pricing-single__details {
+        padding: 28px 24px 32px;
+    }
+    .pricing-single__features {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .pricing-single__offer {
+        padding: 36px 24px;
+    }
+}
+
+@media (max-width: 760px) {
+    .pricing-single {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .pricing-single__card {
+        grid-template-columns: minmax(0, 1fr);
+        margin-top: 40px;
+        padding: 6px;
+    }
+    .pricing-single__details {
+        padding: 22px 18px 26px;
+    }
+    .pricing-single__offer {
+        order: -1;
+        padding: 32px 20px;
+    }
+    .pricing-single__amount {
+        font-size: 56px;
+    }
+    .pricing-single__promises {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}

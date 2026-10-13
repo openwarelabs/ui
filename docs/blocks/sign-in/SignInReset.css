@@ -1,0 +1,174 @@
+/* A slim bar with the way back, and one card below it that moves through the three steps. */
+.sign-in-reset,
+.sign-in-reset *,
+.sign-in-reset *::before,
+.sign-in-reset *::after {
+    box-sizing: border-box;
+}
+
+.sign-in-reset {
+    display: flex;
+    min-height: 100dvh;
+    flex-direction: column;
+    background: var(--ow-canvas);
+    color: var(--ow-text);
+}
+
+.sign-in-reset__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+    padding: 18px 24px;
+}
+
+.sign-in-reset__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.01em;
+}
+
+.sign-in-reset__mark {
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+    background: linear-gradient(180deg, var(--ow-brand-500), var(--ow-brand-700));
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
+}
+
+.sign-in-reset__back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ow-space-xs);
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    font-weight: var(--ow-weight-control);
+}
+
+.sign-in-reset__body {
+    display: grid;
+    flex: 1;
+    place-items: center;
+    padding: 8px var(--ow-page-gutter) 64px;
+}
+
+.sign-in-reset__card {
+    width: 100%;
+    max-width: 420px;
+    padding: 28px;
+}
+
+.sign-in-reset__form {
+    display: grid;
+    gap: var(--ow-space-4xl);
+}
+
+.sign-in-reset__icon {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-tile);
+    background: var(--ow-surface-muted);
+    color: var(--ow-primary-text);
+}
+
+.sign-in-reset__icon--done {
+    border-color: var(--ow-success-border);
+    background: var(--ow-success-surface);
+    color: var(--ow-success-text);
+}
+
+.sign-in-reset__title {
+    margin: -4px 0 0;
+    font-size: 22px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+.sign-in-reset__title:focus {
+    outline: none;
+}
+
+.sign-in-reset__lead {
+    margin: -14px 0 4px;
+    color: var(--ow-text-muted);
+    line-height: 1.55;
+    text-wrap: pretty;
+}
+
+.sign-in-reset__email {
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+    overflow-wrap: anywhere;
+}
+
+/* What the password needs, each ticked off as it's met. */
+.sign-in-reset__rules {
+    display: grid;
+    gap: 7px;
+    margin: -8px 0 2px;
+    padding: 0;
+    list-style: none;
+}
+
+.sign-in-reset__rule {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    transition: color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.sign-in-reset__rule-mark {
+    display: inline-flex;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border-strong);
+    border-radius: 50%;
+    color: transparent;
+    transition:
+        background-color var(--ow-duration-base) var(--ow-ease-standard),
+        border-color var(--ow-duration-base) var(--ow-ease-standard),
+        color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.sign-in-reset__rule[data-met] {
+    color: var(--ow-text);
+}
+
+.sign-in-reset__rule[data-met] .sign-in-reset__rule-mark {
+    border-color: var(--ow-success-solid);
+    background: var(--ow-success-solid);
+    color: var(--ow-on-primary);
+}
+
+@media (max-width: 760px) {
+    .sign-in-reset__bar {
+        padding: 14px 16px;
+    }
+    .sign-in-reset__body {
+        align-items: start;
+        padding-top: 12px;
+    }
+    .sign-in-reset__card {
+        padding: 22px 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sign-in-reset__rule,
+    .sign-in-reset__rule-mark {
+        transition: none;
+    }
+}

@@ -1,0 +1,21 @@
+/* Tooltip: a small dark label in the top layer, above the child (or below when there's no room). */
+.ow-tooltip {
+    display: inline-flex;
+}
+
+.ow-tooltip__bubble {
+    z-index: 70;
+    max-width: 240px;
+    overflow: visible;
+    border: 0;
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-tooltip);
+    padding: var(--ow-space-3xs) var(--ow-space-sm);
+    color: var(--ow-on-tooltip);
+    font-family: var(--ow-font-sans);
+    font-size: 12px;
+    font-weight: var(--ow-weight-regular);
+    line-height: 1.35;
+    white-space: nowrap;
+    pointer-events: none;
+}

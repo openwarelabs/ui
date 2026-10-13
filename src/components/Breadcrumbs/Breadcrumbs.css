@@ -1,0 +1,91 @@
+/* Breadcrumbs and Link. */
+.ow-breadcrumbs__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-2xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.ow-breadcrumbs__item {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: var(--ow-space-2xs);
+}
+
+.ow-breadcrumbs__link {
+    margin: 0;
+    border: 0;
+    border-radius: var(--ow-radius-sm);
+    background: transparent;
+    padding: 2px 4px;
+    color: var(--ow-text-muted);
+    font: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-breadcrumbs__link:hover {
+    color: var(--ow-text);
+}
+
+.ow-breadcrumbs__link:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 1px;
+}
+
+.ow-breadcrumbs__current {
+    padding: 2px 4px;
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-control);
+}
+
+.ow-breadcrumbs__separator {
+    display: inline-flex;
+    color: var(--ow-icon);
+}
+
+.ow-link {
+    display: inline;
+    border-radius: 2px;
+    color: var(--ow-text);
+    text-decoration-line: underline;
+    text-decoration-color: var(--ow-border-strong);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    transition-property: color, text-decoration-color;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-link:hover {
+    color: var(--ow-brass-deep);
+    text-decoration-color: var(--ow-brass-deep);
+}
+
+.ow-link:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-link--muted {
+    color: var(--ow-text-muted);
+}
+
+.ow-link--standalone {
+    font-weight: var(--ow-weight-control);
+    text-decoration-color: transparent;
+}
+
+.ow-link__external {
+    display: inline-block;
+    margin-left: 2px;
+    vertical-align: -1px;
+}

@@ -1,0 +1,404 @@
+.hero-download,
+.hero-download *,
+.hero-download *::before,
+.hero-download *::after {
+    box-sizing: border-box;
+}
+
+.hero-download {
+    overflow: hidden;
+    background: var(--ow-paper);
+    padding: 112px 32px 120px;
+    color: var(--ow-text);
+}
+
+.hero-download__inner {
+    display: grid;
+    max-width: var(--ow-page-max);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: 72px;
+    margin: 0 auto;
+}
+
+.hero-download__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.hero-download__title {
+    margin: 24px 0 0;
+    font-size: 64px;
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+}
+
+.hero-download__lead {
+    max-width: 480px;
+    margin: 22px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 18px;
+    line-height: 1.6;
+    text-wrap: pretty;
+}
+
+.hero-download__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ow-space-sm);
+    margin-top: 34px;
+}
+
+.hero-download__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 14px;
+    margin: 18px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+}
+
+.hero-download__meta > span + span::before {
+    content: "";
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    margin-right: 14px;
+    border-radius: 50%;
+    background: var(--ow-border-strong);
+    vertical-align: middle;
+}
+
+/* The product: the desktop app, with its command bar open and a notification coming in. */
+.hero-download__visual {
+    position: relative;
+    padding-bottom: 32px;
+}
+
+.hero-download__window {
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-card);
+    background: var(--ow-canvas);
+    box-shadow: var(--ow-shadow-lift);
+}
+
+.hero-download__titlebar {
+    display: grid;
+    grid-template-columns: 60px minmax(0, 1fr) 60px;
+    align-items: center;
+    border-bottom: 1px solid var(--ow-border);
+    background: var(--ow-surface);
+    padding: 10px 14px;
+}
+
+.hero-download__dots {
+    display: flex;
+    gap: 6px;
+}
+
+.hero-download__dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--ow-border-strong);
+}
+
+.hero-download__window-title {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-control);
+    text-align: center;
+}
+
+.hero-download__app {
+    position: relative;
+    display: grid;
+    min-height: 380px;
+    grid-template-columns: 52px minmax(0, 1fr);
+}
+
+.hero-download__rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 0;
+    color: var(--ow-icon);
+}
+
+.hero-download__mark {
+    width: 22px;
+    height: 22px;
+    margin-bottom: 6px;
+    border-radius: 7px;
+    background: linear-gradient(180deg, var(--ow-brand-500), var(--ow-brand-700));
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
+}
+
+.hero-download__page {
+    border-left: 1px solid var(--ow-border);
+    border-top-left-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+    padding: 22px 24px;
+}
+
+.hero-download__page-title {
+    margin: 0 0 14px;
+    font-size: 17px;
+    font-weight: var(--ow-weight-display);
+}
+
+.hero-download__row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-top: 1px solid var(--ow-border);
+    padding: 11px 0;
+    font-size: 13px;
+}
+
+.hero-download__agent {
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.hero-download__row-title {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* The command bar, over a dimmed app. */
+.hero-download__scrim {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--ow-canvas) 55%, transparent);
+}
+
+.hero-download__palette {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    width: min(400px, calc(100% - 40px));
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    box-shadow: var(--ow-shadow-menu);
+    transform: translateX(-50%);
+    font-size: 13px;
+}
+
+.hero-download__search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--ow-border);
+    padding: 12px 14px;
+    color: var(--ow-text);
+    font-size: 14px;
+}
+
+.hero-download__search svg {
+    color: var(--ow-icon);
+}
+
+.hero-download__query {
+    flex: 1;
+}
+
+/* A text caret after the query. */
+.hero-download__query::after {
+    content: "";
+    display: inline-block;
+    width: 1.5px;
+    height: 16px;
+    margin-left: 1px;
+    background: var(--ow-primary);
+    vertical-align: -3px;
+}
+
+.hero-download__group {
+    padding: 10px 14px 4px;
+    color: var(--ow-text-muted);
+    font-size: 11px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+}
+
+.hero-download__commands {
+    display: grid;
+    gap: 2px;
+    padding: 0 6px 6px;
+}
+
+.hero-download__command {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--ow-radius-lg);
+    padding: 8px;
+    color: var(--ow-text);
+}
+
+.hero-download__command svg {
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+}
+
+.hero-download__command[data-active] {
+    background: var(--ow-surface-muted);
+}
+
+.hero-download__command[data-active] svg {
+    color: var(--ow-primary-text);
+}
+
+.hero-download__command-title {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* A system notification, as the operating system would show it. */
+.hero-download__notification {
+    position: absolute;
+    right: -20px;
+    bottom: 0;
+    display: flex;
+    width: 300px;
+    gap: 12px;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.4;
+    box-shadow: var(--ow-shadow-menu);
+}
+
+.hero-download__notification .hero-download__mark {
+    flex-shrink: 0;
+    margin: 1px 0 0;
+}
+
+.hero-download__notification-text {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+    gap: 1px;
+}
+
+.hero-download__notification-top {
+    display: flex;
+    justify-content: space-between;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+}
+
+.hero-download__notification-title {
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.hero-download__notification-body {
+    color: var(--ow-text-soft);
+}
+
+@media (max-width: 1100px) {
+    .hero-download__title {
+        font-size: 56px;
+    }
+    .hero-download__notification {
+        right: 12px;
+    }
+}
+
+@media (max-width: 960px) {
+    .hero-download {
+        padding-top: 88px;
+    }
+    .hero-download__inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 48px;
+    }
+    .hero-download__title {
+        font-size: 60px;
+    }
+    .hero-download__lead {
+        max-width: 560px;
+    }
+}
+
+@media (max-width: 760px) {
+    .hero-download {
+        padding: 72px var(--ow-page-gutter) 80px;
+    }
+    .hero-download__title {
+        font-size: 42px;
+        line-height: 1.04;
+        letter-spacing: -0.04em;
+    }
+    .hero-download__lead {
+        font-size: 16px;
+    }
+    .hero-download__buttons {
+        width: 100%;
+    }
+    .hero-download__buttons > :first-child {
+        width: 100%;
+    }
+    .hero-download__buttons > :not(:first-child) {
+        flex: 1;
+    }
+    .hero-download__visual {
+        padding-bottom: 0;
+    }
+    .hero-download__meta {
+        gap: 6px 12px;
+    }
+    .hero-download__meta > span + span::before {
+        margin-right: 12px;
+    }
+    .hero-download__meta > .hero-download__other {
+        flex-basis: 100%;
+    }
+    .hero-download__meta > .hero-download__other::before {
+        display: none;
+    }
+    .hero-download__notification {
+        display: none;
+    }
+    .hero-download__app {
+        min-height: 320px;
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .hero-download__rail {
+        display: none;
+    }
+    .hero-download__page {
+        border-left: 0;
+        border-radius: 0;
+        padding: 18px 16px;
+    }
+    .hero-download__palette {
+        top: 24px;
+        width: calc(100% - 24px);
+    }
+}

@@ -1,0 +1,64 @@
+/* InputOTP: separate boxes, each one character. */
+.ow-otp {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-sm);
+}
+
+.ow-otp__slot {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ow-space-sm);
+}
+
+.ow-otp__input {
+    width: 40px;
+    height: 48px;
+    margin: 0;
+    border: 1px solid var(--ow-border-strong);
+    border-radius: var(--ow-radius-form);
+    background: var(--ow-surface);
+    padding: 0;
+    color: var(--ow-text);
+    font-family: var(--ow-font-mono);
+    font-size: 20px;
+    font-weight: var(--ow-weight-emphasis);
+    text-align: center;
+    caret-color: var(--ow-primary-text);
+    outline: 0;
+    transition-property: border-color, box-shadow;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-otp__input:focus {
+    border-color: var(--ow-focus-border);
+    box-shadow: var(--ow-shadow-focus);
+}
+
+.ow-otp__input:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-otp--invalid .ow-otp__input {
+    border-color: var(--ow-danger-line);
+}
+
+.ow-otp--invalid .ow-otp__input:focus {
+    border-color: var(--ow-danger-solid);
+    box-shadow: var(--ow-shadow-focus-danger);
+}
+
+.ow-otp__input:disabled {
+    cursor: not-allowed;
+    opacity: 0.62;
+}
+
+.ow-otp__separator {
+    width: 10px;
+    height: 2px;
+    border-radius: 1px;
+    background: var(--ow-border-strong);
+}

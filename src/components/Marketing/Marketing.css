@@ -1,0 +1,180 @@
+/* Marketing patterns from the site: Chip, SectionHeading, SiteHeader and the dot grid. */
+.ow-chip {
+    display: inline-flex;
+    height: 28px;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-surface);
+    padding: 0 var(--ow-space-lg);
+    color: var(--ow-text-soft);
+    font-family: var(--ow-font-sans);
+    font-size: 13px;
+    font-weight: var(--ow-weight-control);
+    line-height: 1.2;
+}
+
+.ow-chip::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--ow-brass);
+}
+
+.ow-section-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.ow-section-heading--center {
+    align-items: center;
+    text-align: center;
+}
+
+.ow-section-heading__title {
+    margin: 20px 0 0;
+    color: var(--ow-text);
+    font-family: var(--ow-font-sans);
+    font-size: 44px;
+    font-weight: 500;
+    font-optical-sizing: auto;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+}
+
+.ow-section-heading__intro {
+    max-width: 560px;
+    margin: 16px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 17px;
+    line-height: 1.6;
+    text-wrap: pretty;
+}
+
+@media (max-width: 760px) {
+    .ow-section-heading__title {
+        font-size: 32px;
+        line-height: 1.12;
+    }
+}
+
+.ow-site-header {
+    display: flex;
+    height: var(--ow-header-height);
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-header-glass);
+    padding: 0 10px 0 18px;
+    font-family: var(--ow-font-sans);
+    box-shadow: var(--ow-shadow-header);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+}
+
+.ow-site-header__brand {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 9px;
+    color: var(--ow-text);
+    font-size: 16px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.02em;
+}
+
+.ow-site-header__brand a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.ow-site-header__nav {
+    display: flex;
+    gap: 22px;
+    font-size: 14px;
+    font-weight: var(--ow-weight-control);
+}
+
+.ow-site-header__nav a {
+    color: var(--ow-text-soft);
+    text-decoration: none;
+    transition: color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-site-header__nav a:hover {
+    color: var(--ow-text);
+}
+
+.ow-site-header__nav a:focus-visible {
+    border-radius: var(--ow-radius-sm);
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 3px;
+}
+
+.ow-site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-sm);
+}
+
+@media (max-width: 760px) {
+    .ow-site-header {
+        height: 54px;
+    }
+    .ow-site-header__nav {
+        display: none;
+    }
+}
+
+.ow-dot-grid {
+    position: relative;
+    isolation: isolate;
+    background: var(--ow-paper);
+}
+
+.ow-dot-grid__dots,
+.ow-dot-grid__brass {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: radial-gradient(var(--ow-dot) 1px, transparent 1.4px);
+    background-position: center;
+    background-size: 22px 22px;
+}
+
+.ow-dot-grid--fade .ow-dot-grid__dots {
+    -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, #000 0%, rgb(0 0 0 / 0.5) 50%, transparent 100%);
+    mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, #000 0%, rgb(0 0 0 / 0.5) 50%, transparent 100%);
+}
+
+.ow-dot-grid__brass {
+    background-image: radial-gradient(var(--ow-brass) 1.2px, transparent 1.6px);
+    opacity: 0;
+    -webkit-mask-image: radial-gradient(
+        circle 120px at var(--ow-pointer-x, -999px) var(--ow-pointer-y, -999px),
+        #000 0%,
+        transparent 100%
+    );
+    mask-image: radial-gradient(
+        circle 120px at var(--ow-pointer-x, -999px) var(--ow-pointer-y, -999px),
+        #000 0%,
+        transparent 100%
+    );
+    transition: opacity var(--ow-duration-slow) var(--ow-ease-standard);
+}
+
+.ow-dot-grid--interactive:hover .ow-dot-grid__brass {
+    opacity: 1;
+}
+
+.ow-dot-grid__content {
+    position: relative;
+}

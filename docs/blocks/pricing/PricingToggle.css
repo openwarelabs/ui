@@ -1,0 +1,230 @@
+.pricing-toggle,
+.pricing-toggle *,
+.pricing-toggle *::before,
+.pricing-toggle *::after {
+    box-sizing: border-box;
+}
+
+.pricing-toggle {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.pricing-toggle__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+.pricing-toggle__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px 48px;
+}
+
+.pricing-toggle__header .ow-section-heading {
+    max-width: 640px;
+}
+
+.pricing-toggle__switch {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+/* A hairline round the well, so it still reads on the dark page. */
+.pricing-toggle__switch .ow-segmented {
+    border: 1px solid var(--ow-border);
+}
+
+.pricing-toggle__switch-note {
+    margin: 0;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+}
+
+/* Four plans in one panel, divided by hairlines rather than set apart as cards. */
+.pricing-toggle__panel {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: 56px;
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-card);
+    background: var(--ow-surface);
+}
+
+/* Each plan is a subgrid of the panel's rows, so prices, buttons and lists line up even when a line wraps. */
+.pricing-toggle__plan {
+    display: grid;
+    min-width: 0;
+    grid-row: span 5;
+    grid-template-rows: subgrid;
+    align-content: start;
+    padding: 28px 24px 32px;
+}
+
+.pricing-toggle__plan + .pricing-toggle__plan {
+    border-left: 1px solid var(--ow-border);
+}
+
+.pricing-toggle__plan[data-popular] {
+    background: color-mix(in srgb, var(--ow-primary-subtle) 70%, var(--ow-surface));
+}
+
+.pricing-toggle__name-row {
+    display: flex;
+    min-height: 24px;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-sm);
+}
+
+.pricing-toggle__name {
+    margin: 0;
+    font-size: 16px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.01em;
+}
+
+.pricing-toggle__summary {
+    margin: 8px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.pricing-toggle__price {
+    margin: 24px 0 22px;
+}
+
+.pricing-toggle__figure {
+    display: flex;
+    min-height: 44px;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 8px;
+    margin: 0;
+}
+
+.pricing-toggle__amount {
+    font-size: 44px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+    animation: pricing-toggle-in var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+.pricing-toggle__amount--text {
+    font-size: 36px;
+    letter-spacing: -0.035em;
+    animation: none;
+}
+
+.pricing-toggle__unit {
+    color: var(--ow-text-muted);
+    font-size: 13px;
+}
+
+.pricing-toggle__billing {
+    margin: 10px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.pricing-toggle__saving {
+    color: var(--ow-success-text);
+    font-weight: var(--ow-weight-control);
+}
+
+.pricing-toggle__features {
+    display: grid;
+    gap: 11px;
+    margin: 26px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pricing-toggle__features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--ow-text-soft);
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.pricing-toggle__features svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: var(--ow-primary-text);
+}
+
+.pricing-toggle__note {
+    margin: 20px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    text-align: center;
+}
+
+@keyframes pricing-toggle-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pricing-toggle__amount {
+        animation: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .pricing-toggle__panel {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .pricing-toggle__plan:nth-child(odd) {
+        border-left: 0;
+    }
+    .pricing-toggle__plan:nth-child(n + 3) {
+        border-top: 1px solid var(--ow-border);
+    }
+}
+
+@media (max-width: 760px) {
+    .pricing-toggle {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .pricing-toggle__header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .pricing-toggle__switch {
+        align-items: stretch;
+    }
+    .pricing-toggle__switch .ow-segmented {
+        display: flex;
+        justify-self: stretch;
+    }
+    .pricing-toggle__switch .ow-segmented__item {
+        flex: 1;
+    }
+    .pricing-toggle__panel {
+        grid-template-columns: minmax(0, 1fr);
+        margin-top: 40px;
+    }
+    .pricing-toggle__plan,
+    .pricing-toggle__plan:nth-child(odd) {
+        border-left: 0;
+        padding: 24px 22px 28px;
+    }
+    .pricing-toggle__plan + .pricing-toggle__plan {
+        border-top: 1px solid var(--ow-border);
+    }
+}

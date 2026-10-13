@@ -1,0 +1,119 @@
+.empty-no-results,
+.empty-no-results *,
+.empty-no-results *::before,
+.empty-no-results *::after {
+    box-sizing: border-box;
+}
+
+.empty-no-results {
+    background: var(--ow-canvas);
+    padding: 24px;
+    color: var(--ow-text);
+    font-size: 14px;
+}
+
+.empty-no-results__panel {
+    max-width: 1080px;
+    margin: 0 auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+    padding: 28px 32px 32px;
+}
+
+.empty-no-results__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+.empty-no-results__subtitle {
+    margin: 4px 0 0;
+    color: var(--ow-text-muted);
+}
+
+.empty-no-results__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 12px;
+    margin-top: 24px;
+}
+
+.empty-no-results__search {
+    width: 280px;
+    max-width: 100%;
+}
+
+.empty-no-results__count {
+    margin-left: auto;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.empty-no-results__table {
+    margin-top: 16px;
+}
+
+.empty-no-results__table .ow-table__empty {
+    padding: 24px 16px 28px;
+}
+
+.empty-no-results__deploy {
+    display: grid;
+    min-width: 0;
+    gap: 1px;
+}
+
+.empty-no-results__deploy strong {
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.empty-no-results__deploy span {
+    overflow: hidden;
+    color: var(--ow-text-muted);
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.empty-no-results__by {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.empty-no-results__muted {
+    color: var(--ow-text-muted);
+    white-space: nowrap;
+}
+
+.empty-no-results__query {
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+}
+
+@media (max-width: 760px) {
+    .empty-no-results {
+        padding: 8px;
+    }
+    .empty-no-results__panel {
+        padding: 22px 16px 16px;
+    }
+    .empty-no-results__search {
+        width: 100%;
+    }
+    .empty-no-results__count {
+        display: none;
+    }
+    /* On phones the table keeps the deploy and its status. */
+    .empty-no-results__table th:nth-child(n + 3),
+    .empty-no-results__table td:nth-child(n + 3) {
+        display: none;
+    }
+}

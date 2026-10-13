@@ -1,0 +1,147 @@
+.empty-first-run,
+.empty-first-run *,
+.empty-first-run *::before,
+.empty-first-run *::after {
+    box-sizing: border-box;
+}
+
+.empty-first-run {
+    background: var(--ow-canvas);
+    padding: 24px;
+    color: var(--ow-text);
+    font-size: 14px;
+}
+
+.empty-first-run__panel {
+    max-width: 1080px;
+    margin: 0 auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+    padding: 28px 32px 32px;
+}
+
+.empty-first-run__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.empty-first-run__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+.empty-first-run__subtitle {
+    margin: 4px 0 0;
+    color: var(--ow-text-muted);
+}
+
+/* The empty area: what will be here, the one way to make it, and the other ways to start. */
+.empty-first-run__area {
+    margin-top: 28px;
+    border: 1.5px dashed var(--ow-border-strong);
+    border-radius: var(--ow-radius-container);
+    padding: 36px 32px 32px;
+}
+
+.empty-first-run__area .ow-empty {
+    padding-top: 8px;
+}
+
+.empty-first-run__ways {
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+.empty-first-run__choices {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.empty-first-run__list {
+    margin: 28px 0 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    padding: 0;
+    list-style: none;
+}
+
+.empty-first-run__row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+}
+
+.empty-first-run__row + .empty-first-run__row {
+    border-top: 1px solid var(--ow-border);
+}
+
+.empty-first-run__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--ow-primary);
+}
+
+.empty-first-run__name {
+    display: grid;
+    min-width: 0;
+    gap: 2px;
+}
+
+.empty-first-run__name strong {
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.empty-first-run__name span,
+.empty-first-run__when {
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+}
+
+@media (max-width: 1024px) {
+    .empty-first-run__area {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+}
+
+@media (max-width: 760px) {
+    .empty-first-run {
+        padding: 8px;
+    }
+    .empty-first-run__panel {
+        padding: 22px 16px 16px;
+    }
+    .empty-first-run__area {
+        margin-top: 22px;
+        padding: 24px 14px 14px;
+    }
+    .empty-first-run__when {
+        display: none;
+    }
+    .empty-first-run__choices {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+    }
+    /* On phones each way to start is a row: the icon beside its title. */
+    .empty-first-run__choices .ow-choice {
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        padding: 12px 14px;
+    }
+    .empty-first-run__row {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        padding: 12px 14px;
+    }
+}

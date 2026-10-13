@@ -1,0 +1,173 @@
+/* Rows of a title, one line of detail and a status, with each row's actions in a menu at its end. */
+.list-stacked,
+.list-stacked *,
+.list-stacked *::before,
+.list-stacked *::after {
+    box-sizing: border-box;
+}
+
+.list-stacked {
+    background: var(--ow-canvas);
+    padding: 32px;
+    color: var(--ow-text);
+}
+
+.list-stacked__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 960px;
+    gap: var(--ow-space-4xl);
+    margin: 0 auto;
+}
+
+.list-stacked__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+}
+
+.list-stacked__title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+}
+
+.list-stacked__lead {
+    max-width: 60ch;
+    margin: 4px 0 0;
+    color: var(--ow-text-muted);
+    text-wrap: pretty;
+}
+
+.list-stacked__card {
+    overflow: hidden;
+}
+
+.list-stacked__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.list-stacked__row {
+    display: grid;
+    grid-template-areas: "icon text status menu";
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 4px var(--ow-space-2xl);
+    padding: 14px 12px 14px 18px;
+    transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.list-stacked__row + .list-stacked__row {
+    border-top: 1px solid var(--ow-border);
+}
+
+.list-stacked__row:hover {
+    background: var(--ow-surface-muted);
+}
+
+.list-stacked__row[data-inactive] .list-stacked__name,
+.list-stacked__row[data-inactive] .list-stacked__icon {
+    color: var(--ow-text-muted);
+}
+
+.list-stacked__icon {
+    display: flex;
+    width: 36px;
+    height: 36px;
+    grid-area: icon;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-tile);
+    background: var(--ow-surface-muted);
+    color: var(--ow-text-soft);
+}
+
+.list-stacked__text {
+    display: grid;
+    min-width: 0;
+    grid-area: text;
+    gap: 3px;
+}
+
+.list-stacked__name-row {
+    display: flex;
+    min-width: 0;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.list-stacked__name {
+    overflow: hidden;
+    font-weight: var(--ow-weight-emphasis);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.list-stacked__key {
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+}
+
+.list-stacked__detail {
+    overflow: hidden;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.list-stacked__status {
+    grid-area: status;
+    justify-self: end;
+}
+
+.list-stacked__menu {
+    grid-area: menu;
+}
+
+.list-stacked__footer {
+    margin: 0;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+}
+
+/* Phones: the status moves under the detail, and the detail may wrap. */
+@media (max-width: 759px) {
+    .list-stacked {
+        padding: 24px var(--ow-page-gutter) 32px;
+    }
+    .list-stacked__header > .ow-button {
+        width: 100%;
+    }
+    .list-stacked__row {
+        grid-template-areas:
+            "icon text menu"
+            ". status menu";
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: start;
+        gap: 8px var(--ow-space-lg);
+        padding: 14px 8px 14px 14px;
+    }
+    .list-stacked__status {
+        justify-self: start;
+    }
+    .list-stacked__detail {
+        white-space: normal;
+    }
+    .list-stacked__menu {
+        align-self: center;
+    }
+    .list-stacked__name-row {
+        flex-wrap: wrap;
+        row-gap: 0;
+    }
+}

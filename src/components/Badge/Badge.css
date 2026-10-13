@@ -1,0 +1,74 @@
+/* Badge (the app's Pill): status in a bordered pill. */
+.ow-badge {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: var(--ow-radius-pill);
+    font-weight: var(--ow-weight-strong);
+    line-height: 1;
+    white-space: nowrap;
+    transition-property: border-color, color, background-color;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-badge__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.ow-badge--sm {
+    min-height: 24px;
+    gap: var(--ow-space-xs);
+    padding: 0 var(--ow-space-md);
+    font-size: 12px;
+}
+
+.ow-badge--md {
+    min-height: 32px;
+    gap: var(--ow-space-sm);
+    padding: 0 var(--ow-space-xl);
+    font-size: 12px;
+}
+
+.ow-badge--lg {
+    min-height: 56px;
+    gap: var(--ow-space-xl);
+    padding: 0 var(--ow-space-6xl);
+    font-size: 24px;
+    font-weight: var(--ow-weight-display);
+}
+
+.ow-badge--neutral {
+    border-color: var(--ow-border);
+    background: var(--ow-surface-muted);
+    color: var(--ow-text-soft);
+}
+
+.ow-badge--active {
+    border-color: var(--ow-primary-border);
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.ow-badge--success {
+    border-color: var(--ow-success-border);
+    background: var(--ow-success-surface);
+    color: var(--ow-success-text);
+}
+
+.ow-badge--warning {
+    border-color: var(--ow-warning-border);
+    background: var(--ow-warning-surface);
+    color: var(--ow-warning-text);
+}
+
+.ow-badge--danger {
+    border-color: var(--ow-danger-border);
+    background: var(--ow-danger-surface);
+    color: var(--ow-danger-text);
+}

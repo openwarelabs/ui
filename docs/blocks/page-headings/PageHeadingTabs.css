@@ -1,0 +1,235 @@
+/* Breadcrumbs, the page's name and its action, then line tabs that run edge to edge across the panel. */
+.page-heading-tabs,
+.page-heading-tabs *,
+.page-heading-tabs *::before,
+.page-heading-tabs *::after {
+    box-sizing: border-box;
+}
+
+.page-heading-tabs {
+    background: var(--ow-canvas);
+    padding: 32px;
+    color: var(--ow-text);
+}
+
+.page-heading-tabs__panel {
+    max-width: 1120px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+}
+
+.page-heading-tabs__top {
+    display: grid;
+    gap: var(--ow-space-2xl);
+    padding: 22px 32px 6px;
+}
+
+/* The links carry 4px of padding for their focus ring; line the first one up with the title. */
+.page-heading-tabs__top .ow-breadcrumbs {
+    margin-left: -4px;
+}
+
+.page-heading-tabs__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--ow-space-4xl);
+}
+
+.page-heading-tabs__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+.page-heading-tabs__lead {
+    margin: 4px 0 0;
+    color: var(--ow-text-muted);
+    text-wrap: pretty;
+}
+
+.page-heading-tabs__actions {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--ow-space-2xl);
+}
+
+.page-heading-tabs__tabs {
+    gap: 0;
+}
+
+/* The tab row's hairline runs the full width of the panel. */
+.page-heading-tabs__tabs .ow-tabs__list {
+    gap: var(--ow-space-4xl);
+    padding: 0 32px;
+}
+
+.page-heading-tabs__count {
+    min-width: 20px;
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-surface-muted);
+    box-shadow: inset 0 0 0 1px var(--ow-border);
+    padding: 1px 6px;
+    color: var(--ow-text-muted);
+    font-size: 11.5px;
+    font-weight: var(--ow-weight-emphasis);
+    font-variant-numeric: tabular-nums;
+    line-height: 16px;
+    text-align: center;
+}
+
+.page-heading-tabs__tab-panel {
+    padding: 24px 32px 28px;
+}
+
+.page-heading-tabs__tab-panel:focus-visible {
+    outline-offset: -4px;
+}
+
+.page-heading-tabs__figures {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+}
+
+.page-heading-tabs__figure {
+    display: grid;
+    align-content: space-between;
+    gap: 6px;
+    padding: 16px 18px;
+}
+
+.page-heading-tabs__figure + .page-heading-tabs__figure {
+    border-left: 1px solid var(--ow-border);
+}
+
+.page-heading-tabs__figure dt {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-control);
+}
+
+.page-heading-tabs__figure dd {
+    margin: 0;
+    font-size: 22px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.page-heading-tabs__overview {
+    display: grid;
+    gap: var(--ow-space-2xl);
+}
+
+.page-heading-tabs__rollout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--ow-space-lg) var(--ow-space-7xl);
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    padding: 16px 18px 18px;
+}
+
+.page-heading-tabs__rollout-title {
+    grid-column: 1 / -1;
+    margin: 0;
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.page-heading-tabs__list {
+    margin: 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    padding: 0;
+    list-style: none;
+}
+
+.page-heading-tabs__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+    padding: 12px 18px;
+}
+
+.page-heading-tabs__row + .page-heading-tabs__row {
+    border-top: 1px solid var(--ow-border);
+}
+
+.page-heading-tabs__row-text {
+    display: grid;
+    min-width: 0;
+    gap: 2px;
+}
+
+.page-heading-tabs__row-title {
+    overflow: hidden;
+    font-weight: var(--ow-weight-control);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.page-heading-tabs__row-meta {
+    overflow: hidden;
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.page-heading-tabs__mono {
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+}
+
+.page-heading-tabs__settings {
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    padding: 0 18px;
+}
+
+@media (max-width: 759px) {
+    .page-heading-tabs {
+        padding: 8px;
+    }
+    .page-heading-tabs__top {
+        padding: 18px 18px 4px;
+    }
+    .page-heading-tabs__header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--ow-space-3xl);
+    }
+    .page-heading-tabs__actions {
+        justify-content: space-between;
+    }
+    .page-heading-tabs__tabs .ow-tabs__list {
+        padding: 0 18px;
+    }
+    .page-heading-tabs__tab-panel {
+        padding: 20px 18px 22px;
+    }
+    .page-heading-tabs__figure {
+        padding: 12px 14px;
+    }
+    .page-heading-tabs__figure dd {
+        font-size: 18px;
+    }
+    .page-heading-tabs__row {
+        padding: 12px 14px;
+    }
+    .page-heading-tabs__rollout {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 14px;
+    }
+}

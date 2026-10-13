@@ -1,0 +1,69 @@
+/* Stack, Separator and ScrollShadow. */
+.ow-stack {
+    display: flex;
+    min-width: 0;
+}
+
+.ow-separator {
+    flex-shrink: 0;
+    background: var(--ow-border);
+}
+
+.ow-separator--horizontal {
+    width: 100%;
+    height: 1px;
+}
+
+.ow-separator--vertical {
+    width: 1px;
+    align-self: stretch;
+    min-height: 16px;
+}
+
+.ow-separator-label {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-md);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+}
+
+.ow-separator-label::before,
+.ow-separator-label::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: var(--ow-border);
+}
+
+.ow-scroll-shadow {
+    --ow-scroll-start: 0px;
+    --ow-scroll-end: 0px;
+    overflow: auto;
+    overscroll-behavior: contain;
+}
+
+.ow-scroll-shadow[data-start] {
+    --ow-scroll-start: var(--ow-scroll-shadow);
+}
+
+.ow-scroll-shadow[data-end] {
+    --ow-scroll-end: var(--ow-scroll-shadow);
+}
+
+.ow-scroll-shadow--vertical {
+    overflow-x: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 var(--ow-scroll-start), #000 calc(100% - var(--ow-scroll-end)), transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 var(--ow-scroll-start), #000 calc(100% - var(--ow-scroll-end)), transparent);
+}
+
+.ow-scroll-shadow--horizontal {
+    overflow-y: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--ow-scroll-start), #000 calc(100% - var(--ow-scroll-end)), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 var(--ow-scroll-start), #000 calc(100% - var(--ow-scroll-end)), transparent);
+}
+
+.ow-scroll-shadow:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}

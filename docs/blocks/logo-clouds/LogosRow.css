@@ -1,0 +1,120 @@
+.logos-row,
+.logos-row *,
+.logos-row *::before,
+.logos-row *::after {
+    box-sizing: border-box;
+}
+
+.logos-row {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.logos-row__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+/* A small heading: the logos are the point. */
+.logos-row__title {
+    margin: 0;
+    color: var(--ow-text-muted);
+    font-size: 14px;
+    font-weight: var(--ow-weight-control);
+    line-height: 1.5;
+    text-align: center;
+    text-wrap: balance;
+}
+
+.logos-row__list {
+    display: flex;
+    max-width: 1040px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    margin: 36px auto 0;
+    padding: 0;
+    list-style: none;
+}
+
+.logos-row__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ow-text-muted);
+    font-size: 20px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+}
+
+.logos-row__logo svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+/* Each invented company gets its own lettering, as real wordmarks differ. */
+.logos-row__logo[data-name="Quarry"] {
+    font-size: 15.5px;
+    font-weight: var(--ow-weight-heavy);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.logos-row__logo[data-name="Basalt"] {
+    font-weight: var(--ow-weight-control);
+    letter-spacing: -0.01em;
+}
+
+.logos-row__logo[data-name="Oakline"] {
+    letter-spacing: -0.04em;
+    text-transform: lowercase;
+}
+
+.logos-row__logo[data-name="Ferro"] {
+    font-size: 15.5px;
+    font-weight: var(--ow-weight-strong);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.logos-row__logo[data-name="Lumen"] {
+    font-size: 22px;
+    font-weight: var(--ow-weight-regular);
+    letter-spacing: 0;
+    text-transform: lowercase;
+}
+
+@media (max-width: 900px) {
+    .logos-row__list {
+        display: grid;
+        max-width: 560px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        justify-items: center;
+        gap: 36px 24px;
+    }
+}
+
+@media (max-width: 760px) {
+    .logos-row {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .logos-row__list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 32px 16px;
+        margin-top: 32px;
+    }
+    .logos-row__logo {
+        font-size: 18px;
+    }
+    .logos-row__logo[data-name="Quarry"],
+    .logos-row__logo[data-name="Ferro"] {
+        font-size: 14px;
+    }
+    .logos-row__logo[data-name="Lumen"] {
+        font-size: 20px;
+    }
+}

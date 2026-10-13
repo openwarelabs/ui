@@ -1,0 +1,28 @@
+/* The page a block is previewed in: nothing but the block, on the app's canvas. */
+html,
+body {
+    margin: 0;
+}
+
+html[data-fit="content"],
+html[data-fit="content"] body {
+    overflow: hidden;
+}
+
+.frame-message {
+    display: grid;
+    min-height: 100dvh;
+    place-items: center;
+    padding: 24px;
+    color: var(--ow-text-muted);
+    text-align: center;
+}
+
+.frame-message code {
+    font-family: var(--ow-font-mono);
+    font-size: 13px;
+}
+
+#root {
+    display: flow-root;
+}

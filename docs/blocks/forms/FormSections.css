@@ -1,0 +1,139 @@
+/* Sections down the page: each one's title and purpose on the left, its fields on a card on the right. */
+.form-sections,
+.form-sections *,
+.form-sections *::before,
+.form-sections *::after {
+    box-sizing: border-box;
+}
+
+.form-sections {
+    background: var(--ow-canvas);
+    padding: 48px 32px 64px;
+    color: var(--ow-text);
+}
+
+.form-sections__inner {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.form-sections__header {
+    padding-bottom: 32px;
+}
+
+.form-sections__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+.form-sections__lead {
+    max-width: 640px;
+    margin: 6px 0 0;
+    color: var(--ow-text-muted);
+    text-wrap: pretty;
+}
+
+.form-sections__section {
+    display: grid;
+    grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+    gap: 48px;
+    border-top: 1px solid var(--ow-border);
+    padding: 32px 0;
+}
+
+.form-sections__intro {
+    padding-top: 4px;
+}
+
+.form-sections__section-title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.3;
+}
+
+.form-sections__section-text {
+    margin: 6px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 13.5px;
+    line-height: 1.55;
+    text-wrap: pretty;
+}
+
+.form-sections__fields {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--ow-space-5xl);
+    padding: 24px;
+}
+
+/* An Input with startContent won't shrink below its text's width without this. */
+.form-sections .ow-input-group {
+    min-width: 0;
+}
+
+.form-sections__pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: var(--ow-space-2xl);
+}
+
+.form-sections__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--ow-space-sm);
+    border-top: 1px solid var(--ow-border);
+    padding-top: 24px;
+}
+
+.form-sections__status {
+    margin: 0 auto 0 0;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+}
+
+@media (max-width: 1024px) {
+    .form-sections__section {
+        grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+        gap: 32px;
+    }
+}
+
+@media (max-width: 760px) {
+    .form-sections {
+        padding: 28px var(--ow-page-gutter) 40px;
+    }
+    .form-sections__header {
+        padding-bottom: 24px;
+    }
+    .form-sections__section {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+        padding: 24px 0 28px;
+    }
+    .form-sections__intro {
+        padding-top: 0;
+    }
+    .form-sections__fields {
+        padding: 18px;
+    }
+    .form-sections__pair {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--ow-space-5xl);
+    }
+    .form-sections__status {
+        flex-basis: 100%;
+        margin-bottom: 4px;
+    }
+    .form-sections__actions {
+        flex-wrap: wrap;
+    }
+    .form-sections__actions > button {
+        flex: 1;
+    }
+}

@@ -1,0 +1,32 @@
+/* Combobox: a grouped field (Input.css) with a chevron, over Select's listbox. */
+.ow-combobox {
+    padding-right: var(--ow-space-2xs);
+}
+
+.ow-combobox__toggle {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border: 0;
+    border-radius: var(--ow-radius-md);
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+.ow-combobox__toggle:hover:not(:disabled) {
+    background: var(--ow-surface-muted);
+}
+
+.ow-input-group--sm .ow-combobox__toggle {
+    width: 24px;
+    height: 24px;
+}
+
+.ow-combobox__chevron--open {
+    transform: rotate(180deg);
+}

@@ -1,0 +1,279 @@
+/* A bit of the app behind, and over it Commandr's settings: sections on the canvas, rows on an inset panel. */
+.settings-dialog,
+.settings-dialog *,
+.settings-dialog *::before,
+.settings-dialog *::after {
+    box-sizing: border-box;
+}
+
+.settings-dialog {
+    display: grid;
+    grid-template-columns: 232px minmax(0, 1fr);
+    min-height: 100dvh;
+    background: var(--ow-canvas);
+    color: var(--ow-text);
+}
+
+/* The app behind. */
+.settings-dialog__aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ow-space-3xl);
+    padding: 14px 12px 12px;
+}
+
+.settings-dialog__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.01em;
+}
+
+.settings-dialog__mark {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background: linear-gradient(180deg, var(--ow-brand-500), var(--ow-brand-700));
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
+}
+
+.settings-dialog__aside-end {
+    margin-top: auto;
+}
+
+.settings-dialog__page {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: var(--ow-space-6xl);
+    margin: 8px 8px 8px 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+    padding: 28px 32px;
+}
+
+.settings-dialog__page-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+}
+
+.settings-dialog__page-title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+.settings-dialog__page-text {
+    margin: 4px 0 0;
+    color: var(--ow-text-muted);
+}
+
+.settings-dialog__projects {
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    list-style: none;
+}
+
+.settings-dialog__project {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+    padding: 12px 18px;
+}
+
+.settings-dialog__project + .settings-dialog__project {
+    border-top: 1px solid var(--ow-border);
+}
+
+.settings-dialog__project-text {
+    display: grid;
+    min-width: 0;
+    gap: 2px;
+}
+
+.settings-dialog__project-name {
+    font-weight: var(--ow-weight-control);
+}
+
+.settings-dialog__project-detail {
+    overflow: hidden;
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* The dialog: the canvas around, the sections down the left, the panel on the right. */
+.settings-dialog__dialog {
+    height: min(600px, calc(100dvh - 32px));
+    background: var(--ow-canvas);
+    padding: 8px;
+}
+
+.settings-dialog__dialog .ow-dialog__body {
+    height: 100%;
+    grid-template-columns: 200px minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    gap: 0 8px;
+}
+
+.settings-dialog__dialog .ow-dialog__header {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 14px 10px 16px;
+}
+
+.settings-dialog__nav--side {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 0 4px;
+}
+
+.settings-dialog__nav--top {
+    display: none;
+}
+
+.settings-dialog__saved {
+    grid-column: 1;
+    grid-row: 4;
+    margin: 0;
+    padding: 0 12px 10px;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.settings-dialog__panel {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    min-height: 0;
+    overflow-y: auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+}
+
+/* Sits over the panel's top-right corner, in the same grid cell. */
+.settings-dialog__close {
+    z-index: 1;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    justify-self: end;
+    margin: 12px 12px 0 0;
+}
+
+.settings-dialog__section {
+    padding: 24px 28px 20px;
+}
+
+.settings-dialog__section-title {
+    margin: 0;
+    padding-right: 40px;
+    font-size: 16px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.3;
+}
+
+.settings-dialog__section-text {
+    margin: 4px 0 0;
+    color: var(--ow-text-muted);
+}
+
+.settings-dialog__rows {
+    margin-top: 12px;
+}
+
+.settings-dialog__select {
+    width: 196px;
+}
+
+.settings-dialog__input {
+    width: 150px;
+    font-family: var(--ow-font-mono);
+    font-size: 12.5px;
+}
+
+.settings-dialog__label-badge {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-sm);
+}
+
+@media (max-width: 900px) {
+    .settings-dialog {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .settings-dialog__aside {
+        display: none;
+    }
+    .settings-dialog__page {
+        margin: 8px;
+        padding: 22px 18px;
+    }
+}
+
+@media (max-width: 760px) {
+    .settings-dialog__dialog {
+        height: calc(100dvh - 32px);
+    }
+    .settings-dialog__dialog .ow-dialog__body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto minmax(0, 1fr);
+        gap: 8px;
+    }
+    .settings-dialog__dialog .ow-dialog__header {
+        padding: 10px 10px 0;
+    }
+    .settings-dialog__nav--side,
+    .settings-dialog__saved {
+        display: none;
+    }
+    .settings-dialog__nav--top {
+        display: flex;
+        grid-column: 1;
+        grid-row: 2;
+        padding: 2px;
+        scrollbar-width: none;
+    }
+    .settings-dialog__panel {
+        grid-column: 1;
+        grid-row: 3;
+    }
+    .settings-dialog__close {
+        grid-column: 1;
+        margin: 6px 4px 0 0;
+    }
+    .settings-dialog__project-detail {
+        display: none;
+    }
+    .settings-dialog__section {
+        padding: 18px 16px 12px;
+    }
+    .settings-dialog__section-title {
+        padding-right: 0;
+    }
+    /* Switches stay beside their label; other controls take a line of their own. */
+    .settings-dialog .ow-settings-row__control:not(:has(.ow-switch)) {
+        flex: 1 1 100%;
+        justify-content: flex-start;
+    }
+    .settings-dialog__select,
+    .settings-dialog__input {
+        width: 100%;
+    }
+}

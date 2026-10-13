@@ -1,0 +1,96 @@
+/* FileTree: Commandr's structure explorer. Monospace names, hairline guides, a tinted selected file. */
+.ow-tree,
+.ow-tree__group {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-tree {
+    display: grid;
+    gap: 1px;
+    color: var(--ow-text);
+}
+
+.ow-tree__group {
+    display: grid;
+    gap: 1px;
+    margin-left: 15px;
+    border-left: 1px solid var(--ow-border);
+    padding-left: var(--ow-space-sm);
+}
+
+.ow-tree__item {
+    outline: none;
+}
+
+.ow-tree__row {
+    display: flex;
+    min-height: 32px;
+    align-items: center;
+    gap: var(--ow-space-xs);
+    border-radius: var(--ow-radius-form);
+    padding: var(--ow-space-2xs) var(--ow-space-sm);
+    cursor: pointer;
+    transition: background-color var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.ow-tree__row:hover {
+    background: var(--ow-surface-muted);
+}
+
+.ow-tree__item:focus-visible > .ow-tree__row {
+    box-shadow: 0 0 0 2px var(--ow-focus-ring);
+}
+
+.ow-tree__row--selected,
+.ow-tree__row--selected:hover {
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.ow-tree__chevron {
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+    transition: transform var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-tree__chevron--open {
+    transform: rotate(90deg);
+}
+
+.ow-tree__spacer {
+    width: 14px;
+    flex-shrink: 0;
+}
+
+.ow-tree__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+}
+
+.ow-tree__icon--folder {
+    color: var(--ow-primary-text);
+}
+
+.ow-tree__row--selected .ow-tree__icon {
+    color: inherit;
+}
+
+.ow-tree__name {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    font-family: var(--ow-font-mono);
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ow-tree__meta {
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+}

@@ -1,0 +1,195 @@
+/* CopyButton, CodeBlock and Snippet. */
+.ow-copy-button {
+    display: inline-flex;
+    height: 28px;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--ow-space-xs);
+    margin: 0;
+    border: 1px solid transparent;
+    border-radius: var(--ow-radius-md);
+    background: transparent;
+    padding: 0 var(--ow-space-sm);
+    color: var(--ow-text-muted);
+    font: inherit;
+    font-family: var(--ow-font-sans);
+    font-size: 12px;
+    font-weight: var(--ow-weight-control);
+    cursor: pointer;
+    transition-property: color, background-color, border-color;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-copy-button--icon-only {
+    width: 28px;
+    justify-content: center;
+    padding: 0;
+}
+
+.ow-copy-button:hover {
+    border-color: var(--ow-border);
+    background: var(--ow-surface-muted);
+    color: var(--ow-text);
+}
+
+.ow-copy-button:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 1px;
+}
+
+.ow-copy-button--on-dark {
+    color: var(--ow-on-code-block-muted);
+}
+
+.ow-copy-button--on-dark:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--ow-on-code-block);
+}
+
+.ow-copy-button--on-dark:focus-visible {
+    outline-color: var(--ow-brand-300);
+}
+
+.ow-code-block {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--ow-code-block-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-code-block);
+    color: var(--ow-on-code-block);
+}
+
+.ow-code-block__header {
+    display: flex;
+    min-height: 40px;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--ow-code-block-header);
+    padding: 0 var(--ow-space-xs) 0 var(--ow-space-lg);
+}
+
+.ow-code-block__title {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    color: var(--ow-on-code-block-muted);
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ow-code-block__language {
+    color: var(--ow-on-code-block-muted);
+    font-family: var(--ow-font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.ow-code-block__floating-copy {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 1;
+    background: var(--ow-code-block);
+}
+
+.ow-code-block__pre {
+    display: flex;
+    margin: 0;
+    overflow: auto;
+    padding: var(--ow-space-xl) var(--ow-space-lg);
+    font-family: var(--ow-font-mono);
+    font-size: 13px;
+    line-height: 1.7;
+    tab-size: 4;
+}
+
+.ow-code-block__pre:focus-visible {
+    outline: 2px solid var(--ow-brand-300);
+    outline-offset: -2px;
+}
+
+.ow-code-block:not(:has(.ow-code-block__header)) .ow-code-block__pre {
+    padding-right: 48px;
+}
+
+.ow-code-block__numbers {
+    display: grid;
+    flex-shrink: 0;
+    margin-right: var(--ow-space-lg);
+    color: var(--ow-on-code-block-muted);
+    text-align: right;
+    user-select: none;
+}
+
+.ow-code-block__code {
+    min-width: 0;
+    flex: 1;
+    font: inherit;
+    white-space: pre;
+}
+
+.ow-code-block__code .line {
+    display: inline;
+}
+
+.ow-snippet {
+    display: flex;
+    min-width: 0;
+    height: 40px;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-form);
+    background: var(--ow-surface-muted);
+    padding: 0 var(--ow-space-xs) 0 var(--ow-space-lg);
+}
+
+.ow-snippet__code {
+    min-width: 0;
+    flex: 1;
+    overflow-x: auto;
+    color: var(--ow-text);
+    font-family: var(--ow-font-mono);
+    font-size: 13px;
+    white-space: nowrap;
+    scrollbar-width: none;
+}
+
+.ow-snippet__prompt {
+    margin-right: var(--ow-space-sm);
+    color: var(--ow-text-muted);
+    user-select: none;
+}
+
+/* The copy icon gives way to the check with a quick scale and fade. */
+.ow-copy-button__icon {
+    display: inline-grid;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+.ow-copy-button__icon > svg {
+    grid-area: 1 / 1;
+    transition:
+        opacity var(--ow-duration-base) var(--ow-ease-standard),
+        transform var(--ow-duration-slow) var(--ow-ease-spring);
+}
+
+.ow-copy-button__icon > svg:last-child,
+.ow-copy-button--copied .ow-copy-button__icon > svg:first-child {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+.ow-copy-button--copied .ow-copy-button__icon > svg:last-child {
+    opacity: 1;
+    transform: none;
+}

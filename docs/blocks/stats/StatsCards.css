@@ -1,0 +1,95 @@
+.stats-cards,
+.stats-cards *,
+.stats-cards *::before,
+.stats-cards *::after {
+    box-sizing: border-box;
+}
+
+.stats-cards {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.stats-cards__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+.stats-cards__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px 48px;
+}
+
+.stats-cards__link {
+    margin-bottom: 4px;
+    font-size: 14.5px;
+}
+
+.stats-cards__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 56px;
+}
+
+/* Stat is sized for an app's overview; on a marketing page it gets more room and a bigger number. */
+.stats-cards__stat.ow-stat {
+    gap: 12px;
+    border-radius: var(--ow-radius-card);
+    padding: 24px 24px 20px;
+}
+
+.stats-cards__stat .ow-stat__label {
+    font-size: 13px;
+}
+
+.stats-cards__stat .ow-stat__row {
+    margin-top: 12px;
+}
+
+.stats-cards__stat .ow-stat__value {
+    font-size: 40px;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+}
+
+.stats-cards__stat .ow-stat__change {
+    font-size: 13px;
+}
+
+.stats-cards__stat .ow-stat__description {
+    margin-top: 0;
+    font-size: 13px;
+}
+
+.stats-cards__stat .ow-stat__trend {
+    height: 56px;
+    margin-top: 16px;
+}
+
+@media (max-width: 1024px) {
+    .stats-cards__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .stats-cards {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .stats-cards__grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+        margin-top: 40px;
+    }
+    .stats-cards__stat .ow-stat__value {
+        font-size: 36px;
+    }
+    .stats-cards__stat .ow-stat__trend {
+        height: 44px;
+    }
+}

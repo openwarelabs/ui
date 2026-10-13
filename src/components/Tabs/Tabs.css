@@ -1,0 +1,118 @@
+/* Tabs: the segmented look lives in SegmentedControl.css; this is the shell and the line variant. */
+.ow-tabs {
+    display: grid;
+    min-width: 0;
+    gap: var(--ow-space-xl);
+}
+
+.ow-tabs__list {
+    min-width: 0;
+}
+
+.ow-tab__icon {
+    display: inline-flex;
+}
+
+.ow-tabs__panel {
+    min-width: 0;
+    border-radius: var(--ow-radius-form);
+    animation: ow-fade-up var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+.ow-tabs__panel:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 4px;
+}
+
+.ow-tabs--line .ow-tabs__list {
+    position: relative;
+    display: flex;
+    overflow-x: auto;
+    gap: var(--ow-space-2xl);
+    border-bottom: 1px solid var(--ow-border);
+    scrollbar-width: none;
+}
+
+.ow-tabs--line .ow-tab {
+    position: relative;
+    display: inline-flex;
+    height: 40px;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--ow-space-xs);
+    margin: 0;
+    border: 0;
+    background: transparent;
+    padding: 0 2px;
+    color: var(--ow-text-muted);
+    font: inherit;
+    font-size: 14px;
+    font-weight: var(--ow-weight-control);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-tabs--line .ow-tab::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    border-radius: 2px 2px 0 0;
+    background: transparent;
+    transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-tabs--line .ow-tab:hover:not(:disabled) {
+    color: var(--ow-text);
+}
+
+.ow-tabs--line .ow-tab[aria-selected="true"] {
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.ow-tabs--line .ow-tab[aria-selected="true"]::after {
+    background: var(--ow-primary-text);
+}
+
+.ow-tabs--line .ow-tab:focus-visible {
+    border-radius: var(--ow-radius-sm);
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
+
+.ow-tabs--line .ow-tab:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* The underline slides between tabs once useIndicator has measured; before that, the tab's own line shows. */
+.ow-tabs--line .ow-tabs__list > .ow-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: var(--ow-indicator-w);
+    height: 2px;
+    border-radius: 2px 2px 0 0;
+    background: var(--ow-primary-text);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(var(--ow-indicator-x));
+}
+
+.ow-tabs--line .ow-tabs__list[data-indicator] > .ow-indicator {
+    opacity: 1;
+}
+
+.ow-tabs--line .ow-tabs__list[data-indicator="ready"] > .ow-indicator {
+    transition:
+        transform var(--ow-duration-slow) var(--ow-ease-emphasized),
+        width var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+.ow-tabs--line .ow-tabs__list[data-indicator] > .ow-tab[aria-selected="true"]::after {
+    background: transparent;
+}

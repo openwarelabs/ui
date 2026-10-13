@@ -1,0 +1,99 @@
+.testimonial-grid,
+.testimonial-grid *,
+.testimonial-grid *::before,
+.testimonial-grid *::after {
+    box-sizing: border-box;
+}
+
+.testimonial-grid {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.testimonial-grid__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+.testimonial-grid__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px 48px;
+}
+
+.testimonial-grid__sample.ow-badge {
+    margin-bottom: 4px;
+    font-weight: var(--ow-weight-control);
+}
+
+/* Columns of different heights, like a wall of notes; each card stays whole. */
+.testimonial-grid__list {
+    margin: 56px 0 0;
+    padding: 0;
+    list-style: none;
+    columns: 3;
+    column-gap: 16px;
+}
+
+.testimonial-grid__item {
+    margin-bottom: 16px;
+    break-inside: avoid;
+}
+
+.testimonial-grid__card.ow-card {
+    border-radius: var(--ow-radius-card);
+    padding: 24px;
+}
+
+.testimonial-grid__figure {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 0;
+}
+
+.testimonial-grid__quote {
+    margin: 0;
+}
+
+.testimonial-grid__quote p {
+    margin: 0;
+    color: var(--ow-text-soft);
+    font-size: 15px;
+    line-height: 1.6;
+    text-wrap: pretty;
+}
+
+/* Short quotes read as headlines. */
+.testimonial-grid__item[data-short] .testimonial-grid__quote p {
+    color: var(--ow-text);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+}
+
+@media (max-width: 1024px) {
+    .testimonial-grid__list {
+        columns: 2;
+    }
+}
+
+@media (max-width: 760px) {
+    .testimonial-grid {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .testimonial-grid__list {
+        margin-top: 40px;
+        columns: 1;
+    }
+    .testimonial-grid__item {
+        margin-bottom: 12px;
+    }
+    .testimonial-grid__card.ow-card {
+        padding: 20px;
+    }
+}

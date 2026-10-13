@@ -1,0 +1,14 @@
+/* DatePicker: Select's trigger with a calendar icon, opening a Calendar in a popover. */
+.ow-date-picker {
+    min-width: 180px;
+}
+
+.ow-date-picker__icon {
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+}
+
+.ow-date-picker__panel {
+    width: auto;
+    padding: var(--ow-space-md);
+}

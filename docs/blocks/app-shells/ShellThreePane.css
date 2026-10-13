@@ -1,0 +1,582 @@
+/* The list on the canvas; the open item and its inspector side by side on a raised panel. */
+.shell-three-pane,
+.shell-three-pane *,
+.shell-three-pane *::before,
+.shell-three-pane *::after {
+    box-sizing: border-box;
+}
+
+.shell-three-pane {
+    display: grid;
+    grid-template-columns: 272px minmax(0, 1fr);
+    height: 100dvh;
+    background: var(--ow-canvas);
+    color: var(--ow-text);
+}
+
+/* The list */
+
+.shell-three-pane__list {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    gap: var(--ow-space-lg);
+    padding: 10px 12px 12px;
+}
+
+/* Menus wrap their trigger in an inline span; let these triggers take the full width. */
+.shell-three-pane__list .ow-menu {
+    display: block;
+}
+
+.shell-three-pane__workspace,
+.shell-three-pane__user {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+    border: 0;
+    border-radius: var(--ow-radius-lg);
+    background: transparent;
+    padding: 6px 8px;
+    color: var(--ow-text);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.shell-three-pane__workspace:hover,
+.shell-three-pane__user:hover,
+.shell-three-pane__workspace[aria-expanded="true"],
+.shell-three-pane__user[aria-expanded="true"] {
+    background: color-mix(in srgb, var(--ow-surface) 60%, transparent);
+}
+
+.shell-three-pane__workspace:focus-visible,
+.shell-three-pane__user:focus-visible,
+.shell-three-pane__project:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
+
+.shell-three-pane__workspace > svg,
+.shell-three-pane__user > svg {
+    flex-shrink: 0;
+    color: var(--ow-icon);
+}
+
+.shell-three-pane__workspace-name {
+    flex: 1;
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.01em;
+}
+
+.shell-three-pane__mark {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background: linear-gradient(180deg, var(--ow-brand-500), var(--ow-brand-700));
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
+}
+
+.shell-three-pane__menu-spacer {
+    display: block;
+    width: 15px;
+}
+
+.shell-three-pane__list-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--ow-space-sm);
+    padding-left: 8px;
+}
+
+.shell-three-pane__list-title {
+    font-size: 13px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.shell-three-pane__list-count {
+    margin-left: 6px;
+    color: var(--ow-text-muted);
+    font-weight: var(--ow-weight-regular);
+}
+
+.shell-three-pane__search .ow-input {
+    background: var(--ow-surface);
+}
+
+.shell-three-pane__scroll {
+    min-height: 0;
+    flex: 1;
+    margin: 0 -4px;
+    padding: 0 4px;
+}
+
+.shell-three-pane__projects {
+    display: grid;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.shell-three-pane__project {
+    display: grid;
+    width: 100%;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 10px;
+    border: 0;
+    border-radius: var(--ow-radius-lg);
+    background: transparent;
+    padding: 8px 10px;
+    color: var(--ow-text-soft);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition:
+        background-color var(--ow-duration-base) var(--ow-ease-standard),
+        box-shadow var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.shell-three-pane__project:hover {
+    background: color-mix(in srgb, var(--ow-surface) 60%, transparent);
+}
+
+/* The open item is raised on the surface, like the active NavItem. */
+.shell-three-pane__project[aria-current="true"] {
+    background: var(--ow-surface);
+    color: var(--ow-text);
+    box-shadow:
+        var(--ow-shadow-control),
+        0 0 0 1px var(--ow-border);
+}
+
+.shell-three-pane__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.shell-three-pane__project-text {
+    display: grid;
+    min-width: 0;
+    gap: 1px;
+}
+
+.shell-three-pane__project-name {
+    overflow: hidden;
+    font-weight: var(--ow-weight-control);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.shell-three-pane__project-meta {
+    overflow: hidden;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.shell-three-pane__no-match {
+    margin: 0;
+    padding: 12px 10px;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+}
+
+.shell-three-pane__user-text {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+}
+
+.shell-three-pane__user-name {
+    font-size: 13.5px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.shell-three-pane__user-email {
+    overflow: hidden;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* The panel: the item, and the inspector beside it */
+
+.shell-three-pane__panel {
+    display: grid;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    overflow: hidden;
+    margin: 8px 8px 8px 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+}
+
+.shell-three-pane[data-inspector="closed"] .shell-three-pane__panel {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.shell-three-pane[data-inspector="closed"] .shell-three-pane__inspector {
+    display: none;
+}
+
+.shell-three-pane__item,
+.shell-three-pane__inspector {
+    min-height: 0;
+    overflow-y: auto;
+}
+
+/* The item pane's width depends on the panes beside it, so its figures answer to the pane, not the window. */
+.shell-three-pane__item {
+    container-type: inline-size;
+}
+
+.shell-three-pane__toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    height: 52px;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    border-bottom: 1px solid var(--ow-border);
+    background: var(--ow-surface);
+    padding: 0 12px 0 20px;
+}
+
+.shell-three-pane__crumbs {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    align-items: center;
+    gap: 6px;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+}
+
+.shell-three-pane__crumbs strong {
+    overflow: hidden;
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-control);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.shell-three-pane__crumbs svg {
+    flex-shrink: 0;
+    color: var(--ow-icon);
+}
+
+.shell-three-pane__back {
+    display: none;
+}
+
+.shell-three-pane__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ow-space-7xl);
+    padding: 28px 28px 40px;
+}
+
+.shell-three-pane__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+}
+
+.shell-three-pane__title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.shell-three-pane__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+.shell-three-pane__title:focus {
+    outline: none;
+}
+
+.shell-three-pane__description {
+    max-width: 52ch;
+    margin: 4px 0 0;
+    color: var(--ow-text-muted);
+}
+
+.shell-three-pane__figures {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+}
+
+.shell-three-pane__figure {
+    display: grid;
+    align-content: space-between;
+    gap: 6px;
+    padding: 14px 16px;
+}
+
+.shell-three-pane__figure + .shell-three-pane__figure {
+    border-left: 1px solid var(--ow-border);
+}
+
+.shell-three-pane__figure dt {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-control);
+}
+
+.shell-three-pane__figure dd {
+    margin: 0;
+    white-space: nowrap;
+    font-size: 20px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.shell-three-pane__section-title {
+    margin: 0 0 10px;
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.shell-three-pane__deploys {
+    margin: 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    padding: 0;
+    list-style: none;
+}
+
+.shell-three-pane__deploy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+    padding: 12px 16px;
+}
+
+.shell-three-pane__deploy + .shell-three-pane__deploy {
+    border-top: 1px solid var(--ow-border);
+}
+
+.shell-three-pane__deploy-text {
+    display: grid;
+    min-width: 0;
+    gap: 2px;
+}
+
+.shell-three-pane__deploy-title {
+    overflow: hidden;
+    font-weight: var(--ow-weight-control);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.shell-three-pane__deploy-meta {
+    overflow: hidden;
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.shell-three-pane__branch {
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+}
+
+.shell-three-pane__deploy-end {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--ow-space-lg);
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* The inspector */
+
+.shell-three-pane__inspector {
+    border-left: 1px solid var(--ow-border);
+}
+
+.shell-three-pane__inspector-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    height: 52px;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-sm);
+    border-bottom: 1px solid var(--ow-border);
+    background: var(--ow-surface);
+    padding: 0 12px 0 20px;
+}
+
+.shell-three-pane__inspector-title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.shell-three-pane__inspector-title:focus {
+    outline: none;
+}
+
+.shell-three-pane__inspector-back {
+    display: none;
+}
+
+.shell-three-pane__inspector-body {
+    display: grid;
+    gap: var(--ow-space-4xl);
+    padding: 16px 20px 28px;
+}
+
+.shell-three-pane__details {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+}
+
+.shell-three-pane__detail {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    align-items: center;
+    gap: var(--ow-space-lg);
+    min-height: 24px;
+}
+
+.shell-three-pane__detail dt {
+    color: var(--ow-text-muted);
+    font-size: 13px;
+}
+
+.shell-three-pane__detail dd {
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.shell-three-pane__detail .ow-user__name {
+    font-size: 13px;
+    font-weight: var(--ow-weight-control);
+}
+
+.shell-three-pane__mono {
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+}
+
+.shell-three-pane__settings {
+    border-top: 1px solid var(--ow-border);
+    padding-top: var(--ow-space-lg);
+}
+
+.shell-three-pane__settings-title {
+    margin: 0 0 2px;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-control);
+}
+
+/* Tablets: the inspector takes the item's place when asked for. */
+@media (max-width: 1023px) {
+    .shell-three-pane {
+        grid-template-columns: 248px minmax(0, 1fr);
+    }
+    .shell-three-pane__panel,
+    .shell-three-pane[data-inspector="closed"] .shell-three-pane__panel {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .shell-three-pane__inspector,
+    .shell-three-pane[data-inspector="closed"] .shell-three-pane__inspector {
+        display: none;
+        border-left: 0;
+    }
+    .shell-three-pane[data-view="inspector"] .shell-three-pane__item {
+        display: none;
+    }
+    .shell-three-pane[data-view="inspector"] .shell-three-pane__inspector {
+        display: block;
+    }
+    .shell-three-pane__inspector-back {
+        display: block;
+    }
+    .shell-three-pane__inspector-close {
+        display: none;
+    }
+    .shell-three-pane__inspector-header {
+        justify-content: flex-start;
+        padding-left: 8px;
+    }
+}
+
+@container (max-width: 560px) {
+    .shell-three-pane__figure {
+        padding: 12px;
+    }
+    .shell-three-pane__figure dd {
+        font-size: 16px;
+    }
+}
+
+/* Phones: one pane at a time, each with a way back. */
+@media (max-width: 759px) {
+    .shell-three-pane {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .shell-three-pane[data-view="list"] .shell-three-pane__panel,
+    .shell-three-pane:not([data-view="list"]) .shell-three-pane__list {
+        display: none;
+    }
+    .shell-three-pane__panel {
+        margin: 8px;
+    }
+    .shell-three-pane__toolbar {
+        padding-left: 8px;
+    }
+    .shell-three-pane__back {
+        display: block;
+    }
+    .shell-three-pane__crumbs {
+        visibility: hidden;
+    }
+    .shell-three-pane__content {
+        padding: 22px 18px 32px;
+    }
+    .shell-three-pane__deploy {
+        padding: 12px 14px;
+    }
+    .shell-three-pane__duration {
+        display: none;
+    }
+}

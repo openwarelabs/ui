@@ -1,0 +1,138 @@
+// Checks docs/blocks against docs/app/blocks.tsx and the rules in docs/blocks/README.md:
+//   every block in the list has its two files, and every file is in the list
+//   <Name>.tsx exports one function, <Name>, and imports nothing local but ./<Name>.css
+//   every selector in <Name>.css starts with the block's own class, so blocks can't touch each other
+//   colours come from tokens, and only blocks with a fixed preview height use viewport units
+// `node scripts/check-blocks.mjs` prints what's wrong and exits 1, or says how many blocks passed.
+import fs from "node:fs";
+import path from "node:path";
+import ts from "typescript";
+
+import { root } from "./css.mjs";
+
+const blocksDir = path.join(root, "docs/blocks");
+const listFile = path.join(root, "docs/app/blocks.tsx");
+
+/** "HeroCentred" → "hero-centred", "SettingsApiKeys" → "settings-api-keys". */
+const kebab = (name) =>
+    name
+        .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+        .replace(/([A-Z])([A-Z][a-z])/g, "$1-$2")
+        .toLowerCase();
+
+// The list: each category's slug, and each block's id and whether it has a fixed height.
+const list = fs.readFileSync(listFile, "utf8");
+const expected = new Map();
+let category = null;
+for (const line of list.split("\n")) {
+    const slug = /^\s+slug: "([^"]+)",/.exec(line);
+    if (slug) category = slug[1];
+    const block = /\{ id: "([^"]+)",.*?(height: (\d+))?\s*\},?\s*$/.exec(line);
+    if (block && category) expected.set(`${category}/${block[1]}`, { fixedHeight: Boolean(block[3]) });
+}
+
+/** Splits a selector list on its top-level commas, leaving those inside :is(), :where() and the like alone. */
+function splitSelectors(list) {
+    const parts = [];
+    let depth = 0;
+    let current = "";
+    for (const character of list) {
+        if (character === "(") depth += 1;
+        if (character === ")") depth -= 1;
+        if (character === "," && depth === 0) {
+            parts.push(current.trim());
+            current = "";
+        } else current += character;
+    }
+    parts.push(current.trim());
+    return parts.filter(Boolean);
+}
+
+const problems = [];
+const problem = (id, text) => problems.push(`${id}: ${text}`);
+
+const found = new Set();
+if (fs.existsSync(blocksDir)) {
+    for (const dir of fs.readdirSync(blocksDir, { withFileTypes: true })) {
+        if (!dir.isDirectory()) continue;
+        for (const file of fs.readdirSync(path.join(blocksDir, dir.name))) {
+            const ext = path.extname(file);
+            if (ext !== ".tsx" && ext !== ".css") {
+                problem(`${dir.name}/${file}`, "only .tsx and .css files belong in a block's folder");
+                continue;
+            }
+            found.add(`${dir.name}/${path.basename(file, ext)}`);
+        }
+    }
+}
+
+for (const id of found) if (!expected.has(id)) problem(id, "isn't in docs/app/blocks.tsx");
+
+let checked = 0;
+for (const [id, { fixedHeight }] of expected) {
+    const name = id.split("/")[1];
+    const tsxPath = path.join(blocksDir, `${id}.tsx`);
+    const cssPath = path.join(blocksDir, `${id}.css`);
+    if (!fs.existsSync(tsxPath)) continue; // Not built yet: the docs show its sketch.
+    checked += 1;
+
+    // The component.
+    const tsx = fs.readFileSync(tsxPath, "utf8");
+    const source = ts.createSourceFile(tsxPath, tsx, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+    const exported = [];
+    for (const statement of source.statements) {
+        if (ts.isImportDeclaration(statement)) {
+            const from = statement.moduleSpecifier.text;
+            if (from.startsWith(".") && from !== `./${name}.css`) problem(id, `imports ${from}; a block is its two files and nothing else local`);
+            if (!from.startsWith(".") && !["react", "@openwarelabs/ui", "lucide-react"].includes(from))
+                problem(id, `imports ${from}; use react, @openwarelabs/ui and lucide-react only`);
+        }
+        if (statement.modifiers?.some((m) => m.kind === ts.SyntaxKind.ExportKeyword)) {
+            exported.push(ts.isFunctionDeclaration(statement) ? statement.name?.text : "(something other than a function)");
+        }
+    }
+    if (exported.length !== 1 || exported[0] !== name)
+        problem(id, `should export exactly one function, ${name}; it exports ${exported.join(", ") || "nothing"}`);
+    if (!tsx.includes(`import "./${name}.css";`)) problem(id, `should import "./${name}.css"`);
+    if (/https?:\/\/(?!www\.w3\.org)/.test(tsx)) problem(id, "links to an outside address; use # for links and draw images with CSS or components");
+    if (/lorem ipsum/i.test(tsx)) problem(id, "has placeholder Latin; write real copy");
+
+    // Its styles.
+    if (!fs.existsSync(cssPath)) {
+        problem(id, `has no ${name}.css`);
+        continue;
+    }
+    const prefix = `.${kebab(name)}`;
+    const css = fs.readFileSync(cssPath, "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+    // Selectors: whatever comes before a { that isn't an at-rule or a keyframe step.
+    const selectorPattern = /([^{};]+)\{/g;
+    for (let match; (match = selectorPattern.exec(css)); ) {
+        const selector = match[1].trim();
+        if (!selector || selector.startsWith("@") || /^(from|to|\d+%)(\s*,\s*(from|to|\d+%))*$/.test(selector)) continue;
+        for (const part of splitSelectors(selector)) {
+            if (!part.startsWith(prefix) || /^([a-z0-9]|-(?!-)|_(?!_))/i.test(part.slice(prefix.length))) {
+                problem(id, `selector "${part}" should start with ${prefix} (its own class, or ${prefix}__part / ${prefix}--modifier)`);
+            }
+        }
+    }
+    for (const keyframes of css.matchAll(/@keyframes\s+([\w-]+)/g)) {
+        if (!keyframes[1].startsWith(kebab(name))) problem(id, `@keyframes ${keyframes[1]} should start with ${kebab(name)}`);
+    }
+    for (const declaration of css.matchAll(/([\w-]+)\s*:\s*([^;{}]+);/g)) {
+        const [, property, value] = declaration;
+        if (property.startsWith("--")) continue;
+        const masking = /mask/.test(property);
+        if (!masking && /#[0-9a-f]{3,8}\b|\brgba?\(|\bhsla?\(|\boklch\(/i.test(value))
+            problem(id, `${property}: ${value.trim()} — use a colour token (var(--ow-…))`);
+        if (!fixedHeight && /\d(dvh|svh|lvh|vh)\b/.test(value))
+            problem(id, `${property} uses viewport height; the preview fits the block to its content, so only blocks with a fixed height may`);
+    }
+    if (/\banimation\s*:/.test(css) && !/prefers-reduced-motion/.test(css)) problem(id, "animates without a prefers-reduced-motion rule");
+}
+
+if (problems.length) {
+    console.log(problems.join("\n"));
+    console.log(`\n${problems.length} problem${problems.length === 1 ? "" : "s"} in ${checked} block${checked === 1 ? "" : "s"}.`);
+    process.exit(1);
+}
+console.log(`${checked} of ${expected.size} blocks built, and all follow the rules.`);

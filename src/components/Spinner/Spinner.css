@@ -1,0 +1,47 @@
+/* Spinner: a ring with one coloured quarter, turning. */
+.ow-spinner {
+    display: inline-block;
+    flex-shrink: 0;
+    border-style: solid;
+    border-radius: 50%;
+    border-color: var(--ow-meter-track);
+    border-top-color: var(--ow-progress);
+    vertical-align: middle;
+    animation: ow-spin 0.7s linear infinite;
+}
+
+.ow-spinner--current {
+    border-color: color-mix(in srgb, currentColor 25%, transparent);
+    border-top-color: currentColor;
+}
+
+.ow-spinner--sm {
+    width: 14px;
+    height: 14px;
+    border-width: 2px;
+}
+
+.ow-spinner--md {
+    width: 20px;
+    height: 20px;
+    border-width: 2px;
+}
+
+.ow-spinner--lg {
+    width: 28px;
+    height: 28px;
+    border-width: 3px;
+}
+
+@keyframes ow-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-spinner {
+        animation-duration: 1.6s !important;
+        animation-iteration-count: infinite !important;
+    }
+}

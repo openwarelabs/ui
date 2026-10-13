@@ -1,0 +1,191 @@
+.hero-logos,
+.hero-logos *,
+.hero-logos *::before,
+.hero-logos *::after {
+    box-sizing: border-box;
+}
+
+.hero-logos {
+    background: var(--ow-paper);
+    padding: 128px 32px 88px;
+    color: var(--ow-text);
+}
+
+.hero-logos__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+/* The headline on the left, the lead and the buttons on the right, sharing a baseline at the bottom. */
+.hero-logos__top {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: end;
+    gap: 64px;
+}
+
+.hero-logos__heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.hero-logos__title {
+    margin: 24px 0 0;
+    font-size: 72px;
+    font-weight: 500;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+}
+
+.hero-logos__lead {
+    margin: 0;
+    color: var(--ow-text-muted);
+    font-size: 18px;
+    line-height: 1.6;
+    text-wrap: pretty;
+}
+
+.hero-logos__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ow-space-lg);
+    margin-top: 28px;
+}
+
+/* The first proof: who already uses it. */
+.hero-logos__proof {
+    margin-top: 104px;
+    border-top: 1px solid var(--ow-border);
+    padding-top: 36px;
+}
+
+.hero-logos__proof-label {
+    margin: 0;
+    color: var(--ow-text-muted);
+    font-size: 14px;
+}
+
+.hero-logos__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px 40px;
+    margin: 28px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.hero-logos__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ow-text-muted);
+    font-size: 19px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+}
+
+.hero-logos__logo svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+/* Each invented company gets its own lettering, as real wordmarks differ. */
+.hero-logos__logo[data-name="Quarry"] {
+    font-size: 15px;
+    font-weight: var(--ow-weight-heavy);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.hero-logos__logo[data-name="Basalt"] {
+    font-weight: var(--ow-weight-control);
+    letter-spacing: -0.01em;
+}
+
+.hero-logos__logo[data-name="Oakline"] {
+    letter-spacing: -0.04em;
+    text-transform: lowercase;
+}
+
+.hero-logos__logo[data-name="Ferro"] {
+    font-size: 15px;
+    font-weight: var(--ow-weight-strong);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.hero-logos__logo[data-name="Lumen"] {
+    font-size: 21px;
+    font-weight: var(--ow-weight-regular);
+    letter-spacing: 0;
+    text-transform: lowercase;
+}
+
+.hero-logos__logo[data-name="Cobalt"] {
+    font-weight: var(--ow-weight-heavy);
+    letter-spacing: -0.045em;
+}
+
+@media (max-width: 1024px) {
+    .hero-logos {
+        padding-top: 104px;
+    }
+    .hero-logos__top {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+    }
+    .hero-logos__title {
+        font-size: 64px;
+    }
+    .hero-logos__lead {
+        max-width: 560px;
+    }
+    .hero-logos__list {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        justify-items: start;
+    }
+}
+
+@media (max-width: 760px) {
+    .hero-logos {
+        padding: 72px var(--ow-page-gutter) 64px;
+    }
+    .hero-logos__title {
+        font-size: 44px;
+        line-height: 1.02;
+        letter-spacing: -0.04em;
+    }
+    .hero-logos__lead {
+        font-size: 16px;
+    }
+    .hero-logos__actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .hero-logos__proof {
+        margin-top: 64px;
+        padding-top: 28px;
+    }
+    .hero-logos__list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 28px 16px;
+    }
+    .hero-logos__logo {
+        font-size: 17px;
+    }
+    .hero-logos__logo[data-name="Quarry"],
+    .hero-logos__logo[data-name="Ferro"] {
+        font-size: 13.5px;
+    }
+    .hero-logos__logo[data-name="Lumen"] {
+        font-size: 19px;
+    }
+}

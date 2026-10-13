@@ -1,0 +1,62 @@
+/* Card and SettingsRow. */
+.ow-card {
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    color: var(--ow-text);
+}
+
+.ow-card--pad-none {
+    padding: 0;
+}
+
+.ow-card--pad-md {
+    padding: var(--ow-space-2xl);
+}
+
+.ow-card--pad-lg {
+    padding: var(--ow-space-3xl);
+}
+
+.ow-settings-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-md);
+    border-bottom: 1px solid var(--ow-border);
+    padding: var(--ow-space-lg) 0;
+}
+
+.ow-settings-row:last-child {
+    border-bottom: 0;
+}
+
+.ow-settings-row__text {
+    display: grid;
+    min-width: 0;
+    flex: 1 1 192px;
+    gap: var(--ow-space-3xs);
+}
+
+.ow-settings-row__label {
+    color: var(--ow-text);
+    font-size: 14px;
+    font-weight: var(--ow-weight-control);
+}
+
+.ow-settings-row__description {
+    display: grid;
+    gap: var(--ow-space-xs);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.ow-settings-row__control {
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--ow-space-sm);
+}

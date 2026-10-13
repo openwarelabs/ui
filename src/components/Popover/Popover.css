@@ -1,0 +1,32 @@
+/* Popover: a surface card with the menu shadow, attached to its trigger. */
+.ow-popover-anchor {
+    display: inline-flex;
+}
+
+.ow-popover {
+    z-index: 60;
+    display: grid;
+    gap: var(--ow-space-md);
+    overflow: auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: var(--ow-space-xl);
+    color: var(--ow-text);
+    font-family: var(--ow-font-sans);
+    font-size: 14px;
+    line-height: 1.45;
+    box-shadow: var(--ow-shadow-menu);
+    outline: none;
+}
+
+/* Children may shrink to the popover's width instead of pushing past it. */
+.ow-popover > * {
+    min-width: 0;
+}
+
+.ow-popover__title {
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.3;
+}

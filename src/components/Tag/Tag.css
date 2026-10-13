@@ -1,0 +1,144 @@
+/* Tag, TagGroup and ColorSwatch. */
+.ow-tag-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-xs);
+}
+
+.ow-tag {
+    display: inline-flex;
+    max-width: 100%;
+    align-items: center;
+    gap: var(--ow-space-xs);
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-surface-muted);
+    color: var(--ow-text-soft);
+    font-size: 13px;
+    font-weight: var(--ow-weight-control);
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.ow-tag--md {
+    min-height: 28px;
+    padding: 0 var(--ow-space-md);
+}
+
+.ow-tag--sm {
+    min-height: 22px;
+    padding: 0 var(--ow-space-sm);
+    font-size: 12px;
+}
+
+.ow-tag--removable.ow-tag--md {
+    padding-right: var(--ow-space-2xs);
+}
+
+.ow-tag--removable.ow-tag--sm {
+    padding-right: 2px;
+}
+
+.ow-tag--active {
+    border-color: var(--ow-primary-border);
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.ow-tag__icon {
+    display: inline-flex;
+}
+
+.ow-tag__label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ow-tag__remove {
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border: 0;
+    border-radius: var(--ow-radius-sm);
+    background: transparent;
+    padding: 0;
+    color: inherit;
+    opacity: 0.7;
+    cursor: pointer;
+    transition-property: opacity, background-color;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-tag--sm .ow-tag__remove {
+    width: 16px;
+    height: 16px;
+}
+
+.ow-tag__remove:hover {
+    background: color-mix(in srgb, currentColor 12%, transparent);
+    opacity: 1;
+}
+
+.ow-tag__remove:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 0;
+    opacity: 1;
+}
+
+.ow-swatch {
+    display: inline-block;
+    flex-shrink: 0;
+    border-radius: var(--ow-radius-sm);
+    box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.12);
+    vertical-align: middle;
+}
+
+.ow-swatch--sm {
+    width: 16px;
+    height: 16px;
+}
+
+.ow-swatch--md {
+    width: 24px;
+    height: 24px;
+    border-radius: var(--ow-radius-code);
+}
+
+.ow-swatch--lg {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--ow-radius-form);
+}
+
+.ow-swatch--circle {
+    border-radius: 50%;
+}
+
+.ow-swatch-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    color: var(--ow-text);
+    font-size: 13px;
+}
+
+.ow-swatch-label__text {
+    display: grid;
+    line-height: 1.3;
+}
+
+.ow-swatch-label__name {
+    font-weight: var(--ow-weight-control);
+}
+
+.ow-swatch-label__value {
+    color: var(--ow-text-muted);
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+}

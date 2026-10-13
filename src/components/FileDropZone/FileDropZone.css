@@ -1,0 +1,84 @@
+/* FileDropZone: Commandr's folder drop zone, a dashed well that turns primary while something is dragged over it. */
+.ow-dropzone {
+    display: flex;
+    min-height: 128px;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ow-space-sm);
+    border: 1.5px dashed var(--ow-border-strong);
+    border-radius: var(--ow-radius-container);
+    background: color-mix(in srgb, var(--ow-surface-muted) 60%, transparent);
+    padding: var(--ow-space-3xl) var(--ow-space-2xl);
+    color: var(--ow-text);
+    text-align: center;
+    cursor: pointer;
+    transition-property: border-color, background-color;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-dropzone:hover {
+    border-color: var(--ow-border-hover);
+}
+
+.ow-dropzone:focus-within:has(:focus-visible) {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-dropzone--dragging,
+.ow-dropzone--dragging:hover {
+    border-color: var(--ow-primary-text);
+    background: var(--ow-primary-subtle);
+}
+
+.ow-dropzone--invalid {
+    border-color: var(--ow-danger-line);
+}
+
+.ow-dropzone--disabled {
+    cursor: not-allowed;
+    opacity: 0.62;
+}
+
+.ow-dropzone__icon {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-surface);
+    color: var(--ow-text-muted);
+    transition-property: color, border-color;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-dropzone--dragging .ow-dropzone__icon {
+    border-color: var(--ow-primary-border);
+    color: var(--ow-primary-text);
+}
+
+.ow-dropzone__label {
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.3;
+}
+
+.ow-dropzone--dragging .ow-dropzone__label {
+    color: var(--ow-primary-text);
+}
+
+.ow-dropzone__hint {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.ow-dropzone--invalid .ow-dropzone__hint {
+    color: var(--ow-danger-text);
+}

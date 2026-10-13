@@ -1,0 +1,225 @@
+.pricing-usage,
+.pricing-usage *,
+.pricing-usage *::before,
+.pricing-usage *::after {
+    box-sizing: border-box;
+}
+
+.pricing-usage {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.pricing-usage__inner {
+    display: grid;
+    max-width: var(--ow-page-max);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
+    align-items: start;
+    gap: 64px;
+    margin: 0 auto;
+}
+
+/* The price list: one row per band, the band the estimate lands in marked with a brass dot. */
+.pricing-usage__tiers {
+    margin: 40px 0 0;
+    border-top: 1px solid var(--ow-border);
+    padding: 0;
+    list-style: none;
+}
+
+.pricing-usage__tier {
+    display: grid;
+    grid-template-columns: 14px minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 12px;
+    border-bottom: 1px solid var(--ow-border);
+    padding: 16px 0;
+}
+
+.pricing-usage__tier-dot {
+    width: 6px;
+    height: 6px;
+    align-self: center;
+    border-radius: 50%;
+    background: var(--ow-border-strong);
+    transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.pricing-usage__tier[data-current] .pricing-usage__tier-dot {
+    background: var(--ow-brass);
+}
+
+.pricing-usage__tier-range {
+    color: var(--ow-text-soft);
+    font-size: 15px;
+}
+
+.pricing-usage__tier[data-current] .pricing-usage__tier-range {
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-control);
+}
+
+.pricing-usage__tier-price {
+    color: var(--ow-text);
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+    font-variant-numeric: tabular-nums;
+}
+
+.pricing-usage__tier-price small {
+    margin-left: 4px;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    font-weight: var(--ow-weight-regular);
+}
+
+.pricing-usage__aside {
+    margin: 20px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 13.5px;
+    line-height: 1.55;
+}
+
+.pricing-usage__card {
+    border-radius: var(--ow-radius-card);
+    padding: 28px;
+}
+
+.pricing-usage__card-title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.01em;
+}
+
+.pricing-usage__card-intro {
+    margin: 6px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.pricing-usage__runs {
+    margin: 28px 0 16px;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+}
+
+.pricing-usage__runs small {
+    margin-left: 4px;
+    color: var(--ow-text-muted);
+    font-size: 14px;
+    font-weight: var(--ow-weight-regular);
+    letter-spacing: 0;
+}
+
+.pricing-usage__scale {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 9px 0;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+.pricing-usage__scale span {
+    width: 0;
+    display: flex;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.pricing-usage__breakdown {
+    display: grid;
+    margin: 28px 0 0;
+    border-top: 1px solid var(--ow-border);
+    padding: 12px 0 0;
+}
+
+.pricing-usage__line {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 6px 0;
+    color: var(--ow-text-soft);
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+}
+
+.pricing-usage__line[data-idle] {
+    color: var(--ow-text-disabled);
+}
+
+.pricing-usage__total {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
+    margin-top: 12px;
+    border-top: 1px solid var(--ow-border);
+    padding-top: 18px;
+}
+
+.pricing-usage__total-label {
+    margin: 0;
+    color: var(--ow-text);
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.pricing-usage__total-label small {
+    display: block;
+    margin-top: 2px;
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+    font-weight: var(--ow-weight-regular);
+}
+
+.pricing-usage__total-amount {
+    margin: 0;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+}
+
+.pricing-usage__action {
+    margin-top: 24px;
+}
+
+.pricing-usage__fine {
+    margin: 14px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+    line-height: 1.5;
+    text-align: center;
+    text-wrap: balance;
+}
+
+@media (max-width: 1024px) {
+    .pricing-usage__inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 48px;
+    }
+}
+
+@media (max-width: 760px) {
+    .pricing-usage {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .pricing-usage__tiers {
+        margin-top: 32px;
+    }
+    .pricing-usage__card {
+        padding: 22px 18px;
+    }
+    .pricing-usage__total-amount {
+        font-size: 36px;
+    }
+}

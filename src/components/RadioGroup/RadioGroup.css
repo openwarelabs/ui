@@ -1,0 +1,90 @@
+/* Radio: a 16px ring that fills with a thick primary border, leaving a white centre. */
+.ow-radio {
+    display: inline-flex;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.ow-radio__input {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    appearance: none;
+    border: 1px solid var(--ow-border-strong);
+    border-radius: 50%;
+    background: var(--ow-surface);
+    box-shadow: var(--ow-shadow-control);
+    cursor: pointer;
+    transition:
+        border-color var(--ow-duration-base) var(--ow-ease-standard),
+        border-width var(--ow-duration-slow) var(--ow-ease-spring),
+        background-color var(--ow-duration-base) var(--ow-ease-standard),
+        transform var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-radio__input:active:not(:disabled) {
+    transform: scale(0.9);
+}
+
+.ow-radio__input:hover {
+    border-color: var(--ow-border-hover);
+}
+
+.ow-radio__input:checked,
+.ow-radio__input:checked:hover {
+    border: 5px solid var(--ow-primary);
+    background: #ffffff;
+}
+
+.ow-radio__input:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-radio__input:disabled {
+    cursor: not-allowed;
+    border-style: dashed;
+    background: transparent;
+    box-shadow: none;
+}
+
+.ow-radio__input:disabled:checked {
+    border-style: solid;
+    border-color: var(--ow-border-strong);
+    background: var(--ow-surface);
+}
+
+/* Cards: each option is a bordered surface; the chosen one is tinted. */
+.ow-radio-group--cards .ow-fieldset__content {
+    gap: var(--ow-space-sm);
+}
+
+.ow-radio-group--cards .ow-radio-label {
+    display: flex;
+    border: 1px solid var(--ow-border-strong);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: var(--ow-space-lg) var(--ow-space-xl);
+    transition-property: border-color, background-color;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-radio-group--cards.ow-fieldset--horizontal .ow-radio-label {
+    flex: 1 1 180px;
+}
+
+.ow-radio-group--cards .ow-radio-label:hover {
+    border-color: var(--ow-border-hover);
+}
+
+.ow-radio-group--cards .ow-radio-label:has(:checked) {
+    border-color: var(--ow-primary-border);
+    background: var(--ow-primary-subtle);
+}
+
+.ow-radio-group--cards .ow-radio-label:has(:checked) .ow-check-label__text > :first-child {
+    font-weight: var(--ow-weight-emphasis);
+}

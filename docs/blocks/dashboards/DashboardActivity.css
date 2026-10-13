@@ -1,0 +1,282 @@
+/* The numbers on the left, what just happened in a feed on the right. */
+.dashboard-activity,
+.dashboard-activity *,
+.dashboard-activity *::before,
+.dashboard-activity *::after {
+    box-sizing: border-box;
+}
+
+.dashboard-activity {
+    background: var(--ow-canvas);
+    padding: 32px;
+    color: var(--ow-text);
+}
+
+.dashboard-activity__inner {
+    display: grid;
+    max-width: 1200px;
+    grid-template-areas:
+        "header header"
+        "stats feed"
+        "table feed";
+    grid-template-columns: minmax(0, 1fr) 380px;
+    grid-template-rows: auto auto 1fr;
+    gap: var(--ow-space-2xl);
+    margin: 0 auto;
+}
+
+.dashboard-activity__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+    grid-area: header;
+    margin-bottom: var(--ow-space-sm);
+}
+
+.dashboard-activity__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+.dashboard-activity__lead {
+    margin: 4px 0 0;
+    color: var(--ow-text-muted);
+}
+
+.dashboard-activity__stats {
+    display: grid;
+    grid-area: stats;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--ow-space-2xl);
+}
+
+.dashboard-activity__card {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.dashboard-activity__card-header {
+    display: flex;
+    min-height: 56px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-sm) var(--ow-space-lg);
+    border-bottom: 1px solid var(--ow-border);
+    padding: 10px 14px 10px 18px;
+}
+
+.dashboard-activity__card-title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.dashboard-activity__table-card {
+    grid-area: table;
+    align-self: start;
+}
+
+/* The Table sits edge to edge in its card; the card draws the border. */
+.dashboard-activity__table-card .ow-table-wrap {
+    border: 0;
+    border-radius: 0;
+}
+
+.dashboard-activity__project {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: var(--ow-weight-control);
+    white-space: nowrap;
+}
+
+.dashboard-activity__dot {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    border-radius: 50%;
+}
+
+.dashboard-activity__muted {
+    color: var(--ow-text-muted);
+}
+
+/* The feed */
+
+.dashboard-activity__feed {
+    display: flex;
+    flex-direction: column;
+    grid-area: feed;
+}
+
+.dashboard-activity__new {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid var(--ow-border);
+    padding: 10px;
+}
+
+.dashboard-activity__day {
+    margin: 0;
+    padding: 14px 18px 2px;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-control);
+}
+
+.dashboard-activity__events {
+    margin: 0;
+    padding: 4px 0 6px;
+    list-style: none;
+}
+
+.dashboard-activity__event {
+    position: relative;
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: var(--ow-space-lg);
+    padding: 9px 18px;
+}
+
+/* A hairline runs from each event's icon down to the next one's. */
+.dashboard-activity__event:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 41px;
+    bottom: -5px;
+    left: 31.5px;
+    width: 1px;
+    background: var(--ow-border);
+}
+
+.dashboard-activity__event[data-fresh] {
+    animation: dashboard-activity-arrive var(--ow-duration-panel) var(--ow-ease-emphasized);
+}
+
+@keyframes dashboard-activity-arrive {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+}
+
+.dashboard-activity__icon {
+    display: flex;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: 50%;
+    background: var(--ow-surface-muted);
+    color: var(--ow-text-soft);
+}
+
+.dashboard-activity__icon[data-tone="success"] {
+    border-color: var(--ow-success-border);
+    background: var(--ow-success-surface);
+    color: var(--ow-success-text);
+}
+
+.dashboard-activity__icon[data-tone="danger"] {
+    border-color: var(--ow-danger-border);
+    background: var(--ow-danger-surface);
+    color: var(--ow-danger-text);
+}
+
+.dashboard-activity__icon[data-tone="primary"] {
+    border-color: var(--ow-primary-border);
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.dashboard-activity__event-text {
+    min-width: 0;
+    margin: 0;
+    padding-top: 4px;
+    color: var(--ow-text-soft);
+    line-height: 1.45;
+    text-wrap: pretty;
+}
+
+.dashboard-activity__event-text strong {
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.dashboard-activity__event-meta {
+    display: block;
+    margin-top: 2px;
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+}
+
+.dashboard-activity__earlier {
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid var(--ow-border);
+    padding: 10px;
+}
+
+.dashboard-activity__none {
+    margin: 0;
+    padding: 28px 18px;
+    color: var(--ow-text-muted);
+    text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dashboard-activity__event[data-fresh] {
+        animation: none;
+    }
+}
+
+@media (max-width: 1023px) {
+    .dashboard-activity {
+        padding: 28px 24px;
+    }
+    .dashboard-activity__inner {
+        grid-template-areas:
+            "header"
+            "stats"
+            "feed"
+            "table";
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: none;
+    }
+}
+
+@media (max-width: 759px) {
+    .dashboard-activity {
+        padding: 24px var(--ow-page-gutter) 32px;
+    }
+    .dashboard-activity__stats {
+        gap: var(--ow-space-lg);
+    }
+    .dashboard-activity__stats .ow-stat {
+        padding: 14px 16px;
+    }
+    .dashboard-activity__stats .ow-stat__value {
+        font-size: 22px;
+    }
+    .dashboard-activity__card-header {
+        padding-left: 16px;
+    }
+    .dashboard-activity__event {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+    .dashboard-activity__event:not(:last-child)::after {
+        left: 29.5px;
+    }
+    .dashboard-activity__table-card th:nth-child(4),
+    .dashboard-activity__table-card td:nth-child(4) {
+        display: none;
+    }
+}

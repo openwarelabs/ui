@@ -1,0 +1,195 @@
+/* Checkbox: a native input with its look replaced. */
+.ow-checkbox {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+.ow-checkbox--md {
+    width: 16px;
+    height: 16px;
+}
+
+.ow-checkbox--sm {
+    width: 14px;
+    height: 14px;
+}
+
+.ow-checkbox__input {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    appearance: none;
+    border: 1px solid var(--ow-border-strong);
+    border-radius: var(--ow-radius-sm);
+    background: var(--ow-surface);
+    box-shadow: var(--ow-shadow-control);
+    cursor: pointer;
+    transition-property: border-color, background-color, box-shadow, transform;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-checkbox__input:active:not(:disabled) {
+    transform: scale(0.9);
+}
+
+.ow-checkbox__input:hover {
+    border-color: var(--ow-border-hover);
+}
+
+.ow-checkbox__input:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-checkbox__input:checked {
+    border-color: var(--ow-primary-active);
+    background: var(--ow-primary);
+}
+
+.ow-checkbox__input:checked:hover {
+    background: var(--ow-primary-hover);
+}
+
+.ow-checkbox--danger .ow-checkbox__input:checked {
+    border-color: var(--ow-danger-fill-border);
+    background: var(--ow-danger-fill);
+}
+
+.ow-checkbox--danger .ow-checkbox__input:checked:hover {
+    background: var(--ow-danger-fill-border);
+}
+
+/* Disabled matches disabled buttons: no colour or depth, a dashed outline when unchecked. */
+.ow-checkbox__input:disabled {
+    cursor: not-allowed;
+    border-style: dashed;
+    border-color: var(--ow-border-strong);
+    background: transparent;
+    box-shadow: none;
+}
+
+.ow-checkbox__input:disabled:checked,
+.ow-checkbox--danger .ow-checkbox__input:disabled:checked {
+    border-style: solid;
+    border-color: var(--ow-border-strong);
+    background: var(--ow-border-strong);
+}
+
+.ow-checkbox__check {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    color: #ffffff;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.ow-checkbox__check :is(path, polyline, line) {
+    stroke-dasharray: 24;
+    stroke-dashoffset: 24;
+    transition: stroke-dashoffset var(--ow-duration-fast) var(--ow-ease-exit);
+}
+
+.ow-checkbox__input:checked + .ow-checkbox__check,
+.ow-checkbox__input:indeterminate + .ow-checkbox__check {
+    opacity: 1;
+}
+
+.ow-checkbox__input:checked + .ow-checkbox__check :is(path, polyline, line),
+.ow-checkbox__input:indeterminate + .ow-checkbox__check :is(path, polyline, line) {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset var(--ow-duration-slow) var(--ow-ease-emphasized) 40ms;
+}
+
+.ow-checkbox__input:indeterminate {
+    border-color: var(--ow-primary-active);
+    background: var(--ow-primary);
+}
+
+.ow-checkbox--danger .ow-checkbox__input:indeterminate {
+    border-color: var(--ow-danger-fill-border);
+    background: var(--ow-danger-fill);
+}
+
+/* A checkbox and its text, side by side. */
+.ow-check-label {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: var(--ow-space-sm);
+    color: var(--ow-text);
+    font-size: 14px;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.ow-check-label .ow-checkbox--md {
+    margin-top: 2px;
+}
+
+.ow-check-label .ow-checkbox--sm {
+    margin-top: 3px;
+}
+
+.ow-check-label--disabled {
+    color: var(--ow-text-muted);
+    cursor: not-allowed;
+}
+
+.ow-check-label__text {
+    display: grid;
+    gap: var(--ow-space-3xs);
+}
+
+.ow-check-label__description {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+/* Fieldset: a legend, a description and the controls, with no box. */
+.ow-fieldset {
+    display: grid;
+    min-width: 0;
+    gap: var(--ow-space-sm);
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+.ow-fieldset__legend {
+    float: left;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: var(--ow-text);
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.4;
+}
+
+.ow-fieldset__legend + * {
+    clear: both;
+}
+
+.ow-fieldset__description {
+    margin: calc(var(--ow-space-2xs) * -1) 0 0;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.ow-fieldset__content {
+    display: grid;
+    gap: var(--ow-space-md);
+    padding-top: var(--ow-space-2xs);
+}
+
+.ow-fieldset--horizontal .ow-fieldset__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ow-space-md) var(--ow-space-3xl);
+}

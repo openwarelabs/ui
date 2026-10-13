@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <title>Openware UI block</title>
+        <script>
+            // Opened on its own, take the docs' saved theme and colour; inside the docs, frame.tsx follows the page.
+            try {
+                if (window.parent === window) {
+                    var saved = localStorage.getItem("ow-docs-theme");
+                    if (saved === "light" || saved === "dark" || saved === "system") document.documentElement.dataset.theme = saved;
+                    var brand = JSON.parse(localStorage.getItem("ow-docs-brand") || "null");
+                    if (brand && brand.scale) {
+                        var css = ":root:root, [data-theme][data-theme] {";
+                        for (var step in brand.scale) css += "--ow-brand-" + step + ":" + brand.scale[step] + ";";
+                        var style = document.createElement("style");
+                        style.id = "docs-brand";
+                        style.textContent = css + "}";
+                        document.head.appendChild(style);
+                    }
+                } else {
+                    document.documentElement.dataset.theme = window.parent.document.documentElement.dataset.theme || "system";
+                }
+            } catch (error) {}
+        </script>
+        <link rel="stylesheet" href="./build/frame.css" />
+    </head>
+    <body class="ow-app">
+        <div id="root"></div>
+        <script src="./build/frame.js"></script>
+    </body>
+</html>

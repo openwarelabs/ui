@@ -1,0 +1,94 @@
+/* Openware UI base: the app wrapper, box sizing for the components, keyframes and reduced motion. */
+
+/* Put on <body> (or any wrapper) to give a page the system's font, size and colours. */
+.ow-app {
+    font-family: var(--ow-font-sans);
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--ow-text);
+    background: var(--ow-canvas);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="ow-"],
+[class*=" ow-"],
+[class^="ow-"]::before,
+[class*=" ow-"]::before,
+[class^="ow-"]::after,
+[class*=" ow-"]::after {
+    box-sizing: border-box;
+}
+
+.ow-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Floating layers (menus, popovers, listboxes, tooltips) grow from the edge nearest their trigger and shrink
+   back into it. useFloating sets data-side and --ow-floating-origin; usePresence sets data-state. */
+.ow-floating {
+    --ow-floating-shift: -4px;
+    transform-origin: var(--ow-floating-origin, top center);
+}
+
+.ow-floating[data-side="top"] {
+    --ow-floating-shift: 4px;
+}
+
+.ow-floating[data-state="open"] {
+    animation: ow-floating-in var(--ow-duration-base) var(--ow-ease-emphasized);
+}
+
+.ow-floating[data-state="closed"] {
+    animation: ow-floating-out var(--ow-duration-exit) var(--ow-ease-exit) forwards;
+    pointer-events: none;
+}
+
+@keyframes ow-floating-in {
+    from {
+        opacity: 0;
+        transform: translateY(var(--ow-floating-shift)) scale(0.96);
+    }
+}
+
+@keyframes ow-floating-out {
+    to {
+        opacity: 0;
+        transform: translateY(var(--ow-floating-shift)) scale(0.97);
+    }
+}
+
+@keyframes ow-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+}
+
+@keyframes ow-pulse {
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [class^="ow-"],
+    [class*=" ow-"],
+    [class^="ow-"]::backdrop,
+    [class*=" ow-"]::backdrop {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

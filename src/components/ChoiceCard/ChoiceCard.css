@@ -1,0 +1,96 @@
+/* ChoiceCard: a tactile card-button with an icon tile, a title and one line of description. */
+.ow-choice {
+    display: grid;
+    align-content: start;
+    gap: var(--ow-space-lg);
+    margin: 0;
+    border: 1px solid var(--ow-border-strong);
+    border-radius: var(--ow-radius-container);
+    background-color: var(--ow-control);
+    background-image: linear-gradient(to bottom, var(--ow-control), var(--ow-control-shade));
+    padding: var(--ow-space-2xl);
+    color: var(--ow-text);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: var(--ow-shadow-button-secondary);
+    transition-property: transform, border-color, color, background-color, box-shadow, opacity;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-choice--recommended {
+    border-color: var(--ow-primary-border);
+}
+
+.ow-choice:hover:not(:disabled),
+.ow-choice:focus-visible {
+    border-color: var(--ow-primary-text);
+}
+
+.ow-choice:focus-visible {
+    box-shadow: var(--ow-shadow-focus);
+    outline: none;
+}
+
+.ow-choice:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.ow-choice:disabled {
+    cursor: not-allowed;
+    opacity: 0.62;
+}
+
+.ow-choice__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ow-choice__icon {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-primary-border);
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.ow-choice__shortcut {
+    display: inline-flex;
+    height: 24px;
+    min-width: 24px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-surface-muted);
+    padding: 0 var(--ow-space-xs);
+    color: var(--ow-text-muted);
+    font-family: var(--ow-font-sans);
+    font-size: 12px;
+    font-weight: var(--ow-weight-control);
+    line-height: 1;
+}
+
+.ow-choice__text {
+    display: grid;
+    gap: var(--ow-space-3xs);
+}
+
+.ow-choice__title {
+    color: var(--ow-text);
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.3;
+}
+
+.ow-choice__description {
+    color: var(--ow-text-muted);
+    font-size: 14px;
+    line-height: 1.35;
+}

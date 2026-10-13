@@ -1,0 +1,426 @@
+.chat-agent-run,
+.chat-agent-run *,
+.chat-agent-run *::before,
+.chat-agent-run *::after {
+    box-sizing: border-box;
+}
+
+/* One agent run: what it's working on at the top, its steps on a rail below as they happen. */
+.chat-agent-run {
+    background: var(--ow-canvas);
+    padding: 32px;
+    color: var(--ow-text);
+    font-size: 14px;
+}
+
+.chat-agent-run__panel {
+    max-width: 820px;
+    margin: 0 auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+}
+
+.chat-agent-run__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-lg) var(--ow-space-xl);
+    border-bottom: 1px solid var(--ow-border);
+    padding: 20px 24px;
+}
+
+.chat-agent-run__bot {
+    display: inline-flex;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-primary-border);
+    border-radius: var(--ow-radius-tile);
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.chat-agent-run__heading {
+    display: grid;
+    min-width: 0;
+    flex: 1 1 260px;
+    gap: 3px;
+}
+
+.chat-agent-run__title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+}
+
+.chat-agent-run__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+    margin: 0;
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+}
+
+.chat-agent-run__meta-sep {
+    color: var(--ow-border-strong);
+}
+
+.chat-agent-run__mono {
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+}
+
+.chat-agent-run__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-md);
+}
+
+.chat-agent-run__elapsed {
+    min-width: 36px;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+.chat-agent-run__steps {
+    margin: 0;
+    padding: 12px 24px 20px;
+    list-style: none;
+}
+
+.chat-agent-run__step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr);
+    column-gap: var(--ow-space-xl);
+    padding: 12px 0;
+}
+
+/* The rail from each marker down to the next. */
+.chat-agent-run__step:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    top: 40px;
+    bottom: -8px;
+    left: 10.5px;
+    width: 1px;
+    background: var(--ow-border);
+}
+
+.chat-agent-run__step[data-status="done"]:not(:last-child)::before {
+    background: color-mix(in srgb, var(--ow-success-solid) 45%, var(--ow-border));
+}
+
+.chat-agent-run__marker {
+    display: inline-flex;
+    width: 22px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+    margin-top: -1px;
+    border-radius: 50%;
+}
+
+.chat-agent-run__marker--done {
+    background: var(--ow-success-surface);
+    color: var(--ow-success-text);
+    box-shadow: inset 0 0 0 1px var(--ow-success-border);
+}
+
+.chat-agent-run__marker--failed {
+    background: var(--ow-danger-surface);
+    color: var(--ow-danger-text);
+    box-shadow: inset 0 0 0 1px var(--ow-danger-border);
+}
+
+.chat-agent-run__marker--approval {
+    background: var(--ow-warning-surface);
+    color: var(--ow-warning-text);
+    box-shadow: inset 0 0 0 1px var(--ow-warning-border);
+}
+
+.chat-agent-run__marker--waiting,
+.chat-agent-run__marker--stopped {
+    color: var(--ow-text-disabled);
+    box-shadow: inset 0 0 0 1px var(--ow-border-strong);
+}
+
+.chat-agent-run__marker--waiting::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ow-border-strong);
+}
+
+.chat-agent-run__body {
+    display: grid;
+    min-width: 0;
+    gap: var(--ow-space-sm);
+}
+
+.chat-agent-run__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--ow-space-lg);
+}
+
+.chat-agent-run__step-title {
+    min-width: 0;
+    font-weight: var(--ow-weight-control);
+    line-height: 1.4;
+}
+
+.chat-agent-run__step[data-status="waiting"] .chat-agent-run__step-title,
+.chat-agent-run__step[data-status="stopped"] .chat-agent-run__step-title {
+    color: var(--ow-text-muted);
+}
+
+.chat-agent-run__status {
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.chat-agent-run__status--running {
+    color: var(--ow-primary-text);
+}
+
+.chat-agent-run__status--failed {
+    color: var(--ow-danger-text);
+}
+
+.chat-agent-run__status--approval {
+    color: var(--ow-warning-text);
+    font-weight: var(--ow-weight-control);
+}
+
+.chat-agent-run__note {
+    margin: 0;
+    color: var(--ow-text-muted);
+    line-height: 1.5;
+    text-wrap: pretty;
+}
+
+.chat-agent-run__error {
+    margin: 0;
+    border: 1px solid var(--ow-danger-border);
+    border-radius: var(--ow-radius-form);
+    background: var(--ow-danger-surface);
+    padding: 8px 12px;
+    color: var(--ow-danger-text);
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+/* Files the step changed, each opening to its diff. */
+.chat-agent-run__files {
+    overflow: hidden;
+    margin: 2px 0 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-form);
+    padding: 0;
+    list-style: none;
+}
+
+.chat-agent-run__file + .chat-agent-run__file {
+    border-top: 1px solid var(--ow-border);
+}
+
+.chat-agent-run__file-button {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    margin: 0;
+    border: 0;
+    background: transparent;
+    padding: 8px 12px;
+    color: var(--ow-text);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.chat-agent-run__file-button:hover {
+    background: var(--ow-hover);
+}
+
+.chat-agent-run__file-button:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
+
+.chat-agent-run__chevron {
+    flex-shrink: 0;
+    color: var(--ow-icon);
+    transition: transform var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.chat-agent-run__file-button[aria-expanded="true"] .chat-agent-run__chevron {
+    transform: rotate(90deg);
+}
+
+.chat-agent-run__path {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    font-family: var(--ow-font-mono);
+    font-size: 12.5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.chat-agent-run__added,
+.chat-agent-run__removed {
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+.chat-agent-run__added {
+    color: var(--ow-success-text);
+}
+
+.chat-agent-run__removed {
+    color: var(--ow-danger-text);
+}
+
+/* A diff: removed lines on red, added on green, the rest as context. */
+.chat-agent-run__diff {
+    margin: 0;
+    overflow-x: auto;
+    border-top: 1px solid var(--ow-border);
+    background: var(--ow-surface-muted);
+    padding: 6px 0;
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.chat-agent-run__line {
+    display: flex;
+    min-width: max-content;
+    padding: 0 12px;
+    white-space: pre;
+}
+
+.chat-agent-run__line::before {
+    content: attr(data-sign);
+    width: 18px;
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+    user-select: none;
+}
+
+.chat-agent-run__line--hunk {
+    color: var(--ow-text-muted);
+}
+
+.chat-agent-run__line--add {
+    background: color-mix(in srgb, var(--ow-success-solid) 12%, transparent);
+}
+
+.chat-agent-run__line--add::before {
+    color: var(--ow-success-text);
+}
+
+.chat-agent-run__line--remove {
+    background: color-mix(in srgb, var(--ow-danger-solid) 10%, transparent);
+}
+
+.chat-agent-run__line--remove::before {
+    color: var(--ow-danger-text);
+}
+
+/* The step that waits for a person. */
+.chat-agent-run__approval {
+    display: grid;
+    gap: var(--ow-space-lg);
+    margin-top: 2px;
+    border: 1px solid var(--ow-warning-border);
+    border-radius: var(--ow-radius-container);
+    background: color-mix(in srgb, var(--ow-warning-surface) 55%, var(--ow-surface));
+    padding: 14px 16px;
+}
+
+.chat-agent-run__approval-text {
+    margin: 0;
+    color: var(--ow-text-soft);
+    line-height: 1.5;
+}
+
+.chat-agent-run__approval-text strong {
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.chat-agent-run__approval-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ow-space-sm);
+}
+
+.chat-agent-run__enter {
+    animation: chat-agent-run-enter var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+@keyframes chat-agent-run-enter {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+}
+
+@media (max-width: 760px) {
+    .chat-agent-run {
+        padding: 8px;
+    }
+    .chat-agent-run__header {
+        padding: 18px 16px;
+    }
+    .chat-agent-run__controls {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    .chat-agent-run__controls > .ow-badge {
+        margin-right: auto;
+    }
+    .chat-agent-run__steps {
+        padding: 8px 16px 16px;
+    }
+    .chat-agent-run__step {
+        column-gap: var(--ow-space-lg);
+    }
+    .chat-agent-run__row {
+        flex-direction: column;
+        gap: 2px;
+    }
+    .chat-agent-run__meta-sep--dot {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .chat-agent-run__enter {
+        animation: none;
+    }
+    .chat-agent-run__chevron {
+        transition: none;
+    }
+}

@@ -1,0 +1,258 @@
+.pricing-plans,
+.pricing-plans *,
+.pricing-plans *::before,
+.pricing-plans *::after {
+    box-sizing: border-box;
+}
+
+.pricing-plans {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.pricing-plans__inner {
+    display: flex;
+    max-width: var(--ow-page-max);
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+/* The recommended card stands 14px proud of its neighbours at both ends, padded so every row inside still lines up. */
+.pricing-plans__grid {
+    display: grid;
+    width: 100%;
+    max-width: 1080px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 72px;
+}
+
+.pricing-plans__card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--ow-radius-card);
+}
+
+.pricing-plans__card[data-recommended] {
+    position: relative;
+    z-index: 1;
+    margin: -14px 0;
+    border-color: var(--ow-primary-border);
+    box-shadow: var(--ow-shadow-lift);
+}
+
+.pricing-plans__head {
+    display: flex;
+    flex-direction: column;
+    padding: 28px 28px 24px;
+}
+
+.pricing-plans__card[data-recommended] .pricing-plans__head {
+    padding-top: 42px;
+}
+
+.pricing-plans__name-row {
+    display: flex;
+    min-height: 26px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-sm);
+}
+
+.pricing-plans__name {
+    margin: 0;
+    font-size: 17px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.01em;
+}
+
+.pricing-plans__summary {
+    margin: 6px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.pricing-plans__price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+    margin: 28px 0 24px;
+}
+
+.pricing-plans__amount {
+    font-size: 48px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+}
+
+.pricing-plans__unit {
+    color: var(--ow-text-muted);
+    font-size: 14px;
+}
+
+.pricing-plans__body {
+    flex: 1;
+    border-top: 1px solid var(--ow-border);
+    padding: 24px 28px 30px;
+}
+
+.pricing-plans__card[data-recommended] .pricing-plans__body {
+    padding-bottom: 44px;
+}
+
+.pricing-plans__lead {
+    margin: 0;
+    color: var(--ow-text);
+    font-size: 13px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.pricing-plans__features {
+    display: grid;
+    gap: 12px;
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pricing-plans__features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--ow-text-soft);
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.pricing-plans__features svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: var(--ow-primary-text);
+}
+
+.pricing-plans__enterprise {
+    display: flex;
+    width: 100%;
+    max-width: 1080px;
+    align-items: center;
+    gap: var(--ow-space-2xl);
+    margin-top: 52px;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-card);
+    background: var(--ow-surface);
+    padding: 18px 24px;
+}
+
+.pricing-plans__enterprise-icon {
+    display: inline-flex;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-tile);
+    background: var(--ow-surface-muted);
+    color: var(--ow-text-soft);
+}
+
+.pricing-plans__enterprise-text {
+    flex: 1;
+    margin: 0;
+    color: var(--ow-text-muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.pricing-plans__enterprise-text strong {
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.pricing-plans__enterprise-link {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.pricing-plans__note {
+    margin: 20px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    text-align: center;
+}
+
+@media (max-width: 1100px) {
+    .pricing-plans__head {
+        padding-right: 24px;
+        padding-left: 24px;
+    }
+    .pricing-plans__body {
+        padding-right: 24px;
+        padding-left: 24px;
+    }
+}
+
+@media (max-width: 900px) {
+    .pricing-plans__grid {
+        max-width: 520px;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+        margin-top: 48px;
+    }
+    /* Stacked, the recommended plan goes first. */
+    .pricing-plans__card[data-recommended] {
+        order: -1;
+        margin: 0;
+        box-shadow: 0 0 0 1px var(--ow-primary-border);
+    }
+    .pricing-plans__card[data-recommended] .pricing-plans__head {
+        padding-top: 28px;
+    }
+    .pricing-plans__card[data-recommended] .pricing-plans__body {
+        padding-bottom: 30px;
+    }
+    .pricing-plans__enterprise {
+        max-width: 520px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+    }
+    .pricing-plans__enterprise-text {
+        flex-basis: calc(100% - 60px);
+    }
+    .pricing-plans__enterprise-link {
+        margin-left: 52px;
+    }
+}
+
+@media (max-width: 760px) {
+    .pricing-plans {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .pricing-plans__head {
+        padding: 24px 22px 22px;
+    }
+    .pricing-plans__card[data-recommended] .pricing-plans__head {
+        padding: 24px 22px 22px;
+    }
+    .pricing-plans__body,
+    .pricing-plans__card[data-recommended] .pricing-plans__body {
+        padding: 22px 22px 26px;
+    }
+    .pricing-plans__amount {
+        font-size: 44px;
+    }
+    .pricing-plans__enterprise {
+        align-items: flex-start;
+        padding: 18px;
+    }
+}

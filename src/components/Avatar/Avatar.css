@@ -1,0 +1,98 @@
+/* Avatar: initials on the primary fill, or a photo, in a circle. */
+.ow-avatar {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
+    background: var(--ow-primary);
+    color: var(--ow-on-primary);
+    font-family: var(--ow-font-sans);
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1;
+}
+
+.ow-avatar--empty {
+    background: var(--ow-avatar-empty);
+    color: var(--ow-on-avatar-empty);
+}
+
+.ow-avatar--sm {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+}
+
+.ow-avatar--md {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+}
+
+.ow-avatar--lg {
+    width: 36px;
+    height: 36px;
+    font-size: 13px;
+}
+
+.ow-avatar__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* AvatarGroup: overlapping, each ringed in the surface colour. */
+.ow-avatar-group {
+    display: inline-flex;
+    align-items: center;
+    padding-left: 6px;
+}
+
+.ow-avatar-group > .ow-avatar {
+    margin-left: -6px;
+    box-shadow: 0 0 0 2px var(--ow-surface);
+}
+
+.ow-avatar--count {
+    background: var(--ow-avatar-empty);
+    color: var(--ow-on-avatar-empty);
+    font-variant-numeric: tabular-nums;
+}
+
+/* User: avatar beside a name and a muted line. */
+.ow-user {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: var(--ow-space-sm);
+}
+
+.ow-user--lg {
+    gap: var(--ow-space-md);
+}
+
+.ow-user__text {
+    display: grid;
+    min-width: 0;
+}
+
+.ow-user__name {
+    overflow: hidden;
+    color: var(--ow-text);
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.3;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ow-user__description {
+    overflow: hidden;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

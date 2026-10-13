@@ -1,0 +1,151 @@
+/* Steps: Commandr's setup checklist (vertical) and a compact strip (horizontal). */
+.ow-steps--vertical {
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface-muted);
+    padding: var(--ow-space-2xs);
+}
+
+.ow-steps__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-md);
+    padding: var(--ow-space-sm) var(--ow-space-lg) var(--ow-space-xs);
+}
+
+.ow-steps__heading {
+    margin: 0;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-control);
+}
+
+.ow-steps__count {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-steps__list {
+    display: grid;
+    gap: var(--ow-space-2xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-steps--vertical .ow-steps__item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-lg);
+    border: 1px solid transparent;
+    border-radius: var(--ow-radius-form);
+    padding: var(--ow-space-md) var(--ow-space-lg);
+}
+
+.ow-steps--vertical .ow-steps__item--current {
+    border-color: var(--ow-primary-border);
+    background: var(--ow-surface);
+    box-shadow: var(--ow-shadow-control);
+}
+
+.ow-steps__marker {
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border-strong);
+    border-radius: 50%;
+    background: var(--ow-surface);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-emphasis);
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-steps__item--done .ow-steps__marker {
+    border-color: var(--ow-primary);
+    background: var(--ow-primary);
+    color: var(--ow-on-primary);
+}
+
+.ow-steps__item--current .ow-steps__marker {
+    border-color: var(--ow-primary-text);
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.ow-steps__text {
+    display: grid;
+    min-width: 0;
+    flex: 1 1 160px;
+    gap: var(--ow-space-3xs);
+}
+
+.ow-steps__title {
+    color: var(--ow-text);
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.3;
+}
+
+.ow-steps--vertical .ow-steps__item--done .ow-steps__title {
+    color: var(--ow-text-muted);
+    text-decoration: line-through;
+    text-decoration-color: var(--ow-border-strong);
+}
+
+.ow-steps__description {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.ow-steps__action {
+    display: inline-flex;
+    flex-shrink: 0;
+}
+
+/* Horizontal: markers joined by a line that fills as steps finish. */
+.ow-steps--horizontal .ow-steps__list {
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+    gap: 0;
+}
+
+.ow-steps--horizontal .ow-steps__item {
+    position: relative;
+    display: grid;
+    justify-items: start;
+    gap: var(--ow-space-sm);
+    padding-right: var(--ow-space-md);
+}
+
+.ow-steps--horizontal .ow-steps__item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 8px;
+    left: 32px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--ow-meter-track);
+}
+
+.ow-steps--horizontal .ow-steps__item--done:not(:last-child)::after {
+    background: var(--ow-progress);
+}
+
+.ow-steps--horizontal .ow-steps__text {
+    flex: none;
+}
+
+@media (max-width: 560px) {
+    .ow-steps--horizontal .ow-steps__description {
+        display: none;
+    }
+}

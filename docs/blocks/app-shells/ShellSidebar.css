@@ -1,0 +1,278 @@
+/* Navigation down the left on the canvas; the page on a raised panel beside it. */
+.shell-sidebar,
+.shell-sidebar *,
+.shell-sidebar *::before,
+.shell-sidebar *::after {
+    box-sizing: border-box;
+}
+
+.shell-sidebar {
+    display: grid;
+    grid-template-columns: 248px minmax(0, 1fr);
+    min-height: 100dvh;
+    background: var(--ow-canvas);
+    color: var(--ow-text);
+}
+
+.shell-sidebar__aside {
+    position: sticky;
+    top: 0;
+    height: 100dvh;
+    overflow-y: auto;
+    padding: 10px 12px 12px;
+}
+
+.shell-sidebar__nav {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    gap: var(--ow-space-3xl);
+}
+
+/* Menus wrap their trigger in an inline span; let these triggers take the full width. */
+.shell-sidebar__nav .ow-menu {
+    display: block;
+}
+
+.shell-sidebar__workspace,
+.shell-sidebar__user {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+    border: 0;
+    border-radius: var(--ow-radius-lg);
+    background: transparent;
+    padding: 6px 8px;
+    color: var(--ow-text);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.shell-sidebar__workspace:hover,
+.shell-sidebar__user:hover,
+.shell-sidebar__workspace[aria-expanded="true"],
+.shell-sidebar__user[aria-expanded="true"] {
+    background: color-mix(in srgb, var(--ow-surface) 60%, transparent);
+}
+
+.shell-sidebar__workspace:focus-visible,
+.shell-sidebar__user:focus-visible,
+.shell-sidebar__search:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.shell-sidebar__workspace svg,
+.shell-sidebar__user > svg {
+    flex-shrink: 0;
+    color: var(--ow-icon);
+}
+
+.shell-sidebar__workspace-name {
+    flex: 1;
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.01em;
+}
+
+.shell-sidebar__mark {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background: linear-gradient(180deg, var(--ow-brand-500), var(--ow-brand-700));
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
+}
+
+.shell-sidebar__menu-spacer {
+    display: block;
+    width: 15px;
+}
+
+.shell-sidebar__search {
+    display: flex;
+    height: 34px;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-form);
+    background: var(--ow-surface);
+    padding: 0 6px 0 10px;
+    color: var(--ow-text-muted);
+    font: inherit;
+    cursor: pointer;
+    box-shadow: var(--ow-shadow-control);
+    transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.shell-sidebar__search:hover {
+    border-color: var(--ow-border-strong);
+}
+
+.shell-sidebar__search-text {
+    flex: 1;
+    text-align: left;
+}
+
+.shell-sidebar__dot {
+    display: block;
+    width: 8px;
+    height: 8px;
+    margin: 0 3.5px;
+    border-radius: 50%;
+}
+
+.shell-sidebar__account {
+    margin-top: auto;
+}
+
+.shell-sidebar__user-text {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+}
+
+.shell-sidebar__user-name {
+    font-size: 13.5px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.shell-sidebar__user-email {
+    overflow: hidden;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.shell-sidebar__body {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+}
+
+/* On phones the sidebar folds into a drawer behind this bar. */
+.shell-sidebar__topbar {
+    display: none;
+    height: 52px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+}
+
+.shell-sidebar__topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.shell-sidebar__panel {
+    display: flex;
+    min-height: calc(100dvh - 16px);
+    flex: 1;
+    flex-direction: column;
+    gap: var(--ow-space-7xl);
+    margin: 8px 8px 8px 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+    padding: 28px 32px 40px;
+}
+
+.shell-sidebar__page-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+}
+
+.shell-sidebar__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+.shell-sidebar__subtitle {
+    margin: 4px 0 0;
+    color: var(--ow-text-muted);
+}
+
+.shell-sidebar__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--ow-space-lg);
+}
+
+.shell-sidebar__card {
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+}
+
+.shell-sidebar__card-title {
+    margin: 0;
+    border-bottom: 1px solid var(--ow-border);
+    padding: 14px 18px;
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.shell-sidebar__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.shell-sidebar__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+    padding: 12px 18px;
+}
+
+.shell-sidebar__item + .shell-sidebar__item {
+    border-top: 1px solid var(--ow-border);
+}
+
+.shell-sidebar__item-text {
+    display: grid;
+    min-width: 0;
+    gap: 2px;
+}
+
+.shell-sidebar__item-title {
+    font-weight: var(--ow-weight-control);
+}
+
+.shell-sidebar__item-meta {
+    overflow: hidden;
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+    .shell-sidebar {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .shell-sidebar__aside {
+        display: none;
+    }
+    .shell-sidebar__topbar {
+        display: flex;
+    }
+    .shell-sidebar__panel {
+        min-height: calc(100dvh - 60px);
+        margin: 0 8px 8px;
+        padding: 22px 18px 32px;
+    }
+}

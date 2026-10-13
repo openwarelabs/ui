@@ -1,0 +1,125 @@
+/* SegmentedControl and segmented Tabs: Commandr's journey switcher, a well with the chosen segment raised. */
+.ow-segmented,
+.ow-tabs--segmented .ow-tabs__list {
+    position: relative;
+    display: inline-flex;
+    justify-self: start;
+    max-width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-2xs);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-track);
+    padding: var(--ow-space-2xs);
+}
+
+.ow-segmented--full {
+    display: flex;
+    justify-self: stretch;
+    flex-wrap: nowrap;
+}
+
+.ow-segmented--full .ow-segmented__item {
+    flex: 1;
+}
+
+.ow-segmented__item,
+.ow-tabs--segmented .ow-tab {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    min-height: 32px;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ow-space-xs);
+    margin: 0;
+    border: 0;
+    border-radius: var(--ow-radius-form);
+    background: transparent;
+    padding: 0 var(--ow-space-md);
+    color: var(--ow-text-muted);
+    font: inherit;
+    font-size: 14px;
+    font-weight: var(--ow-weight-action);
+    line-height: 1.1;
+    white-space: nowrap;
+    cursor: pointer;
+    transition-property: color, background-color, box-shadow;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-segmented--sm .ow-segmented__item {
+    min-height: 28px;
+    padding: 0 var(--ow-space-sm);
+    font-size: 13px;
+}
+
+.ow-segmented__item:hover:not(:disabled),
+.ow-tabs--segmented .ow-tab:hover:not(:disabled) {
+    color: var(--ow-text);
+}
+
+.ow-segmented__item--selected,
+.ow-segmented__item--selected:hover:not(:disabled),
+.ow-tabs--segmented .ow-tab[aria-selected="true"] {
+    background: var(--ow-thumb);
+    color: var(--ow-text);
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08), 0 0 0 1px var(--ow-border);
+}
+
+.ow-segmented__item:focus-visible,
+.ow-tabs--segmented .ow-tab:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 1px;
+}
+
+.ow-segmented__item:disabled,
+.ow-tabs--segmented .ow-tab:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.ow-segmented__icon {
+    display: inline-flex;
+}
+
+/* The raised thumb slides from one choice to the next (useIndicator measures the chosen one). Until it has
+   measured, the chosen item paints its own thumb, so nothing jumps on first paint. */
+.ow-segmented > .ow-indicator,
+.ow-tabs--segmented .ow-tabs__list > .ow-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--ow-indicator-w);
+    height: var(--ow-indicator-h);
+    border-radius: var(--ow-radius-form);
+    background: var(--ow-thumb);
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08), 0 0 0 1px var(--ow-border);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(var(--ow-indicator-x), var(--ow-indicator-y));
+}
+
+.ow-segmented[data-indicator] > .ow-indicator,
+.ow-tabs--segmented .ow-tabs__list[data-indicator] > .ow-indicator {
+    opacity: 1;
+}
+
+.ow-segmented[data-indicator="ready"] > .ow-indicator,
+.ow-tabs--segmented .ow-tabs__list[data-indicator="ready"] > .ow-indicator {
+    transition:
+        transform var(--ow-duration-slow) var(--ow-ease-emphasized),
+        width var(--ow-duration-slow) var(--ow-ease-emphasized),
+        height var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+.ow-segmented[data-indicator] > .ow-segmented__item--selected,
+.ow-tabs--segmented .ow-tabs__list[data-indicator] > .ow-tab[aria-selected="true"] {
+    background: transparent;
+    box-shadow: none;
+}
+
+.ow-segmented--disabled > .ow-indicator {
+    opacity: 0.5;
+}

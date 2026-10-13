@@ -1,0 +1,5 @@
+{
+    "tabWidth": 4,
+    "printWidth": 160,
+    "overrides": [{ "files": "docs/examples/*.tsx", "options": { "printWidth": 100 } }]
+}

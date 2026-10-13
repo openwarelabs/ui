@@ -1,0 +1,360 @@
+.header-full-width,
+.header-full-width *,
+.header-full-width *::before,
+.header-full-width *::after {
+    box-sizing: border-box;
+}
+
+.header-full-width {
+    min-height: 100dvh;
+    background: var(--ow-paper);
+    color: var(--ow-text);
+}
+
+.header-full-width__bar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-bottom: 1px solid var(--ow-border);
+    background: var(--ow-surface);
+}
+
+.header-full-width__inner {
+    display: flex;
+    max-width: var(--ow-page-max);
+    height: 64px;
+    align-items: center;
+    gap: 28px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+.header-full-width__brand {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 9px;
+    border-radius: var(--ow-radius-md);
+    color: var(--ow-text);
+    font-size: 16px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+}
+
+.header-full-width__mark {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background: linear-gradient(180deg, var(--ow-brand-500), var(--ow-brand-700));
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
+}
+
+.header-full-width__nav {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    align-items: center;
+    gap: 2px;
+}
+
+/* Links and menu triggers share one look: quiet text that gets a soft ground on hover and while open. */
+.header-full-width__item {
+    display: inline-flex;
+    height: 34px;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    border: 0;
+    border-radius: var(--ow-radius-pill);
+    background: transparent;
+    padding: 0 12px;
+    color: var(--ow-text-soft);
+    font: inherit;
+    font-size: 14px;
+    font-weight: var(--ow-weight-control);
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition-property: color, background-color;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.header-full-width__item:hover,
+.header-full-width__item[aria-expanded="true"] {
+    background: var(--ow-hover);
+    color: var(--ow-text);
+}
+
+.header-full-width__item svg {
+    color: var(--ow-icon);
+    transition: transform var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.header-full-width__item[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+}
+
+.header-full-width__brand:focus-visible,
+.header-full-width__item:focus-visible,
+.header-full-width__feature:focus-visible,
+.header-full-width__news:focus-visible,
+.header-full-width__panel-link:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.header-full-width__actions {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 6px;
+}
+
+.header-full-width__toggle {
+    display: none;
+}
+
+/* The product menu: four areas of the product and the latest news. */
+.header-full-width .header-full-width__popover {
+    padding: 8px;
+}
+
+.header-full-width__product {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 200px;
+    gap: 8px;
+}
+
+.header-full-width__features {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.header-full-width__feature {
+    display: flex;
+    height: 100%;
+    align-items: flex-start;
+    gap: 12px;
+    border-radius: var(--ow-radius-lg);
+    padding: 12px;
+    color: var(--ow-text);
+    text-decoration: none;
+    transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.header-full-width__feature:hover {
+    background: var(--ow-surface-muted);
+}
+
+.header-full-width__feature-icon {
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-tile);
+    background: var(--ow-surface);
+    color: var(--ow-primary-text);
+    box-shadow: var(--ow-shadow-control);
+}
+
+.header-full-width__feature-text {
+    display: grid;
+    gap: 3px;
+}
+
+.header-full-width__feature-title {
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.3;
+}
+
+.header-full-width__feature-description {
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.header-full-width__news {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-lg);
+    background: var(--ow-surface-muted);
+    padding: 14px;
+    color: var(--ow-text);
+    text-decoration: none;
+    transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.header-full-width__news:hover {
+    border-color: var(--ow-border-strong);
+}
+
+.header-full-width__news-title {
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.35;
+    text-wrap: balance;
+}
+
+.header-full-width__news-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: auto;
+    color: var(--ow-primary-text);
+    font-size: 13px;
+    font-weight: var(--ow-weight-control);
+}
+
+/* Phones: the panel under the bar. */
+.header-full-width__panel {
+    display: grid;
+    max-height: calc(100dvh - 57px);
+    overflow-y: auto;
+    border-top: 1px solid var(--ow-border);
+    padding: 6px var(--ow-page-gutter) 20px;
+    animation: header-full-width-panel-in var(--ow-duration-base) var(--ow-ease-emphasized);
+}
+
+.header-full-width__panel[hidden] {
+    display: none;
+}
+
+.header-full-width__panel-label {
+    margin: 16px 0 4px;
+    color: var(--ow-text-muted);
+    font-size: 11px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+}
+
+.header-full-width__panel-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.header-full-width__panel-list--columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 16px;
+}
+
+.header-full-width__panel-list--ruled {
+    margin: 14px 0 18px;
+    border-top: 1px solid var(--ow-border);
+    padding-top: 6px;
+}
+
+.header-full-width__panel-link {
+    display: flex;
+    min-height: 42px;
+    align-items: center;
+    gap: 12px;
+    border-radius: var(--ow-radius-md);
+    color: var(--ow-text);
+    font-size: 15px;
+    font-weight: var(--ow-weight-control);
+    text-decoration: none;
+}
+
+.header-full-width__panel-link svg {
+    color: var(--ow-primary-text);
+}
+
+@keyframes header-full-width-panel-in {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+}
+
+/* Your page */
+.header-full-width__page {
+    display: flex;
+    max-width: var(--ow-page-max);
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 auto;
+    padding: 112px 32px 120px;
+}
+
+.header-full-width__title {
+    max-width: 720px;
+    margin: 22px 0 0;
+    font-size: 60px;
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+}
+
+.header-full-width__lead {
+    max-width: 540px;
+    margin: 20px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 17px;
+    line-height: 1.6;
+    text-wrap: pretty;
+}
+
+@media (max-width: 1024px) {
+    .header-full-width__page {
+        padding-right: 24px;
+        padding-left: 24px;
+    }
+    .header-full-width__inner {
+        gap: 16px;
+        padding: 0 24px;
+    }
+}
+
+@media (max-width: 760px) {
+    .header-full-width__inner {
+        height: 56px;
+        padding: 0 12px 0 var(--ow-page-gutter);
+    }
+    .header-full-width__nav,
+    .header-full-width__sign-in {
+        display: none;
+    }
+    .header-full-width__actions {
+        margin-left: auto;
+    }
+    .header-full-width__toggle {
+        display: inline-flex;
+    }
+    .header-full-width__page {
+        padding: 64px var(--ow-page-gutter) 88px;
+    }
+    .header-full-width__title {
+        font-size: 38px;
+        line-height: 1.06;
+    }
+    .header-full-width__lead {
+        font-size: 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .header-full-width__panel {
+        animation: none;
+    }
+    .header-full-width__item svg {
+        transition: none;
+    }
+}

@@ -1,0 +1,29 @@
+/* Textarea: the field look from Input.css, taller and resizable. */
+.ow-textarea {
+    display: block;
+    min-height: 72px;
+    padding: var(--ow-space-md) var(--ow-space-lg);
+    resize: vertical;
+}
+
+.ow-textarea--auto-grow {
+    resize: none;
+    overflow-y: hidden;
+}
+
+.ow-textarea--bare {
+    min-height: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+    resize: none;
+}
+
+.ow-textarea--bare:focus {
+    box-shadow: none;
+}
+
+.ow-textarea--bare:focus-visible {
+    outline: 0;
+}

@@ -1,0 +1,138 @@
+/* Table: a bordered card with a quiet header row and hairlines between rows. */
+.ow-table-wrap {
+    min-width: 0;
+    overflow: auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+}
+
+.ow-table-wrap:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    color: var(--ow-text);
+    font-size: 14px;
+}
+
+.ow-table__caption {
+    padding: var(--ow-space-lg) var(--ow-space-xl) var(--ow-space-sm);
+    color: var(--ow-text);
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+    text-align: left;
+}
+
+.ow-table th {
+    height: 36px;
+    border-bottom: 1px solid var(--ow-border);
+    background: var(--ow-surface-muted);
+    padding: 0 var(--ow-space-xl);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-emphasis);
+    text-align: left;
+    white-space: nowrap;
+}
+
+.ow-table-wrap--sticky th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.ow-table td {
+    border-bottom: 1px solid var(--ow-border);
+    padding: 0 var(--ow-space-xl);
+    vertical-align: middle;
+}
+
+.ow-table--comfortable td {
+    height: 44px;
+    padding-top: var(--ow-space-xs);
+    padding-bottom: var(--ow-space-xs);
+}
+
+.ow-table--compact td {
+    height: 36px;
+}
+
+.ow-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.ow-table tbody tr:hover td {
+    background: var(--ow-surface-muted);
+}
+
+.ow-table__row--selected td,
+.ow-table__row--selected:hover td {
+    background: var(--ow-primary-subtle);
+}
+
+.ow-table__cell--end {
+    text-align: right !important;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-table__cell--center {
+    text-align: center !important;
+}
+
+.ow-table__select {
+    width: 40px;
+    padding-right: 0 !important;
+}
+
+.ow-table__select .ow-checkbox {
+    vertical-align: middle;
+}
+
+.ow-table__sort {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ow-space-2xs);
+    margin: 0 -4px;
+    border: 0;
+    border-radius: var(--ow-radius-sm);
+    background: transparent;
+    padding: 2px 4px;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+.ow-table__sort:hover {
+    color: var(--ow-text);
+}
+
+.ow-table__sort:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 0;
+}
+
+.ow-table__cell--end .ow-table__sort {
+    flex-direction: row-reverse;
+}
+
+.ow-table__sort-icon {
+    display: inline-flex;
+    opacity: 0.6;
+}
+
+.ow-table__sort-icon--active {
+    color: var(--ow-primary-text);
+    opacity: 1;
+}
+
+.ow-table__empty {
+    height: auto !important;
+    padding: var(--ow-space-4xl) var(--ow-space-xl) !important;
+    color: var(--ow-text-muted);
+    text-align: center;
+}

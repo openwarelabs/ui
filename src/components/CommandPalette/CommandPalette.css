@@ -1,0 +1,139 @@
+/* CommandPalette: a dialog 12vh from the top, 560px wide, with a search row and a results list. */
+.ow-palette {
+    top: 12vh;
+    bottom: auto;
+    width: min(560px, calc(100% - 32px));
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0;
+}
+
+.ow-palette__search {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    border-bottom: 1px solid var(--ow-border);
+    padding: var(--ow-space-md) var(--ow-space-lg);
+}
+
+.ow-palette__search-icon {
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+}
+
+.ow-palette__input {
+    min-width: 0;
+    flex: 1;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    color: var(--ow-text);
+    font: inherit;
+    font-size: 14px;
+    outline: 0;
+}
+
+.ow-palette__input::placeholder {
+    color: var(--ow-text-muted);
+    opacity: 1;
+}
+
+.ow-palette__esc {
+    flex-shrink: 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-sm);
+    padding: 0 var(--ow-space-2xs);
+    color: var(--ow-text-muted);
+    font-family: var(--ow-font-sans);
+    font-size: 11px;
+}
+
+.ow-palette__list {
+    max-height: min(420px, 60vh);
+    margin: 0;
+    overflow-y: auto;
+    padding: var(--ow-space-xs);
+    list-style: none;
+}
+
+.ow-palette__group {
+    padding: var(--ow-space-sm) var(--ow-space-sm) var(--ow-space-3xs);
+    color: var(--ow-text-muted);
+    font-size: 11px;
+    font-weight: var(--ow-weight-control);
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+}
+
+.ow-palette__option {
+    display: flex;
+    min-height: 36px;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    border-radius: var(--ow-radius-lg);
+    padding: var(--ow-space-xs) var(--ow-space-sm);
+    color: var(--ow-text);
+    font-size: 14px;
+    cursor: default;
+}
+
+.ow-palette__option--active {
+    background: var(--ow-primary-subtle);
+}
+
+.ow-palette__option--disabled {
+    color: var(--ow-text-muted);
+}
+
+.ow-palette__icon {
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    color: var(--ow-text-muted);
+}
+
+.ow-palette__icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+.ow-palette__title {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ow-palette__hint {
+    max-width: 45%;
+    flex-shrink: 0;
+    overflow: hidden;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ow-palette__shortcut {
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+    font-family: var(--ow-font-sans);
+    font-size: 12px;
+}
+
+.ow-palette__enter {
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+}
+
+.ow-palette__empty {
+    padding: var(--ow-space-lg) var(--ow-space-sm);
+    color: var(--ow-text-muted);
+    font-size: 14px;
+    text-align: center;
+}

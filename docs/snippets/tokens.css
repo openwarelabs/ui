@@ -1,0 +1,17 @@
+.release-card {
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: var(--ow-space-2xl);
+    color: var(--ow-text);
+    transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.release-card:hover {
+    border-color: var(--ow-border-hover);
+}
+
+.release-card__date {
+    color: var(--ow-text-muted);
+    font-weight: var(--ow-weight-control);
+}

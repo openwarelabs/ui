@@ -1,0 +1,56 @@
+/* Switch: a 36 × 20 track with a 16px knob. */
+.ow-switch {
+    position: relative;
+    display: inline-flex;
+    width: 36px;
+    height: 20px;
+    flex-shrink: 0;
+    align-items: center;
+    margin: 0;
+    border: 0;
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-switch-off);
+    padding: 0;
+    cursor: pointer;
+    transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-switch--on {
+    background: var(--ow-primary);
+}
+
+.ow-switch:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-switch:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.ow-switch__knob {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: var(--ow-radius-pill);
+    background: #ffffff;
+    box-shadow: var(--ow-shadow-control);
+    transform: translateX(2px);
+    transition:
+        transform var(--ow-duration-slow) var(--ow-ease-spring),
+        width var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-switch--on .ow-switch__knob {
+    transform: translateX(18px);
+}
+
+/* Pressed, the knob stretches toward where it's going. */
+.ow-switch:active:not(:disabled) .ow-switch__knob {
+    width: 20px;
+}
+
+.ow-switch--on:active:not(:disabled) .ow-switch__knob {
+    transform: translateX(14px);
+}

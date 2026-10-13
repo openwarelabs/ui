@@ -1,0 +1,97 @@
+/* Menu: a panel under its trigger, with the menu shadow. */
+.ow-menu {
+    position: relative;
+    display: inline-flex;
+}
+
+.ow-menu__panel {
+    z-index: 30;
+    display: grid;
+    min-width: 200px;
+    gap: var(--ow-space-2xs);
+    overflow: auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: var(--ow-space-xs);
+    color: var(--ow-text);
+    font-family: var(--ow-font-sans);
+    box-shadow: var(--ow-shadow-menu);
+}
+
+.ow-menu__item {
+    display: flex;
+    width: 100%;
+    min-height: 32px;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    margin: 0;
+    border: 0;
+    border-radius: var(--ow-radius-lg);
+    background: transparent;
+    padding: var(--ow-space-xs) var(--ow-space-sm);
+    color: var(--ow-text);
+    font: inherit;
+    font-size: 14px;
+    font-weight: var(--ow-weight-control);
+    line-height: 1.1;
+    text-align: left;
+    cursor: pointer;
+    transition-property: color, background-color;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-menu__item:hover,
+.ow-menu__item:focus {
+    background: var(--ow-surface-muted);
+    outline: 0;
+}
+
+.ow-menu__item:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
+
+.ow-menu__item:disabled {
+    color: var(--ow-text-disabled);
+    cursor: not-allowed;
+    background: transparent;
+}
+
+.ow-menu__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+}
+
+.ow-menu__label {
+    min-width: 0;
+    flex: 1;
+}
+
+.ow-menu__shortcut {
+    color: var(--ow-text-muted);
+    font-family: var(--ow-font-sans);
+    font-size: 12px;
+}
+
+.ow-menu__item--destructive,
+.ow-menu__item--destructive .ow-menu__icon {
+    color: var(--ow-danger-text);
+}
+
+.ow-menu__group-label {
+    padding: var(--ow-space-sm) var(--ow-space-sm) var(--ow-space-2xs);
+    color: var(--ow-text-muted);
+    font-size: 11px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+}
+
+.ow-menu__separator {
+    height: 1px;
+    margin: var(--ow-space-2xs) calc(var(--ow-space-xs) * -1);
+    background: var(--ow-border);
+}

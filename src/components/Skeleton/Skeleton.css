@@ -1,0 +1,34 @@
+/* Skeleton: pulsing grey bars. */
+.ow-skeleton {
+    display: block;
+    flex-shrink: 0;
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-skeleton);
+    animation: ow-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.ow-skeleton--soft {
+    background: var(--ow-skeleton-soft);
+}
+
+.ow-skeleton--block {
+    border-radius: var(--ow-radius-form);
+}
+
+.ow-skeleton-rows__row {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-md);
+    border-bottom: 1px solid var(--ow-border);
+    padding: var(--ow-space-lg) 0;
+}
+
+.ow-skeleton-rows__row:last-child {
+    border-bottom: 0;
+}
+
+.ow-skeleton-rows__text {
+    display: grid;
+    flex: 1;
+    gap: var(--ow-space-xs);
+}

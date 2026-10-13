@@ -1,0 +1,133 @@
+/* Slider: native range inputs over a drawn track. The thumb is the switch's knob: white, round, with a soft shadow. */
+.ow-slider {
+    display: grid;
+    gap: var(--ow-space-sm);
+    min-width: 0;
+}
+
+.ow-slider__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--ow-space-md);
+}
+
+.ow-slider__label {
+    color: var(--ow-text);
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.ow-slider__value {
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-slider__control {
+    position: relative;
+    height: 20px;
+}
+
+/* The track runs between the thumb's centre at each end (9px in), so the fill meets the thumb exactly. */
+.ow-slider__track {
+    position: absolute;
+    top: 50%;
+    right: 9px;
+    left: 9px;
+    height: 4px;
+    overflow: hidden;
+    border-radius: 2px;
+    background: var(--ow-meter-track);
+    transform: translateY(-50%);
+}
+
+.ow-slider__fill {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--ow-slider-from);
+    width: calc(var(--ow-slider-to) - var(--ow-slider-from));
+    background: var(--ow-progress);
+}
+
+.ow-slider__input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.ow-slider__input--low,
+.ow-slider__input--high {
+    pointer-events: none;
+}
+
+.ow-slider__input:focus {
+    outline: none;
+}
+
+.ow-slider__input::-webkit-slider-runnable-track {
+    height: 20px;
+    background: transparent;
+}
+
+.ow-slider__input::-moz-range-track {
+    height: 20px;
+    background: transparent;
+}
+
+.ow-slider__input::-webkit-slider-thumb {
+    box-sizing: border-box;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    appearance: none;
+    border: 1px solid var(--ow-border-strong);
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.18);
+    pointer-events: auto;
+    cursor: grab;
+    transition: box-shadow var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-slider__input::-moz-range-thumb {
+    box-sizing: border-box;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--ow-border-strong);
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.18);
+    pointer-events: auto;
+    cursor: grab;
+}
+
+.ow-slider__input:active::-webkit-slider-thumb {
+    cursor: grabbing;
+}
+
+.ow-slider__input:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 2px var(--ow-surface), 0 0 0 4px var(--ow-focus-ring);
+}
+
+.ow-slider__input:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 2px var(--ow-surface), 0 0 0 4px var(--ow-focus-ring);
+}
+
+.ow-slider--disabled {
+    opacity: 0.55;
+}
+
+.ow-slider--disabled .ow-slider__input {
+    cursor: not-allowed;
+}
+
+.ow-slider--disabled .ow-slider__input::-webkit-slider-thumb {
+    cursor: not-allowed;
+}

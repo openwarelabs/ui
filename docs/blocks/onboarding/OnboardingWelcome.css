@@ -1,0 +1,343 @@
+.onboarding-welcome,
+.onboarding-welcome *,
+.onboarding-welcome *::before,
+.onboarding-welcome *::after {
+    box-sizing: border-box;
+}
+
+/* A slice of the app behind the dialog: a top bar and the Reviews page. */
+.onboarding-welcome {
+    display: flex;
+    height: 100dvh;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--ow-canvas);
+    color: var(--ow-text);
+    font-size: 14px;
+}
+
+.onboarding-welcome__bar {
+    display: flex;
+    height: 56px;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--ow-space-lg);
+    padding: 0 16px 0 20px;
+}
+
+.onboarding-welcome__brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-right: 12px;
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.01em;
+}
+
+.onboarding-welcome__mark {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background: linear-gradient(180deg, var(--ow-brand-500), var(--ow-brand-700));
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
+}
+
+.onboarding-welcome__nav {
+    display: flex;
+    flex: 1;
+    gap: 2px;
+}
+
+.onboarding-welcome__nav-item {
+    border-radius: var(--ow-radius-lg);
+    padding: 6px 10px;
+    color: var(--ow-text-muted);
+    font-size: 13.5px;
+    font-weight: var(--ow-weight-control);
+    text-decoration: none;
+    transition: color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.onboarding-welcome__nav-item:hover {
+    color: var(--ow-text);
+}
+
+.onboarding-welcome__nav-item:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.onboarding-welcome__nav-item[aria-current="page"] {
+    background: var(--ow-surface);
+    color: var(--ow-text);
+    box-shadow: var(--ow-shadow-control);
+}
+
+/* The way back to the dialog; the brass dot means there's something unread in it. */
+.onboarding-welcome__news {
+    position: relative;
+}
+
+.onboarding-welcome__news-dot {
+    position: absolute;
+    top: 6px;
+    left: 22px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ow-brass);
+    box-shadow: 0 0 0 2px var(--ow-canvas);
+}
+
+.onboarding-welcome__panel {
+    display: flex;
+    min-height: 0;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--ow-space-4xl);
+    margin: 0 8px;
+    border: 1px solid var(--ow-border);
+    border-bottom: 0;
+    border-radius: var(--ow-radius-panel) var(--ow-radius-panel) 0 0;
+    background: var(--ow-surface);
+    padding: 28px 32px;
+}
+
+.onboarding-welcome__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+.onboarding-welcome__subtitle {
+    margin: 4px 0 0;
+    color: var(--ow-text-muted);
+}
+
+.onboarding-welcome__list {
+    margin: 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    padding: 0;
+    list-style: none;
+}
+
+.onboarding-welcome__row {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-lg);
+    padding: 12px 18px;
+}
+
+.onboarding-welcome__row + .onboarding-welcome__row {
+    border-top: 1px solid var(--ow-border);
+}
+
+.onboarding-welcome__row-text {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+    gap: 2px;
+}
+
+.onboarding-welcome__row-title {
+    overflow: hidden;
+    font-weight: var(--ow-weight-control);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.onboarding-welcome__row-meta {
+    overflow: hidden;
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* The dialog. */
+.onboarding-welcome__dialog .ow-dialog__body {
+    gap: var(--ow-space-4xl);
+}
+
+.onboarding-welcome__dialog .ow-dialog__actions {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.onboarding-welcome__changelog {
+    font-size: 13px;
+}
+
+.onboarding-welcome__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-control);
+}
+
+.onboarding-welcome__eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ow-brass);
+}
+
+/* A pull request an agent opened, drawn small, on a quiet ground. */
+.onboarding-welcome__visual {
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface-muted);
+    padding: 14px;
+}
+
+.onboarding-welcome__pr {
+    display: grid;
+    gap: 10px;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-tile);
+    background: var(--ow-surface);
+    padding: 14px 16px;
+    box-shadow: var(--ow-shadow-control);
+}
+
+.onboarding-welcome__pr-head {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    min-width: 0;
+}
+
+.onboarding-welcome__pr-head svg {
+    flex-shrink: 0;
+    color: var(--ow-success-text);
+}
+
+.onboarding-welcome__pr-title {
+    overflow: hidden;
+    font-weight: var(--ow-weight-emphasis);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.onboarding-welcome__pr-number {
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.onboarding-welcome__pr-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    color: var(--ow-text-muted);
+}
+
+.onboarding-welcome__bot {
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.onboarding-welcome__branch {
+    min-width: 0;
+    overflow: hidden;
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.onboarding-welcome__diff {
+    display: inline-flex;
+    gap: 6px;
+    margin-left: auto;
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+}
+
+.onboarding-welcome__added {
+    color: var(--ow-success-text);
+}
+
+.onboarding-welcome__removed {
+    color: var(--ow-danger-text);
+}
+
+.onboarding-welcome__changes {
+    display: grid;
+    gap: var(--ow-space-xl);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.onboarding-welcome__change {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--ow-space-lg);
+}
+
+.onboarding-welcome__change-icon {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-primary-border);
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.onboarding-welcome__change-text {
+    display: grid;
+    gap: 1px;
+    padding-top: 1px;
+}
+
+.onboarding-welcome__change-title {
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.onboarding-welcome__change-description {
+    color: var(--ow-text-muted);
+    font-size: 13.5px;
+    line-height: 1.45;
+}
+
+@media (max-width: 760px) {
+    .onboarding-welcome__bar {
+        padding: 0 8px 0 16px;
+    }
+    .onboarding-welcome__nav {
+        display: none;
+    }
+    .onboarding-welcome__brand {
+        flex: 1;
+    }
+    .onboarding-welcome__panel {
+        padding: 22px 16px;
+    }
+    .onboarding-welcome__row {
+        padding: 12px 14px;
+    }
+    .onboarding-welcome__row .ow-avatar {
+        display: none;
+    }
+    .onboarding-welcome__visual {
+        display: none;
+    }
+}

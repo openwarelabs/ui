@@ -1,0 +1,185 @@
+.hero-dot-grid,
+.hero-dot-grid *,
+.hero-dot-grid *::before,
+.hero-dot-grid *::after {
+    box-sizing: border-box;
+}
+
+.hero-dot-grid {
+    overflow: hidden;
+    background: var(--ow-paper);
+    color: var(--ow-text);
+}
+
+.hero-dot-grid__grid {
+    padding: 128px 32px 136px;
+}
+
+/* The headline in the middle column; the sample work sits either side of it on wide screens. */
+.hero-dot-grid__layout {
+    display: grid;
+    max-width: var(--ow-page-max);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 640px) minmax(0, 1fr);
+    align-items: center;
+    gap: 40px;
+    margin: 0 auto;
+}
+
+.hero-dot-grid__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-dot-grid__title {
+    margin: 24px 0 0;
+    font-size: 72px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+}
+
+.hero-dot-grid__lead {
+    max-width: 540px;
+    margin: 22px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 18px;
+    line-height: 1.6;
+    text-wrap: pretty;
+}
+
+.hero-dot-grid__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--ow-space-lg);
+    margin-top: 34px;
+}
+
+.hero-dot-grid__hint {
+    margin: 18px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+}
+
+/* The sample work: small cards, the size of notes on a planning sheet. */
+.hero-dot-grid__side {
+    display: flex;
+    flex-direction: column;
+    gap: 88px;
+}
+
+.hero-dot-grid__side--start {
+    align-items: flex-start;
+}
+
+.hero-dot-grid__side--end {
+    align-items: flex-end;
+}
+
+.hero-dot-grid__card {
+    display: grid;
+    width: 220px;
+    gap: 10px;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: 14px;
+    font-size: 13px;
+    box-shadow: var(--ow-shadow-control);
+}
+
+.hero-dot-grid__side--start .hero-dot-grid__card:last-child {
+    margin-left: 44px;
+}
+
+.hero-dot-grid__side--end .hero-dot-grid__card:first-child {
+    margin-right: 44px;
+}
+
+.hero-dot-grid__card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+}
+
+.hero-dot-grid__card-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.hero-dot-grid__card-label svg {
+    color: var(--ow-primary-text);
+}
+
+.hero-dot-grid__mono {
+    font-family: var(--ow-font-mono);
+}
+
+.hero-dot-grid__card-title {
+    color: var(--ow-text);
+    font-size: 13.5px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.35;
+}
+
+.hero-dot-grid__card-title .hero-dot-grid__mono {
+    font-size: 13px;
+    font-weight: var(--ow-weight-control);
+}
+
+/* The progress label at the card's small size. */
+.hero-dot-grid__card .ow-progress__label,
+.hero-dot-grid__card .ow-progress__value {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-regular);
+}
+
+.hero-dot-grid__card-foot {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+}
+
+@media (max-width: 1180px) {
+    .hero-dot-grid__layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .hero-dot-grid__side {
+        display: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .hero-dot-grid__title {
+        font-size: 64px;
+    }
+}
+
+@media (max-width: 760px) {
+    .hero-dot-grid__grid {
+        padding: 80px var(--ow-page-gutter) 88px;
+    }
+    .hero-dot-grid__title {
+        font-size: 42px;
+        line-height: 1.04;
+        letter-spacing: -0.04em;
+    }
+    .hero-dot-grid__lead {
+        font-size: 16px;
+    }
+    .hero-dot-grid__actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

@@ -1,0 +1,122 @@
+/* ProgressBar and ProgressCircle. The fill is ow-progress; tones swap in a status colour. */
+.ow-progress {
+    display: grid;
+    min-width: 0;
+    gap: var(--ow-space-sm);
+}
+
+.ow-progress--primary {
+    --ow-progress-fill: var(--ow-progress);
+}
+
+/* Status fills use the status text colours, which keep 3:1 against the track in both themes. */
+.ow-progress--success {
+    --ow-progress-fill: var(--ow-success-text);
+}
+
+.ow-progress--warning {
+    --ow-progress-fill: var(--ow-warning-text);
+}
+
+.ow-progress--danger {
+    --ow-progress-fill: var(--ow-danger-text);
+}
+
+.ow-progress__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--ow-space-md);
+}
+
+.ow-progress__label {
+    color: var(--ow-text);
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.ow-progress__value {
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-progress__track {
+    position: relative;
+    height: 4px;
+    overflow: hidden;
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-meter-track);
+}
+
+.ow-progress--md .ow-progress__track {
+    height: 8px;
+}
+
+.ow-progress__fill {
+    height: 100%;
+    border-radius: inherit;
+    background: var(--ow-progress-fill);
+    transition: width var(--ow-duration-slow) var(--ow-ease-standard);
+}
+
+/* Unknown length: a segment sliding across, like Commandr's licence check. */
+.ow-progress__track--indeterminate .ow-progress__fill {
+    width: 37%;
+    animation: ow-progress-slide 1.3s var(--ow-ease-standard) infinite;
+}
+
+@keyframes ow-progress-slide {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(270%);
+    }
+}
+
+.ow-progress-circle {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.ow-progress-circle svg {
+    position: absolute;
+    inset: 0;
+}
+
+.ow-progress-circle__track {
+    stroke: var(--ow-meter-track);
+}
+
+.ow-progress-circle__fill {
+    stroke: var(--ow-progress-fill);
+    transition: stroke-dashoffset var(--ow-duration-slow) var(--ow-ease-standard);
+}
+
+.ow-progress-circle--indeterminate svg {
+    animation: ow-spin 0.9s linear infinite;
+}
+
+.ow-progress-circle__value {
+    position: relative;
+    color: var(--ow-text);
+    font-size: 12px;
+    font-weight: var(--ow-weight-emphasis);
+    font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-progress__track--indeterminate .ow-progress__fill {
+        width: 100%;
+        animation: none !important;
+        opacity: 0.5;
+    }
+    .ow-progress-circle--indeterminate svg {
+        animation-duration: 1.8s !important;
+        animation-iteration-count: infinite !important;
+    }
+}

@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@import "@openwarelabs/ui/tailwind.css";
+
+/* Now bg-surface, text-text-muted, border-border, rounded-container, p-lg,
+   font-action, shadow-menu and the rest work, with a dark: variant for data-theme="dark". */

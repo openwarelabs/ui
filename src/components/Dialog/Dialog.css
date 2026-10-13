@@ -1,0 +1,135 @@
+/* Dialog: fades and rises in, fades and sinks out. The exit uses allow-discrete so the dialog stays
+   rendered while display and overlay switch off. */
+.ow-dialog {
+    position: fixed;
+    inset: 0;
+    max-width: calc(100% - 32px);
+    max-height: calc(100% - 32px);
+    margin: auto;
+    overflow: auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: var(--ow-space-5xl);
+    color: var(--ow-text);
+    font-family: var(--ow-font-sans);
+    font-size: 14px;
+    line-height: 1.45;
+    box-shadow: var(--ow-shadow-menu);
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+    transition:
+        opacity var(--ow-duration-exit) var(--ow-ease-exit),
+        transform var(--ow-duration-exit) var(--ow-ease-exit),
+        overlay var(--ow-duration-exit) allow-discrete,
+        display var(--ow-duration-exit) allow-discrete;
+}
+
+.ow-dialog[open] {
+    opacity: 1;
+    transform: none;
+    transition:
+        opacity var(--ow-duration-base) var(--ow-ease-standard),
+        transform var(--ow-duration-slow) var(--ow-ease-emphasized),
+        overlay var(--ow-duration-slow) allow-discrete,
+        display var(--ow-duration-slow) allow-discrete;
+}
+
+@starting-style {
+    .ow-dialog[open] {
+        opacity: 0;
+        transform: translateY(12px) scale(0.96);
+    }
+}
+
+.ow-dialog::backdrop {
+    background-color: rgb(0 0 0 / 0);
+    backdrop-filter: blur(0);
+    transition:
+        background-color var(--ow-duration-exit) var(--ow-ease-exit),
+        backdrop-filter var(--ow-duration-exit) var(--ow-ease-exit),
+        overlay var(--ow-duration-exit) allow-discrete,
+        display var(--ow-duration-exit) allow-discrete;
+}
+
+.ow-dialog[open]::backdrop {
+    background-color: var(--ow-backdrop);
+    backdrop-filter: blur(2px);
+    transition:
+        background-color var(--ow-duration-slow) var(--ow-ease-standard),
+        backdrop-filter var(--ow-duration-slow) var(--ow-ease-standard),
+        overlay var(--ow-duration-slow) allow-discrete,
+        display var(--ow-duration-slow) allow-discrete;
+}
+
+@starting-style {
+    .ow-dialog[open]::backdrop {
+        background-color: rgb(0 0 0 / 0);
+        backdrop-filter: blur(0);
+    }
+}
+
+.ow-dialog--confirm {
+    padding: var(--ow-space-4xl);
+}
+
+.ow-dialog__body {
+    display: grid;
+    gap: var(--ow-space-xl);
+}
+
+.ow-dialog__header {
+    display: grid;
+    min-width: 0;
+    gap: var(--ow-space-xs);
+}
+
+.ow-dialog__title {
+    display: grid;
+    gap: var(--ow-space-md);
+    margin: 0;
+    color: var(--ow-text);
+    font-size: 16px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.3;
+}
+
+.ow-dialog__description {
+    color: var(--ow-text-muted);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.ow-dialog__description > p {
+    margin: 0;
+}
+
+.ow-dialog__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--ow-space-sm);
+}
+
+.ow-dialog__error {
+    color: var(--ow-danger-text);
+    font-size: 14px;
+}
+
+.ow-dialog__danger-icon {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--ow-danger-wash);
+    color: var(--ow-danger-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-dialog,
+    .ow-dialog::backdrop {
+        transition: none;
+    }
+}

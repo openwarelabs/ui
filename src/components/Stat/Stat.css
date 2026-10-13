@@ -1,0 +1,108 @@
+/* Stat: Commandr's overview card. A muted label, a big tabular number, a change and an optional trend line. */
+.ow-stat {
+    display: grid;
+    min-width: 0;
+    align-content: start;
+    gap: var(--ow-space-md);
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: var(--ow-space-3xl) var(--ow-space-4xl);
+    color: var(--ow-text);
+}
+
+.ow-stat__label {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: var(--ow-space-md);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-control);
+}
+
+.ow-stat__icon {
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-primary-border);
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.ow-stat__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--ow-space-sm);
+}
+
+.ow-stat__value {
+    font-size: 28px;
+    font-weight: var(--ow-weight-display);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.ow-stat__change {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 12px;
+    font-weight: var(--ow-weight-emphasis);
+    font-variant-numeric: tabular-nums;
+    color: var(--ow-text-muted);
+}
+
+.ow-stat__change--positive {
+    color: var(--ow-success-text);
+}
+
+.ow-stat__change--negative {
+    color: var(--ow-danger-text);
+}
+
+.ow-stat__description {
+    margin-top: calc(var(--ow-space-xs) * -1);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+}
+
+.ow-stat__trend {
+    position: relative;
+    height: 40px;
+}
+
+.ow-stat__trend svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.ow-stat__trend-area {
+    fill: color-mix(in srgb, var(--ow-progress) 12%, transparent);
+}
+
+.ow-stat__trend-line {
+    fill: none;
+    stroke: var(--ow-progress);
+    stroke-width: 1.75px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+.ow-stat__trend-end {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 2px solid var(--ow-surface);
+    border-radius: 50%;
+    background: var(--ow-progress);
+    transform: translate(-50%, -50%);
+}

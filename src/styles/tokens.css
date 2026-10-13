@@ -1,0 +1,427 @@
+/* Generated from tokens/tokens.json by scripts/build-tokens.mjs. Don't edit by hand. */
+
+:root,
+[data-theme="light"] {
+    --ow-brand-50: #f2f3fc;
+    --ow-brand-100: #e7e9f9;
+    --ow-brand-200: #d4d7f4;
+    --ow-brand-300: #b7bbea;
+    --ow-brand-400: #898cd0;
+    --ow-brand-500: #5856ad;
+    --ow-brand-600: #312c7e;
+    --ow-brand-700: #1e1b4b;
+    --ow-brand-800: #18163d;
+    --ow-brand-900: #13112f;
+    --ow-brand-950: #0b0a20;
+    --ow-gray-50: #f8fafc;
+    --ow-gray-100: #f1f5f9;
+    --ow-gray-200: #e2e8f0;
+    --ow-gray-300: #cbd5e1;
+    --ow-gray-400: #94a3b8;
+    --ow-gray-500: #64748b;
+    --ow-gray-600: #475569;
+    --ow-gray-700: #334155;
+    --ow-gray-800: #1e293b;
+    --ow-gray-900: #0f172a;
+    --ow-gray-950: #020617;
+    --ow-canvas: var(--ow-gray-100);
+    --ow-paper: #f8f8f7;
+    --ow-surface: #ffffff;
+    --ow-surface-muted: var(--ow-gray-50);
+    --ow-control: #ffffff;
+    --ow-control-shade: var(--ow-gray-50);
+    --ow-control-shade-hover: var(--ow-gray-100);
+    --ow-hover: var(--ow-gray-100);
+    --ow-disabled: var(--ow-gray-100);
+    --ow-icon: var(--ow-gray-400);
+    --ow-border: var(--ow-gray-200);
+    --ow-border-strong: var(--ow-gray-300);
+    --ow-border-hover: var(--ow-gray-400);
+    --ow-text: var(--ow-gray-900);
+    --ow-text-soft: var(--ow-gray-700);
+    --ow-text-muted: #5f6b7d;
+    --ow-text-disabled: var(--ow-gray-400);
+    --ow-primary: var(--ow-brand-600);
+    --ow-primary-hover: var(--ow-brand-700);
+    --ow-primary-active: var(--ow-brand-800);
+    --ow-on-primary: #ffffff;
+    --ow-primary-text: var(--ow-brand-600);
+    --ow-primary-subtle: var(--ow-brand-50);
+    --ow-primary-soft: var(--ow-brand-100);
+    --ow-primary-border: var(--ow-brand-200);
+    --ow-primary-focus: var(--ow-brand-300);
+    --ow-focus-border: var(--ow-brand-500);
+    --ow-focus-ring: var(--ow-brand-500);
+    --ow-brass: #d4a72c;
+    --ow-brass-deep: #8a6a12;
+    --ow-brass-soft: #faf3df;
+    --ow-danger-surface: #fff7f7;
+    --ow-danger-wash: #ffe2e2;
+    --ow-danger-border: #ffc9c9;
+    --ow-danger-line: #ffa2a2;
+    --ow-danger-solid: #fb2c36;
+    --ow-danger-fill: #e7000b;
+    --ow-danger-fill-border: #c10007;
+    --ow-danger-text: #c10007;
+    --ow-success-surface: #eef8f2;
+    --ow-success-border: #b9d8c2;
+    --ow-success-solid: #00bc7d;
+    --ow-success-text: #006045;
+    --ow-warning-surface: #fffbeb;
+    --ow-warning-border: #d7ca9f;
+    --ow-warning-solid: #fe9a00;
+    --ow-warning-text: #973c00;
+    --ow-tooltip: var(--ow-gray-900);
+    --ow-on-tooltip: #ffffff;
+    --ow-switch-off: var(--ow-gray-400);
+    --ow-skeleton: var(--ow-gray-200);
+    --ow-skeleton-soft: var(--ow-gray-100);
+    --ow-avatar-empty: var(--ow-gray-200);
+    --ow-on-avatar-empty: var(--ow-gray-600);
+    --ow-code-ground: var(--ow-gray-100);
+    --ow-key-ground: var(--ow-gray-50);
+    --ow-track: var(--ow-gray-100);
+    --ow-thumb: #ffffff;
+    --ow-meter-track: var(--ow-gray-200);
+    --ow-progress: var(--ow-brand-600);
+    --ow-code-block: #15171c;
+    --ow-code-block-header: #1c1f26;
+    --ow-code-block-border: #15171c;
+    --ow-on-code-block: #e6edf3;
+    --ow-on-code-block-muted: #8b919c;
+    --ow-backdrop: rgba(15,23,42,0.4);
+    --ow-dot: rgba(15,23,42,0.11);
+    --ow-header-glass: rgba(255,255,255,0.85);
+    --ow-shadow-button: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.2), 0 1px 2px color-mix(in srgb, var(--ow-brand-700) 30%, transparent), 0 4px 10px -4px color-mix(in srgb, var(--ow-brand-600) 50%, transparent);
+    --ow-shadow-button-secondary: inset 0 1px 0 rgba(255,255,255,0.7), 0 1px 2px rgba(15,23,42,0.08);
+    --ow-shadow-button-danger: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(0,0,0,0.12), 0 1px 2px rgba(127,29,29,0.25), 0 4px 10px -4px rgba(220,38,38,0.5);
+    --ow-shadow-pressed: inset 0 2px 4px rgba(0,0,0,0.18);
+    --ow-shadow-pressed-secondary: inset 0 1px 2px rgba(15,23,42,0.1);
+    --ow-shadow-control: 0 1px 2px rgba(0,0,0,0.06);
+    --ow-shadow-menu: 0 12px 24px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.08);
+    --ow-shadow-focus: 0 0 0 3px color-mix(in srgb, var(--ow-brand-600) 14%, transparent);
+    --ow-shadow-focus-danger: 0 0 0 3px rgba(239,68,68,0.12);
+    --ow-shadow-header: 0 1px 2px rgba(0,0,0,0.04), 0 6px 20px rgba(0,0,0,0.04);
+    --ow-shadow-lift: 0 20px 40px color-mix(in srgb, var(--ow-brand-700) 35%, transparent);
+    color-scheme: light;
+}
+
+[data-theme="dark"] {
+    --ow-canvas: #15171c;
+    --ow-paper: #15171c;
+    --ow-surface: #1c1f26;
+    --ow-surface-muted: #262a33;
+    --ow-control: #2a2f38;
+    --ow-control-shade: #23272f;
+    --ow-control-shade-hover: #1f232a;
+    --ow-hover: #2a2f38;
+    --ow-disabled: #23272f;
+    --ow-icon: #7d8593;
+    --ow-border: #2c313a;
+    --ow-border-strong: #434a56;
+    --ow-border-hover: #5b6472;
+    --ow-text: #f3f4f6;
+    --ow-text-soft: #cfd3da;
+    --ow-text-muted: #959ba6;
+    --ow-text-disabled: #626a77;
+    --ow-primary: var(--ow-brand-500);
+    --ow-primary-hover: var(--ow-brand-600);
+    --ow-primary-active: var(--ow-brand-700);
+    --ow-primary-text: var(--ow-brand-300);
+    --ow-primary-subtle: color-mix(in srgb, var(--ow-brand-400) 14%, transparent);
+    --ow-primary-soft: color-mix(in srgb, var(--ow-brand-400) 22%, transparent);
+    --ow-primary-border: color-mix(in srgb, var(--ow-brand-400) 40%, transparent);
+    --ow-primary-focus: var(--ow-brand-400);
+    --ow-focus-border: var(--ow-brand-400);
+    --ow-focus-ring: var(--ow-brand-300);
+    --ow-brass-deep: var(--ow-brass);
+    --ow-brass-soft: rgba(212,167,44,0.14);
+    --ow-danger-surface: rgba(251,44,54,0.12);
+    --ow-danger-wash: rgba(251,44,54,0.18);
+    --ow-danger-border: rgba(255,100,103,0.38);
+    --ow-danger-line: #ff6467;
+    --ow-danger-text: #ffa2a2;
+    --ow-success-surface: rgba(0,188,125,0.12);
+    --ow-success-border: rgba(0,212,146,0.32);
+    --ow-success-text: #5ee9b5;
+    --ow-warning-surface: rgba(254,154,0,0.12);
+    --ow-warning-border: rgba(255,185,0,0.32);
+    --ow-warning-text: #ffd230;
+    --ow-tooltip: #f3f4f6;
+    --ow-on-tooltip: #15171c;
+    --ow-switch-off: #5b6472;
+    --ow-skeleton: #2c313a;
+    --ow-skeleton-soft: #252932;
+    --ow-avatar-empty: #2c313a;
+    --ow-on-avatar-empty: #cfd3da;
+    --ow-code-ground: #262a33;
+    --ow-key-ground: #22262e;
+    --ow-track: #14161b;
+    --ow-thumb: #2f3541;
+    --ow-meter-track: #2c313a;
+    --ow-progress: var(--ow-brand-400);
+    --ow-code-block-border: #2c313a;
+    --ow-backdrop: rgba(0,0,0,0.6);
+    --ow-dot: rgba(255,255,255,0.09);
+    --ow-header-glass: rgba(28,31,38,0.85);
+    --ow-shadow-button: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.45), 0 4px 10px -4px rgba(0,0,0,0.7);
+    --ow-shadow-button-secondary: inset 0 1px 0 rgba(255,255,255,0.06), 0 1px 2px rgba(0,0,0,0.4);
+    --ow-shadow-button-danger: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.45), 0 4px 10px -4px rgba(0,0,0,0.7);
+    --ow-shadow-pressed-secondary: inset 0 1px 2px rgba(0,0,0,0.4);
+    --ow-shadow-control: 0 1px 2px rgba(0,0,0,0.4);
+    --ow-shadow-menu: 0 12px 24px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.4);
+    --ow-shadow-focus: 0 0 0 3px color-mix(in srgb, var(--ow-brand-400) 28%, transparent);
+    --ow-shadow-focus-danger: 0 0 0 3px rgba(239,68,68,0.24);
+    --ow-shadow-header: 0 1px 2px rgba(0,0,0,0.3), 0 6px 20px rgba(0,0,0,0.3);
+    --ow-shadow-lift: 0 20px 40px rgba(0,0,0,0.6);
+    color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+    [data-theme="system"] {
+        --ow-canvas: #15171c;
+        --ow-paper: #15171c;
+        --ow-surface: #1c1f26;
+        --ow-surface-muted: #262a33;
+        --ow-control: #2a2f38;
+        --ow-control-shade: #23272f;
+        --ow-control-shade-hover: #1f232a;
+        --ow-hover: #2a2f38;
+        --ow-disabled: #23272f;
+        --ow-icon: #7d8593;
+        --ow-border: #2c313a;
+        --ow-border-strong: #434a56;
+        --ow-border-hover: #5b6472;
+        --ow-text: #f3f4f6;
+        --ow-text-soft: #cfd3da;
+        --ow-text-muted: #959ba6;
+        --ow-text-disabled: #626a77;
+        --ow-primary: var(--ow-brand-500);
+        --ow-primary-hover: var(--ow-brand-600);
+        --ow-primary-active: var(--ow-brand-700);
+        --ow-primary-text: var(--ow-brand-300);
+        --ow-primary-subtle: color-mix(in srgb, var(--ow-brand-400) 14%, transparent);
+        --ow-primary-soft: color-mix(in srgb, var(--ow-brand-400) 22%, transparent);
+        --ow-primary-border: color-mix(in srgb, var(--ow-brand-400) 40%, transparent);
+        --ow-primary-focus: var(--ow-brand-400);
+        --ow-focus-border: var(--ow-brand-400);
+        --ow-focus-ring: var(--ow-brand-300);
+        --ow-brass-deep: var(--ow-brass);
+        --ow-brass-soft: rgba(212,167,44,0.14);
+        --ow-danger-surface: rgba(251,44,54,0.12);
+        --ow-danger-wash: rgba(251,44,54,0.18);
+        --ow-danger-border: rgba(255,100,103,0.38);
+        --ow-danger-line: #ff6467;
+        --ow-danger-text: #ffa2a2;
+        --ow-success-surface: rgba(0,188,125,0.12);
+        --ow-success-border: rgba(0,212,146,0.32);
+        --ow-success-text: #5ee9b5;
+        --ow-warning-surface: rgba(254,154,0,0.12);
+        --ow-warning-border: rgba(255,185,0,0.32);
+        --ow-warning-text: #ffd230;
+        --ow-tooltip: #f3f4f6;
+        --ow-on-tooltip: #15171c;
+        --ow-switch-off: #5b6472;
+        --ow-skeleton: #2c313a;
+        --ow-skeleton-soft: #252932;
+        --ow-avatar-empty: #2c313a;
+        --ow-on-avatar-empty: #cfd3da;
+        --ow-code-ground: #262a33;
+        --ow-key-ground: #22262e;
+        --ow-track: #14161b;
+        --ow-thumb: #2f3541;
+        --ow-meter-track: #2c313a;
+        --ow-progress: var(--ow-brand-400);
+        --ow-code-block-border: #2c313a;
+        --ow-backdrop: rgba(0,0,0,0.6);
+        --ow-dot: rgba(255,255,255,0.09);
+        --ow-header-glass: rgba(28,31,38,0.85);
+        --ow-shadow-button: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.45), 0 4px 10px -4px rgba(0,0,0,0.7);
+        --ow-shadow-button-secondary: inset 0 1px 0 rgba(255,255,255,0.06), 0 1px 2px rgba(0,0,0,0.4);
+        --ow-shadow-button-danger: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.45), 0 4px 10px -4px rgba(0,0,0,0.7);
+        --ow-shadow-pressed-secondary: inset 0 1px 2px rgba(0,0,0,0.4);
+        --ow-shadow-control: 0 1px 2px rgba(0,0,0,0.4);
+        --ow-shadow-menu: 0 12px 24px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.4);
+        --ow-shadow-focus: 0 0 0 3px color-mix(in srgb, var(--ow-brand-400) 28%, transparent);
+        --ow-shadow-focus-danger: 0 0 0 3px rgba(239,68,68,0.24);
+        --ow-shadow-header: 0 1px 2px rgba(0,0,0,0.3), 0 6px 20px rgba(0,0,0,0.3);
+        --ow-shadow-lift: 0 20px 40px rgba(0,0,0,0.6);
+        color-scheme: dark;
+    }
+}
+
+:root {
+    --ow-space-3xs: 3px;
+    --ow-space-2xs: 4px;
+    --ow-space-xs: 6px;
+    --ow-space-sm: 8px;
+    --ow-space-md: 10px;
+    --ow-space-lg: 12px;
+    --ow-space-xl: 14px;
+    --ow-space-2xl: 16px;
+    --ow-space-3xl: 18px;
+    --ow-space-4xl: 20px;
+    --ow-space-5xl: 22px;
+    --ow-space-6xl: 26px;
+    --ow-space-7xl: 28px;
+    --ow-page-max: 1200px;
+    --ow-page-gutter: 20px;
+    --ow-header-height: 56px;
+    --ow-section-y: 96px;
+    --ow-radius-sm: 4px;
+    --ow-radius-code: 5px;
+    --ow-radius-md: 6px;
+    --ow-radius-lg: 8px;
+    --ow-radius-form: 8px;
+    --ow-radius-tile: 10px;
+    --ow-radius-container: 12px;
+    --ow-radius-panel: 14px;
+    --ow-radius-card: 18px;
+    --ow-radius-section: 22px;
+    --ow-radius-pill: 999px;
+    --ow-duration-fast: 120ms;
+    --ow-duration-base: 180ms;
+    --ow-duration-slow: 260ms;
+    --ow-duration-exit: 140ms;
+    --ow-duration-panel: 340ms;
+    --ow-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+    --ow-ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+    --ow-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+    --ow-ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+    --ow-weight-regular: 400;
+    --ow-weight-control: 500;
+    --ow-weight-emphasis: 600;
+    --ow-weight-label: 680;
+    --ow-weight-heavy: 700;
+    --ow-weight-title: 720;
+    --ow-weight-action: 730;
+    --ow-weight-subheading: 740;
+    --ow-weight-strong: 750;
+    --ow-weight-display: 760;
+    --ow-font-sans: "Inter Variable", Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --ow-font-mono: "Geist Mono Variable", "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.ow-type-hero {
+    font-family: var(--ow-font-sans);
+    font-size: 76px;
+    line-height: 0.98;
+    font-weight: 500;
+    letter-spacing: -0.045em;
+}
+
+.ow-type-page-title {
+    font-family: var(--ow-font-sans);
+    font-size: 56px;
+    line-height: 1.05;
+    font-weight: 500;
+    letter-spacing: -0.035em;
+}
+
+.ow-type-section-title {
+    font-family: var(--ow-font-sans);
+    font-size: 44px;
+    line-height: 1.1;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+}
+
+.ow-type-heading {
+    font-family: var(--ow-font-sans);
+    font-size: 24px;
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.ow-type-lead {
+    font-family: var(--ow-font-sans);
+    font-size: 17px;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+.ow-type-prose {
+    font-family: var(--ow-font-sans);
+    font-size: 16.5px;
+    line-height: 1.7;
+    font-weight: 400;
+}
+
+.ow-type-dialog-title {
+    font-family: var(--ow-font-sans);
+    font-size: 16px;
+    line-height: 1.3;
+    font-weight: 760;
+}
+
+.ow-type-card-title {
+    font-family: var(--ow-font-sans);
+    font-size: 15px;
+    line-height: 1.3;
+    font-weight: 600;
+}
+
+.ow-type-body {
+    font-family: var(--ow-font-sans);
+    font-size: 14px;
+    line-height: 1.45;
+    font-weight: 400;
+}
+
+.ow-type-copy {
+    font-family: var(--ow-font-sans);
+    font-size: 14px;
+    line-height: 1.55;
+    font-weight: 400;
+}
+
+.ow-type-label {
+    font-family: var(--ow-font-sans);
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 600;
+}
+
+.ow-type-button {
+    font-family: var(--ow-font-sans);
+    font-size: 14px;
+    line-height: 1.1;
+    font-weight: 730;
+}
+
+.ow-type-caption {
+    font-family: var(--ow-font-sans);
+    font-size: 12px;
+    line-height: 1.35;
+    font-weight: 400;
+}
+
+.ow-type-badge {
+    font-family: var(--ow-font-sans);
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 750;
+}
+
+.ow-type-overline {
+    font-family: var(--ow-font-sans);
+    font-size: 11px;
+    line-height: 1.35;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+}
+
+.ow-type-code {
+    font-family: var(--ow-font-mono);
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.ow-type-kbd {
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 500;
+}

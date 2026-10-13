@@ -1,0 +1,179 @@
+.cta-brand,
+.cta-brand *,
+.cta-brand *::before,
+.cta-brand *::after {
+    box-sizing: border-box;
+}
+
+.cta-brand {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+}
+
+/* The plate: the brand's deep steps, in both themes, with its own faint dots. The brand scale is built so
+   white text holds its contrast on 600 and darker, whatever colour the brand is. */
+.cta-brand .cta-brand__plate {
+    --ow-dot: color-mix(in srgb, var(--ow-on-primary) 13%, transparent);
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--ow-brand-400) 35%, transparent);
+    border-radius: var(--ow-radius-section);
+    background: linear-gradient(180deg, var(--ow-brand-600), var(--ow-brand-800));
+    color: var(--ow-on-primary);
+}
+
+.cta-brand__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 88px 40px 84px;
+    text-align: center;
+}
+
+.cta-brand__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    border: 1px solid color-mix(in srgb, var(--ow-on-primary) 22%, transparent);
+    border-radius: var(--ow-radius-pill);
+    background: color-mix(in srgb, var(--ow-on-primary) 8%, transparent);
+    padding: 5px 12px;
+    color: color-mix(in srgb, var(--ow-on-primary) 88%, transparent);
+    font-size: 13px;
+    font-weight: var(--ow-weight-control);
+}
+
+.cta-brand__eyebrow::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ow-brass);
+}
+
+.cta-brand__title {
+    max-width: 760px;
+    margin: 24px 0 0;
+    color: var(--ow-on-primary);
+    font-size: 52px;
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+}
+
+.cta-brand__lead {
+    max-width: 540px;
+    margin: 20px 0 0;
+    color: color-mix(in srgb, var(--ow-on-primary) 78%, transparent);
+    font-size: 17px;
+    line-height: 1.6;
+    text-wrap: pretty;
+}
+
+.cta-brand__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px 28px;
+    margin-top: 36px;
+}
+
+/* The one main action, as a light pill on the plate: a primary button would vanish into the brand colour. */
+.cta-brand .cta-brand__action {
+    border-color: transparent;
+    background-color: var(--ow-on-primary);
+    background-image: linear-gradient(to bottom, var(--ow-on-primary), color-mix(in srgb, var(--ow-brand-50) 70%, var(--ow-on-primary)));
+    color: var(--ow-brand-700);
+    box-shadow:
+        0 1px 2px color-mix(in srgb, var(--ow-brand-950) 40%, transparent),
+        0 6px 16px -6px color-mix(in srgb, var(--ow-brand-950) 60%, transparent);
+}
+
+.cta-brand .cta-brand__action:hover:not(:disabled) {
+    border-color: transparent;
+    background-image: linear-gradient(to bottom, var(--ow-on-primary), var(--ow-brand-100));
+}
+
+.cta-brand .cta-brand__action:focus-visible,
+.cta-brand__link:focus-visible {
+    outline: 2px solid var(--ow-on-primary);
+    outline-offset: 3px;
+}
+
+.cta-brand__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: var(--ow-radius-sm);
+    color: var(--ow-on-primary);
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+    text-decoration: none;
+}
+
+.cta-brand__link svg {
+    transition: transform var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.cta-brand__link:hover svg {
+    transform: translateX(2px);
+}
+
+.cta-brand__facts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 28px;
+    margin: 48px 0 0;
+    padding: 0;
+    color: color-mix(in srgb, var(--ow-on-primary) 70%, transparent);
+    font-size: 13.5px;
+    list-style: none;
+}
+
+.cta-brand__facts li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cta-brand__link svg {
+        transition: none;
+    }
+}
+
+@media (max-width: 760px) {
+    .cta-brand {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .cta-brand .cta-brand__plate {
+        border-radius: var(--ow-radius-card);
+    }
+    .cta-brand__content {
+        padding: 56px 22px 52px;
+    }
+    .cta-brand__title {
+        font-size: 36px;
+        line-height: 1.1;
+    }
+    .cta-brand__lead {
+        font-size: 16px;
+    }
+    .cta-brand__actions {
+        width: 100%;
+        flex-direction: column;
+    }
+    .cta-brand .cta-brand__action {
+        width: 100%;
+    }
+    .cta-brand__facts {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 36px;
+    }
+}

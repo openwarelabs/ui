@@ -1,0 +1,263 @@
+.onboarding-choice,
+.onboarding-choice *,
+.onboarding-choice *::before,
+.onboarding-choice *::after {
+    box-sizing: border-box;
+}
+
+/* A setup screen on the canvas: the brand and progress along the top, the choice in the middle. */
+.onboarding-choice {
+    background: var(--ow-canvas);
+    padding: 0 32px 88px;
+    color: var(--ow-text);
+    font-size: 14px;
+}
+
+.onboarding-choice__top {
+    display: grid;
+    max-width: 1040px;
+    grid-template-areas: "brand progress skip";
+    grid-template-columns: 1fr minmax(0, 340px) 1fr;
+    align-items: center;
+    gap: var(--ow-space-2xl);
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.onboarding-choice__brand {
+    display: flex;
+    grid-area: brand;
+    align-items: center;
+    gap: 9px;
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.01em;
+}
+
+.onboarding-choice__mark {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background: linear-gradient(180deg, var(--ow-brand-500), var(--ow-brand-700));
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
+}
+
+.onboarding-choice__progress {
+    grid-area: progress;
+}
+
+.onboarding-choice__skip {
+    grid-area: skip;
+    justify-self: end;
+}
+
+.onboarding-choice__body {
+    display: flex;
+    max-width: 880px;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding-top: 72px;
+    text-align: center;
+}
+
+.onboarding-choice__title {
+    margin: 0;
+    font-size: 30px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+}
+
+.onboarding-choice__title:focus {
+    outline: none;
+}
+
+.onboarding-choice__lead {
+    max-width: 520px;
+    margin: 12px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 15px;
+    line-height: 1.55;
+    text-wrap: balance;
+}
+
+.onboarding-choice__content {
+    width: 100%;
+    margin-top: 40px;
+    text-align: left;
+}
+
+.onboarding-choice__options {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--ow-space-lg);
+}
+
+/* The badge sits over the card's corner; clicks go through to the card. */
+.onboarding-choice__option {
+    position: relative;
+    display: grid;
+}
+
+.onboarding-choice__recommended {
+    position: absolute;
+    top: 24px;
+    right: 16px;
+    pointer-events: none;
+}
+
+.onboarding-choice__note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ow-space-sm);
+    margin: 28px 0 0;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    text-align: center;
+    text-wrap: pretty;
+}
+
+.onboarding-choice__note svg {
+    flex-shrink: 0;
+    color: var(--ow-icon);
+}
+
+/* The step after the choice: one small card. */
+.onboarding-choice__card {
+    display: grid;
+    max-width: 520px;
+    gap: var(--ow-space-4xl);
+    margin: 0 auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: 24px;
+}
+
+.onboarding-choice__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-sm);
+}
+
+.onboarding-choice__repos {
+    margin: -8px -8px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.onboarding-choice__repo {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-lg);
+    padding: 10px 8px;
+}
+
+.onboarding-choice__repo + .onboarding-choice__repo {
+    border-top: 1px solid var(--ow-border);
+}
+
+.onboarding-choice__repo-icon {
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-surface-muted);
+    color: var(--ow-icon);
+}
+
+.onboarding-choice__repo-text {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+    gap: 2px;
+}
+
+.onboarding-choice__repo-name {
+    overflow: hidden;
+    font-family: var(--ow-font-mono);
+    font-size: 13px;
+    font-weight: var(--ow-weight-control);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.onboarding-choice__repo-meta {
+    overflow: hidden;
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.onboarding-choice__done-icon {
+    display: inline-flex;
+    margin-bottom: 20px;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-success-border);
+    border-radius: 50%;
+    background: var(--ow-success-surface);
+    color: var(--ow-success-text);
+}
+
+.onboarding-choice__done-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--ow-space-sm);
+}
+
+@media (max-width: 1024px) {
+    .onboarding-choice__body {
+        padding-top: 56px;
+    }
+}
+
+@media (max-width: 760px) {
+    .onboarding-choice {
+        padding: 0 var(--ow-page-gutter) 56px;
+    }
+    .onboarding-choice__top {
+        grid-template-areas:
+            "brand skip"
+            "progress progress";
+        grid-template-columns: 1fr auto;
+        row-gap: 20px;
+        padding: 12px 0 0;
+    }
+    .onboarding-choice__body {
+        padding-top: 40px;
+    }
+    .onboarding-choice__title {
+        font-size: 26px;
+    }
+    .onboarding-choice__content {
+        margin-top: 28px;
+    }
+    .onboarding-choice__options {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .onboarding-choice__card {
+        padding: 20px 16px;
+    }
+    .onboarding-choice__note {
+        align-items: flex-start;
+        text-align: left;
+    }
+    .onboarding-choice__note svg {
+        margin-top: 1px;
+    }
+}

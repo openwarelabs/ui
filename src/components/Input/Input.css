@@ -1,0 +1,150 @@
+/* Input and Textarea share the field look: a slate border, white ground, a brand border and halo on focus. */
+.ow-input,
+.ow-textarea {
+    width: 100%;
+    margin: 0;
+    border: 1px solid var(--ow-border-strong);
+    border-radius: var(--ow-radius-form);
+    background: var(--ow-surface);
+    padding: 0 var(--ow-space-lg);
+    color: var(--ow-text);
+    font: inherit;
+    font-size: 14px;
+    font-weight: var(--ow-weight-regular);
+    line-height: 1.45;
+    outline: 0;
+    transition-property: border-color, background-color, box-shadow, opacity;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-input {
+    height: 40px;
+}
+
+.ow-input::placeholder,
+.ow-textarea::placeholder {
+    color: var(--ow-text-muted);
+    opacity: 1;
+}
+
+.ow-input:focus,
+.ow-textarea:focus {
+    border-color: var(--ow-focus-border);
+    box-shadow: var(--ow-shadow-focus);
+}
+
+.ow-input:focus-visible,
+.ow-textarea:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-input--invalid,
+.ow-textarea--invalid {
+    border-color: var(--ow-danger-line);
+}
+
+.ow-input--invalid:focus,
+.ow-textarea--invalid:focus {
+    border-color: var(--ow-danger-solid);
+    box-shadow: var(--ow-shadow-focus-danger);
+}
+
+.ow-input:disabled,
+.ow-textarea:disabled {
+    cursor: not-allowed;
+    opacity: 0.62;
+}
+
+.ow-input--sm {
+    height: 32px;
+    padding: 0 var(--ow-space-md);
+    font-size: 13px;
+}
+
+/* Input with start or end content: the group draws the field; the input inside is bare. */
+.ow-input-group {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    border: 1px solid var(--ow-border-strong);
+    border-radius: var(--ow-radius-form);
+    background: var(--ow-surface);
+    padding: 0 var(--ow-space-sm) 0 var(--ow-space-lg);
+    color: var(--ow-text);
+    font-size: 14px;
+    transition-property: border-color, background-color, box-shadow, opacity;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-input-group--sm {
+    height: 32px;
+    gap: var(--ow-space-xs);
+    padding: 0 var(--ow-space-xs) 0 var(--ow-space-md);
+    font-size: 13px;
+}
+
+.ow-input-group:focus-within {
+    border-color: var(--ow-focus-border);
+    box-shadow: var(--ow-shadow-focus);
+}
+
+.ow-input-group:has(.ow-input-group__input:focus-visible) {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-input-group--invalid {
+    border-color: var(--ow-danger-line);
+}
+
+.ow-input-group--invalid:focus-within {
+    border-color: var(--ow-danger-solid);
+    box-shadow: var(--ow-shadow-focus-danger);
+}
+
+.ow-input-group--disabled {
+    cursor: not-allowed;
+    opacity: 0.62;
+}
+
+.ow-input-group__input {
+    min-width: 0;
+    height: 100%;
+    flex: 1;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    line-height: 1.45;
+    outline: 0;
+}
+
+.ow-input-group__input::placeholder {
+    color: var(--ow-text-muted);
+    opacity: 1;
+}
+
+.ow-input-group__input:disabled {
+    cursor: not-allowed;
+}
+
+.ow-input-group__input[type="search"]::-webkit-search-cancel-button,
+.ow-input-group__input[type="search"]::-webkit-search-decoration {
+    appearance: none;
+}
+
+.ow-input-group__addon {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--ow-space-2xs);
+    color: var(--ow-text-muted);
+    white-space: nowrap;
+}

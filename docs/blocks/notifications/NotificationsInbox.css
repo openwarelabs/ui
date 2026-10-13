@@ -1,0 +1,339 @@
+.notifications-inbox,
+.notifications-inbox *,
+.notifications-inbox *::before,
+.notifications-inbox *::after {
+    box-sizing: border-box;
+}
+
+/* A top bar with the bell, over the Deploys page. */
+.notifications-inbox {
+    display: flex;
+    height: 100dvh;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--ow-canvas);
+    color: var(--ow-text);
+    font-size: 14px;
+}
+
+.notifications-inbox__bar {
+    display: flex;
+    height: 56px;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    padding: 0 16px 0 20px;
+}
+
+.notifications-inbox__brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-right: 16px;
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.01em;
+}
+
+.notifications-inbox__mark {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background: linear-gradient(180deg, var(--ow-brand-500), var(--ow-brand-700));
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
+}
+
+.notifications-inbox__nav {
+    display: flex;
+    flex: 1;
+    gap: 2px;
+}
+
+.notifications-inbox__nav-item {
+    border-radius: var(--ow-radius-lg);
+    padding: 6px 10px;
+    color: var(--ow-text-muted);
+    font-size: 13.5px;
+    font-weight: var(--ow-weight-control);
+    text-decoration: none;
+    transition: color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.notifications-inbox__nav-item:hover {
+    color: var(--ow-text);
+}
+
+.notifications-inbox__nav-item:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.notifications-inbox__nav-item[aria-current="page"] {
+    background: var(--ow-surface);
+    color: var(--ow-text);
+    box-shadow: var(--ow-shadow-control);
+}
+
+/* The bell, with the unread count cut out of its corner. */
+.notifications-inbox__bell {
+    position: relative;
+}
+
+.notifications-inbox__bell[aria-expanded="true"] {
+    background: var(--ow-surface);
+    box-shadow: var(--ow-shadow-control);
+}
+
+.notifications-inbox__count.ow-badge {
+    position: absolute;
+    top: 2px;
+    right: 1px;
+    min-width: 18px;
+    min-height: 18px;
+    border: 2px solid var(--ow-canvas);
+    background: var(--ow-primary);
+    padding: 0 4px;
+    color: var(--ow-on-primary);
+    font-size: 10.5px;
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+}
+
+.notifications-inbox__bell[aria-expanded="true"] .notifications-inbox__count.ow-badge {
+    border-color: var(--ow-surface);
+}
+
+.notifications-inbox__me {
+    margin-left: 6px;
+}
+
+/* The popover: edge-to-edge rows, so its own padding goes. */
+.notifications-inbox__popover.ow-popover {
+    gap: 0;
+    padding: 0;
+}
+
+.notifications-inbox__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-md);
+    padding: 10px 8px 4px 16px;
+}
+
+.notifications-inbox__title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.notifications-inbox__tabs.ow-tabs {
+    gap: 0;
+}
+
+.notifications-inbox__tabs .ow-tabs__list {
+    padding: 0 16px;
+}
+
+.notifications-inbox__tab-count {
+    min-width: 18px;
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-surface-muted);
+    padding: 1px 5px;
+    color: var(--ow-text-muted);
+    font-size: 11.5px;
+    font-weight: var(--ow-weight-emphasis);
+    font-variant-numeric: tabular-nums;
+}
+
+.notifications-inbox__list {
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+}
+
+.notifications-inbox__item {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--ow-space-lg);
+    border-radius: var(--ow-radius-form);
+    padding: 10px 28px 10px 10px;
+    color: inherit;
+    text-decoration: none;
+    transition: background-color var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.notifications-inbox__item:hover {
+    background: var(--ow-hover);
+}
+
+.notifications-inbox__item:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
+
+.notifications-inbox__agent {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-primary-border);
+    border-radius: 50%;
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.notifications-inbox__agent--danger {
+    border-color: var(--ow-danger-border);
+    background: var(--ow-danger-surface);
+    color: var(--ow-danger-text);
+}
+
+.notifications-inbox__text {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+    gap: 3px;
+}
+
+.notifications-inbox__what {
+    color: var(--ow-text-muted);
+    line-height: 1.4;
+}
+
+.notifications-inbox__what strong {
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.notifications-inbox__quote {
+    display: -webkit-box;
+    overflow: hidden;
+    border-left: 2px solid var(--ow-border-strong);
+    margin: 3px 0 1px;
+    padding-left: 10px;
+    color: var(--ow-text-soft);
+    font-size: 13px;
+    line-height: 1.45;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.notifications-inbox__meta {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+}
+
+.notifications-inbox__unread {
+    position: absolute;
+    top: 18px;
+    right: 12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ow-brass);
+}
+
+.notifications-inbox__empty {
+    margin: 0;
+    padding: 40px 16px;
+    color: var(--ow-text-muted);
+    text-align: center;
+}
+
+.notifications-inbox__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-md);
+    border-top: 1px solid var(--ow-border);
+    padding: 6px 8px 6px 16px;
+    font-size: 13px;
+}
+
+/* The page under the popover. */
+.notifications-inbox__panel {
+    display: flex;
+    min-height: 0;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--ow-space-4xl);
+    margin: 0 8px;
+    border: 1px solid var(--ow-border);
+    border-bottom: 0;
+    border-radius: var(--ow-radius-panel) var(--ow-radius-panel) 0 0;
+    background: var(--ow-surface);
+    padding: 28px 32px;
+}
+
+.notifications-inbox__page-title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+.notifications-inbox__page-subtitle {
+    margin: 4px 0 0;
+    color: var(--ow-text-muted);
+}
+
+.notifications-inbox__deploys {
+    margin: 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    padding: 0;
+    list-style: none;
+}
+
+.notifications-inbox__deploy {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) auto;
+    align-items: center;
+    gap: var(--ow-space-2xl);
+    padding: 13px 18px;
+}
+
+.notifications-inbox__deploy + .notifications-inbox__deploy {
+    border-top: 1px solid var(--ow-border);
+}
+
+.notifications-inbox__project {
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.notifications-inbox__branch {
+    overflow: hidden;
+    color: var(--ow-text-muted);
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+    .notifications-inbox__bar {
+        padding: 0 10px 0 16px;
+    }
+    .notifications-inbox__nav {
+        display: none;
+    }
+    .notifications-inbox__brand {
+        flex: 1;
+    }
+    .notifications-inbox__panel {
+        padding: 22px 16px;
+    }
+    .notifications-inbox__deploy {
+        grid-template-columns: minmax(0, 1fr) auto;
+        padding: 12px 14px;
+    }
+    .notifications-inbox__branch {
+        display: none;
+    }
+}

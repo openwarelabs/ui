@@ -1,0 +1,85 @@
+/* NavList: the settings sidebar's items; the current one is raised on a surface. */
+.ow-nav {
+    display: grid;
+    align-content: start;
+    gap: var(--ow-space-2xs);
+}
+
+.ow-nav--horizontal {
+    display: flex;
+    overflow-x: auto;
+}
+
+.ow-nav__heading {
+    padding: var(--ow-space-xs) var(--ow-space-sm) var(--ow-space-sm);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-control);
+}
+
+.ow-nav__item {
+    display: flex;
+    text-decoration: none;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    margin: 0;
+    border: 0;
+    border-radius: var(--ow-radius-lg);
+    background: transparent;
+    padding: var(--ow-space-xs) var(--ow-space-sm);
+    color: var(--ow-text-soft);
+    font: inherit;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    transition-property: color, background-color, box-shadow;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-nav__item:hover {
+    background: color-mix(in srgb, var(--ow-surface) 60%, transparent);
+}
+
+.ow-nav__item:focus-visible {
+    box-shadow: 0 0 0 2px var(--ow-focus-ring);
+}
+
+.ow-nav__item--active,
+.ow-nav__item--active:hover {
+    background: var(--ow-surface);
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+    box-shadow: var(--ow-shadow-control), 0 0 0 1px var(--ow-border);
+}
+
+.ow-nav__item--active:focus-visible {
+    box-shadow: var(--ow-shadow-control), 0 0 0 2px var(--ow-focus-ring);
+}
+
+.ow-nav__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    color: var(--ow-icon);
+}
+
+.ow-nav__item--active .ow-nav__icon {
+    color: var(--ow-primary-text);
+}
+
+.ow-nav__label {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ow-nav__end {
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-regular);
+}

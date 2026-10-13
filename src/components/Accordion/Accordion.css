@@ -1,0 +1,168 @@
+/* Disclosure and Accordion: Commandr's change review header, a chevron that turns as the panel opens. */
+.ow-disclosure,
+.ow-accordion--bordered,
+.ow-accordion--separated .ow-accordion__item {
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    color: var(--ow-text);
+}
+
+.ow-accordion--separated {
+    display: grid;
+    gap: var(--ow-space-sm);
+}
+
+.ow-accordion--bordered .ow-accordion__item + .ow-accordion__item {
+    border-top: 1px solid var(--ow-border);
+}
+
+.ow-disclosure__header {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    padding-right: var(--ow-space-md);
+}
+
+.ow-disclosure__heading {
+    min-width: 0;
+    flex: 1;
+    margin: 0;
+    font: inherit;
+}
+
+.ow-disclosure__trigger {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    margin: 0;
+    border: 0;
+    background: transparent;
+    padding: var(--ow-space-md) var(--ow-space-lg);
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.ow-disclosure__trigger:focus-visible {
+    border-radius: var(--ow-radius-form);
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -4px;
+}
+
+.ow-disclosure__trigger:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.ow-disclosure__chevron {
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+    transition: transform var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+[data-open="true"] > .ow-disclosure__header .ow-disclosure__chevron {
+    transform: rotate(90deg);
+}
+
+.ow-disclosure__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+}
+
+.ow-disclosure__titles {
+    display: grid;
+    min-width: 0;
+    gap: var(--ow-space-3xs);
+}
+
+.ow-disclosure__title {
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.3;
+}
+
+.ow-disclosure__subtitle {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.ow-disclosure__actions {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--ow-space-xs);
+}
+
+/* The panel animates its height with a 0fr → 1fr grid row. */
+.ow-disclosure__panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition:
+        grid-template-rows var(--ow-duration-base) var(--ow-ease-standard),
+        visibility 0s linear var(--ow-duration-base);
+}
+
+[data-open="true"] > .ow-disclosure__panel {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition:
+        grid-template-rows var(--ow-duration-panel) var(--ow-ease-emphasized),
+        visibility 0s;
+}
+
+.ow-disclosure__clip {
+    min-height: 0;
+    overflow: hidden;
+}
+
+.ow-disclosure__content {
+    padding: 0 var(--ow-space-lg) var(--ow-space-lg) 38px;
+    color: var(--ow-text-soft);
+    font-size: 14px;
+    line-height: 1.55;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition:
+        opacity var(--ow-duration-fast) var(--ow-ease-standard),
+        transform var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+[data-open="true"] > .ow-disclosure__panel .ow-disclosure__content {
+    opacity: 1;
+    transform: none;
+    transition:
+        opacity var(--ow-duration-slow) var(--ow-ease-standard) 60ms,
+        transform var(--ow-duration-panel) var(--ow-ease-emphasized);
+}
+
+.ow-disclosure__content > :first-child {
+    margin-top: 0;
+}
+
+.ow-disclosure__content > :last-child {
+    margin-bottom: 0;
+}
+
+/* Plain: no card, just the toggle. */
+.ow-disclosure--plain {
+    overflow: visible;
+    border: 0;
+    background: transparent;
+}
+
+.ow-disclosure--plain .ow-disclosure__trigger {
+    width: auto;
+    padding: var(--ow-space-xs) var(--ow-space-2xs);
+    color: var(--ow-text-soft);
+}
+
+.ow-disclosure--plain .ow-disclosure__content {
+    padding: var(--ow-space-xs) 0 0 26px;
+}

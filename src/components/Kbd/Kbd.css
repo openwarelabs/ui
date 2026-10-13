@@ -1,0 +1,30 @@
+/* Kbd and inline Code, both in the mono face. */
+.ow-kbd {
+    display: inline-flex;
+    height: 22px;
+    min-width: 22px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border-strong);
+    border-bottom-width: 2px;
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-key-ground);
+    padding: 0 var(--ow-space-xs);
+    color: var(--ow-text-soft);
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+    font-weight: var(--ow-weight-control);
+    line-height: 1;
+    white-space: nowrap;
+    vertical-align: 1px;
+}
+
+.ow-code {
+    border-radius: var(--ow-radius-code);
+    background: var(--ow-code-ground);
+    padding: 1px 5px;
+    color: var(--ow-text);
+    font-family: var(--ow-font-mono);
+    font-size: 0.88em;
+    white-space: nowrap;
+}

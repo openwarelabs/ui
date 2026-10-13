@@ -1,0 +1,323 @@
+.cta-split,
+.cta-split *,
+.cta-split *::before,
+.cta-split *::after {
+    box-sizing: border-box;
+}
+
+.cta-split {
+    overflow: hidden;
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.cta-split__inner {
+    display: grid;
+    max-width: var(--ow-page-max);
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: center;
+    gap: 72px;
+    margin: 0 auto;
+}
+
+.cta-split__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ow-space-lg);
+    margin-top: 32px;
+}
+
+.cta-split__points {
+    display: grid;
+    gap: 10px;
+    margin: 32px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.cta-split__points li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ow-text-soft);
+    font-size: 14px;
+}
+
+.cta-split__points svg {
+    flex-shrink: 0;
+    color: var(--ow-primary-text);
+}
+
+/* The product: a pull request an agent opened, on a dot-grid ground, with the deploy that followed. */
+.cta-split .cta-split__visual {
+    position: relative;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-card);
+    background: var(--ow-canvas);
+    padding: 48px 44px 72px;
+}
+
+.cta-split__pr {
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    box-shadow: var(--ow-shadow-lift);
+    font-size: 13px;
+}
+
+.cta-split__pr-head {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 4px 12px;
+    padding: 18px 20px 16px;
+}
+
+.cta-split__pr-icon {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    grid-row: span 2;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--ow-radius-lg);
+    background: var(--ow-success-surface);
+    color: var(--ow-success-text);
+}
+
+.cta-split__pr-title {
+    overflow: hidden;
+    color: var(--ow-text);
+    font-size: 14.5px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cta-split__pr-meta {
+    display: flex;
+    min-width: 0;
+    grid-column: 2;
+    align-items: center;
+    gap: 6px;
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+    white-space: nowrap;
+}
+
+.cta-split__pr-by {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.cta-split__pr-meta .ow-avatar {
+    flex-shrink: 0;
+}
+
+.cta-split__pr-head .ow-badge {
+    grid-row: 1;
+    grid-column: 3;
+}
+
+.cta-split__checks {
+    display: grid;
+    border-top: 1px solid var(--ow-border);
+    padding: 6px 0;
+}
+
+.cta-split__check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 20px;
+    color: var(--ow-text);
+}
+
+.cta-split__check svg {
+    flex-shrink: 0;
+    color: var(--ow-success-solid);
+}
+
+.cta-split__check-name {
+    flex: 1;
+}
+
+.cta-split__check-result {
+    color: var(--ow-text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.cta-split__diff {
+    margin: 0 20px;
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-lg);
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+}
+
+.cta-split__diff-file {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid var(--ow-border);
+    background: var(--ow-surface-muted);
+    padding: 7px 12px;
+    color: var(--ow-text-soft);
+}
+
+.cta-split__diff-stat {
+    color: var(--ow-text-muted);
+    white-space: nowrap;
+}
+
+.cta-split__diff-stat b {
+    color: var(--ow-success-text);
+    font-weight: var(--ow-weight-regular);
+}
+
+.cta-split__diff-stat i {
+    color: var(--ow-danger-text);
+    font-style: normal;
+}
+
+.cta-split__line {
+    display: block;
+    overflow: hidden;
+    padding: 3px 12px;
+    color: var(--ow-text-soft);
+    text-overflow: ellipsis;
+    white-space: pre;
+}
+
+.cta-split__line[data-change="add"] {
+    background: var(--ow-success-surface);
+    color: var(--ow-success-text);
+}
+
+.cta-split__line[data-change="remove"] {
+    background: var(--ow-danger-surface);
+    color: var(--ow-danger-text);
+}
+
+.cta-split__pr-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 16px;
+    border-top: 1px solid var(--ow-border);
+    padding: 14px 20px;
+}
+
+.cta-split__approval {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 8px;
+    color: var(--ow-text-soft);
+    white-space: nowrap;
+}
+
+.cta-split__approval svg {
+    color: var(--ow-success-solid);
+}
+
+/* Drawn, not pressable: the vignette holds nothing focusable. */
+.cta-split__fake-button {
+    pointer-events: none;
+}
+
+/* Placed against the dot grid's content box, so it overlaps the pull request's lower edge and the frame. */
+.cta-split__deploy {
+    position: absolute;
+    bottom: -46px;
+    left: -68px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: 12px 16px 12px 12px;
+    box-shadow: var(--ow-shadow-menu);
+    font-size: 13px;
+}
+
+.cta-split__deploy-icon {
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--ow-radius-lg);
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.cta-split__deploy-title {
+    display: block;
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.cta-split__deploy-meta {
+    display: block;
+    margin-top: 1px;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+}
+
+@media (max-width: 1024px) {
+    .cta-split__inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 56px;
+    }
+    .cta-split .cta-split__visual {
+        max-width: 640px;
+    }
+    .cta-split__deploy {
+        left: -20px;
+    }
+}
+
+@media (max-width: 760px) {
+    .cta-split {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .cta-split__actions {
+        flex-direction: column;
+    }
+    .cta-split .cta-split__visual {
+        padding: 24px 14px 70px;
+    }
+    .cta-split__pr-head {
+        grid-template-columns: auto minmax(0, 1fr);
+        padding: 16px 14px 14px;
+    }
+    .cta-split__pr-head .ow-badge,
+    .cta-split__pr-by {
+        display: none;
+    }
+    .cta-split__check {
+        padding: 7px 14px;
+    }
+    .cta-split__diff {
+        margin: 0 14px;
+    }
+    .cta-split__pr-foot {
+        padding: 12px 14px;
+    }
+    .cta-split__fake-button {
+        display: none;
+    }
+    .cta-split__deploy {
+        right: 6px;
+        bottom: -56px;
+        left: 6px;
+    }
+}
