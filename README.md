@@ -50,10 +50,11 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 
 ## Components
 
-70 components, each with a page in the docs.
+71 components, each with a page in the docs.
 
 | Group | Components |
 | --- | --- |
+| Typography | `Text` (each style on the Typography page as a variant: hero to caption, code and kbd; tones, `truncate`, `as`) |
 | Buttons | `Button` (primary, secondary, ghost, danger; sm, md, lg; `loading`; `shape="pill"`), `buttonClassName()` for links, `ButtonGroup`, `ToggleButton`, `CloseButton`, `CopyButton`, `SegmentedControl`, `ChoiceCard` |
 | Forms | `Field`, `Fieldset`, `Input` (start and end content), `SearchField`, `NumberField`, `InputOTP`, `Textarea` (`autoGrow`), `Select`, `Combobox`, `Checkbox`, `CheckboxGroup`, `RadioGroup` (plain or cards), `Switch`, `Slider` (one value or a range), `ColorPicker`, `ColorField`, `FileDropZone` |
 | Dates | `Calendar`, `DatePicker` |
