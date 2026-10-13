@@ -6,7 +6,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "ColorPicker",
-    category: "Forms",
+    category: "Pickers",
     description:
         "Picks a colour: a saturation area, a hue slider, a hex field, an eyedropper and swatches. Built on react-colorful.",
     source: "components/ColorPicker/ColorPicker.tsx",

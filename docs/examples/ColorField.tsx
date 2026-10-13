@@ -6,7 +6,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "ColorField",
-    category: "Forms",
+    category: "Inputs",
     description:
         "A form field that shows a colour and its hex, and opens a ColorPicker in a popover.",
     source: "components/ColorPicker/ColorPicker.tsx",

@@ -4,7 +4,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "CodeBlock",
-    category: "Data display",
+    category: "Typography",
     description:
         "A block of code on a dark ground, with a title bar, line numbers and a copy button.",
     source: "components/CodeBlock/CodeBlock.tsx",

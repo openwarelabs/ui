@@ -31,11 +31,11 @@ export function Field({ label, children, hint, error, className }: FieldProps) {
             .filter(Boolean)
             .join(" ") || undefined;
 
-    // Our own controls draw the invalid state from `isInvalid`; native elements get aria-invalid.
+    // Our own controls draw the invalid state from `isInvalid`; native elements get aria-invalid. It's only passed
+    // when there's something to say, so a control without the prop (SegmentedControl) doesn't get it as an attribute.
+    const invalid = (child?.props.isInvalid as boolean | undefined) ?? (error ? true : undefined);
     const invalidProp =
-        child && typeof child.type !== "string"
-            ? { isInvalid: (child.props.isInvalid as boolean | undefined) ?? Boolean(error) }
-            : { "aria-invalid": error ? true : undefined };
+        child && typeof child.type !== "string" ? (invalid === undefined ? {} : { isInvalid: invalid }) : { "aria-invalid": error ? true : undefined };
 
     return (
         <div className={cx("ow-field", className)}>

@@ -62,13 +62,17 @@ export function ComponentsIndex() {
                     <Section id={slugify(group.category)} title={group.category}>
                         <div className="docs-index">
                             {group.docs.map((doc) => (
-                                <a key={doc.slug} className="docs-card" href={hrefOf.component(doc.slug)}>
+                                // The card is a box and its name the link, stretched over the card, so a preview that holds
+                                // a link (Link's own) doesn't end up inside another.
+                                <div key={doc.slug} className="docs-card">
                                     <Thumbnail doc={doc} />
                                     <span className="docs-card__body">
-                                        <span className="docs-card__name">{doc.meta.title}</span>
+                                        <a className="docs-card__name docs-card__link" href={hrefOf.component(doc.slug)}>
+                                            {doc.meta.title}
+                                        </a>
                                         <span className="docs-card__description">{doc.meta.description}</span>
                                     </span>
-                                </a>
+                                </div>
                             ))}
                         </div>
                     </Section>

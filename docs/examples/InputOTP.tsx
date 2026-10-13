@@ -6,7 +6,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "InputOTP",
-    category: "Forms",
+    category: "Inputs",
     description:
         "A one-time code in separate boxes. Typing moves forward, Backspace moves back, and pasting fills them all.",
     source: "components/InputOTP/InputOTP.tsx",

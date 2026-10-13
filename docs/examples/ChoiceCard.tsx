@@ -5,7 +5,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "ChoiceCard",
-    category: "Buttons",
+    category: "Choices",
     description:
         "A large, card-shaped button for picking between a few ways to start, such as on an empty state.",
     source: "components/ChoiceCard/ChoiceCard.tsx",

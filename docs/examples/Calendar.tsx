@@ -6,7 +6,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "Calendar",
-    category: "Dates",
+    category: "Pickers",
     description:
         "A month grid for picking a date. Today has a brass dot; the chosen day is filled with the primary colour.",
     source: "components/Calendar/Calendar.tsx",

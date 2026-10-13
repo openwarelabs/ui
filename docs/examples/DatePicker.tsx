@@ -6,7 +6,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "DatePicker",
-    category: "Dates",
+    category: "Pickers",
     description:
         "A field that opens a Calendar. Choosing a day closes it; Escape closes it without a change.",
     source: "components/Calendar/DatePicker.tsx",

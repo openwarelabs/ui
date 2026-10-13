@@ -54,14 +54,15 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 
 | Group | Components |
 | --- | --- |
-| Typography | `Text` (each style on the Typography page as a variant: hero to caption, code and kbd; tones, `truncate`, `as`) |
-| Buttons | `Button` (primary, secondary, ghost, danger; sm, md, lg; `loading`; `shape="pill"`), `buttonClassName()` for links, `ButtonGroup`, `ToggleButton`, `CloseButton`, `CopyButton`, `SegmentedControl`, `ChoiceCard` |
-| Forms | `Field`, `Fieldset`, `Input` (start and end content), `SearchField`, `NumberField`, `InputOTP`, `Textarea` (`autoGrow`), `Select`, `Combobox`, `Checkbox`, `CheckboxGroup`, `RadioGroup` (plain or cards), `Switch`, `Slider` (one value or a range), `ColorPicker`, `ColorField`, `FileDropZone` |
-| Dates | `Calendar`, `DatePicker` |
+| Typography | `Text` (each style on the Typography page as a variant: hero to caption, code and kbd; tones, `truncate`, `as`), `Link`, `Kbd`, `Code`, `CodeBlock`, `Snippet` |
+| Actions | `Button` (primary, secondary, ghost, danger; sm, md, lg; `loading`; `shape="pill"`), `buttonClassName()` for links, `ButtonGroup`, `CloseButton`, `CopyButton`, `ToggleButton`, `SegmentedControl` |
+| Inputs | `Field`, `Fieldset`, `Input` (start and end content), `Textarea` (`autoGrow`), `NumberField`, `SearchField`, `InputOTP`, `ColorField` |
+| Choices | `Checkbox`, `CheckboxGroup`, `RadioGroup` (plain or cards), `Switch`, `Select`, `Combobox`, `Slider` (one value or a range), `ChoiceCard` |
+| Pickers | `Calendar`, `DatePicker`, `ColorPicker`, `FileDropZone` |
 | Feedback | `Alert`, `Badge`, `ProgressBar`, `ProgressCircle`, `Spinner`, `Skeleton`, `SkeletonRows`, `Toaster` + `toast()` (sonner: stacked, swipeable, with actions and promises), `Tooltip` |
 | Overlays | `Dialog`, `ConfirmDialog`, `Drawer`, `Popover`, `Menu` + `MenuItem`, `CommandPalette` |
-| Navigation | `Tabs`, `Accordion`, `Disclosure`, `Breadcrumbs`, `Link`, `Pagination`, `Steps`, `NavList` + `NavItem` |
-| Data display | `Table` (sorting, selection), `Stat`, `FileTree`, `EmptyState`, `Tag`, `ColorSwatch`, `Avatar`, `AvatarGroup`, `User`, `Kbd`, `Code`, `CodeBlock`, `Snippet` |
+| Navigation | `Tabs`, `Accordion`, `Disclosure`, `Breadcrumbs`, `Pagination`, `Steps`, `NavList` + `NavItem` |
+| Data display | `Table` (sorting, selection), `Stat`, `FileTree`, `EmptyState`, `Tag`, `ColorSwatch`, `Avatar`, `AvatarGroup`, `User` |
 | Layout | `Card`, `SettingsRow`, `Stack`, `Separator`, `ScrollShadow`, `VisuallyHidden` |
 | Marketing | `SiteHeader`, `SectionHeading`, `Chip`, `DotGrid` |
 

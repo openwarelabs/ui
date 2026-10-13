@@ -4,7 +4,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "CopyButton",
-    category: "Buttons",
+    category: "Actions",
     description: "Copies a value and says so: the icon turns into a check for two seconds.",
     source: "components/CodeBlock/CodeBlock.tsx",
     notes: [

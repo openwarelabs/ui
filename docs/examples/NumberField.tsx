@@ -6,7 +6,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "NumberField",
-    category: "Forms",
+    category: "Inputs",
     description: "A number with − and + buttons either side, clamped to a minimum and maximum.",
     source: "components/NumberField/NumberField.tsx",
     keyboard: [

@@ -6,7 +6,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "SearchField",
-    category: "Forms",
+    category: "Inputs",
     description:
         "A search box with a magnifier and a clear button that appears once there's something to clear.",
     source: "components/SearchField/SearchField.tsx",

@@ -1,6 +1,6 @@
 import type { ComponentType } from "react";
 
-export const categories = ["Typography", "Buttons", "Forms", "Dates", "Feedback", "Overlays", "Navigation", "Data display", "Layout", "Marketing"] as const;
+export const categories = ["Typography", "Actions", "Inputs", "Choices", "Pickers", "Feedback", "Overlays", "Navigation", "Data display", "Layout", "Marketing"] as const;
 
 export type Category = (typeof categories)[number];
 
@@ -23,6 +23,8 @@ export interface DocMeta {
     source: string;
     /** Other pages to point to at the end. */
     related?: string[];
+    /** The release that added it, e.g. "0.3.0": the sidebar marks it new while that's the current version. */
+    since?: string;
 }
 
 /** How an example's preview box is laid out; set as `MyExample.layout = {…}` beside it. */

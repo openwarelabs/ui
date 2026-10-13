@@ -6,7 +6,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "Checkbox",
-    category: "Forms",
+    category: "Choices",
     description:
         "A real checkbox, restyled. Give it children for its label, or wrap the bare box in your own.",
     source: "components/Checkbox/Checkbox.tsx",

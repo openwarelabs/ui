@@ -7,7 +7,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "FileDropZone",
-    category: "Forms",
+    category: "Pickers",
     description:
         "Commandr's folder drop zone, for files: drop them on it, or press it to pick them. It checks type and size.",
     source: "components/FileDropZone/FileDropZone.tsx",

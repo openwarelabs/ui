@@ -6,7 +6,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "Switch",
-    category: "Forms",
+    category: "Choices",
     description:
         "A small on/off switch for a setting that takes effect at once, with no save button.",
     source: "components/Switch/Switch.tsx",

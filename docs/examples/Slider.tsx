@@ -6,7 +6,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "Slider",
-    category: "Forms",
+    category: "Choices",
     description: "Picks a number, or a range, by dragging. It's built on native range inputs.",
     source: "components/Slider/Slider.tsx",
     keyboard: [

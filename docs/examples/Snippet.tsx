@@ -4,7 +4,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "Snippet",
-    category: "Data display",
+    category: "Typography",
     description:
         "One line to copy, usually a command, with a prompt in front and a copy button at the end.",
     source: "components/CodeBlock/CodeBlock.tsx",

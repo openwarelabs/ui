@@ -7,7 +7,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "SegmentedControl",
-    category: "Buttons",
+    category: "Actions",
     description:
         "Two to five options in a well, with the chosen one raised. It switches a view or a filter at once.",
     source: "components/SegmentedControl/SegmentedControl.tsx",

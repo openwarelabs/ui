@@ -7,7 +7,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "Textarea",
-    category: "Forms",
+    category: "Inputs",
     description:
         "A multi-line text field, 72px tall at least, that can grow line by line with what's typed.",
     source: "components/Textarea/Textarea.tsx",

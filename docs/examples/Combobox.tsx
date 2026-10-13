@@ -6,7 +6,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "Combobox",
-    category: "Forms",
+    category: "Choices",
     description:
         "A text field that suggests options as you type, for picking from a long list: a country, a repository, a person.",
     source: "components/Combobox/Combobox.tsx",

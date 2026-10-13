@@ -1,15 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { Badge, Button, CommandPalette, Drawer, Kbd, NavItem, NavList, Popover, ScrollShadow, SegmentedControl, Toaster, type Command } from "@openwarelabs/ui";
+import { Badge, Button, CommandPalette, Drawer, Kbd, Popover, ScrollShadow, SegmentedControl, Toaster, type Command } from "@openwarelabs/ui";
 import { ArrowUpRight, Book, Component, LayoutTemplate, Menu as MenuIcon, Monitor, Moon, Search, Sun } from "lucide-react";
 
-import { blockCategories, blockGroups, blockVariantCount } from "./blocks";
+import { blockCategories } from "./blocks";
 import { BrandPicker } from "./BrandPicker";
 import { ComponentPage, repository } from "./ComponentPage";
 import { componentDocs, componentsInBlocks, guides, hrefOf, listedComponents, slugify, type Route } from "./content";
 import { useMinWidth, useRoute, useTheme, type ThemeChoice } from "./hooks";
 import { RouteProvider } from "./Page";
-import { categories } from "./types";
+import { Sidebar, sectionLinks as sections, sectionOf } from "./Sidebar";
 import { version } from "./version";
 import { BlockCategoryPage, BlocksIndex } from "../pages/Blocks";
 import { ComponentsIndex } from "../pages/ComponentsIndex";
@@ -19,103 +19,6 @@ import { Introduction } from "../pages/Introduction";
 import { Theming } from "../pages/Theming";
 import { Tokens } from "../pages/Tokens";
 import { Typography } from "../pages/Typography";
-
-type SectionName = "docs" | "components" | "blocks";
-
-const sectionOf = (route: Route): SectionName =>
-    route.kind === "blocks" || route.kind === "block-category" ? "blocks" : route.kind === "components" || route.kind === "component" ? "components" : "docs";
-
-const sections: Array<{ name: SectionName; label: string; href: string }> = [
-    { name: "docs", label: "Docs", href: hrefOf.guide("introduction") },
-    { name: "components", label: "Components", href: hrefOf.components() },
-    { name: "blocks", label: "Blocks", href: hrefOf.blocks() },
-];
-
-function BlocksSidebar({ route, onNavigate }: { route: Route; onNavigate?: () => void }) {
-    return (
-        <>
-            <NavList label="Blocks overview" heading="Blocks">
-                <NavItem href={hrefOf.blocks()} active={route.kind === "blocks"} onClick={onNavigate} end={blockVariantCount}>
-                    All blocks
-                </NavItem>
-            </NavList>
-            {blockGroups.map((group) => (
-                <NavList key={group.name} label={group.name} heading={group.name}>
-                    {blockCategories
-                        .filter((category) => category.group === group.name)
-                        .map((category) => (
-                            <NavItem
-                                key={category.slug}
-                                href={hrefOf.blocks(category.slug)}
-                                active={route.kind === "block-category" && route.category === category}
-                                onClick={onNavigate}
-                            >
-                                {category.title}
-                            </NavItem>
-                        ))}
-                </NavList>
-            ))}
-        </>
-    );
-}
-
-/** The guides and components, or the blocks: whichever part of the docs the page is in. */
-function Sidebar({ route, onNavigate, showSections = false }: { route: Route; onNavigate?: () => void; showSections?: boolean }) {
-    const isGuide = (slug: string) => route.kind === "guide" && route.slug === slug;
-    const section = sectionOf(route);
-    const switcher = showSections ? (
-        <NavList label="Sections" heading="Sections">
-            {sections.map((entry) => (
-                <NavItem key={entry.name} href={entry.href} active={section === entry.name && route.kind !== "missing"} onClick={onNavigate}>
-                    {entry.label}
-                </NavItem>
-            ))}
-        </NavList>
-    ) : null;
-    if (section === "blocks") {
-        return (
-            <div className="docs-sidebar">
-                {switcher}
-                <BlocksSidebar route={route} onNavigate={onNavigate} />
-            </div>
-        );
-    }
-    return (
-        <div className="docs-sidebar">
-            {switcher}
-            <NavList label="Getting started" heading="Getting started">
-                {guides.map((guide) => (
-                    <NavItem key={guide.slug} href={hrefOf.guide(guide.slug)} active={isGuide(guide.slug)} onClick={onNavigate}>
-                        {guide.title}
-                    </NavItem>
-                ))}
-            </NavList>
-            <NavList label="Components overview" heading="Components">
-                <NavItem href={hrefOf.components()} active={route.kind === "components"} onClick={onNavigate} end={listedComponents.length}>
-                    All components
-                </NavItem>
-            </NavList>
-            {categories.map((category) => {
-                const docs = listedComponents.filter((doc) => doc.meta.category === category);
-                if (!docs.length) return null;
-                return (
-                    <NavList key={category} label={category} heading={category}>
-                        {docs.map((doc) => (
-                            <NavItem
-                                key={doc.slug}
-                                href={hrefOf.component(doc.slug)}
-                                active={route.kind === "component" && route.doc === doc}
-                                onClick={onNavigate}
-                            >
-                                {doc.meta.title}
-                            </NavItem>
-                        ))}
-                    </NavList>
-                );
-            })}
-        </div>
-    );
-}
 
 /** One key per page, not per section, so moving between pages animates but jumping to a heading doesn't. */
 const pageKey = (route: Route) =>
@@ -324,7 +227,7 @@ export function App() {
                 {wide ? (
                     <aside className="docs-aside" aria-label="Documentation">
                         <ScrollShadow className="docs-aside__scroll" size={24}>
-                            <Sidebar route={route} />
+                            <Sidebar route={route} onSearch={() => setSearchOpen(true)} />
                         </ScrollShadow>
                     </aside>
                 ) : null}
@@ -335,7 +238,15 @@ export function App() {
                 </main>
             </div>
             <Drawer open={navOpen} onClose={() => setNavOpen(false)} side="left" size={300} title="Openware UI">
-                <Sidebar route={route} onNavigate={() => setNavOpen(false)} showSections />
+                <Sidebar
+                    route={route}
+                    onNavigate={() => setNavOpen(false)}
+                    onSearch={() => {
+                        setNavOpen(false);
+                        setSearchOpen(true);
+                    }}
+                    showSections
+                />
             </Drawer>
             <CommandPalette open={searchOpen} onClose={() => setSearchOpen(false)} commands={commands} placeholder="Search components, blocks, examples and guides…" />
             <Toaster />

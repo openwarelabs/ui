@@ -15,6 +15,7 @@ export const meta: DocMeta = {
         "The display styles (hero, page-title, section-title, heading) shrink on screens under 760px wide.",
     ],
     related: ["SectionHeading", "Code", "Kbd"],
+    since: "0.3.0",
 };
 
 /** The display styles, for marketing pages and long reading. */

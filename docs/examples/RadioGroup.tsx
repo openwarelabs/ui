@@ -6,7 +6,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "RadioGroup",
-    category: "Forms",
+    category: "Choices",
     description:
         "One choice from a few visible options. Each option is a native radio, so the arrow keys move between them.",
     source: "components/RadioGroup/RadioGroup.tsx",

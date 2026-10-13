@@ -10,7 +10,7 @@
 
 :root {
     --docs-header: 56px;
-    --docs-aside: 264px;
+    --docs-aside: 280px;
 }
 
 html {
@@ -224,16 +224,278 @@ body {
     padding: var(--ow-space-xs) var(--ow-space-lg) var(--ow-space-7xl);
 }
 
-.docs-sidebar {
+/* The sidebar: a search button, then groups under small-capital headings. Components sit two to a line. */
+.docs-side {
     display: grid;
-    gap: var(--ow-space-3xl);
+    /* minmax(0, 1fr) all the way down, so a long name truncates instead of widening the sidebar. */
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--ow-space-2xl);
 }
 
-.docs-sidebar .ow-nav__item {
-    min-height: 30px;
-    padding-top: 4px;
-    padding-bottom: 4px;
+.docs-side-search {
+    display: flex;
+    width: 100%;
+    height: 36px;
+    box-sizing: border-box;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-form);
+    background: var(--ow-surface);
+    padding: 0 var(--ow-space-xs) 0 var(--ow-space-md);
+    box-shadow: var(--ow-shadow-control);
+    color: var(--ow-text-muted);
+    font: inherit;
     font-size: 13.5px;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.docs-side-search:hover {
+    border-color: var(--ow-border-hover);
+}
+
+.docs-side-search:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.docs-side-search > svg {
+    flex-shrink: 0;
+    color: var(--ow-icon);
+}
+
+.docs-side-search__label {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.docs-side-group {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--ow-space-2xs);
+}
+
+.docs-side-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--ow-space-xs);
+}
+
+.docs-side-heading__count {
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--ow-weight-control);
+    letter-spacing: 0;
+}
+
+.docs-side-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.docs-side-list--two {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.docs-side-link {
+    display: flex;
+    min-height: 28px;
+    box-sizing: border-box;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    border-radius: var(--ow-radius-lg);
+    padding: 0 var(--ow-space-xs);
+    color: var(--ow-text-soft);
+    font-size: 13px;
+    text-decoration: none;
+    transition-property: color, background-color, box-shadow;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.docs-side-list--two .docs-side-link {
+    gap: var(--ow-space-xs);
+}
+
+.docs-side-link:hover {
+    background: color-mix(in srgb, var(--ow-surface) 60%, transparent);
+    color: var(--ow-text);
+}
+
+.docs-side-link:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--ow-focus-ring);
+}
+
+.docs-side-link[aria-current="page"] {
+    background: var(--ow-surface);
+    box-shadow: var(--ow-shadow-control), 0 0 0 1px var(--ow-border);
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.docs-side-link[aria-current="page"]:focus-visible {
+    box-shadow: var(--ow-shadow-control), 0 0 0 2px var(--ow-focus-ring);
+}
+
+.docs-side-link__label {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    align-items: center;
+    gap: var(--ow-space-xs);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.docs-side-link__icon {
+    flex-shrink: 0;
+    color: var(--ow-icon);
+}
+
+.docs-side-link__hint {
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--ow-weight-regular);
+}
+
+/* Brass marks what's new in this release. */
+.docs-side-new {
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-brass);
+}
+
+/* Blocks: taller rows, each with its category's thumbnail and a count of its blocks. */
+.docs-side-link:has(.mini, .docs-side-tile) {
+    min-height: 36px;
+    gap: var(--ow-space-md);
+    font-size: 13.5px;
+}
+
+.docs-side-tile {
+    display: flex;
+    width: 28px;
+    height: 20px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    color: var(--ow-icon);
+}
+
+.docs-side-count {
+    display: inline-flex;
+    min-width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-surface);
+    padding: 0 var(--ow-space-xs);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--ow-weight-control);
+}
+
+.docs-side-link[aria-current="page"] .docs-side-count {
+    border-color: var(--ow-primary-border);
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+/* The thumbnails: 2px bars, boxes and dots in tints of the text colour, inside a 28×20 tile. */
+.mini {
+    --mini-ink: color-mix(in oklab, var(--ow-text) 14%, transparent);
+    --mini-strong: color-mix(in oklab, var(--ow-text) 32%, transparent);
+    --mini-fill: color-mix(in oklab, var(--ow-text) 5%, transparent);
+    --mini-edge: color-mix(in oklab, var(--ow-text) 26%, transparent);
+    display: flex;
+    width: 28px;
+    height: 20px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-sm);
+    background: var(--ow-surface);
+    padding: 2px;
+    overflow: hidden;
+}
+
+.mini--current {
+    border-color: var(--ow-border-strong);
+}
+
+.mini span {
+    display: block;
+    box-sizing: border-box;
+    flex: none;
+}
+
+.mini .mini-ink {
+    border-radius: var(--ow-radius-pill);
+    background: var(--mini-ink);
+}
+
+.mini .mini-strong {
+    border-radius: var(--ow-radius-pill);
+    background: var(--mini-strong);
+}
+
+.mini .mini-square {
+    border-radius: 1px;
+}
+
+.mini .mini-round {
+    border-radius: var(--ow-radius-pill);
+}
+
+.mini .mini-box {
+    border-radius: 1px;
+    background: var(--mini-fill);
+    box-shadow: inset 0 0 0 1px var(--mini-edge);
+}
+
+.mini .mini-box.mini-round {
+    border-radius: var(--ow-radius-pill);
+}
+
+.mini .mini-rule {
+    width: 100%;
+    height: 1px;
+    background: var(--mini-ink);
+}
+
+.mini .mini-plate {
+    display: flex;
+    width: 100%;
+    height: 12px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+
+.mini .mini-on-plate {
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-surface);
 }
 
 .docs-panel {
@@ -745,6 +1007,7 @@ body {
 .docs-related__card,
 .docs-pager__link,
 .docs-card {
+    position: relative;
     display: grid;
     align-content: start;
     gap: var(--ow-space-2xs);
@@ -766,9 +1029,24 @@ body {
 
 .docs-related__card:focus-visible,
 .docs-pager__link:focus-visible,
-.docs-card:focus-visible {
+.docs-card:focus-visible,
+.docs-card:has(.docs-card__link:focus-visible) {
     outline: 2px solid var(--ow-focus-ring);
     outline-offset: 2px;
+}
+
+.docs-card__link {
+    color: inherit;
+    text-decoration: none;
+    outline: none;
+}
+
+/* The name's link covers the whole card. */
+.docs-card__link::after {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    content: "";
 }
 
 .docs-related__name {
