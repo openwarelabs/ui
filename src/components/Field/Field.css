@@ -24,3 +24,8 @@
     font-size: 14px;
     line-height: 1.4;
 }
+
+/* A checkbox in a Field with an error (the terms, say) takes the invalid field's border until it's ticked. */
+.ow-field .ow-checkbox__input[aria-invalid="true"]:not(:checked, :disabled) {
+    border-color: var(--ow-danger-line);
+}

@@ -1,0 +1,79 @@
+/* ListBox: Select's list on the page. It wears Select.css's .ow-listbox and .ow-option (rows, checkmarks, group
+   labels, sizes), so the two stay in step; this file only undoes the floating and adds the field states. */
+.ow-listbox.ow-listbox--standalone {
+    position: relative;
+    z-index: auto;
+    min-width: 0;
+    box-shadow: none;
+    overscroll-behavior: auto;
+    outline: 0;
+    transition-property: border-color, box-shadow, opacity;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-listbox--standalone .ow-option {
+    user-select: none;
+    transition: background-color var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+/* In a floating list the pointer moves the highlight; here hover is its own state, apart from the keyboard's. */
+.ow-listbox--standalone:not(.ow-listbox--disabled, .ow-listbox--readonly) .ow-option:not(.ow-option--disabled):hover {
+    background: var(--ow-hover);
+}
+
+.ow-listbox--readonly .ow-option {
+    cursor: default;
+}
+
+.ow-listbox--standalone.ow-listbox--focus-visible {
+    border-color: var(--ow-focus-border);
+    box-shadow: var(--ow-shadow-focus);
+}
+
+.ow-listbox--standalone.ow-listbox--invalid {
+    border-color: var(--ow-danger-line);
+}
+
+.ow-listbox--standalone.ow-listbox--invalid.ow-listbox--focus-visible {
+    border-color: var(--ow-danger-solid);
+    box-shadow: var(--ow-shadow-focus-danger);
+}
+
+.ow-listbox--standalone.ow-listbox--disabled {
+    cursor: not-allowed;
+    opacity: 0.62;
+}
+
+.ow-listbox--disabled .ow-option {
+    cursor: not-allowed;
+}
+
+/* An empty list is one option row tall. */
+.ow-listbox--standalone .ow-listbox__empty {
+    padding: var(--ow-space-md);
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.ow-listbox--standalone.ow-listbox--sm .ow-listbox__empty {
+    padding-block: var(--ow-space-sm);
+    font-size: 12px;
+}
+
+.ow-option__icon {
+    display: flex;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    color: var(--ow-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-listbox.ow-listbox--standalone,
+    .ow-listbox--standalone .ow-option {
+        transition: none;
+    }
+}

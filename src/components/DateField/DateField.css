@@ -1,0 +1,145 @@
+/* DateField and TimeField: typed segments in a field drawn like Input. The whole field shows focus while a segment
+   has it; the focused segment is tinted. */
+.ow-date-field {
+    display: flex;
+    width: 100%;
+    /* Shrink in a narrow grid or flex column instead of pushing past it. */
+    min-width: 0;
+    height: 40px;
+    align-items: center;
+    gap: var(--ow-space-xs);
+    border: 1px solid var(--ow-border-strong);
+    border-radius: var(--ow-radius-form);
+    background: var(--ow-surface);
+    /* With the segments' own 2px, the digits start where Input's text does. */
+    padding: 0 var(--ow-space-md);
+    color: var(--ow-text);
+    font-size: 14px;
+    font-weight: var(--ow-weight-regular);
+    line-height: 1.45;
+    font-variant-numeric: tabular-nums;
+    cursor: text;
+    transition-property: border-color, background-color, box-shadow, opacity;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-date-field--sm {
+    height: 32px;
+    gap: var(--ow-space-2xs);
+    padding: 0 var(--ow-space-sm);
+    font-size: 13px;
+}
+
+.ow-date-field--with-start {
+    padding-left: var(--ow-space-lg);
+}
+
+.ow-date-field--sm.ow-date-field--with-start {
+    padding-left: var(--ow-space-md);
+}
+
+.ow-date-field:focus-within {
+    border-color: var(--ow-focus-border);
+    box-shadow: var(--ow-shadow-focus);
+}
+
+.ow-date-field:has(.ow-date-field__segment:focus-visible) {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-date-field--invalid {
+    border-color: var(--ow-danger-line);
+}
+
+.ow-date-field--invalid:focus-within {
+    border-color: var(--ow-danger-solid);
+    box-shadow: var(--ow-shadow-focus-danger);
+}
+
+.ow-date-field--readonly {
+    cursor: default;
+}
+
+.ow-date-field--disabled {
+    cursor: not-allowed;
+    opacity: 0.62;
+}
+
+.ow-date-field__addon {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    color: var(--ow-text-muted);
+    cursor: default;
+}
+
+.ow-date-field__segments {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    white-space: pre;
+}
+
+.ow-date-field__segment {
+    flex-shrink: 0;
+    border-radius: var(--ow-radius-sm);
+    padding: 2px;
+    color: var(--ow-text);
+    text-align: center;
+    caret-color: transparent;
+    outline: 0;
+    transition-property: color, background-color, box-shadow;
+    transition-duration: var(--ow-duration-fast);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-date-field__segment::selection {
+    background: transparent;
+}
+
+/* Tabular digits are 1ch wide, so a segment keeps its width while a value is half typed ("1" on the way to "12").
+   Placeholders keep their own width, so the letters sit evenly. */
+.ow-date-field__segment--digits-2:not(.ow-date-field__segment--placeholder) {
+    min-width: calc(2ch + 4px);
+}
+
+.ow-date-field__segment--digits-4:not(.ow-date-field__segment--placeholder) {
+    min-width: calc(4ch + 4px);
+}
+
+.ow-date-field__segment--placeholder {
+    color: var(--ow-text-muted);
+}
+
+/* The tint and edge of selected things, as on Pagination's current page. */
+.ow-date-field__segment:focus {
+    background: var(--ow-primary-subtle);
+    box-shadow: inset 0 0 0 1px var(--ow-primary-border);
+    color: var(--ow-primary-text);
+}
+
+.ow-date-field__segment--placeholder:focus {
+    color: var(--ow-text-muted);
+}
+
+.ow-date-field--disabled .ow-date-field__segment {
+    cursor: not-allowed;
+}
+
+.ow-date-field--readonly .ow-date-field__segment {
+    cursor: default;
+}
+
+.ow-date-field__literal {
+    color: var(--ow-text-muted);
+    user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-date-field,
+    .ow-date-field__segment {
+        transition: none;
+    }
+}

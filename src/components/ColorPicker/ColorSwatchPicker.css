@@ -1,0 +1,101 @@
+/* ColorSwatchPicker: swatches in wrapping rows, like ColorPicker's. The chosen one gets ColorPicker's ring (a gap in
+   the surface colour, then a 2px ring in the text colour) and a check in white or slate, whichever reads on it.
+   The focus outline lands exactly on the ring, so a focused swatch's ring turns the focus colour. */
+.ow-color-swatch-picker {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-sm);
+}
+
+.ow-color-swatch-picker--sm {
+    gap: var(--ow-space-xs);
+}
+
+.ow-color-swatch-picker__swatch {
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--ow-radius-form);
+    background:
+        linear-gradient(var(--ow-color-swatch-picker-value), var(--ow-color-swatch-picker-value)),
+        repeating-conic-gradient(var(--ow-gray-200) 0 25%, #ffffff 0 50%) 0 0 / 8px 8px;
+    box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.14);
+    cursor: pointer;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+        transform var(--ow-duration-base) var(--ow-ease-spring),
+        box-shadow var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-color-swatch-picker--sm .ow-color-swatch-picker__swatch {
+    width: 24px;
+    height: 24px;
+    border-radius: var(--ow-radius-md);
+}
+
+.ow-color-swatch-picker--circle .ow-color-swatch-picker__swatch {
+    border-radius: 50%;
+}
+
+.ow-color-swatch-picker__swatch:hover:not([aria-disabled="true"]) {
+    transform: scale(1.1);
+}
+
+.ow-color-swatch-picker__swatch[aria-checked="true"] {
+    box-shadow:
+        inset 0 0 0 1px rgba(15, 23, 42, 0.14),
+        0 0 0 2px var(--ow-surface),
+        0 0 0 4px var(--ow-text);
+}
+
+.ow-color-swatch-picker__swatch:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-color-swatch-picker__check {
+    opacity: 0;
+    scale: 0.5;
+    transition:
+        opacity var(--ow-duration-fast) var(--ow-ease-standard),
+        scale var(--ow-duration-base) var(--ow-ease-spring);
+}
+
+.ow-color-swatch-picker__swatch[data-ink="light"] .ow-color-swatch-picker__check {
+    color: #ffffff;
+}
+
+.ow-color-swatch-picker__swatch[data-ink="dark"] .ow-color-swatch-picker__check {
+    color: var(--ow-gray-900);
+}
+
+.ow-color-swatch-picker__swatch[aria-checked="true"] .ow-color-swatch-picker__check {
+    opacity: 1;
+    scale: 1;
+}
+
+.ow-color-swatch-picker__swatch[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+.ow-color-swatch-picker--disabled {
+    opacity: 0.55;
+}
+
+/* The group fades as a whole; its swatches don't fade again. */
+.ow-color-swatch-picker--disabled .ow-color-swatch-picker__swatch[aria-disabled="true"] {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-color-swatch-picker__swatch,
+    .ow-color-swatch-picker__check {
+        transition: none;
+    }
+}

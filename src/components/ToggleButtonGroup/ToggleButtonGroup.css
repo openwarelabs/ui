@@ -1,0 +1,73 @@
+/* ToggleButtonGroup: toggles joined like an attached ButtonGroup, sharing borders, each pressed in while it's on.
+   An item is the button itself, or the Tooltip around an icon-only one. */
+.ow-toggle-group {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    vertical-align: middle;
+}
+
+.ow-toggle-group--vertical {
+    flex-direction: column;
+}
+
+.ow-toggle-group > * {
+    position: relative;
+}
+
+.ow-toggle-group > .ow-tooltip > .ow-button {
+    flex: 1;
+}
+
+/* Hovered and pressed buttons sit above their neighbours so their whole border shows; a focused one above all,
+   so nothing covers its ring. */
+.ow-toggle-group > :hover,
+.ow-toggle-group > .ow-button--pressed,
+.ow-toggle-group > :has(> .ow-button--pressed) {
+    z-index: 1;
+}
+
+.ow-toggle-group > :focus-visible,
+.ow-toggle-group > :has(> :focus-visible) {
+    z-index: 2;
+}
+
+/* Shared borders: each item overlaps the one before by a border's width, and only the ends keep their corners. */
+.ow-toggle-group:not(.ow-toggle-group--vertical) > :not(:first-child) {
+    margin-inline-start: -1px;
+}
+
+.ow-toggle-group:not(.ow-toggle-group--vertical) > .ow-button:not(:first-child),
+.ow-toggle-group:not(.ow-toggle-group--vertical) > :not(:first-child) > .ow-button {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+}
+
+.ow-toggle-group:not(.ow-toggle-group--vertical) > .ow-button:not(:last-child),
+.ow-toggle-group:not(.ow-toggle-group--vertical) > :not(:last-child) > .ow-button {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+}
+
+.ow-toggle-group--vertical > :not(:first-child) {
+    margin-block-start: -1px;
+}
+
+.ow-toggle-group--vertical > .ow-button:not(:first-child),
+.ow-toggle-group--vertical > :not(:first-child) > .ow-button {
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
+}
+
+.ow-toggle-group--vertical > .ow-button:not(:last-child),
+.ow-toggle-group--vertical > :not(:last-child) > .ow-button {
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+}
+
+/* An icon-only option among labelled ones matches their height. */
+.ow-toggle-group--sm:not(.ow-toggle-group--icon-only) .ow-button--icon-only {
+    width: 32px;
+    height: 32px;
+    min-height: 32px;
+}

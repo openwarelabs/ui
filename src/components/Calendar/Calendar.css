@@ -54,6 +54,13 @@
     cursor: not-allowed;
 }
 
+/* Holds a missing button's place, so a month's name stays centred (RangeCalendar's months side by side). */
+.ow-calendar__nav-space {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+}
+
 .ow-calendar__grid {
     border-collapse: separate;
     border-spacing: 2px;

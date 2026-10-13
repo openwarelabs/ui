@@ -1,0 +1,56 @@
+/* Toolbar: a row (or column) of controls for one context, raised on its own surface or plain. */
+.ow-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-xs);
+    min-width: 0;
+}
+
+.ow-toolbar--sm {
+    gap: var(--ow-space-2xs);
+}
+
+.ow-toolbar--raised {
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: var(--ow-space-xs);
+    box-shadow: var(--ow-shadow-control);
+}
+
+/* 4px inside a 12px corner keeps the buttons' 8px corners concentric with the bar's. */
+.ow-toolbar--raised.ow-toolbar--sm {
+    padding: var(--ow-space-2xs);
+}
+
+.ow-toolbar--vertical {
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+}
+
+/* The separator stops short of the bar's edges, so it divides groups without boxing them in. */
+.ow-toolbar__separator {
+    flex-shrink: 0;
+    align-self: center;
+    width: 1px;
+    height: 20px;
+    margin: 0 var(--ow-space-2xs);
+    background: var(--ow-border);
+}
+
+.ow-toolbar--sm .ow-toolbar__separator {
+    height: 16px;
+}
+
+.ow-toolbar--vertical .ow-toolbar__separator {
+    width: 20px;
+    height: 1px;
+    margin: var(--ow-space-2xs) 0;
+}
+
+.ow-toolbar--vertical.ow-toolbar--sm .ow-toolbar__separator {
+    width: 16px;
+}

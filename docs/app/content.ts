@@ -67,7 +67,10 @@ export function resolve(hash: string): Route {
         const moved = componentsInBlocks.get(parts[1]);
         if (moved) return { kind: "block-category", category: moved, section: blockComponentId(parts[1], parts[2]) };
         const doc = componentDocs.find((entry) => entry.slug === parts[1]);
-        return doc ? { kind: "component", doc, section: parts[2] } : { kind: "missing", path: hash };
+        if (doc) return { kind: "component", doc, section: parts[2] };
+        // A group, such as #/components/actions: its section of the components page.
+        if (categories.some((category) => slugify(category) === parts[1])) return { kind: "components", section: parts[1] };
+        return { kind: "missing", path: hash };
     }
     if (parts[0] === "blocks") {
         if (!parts[1] || blockGroups.some((group) => slugify(group.name) === parts[1])) return { kind: "blocks", section: parts[1] };

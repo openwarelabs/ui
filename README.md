@@ -50,16 +50,16 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 
 ## Components
 
-71 components, each with a page in the docs.
+83 components, each with a page in the docs.
 
 | Group | Components |
 | --- | --- |
 | Typography | `Text` (each style on the Typography page as a variant: hero to caption, code and kbd; tones, `truncate`, `as`), `Link`, `Kbd`, `Code`, `CodeBlock`, `Snippet` |
-| Actions | `Button` (primary, secondary, ghost, danger; sm, md, lg; `loading`; `shape="pill"`), `buttonClassName()` for links, `ButtonGroup`, `CloseButton`, `CopyButton`, `ToggleButton`, `SegmentedControl` |
-| Inputs | `Field`, `Fieldset`, `Input` (start and end content), `Textarea` (`autoGrow`), `NumberField`, `SearchField`, `InputOTP`, `ColorField` |
-| Choices | `Checkbox`, `CheckboxGroup`, `RadioGroup` (plain or cards), `Switch`, `Select`, `Combobox`, `Slider` (one value or a range), `ChoiceCard` |
-| Pickers | `Calendar`, `DatePicker`, `ColorPicker`, `FileDropZone` |
-| Feedback | `Alert`, `Badge`, `ProgressBar`, `ProgressCircle`, `Spinner`, `Skeleton`, `SkeletonRows`, `Toaster` + `toast()` (sonner: stacked, swipeable, with actions and promises), `Tooltip` |
+| Actions | `Button` (primary, secondary, ghost, danger; sm, md, lg; `loading`; `shape="pill"`), `buttonClassName()` for links, `ButtonGroup`, `CloseButton`, `CopyButton`, `ToggleButton`, `SegmentedControl`, `ToggleButtonGroup` (one or several on), `Toolbar` + `ToolbarSeparator` (arrow keys across its controls) |
+| Inputs | `Form` (the browser's checks, your own and the server's errors, under each field; `useFormStatus`), `Field`, `Fieldset`, `Input` (start and end content), `Textarea` (`autoGrow`), `NumberField`, `SearchField`, `InputOTP`, `ColorField`, `DateField` and `TimeField` (typed in segments, in the locale's order) |
+| Choices | `Checkbox`, `CheckboxGroup`, `RadioGroup` (plain or cards), `Switch`, `Select`, `Combobox`, `Slider` (one value or a range), `ChoiceCard`, `ListBox` (one or many, on the page) |
+| Pickers | `Calendar`, `DatePicker`, `RangeCalendar`, `DateRangePicker` (with presets), `ColorPicker`, `ColorArea`, `ColorSlider`, `ColorSwatchPicker`, `FileDropZone` |
+| Feedback | `Alert`, `Badge`, `ProgressBar`, `ProgressCircle`, `Meter` (an amount in a range, toned by thresholds), `Spinner`, `Skeleton`, `SkeletonRows`, `Toaster` + `toast()` (sonner: stacked, swipeable, with actions and promises), `Tooltip` |
 | Overlays | `Dialog`, `ConfirmDialog`, `Drawer`, `Popover`, `Menu` + `MenuItem`, `CommandPalette` |
 | Navigation | `Tabs`, `Accordion`, `Disclosure`, `Breadcrumbs`, `Pagination`, `Steps`, `NavList` + `NavItem` |
 | Data display | `Table` (sorting, selection), `Stat`, `FileTree`, `EmptyState`, `Tag`, `ColorSwatch`, `Avatar`, `AvatarGroup`, `User` |

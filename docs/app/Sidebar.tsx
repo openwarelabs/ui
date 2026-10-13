@@ -14,6 +14,9 @@ export type SectionName = "docs" | "components" | "blocks";
 export const sectionOf = (route: Route): SectionName =>
     route.kind === "blocks" || route.kind === "block-category" ? "blocks" : route.kind === "components" || route.kind === "component" ? "components" : "docs";
 
+/** Names longer than this ("ToggleButtonGroup") don't fit half the sidebar, so they take a whole row. */
+const longName = 16;
+
 /** "0.3.1" → "0.3": patch releases don't make a component old. */
 const minor = (release: string) => release.split(".").slice(0, 2).join(".");
 
@@ -86,6 +89,7 @@ function SideLink({
     title,
     start,
     end,
+    wide = false,
     children,
 }: {
     href: string;
@@ -94,10 +98,12 @@ function SideLink({
     title?: string;
     start?: ReactNode;
     end?: ReactNode;
+    /** Takes both columns of a two-column list. */
+    wide?: boolean;
     children: ReactNode;
 }) {
     return (
-        <li>
+        <li className={wide ? "docs-side-list__wide" : undefined}>
             <a className="docs-side-link" href={href} aria-current={current ? "page" : undefined} onClick={onNavigate} title={title}>
                 {start}
                 <span className="docs-side-link__label">{children}</span>
@@ -154,7 +160,14 @@ function ComponentsSidebar({ route, onNavigate, onSearch }: SidebarProps) {
                 return (
                     <Group key={category} title={category} count={docs.length} columns={2}>
                         {docs.map((doc) => (
-                            <SideLink key={doc.slug} href={hrefOf.component(doc.slug)} current={isCurrent(doc)} onNavigate={onNavigate} title={doc.meta.title}>
+                            <SideLink
+                                key={doc.slug}
+                                href={hrefOf.component(doc.slug)}
+                                current={isCurrent(doc)}
+                                onNavigate={onNavigate}
+                                title={doc.meta.title}
+                                wide={doc.meta.title.length > longName}
+                            >
                                 {doc.meta.title}
                                 {isNew(doc) ? <NewDot /> : null}
                             </SideLink>

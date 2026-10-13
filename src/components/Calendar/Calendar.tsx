@@ -1,9 +1,9 @@
-import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState, type KeyboardEvent, type Ref } from "react";
 
 import { useControllableState } from "../../hooks/useControllableState";
 import { ChevronLeftIcon, ChevronRightIcon } from "../../icons";
 import { cx } from "../../utils/cx";
-import { addDays, addMonths, formatDate, parseISO, todayISO, toISO, weekday, type ISODate } from "./dates";
+import { addDays, addMonths, clampDate, formatDate, monthIndex, monthWeeks, parseISO, startOfMonth, todayISO, toISO, weekday, type ISODate } from "./dates";
 
 export interface CalendarProps {
     /** The chosen date as "YYYY-MM-DD", or "" for none. */
@@ -60,20 +60,7 @@ export const Calendar = forwardRef<CalendarHandle, CalendarProps>(function Calen
 
     const { year, month } = parseISO(focused);
     const first = toISO(year, month, 1);
-
-    // Which way the month changed, so the new one slides in from that side.
-    const monthIndex = year * 12 + month;
-    const slide = useRef<{ month: number; direction?: "next" | "previous" }>({ month: monthIndex });
-    if (slide.current.month !== monthIndex) {
-        slide.current = { month: monthIndex, direction: monthIndex > slide.current.month ? "next" : "previous" };
-    }
-    const offset = (weekday(first) - weekStartsOn + 7) % 7;
-    const gridStart = addDays(first, -offset);
-    const weeks = useMemo(() => Array.from({ length: 6 }, (_, w) => Array.from({ length: 7 }, (_, d) => addDays(gridStart, w * 7 + d))), [gridStart]);
-    const weekdayNames = weeks[0]!.map((date) => ({
-        short: formatDate(date, locale, { weekday: "short" }),
-        long: formatDate(date, locale, { weekday: "long" }),
-    }));
+    const slide = useSlide(monthIndex(first));
 
     const isDisabled = (date: ISODate) => (min !== undefined && date < min) || (max !== undefined && date > max) || Boolean(isDateDisabled?.(date));
 
@@ -88,111 +75,241 @@ export const Calendar = forwardRef<CalendarHandle, CalendarProps>(function Calen
         setFocused(date);
     }
 
-    function onKeyDown(event: KeyboardEvent<HTMLButtonElement>, date: ISODate) {
-        const day = (weekday(date) - weekStartsOn + 7) % 7;
-        const moves: Record<string, () => ISODate> = {
-            ArrowLeft: () => addDays(date, -1),
-            ArrowRight: () => addDays(date, 1),
-            ArrowUp: () => addDays(date, -7),
-            ArrowDown: () => addDays(date, 7),
-            Home: () => addDays(date, -day),
-            End: () => addDays(date, 6 - day),
-            PageUp: () => addMonths(date, event.shiftKey ? -12 : -1),
-            PageDown: () => addMonths(date, event.shiftKey ? 12 : 1),
-        };
-        const move = moves[event.key];
-        if (move) {
-            event.preventDefault();
-            moveTo(move());
-        }
-    }
-
-    const monthLabel = formatDate(first, locale, { month: "long", year: "numeric" });
-    const prevMonth = addMonths(first, -1);
-    const nextMonth = addMonths(first, 1);
-    const canGoBack = !min || toISO(year, month, 0) >= min;
-    const canGoForward = !max || nextMonth <= max;
-
     return (
         <div className={cx("ow-calendar", className)}>
-            <div className="ow-calendar__header">
-                <button
-                    type="button"
-                    className="ow-calendar__nav"
-                    aria-label={`Previous month, ${formatDate(prevMonth, locale, { month: "long", year: "numeric" })}`}
-                    disabled={!canGoBack}
-                    onClick={() => setFocused(clampDate(addMonths(focused, -1), min, max))}
-                >
-                    <ChevronLeftIcon size={16} />
-                </button>
-                <h2 className="ow-calendar__title" aria-live="polite">
-                    <span
-                        key={monthIndex}
-                        className={cx("ow-calendar__title-text", slide.current.direction && `ow-calendar__slide--${slide.current.direction}`)}
-                    >
-                        {monthLabel}
-                    </span>
-                </h2>
-                <button
-                    type="button"
-                    className="ow-calendar__nav"
-                    aria-label={`Next month, ${formatDate(nextMonth, locale, { month: "long", year: "numeric" })}`}
-                    disabled={!canGoForward}
-                    onClick={() => setFocused(clampDate(addMonths(focused, 1), min, max))}
-                >
-                    <ChevronRightIcon size={16} />
-                </button>
-            </div>
-            <table ref={gridRef} role="grid" className="ow-calendar__grid" aria-label={monthLabel}>
-                <thead>
-                    <tr>
-                        {weekdayNames.map((name) => (
-                            <th key={name.long} scope="col" abbr={name.long} className="ow-calendar__weekday">
-                                {name.short.slice(0, 2)}
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody key={monthIndex} className={cx(slide.current.direction && `ow-calendar__slide--${slide.current.direction}`)}>
-                    {weeks.map((week) => (
-                        <tr key={week[0]}>
-                            {week.map((date) => {
-                                const inMonth = parseISO(date).month === month;
-                                const isSelected = date === selected;
-                                const disabled = isDisabled(date);
-                                return (
-                                    <td key={date} role="gridcell" aria-selected={isSelected} className="ow-calendar__cell">
-                                        <button
-                                            type="button"
-                                            tabIndex={date === focused ? 0 : -1}
-                                            aria-label={formatDate(date, locale, { dateStyle: "full" })}
-                                            aria-current={date === today ? "date" : undefined}
-                                            aria-disabled={disabled || undefined}
-                                            className={cx("ow-calendar__day", {
-                                                "ow-calendar__day--outside": !inMonth,
-                                                "ow-calendar__day--selected": isSelected,
-                                                "ow-calendar__day--today": date === today,
-                                                "ow-calendar__day--disabled": disabled,
-                                            })}
-                                            onClick={() => choose(date)}
-                                            onKeyDown={(event) => onKeyDown(event, date)}
-                                            onFocus={() => date !== focused && setFocused(date)}
-                                        >
-                                            {parseISO(date).day}
-                                        </button>
-                                    </td>
-                                );
-                            })}
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <MonthHeader
+                month={first}
+                locale={locale}
+                slide={slide}
+                previous={{ disabled: !canShowBefore(first, min), onClick: () => setFocused(clampDate(addMonths(focused, -1), min, max)) }}
+                next={{ disabled: !canShowAfter(first, max), onClick: () => setFocused(clampDate(addMonths(focused, 1), min, max)) }}
+            />
+            <MonthGrid
+                gridRef={gridRef}
+                month={first}
+                focused={focused}
+                today={today}
+                locale={locale}
+                weekStartsOn={weekStartsOn}
+                slide={slide}
+                isDisabled={isDisabled}
+                isSelected={(date) => date === selected}
+                isFilled={(date) => date === selected}
+                onChoose={choose}
+                onDayKeyDown={(event, date) => {
+                    const target = dateForKey(event, date, weekStartsOn);
+                    if (target === undefined) return;
+                    event.preventDefault();
+                    moveTo(target);
+                }}
+                onDayFocus={(date) => date !== focused && setFocused(date)}
+            />
         </div>
     );
 });
 
-function clampDate(date: ISODate, min: ISODate | undefined, max: ISODate | undefined): ISODate {
-    if (min && date < min) return min;
-    if (max && date > max) return max;
-    return date;
+// The pieces below are shared with RangeCalendar, which shows the same month grid.
+
+/** Whether the month before `first` has a day on or after `min`. */
+export function canShowBefore(first: ISODate, min: ISODate | undefined): boolean {
+    return !min || addDays(first, -1) >= min;
+}
+
+/** Whether the month after `last` (the first of the last month shown) has a day on or before `max`. */
+export function canShowAfter(last: ISODate, max: ISODate | undefined): boolean {
+    return !max || addMonths(last, 1) <= max;
+}
+
+/** Where a key moves the focus from `date`: a day, a week, the week's ends, a month (with Shift, a year). */
+export function dateForKey(event: KeyboardEvent<HTMLElement>, date: ISODate, weekStartsOn: 0 | 1): ISODate | undefined {
+    const day = (weekday(date) - weekStartsOn + 7) % 7;
+    const moves: Record<string, () => ISODate> = {
+        ArrowLeft: () => addDays(date, -1),
+        ArrowRight: () => addDays(date, 1),
+        ArrowUp: () => addDays(date, -7),
+        ArrowDown: () => addDays(date, 7),
+        Home: () => addDays(date, -day),
+        End: () => addDays(date, 6 - day),
+        PageUp: () => addMonths(date, event.shiftKey ? -12 : -1),
+        PageDown: () => addMonths(date, event.shiftKey ? 12 : 1),
+    };
+    return moves[event.key]?.();
+}
+
+/** Which way the month changed since the last render, so the new one slides in from that side. */
+export function useSlide(month: number): "next" | "previous" | undefined {
+    const slide = useRef<{ month: number; direction?: "next" | "previous" }>({ month });
+    if (slide.current.month !== month) {
+        slide.current = { month, direction: month > slide.current.month ? "next" : "previous" };
+    }
+    return slide.current.direction;
+}
+
+interface MonthNavButton {
+    disabled: boolean;
+    onClick(): void;
+}
+
+export interface MonthHeaderProps {
+    /** The first day of the month shown. */
+    month: ISODate;
+    locale?: string;
+    slide?: "next" | "previous";
+    /** The previous-month button, or null for an empty space of the same size. */
+    previous: MonthNavButton | null;
+    /** The next-month button, or null for an empty space of the same size. */
+    next: MonthNavButton | null;
+}
+
+/** The month's name between the previous- and next-month buttons. */
+export function MonthHeader({ month, locale, slide, previous, next }: MonthHeaderProps) {
+    const monthLabel = (date: ISODate) => formatDate(date, locale, { month: "long", year: "numeric" });
+    return (
+        <div className="ow-calendar__header">
+            {previous ? (
+                <button
+                    type="button"
+                    className="ow-calendar__nav"
+                    aria-label={`Previous month, ${monthLabel(addMonths(month, -1))}`}
+                    disabled={previous.disabled}
+                    onClick={previous.onClick}
+                >
+                    <ChevronLeftIcon size={16} />
+                </button>
+            ) : (
+                <span className="ow-calendar__nav-space" />
+            )}
+            <h2 className="ow-calendar__title" aria-live="polite">
+                <span key={monthIndex(month)} className={cx("ow-calendar__title-text", slide && `ow-calendar__slide--${slide}`)}>
+                    {monthLabel(month)}
+                </span>
+            </h2>
+            {next ? (
+                <button
+                    type="button"
+                    className="ow-calendar__nav"
+                    aria-label={`Next month, ${monthLabel(addMonths(month, 1))}`}
+                    disabled={next.disabled}
+                    onClick={next.onClick}
+                >
+                    <ChevronRightIcon size={16} />
+                </button>
+            ) : (
+                <span className="ow-calendar__nav-space" />
+            )}
+        </div>
+    );
+}
+
+export interface MonthGridProps {
+    /** The first day of the month shown. */
+    month: ISODate;
+    /** The day that takes Tab focus (roving tabindex). */
+    focused: ISODate;
+    today: ISODate;
+    locale?: string;
+    weekStartsOn: 0 | 1;
+    slide?: "next" | "previous";
+    /** Leaves the days of the months either side empty, for months shown side by side. */
+    hideOutsideDays?: boolean;
+    isDisabled(date: ISODate): boolean;
+    /** aria-selected on the day's cell. */
+    isSelected(date: ISODate): boolean;
+    /** Fills the day with the primary colour. */
+    isFilled(date: ISODate): boolean;
+    /** Extra classes for a day's cell; `column` is 0 to 6 across the week. */
+    cellClassName?(date: ISODate, column: number): string | undefined;
+    /** Extra classes for a day's button. */
+    dayClassName?(date: ISODate): string | undefined;
+    /** Extra attributes for a day's button. */
+    dayProps?(date: ISODate): { "aria-describedby"?: string };
+    onChoose(date: ISODate): void;
+    onDayKeyDown(event: KeyboardEvent<HTMLButtonElement>, date: ISODate): void;
+    onDayFocus(date: ISODate): void;
+    onDayPointerEnter?(date: ISODate): void;
+    gridRef?: Ref<HTMLTableElement>;
+}
+
+/** One month as a grid of day buttons: six weeks, weekday names above, each day read out in full. */
+export function MonthGrid({
+    month,
+    focused,
+    today,
+    locale,
+    weekStartsOn,
+    slide,
+    hideOutsideDays = false,
+    isDisabled,
+    isSelected,
+    isFilled,
+    cellClassName,
+    dayClassName,
+    dayProps,
+    onChoose,
+    onDayKeyDown,
+    onDayFocus,
+    onDayPointerEnter,
+    gridRef,
+}: MonthGridProps) {
+    const first = startOfMonth(month);
+    const { month: monthNumber } = parseISO(first);
+    const weeks = useMemo(() => monthWeeks(first, weekStartsOn), [first, weekStartsOn]);
+    const weekdayNames = weeks[0]!.map((date) => ({
+        short: formatDate(date, locale, { weekday: "short" }),
+        long: formatDate(date, locale, { weekday: "long" }),
+    }));
+
+    return (
+        <table ref={gridRef} role="grid" className="ow-calendar__grid" aria-label={formatDate(first, locale, { month: "long", year: "numeric" })}>
+            <thead>
+                <tr>
+                    {weekdayNames.map((name) => (
+                        <th key={name.long} scope="col" abbr={name.long} className="ow-calendar__weekday">
+                            {name.short.slice(0, 2)}
+                        </th>
+                    ))}
+                </tr>
+            </thead>
+            <tbody key={monthIndex(first)} className={cx(slide && `ow-calendar__slide--${slide}`)}>
+                {weeks.map((week) => (
+                    <tr key={week[0]}>
+                        {week.map((date, column) => {
+                            const inMonth = parseISO(date).month === monthNumber;
+                            if (!inMonth && hideOutsideDays) return <td key={date} role="gridcell" className="ow-calendar__cell" />;
+                            const selected = isSelected(date);
+                            const disabled = isDisabled(date);
+                            return (
+                                <td key={date} role="gridcell" aria-selected={selected} className={cx("ow-calendar__cell", cellClassName?.(date, column))}>
+                                    <button
+                                        type="button"
+                                        tabIndex={date === focused ? 0 : -1}
+                                        aria-label={formatDate(date, locale, { dateStyle: "full" })}
+                                        aria-current={date === today ? "date" : undefined}
+                                        aria-disabled={disabled || undefined}
+                                        {...dayProps?.(date)}
+                                        className={cx(
+                                            "ow-calendar__day",
+                                            {
+                                                "ow-calendar__day--outside": !inMonth,
+                                                "ow-calendar__day--selected": isFilled(date),
+                                                "ow-calendar__day--today": date === today,
+                                                "ow-calendar__day--disabled": disabled,
+                                            },
+                                            dayClassName?.(date),
+                                        )}
+                                        onClick={() => onChoose(date)}
+                                        onKeyDown={(event) => onDayKeyDown(event, date)}
+                                        onFocus={() => onDayFocus(date)}
+                                        onPointerEnter={onDayPointerEnter ? () => onDayPointerEnter(date) : undefined}
+                                    >
+                                        {parseISO(date).day}
+                                    </button>
+                                </td>
+                            );
+                        })}
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    );
 }

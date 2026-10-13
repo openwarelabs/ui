@@ -1,0 +1,88 @@
+/* Meter: ProgressBar's header and track (Progress.css), for an amount within a range. Tones swap in a status colour. */
+.ow-meter {
+    display: grid;
+    min-width: 0;
+    gap: var(--ow-space-sm);
+}
+
+.ow-meter--primary {
+    --ow-meter-fill: var(--ow-progress);
+}
+
+/* Status fills use the status text colours, which keep 3:1 against the track in both themes. */
+.ow-meter--success {
+    --ow-meter-fill: var(--ow-success-text);
+}
+
+.ow-meter--warning {
+    --ow-meter-fill: var(--ow-warning-text);
+}
+
+.ow-meter--danger {
+    --ow-meter-fill: var(--ow-danger-text);
+}
+
+.ow-meter__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--ow-space-md);
+}
+
+.ow-meter__label {
+    min-width: 0;
+    color: var(--ow-text);
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.ow-meter__value {
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-meter__track {
+    display: flex;
+    height: 4px;
+    overflow: hidden;
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-meter-track);
+}
+
+.ow-meter--md .ow-meter__track {
+    height: 8px;
+}
+
+.ow-meter__fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--ow-meter-fill);
+    transition:
+        width var(--ow-duration-slow) var(--ow-ease-standard),
+        background-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+/* Segments: the track splits into blocks, each with its own track and a share of the fill. */
+.ow-meter__track--segmented {
+    gap: var(--ow-space-2xs);
+    overflow: visible;
+    border-radius: 0;
+    background: none;
+}
+
+.ow-meter__segment {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-meter-track);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-meter__fill {
+        transition: none;
+    }
+}

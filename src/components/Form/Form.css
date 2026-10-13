@@ -1,0 +1,16 @@
+/* Form: its rows sit ow-space-xl apart, as the README asks. */
+.ow-form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+    gap: var(--ow-space-xl);
+}
+
+/* A button on a row of its own keeps its width, unless it's fullWidth. */
+.ow-form > .ow-button {
+    justify-self: start;
+}
+
+.ow-form > .ow-button--full {
+    justify-self: stretch;
+}

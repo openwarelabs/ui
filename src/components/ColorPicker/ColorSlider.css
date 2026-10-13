@@ -1,0 +1,142 @@
+/* ColorSlider: a 12px pill track painted with the channel's range, and ColorPicker's thumb, which shows the colour.
+   The input is visually hidden inside the thumb, so a screen reader's focus box sits where the thumb is. */
+.ow-color-slider {
+    --ow-color-slider-direction: to right;
+    display: grid;
+    min-width: 0;
+    gap: var(--ow-space-md);
+}
+
+.ow-color-slider--horizontal:dir(rtl) {
+    --ow-color-slider-direction: to left;
+}
+
+.ow-color-slider--vertical {
+    --ow-color-slider-direction: to top;
+    display: inline-flex;
+    height: 152px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ow-color-slider__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--ow-space-md);
+}
+
+.ow-color-slider--vertical .ow-color-slider__header {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+.ow-color-slider__label {
+    color: var(--ow-text);
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.ow-color-slider__value {
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-color-slider__track {
+    position: relative;
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-color-slider-gradient);
+    box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.1);
+    cursor: pointer;
+    touch-action: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* A taller target than the 12px track, the thumb's full height. */
+.ow-color-slider__track::before {
+    position: absolute;
+    content: "";
+}
+
+.ow-color-slider--horizontal .ow-color-slider__track {
+    height: 12px;
+}
+
+.ow-color-slider--horizontal .ow-color-slider__track::before {
+    inset: -4px 0;
+}
+
+.ow-color-slider--vertical .ow-color-slider__track {
+    width: 12px;
+    min-height: 0;
+    flex: 1;
+}
+
+.ow-color-slider--vertical .ow-color-slider__track::before {
+    inset: 0 -4px;
+}
+
+.ow-color-slider--alpha .ow-color-slider__track {
+    background:
+        var(--ow-color-slider-gradient),
+        repeating-conic-gradient(var(--ow-gray-200) 0 25%, #ffffff 0 50%) 0 0 / 12px 12px;
+}
+
+.ow-color-slider__thumb {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    background:
+        linear-gradient(var(--ow-color-slider-thumb), var(--ow-color-slider-thumb)),
+        repeating-conic-gradient(var(--ow-gray-200) 0 25%, #ffffff 0 50%) 0 0 / 8px 8px;
+    box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.18),
+        0 2px 6px rgba(15, 23, 42, 0.28);
+    pointer-events: none;
+    transition: scale var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.ow-color-slider--horizontal .ow-color-slider__thumb {
+    top: 50%;
+    inset-inline-start: var(--ow-color-slider-position);
+    translate: -50% -50%;
+}
+
+.ow-color-slider--horizontal:dir(rtl) .ow-color-slider__thumb {
+    translate: 50% -50%;
+}
+
+.ow-color-slider--vertical .ow-color-slider__thumb {
+    bottom: var(--ow-color-slider-position);
+    left: 50%;
+    translate: -50% 50%;
+}
+
+.ow-color-slider--dragging .ow-color-slider__thumb {
+    scale: 1.15;
+}
+
+/* Focused by a press, it shows no ring until a key is used (useDrag's pointerFocus). */
+.ow-color-slider:not(.ow-color-slider--pointer) .ow-color-slider__thumb:has(:focus-visible) {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-color-slider--disabled {
+    opacity: 0.55;
+}
+
+.ow-color-slider--disabled .ow-color-slider__track {
+    cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-color-slider__thumb {
+        transition: none;
+    }
+}

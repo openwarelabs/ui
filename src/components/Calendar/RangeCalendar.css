@@ -1,0 +1,52 @@
+/* RangeCalendar: Calendar's month grid, with the range's ends as solid caps and a primary-subtle band between them. */
+.ow-range-calendar {
+    display: inline-flex;
+    max-width: 100%;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--ow-space-2xl) var(--ow-space-4xl);
+    color: var(--ow-text);
+    font-family: var(--ow-font-sans);
+}
+
+.ow-range-calendar .ow-calendar__cell {
+    position: relative;
+}
+
+/* The band sits behind the day buttons and reaches 1px into the 2px gaps either side, so the days join up. */
+.ow-range-calendar__cell--in-range::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -1px;
+    bottom: 0;
+    left: -1px;
+    background: var(--ow-primary-subtle);
+}
+
+/* It rounds off at the ends of each week, and side by side at the ends of each month. */
+.ow-range-calendar__cell--row-start::before {
+    left: 0;
+    border-top-left-radius: var(--ow-radius-form);
+    border-bottom-left-radius: var(--ow-radius-form);
+}
+
+.ow-range-calendar__cell--row-end::before {
+    right: 0;
+    border-top-right-radius: var(--ow-radius-form);
+    border-bottom-right-radius: var(--ow-radius-form);
+}
+
+/* At the caps it starts and stops halfway, so it fills in behind their inner corners. */
+.ow-range-calendar__cell--start::before {
+    left: 50%;
+}
+
+.ow-range-calendar__cell--end::before {
+    right: 50%;
+}
+
+.ow-range-calendar__day--in-range:not(.ow-calendar__day--disabled):hover {
+    border-color: var(--ow-primary-border);
+    background: var(--ow-primary-soft);
+}

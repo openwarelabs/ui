@@ -304,6 +304,12 @@ body {
 
 .docs-side-list--two {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    /* A long name takes a whole row; dense packing keeps the others from leaving a gap before it. */
+    grid-auto-flow: row dense;
+}
+
+.docs-side-list__wide {
+    grid-column: 1 / -1;
 }
 
 .docs-side-link {

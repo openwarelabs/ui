@@ -14,6 +14,7 @@ export const meta: DocMeta = {
         "Field gives its control an id, points aria-describedby at the hint and error, and marks it invalid when there's an error.",
         'Errors use role="alert", so they\'re read out when they appear.',
         "Show an error after the person leaves the field or submits, not while they're typing.",
+        "Inside a Form, Field shows the Form's error for its control's name, so there's nothing to wire by hand.",
     ],
     related: ["Input", "Fieldset", "Select"],
 };
