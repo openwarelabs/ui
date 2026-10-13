@@ -1,4 +1,4 @@
-import { useId, useRef, useState, type DragEvent, type ReactNode } from "react";
+import { useEffect, useId, useRef, useState, type DragEvent, type ReactNode } from "react";
 
 import { UploadIcon } from "../../icons";
 import { cx } from "../../utils/cx";
@@ -22,7 +22,7 @@ export interface FileDropZoneProps {
      * @default <UploadIcon /> */
     icon?: ReactNode;
     disabled?: boolean;
-    /** The form field name for the file input. */
+    /** The form field name for the file input. A form submits the files from the last accepted pick or drop. */
     name?: string;
     className?: string;
 }
@@ -63,6 +63,31 @@ export function FileDropZone({
     const [isDragging, setIsDragging] = useState(false);
     const [problem, setProblem] = useState<string>();
     const hintId = useId();
+    // The files a form will submit: the last accepted pick or drop, put back in the input after each change.
+    const kept = useRef<File[]>([]);
+
+    function keep(files: File[]) {
+        kept.current = files;
+        const input = inputRef.current;
+        if (!input) return;
+        try {
+            const transfer = new DataTransfer();
+            files.forEach((file) => transfer.items.add(file));
+            input.files = transfer.files;
+        } catch {
+            // Browsers without a DataTransfer constructor: the files still reach onFiles, just not a plain form post.
+        }
+    }
+
+    // The input is emptied as the picker opens, so choosing the same file again still counts as a change;
+    // closing the picker without choosing puts the kept files back.
+    useEffect(() => {
+        const input = inputRef.current;
+        if (!input) return;
+        const restore = () => keep(kept.current);
+        input.addEventListener("cancel", restore);
+        return () => input.removeEventListener("cancel", restore);
+    }, []);
 
     function take(list: FileList | null) {
         if (!list || disabled) return;
@@ -74,8 +99,13 @@ export function FileDropZone({
         else if (tooBig && maxSize) setProblem(`“${tooBig.name}” is over ${formatSize(maxSize)}.`);
         else {
             setProblem(undefined);
-            if (files.length) onFiles(files);
+            if (files.length) {
+                keep(files);
+                onFiles(files);
+                return;
+            }
         }
+        keep(kept.current);
     }
 
     const hasFiles = (event: DragEvent) => event.dataTransfer.types.includes("Files");
@@ -121,10 +151,10 @@ export function FileDropZone({
                 disabled={disabled}
                 name={name}
                 aria-describedby={hintId}
-                onChange={(event) => {
-                    take(event.target.files);
-                    event.target.value = "";
+                onClick={(event) => {
+                    event.currentTarget.value = "";
                 }}
+                onChange={(event) => take(event.target.files)}
             />
             <span className="ow-dropzone__icon">{icon ?? <UploadIcon size={20} />}</span>
             <span className="ow-dropzone__label">{isDragging ? "Drop to add" : label}</span>

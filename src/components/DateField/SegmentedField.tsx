@@ -392,7 +392,7 @@ export function SegmentedField({
             id={id}
             role="group"
             aria-label={ariaLabel}
-            aria-labelledby={[ariaLabelledBy, labelId].filter(Boolean).join(" ") || undefined}
+            aria-labelledby={[...new Set([ariaLabelledBy, labelId].filter(Boolean))].join(" ") || undefined}
             aria-disabled={disabled || undefined}
             className={cx(
                 "ow-date-field",

@@ -52,11 +52,16 @@ export const Calendar = forwardRef<CalendarHandle, CalendarProps>(function Calen
         if (selected) setFocused(selected);
     }, [selected]);
 
+    const focusFrame = useRef(0);
     useEffect(() => {
         if (!shouldFocus) return;
-        gridRef.current?.querySelector<HTMLButtonElement>('button[tabindex="0"]')?.focus();
         setShouldFocus(false);
+        const focusDay = () => gridRef.current?.querySelector<HTMLButtonElement>('button[tabindex="0"]')?.focus();
+        focusDay();
+        // A popover (DatePicker's) is hidden for its first frame while it's placed, and can't take focus until it shows.
+        if (!gridRef.current?.contains(document.activeElement)) focusFrame.current = requestAnimationFrame(focusDay);
     }, [shouldFocus, focused]);
+    useEffect(() => () => cancelAnimationFrame(focusFrame.current), []);
 
     const { year, month } = parseISO(focused);
     const first = toISO(year, month, 1);
@@ -299,7 +304,9 @@ export function MonthGrid({
                                         )}
                                         onClick={() => onChoose(date)}
                                         onKeyDown={(event) => onDayKeyDown(event, date)}
-                                        onFocus={() => onDayFocus(date)}
+                                        // A day from the next or previous month doesn't turn the page when it takes focus from a click,
+                                        // or the button would move out from under the pointer and the click would be lost; choosing it does.
+                                        onFocus={() => inMonth && onDayFocus(date)}
                                         onPointerEnter={onDayPointerEnter ? () => onDayPointerEnter(date) : undefined}
                                     >
                                         {parseISO(date).day}

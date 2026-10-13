@@ -1,4 +1,4 @@
-import { cloneElement, isValidElement, useContext, useEffect, useId, useRef, type ReactElement, type ReactNode } from "react";
+import { cloneElement, isValidElement, useContext, useEffect, useId, useLayoutEffect, useRef, useState, type ReactElement, type ReactNode } from "react";
 
 import { cx } from "../../utils/cx";
 import { Checkbox } from "../Checkbox/Checkbox";
@@ -27,6 +27,16 @@ export interface FieldProps {
     className?: string;
 }
 
+/** Elements a <label for> can name. */
+const isLabelable = (element: HTMLElement) =>
+    element instanceof HTMLInputElement ||
+    element instanceof HTMLSelectElement ||
+    element instanceof HTMLTextAreaElement ||
+    element instanceof HTMLButtonElement ||
+    element instanceof HTMLMeterElement ||
+    element instanceof HTMLOutputElement ||
+    element instanceof HTMLProgressElement;
+
 /** A stable key for a control's value, to notice when it changes. */
 const keyOf = (value: unknown) => JSON.stringify(value ?? null);
 
@@ -39,6 +49,7 @@ export function Field({ label, children, hint, error, name: nameProp, errorMessa
     const form = useContext(FormContext);
     const generatedId = useId();
     const rootRef = useRef<HTMLDivElement>(null);
+    const labelId = `${generatedId}-label`;
     const hintId = `${generatedId}-hint`;
     const errorId = `${generatedId}-error`;
 
@@ -70,6 +81,19 @@ export function Field({ label, children, hint, error, name: nameProp, errorMessa
     );
     const carriedKey = carries ? keyOf(carried) : undefined;
 
+    // <label for> only names inputs, selects, textareas and buttons. When the control turns out to be something else
+    // (a radiogroup like SegmentedControl, a ListBox, a DateField's group), it's named with aria-labelledby instead.
+    const [labelsByFor, setLabelsByFor] = useState(true);
+    useLayoutEffect(() => {
+        if (!label) return;
+        const control = rootRef.current?.ownerDocument.getElementById(controlId);
+        setLabelsByFor(!control || isLabelable(control));
+    });
+    const labelledBy =
+        label && !labelsByFor && child && child.props["aria-label"] === undefined && child.props["aria-labelledby"] === undefined
+            ? { "aria-labelledby": labelId }
+            : {};
+
     const entry = useRef<FormFieldEntry>({ name, root: rootRef, controlId, errorMessages });
     entry.current = { name, root: rootRef, controlId, errorMessages };
     const register = form?.register;
@@ -87,11 +111,11 @@ export function Field({ label, children, hint, error, name: nameProp, errorMessa
     return (
         <div ref={rootRef} className={cx("ow-field", className)}>
             {label ? (
-                <label className="ow-field__label" htmlFor={controlId}>
+                <label id={labelId} className="ow-field__label" htmlFor={controlId}>
                     {label}
                 </label>
             ) : null}
-            {child ? cloneElement(child, { id: controlId, "aria-describedby": describedBy, ...invalidProp }) : children}
+            {child ? cloneElement(child, { id: controlId, "aria-describedby": describedBy, ...labelledBy, ...invalidProp }) : children}
             {carries && nameProp
                 ? carriedValues.map((value, index) => <input key={index} type="hidden" name={nameProp} value={value === true ? "on" : String(value)} />)
                 : null}

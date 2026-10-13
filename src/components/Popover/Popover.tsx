@@ -82,8 +82,17 @@ export function Popover({
         if (!isOpen || !autoFocus) return;
         const frame = requestAnimationFrame(() => {
             const panel = panelRef.current;
+            // The first control Tab would reach: not one taken out of the tab order (a radio group's other options), a
+            // hidden input or anything disabled, so a group lands on its chosen option.
             const first = panel?.querySelector<HTMLElement>(
-                'input, select, textarea, button, [href], [tabindex]:not([tabindex="-1"])',
+                [
+                    'input:not([type="hidden"]):not([disabled]):not([tabindex="-1"])',
+                    'select:not([disabled]):not([tabindex="-1"])',
+                    'textarea:not([disabled]):not([tabindex="-1"])',
+                    'button:not([disabled]):not([tabindex="-1"])',
+                    '[href]:not([tabindex="-1"])',
+                    '[tabindex]:not([tabindex="-1"])',
+                ].join(", "),
             );
             (first ?? panel)?.focus();
         });

@@ -58,9 +58,8 @@
     padding: 0;
 }
 .ow-button--icon-only.ow-button--sm {
-    width: 28px;
-    height: 28px;
-    min-height: 28px;
+    width: 32px;
+    height: 32px;
 }
 .ow-button--icon-only.ow-button--md {
     width: 40px;
@@ -268,29 +267,38 @@
     flex-wrap: nowrap;
     gap: 0;
 }
-.ow-button-group--attached > .ow-button {
+/* A button joins its neighbours whether it's a direct child or wrapped one level down, by a Tooltip or a Menu's trigger. */
+.ow-button-group--attached > .ow-button,
+.ow-button-group--attached > * > .ow-button {
     position: relative;
 }
 .ow-button-group--attached > .ow-button:hover,
 .ow-button-group--attached > .ow-button:focus-visible,
-.ow-button-group--attached > .ow-button--pressed {
+.ow-button-group--attached > .ow-button--pressed,
+.ow-button-group--attached > * > .ow-button:hover,
+.ow-button-group--attached > * > .ow-button:focus-visible,
+.ow-button-group--attached > * > .ow-button--pressed {
     z-index: 1;
 }
-.ow-button-group--attached:not(.ow-button-group--vertical) > .ow-button:not(:first-child) {
+.ow-button-group--attached:not(.ow-button-group--vertical) > .ow-button:not(:first-child),
+.ow-button-group--attached:not(.ow-button-group--vertical) > :not(:first-child) > .ow-button {
     margin-left: -1px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
-.ow-button-group--attached:not(.ow-button-group--vertical) > .ow-button:not(:last-child) {
+.ow-button-group--attached:not(.ow-button-group--vertical) > .ow-button:not(:last-child),
+.ow-button-group--attached:not(.ow-button-group--vertical) > :not(:last-child) > .ow-button {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
-.ow-button-group--attached.ow-button-group--vertical > .ow-button:not(:first-child) {
+.ow-button-group--attached.ow-button-group--vertical > .ow-button:not(:first-child),
+.ow-button-group--attached.ow-button-group--vertical > :not(:first-child) > .ow-button {
     margin-top: -1px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
-.ow-button-group--attached.ow-button-group--vertical > .ow-button:not(:last-child) {
+.ow-button-group--attached.ow-button-group--vertical > .ow-button:not(:last-child),
+.ow-button-group--attached.ow-button-group--vertical > :not(:last-child) > .ow-button {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }

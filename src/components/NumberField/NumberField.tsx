@@ -45,6 +45,8 @@ export const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>(functi
         onBlur,
         onFocus,
         onKeyDown,
+        name,
+        form,
         ...inputProps
     },
     ref,
@@ -148,6 +150,8 @@ export const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>(functi
                 onKeyDown={handleKeyDown}
                 {...inputProps}
             />
+            {/* The field shows the number formatted ("€1,200.00"), so a form gets the plain number from here instead. */}
+            {name ? <input type="hidden" name={name} form={form} value={number ?? ""} disabled={disabled} /> : null}
             <button
                 type="button"
                 className="ow-number-field__step"

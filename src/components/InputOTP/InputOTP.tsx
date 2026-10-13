@@ -27,6 +27,12 @@ export interface InputOTPProps {
     "aria-label"?: string;
     /** The form field name; a hidden input carries the whole code. */
     name?: string;
+    /** Names the code by another element's id, in place of aria-label. */
+    "aria-labelledby"?: string;
+    /** Ids of the hint or error that describe it, read from every box; Field sets this. */
+    "aria-describedby"?: string;
+    /** The id of the first box, so a Field's label points at it and clicking the label starts there; Field sets this. */
+    id?: string;
     className?: string;
 }
 
@@ -46,6 +52,9 @@ export function InputOTP({
     disabled,
     autoFocus,
     "aria-label": ariaLabel = "Verification code",
+    "aria-labelledby": ariaLabelledBy,
+    "aria-describedby": ariaDescribedBy,
+    id,
     name,
     className,
 }: InputOTPProps) {
@@ -107,7 +116,12 @@ export function InputOTP({
     }
 
     return (
-        <div role="group" aria-label={ariaLabel} className={cx("ow-otp", isInvalid && "ow-otp--invalid", className)}>
+        <div
+            role="group"
+            aria-label={ariaLabelledBy ? undefined : ariaLabel}
+            aria-labelledby={ariaLabelledBy}
+            className={cx("ow-otp", isInvalid && "ow-otp--invalid", className)}
+        >
             {chars.map((char, index) => (
                 <span key={index} className="ow-otp__slot">
                     {groupSize && index > 0 && index % groupSize === 0 ? (
@@ -123,7 +137,9 @@ export function InputOTP({
                         autoComplete={index === 0 ? "one-time-code" : "off"}
                         autoCapitalize="characters"
                         maxLength={length}
+                        id={index === 0 ? id : undefined}
                         aria-label={`Character ${index + 1} of ${length}`}
+                        aria-describedby={ariaDescribedBy}
                         aria-invalid={isInvalid || undefined}
                         disabled={disabled}
                         autoFocus={autoFocus && index === 0}

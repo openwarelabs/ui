@@ -4,8 +4,10 @@ export type ISODate = string;
 const pad = (n: number) => String(n).padStart(2, "0");
 
 export function toISO(year: number, month: number, day: number): ISODate {
-    const date = new Date(Date.UTC(year, month, day));
-    return `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())}`;
+    // setUTCFullYear, not Date.UTC, which reads years 0–99 as 1900–1999. Months and days past the end roll over.
+    const date = new Date(0);
+    date.setUTCFullYear(year, month, day);
+    return `${String(date.getUTCFullYear()).padStart(4, "0")}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())}`;
 }
 
 export function parseISO(iso: ISODate): { year: number; month: number; day: number } {

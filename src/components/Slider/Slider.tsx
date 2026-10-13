@@ -27,6 +27,12 @@ export interface SliderProps<V extends SliderValue = number> {
     formatValue?(value: number): string;
     /** Names the slider when there's no visible label. */
     "aria-label"?: string;
+    /** Names the slider by another element's id, such as a Field's label. */
+    "aria-labelledby"?: string;
+    /** Ids of the hint or error that describe it; Field sets this. */
+    "aria-describedby"?: string;
+    /** The id of the (first) handle's input, so a Field's label points at it; Field sets this. */
+    id?: string;
     disabled?: boolean;
     className?: string;
 }
@@ -47,6 +53,9 @@ export function Slider<V extends SliderValue = number>({
     showValue = true,
     formatValue = String,
     "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledBy,
+    "aria-describedby": ariaDescribedBy,
+    id,
     disabled,
     className,
 }: SliderProps<V>) {
@@ -72,7 +81,9 @@ export function Slider<V extends SliderValue = number>({
                 step={step}
                 value={own}
                 disabled={disabled}
-                aria-labelledby={label ? labelId : undefined}
+                id={which === (isRange ? "low" : "high") ? id : undefined}
+                aria-describedby={ariaDescribedBy}
+                aria-labelledby={label ? labelId : ariaLabelledBy}
                 aria-label={label ? undefined : isRange ? `${ariaLabel ?? "Range"}, ${which === "low" ? "minimum" : "maximum"}` : ariaLabel}
                 aria-valuetext={formatValue(own)}
                 onChange={(event) => {
