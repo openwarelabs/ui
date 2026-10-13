@@ -197,7 +197,7 @@
     display: grid;
     min-width: 0;
     flex: 1;
-    gap: 3px;
+    gap: 4px;
 }
 
 .notifications-inbox__what {
@@ -214,7 +214,7 @@
     display: -webkit-box;
     overflow: hidden;
     border-left: 2px solid var(--ow-border-strong);
-    margin: 3px 0 1px;
+    margin: 2px 0 0;
     padding-left: 10px;
     color: var(--ow-text-soft);
     font-size: 13px;

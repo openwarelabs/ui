@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Badge, Button, Card, Chip, Field, Input, SegmentedControl, Stack, Switch, buttonClassName, toast } from "@openwarelabs/ui";
 import { ArrowRight } from "lucide-react";
 
-import { componentDocs, hrefOf, slugify } from "../app/content";
+import { hrefOf, listedComponents, slugify } from "../app/content";
 import { DocPage, Section } from "../app/Page";
 import { categories } from "../app/types";
 import { version } from "../app/version";
@@ -78,7 +78,7 @@ function Hero() {
                 <h1 className="docs-hero__title">Interfaces that look finished from the first commit</h1>
                 <p className="docs-hero__lead">
                     A React component library with Commandr's look: deep midnight, a little brass, cool slate surfaces and buttons that press in.{" "}
-                    {componentDocs.length} components, light and dark themes, and a brand colour you can swap.
+                    {listedComponents.length} components, light and dark themes, and a brand colour you can swap.
                 </p>
                 <div className="docs-hero__actions">
                     <a className={buttonClassName({ variant: "primary", shape: "pill" })} href={hrefOf.guide("installation")}>
@@ -97,7 +97,7 @@ function Hero() {
 
 export function Introduction() {
     const groups = categories
-        .map((category) => ({ category, docs: componentDocs.filter((doc) => doc.meta.category === category) }))
+        .map((category) => ({ category, docs: listedComponents.filter((doc) => doc.meta.category === category) }))
         .filter((group) => group.docs.length);
     return (
         <DocPage
@@ -171,7 +171,7 @@ export function Introduction() {
                     </a>
                     <a className="docs-feature docs-feature--link" href={hrefOf.components()}>
                         <span className="docs-feature__title">Components</span>
-                        <span className="docs-feature__text">All {componentDocs.length} of them, grouped by what they're for.</span>
+                        <span className="docs-feature__text">All {listedComponents.length} of them, grouped by what they're for.</span>
                     </a>
                     <a className="docs-feature docs-feature--link" href={hrefOf.blocks()}>
                         <span className="docs-feature__title">Blocks</span>

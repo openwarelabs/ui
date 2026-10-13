@@ -19,11 +19,11 @@ const people = [
         email: "jonas@example.com",
     },
     {
-        name: "Priya Nair",
+        name: "Clara Novak",
         role: "Head of engineering",
         place: "Lisbon",
         about: "Runs the team behind reviews and deploys, which ship about forty changes a day.",
-        email: "priya@example.com",
+        email: "clara@example.com",
     },
     {
         name: "Aiko Tanaka",

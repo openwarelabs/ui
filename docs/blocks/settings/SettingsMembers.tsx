@@ -33,7 +33,7 @@ const asRole = (role: Role) => (role === "admin" ? "an admin" : `a ${role}`);
 const initialMembers: Member[] = [
     { name: "Maya Chen", email: "maya@example.com", role: "owner" },
     { name: "Tomás Reyes", email: "tomas@example.com", role: "admin" },
-    { name: "Priya Nair", email: "priya@example.com", role: "member" },
+    { name: "Clara Novak", email: "clara@example.com", role: "member" },
     { name: "Jonas Berg", email: "jonas@example.com", role: "member" },
     { name: "Aiko Tanaka", email: "aiko@example.com", role: "member" },
     { name: "Sam Okafor", email: "sam@example.com", role: "guest" },

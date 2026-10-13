@@ -1,11 +1,11 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-import { componentDocs, hrefOf, slugify } from "../app/content";
+import { hrefOf, listedComponents, slugify } from "../app/content";
 import { DocPage, Section } from "../app/Page";
 import { categories } from "../app/types";
 
 /** The first example of a component, shrunk to fit its card. It can't be focused or clicked. */
-function Thumbnail({ doc }: { doc: (typeof componentDocs)[number] }) {
+function Thumbnail({ doc }: { doc: (typeof listedComponents)[number] }) {
     const frame = useRef<HTMLDivElement>(null);
     const content = useRef<HTMLDivElement>(null);
     const [scale, setScale] = useState(0.72);
@@ -49,12 +49,12 @@ function Thumbnail({ doc }: { doc: (typeof componentDocs)[number] }) {
 
 export function ComponentsIndex() {
     const groups = categories
-        .map((category) => ({ category, docs: componentDocs.filter((doc) => doc.meta.category === category) }))
+        .map((category) => ({ category, docs: listedComponents.filter((doc) => doc.meta.category === category) }))
         .filter((group) => group.docs.length);
     return (
         <DocPage
             title="Components"
-            description={`All ${componentDocs.length} components, grouped by what they're for. Each page has live examples, the code to copy and every prop.`}
+            description={`All ${listedComponents.length} components, grouped by what they're for. Each page has live examples, the code to copy and every prop.`}
             toc={groups.map((group) => ({ id: slugify(group.category), label: group.category, level: 2 }))}
         >
             {groups.map((group) => (

@@ -2,6 +2,10 @@
 //   import "@openwarelabs/ui/fonts.css";
 //   import "@openwarelabs/ui/styles.css";
 
+// Typography
+export { Text } from "./components/Text/Text";
+export type { TextProps, TextVariant, TextTone } from "./components/Text/Text";
+
 // Buttons
 export { Button, buttonClassName } from "./components/Button/Button";
 export type { ButtonProps, ButtonStyleOptions, ButtonVariant, ButtonSize, ButtonShape } from "./components/Button/Button";

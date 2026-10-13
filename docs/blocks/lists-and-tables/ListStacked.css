@@ -93,7 +93,7 @@
     display: grid;
     min-width: 0;
     grid-area: text;
-    gap: 3px;
+    gap: 4px;
 }
 
 .list-stacked__name-row {

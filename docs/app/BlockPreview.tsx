@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 
 import { buttonClassName, CodeBlock, SegmentedControl, Spinner, Tooltip } from "@openwarelabs/ui";
 import { ArrowUpRight, Code2, Eye, Monitor, Smartphone, Tablet } from "lucide-react";
@@ -7,6 +7,9 @@ type View = "preview" | "code";
 type Viewport = "desktop" | "tablet" | "phone";
 
 const widths: Record<Viewport, number | null> = { desktop: null, tablet: 768, phone: 390 };
+
+/** The narrowest the frame can be dragged to: a small phone. */
+const minWidth = 320;
 
 interface BlockFile {
     name: string;
@@ -97,17 +100,61 @@ function BlockCode({ id }: { id: string }) {
 }
 
 /**
- * A block, live in a frame you can narrow to a tablet or a phone, or its code. The frame follows the docs' theme and
+ * A block, live in a frame you can narrow to a tablet or a phone, or drag to any width by the handle on its right
+ * edge, or its code. The frame follows the docs' theme and
  * colour, and grows to fit the block unless the block fills the window, when it gets a fixed `height`.
  */
 export function BlockPreview({ id, name, height }: { id: string; name: string; height?: number }) {
     const [view, setView] = useState<View>("preview");
-    const [viewport, setViewport] = useState<Viewport>("desktop");
+    // A preset width, or any width dragged to with the handle (null is the stage's full width).
+    const [width, setWidth] = useState<number | null>(null);
+    const [dragging, setDragging] = useState(false);
+    const [measured, setMeasured] = useState<number | null>(null);
     const [contentHeight, setContentHeight] = useState<number | null>(null);
     const [loaded, setLoaded] = useState(false);
     const frame = useRef<HTMLIFrameElement>(null);
+    const stage = useRef<HTMLDivElement>(null);
+    const device = useRef<HTMLDivElement>(null);
+    const drag = useRef({ startX: 0, startWidth: 0 });
     const fits = height === undefined;
-    const width = widths[viewport];
+    const viewport = (Object.keys(widths) as Viewport[]).find((key) => widths[key] === width) ?? "custom";
+
+    // The width the block is really drawn at, for the readout.
+    useEffect(() => {
+        const element = device.current;
+        if (!element) return undefined;
+        const observer = new ResizeObserver(() => setMeasured(Math.round(element.getBoundingClientRect().width)));
+        observer.observe(element);
+        return () => observer.disconnect();
+    }, []);
+
+    const maxWidth = () => stage.current?.clientWidth ?? Infinity;
+    /** Sets a width, or the full width once it reaches the stage's edge. */
+    const resize = (next: number) => setWidth(next >= maxWidth() - 1 ? null : Math.max(minWidth, Math.round(next)));
+
+    const startDrag = (event: PointerEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        event.currentTarget.setPointerCapture(event.pointerId);
+        drag.current = { startX: event.clientX, startWidth: device.current?.getBoundingClientRect().width ?? 0 };
+        setDragging(true);
+    };
+    // The frame is centred, so its edge moves half as far as its width grows: double the pointer's travel to keep
+    // the handle under the pointer.
+    const moveDrag = (event: PointerEvent<HTMLDivElement>) => {
+        if (!dragging) return;
+        resize(drag.current.startWidth + (event.clientX - drag.current.startX) * 2);
+    };
+    const endDrag = () => setDragging(false);
+    const nudge = (event: KeyboardEvent<HTMLDivElement>) => {
+        const step = event.shiftKey ? 50 : 10;
+        const current = measured ?? maxWidth();
+        if (event.key === "ArrowLeft") resize(current - step);
+        else if (event.key === "ArrowRight") resize(current + step);
+        else if (event.key === "Home") resize(minWidth);
+        else if (event.key === "End") setWidth(null);
+        else return;
+        event.preventDefault();
+    };
 
     useEffect(() => {
         if (!fits) return undefined;
@@ -124,7 +171,7 @@ export function BlockPreview({ id, name, height }: { id: string; name: string; h
     const frameHeight = fits ? (contentHeight ?? 320) : height;
 
     return (
-        <div className="docs-block" data-view={view} data-viewport={viewport}>
+        <div className="docs-block" data-view={view} data-viewport={width === null ? "desktop" : "narrow"} data-dragging={dragging || undefined}>
             <div className="docs-block__bar">
                 <SegmentedControl
                     size="sm"
@@ -138,12 +185,17 @@ export function BlockPreview({ id, name, height }: { id: string; name: string; h
                 />
                 <div className="docs-block__tools">
                     {view === "preview" ? (
+                        <span className="docs-block__width" aria-live="polite">
+                            {measured ? `${measured} px` : null}
+                        </span>
+                    ) : null}
+                    {view === "preview" ? (
                         <SegmentedControl
                             size="sm"
                             aria-label="Preview width"
                             className="docs-block__viewports"
                             value={viewport}
-                            onChange={(value) => setViewport(value as Viewport)}
+                            onChange={(value) => setWidth(widths[value as Viewport])}
                             options={[
                                 { value: "desktop", label: null, icon: <Monitor size={15} />, "aria-label": "Desktop: the full width" },
                                 { value: "tablet", label: null, icon: <Tablet size={15} />, "aria-label": "Tablet: 768 pixels wide" },
@@ -164,8 +216,8 @@ export function BlockPreview({ id, name, height }: { id: string; name: string; h
                     </Tooltip>
                 </div>
             </div>
-            <div className="docs-block__stage" hidden={view !== "preview"}>
-                <div className="docs-block__device" style={{ width: width ? `min(${width}px, 100%)` : "100%" }}>
+            <div ref={stage} className="docs-block__stage" hidden={view !== "preview"}>
+                <div ref={device} className="docs-block__device" style={{ width: width ? `min(${width}px, 100%)` : "100%" }}>
                     <iframe
                         ref={frame}
                         className="docs-block__frame"
@@ -181,6 +233,24 @@ export function BlockPreview({ id, name, height }: { id: string; name: string; h
                             <Spinner size="sm" label={`Loading ${name}`} />
                         </div>
                     ) : null}
+                    <div
+                        className="docs-block__handle"
+                        role="separator"
+                        aria-orientation="vertical"
+                        aria-label="Preview width: drag, or use the arrow keys"
+                        aria-valuemin={minWidth}
+                        aria-valuemax={stage.current?.clientWidth}
+                        aria-valuenow={measured ?? undefined}
+                        tabIndex={0}
+                        onPointerDown={startDrag}
+                        onPointerMove={moveDrag}
+                        onPointerUp={endDrag}
+                        onPointerCancel={endDrag}
+                        onKeyDown={nudge}
+                        onDoubleClick={() => setWidth(null)}
+                    >
+                        <span className="docs-block__grip" aria-hidden="true" />
+                    </div>
                 </div>
             </div>
             {view === "code" ? <BlockCode id={id} /> : null}

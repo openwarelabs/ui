@@ -11,6 +11,7 @@ export type BlockGroup = "Marketing" | "Application";
 export type SketchKind =
     | "header"
     | "hero"
+    | "section-heading"
     | "hero-split"
     | "features"
     | "features-alternating"
@@ -67,6 +68,11 @@ export interface BlockCategory {
     sketch: SketchKind;
     /** The Openware components the blocks are made from. */
     uses: string[];
+    /**
+     * A component from the package that these blocks are built around. Its page lives here rather than under
+     * Components: its examples and props show after the blocks, and links to it come here.
+     */
+    component?: string;
     variants: BlockVariant[];
 }
 
@@ -83,6 +89,7 @@ export const blockCategories: BlockCategory[] = [
         description: "The bar along the top of a site: the logo, a few links and one call to action.",
         sketch: "header",
         uses: ["SiteHeader", "Button", "Menu", "Drawer"],
+        component: "SiteHeader",
         variants: [
             { id: "HeaderFloatingPill", name: "Floating pill", description: "Commandr's header: a blurred pill that floats above the page and follows it down.", height: 440 },
             { id: "HeaderFullWidth", name: "Full-width bar", description: "A bar across the top with menus that open on product and resources.", height: 460 },
@@ -105,6 +112,20 @@ export const blockCategories: BlockCategory[] = [
             { id: "HeroDotGrid", name: "On a dot grid", description: "The headline on Openware's dot grid, with the dots turning brass under the pointer." },
             { id: "HeroLogos", name: "With logos below", description: "The usual hero, then a row of customers' logos as the first proof." },
             { id: "HeroDownload", name: "Download buttons", description: "For a desktop app: buttons for each platform, with the one for this computer first.", sketch: "hero-split" },
+        ],
+    },
+    {
+        slug: "section-headings",
+        title: "Section headings",
+        group: "Marketing",
+        description: "How a section opens: a small label, a big light title and a line or two under it.",
+        sketch: "section-heading",
+        uses: ["SectionHeading", "Chip", "Button", "Link"],
+        component: "SectionHeading",
+        variants: [
+            { id: "SectionHeadingCentred", name: "Centred", description: "The label, the title and the intro centred over the section, for features and pricing." },
+            { id: "SectionHeadingWithLink", name: "With a link", description: "The heading on the left and a link to the rest on the right, for a preview of posts or releases." },
+            { id: "SectionHeadingSplit", name: "Split", description: "The title on the left; the intro and a button on the right, for a wide section." },
         ],
     },
     {
@@ -513,7 +534,7 @@ const sketches: Record<SketchKind, () => ReactNode> = {
             <T width={70} />
             <T width={52} />
             <L width={46} />
-            <Row gap={5} style={{ margin: "3px 0 6px" }}>
+            <Row gap={5} style={{ margin: "4px 0 6px" }}>
                 <B primary />
                 <B />
             </Row>
@@ -527,7 +548,7 @@ const sketches: Record<SketchKind, () => ReactNode> = {
                 <T width={90} />
                 <T width={70} />
                 <L width={80} />
-                <Row gap={5} style={{ marginTop: 3 }}>
+                <Row gap={5} style={{ marginTop: 4 }}>
                     <B primary width={34} />
                     <B width={28} />
                 </Row>
@@ -801,6 +822,15 @@ const sketches: Record<SketchKind, () => ReactNode> = {
                 <L width={70} />
             </Col>
         </Row>
+    ),
+    "section-heading": () => (
+        <Col gap={6} style={{ width: "100%" }}>
+            <span className="sk-chip" />
+            <T width={64} />
+            <T width={44} />
+            <L width={56} />
+            <L width={40} />
+        </Col>
     ),
     "page-heading": () => (
         <Col gap={7} style={{ width: "100%" }}>

@@ -17,7 +17,7 @@ const contents = [
 
 const admins = [
     { value: "Tomás Reyes", label: "Tomás Reyes", description: "Admin · tomas@example.com" },
-    { value: "Priya Nair", label: "Priya Nair", description: "Admin · priya@example.com" },
+    { value: "Clara Novak", label: "Clara Novak", description: "Admin · clara@example.com" },
     { value: "Jonas Berg", label: "Jonas Berg", description: "Admin · jonas@example.com" },
 ];
 

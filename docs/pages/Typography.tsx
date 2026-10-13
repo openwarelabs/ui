@@ -1,9 +1,10 @@
 import tokens from "docs:tokens";
 
-import { slugify } from "../app/content";
+import { hrefOf, slugify } from "../app/content";
 import { SnippetBlock } from "../app/Guide";
 import { DocPage, Section } from "../app/Page";
 import type { TypeStyle } from "../app/types";
+import textComponent from "../snippets/text.tsx?highlight";
 import typeClasses from "../snippets/type-classes.tsx?highlight";
 
 const { families, groups } = tokens.type;
@@ -63,7 +64,7 @@ export function Typography() {
                             <div key={style.name} className="docs-type-row">
                                 <span className={`docs-type-row__sample ${style.name}`}>{style.sample ?? "The quick brown fox"}</span>
                                 <span className="docs-type-row__meta">
-                                    <code>{style.name.replace(/^ow-type-/, "")}</code>
+                                    <code>{`<Text variant="${style.name.replace(/^ow-type-/, "")}">`}</code>
                                     <span>{spec(style)}</span>
                                     {style.usage ? <span className="docs-type-row__usage">{style.usage}</span> : null}
                                 </span>
@@ -75,8 +76,16 @@ export function Typography() {
             <Section
                 id="using-the-styles"
                 title="Using the styles"
-                description="Put the class on any element. Choose the element for the outline (h1, h2, p) and the class for the look."
+                description={
+                    <>
+                        In React, use the <a href={hrefOf.component("text")}>Text</a> component: its variants are these styles, by the same names. It picks a
+                        sensible element, mutes the styles that should be muted and shrinks the display styles on phones; set <code>as</code> to keep the
+                        page's outline right.
+                    </>
+                }
             >
+                <SnippetBlock snippet={textComponent} />
+                <p className="docs-text">Anywhere else, put the class on any element. Choose the element for the outline (h1, h2, p) and the class for the look.</p>
                 <SnippetBlock snippet={typeClasses} />
             </Section>
         </DocPage>

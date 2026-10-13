@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { builtBlocks } from "docs:block-index";
 
 import { BlockPreview } from "../app/BlockPreview";
+import { ComponentReference } from "../app/ComponentPage";
 import { Sketch, blockCategories, blockGroups, blockHref, blockId, blockVariantCount, type BlockCategory } from "../app/blocks";
 import { componentDocs, hrefOf, kebab, slugify } from "../app/content";
 import { DocPage, Section } from "../app/Page";
@@ -58,6 +59,7 @@ export function BlockCategoryPage({ category }: { category: BlockCategory }) {
     const index = blockCategories.indexOf(category);
     const previous = blockCategories[index - 1];
     const next = blockCategories[index + 1];
+    const component = category.component ? docFor(category.component) : undefined;
     return (
         <DocPage
             wide
@@ -95,7 +97,10 @@ export function BlockCategoryPage({ category }: { category: BlockCategory }) {
                     </div>
                 </div>
             }
-            toc={category.variants.map((variant) => ({ id: slugify(variant.name), label: variant.name, level: 2 }))}
+            toc={[
+                ...category.variants.map((variant) => ({ id: slugify(variant.name), label: variant.name, level: 2 as const })),
+                ...(component ? [{ id: component.slug, label: component.meta.title, level: 2 as const }] : []),
+            ]}
         >
             {category.variants.map((variant) => {
                 const id = blockId(category, variant);
@@ -113,6 +118,8 @@ export function BlockCategoryPage({ category }: { category: BlockCategory }) {
                     </Section>
                 );
             })}
+
+            {component ? <ComponentReference doc={component} /> : null}
 
             <nav className="docs-pager" aria-label="Previous and next">
                 {previous ? (

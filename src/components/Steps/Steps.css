@@ -83,7 +83,7 @@
     display: grid;
     min-width: 0;
     flex: 1 1 160px;
-    gap: var(--ow-space-3xs);
+    gap: var(--ow-space-2xs);
 }
 
 .ow-steps__title {

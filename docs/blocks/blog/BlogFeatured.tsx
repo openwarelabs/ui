@@ -15,7 +15,7 @@ const more: Array<{ title: string; category: string; date: string; iso: string; 
         author: "Tomás Reyes",
         cover: "diff",
     },
-    { title: "Roll back any deploy in one click", category: "Product", date: "22 Sep 2026", iso: "2026-09-22", author: "Priya Nair", cover: "bars" },
+    { title: "Roll back any deploy in one click", category: "Product", date: "22 Sep 2026", iso: "2026-09-22", author: "Clara Novak", cover: "bars" },
 ];
 
 /** A post's cover, drawn with CSS from the brand scale. Swap it for an image: <img src="…" alt="" />. */

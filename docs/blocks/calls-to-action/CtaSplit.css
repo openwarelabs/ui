@@ -188,7 +188,7 @@
 .cta-split__line {
     display: block;
     overflow: hidden;
-    padding: 3px 12px;
+    padding: 4px 12px;
     color: var(--ow-text-soft);
     text-overflow: ellipsis;
     white-space: pre;

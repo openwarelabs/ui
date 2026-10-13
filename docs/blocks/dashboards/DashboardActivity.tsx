@@ -50,7 +50,7 @@ const events: Event[] = [
         icon: <GitMerge size={14} />,
         text: (
             <>
-                <strong>Priya Nair</strong> merged <strong>#306 Cache avatars between launches</strong>
+                <strong>Clara Novak</strong> merged <strong>#306 Cache avatars between launches</strong>
             </>
         ),
         meta: "mobile-app · 1 h ago",

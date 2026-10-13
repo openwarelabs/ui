@@ -57,14 +57,14 @@
 }
 
 .contact-form__detail-value {
-    margin: 3px 0 0;
+    margin: 4px 0 0;
     color: var(--ow-text);
     font-size: 15px;
     font-weight: var(--ow-weight-control);
 }
 
 .contact-form__detail-note {
-    margin: 3px 0 0;
+    margin: 4px 0 0;
     color: var(--ow-text-muted);
     font-size: 13.5px;
     line-height: 1.5;

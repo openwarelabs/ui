@@ -58,7 +58,7 @@
 }
 
 .ow-palette__group {
-    padding: var(--ow-space-sm) var(--ow-space-sm) var(--ow-space-3xs);
+    padding: var(--ow-space-sm) var(--ow-space-sm) var(--ow-space-2xs);
     color: var(--ow-text-muted);
     font-size: 11px;
     font-weight: var(--ow-weight-control);

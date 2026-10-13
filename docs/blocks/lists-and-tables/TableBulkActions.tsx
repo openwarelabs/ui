@@ -21,7 +21,7 @@ interface Person {
 const people: Person[] = [
     { id: "maya", name: "Maya Chen", email: "maya@example.com", role: "Owner", twoFactor: "On", minutesAgo: 0, lastActive: "Now" },
     { id: "tomas", name: "Tomás Reyes", email: "tomas@example.com", role: "Admin", twoFactor: "On", minutesAgo: 12, lastActive: "12 min ago" },
-    { id: "priya", name: "Priya Nair", email: "priya@example.com", role: "Admin", twoFactor: "On", minutesAgo: 64, lastActive: "1 h ago" },
+    { id: "clara", name: "Clara Novak", email: "clara@example.com", role: "Admin", twoFactor: "On", minutesAgo: 64, lastActive: "1 h ago" },
     { id: "jonas", name: "Jonas Berg", email: "jonas@example.com", role: "Member", twoFactor: "Off", minutesAgo: 190, lastActive: "3 h ago" },
     { id: "aiko", name: "Aiko Tanaka", email: "aiko@example.com", role: "Member", twoFactor: "On", minutesAgo: 1300, lastActive: "Yesterday" },
     { id: "sam", name: "Sam Okafor", email: "sam@example.com", role: "Member", twoFactor: "Off", minutesAgo: 2900, lastActive: "2 days ago" },

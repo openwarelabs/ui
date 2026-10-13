@@ -28,7 +28,7 @@ interface Row {
     tone: BadgeVariant;
 }
 
-const members = ["Priya Nair", "Jonas Berg", "Aiko Tanaka", "Sam Okafor", "Maya Chen"];
+const members = ["Clara Novak", "Jonas Berg", "Aiko Tanaka", "Sam Okafor", "Maya Chen"];
 
 /** The views of the project that list things, each with a few rows to start the page. */
 const lists: Array<{ id: string; label: string; rows: Row[] }> = [
@@ -36,8 +36,8 @@ const lists: Array<{ id: string; label: string; rows: Row[] }> = [
         id: "deploys",
         label: "Deploys",
         rows: [
-            { title: "Update React Native to 0.76", mono: "agent/rn-076", meta: "Agent for Priya Nair · 1 h ago", status: "Building", tone: "active" },
-            { title: "Release 2.4", mono: "release/2.4", meta: "Priya Nair · 2 h ago", status: "Live", tone: "success" },
+            { title: "Update React Native to 0.76", mono: "agent/rn-076", meta: "Agent for Clara Novak · 1 h ago", status: "Building", tone: "active" },
+            { title: "Release 2.4", mono: "release/2.4", meta: "Clara Novak · 2 h ago", status: "Live", tone: "success" },
             { title: "Dark mode for the settings screen", mono: "main", meta: "Jonas Berg · Yesterday", status: "Live", tone: "success" },
         ],
     },
@@ -48,7 +48,7 @@ const lists: Array<{ id: string; label: string; rows: Row[] }> = [
             {
                 title: "Update React Native to 0.76",
                 mono: "#311",
-                meta: "Opened by an agent for Priya Nair · 412 lines",
+                meta: "Opened by an agent for Clara Novak · 412 lines",
                 status: "Needs review",
                 tone: "warning",
             },
@@ -60,7 +60,7 @@ const lists: Array<{ id: string; label: string; rows: Row[] }> = [
         id: "runs",
         label: "Agent runs",
         rows: [
-            { title: "Update React Native to 0.76", mono: "agent/rn-076", meta: "For Priya Nair · 23 min · 14 files", status: "Needs review", tone: "warning" },
+            { title: "Update React Native to 0.76", mono: "agent/rn-076", meta: "For Clara Novak · 23 min · 14 files", status: "Needs review", tone: "warning" },
             {
                 title: "Translate onboarding into Japanese",
                 mono: "agent/onboarding-ja",

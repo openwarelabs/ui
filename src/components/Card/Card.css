@@ -35,7 +35,7 @@
     display: grid;
     min-width: 0;
     flex: 1 1 192px;
-    gap: var(--ow-space-3xs);
+    gap: var(--ow-space-2xs);
 }
 
 .ow-settings-row__label {

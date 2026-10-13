@@ -79,7 +79,7 @@
 
 .ow-choice__text {
     display: grid;
-    gap: var(--ow-space-3xs);
+    gap: var(--ow-space-2xs);
 }
 
 .ow-choice__title {

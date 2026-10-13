@@ -26,7 +26,7 @@ function Frame({ path, label, children }: { path: string[]; label: string; child
                 <AvatarGroup size="sm" max={3} className="features-tabs__people">
                     <Avatar name="Maya Chen" />
                     <Avatar name="Tomás Reyes" />
-                    <Avatar name="Priya Nair" />
+                    <Avatar name="Clara Novak" />
                     <Avatar name="Jonas Berg" />
                     <Avatar name="Aiko Tanaka" />
                 </AvatarGroup>
@@ -60,7 +60,7 @@ const board = [
         column: "In progress",
         issues: [
             { id: "ACME-412", title: "Bump the Stripe SDK to v15", label: "billing-api", owner: "Agent", progress: 88 },
-            { id: "ACME-417", title: "Offline drafts on Android", label: "mobile-app", owner: "Priya Nair" },
+            { id: "ACME-417", title: "Offline drafts on Android", label: "mobile-app", owner: "Clara Novak" },
         ],
     },
     {
@@ -114,7 +114,7 @@ const runs = [
     {
         title: "Fix the flaky checkout test",
         project: "mobile-app",
-        for: "Priya Nair",
+        for: "Clara Novak",
         state: "Opened pull request #96",
         status: "Ready",
         tone: "success",
@@ -186,7 +186,7 @@ const diff = [
     { kind: " ", old: 16, new: 20, code: "}" },
 ];
 
-const checks = ["240 tests passed", "Preview is ready", "Approved by Priya Nair"];
+const checks = ["240 tests passed", "Preview is ready", "Approved by Clara Novak"];
 
 function ReviewScreen() {
     return (
@@ -247,7 +247,7 @@ const deploys = [
         status: "Building",
         tone: "active",
     },
-    { project: "mobile-app", branch: "release/2.4", what: "Release 2.4", who: "Priya Nair", when: "2 h ago", status: "Live", tone: "success" },
+    { project: "mobile-app", branch: "release/2.4", what: "Release 2.4", who: "Clara Novak", when: "2 h ago", status: "Live", tone: "success" },
     { project: "docs", branch: "spike/new-nav", what: "Try the new navigation", who: "Aiko Tanaka", when: "3 h ago", status: "Failed", tone: "danger" },
 ] as const;
 

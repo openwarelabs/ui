@@ -32,8 +32,8 @@ export function Sizes() {
 export function Fallbacks() {
     return (
         <Stack direction="row" gap="md" align="center">
-            <Avatar name="Priya Nair" size="lg" label="Priya Nair" />
-            <Avatar name="Sam Okafor" src="data:," size="lg" label="Sam Okafor" />
+            <Avatar name="Alex Silver" size="lg" label="Alex Silver" />
+            <Avatar name="Alex Silver" src="data:," size="lg" label="Alex Silver" />
             <Avatar name="" size="lg" label="Unknown" />
         </Stack>
     );

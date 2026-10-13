@@ -8,6 +8,7 @@ export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "
 
 export const cssOrder = [
     "styles/base.css",
+    "components/Text/Text.css",
     "components/Spinner/Spinner.css",
     "components/Button/Button.css",
     "components/SegmentedControl/SegmentedControl.css",

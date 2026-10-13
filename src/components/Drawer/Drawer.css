@@ -102,7 +102,7 @@
     display: grid;
     min-width: 0;
     flex: 1;
-    gap: var(--ow-space-3xs);
+    gap: var(--ow-space-2xs);
     padding-top: 5px;
 }
 

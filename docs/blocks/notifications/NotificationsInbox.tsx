@@ -22,13 +22,13 @@ interface Notification {
 const initial: Notification[] = [
     {
         id: "n1",
-        from: "Priya Nair",
+        from: "Clara Novak",
         what: (
             <>
-                <strong>Priya Nair</strong> mentioned you in <strong>Fix invoice dates in the EU</strong>
+                <strong>Clara Novak</strong> mentioned you in <strong>Fix invoice dates in the EU</strong>
             </>
         ),
-        summary: "Priya Nair mentioned you in Fix invoice dates in the EU",
+        summary: "Clara Novak mentioned you in Fix invoice dates in the EU",
         quote: "@maya can you check the rounding on the Irish invoices before we merge?",
         where: "billing-api",
         when: "4 min ago",

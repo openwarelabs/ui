@@ -45,7 +45,7 @@ const sections = [
         rows: [
             { title: "Pricing page copy", meta: "marketing-site · Maya Chen", when: "4 min ago", status: "Live", tone: "success" },
             { title: "Fix invoice dates in the EU", meta: "billing-api · Agent for Tomás Reyes", when: "26 min ago", status: "Building", tone: "active" },
-            { title: "Release 2.4", meta: "mobile-app · Priya Nair", when: "2 h ago", status: "Live", tone: "success" },
+            { title: "Release 2.4", meta: "mobile-app · Clara Novak", when: "2 h ago", status: "Live", tone: "success" },
             { title: "Rebuild the search index", meta: "docs · Agent for Jonas Berg", when: "Yesterday", status: "Failed", tone: "danger" },
         ] as Row[],
     },
@@ -89,7 +89,7 @@ const sections = [
                 status: "Building",
                 tone: "active",
             },
-            { title: "release/2.4 · c81aa95", meta: "mobile-app · Priya Nair · 3 min 12 s", when: "2 h ago", status: "Live", tone: "success" },
+            { title: "release/2.4 · c81aa95", meta: "mobile-app · Clara Novak · 3 min 12 s", when: "2 h ago", status: "Live", tone: "success" },
             { title: "main · 07d5e3f", meta: "design-system · Aiko Tanaka · 1 min 05 s", when: "3 h ago", status: "Live", tone: "success" },
         ] as Row[],
     },
@@ -115,7 +115,7 @@ const sections = [
             },
             {
                 title: "Update React Native to 0.76",
-                meta: "mobile-app · for Priya Nair · 14 files changed",
+                meta: "mobile-app · for Clara Novak · 14 files changed",
                 when: "1 h ago",
                 status: "Needs review",
                 tone: "warning",

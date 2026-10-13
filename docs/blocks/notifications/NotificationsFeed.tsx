@@ -78,11 +78,11 @@ const recent: Day[] = [
             {
                 id: "e3",
                 kind: "review",
-                by: "Priya Nair",
+                by: "Clara Novak",
                 at: "11:47",
                 line: (
                     <>
-                        <Who>Priya Nair</Who> commented on <To>Fix invoice dates in the EU</To>
+                        <Who>Clara Novak</Who> commented on <To>Fix invoice dates in the EU</To>
                     </>
                 ),
                 detail: <p className="notifications-feed__quote">The rounding looks right now. Can we add a test for a customer in Dublin at 23:30 UTC?</p>,
@@ -120,7 +120,7 @@ const recent: Day[] = [
                         <Badge size="sm" variant="danger">
                             Failed
                         </Badge>
-                        <span>Tests failed in checkout.spec.ts · started by Priya Nair</span>
+                        <span>Tests failed in checkout.spec.ts · started by Clara Novak</span>
                     </>
                 ),
             },

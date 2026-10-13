@@ -215,7 +215,7 @@
     display: grid;
     min-width: 0;
     flex: 1;
-    gap: 3px;
+    gap: 4px;
 }
 
 .changelog__pr-name {

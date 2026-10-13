@@ -47,7 +47,7 @@ const posts: Array<{
         date: "22 Sep 2026",
         iso: "2026-09-22",
         read: "3 min read",
-        author: "Priya Nair",
+        author: "Clara Novak",
         role: "Engineering manager",
         cover: "bars",
     },

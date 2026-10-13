@@ -179,7 +179,7 @@ body {
 
 .docs-search__keys {
     display: inline-flex;
-    gap: 3px;
+    gap: 4px;
 }
 
 .docs-search__keys .ow-kbd {
@@ -856,7 +856,7 @@ body {
 
 .docs-card__body {
     display: grid;
-    gap: var(--ow-space-3xs);
+    gap: var(--ow-space-2xs);
     padding: var(--ow-space-md) var(--ow-space-xl) var(--ow-space-lg);
 }
 
@@ -1436,7 +1436,7 @@ body {
 
 .docs-type-row__meta {
     display: grid;
-    gap: 3px;
+    gap: 4px;
     color: var(--ow-text-muted);
     font-size: 12px;
     line-height: 1.5;
@@ -1684,6 +1684,8 @@ a.docs-block-uses__item:focus-visible {
 .docs-block__stage {
     display: flex;
     justify-content: center;
+    /* Room on each side for the resize handle, at every width. */
+    padding: 0 22px;
     background-color: var(--ow-canvas);
     background-image: radial-gradient(var(--ow-dot) 1px, transparent 1.4px);
     background-size: 22px 22px;
@@ -1693,9 +1695,9 @@ a.docs-block-uses__item:focus-visible {
     display: none;
 }
 
-.docs-block[data-viewport="tablet"] .docs-block__stage,
-.docs-block[data-viewport="phone"] .docs-block__stage {
-    padding: 28px 16px;
+.docs-block[data-viewport="narrow"] .docs-block__stage {
+    padding-top: 28px;
+    padding-bottom: 28px;
 }
 
 .docs-block__device {
@@ -1704,12 +1706,23 @@ a.docs-block-uses__item:focus-visible {
     transition: width var(--ow-duration-panel) var(--ow-ease-emphasized);
 }
 
-.docs-block[data-viewport="tablet"] .docs-block__device,
-.docs-block[data-viewport="phone"] .docs-block__device {
-    overflow: hidden;
+.docs-block[data-viewport="narrow"] .docs-block__frame {
+    border-radius: calc(var(--ow-radius-container) - 1px);
+}
+
+.docs-block[data-viewport="narrow"] .docs-block__device {
     border: 1px solid var(--ow-border);
     border-radius: var(--ow-radius-container);
     box-shadow: var(--ow-shadow-menu);
+}
+
+.docs-block[data-dragging] .docs-block__device {
+    transition: none;
+}
+
+/* While dragging, the frame mustn't swallow the pointer. */
+.docs-block[data-dragging] .docs-block__frame {
+    pointer-events: none;
 }
 
 .docs-block__frame {
@@ -1723,6 +1736,51 @@ a.docs-block-uses__item:focus-visible {
 
 .docs-block__frame[data-loaded] {
     opacity: 1;
+}
+
+/* The handle: a strip down the frame's right edge, with a grip that stays in view on tall blocks. */
+.docs-block__handle {
+    position: absolute;
+    top: 0;
+    right: -20px;
+    bottom: 0;
+    display: flex;
+    width: 20px;
+    align-items: center;
+    justify-content: center;
+    cursor: col-resize;
+    touch-action: none;
+    outline: none;
+}
+
+.docs-block__grip {
+    position: sticky;
+    top: calc(50vh - 20px);
+    bottom: calc(50vh - 20px);
+    width: 6px;
+    height: 40px;
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-border-strong);
+    transition: background-color var(--ow-duration-base) var(--ow-ease-standard), height var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.docs-block__handle:hover .docs-block__grip,
+.docs-block[data-dragging] .docs-block__grip {
+    height: 56px;
+    background: var(--ow-primary);
+}
+
+.docs-block__handle:focus-visible .docs-block__grip {
+    background: var(--ow-primary);
+    box-shadow: 0 0 0 2px var(--ow-surface), 0 0 0 4px var(--ow-focus-ring);
+}
+
+.docs-block__width {
+    min-width: 64px;
+    color: var(--ow-text-muted);
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
 }
 
 .docs-block__loading {
@@ -1786,8 +1844,13 @@ a.docs-block-uses__item:focus-visible {
 }
 
 @media (max-width: 640px) {
-    .docs-block__viewports {
+    .docs-block__viewports,
+    .docs-block__width,
+    .docs-block__handle {
         display: none;
+    }
+    .docs-block__stage {
+        padding: 0;
     }
 }
 
@@ -2164,7 +2227,7 @@ a.docs-block-uses__item:focus-visible {
     display: flex;
     width: 58%;
     flex-direction: column;
-    gap: 3px;
+    gap: 4px;
     border: 0;
     border-radius: 7px;
     background: var(--sk-fill);

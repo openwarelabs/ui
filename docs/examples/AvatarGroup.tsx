@@ -9,14 +9,14 @@ export const meta: DocMeta = {
     source: "components/Avatar/AvatarGroup.tsx",
     imports: ["AvatarGroup", "Avatar"],
     notes: [
-        "The group reads out as one image: “Alex Silver, Priya Nair and 3 others”, or your label.",
+        "The group reads out as one image: “Alex Silver, Clara Novak and 3 others”, or your label.",
     ],
     related: ["Avatar", "User"],
 };
 
 const team = [
     "Alex Silver",
-    "Priya Nair",
+    "Clara Novak",
     "Sam Okafor",
     "Mia Chen",
     "Jonas Berg",

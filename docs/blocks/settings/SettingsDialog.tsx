@@ -70,7 +70,7 @@ const defaults: Preferences = {
 const projects = [
     { name: "marketing-site", detail: "Pricing page copy · Maya Chen", when: "4 min ago", status: "Live" },
     { name: "billing-api", detail: "Fix invoice dates in the EU · agent", when: "26 min ago", status: "Building" },
-    { name: "mobile-app", detail: "Release 2.4 · Priya Nair", when: "2 h ago", status: "Live" },
+    { name: "mobile-app", detail: "Release 2.4 · Clara Novak", when: "2 h ago", status: "Live" },
     { name: "docs", detail: "New API reference · Jonas Berg", when: "Yesterday", status: "Live" },
     { name: "design-system", detail: "Tokens for dark mode · agent", when: "2 days ago", status: "Failed" },
 ] as const;

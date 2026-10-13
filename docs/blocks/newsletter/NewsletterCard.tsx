@@ -13,7 +13,7 @@ function emailError(value: string) {
     return undefined;
 }
 
-const authors = ["Priya Nair", "Jonas Berg", "Sam Okafor"];
+const authors = ["Clara Novak", "Jonas Berg", "Sam Okafor"];
 
 export function NewsletterCard() {
     const [email, setEmail] = useState("");
@@ -76,7 +76,7 @@ export function NewsletterCard() {
                             ))}
                         </AvatarGroup>
                         <span>
-                            <strong>Priya, Jonas and Sam</strong> write it for 9,400 readers.
+                            <strong>Clara, Jonas and Sam</strong> write it for 9,400 readers.
                         </span>
                     </div>
                     <Link href="#" variant="standalone" className="newsletter-card__past">

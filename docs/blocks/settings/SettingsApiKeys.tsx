@@ -34,7 +34,7 @@ interface ApiKey {
 const initialKeys: ApiKey[] = [
     { id: "k1", name: "CI deploys", prefix: "acme_3f9a2c7d", access: "Read and write", by: "Maya Chen", created: "12 Mar 2026", lastUsed: "2 hours ago" },
     { id: "k2", name: "Status page", prefix: "acme_81be04c2", access: "Read only", by: "Jonas Berg", created: "3 Jun 2026", lastUsed: "Yesterday" },
-    { id: "k3", name: "Release bot", prefix: "acme_c47d19ea", access: "Read and write", by: "Priya Nair", created: "28 Aug 2026", lastUsed: "Never" },
+    { id: "k3", name: "Release bot", prefix: "acme_c47d19ea", access: "Read and write", by: "Clara Novak", created: "28 Aug 2026", lastUsed: "Never" },
     { id: "k4", name: "Quarterly export", prefix: "acme_0b6e55f1", access: "Read only", by: "Lena Fischer", created: "2 Jan 2026", lastUsed: "3 months ago" },
 ];
 

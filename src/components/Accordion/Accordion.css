@@ -77,7 +77,7 @@
 .ow-disclosure__titles {
     display: grid;
     min-width: 0;
-    gap: var(--ow-space-3xs);
+    gap: var(--ow-space-2xs);
 }
 
 .ow-disclosure__title {

@@ -48,7 +48,7 @@ const projects: Project[] = [
         description: "Invoices, payments and the EU tax rules behind them.",
         status: "Building",
         when: "Building fix/invoice-dates",
-        members: ["Tomás Reyes", "Priya Nair", "Omar Haddad", "Lena Fischer"],
+        members: ["Tomás Reyes", "Clara Novak", "Omar Haddad", "Lena Fischer"],
         pinned: true,
     },
     {
@@ -57,7 +57,7 @@ const projects: Project[] = [
         description: "The iOS and Android app, built from one codebase.",
         status: "Live",
         when: "Release 2.4, 2 h ago",
-        members: ["Priya Nair", "Jonas Berg", "Aiko Tanaka", "Sam Okafor", "Maya Chen"],
+        members: ["Clara Novak", "Jonas Berg", "Aiko Tanaka", "Sam Okafor", "Maya Chen"],
         pinned: true,
     },
     {
@@ -75,7 +75,7 @@ const projects: Project[] = [
         description: "The components and tokens every Acme app shares.",
         status: "Live",
         when: "Deployed 3 h ago",
-        members: ["Aiko Tanaka", "Maya Chen", "Priya Nair"],
+        members: ["Aiko Tanaka", "Maya Chen", "Clara Novak"],
         pinned: false,
     },
 ];

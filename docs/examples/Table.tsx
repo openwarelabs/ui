@@ -53,7 +53,7 @@ const runs: Run[] = [
     {
         id: "r3",
         project: "billing-api",
-        owner: "Priya Nair",
+        owner: "Clara Novak",
         status: "Failed",
         cost: 2.9,
         minutes: 21,

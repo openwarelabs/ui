@@ -1,7 +1,7 @@
 import { Badge, CodeBlock, Kbd, Link, Stack } from "@openwarelabs/ui";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-import { componentDocs, hrefOf, kebab, slugify } from "./content";
+import { blockComponentId, componentDocs, hrefOf, kebab, listedComponents, slugify } from "./content";
 import { Example } from "./Example";
 import { DocPage, Section, type TocItem } from "./Page";
 import { hasProps, PropsTable } from "./PropsTable";
@@ -35,9 +35,9 @@ function Keys({ keys }: { keys: string }) {
 export function ComponentPage({ doc }: { doc: ComponentDoc }) {
     const { meta, examples } = doc;
     const propNames = (meta.props ?? [`${meta.title}Props`]).filter(hasProps);
-    const index = componentDocs.indexOf(doc);
-    const previous = componentDocs[index - 1];
-    const next = componentDocs[index + 1];
+    const index = listedComponents.indexOf(doc);
+    const previous = listedComponents[index - 1];
+    const next = listedComponents[index + 1];
     const snippet = importSnippet(meta.imports ?? [meta.title]);
     const hasAccessibility = Boolean(meta.keyboard?.length || meta.notes?.length);
 
@@ -166,5 +166,56 @@ export function ComponentPage({ doc }: { doc: ComponentDoc }) {
                 ) : null}
             </nav>
         </DocPage>
+    );
+}
+
+/**
+ * A component's reference for a page that isn't its own: a block category built around it. One section headed
+ * with its name, then its import, examples, accessibility notes and props, with ids under its slug.
+ */
+export function ComponentReference({ doc }: { doc: ComponentDoc }) {
+    const { meta, examples } = doc;
+    const propNames = (meta.props ?? [`${meta.title}Props`]).filter(hasProps);
+    const snippet = importSnippet(meta.imports ?? [meta.title]);
+    const id = (section?: string) => blockComponentId(doc.slug, section);
+    return (
+        <Section
+            id={id()}
+            title={
+                <>
+                    The <code className="docs-h3__code">{meta.title}</code> component
+                </>
+            }
+            description={meta.description}
+        >
+            <div className="docs-component-reference">
+                <Stack direction="row" gap="md" align="center" wrap>
+                    <Badge size="sm">In the package</Badge>
+                    <Link href={`${repository}/blob/main/src/${meta.source}`} external variant="muted">
+                        Source
+                    </Link>
+                </Stack>
+                <CodeBlock code={snippet.code} html={snippet.html} />
+                {examples.map((example) => (
+                    <Section key={example.name} id={id(slugify(example.title))} title={example.title} level={3} description={example.description || undefined}>
+                        <Example example={example} />
+                    </Section>
+                ))}
+                {meta.notes?.length ? (
+                    <Section id={id("notes")} title="Notes" level={3}>
+                        <ul className="docs-list">
+                            {meta.notes.map((note) => (
+                                <li key={note}>{note}</li>
+                            ))}
+                        </ul>
+                    </Section>
+                ) : null}
+                {propNames.map((name) => (
+                    <Section key={name} id={id(slugify(name))} title={<code className="docs-h3__code">{name}</code>} level={3}>
+                        <PropsTable name={name} />
+                    </Section>
+                ))}
+            </div>
+        </Section>
     );
 }

@@ -59,7 +59,7 @@ const reviews = [
     { title: "Fix invoice dates in the EU", project: "billing-api", by: "Tomás Reyes", add: 42, remove: 8, status: "Checks passed", tone: "success" },
     { title: "Bump the Stripe SDK to v15", project: "billing-api", by: "Agent", add: 84, remove: 61, status: "Ready", tone: "success" },
     { title: "Pricing page copy", project: "marketing-site", by: "Maya Chen", add: 12, remove: 9, status: "Preview building", tone: "active" },
-    { title: "Offline drafts on Android", project: "mobile-app", by: "Priya Nair", add: 318, remove: 40, status: "Changes asked", tone: "warning" },
+    { title: "Offline drafts on Android", project: "mobile-app", by: "Clara Novak", add: 318, remove: 40, status: "Changes asked", tone: "warning" },
 ] as const;
 
 /** The review queue: pull requests from people and agents, each with its size and state. */

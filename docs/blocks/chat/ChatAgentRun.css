@@ -47,7 +47,7 @@
     display: grid;
     min-width: 0;
     flex: 1 1 260px;
-    gap: 3px;
+    gap: 4px;
 }
 
 .chat-agent-run__title {

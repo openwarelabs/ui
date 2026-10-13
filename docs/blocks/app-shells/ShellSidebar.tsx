@@ -37,7 +37,7 @@ const projects = [
 const recent = [
     { project: "marketing-site", what: "Pricing page copy", who: "Maya Chen", when: "4 min ago", status: "Live" },
     { project: "billing-api", what: "Fix invoice dates in the EU", who: "Agent · Tomás Reyes", when: "26 min ago", status: "Building" },
-    { project: "mobile-app", what: "Release 2.4", who: "Priya Nair", when: "2 h ago", status: "Live" },
+    { project: "mobile-app", what: "Release 2.4", who: "Clara Novak", when: "2 h ago", status: "Live" },
 ];
 
 /** Everything in the sidebar; the same list goes in the drawer on phones. */

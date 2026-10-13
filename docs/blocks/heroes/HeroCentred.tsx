@@ -14,7 +14,7 @@ const nav = [
 const deploys = [
     { project: "marketing-site", branch: "main", by: "Maya Chen", status: "Live", tone: "success" },
     { project: "billing-api", branch: "fix/invoice-dates", by: "Tomás Reyes", status: "Building", tone: "active" },
-    { project: "mobile-app", branch: "release/2.4", by: "Priya Nair", status: "Live", tone: "success" },
+    { project: "mobile-app", branch: "release/2.4", by: "Clara Novak", status: "Live", tone: "success" },
 ] as const;
 
 /** The product, drawn with Openware components. Swap it for a screenshot: <img src="…" alt="…" />. */

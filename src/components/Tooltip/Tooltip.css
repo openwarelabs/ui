@@ -10,7 +10,7 @@
     border: 0;
     border-radius: var(--ow-radius-md);
     background: var(--ow-tooltip);
-    padding: var(--ow-space-3xs) var(--ow-space-sm);
+    padding: var(--ow-space-2xs) var(--ow-space-sm);
     color: var(--ow-on-tooltip);
     font-family: var(--ow-font-sans);
     font-size: 12px;

@@ -51,7 +51,7 @@ function ReviewVignette() {
                         Opened by an agent for Tomás Reyes
                     </span>
                     <AvatarGroup size="sm">
-                        <Avatar name="Priya Nair" />
+                        <Avatar name="Clara Novak" />
                         <Avatar name="Jonas Berg" />
                     </AvatarGroup>
                 </div>

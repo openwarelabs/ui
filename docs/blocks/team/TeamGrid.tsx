@@ -6,7 +6,7 @@ import "./TeamGrid.css";
 const people = [
     { name: "Maya Chen", role: "Co-founder and CEO", tone: "brand" },
     { name: "Jonas Berg", role: "Co-founder and CTO", tone: "soft" },
-    { name: "Priya Nair", role: "Head of engineering", tone: "ink" },
+    { name: "Clara Novak", role: "Head of engineering", tone: "ink" },
     { name: "Aiko Tanaka", role: "Product designer", tone: "soft" },
     { name: "Tomás Reyes", role: "Product engineer", tone: "ink" },
     { name: "Sam Okafor", role: "Agent infrastructure", tone: "brand" },

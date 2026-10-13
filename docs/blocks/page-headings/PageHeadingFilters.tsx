@@ -28,7 +28,7 @@ function row(number: number, title: string, project: string, author: string, age
 const reviews: Review[] = [
     row(482, "Pricing page copy", "marketing-site", "Maya Chen", false, "Needs review", "12 min ago", 3),
     row(219, "Fix invoice dates in the EU", "billing-api", "Tomás Reyes", true, "Needs review", "26 min ago", 1),
-    row(311, "Update React Native to 0.76", "mobile-app", "Priya Nair", true, "Needs review", "1 h ago", 0),
+    row(311, "Update React Native to 0.76", "mobile-app", "Clara Novak", true, "Needs review", "1 h ago", 0),
     row(309, "Haptics on pull to refresh", "mobile-app", "Aiko Tanaka", false, "Changes requested", "3 h ago", 5),
     row(220, "Write tests for the refund flow", "billing-api", "Omar Haddad", true, "Needs review", "4 h ago", 0),
     row(96, "Document the webhooks API", "docs", "Lena Fischer", false, "Approved", "Yesterday", 4),

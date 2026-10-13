@@ -76,7 +76,7 @@ const tone: Record<RunStatus, BadgeVariant> = { Running: "active", "Needs review
 // [task, project, branch, for, status, lines added, lines removed, minutes it took, minutes ago it started]
 const sample: Array<[string, string, string, string, RunStatus, number, number, number, number]> = [
     ["Fix invoice dates in the EU", "billing-api", "agent/invoice-dates", "Tomás Reyes", "Running", 84, 31, 6, 6],
-    ["Update React Native to 0.76", "mobile-app", "agent/rn-076", "Priya Nair", "Needs review", 412, 388, 23, 64],
+    ["Update React Native to 0.76", "mobile-app", "agent/rn-076", "Clara Novak", "Needs review", 412, 388, 23, 64],
     ["Add alt text to the blog images", "marketing-site", "agent/alt-text", "Sam Okafor", "Merged", 96, 12, 9, 190],
     ["Write tests for the refund flow", "billing-api", "agent/refund-tests", "Omar Haddad", "Needs review", 238, 4, 14, 260],
     ["Rebuild the search index", "docs", "agent/search-index", "Jonas Berg", "Failed", 0, 0, 4, 1300],

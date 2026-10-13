@@ -8,7 +8,7 @@ import "./OnboardingWelcome.css";
 const reviews: Array<{ title: string; project: string; who: string; status: string; tone: BadgeVariant }> = [
     { title: "Fix invoice dates in the EU", project: "billing-api", who: "Agent for Tomás Reyes", status: "Ready", tone: "active" },
     { title: "Pricing page copy", project: "marketing-site", who: "Maya Chen", status: "Approved", tone: "success" },
-    { title: "Release 2.4", project: "mobile-app", who: "Priya Nair", status: "Changes requested", tone: "warning" },
+    { title: "Release 2.4", project: "mobile-app", who: "Clara Novak", status: "Changes requested", tone: "warning" },
     { title: "Update the API reference", project: "docs", who: "Agent for Jonas Berg", status: "In review", tone: "neutral" },
     { title: "Focus rings on every button", project: "design-system", who: "Aiko Tanaka", status: "In review", tone: "neutral" },
 ];

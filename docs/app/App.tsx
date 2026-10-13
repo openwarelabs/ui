@@ -6,7 +6,7 @@ import { ArrowUpRight, Book, Component, LayoutTemplate, Menu as MenuIcon, Monito
 import { blockCategories, blockGroups, blockVariantCount } from "./blocks";
 import { BrandPicker } from "./BrandPicker";
 import { ComponentPage, repository } from "./ComponentPage";
-import { componentDocs, guides, hrefOf, slugify, type Route } from "./content";
+import { componentDocs, componentsInBlocks, guides, hrefOf, listedComponents, slugify, type Route } from "./content";
 import { useMinWidth, useRoute, useTheme, type ThemeChoice } from "./hooks";
 import { RouteProvider } from "./Page";
 import { categories } from "./types";
@@ -91,12 +91,12 @@ function Sidebar({ route, onNavigate, showSections = false }: { route: Route; on
                 ))}
             </NavList>
             <NavList label="Components overview" heading="Components">
-                <NavItem href={hrefOf.components()} active={route.kind === "components"} onClick={onNavigate} end={componentDocs.length}>
+                <NavItem href={hrefOf.components()} active={route.kind === "components"} onClick={onNavigate} end={listedComponents.length}>
                     All components
                 </NavItem>
             </NavList>
             {categories.map((category) => {
-                const docs = componentDocs.filter((doc) => doc.meta.category === category);
+                const docs = listedComponents.filter((doc) => doc.meta.category === category);
                 if (!docs.length) return null;
                 return (
                     <NavList key={category} label={category} heading={category}>
@@ -179,7 +179,7 @@ export function App() {
                 keywords: guide.description,
                 run: () => (window.location.hash = hrefOf.guide(guide.slug)),
             })),
-            ...componentDocs.map((doc) => ({
+            ...listedComponents.map((doc) => ({
                 id: `component-${doc.slug}`,
                 title: doc.meta.title,
                 group: "Components",
@@ -188,6 +188,22 @@ export function App() {
                 keywords: `${doc.meta.category} ${doc.meta.description}`,
                 run: () => (window.location.hash = hrefOf.component(doc.slug)),
             })),
+            ...[...componentsInBlocks].flatMap(([slug, category]) => {
+                const doc = componentDocs.find((entry) => entry.slug === slug);
+                return doc
+                    ? [
+                          {
+                              id: `component-${slug}`,
+                              title: doc.meta.title,
+                              group: "Components",
+                              hint: `In Blocks: ${category.title}`,
+                              icon: <Component />,
+                              keywords: doc.meta.description,
+                              run: () => (window.location.hash = hrefOf.component(slug)),
+                          },
+                      ]
+                    : [];
+            }),
             ...blockCategories.map((category) => ({
                 id: `blocks-${category.slug}`,
                 title: category.title,

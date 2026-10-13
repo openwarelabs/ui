@@ -75,7 +75,7 @@ function Rollback() {
                 <div className="changelog__deploy">
                     <span className="changelog__deploy-name">
                         <strong>billing-api #418</strong>
-                        <span>fix/vat-rounding · Priya Nair · 2 min ago</span>
+                        <span>fix/vat-rounding · Clara Novak · 2 min ago</span>
                     </span>
                     <Badge size="sm" variant="danger">
                         Failed

@@ -126,12 +126,13 @@
     cursor: pointer;
 }
 
+/* Centred on the label's first line, whatever its line height. */
 .ow-check-label .ow-checkbox--md {
-    margin-top: 2px;
+    margin-top: calc((1lh - 16px) / 2);
 }
 
 .ow-check-label .ow-checkbox--sm {
-    margin-top: 3px;
+    margin-top: calc((1lh - 14px) / 2);
 }
 
 .ow-check-label--disabled {
@@ -141,7 +142,7 @@
 
 .ow-check-label__text {
     display: grid;
-    gap: var(--ow-space-3xs);
+    gap: var(--ow-space-2xs);
 }
 
 .ow-check-label__description {
