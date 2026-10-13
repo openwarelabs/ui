@@ -49,6 +49,11 @@ export interface TableProps<Row> {
     selectedKeys?: Key[];
     defaultSelectedKeys?: Key[];
     onSelectionChange?(keys: Key[]): void;
+    /**
+     * Names a row for its checkbox, read out as "Select …": the person, the file, the project. Defaults to the
+     * first column's value when it's text or a number, else "row 3".
+     */
+    rowLabel?(row: Row): string;
     /** Shown in place of the rows when there are none, such as an EmptyState. */
     emptyContent?: ReactNode;
     /** `compact` rows are 36px; `comfortable` 44px.
@@ -80,6 +85,7 @@ export function Table<Row extends object>({
     selectedKeys,
     defaultSelectedKeys = [],
     onSelectionChange,
+    rowLabel,
     emptyContent = "Nothing here yet.",
     density = "comfortable",
     stickyHeader = false,
@@ -89,6 +95,11 @@ export function Table<Row extends object>({
     const [currentSort, setSort] = useControllableState<TableSort | undefined>(sort, defaultSort, onSortChange as (sort: TableSort | undefined) => void);
     const [selected, setSelected] = useControllableState(selectedKeys, defaultSelectedKeys, onSelectionChange);
     const keyOf = (row: Row): Key => (typeof rowKey === "function" ? rowKey(row) : (row[rowKey] as Key));
+    const labelOf = (row: Row, index: number): string => {
+        if (rowLabel) return rowLabel(row);
+        const first = columns[0] ? (row as Record<string, unknown>)[columns[0].key] : undefined;
+        return typeof first === "string" || typeof first === "number" ? String(first) : `row ${index + 1}`;
+    };
     const field = (row: Row, key: string) => (row as Record<string, unknown>)[key];
 
     const sorted = useMemo(() => {
@@ -179,7 +190,7 @@ export function Table<Row extends object>({
                             </td>
                         </tr>
                     ) : (
-                        sorted.map((row) => {
+                        sorted.map((row, index) => {
                             const key = keyOf(row);
                             const isSelected = selected.includes(key);
                             return (
@@ -188,7 +199,7 @@ export function Table<Row extends object>({
                                         <td className="ow-table__select">
                                             <Checkbox
                                                 size="sm"
-                                                aria-label="Select row"
+                                                aria-label={`Select ${labelOf(row, index)}`}
                                                 checked={isSelected}
                                                 onChange={(event) =>
                                                     setSelected(

@@ -51,10 +51,6 @@
     padding: 18px 20px 20px;
 }
 
-.settings-members .ow-input-group {
-    min-width: 0;
-}
-
 /* Line the role and the button up with the field, below its label. */
 .settings-members__invite-role,
 .settings-members__invite-send {

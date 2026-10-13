@@ -1,4 +1,4 @@
-/* Slider: native range inputs over a drawn track. The thumb is the switch's knob: white, round, with a soft shadow. */
+/* Slider: native range inputs over a drawn track. The thumb is the switch's knob (ow-knob): round, with a soft shadow. */
 .ow-slider {
     display: grid;
     gap: var(--ow-space-sm);
@@ -89,7 +89,7 @@
     appearance: none;
     border: 1px solid var(--ow-border-strong);
     border-radius: 50%;
-    background: #ffffff;
+    background: var(--ow-knob);
     box-shadow: 0 1px 3px rgba(15, 23, 42, 0.18);
     pointer-events: auto;
     cursor: grab;
@@ -102,7 +102,7 @@
     height: 18px;
     border: 1px solid var(--ow-border-strong);
     border-radius: 50%;
-    background: #ffffff;
+    background: var(--ow-knob);
     box-shadow: 0 1px 3px rgba(15, 23, 42, 0.18);
     pointer-events: auto;
     cursor: grab;

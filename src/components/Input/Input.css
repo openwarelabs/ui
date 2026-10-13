@@ -67,6 +67,8 @@
 .ow-input-group {
     display: flex;
     width: 100%;
+    /* Shrink in a narrow grid or flex column instead of pushing past it. */
+    min-width: 0;
     height: 40px;
     align-items: center;
     gap: var(--ow-space-sm);
@@ -113,6 +115,8 @@
 }
 
 .ow-input-group__input {
+    /* A percentage width lets the field's minimum size come from its start and end content alone. */
+    width: 100%;
     min-width: 0;
     height: 100%;
     flex: 1;

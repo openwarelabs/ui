@@ -62,16 +62,15 @@ export function OnboardingChecklist() {
         }, 700);
     };
 
-    // Only the current step gets its button; the later ones wait their turn.
-    const items: StepItem[] = steps.map((step, index) => ({
+    // Steps shows each step's button only while it's the current one, so only that one ever renders.
+    const items: StepItem[] = steps.map((step) => ({
         title: step.title,
         description: step.description,
-        action:
-            index === current ? (
-                <Button ref={nextAction} size="sm" variant="primary" loading={working} onClick={complete}>
-                    {step.action}
-                </Button>
-            ) : undefined,
+        action: (
+            <Button ref={nextAction} size="sm" variant="primary" loading={working} onClick={complete}>
+                {step.action}
+            </Button>
+        ),
     }));
 
     return (

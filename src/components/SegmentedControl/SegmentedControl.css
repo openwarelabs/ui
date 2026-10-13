@@ -11,6 +11,8 @@
     border-radius: var(--ow-radius-container);
     background: var(--ow-track);
     padding: var(--ow-space-2xs);
+    /* A hairline edge, so the well shows on the canvas as well as on a surface. */
+    box-shadow: inset 0 0 0 1px var(--ow-border);
 }
 
 .ow-segmented--full {

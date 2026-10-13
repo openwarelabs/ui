@@ -70,11 +70,6 @@
     padding: 24px;
 }
 
-/* An Input with startContent won't shrink below its text's width without this. */
-.form-sections .ow-input-group {
-    min-width: 0;
-}
-
 .form-sections__pair {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

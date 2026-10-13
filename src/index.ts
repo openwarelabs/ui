@@ -105,7 +105,7 @@ export type { EmptyStateProps } from "./components/EmptyState/EmptyState";
 export { Tag, TagGroup, ColorSwatch } from "./components/Tag/Tag";
 export type { TagProps, TagGroupProps, ColorSwatchProps } from "./components/Tag/Tag";
 export { Avatar } from "./components/Avatar/Avatar";
-export type { AvatarProps } from "./components/Avatar/Avatar";
+export type { AvatarProps, AvatarSize } from "./components/Avatar/Avatar";
 export { AvatarGroup, User } from "./components/Avatar/AvatarGroup";
 export type { AvatarGroupProps, UserProps } from "./components/Avatar/AvatarGroup";
 export { Kbd, Code } from "./components/Kbd/Kbd";

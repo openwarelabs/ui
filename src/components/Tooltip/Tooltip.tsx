@@ -8,9 +8,9 @@ export interface TooltipProps {
     label: ReactNode;
     /** The thing it explains: usually an icon-only Button with the same words as its aria-label. */
     children: ReactNode;
-    /** Which side it prefers; it flips when there's no room.
+    /** Which side it prefers; it flips to the opposite side when there's no room. `right` suits icons in a folded sidebar.
      * @default "top" */
-    placement?: "top" | "bottom";
+    placement?: "top" | "bottom" | "left" | "right";
     /** Milliseconds of hovering before it shows. Moving to a neighbour while one is showing skips the wait.
      * @default 400 */
     delay?: number;
@@ -21,7 +21,7 @@ let lastClosedAt = 0;
 const warmWindow = 500;
 
 /**
- * A small dark label above its child on hover or keyboard focus. It's for sighted users only: the child
+ * A small dark label beside its child (above, unless `placement` says otherwise) on hover or keyboard focus. It's for sighted users only: the child
  * carries the same words for screen readers (an aria-label, or visually hidden text), so they aren't read twice.
  * It sits in the top layer, so scroll areas and dialogs can't clip it.
  */

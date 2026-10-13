@@ -82,6 +82,7 @@
     --ow-key-ground: var(--ow-gray-50);
     --ow-track: var(--ow-gray-100);
     --ow-thumb: #ffffff;
+    --ow-knob: #ffffff;
     --ow-meter-track: var(--ow-gray-200);
     --ow-progress: var(--ow-brand-600);
     --ow-code-block: #15171c;
@@ -158,6 +159,7 @@
     --ow-key-ground: #22262e;
     --ow-track: #14161b;
     --ow-thumb: #2f3541;
+    --ow-knob: #e4e7ec;
     --ow-meter-track: #2c313a;
     --ow-progress: var(--ow-brand-400);
     --ow-code-block-border: #2c313a;
@@ -230,6 +232,7 @@
         --ow-key-ground: #22262e;
         --ow-track: #14161b;
         --ow-thumb: #2f3541;
+        --ow-knob: #e4e7ec;
         --ow-meter-track: #2c313a;
         --ow-progress: var(--ow-brand-400);
         --ow-code-block-border: #2c313a;

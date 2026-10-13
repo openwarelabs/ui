@@ -199,6 +199,7 @@ export function TableBulkActions() {
                         selectionMode="multiple"
                         selectedKeys={selected}
                         onSelectionChange={setSelected}
+                        rowLabel={(member) => member.name ?? member.email}
                         defaultSort={{ key: "role", direction: "ascending" }}
                     />
                 </Card>

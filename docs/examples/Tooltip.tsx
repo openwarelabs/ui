@@ -1,5 +1,5 @@
 import { Button, Stack, Tooltip } from "@openwarelabs/ui";
-import { Copy, Pencil, Trash } from "lucide-react";
+import { Copy, FolderKanban, Gauge, Inbox, Pencil, Trash } from "lucide-react";
 
 import type { DocMeta } from "../app/types";
 
@@ -7,7 +7,7 @@ export const meta: DocMeta = {
     title: "Tooltip",
     category: "Feedback",
     description:
-        "A small dark label above its child on hover or keyboard focus, naming an icon-only control.",
+        "A small dark label beside its child on hover or keyboard focus, naming an icon-only control.",
     source: "components/Tooltip/Tooltip.tsx",
     keyboard: [
         ["Tab", "Focusing the child shows it at once."],
@@ -16,7 +16,7 @@ export const meta: DocMeta = {
     notes: [
         "It's for sighted people only: the child carries the same words in its aria-label, so they aren't read twice.",
         "It waits 400ms before showing on hover; moving along a row of buttons after that shows the next one at once.",
-        "It sits in the browser's top layer, so scroll areas and dialogs can't clip it, and it flips below when there's no room above.",
+        "It sits in the browser's top layer, so scroll areas and dialogs can't clip it, and it flips to the other side when there's no room.",
         "Touch screens can't hover. Never put information only in a tooltip.",
     ],
     related: ["Button", "Popover"],
@@ -54,6 +54,29 @@ export function PlacementAndDelay() {
             </Tooltip>
             <Tooltip label="No wait" delay={0}>
                 <Button>Instant</Button>
+            </Tooltip>
+        </Stack>
+    );
+}
+
+/** placement="right" (or "left") for icons in a folded sidebar, where above would cover the icon before it. */
+export function Beside() {
+    return (
+        <Stack gap="2xs">
+            <Tooltip label="Overview" placement="right">
+                <Button iconOnly variant="ghost" aria-label="Overview">
+                    <Gauge size={16} />
+                </Button>
+            </Tooltip>
+            <Tooltip label="Projects" placement="right">
+                <Button iconOnly variant="ghost" aria-label="Projects">
+                    <FolderKanban size={16} />
+                </Button>
+            </Tooltip>
+            <Tooltip label="Inbox" placement="right">
+                <Button iconOnly variant="ghost" aria-label="Inbox">
+                    <Inbox size={16} />
+                </Button>
             </Tooltip>
         </Stack>
     );

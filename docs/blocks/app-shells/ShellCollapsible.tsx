@@ -166,7 +166,13 @@ const columns: Array<TableColumn<Run>> = [
 
 /** Names an item in a tooltip while the sidebar shows only its icon. */
 function Tip({ show, label, children }: { show: boolean; label: string; children: ReactElement }) {
-    return show ? <Tooltip label={label}>{children}</Tooltip> : children;
+    return show ? (
+        <Tooltip label={label} placement="right">
+            {children}
+        </Tooltip>
+    ) : (
+        children
+    );
 }
 
 /** Everything in the sidebar; the same list goes in the drawer on phones, always unfolded there. */

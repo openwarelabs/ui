@@ -15,13 +15,15 @@ export const meta: DocMeta = {
     related: ["AvatarGroup", "User"],
 };
 
-/** Three sizes: 24, 28 and 36px. */
+/** Four sizes, 24, 28, 36 and 48px, or any size in pixels for a profile or a team page. */
 export function Sizes() {
     return (
         <Stack direction="row" gap="md" align="center">
             <Avatar name="Alex Silver" size="sm" label="Alex Silver" />
             <Avatar name="Alex Silver" label="Alex Silver" />
             <Avatar name="Alex Silver" size="lg" label="Alex Silver" />
+            <Avatar name="Alex Silver" size="xl" label="Alex Silver" />
+            <Avatar name="Alex Silver" size={72} label="Alex Silver" />
         </Stack>
     );
 }

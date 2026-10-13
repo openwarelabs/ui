@@ -7,7 +7,7 @@ export interface StepItem {
     title: ReactNode;
     /** A line under the title. Hidden once the step is done, in the vertical layout. */
     description?: ReactNode;
-    /** A control on the right of the current step, such as a small Button. */
+    /** A control on the right of the step while it's the current one, such as a small Button. Other steps don't show it. */
     action?: ReactNode;
     /** Overrides the status worked out from `current`. */
     status?: "done" | "current" | "upcoming";
@@ -57,7 +57,7 @@ export function Steps({ items, current = 0, orientation = "vertical", title, lab
                                 <span className="ow-steps__description">{item.description}</span>
                             ) : null}
                         </span>
-                        {item.action && status !== "done" && orientation === "vertical" ? (
+                        {item.action && status === "current" && orientation === "vertical" ? (
                             <span className="ow-steps__action">{item.action}</span>
                         ) : null}
                     </li>

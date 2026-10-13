@@ -1,4 +1,4 @@
-/* Tooltip: a small dark label in the top layer, above the child (or below when there's no room). */
+/* Tooltip: a small dark label in the top layer, on the side of the child it prefers (or the other side when there's no room). */
 .ow-tooltip {
     display: inline-flex;
 }

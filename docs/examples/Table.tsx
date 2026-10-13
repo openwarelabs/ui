@@ -113,7 +113,10 @@ export function Basic() {
 }
 Basic.layout = { fill: true };
 
-/** selectionMode="multiple" adds a checkbox to each row and one to select them all. */
+/**
+ * selectionMode="multiple" adds a checkbox to each row and one to select them all. Each box reads out as "Select" and
+ * the row's first column ("Select billing-api"); pass rowLabel to name rows another way.
+ */
 export function Selection() {
     const [selected, setSelected] = useState<Key[]>(["r3"]);
     return (

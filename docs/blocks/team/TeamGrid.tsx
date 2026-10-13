@@ -28,7 +28,7 @@ export function TeamGrid() {
                 <ul className="team-grid__list">
                     {people.map((person) => (
                         <li key={person.name} className="team-grid__person" data-tone={person.tone}>
-                            <Avatar name={person.name} size="lg" className="team-grid__avatar" />
+                            <Avatar name={person.name} size={96} className="team-grid__avatar" />
                             <span className="team-grid__name">{person.name}</span>
                             <span className="team-grid__role">{person.role}</span>
                         </li>

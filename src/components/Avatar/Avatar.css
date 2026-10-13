@@ -37,6 +37,19 @@
     font-size: 13px;
 }
 
+.ow-avatar--xl {
+    width: 48px;
+    height: 48px;
+    font-size: 17px;
+}
+
+/* Any size in pixels, through --ow-avatar-size: the initials stay in proportion. */
+.ow-avatar--custom {
+    width: var(--ow-avatar-size);
+    height: var(--ow-avatar-size);
+    font-size: calc(var(--ow-avatar-size) * 0.36);
+}
+
 .ow-avatar__image {
     width: 100%;
     height: 100%;
@@ -71,6 +84,18 @@
 
 .ow-user--lg {
     gap: var(--ow-space-md);
+}
+
+.ow-user--xl {
+    gap: var(--ow-space-lg);
+}
+
+.ow-user--xl .ow-user__name {
+    font-size: 15px;
+}
+
+.ow-user--xl .ow-user__description {
+    font-size: 13px;
 }
 
 .ow-user__text {

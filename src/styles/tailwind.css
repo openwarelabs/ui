@@ -83,6 +83,7 @@
     --color-key-ground: var(--ow-key-ground);
     --color-track: var(--ow-track);
     --color-thumb: var(--ow-thumb);
+    --color-knob: var(--ow-knob);
     --color-meter-track: var(--ow-meter-track);
     --color-progress: var(--ow-progress);
     --color-code-block: var(--ow-code-block);

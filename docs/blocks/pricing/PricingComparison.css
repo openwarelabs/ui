@@ -22,11 +22,6 @@
     display: none;
 }
 
-/* A hairline round the well, so it still reads on the dark page. */
-.pricing-comparison__picker .ow-segmented {
-    border: 1px solid var(--ow-border);
-}
-
 /* The plan names, prices and buttons, in columns that line up with the tables below. Sticks under the top
    of the window as the tables scroll past. */
 .pricing-comparison__plans {

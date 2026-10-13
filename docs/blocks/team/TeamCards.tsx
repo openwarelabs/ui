@@ -65,7 +65,7 @@ export function TeamCards() {
                         <li key={person.name}>
                             <Card padding="lg" className="team-cards__card">
                                 <div className="team-cards__head">
-                                    <Avatar name={person.name} size="lg" className="team-cards__avatar" />
+                                    <Avatar name={person.name} size={56} />
                                     <div className="team-cards__who">
                                         <h3 className="team-cards__name">{person.name}</h3>
                                         <p className="team-cards__role">{person.role}</p>

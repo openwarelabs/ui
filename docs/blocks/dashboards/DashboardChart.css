@@ -53,11 +53,6 @@
     width: 180px;
 }
 
-/* The segmented well is the canvas's own colour; a hairline shows where it is. */
-.dashboard-chart__filters .ow-segmented {
-    box-shadow: inset 0 0 0 1px var(--ow-border);
-}
-
 .dashboard-chart__stats {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));

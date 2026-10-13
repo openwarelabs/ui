@@ -34,7 +34,7 @@
     width: 16px;
     height: 16px;
     border-radius: var(--ow-radius-pill);
-    background: #ffffff;
+    background: var(--ow-knob);
     box-shadow: var(--ow-shadow-control);
     transform: translateX(2px);
     transition:

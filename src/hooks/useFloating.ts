@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useState, type CSSProperties, type RefObject } from "react";
 
-export type Placement = "bottom-start" | "bottom-end" | "bottom" | "top-start" | "top-end" | "top";
+export type Placement = "bottom-start" | "bottom-end" | "bottom" | "top-start" | "top-end" | "top" | "left" | "right";
 
 interface Options {
     open: boolean;
@@ -19,7 +19,7 @@ const margin = 8;
 
 /**
  * Positions a floating element (a popover, a listbox) against its anchor with fixed coordinates, flips it above
- * or below when there's no room, keeps it on screen, and follows the anchor when the page scrolls or resizes.
+ * or below (or, for "left" and "right", to the other side) when there's no room, keeps it on screen, and follows the anchor when the page scrolls or resizes.
  * It also puts the element in the browser's top layer (popover="manual"), so dialogs and overflow can't clip it.
  * Pass the element's `mounted` from usePresence as `open`, so it stays placed while it animates out.
  */
@@ -49,6 +49,27 @@ export function useFloating({
         const rect = anchor.getBoundingClientRect();
         const width = Math.max(floating.offsetWidth, matchWidth ? rect.width : 0);
         const height = floating.scrollHeight;
+
+        // Beside the anchor, centred on it: for a tooltip on a folded sidebar's icons.
+        if (placement === "left" || placement === "right") {
+            const roomLeft = rect.left - offset - margin;
+            const roomRight = window.innerWidth - rect.right - offset - margin;
+            const onLeft = placement === "left" ? width <= roomLeft || roomLeft > roomRight : width > roomRight && roomLeft > roomRight;
+            const top = Math.min(Math.max(margin, rect.top + rect.height / 2 - height / 2), window.innerHeight - height - margin);
+            floating.dataset.side = onLeft ? "left" : "right";
+            setStyle({
+                position: "fixed",
+                inset: "auto",
+                margin: 0,
+                left: onLeft ? "auto" : rect.right + offset,
+                right: onLeft ? window.innerWidth - rect.left + offset : "auto",
+                top,
+                bottom: "auto",
+                maxHeight: Math.max(120, Math.min(maxHeight, window.innerHeight - 2 * margin)),
+                ["--ow-floating-origin" as string]: `${onLeft ? "right" : "left"} center`,
+            });
+            return;
+        }
         const below = window.innerHeight - rect.bottom - offset - margin;
         const above = rect.top - offset - margin;
         const wantsTop = placement.startsWith("top");
