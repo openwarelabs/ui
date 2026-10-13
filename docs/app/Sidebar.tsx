@@ -1,7 +1,7 @@
 import { useEffect, useId, useState, type ReactNode } from "react";
 
 import { Kbd, Text } from "@openwarelabs/ui";
-import { Clock, LayoutGrid, Search } from "lucide-react";
+import { BookOpen, Clock, LayoutGrid, Package, Palette, Ruler, Search, SunMoon, Type, type LucideIcon } from "lucide-react";
 
 import { blockCategories, blockGroups, blockVariantCount } from "./blocks";
 import { guides, hrefOf, listedComponents, type Route } from "./content";
@@ -14,8 +14,11 @@ export type SectionName = "docs" | "components" | "blocks";
 export const sectionOf = (route: Route): SectionName =>
     route.kind === "blocks" || route.kind === "block-category" ? "blocks" : route.kind === "components" || route.kind === "component" ? "components" : "docs";
 
-/** New while the release that added it is the current one. */
-const isNew = (doc: ComponentDoc) => doc.meta.since === version;
+/** "0.3.1" → "0.3": patch releases don't make a component old. */
+const minor = (release: string) => release.split(".").slice(0, 2).join(".");
+
+/** New while the release line that added it is the current one: Text, added in 0.3.0, is new through 0.3.x. */
+const isNew = (doc: ComponentDoc) => doc.meta.since !== undefined && minor(doc.meta.since) === minor(version);
 
 // The components you opened last, newest first, remembered in this browser only.
 const recentKey = "ow-docs-recent";
@@ -215,21 +218,34 @@ function BlocksSidebar({ route, onNavigate, onSearch }: SidebarProps) {
     );
 }
 
+const guideIcons: Record<(typeof guides)[number]["slug"], LucideIcon> = {
+    introduction: BookOpen,
+    installation: Package,
+    theming: SunMoon,
+    colours: Palette,
+    typography: Type,
+    tokens: Ruler,
+};
+
 function GuidesSidebar({ route, onNavigate, onSearch }: SidebarProps) {
     return (
         <>
             <SearchButton label="Search the docs…" onSearch={onSearch} />
             <Group title="Getting started">
-                {guides.map((guide) => (
-                    <SideLink
-                        key={guide.slug}
-                        href={hrefOf.guide(guide.slug)}
-                        current={route.kind === "guide" && route.slug === guide.slug}
-                        onNavigate={onNavigate}
-                    >
-                        {guide.title}
-                    </SideLink>
-                ))}
+                {guides.map((guide) => {
+                    const Icon = guideIcons[guide.slug];
+                    return (
+                        <SideLink
+                            key={guide.slug}
+                            href={hrefOf.guide(guide.slug)}
+                            current={route.kind === "guide" && route.slug === guide.slug}
+                            onNavigate={onNavigate}
+                            start={<Icon size={15} className="docs-side-link__icon" aria-hidden="true" />}
+                        >
+                            {guide.title}
+                        </SideLink>
+                    );
+                })}
             </Group>
         </>
     );

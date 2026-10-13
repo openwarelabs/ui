@@ -23,7 +23,7 @@ export interface DocMeta {
     source: string;
     /** Other pages to point to at the end. */
     related?: string[];
-    /** The release that added it, e.g. "0.3.0": the sidebar marks it new while that's the current version. */
+    /** The release that added it, e.g. "0.3.0": the sidebar marks it new until the next minor release (0.4.0). */
     since?: string;
 }
 

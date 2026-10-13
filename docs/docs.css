@@ -10,7 +10,7 @@
 
 :root {
     --docs-header: 56px;
-    --docs-aside: 280px;
+    --docs-aside: 288px;
 }
 
 html {
@@ -284,7 +284,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 var(--ow-space-xs);
+    padding: 0 var(--ow-space-sm);
 }
 
 .docs-side-heading__count {
@@ -313,7 +313,7 @@ body {
     align-items: center;
     gap: var(--ow-space-sm);
     border-radius: var(--ow-radius-lg);
-    padding: 0 var(--ow-space-xs);
+    padding: 0 var(--ow-space-sm);
     color: var(--ow-text-soft);
     font-size: 13px;
     text-decoration: none;
@@ -361,6 +361,15 @@ body {
 .docs-side-link__icon {
     flex-shrink: 0;
     color: var(--ow-icon);
+    transition: color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.docs-side-link:hover .docs-side-link__icon {
+    color: var(--ow-text-muted);
+}
+
+.docs-side-link[aria-current="page"] .docs-side-link__icon {
+    color: var(--ow-primary-text);
 }
 
 .docs-side-link__hint {
@@ -1937,7 +1946,9 @@ a.docs-block-uses__item:focus-visible {
 
 /* A block: a bar of controls, then the live frame on a dotted ground, or its code. */
 .docs-block {
-    overflow: hidden;
+    /* clip, not hidden: hidden would make the block a scroll box, and the resize grip's sticky position would follow it
+       instead of the window. */
+    overflow: clip;
     border: 1px solid var(--ow-border);
     border-radius: var(--ow-radius-container);
     background: var(--ow-surface);
@@ -2031,10 +2042,11 @@ a.docs-block-uses__item:focus-visible {
     outline: none;
 }
 
+/* Centred on the frame. On a block taller than the window it stops at the window's edge, so it never scrolls away. */
 .docs-block__grip {
     position: sticky;
-    top: calc(50vh - 20px);
-    bottom: calc(50vh - 20px);
+    top: calc(var(--docs-header) + 24px);
+    bottom: 24px;
     width: 6px;
     height: 40px;
     border-radius: var(--ow-radius-pill);
