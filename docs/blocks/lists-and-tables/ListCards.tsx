@@ -5,11 +5,13 @@ import {
     AvatarGroup,
     Badge,
     Button,
+    Card,
     EmptyState,
     Menu,
     MenuItem,
     MenuSeparator,
     SearchField,
+    Text,
     copyText,
     toast,
     type BadgeVariant,
@@ -122,10 +124,15 @@ export function ListCards() {
             <div className="list-cards__inner">
                 <div className="list-cards__header">
                     <div>
-                        <h2 id="list-cards-title" className="list-cards__title">
-                            Projects<span className="list-cards__count">{list.length}</span>
-                        </h2>
-                        <p className="list-cards__lead">Everything Acme builds and deploys. Pinned projects stay in the sidebar.</p>
+                        <Text as="h2" variant="heading" id="list-cards-title">
+                            Projects
+                            <Text as="span" variant="heading" tone="muted" className="list-cards__count">
+                                {list.length}
+                            </Text>
+                        </Text>
+                        <Text variant="copy" className="list-cards__lead">
+                            Everything Acme builds and deploys. Pinned projects stay in the sidebar.
+                        </Text>
                     </div>
                     <div className="list-cards__tools">
                         <SearchField
@@ -148,17 +155,19 @@ export function ListCards() {
                             const Icon = project.icon;
                             return (
                                 <li key={project.id}>
-                                    <article className="list-cards__card" aria-labelledby={`list-cards-${project.id}`}>
+                                    <Card padding="none" role="article" className="list-cards__card" aria-labelledby={`list-cards-${project.id}`}>
                                         <div className="list-cards__top">
                                             <span className="list-cards__tile" aria-hidden="true">
                                                 <Icon size={17} />
                                             </span>
                                             <div className="list-cards__names">
-                                                <h3 id={`list-cards-${project.id}`} className="list-cards__name">
-                                                    <span>{project.id}</span>
+                                                <Text as="h3" variant="card-title" id={`list-cards-${project.id}`} className="list-cards__name">
+                                                    <span className="list-cards__name-text">{project.id}</span>
                                                     {project.pinned ? <Star size={13} className="list-cards__star" aria-label="Pinned" /> : null}
-                                                </h3>
-                                                <span className="list-cards__repo">acme/{project.id}</span>
+                                                </Text>
+                                                <Text as="span" variant="code" tone="muted" truncate className="list-cards__repo">
+                                                    acme/{project.id}
+                                                </Text>
                                             </div>
                                             <Menu
                                                 label={`${project.id} actions`}
@@ -191,20 +200,24 @@ export function ListCards() {
                                             </Menu>
                                         </div>
 
-                                        <p className="list-cards__description">{project.description}</p>
+                                        <Text variant="copy" tone="soft" className="list-cards__description">
+                                            {project.description}
+                                        </Text>
 
                                         <div className="list-cards__foot">
                                             <Badge size="sm" variant={tone[project.status]}>
                                                 {project.status}
                                             </Badge>
-                                            <span className="list-cards__when">{project.when}</span>
+                                            <Text variant="caption" truncate className="list-cards__when">
+                                                {project.when}
+                                            </Text>
                                             <AvatarGroup size="sm" max={3} label={`${project.members.length} people on ${project.id}`}>
                                                 {project.members.map((name) => (
                                                     <Avatar key={name} name={name} label={name} />
                                                 ))}
                                             </AvatarGroup>
                                         </div>
-                                    </article>
+                                    </Card>
                                 </li>
                             );
                         })}

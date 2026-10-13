@@ -1,54 +1,17 @@
-import { useState, useSyncExternalStore, type ReactNode } from "react";
+import { useState, useSyncExternalStore } from "react";
 
-import { Badge, Button, SectionHeading, SegmentedControl, Table, VisuallyHidden, type TableColumn } from "@openwarelabs/ui";
+import { Badge, Button, SectionHeading, SegmentedControl, Table, Text, VisuallyHidden, type TableColumn } from "@openwarelabs/ui";
 import { Check, Minus } from "lucide-react";
 
 import "./PricingComparison.css";
 
 type PlanId = "free" | "team" | "business" | "enterprise";
 
-const plans: Array<{ id: PlanId; name: string; price: ReactNode; action: string; popular?: boolean }> = [
-    {
-        id: "free",
-        name: "Free",
-        price: (
-            <>
-                <strong>€0</strong> up to 5 people
-            </>
-        ),
-        action: "Start for free",
-    },
-    {
-        id: "team",
-        name: "Team",
-        price: (
-            <>
-                <strong>€12</strong> a person a month
-            </>
-        ),
-        action: "Start a trial",
-        popular: true,
-    },
-    {
-        id: "business",
-        name: "Business",
-        price: (
-            <>
-                <strong>€24</strong> a person a month
-            </>
-        ),
-        action: "Start a trial",
-    },
-    {
-        id: "enterprise",
-        name: "Enterprise",
-        price: (
-            <>
-                <strong>Custom</strong> pricing
-            </>
-        ),
-        action: "Talk to sales",
-    },
+const plans: Array<{ id: PlanId; name: string; price: string; unit: string; action: string; popular?: boolean }> = [
+    { id: "free", name: "Free", price: "€0", unit: "up to 5 people", action: "Start for free" },
+    { id: "team", name: "Team", price: "€12", unit: "a person a month", action: "Start a trial", popular: true },
+    { id: "business", name: "Business", price: "€24", unit: "a person a month", action: "Start a trial" },
+    { id: "enterprise", name: "Enterprise", price: "Custom", unit: "pricing", action: "Talk to sales" },
 ];
 
 /** true is a tick, false a dash, and text is a limit. */
@@ -173,10 +136,14 @@ export function PricingComparison() {
             key: "feature",
             header: title,
             render: (row) => (
-                <span className="pricing-comparison__feature">
+                <Text as="span" variant="body" className="pricing-comparison__feature">
                     {row.feature}
-                    {row.note ? <span className="pricing-comparison__feature-note">{row.note}</span> : null}
-                </span>
+                    {row.note ? (
+                        <Text variant="caption" className="pricing-comparison__feature-note">
+                            {row.note}
+                        </Text>
+                    ) : null}
+                </Text>
             ),
         },
         ...shown.map((plan) => ({
@@ -207,18 +174,25 @@ export function PricingComparison() {
                 </div>
 
                 <div className="pricing-comparison__plans">
-                    <p className="pricing-comparison__plans-label">Prices a month, in euro, before VAT.</p>
+                    <Text as="p" variant="caption" className="pricing-comparison__plans-label">
+                        Prices a month, in euro, before VAT.
+                    </Text>
                     {shown.map((plan) => (
                         <div key={plan.id} className="pricing-comparison__plan">
-                            <p className="pricing-comparison__plan-name">
+                            <Text as="p" variant="card-title" className="pricing-comparison__plan-name">
                                 {plan.name}
                                 {plan.popular ? (
                                     <Badge size="sm" variant="active">
                                         Popular
                                     </Badge>
                                 ) : null}
-                            </p>
-                            <p className="pricing-comparison__plan-price">{plan.price}</p>
+                            </Text>
+                            <Text as="p" variant="caption" className="pricing-comparison__plan-price">
+                                <Text as="strong" variant="label" tone="default" className="pricing-comparison__plan-amount">
+                                    {plan.price}
+                                </Text>{" "}
+                                {plan.unit}
+                            </Text>
                             <Button size="sm" shape="pill" variant={plan.popular ? "primary" : "secondary"}>
                                 {plan.action}
                             </Button>
@@ -239,7 +213,9 @@ export function PricingComparison() {
                     ))}
                 </div>
 
-                <p className="pricing-comparison__note">Need a limit that isn't here? Enterprise plans set their own.</p>
+                <Text as="p" variant="caption" align="center" className="pricing-comparison__note">
+                    Need a limit that isn't here? Enterprise plans set their own.
+                </Text>
             </div>
         </section>
     );

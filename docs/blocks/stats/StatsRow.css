@@ -36,28 +36,17 @@
     border-left: 1px solid var(--ow-border);
 }
 
+/* A figure, not a title: no extra leading, and digits of one width. */
 .stats-row__value {
-    margin: 0;
-    font-size: 60px;
-    font-weight: 500;
     font-variant-numeric: tabular-nums;
     line-height: 1;
-    letter-spacing: -0.045em;
     white-space: nowrap;
 }
 
+/* The unit is half the figure's size, whatever size the figure is. */
 .stats-row__unit {
     margin-left: 0.06em;
-    color: var(--ow-text-muted);
     font-size: 0.5em;
-    letter-spacing: -0.02em;
-}
-
-.stats-row__label {
-    color: var(--ow-text-muted);
-    font-size: 15px;
-    line-height: 1.45;
-    text-wrap: balance;
 }
 
 .stats-row__note {
@@ -65,9 +54,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin: 48px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
+    margin-top: 48px;
 }
 
 /* A brass dot, the section's one touch of colour. */
@@ -80,9 +67,6 @@
 }
 
 @media (max-width: 1024px) {
-    .stats-row__value {
-        font-size: 48px;
-    }
     .stats-row__item {
         padding: 8px 16px;
     }
@@ -115,12 +99,6 @@
     }
     .stats-row__item {
         padding: 24px 12px;
-    }
-    .stats-row__value {
-        font-size: 40px;
-    }
-    .stats-row__label {
-        font-size: 14px;
     }
     .stats-row__note {
         margin-top: 32px;

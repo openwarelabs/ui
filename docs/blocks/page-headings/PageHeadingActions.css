@@ -55,18 +55,8 @@
     gap: 6px 10px;
 }
 
-.page-heading-actions__title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
 .page-heading-actions__lead {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
-    text-wrap: pretty;
+    margin-top: 4px;
 }
 
 .page-heading-actions__actions {
@@ -96,29 +86,17 @@
     border-left: 1px solid var(--ow-border);
 }
 
-.page-heading-actions__fact dt {
-    color: var(--ow-text-muted);
-    font-size: 12px;
-    font-weight: var(--ow-weight-control);
-}
-
-.page-heading-actions__fact dd {
+.page-heading-actions__value {
     display: flex;
     min-width: 0;
     align-items: center;
     gap: 8px;
-    margin: 0;
     white-space: nowrap;
 }
 
-.page-heading-actions__fact dd > span {
+.page-heading-actions__value > span {
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-.page-heading-actions__mono {
-    font-family: var(--ow-font-mono);
-    font-size: 13px;
 }
 
 .page-heading-actions__live-dot {
@@ -140,9 +118,7 @@
 }
 
 .page-heading-actions__recent-title {
-    margin: 0 0 4px;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
+    margin-bottom: 4px;
 }
 
 .page-heading-actions__deploys {
@@ -169,22 +145,8 @@
     gap: 2px;
 }
 
-.page-heading-actions__deploy-message {
-    overflow: hidden;
-    font-weight: var(--ow-weight-control);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.page-heading-actions__deploy-meta {
-    overflow: hidden;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.page-heading-actions__deploy-meta .page-heading-actions__mono {
+/* A commit hash in mono at 12px, the size of the caption it sits in. */
+.page-heading-actions__commit {
     font-size: 12px;
 }
 

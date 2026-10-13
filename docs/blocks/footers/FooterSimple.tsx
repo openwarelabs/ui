@@ -1,4 +1,4 @@
-import { Link } from "@openwarelabs/ui";
+import { Link, Text } from "@openwarelabs/ui";
 
 import "./FooterSimple.css";
 
@@ -8,9 +8,9 @@ export function FooterSimple() {
     return (
         <footer className="footer-simple">
             <div className="footer-simple__inner">
-                <a className="footer-simple__logo" href="#" aria-label="Acme home">
+                <Link href="#" className="footer-simple__logo" aria-label="Acme home">
                     <span className="footer-simple__mark" />
-                </a>
+                </Link>
                 <nav aria-label="Footer">
                     <ul className="footer-simple__links">
                         {links.map((link) => (
@@ -22,7 +22,9 @@ export function FooterSimple() {
                         ))}
                     </ul>
                 </nav>
-                <p className="footer-simple__legal">© 2026 Acme Ltd. All rights reserved.</p>
+                <Text variant="caption" as="p">
+                    © 2026 Acme Ltd. All rights reserved.
+                </Text>
             </div>
         </footer>
     );

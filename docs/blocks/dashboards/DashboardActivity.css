@@ -35,17 +35,8 @@
     margin-bottom: var(--ow-space-sm);
 }
 
-.dashboard-activity__title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
 .dashboard-activity__lead {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
+    margin-top: 4px;
 }
 
 .dashboard-activity__stats {
@@ -71,12 +62,6 @@
     padding: 10px 14px 10px 18px;
 }
 
-.dashboard-activity__card-title {
-    margin: 0;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
-}
-
 .dashboard-activity__table-card {
     grid-area: table;
     align-self: start;
@@ -92,7 +77,6 @@
     display: inline-flex;
     align-items: center;
     gap: 9px;
-    font-weight: var(--ow-weight-control);
     white-space: nowrap;
 }
 
@@ -101,10 +85,6 @@
     height: 8px;
     flex-shrink: 0;
     border-radius: 50%;
-}
-
-.dashboard-activity__muted {
-    color: var(--ow-text-muted);
 }
 
 /* The feed */
@@ -123,11 +103,7 @@
 }
 
 .dashboard-activity__day {
-    margin: 0;
     padding: 14px 18px 2px;
-    color: var(--ow-text-muted);
-    font-size: 12px;
-    font-weight: var(--ow-weight-control);
 }
 
 .dashboard-activity__events {
@@ -198,23 +174,13 @@
 
 .dashboard-activity__event-text {
     min-width: 0;
-    margin: 0;
     padding-top: 4px;
-    color: var(--ow-text-soft);
-    line-height: 1.45;
     text-wrap: pretty;
-}
-
-.dashboard-activity__event-text strong {
-    color: var(--ow-text);
-    font-weight: var(--ow-weight-emphasis);
 }
 
 .dashboard-activity__event-meta {
     display: block;
     margin-top: 2px;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
 }
 
 .dashboard-activity__earlier {
@@ -225,10 +191,7 @@
 }
 
 .dashboard-activity__none {
-    margin: 0;
     padding: 28px 18px;
-    color: var(--ow-text-muted);
-    text-align: center;
 }
 
 @media (prefers-reduced-motion: reduce) {

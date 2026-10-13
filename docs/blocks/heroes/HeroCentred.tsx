@@ -1,4 +1,4 @@
-import { Avatar, Badge, Button, Chip, Stat } from "@openwarelabs/ui";
+import { Avatar, Badge, Button, Chip, Stat, Text } from "@openwarelabs/ui";
 import { ArrowRight, FolderKanban, Gauge, Inbox, Rocket, Settings } from "lucide-react";
 
 import "./HeroCentred.css";
@@ -72,13 +72,13 @@ export function HeroCentred() {
         <section className="hero-centred" aria-labelledby="hero-centred-title">
             <div className="hero-centred__inner">
                 <Chip>New: agents that open their own pull requests</Chip>
-                <h1 id="hero-centred-title" className="hero-centred__title">
+                <Text variant="hero" align="center" id="hero-centred-title" className="hero-centred__title">
                     The workspace for shipping software
-                </h1>
-                <p className="hero-centred__lead">
+                </Text>
+                <Text variant="lead" align="center" className="hero-centred__lead">
                     Plan the work, hand the routine parts to agents, review every change and ship it. One place for your team, from the first idea to the
                     deploy.
-                </p>
+                </Text>
                 <div className="hero-centred__actions">
                     <Button variant="primary" shape="pill" size="lg" endIcon={<ArrowRight size={16} />}>
                         Start for free
@@ -87,7 +87,9 @@ export function HeroCentred() {
                         Book a demo
                     </Button>
                 </div>
-                <p className="hero-centred__note">Free for teams of up to five. No card needed.</p>
+                <Text variant="caption" as="p" className="hero-centred__note">
+                    Free for teams of up to five. No card needed.
+                </Text>
             </div>
             <div className="hero-centred__visual">
                 <ProductShot />

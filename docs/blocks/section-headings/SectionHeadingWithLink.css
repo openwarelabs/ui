@@ -25,8 +25,6 @@
     align-items: center;
     gap: 6px;
     margin-bottom: 4px;
-    font-size: 15px;
-    font-weight: var(--ow-weight-control);
 }
 
 @media (max-width: 760px) {

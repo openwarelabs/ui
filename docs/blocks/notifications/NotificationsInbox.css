@@ -30,9 +30,6 @@
     align-items: center;
     gap: 9px;
     margin-right: 16px;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.01em;
 }
 
 .notifications-inbox__mark {
@@ -45,34 +42,8 @@
 }
 
 .notifications-inbox__nav {
-    display: flex;
     flex: 1;
     gap: 2px;
-}
-
-.notifications-inbox__nav-item {
-    border-radius: var(--ow-radius-lg);
-    padding: 6px 10px;
-    color: var(--ow-text-muted);
-    font-size: 13.5px;
-    font-weight: var(--ow-weight-control);
-    text-decoration: none;
-    transition: color var(--ow-duration-base) var(--ow-ease-standard);
-}
-
-.notifications-inbox__nav-item:hover {
-    color: var(--ow-text);
-}
-
-.notifications-inbox__nav-item:focus-visible {
-    outline: 2px solid var(--ow-focus-ring);
-    outline-offset: 2px;
-}
-
-.notifications-inbox__nav-item[aria-current="page"] {
-    background: var(--ow-surface);
-    color: var(--ow-text);
-    box-shadow: var(--ow-shadow-control);
 }
 
 /* The bell, with the unread count cut out of its corner. */
@@ -122,12 +93,6 @@
     padding: 10px 8px 4px 16px;
 }
 
-.notifications-inbox__title {
-    margin: 0;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
-}
-
 .notifications-inbox__tabs.ow-tabs {
     gap: 0;
 }
@@ -136,14 +101,11 @@
     padding: 0 16px;
 }
 
-.notifications-inbox__tab-count {
+/* A small count inside the tab, so the tab keeps its height; its figures line up as it changes. */
+.notifications-inbox__tab-count.ow-badge {
     min-width: 18px;
-    border-radius: var(--ow-radius-pill);
-    background: var(--ow-surface-muted);
-    padding: 1px 5px;
-    color: var(--ow-text-muted);
-    font-size: 11.5px;
-    font-weight: var(--ow-weight-emphasis);
+    min-height: 18px;
+    padding: 0 5px;
     font-variant-numeric: tabular-nums;
 }
 
@@ -153,7 +115,8 @@
     list-style: none;
 }
 
-.notifications-inbox__item {
+/* Each notification is one link, laid out as a row rather than a line of underlined text. */
+.notifications-inbox__item.ow-link {
     position: relative;
     display: flex;
     align-items: flex-start;
@@ -165,11 +128,12 @@
     transition: background-color var(--ow-duration-fast) var(--ow-ease-standard);
 }
 
-.notifications-inbox__item:hover {
+.notifications-inbox__item.ow-link:hover {
     background: var(--ow-hover);
+    color: inherit;
 }
 
-.notifications-inbox__item:focus-visible {
+.notifications-inbox__item.ow-link:focus-visible {
     outline: 2px solid var(--ow-focus-ring);
     outline-offset: -2px;
 }
@@ -200,32 +164,14 @@
     gap: 4px;
 }
 
-.notifications-inbox__what {
-    color: var(--ow-text-muted);
-    line-height: 1.4;
-}
-
-.notifications-inbox__what strong {
-    color: var(--ow-text);
-    font-weight: var(--ow-weight-emphasis);
-}
-
 .notifications-inbox__quote {
     display: -webkit-box;
     overflow: hidden;
     border-left: 2px solid var(--ow-border-strong);
     margin: 2px 0 0;
     padding-left: 10px;
-    color: var(--ow-text-soft);
-    font-size: 13px;
-    line-height: 1.45;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-}
-
-.notifications-inbox__meta {
-    color: var(--ow-text-muted);
-    font-size: 12px;
 }
 
 .notifications-inbox__unread {
@@ -239,10 +185,7 @@
 }
 
 .notifications-inbox__empty {
-    margin: 0;
     padding: 40px 16px;
-    color: var(--ow-text-muted);
-    text-align: center;
 }
 
 .notifications-inbox__foot {
@@ -252,7 +195,6 @@
     gap: var(--ow-space-md);
     border-top: 1px solid var(--ow-border);
     padding: 6px 8px 6px 16px;
-    font-size: 13px;
 }
 
 /* The page under the popover. */
@@ -270,17 +212,8 @@
     padding: 28px 32px;
 }
 
-.notifications-inbox__page-title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
 .notifications-inbox__page-subtitle {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
+    margin-top: 4px;
 }
 
 .notifications-inbox__deploys {
@@ -303,14 +236,9 @@
     border-top: 1px solid var(--ow-border);
 }
 
-.notifications-inbox__project {
-    font-weight: var(--ow-weight-emphasis);
-}
-
+/* Branch names in mono at caption size: the code style is 14px, too loud beside the project's name. */
 .notifications-inbox__branch {
     overflow: hidden;
-    color: var(--ow-text-muted);
-    font-family: var(--ow-font-mono);
     font-size: 12px;
     text-overflow: ellipsis;
     white-space: nowrap;

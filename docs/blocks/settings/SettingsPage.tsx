@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 
-import { Badge, Button, Card, Input, NavItem, NavList, NumberField, SegmentedControl, Select, SettingsRow, Switch, toast } from "@openwarelabs/ui";
+import { Badge, Button, Card, Input, NavItem, NavList, NumberField, SegmentedControl, Select, SettingsRow, Switch, Text, toast } from "@openwarelabs/ui";
 import { Bell, Bot, Check, Monitor, Moon, Palette, SlidersHorizontal, Sun, UserRound } from "lucide-react";
 
 import "./SettingsPage.css";
@@ -61,7 +61,11 @@ type Update = <K extends keyof Preferences>(key: K, value: Preferences[K]) => vo
 function Group({ title, children }: { title?: string; children: ReactNode }) {
     return (
         <div className="settings-page__group">
-            {title ? <h3 className="settings-page__group-title">{title}</h3> : null}
+            {title ? (
+                <Text variant="label" as="h3" tone="muted">
+                    {title}
+                </Text>
+            ) : null}
             <Card padding="none" className="settings-page__card">
                 {children}
             </Card>
@@ -325,8 +329,12 @@ export function SettingsPage() {
         <div className="settings-page">
             <div className="settings-page__inner">
                 <header className="settings-page__header">
-                    <h1 className="settings-page__title">Settings</h1>
-                    <p className="settings-page__lead">Your own preferences in Acme. They follow you to every device you sign in on.</p>
+                    <Text variant="heading" as="h1">
+                        Settings
+                    </Text>
+                    <Text variant="copy" className="settings-page__lead">
+                        Your own preferences in Acme. They follow you to every device you sign in on.
+                    </Text>
                 </header>
 
                 <div className="settings-page__layout">
@@ -341,19 +349,21 @@ export function SettingsPage() {
                     <section className="settings-page__section" aria-labelledby={sectionId}>
                         <div className="settings-page__section-header">
                             <div>
-                                <h2 id={sectionId} className="settings-page__section-title">
+                                <Text variant="dialog-title" as="h2" id={sectionId}>
                                     {current.label}
-                                </h2>
-                                <p className="settings-page__section-text">{current.description}</p>
+                                </Text>
+                                <Text variant="copy" className="settings-page__section-text">
+                                    {current.description}
+                                </Text>
                             </div>
-                            <span className="settings-page__saved" data-visible={saved || undefined} role="status">
+                            <Text variant="caption" tone="success" className="settings-page__saved" data-visible={saved || undefined} role="status">
                                 {saved ? (
                                     <>
                                         <Check size={14} aria-hidden="true" />
                                         Saved
                                     </>
                                 ) : null}
-                            </span>
+                            </Text>
                         </div>
                         <SectionContent section={section} prefs={prefs} set={set} />
                     </section>

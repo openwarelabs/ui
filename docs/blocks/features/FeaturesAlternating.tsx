@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { Avatar, Badge, DotGrid, Link, ProgressBar, SectionHeading, Spinner } from "@openwarelabs/ui";
+import { Avatar, Badge, DotGrid, Link, ProgressBar, SectionHeading, Spinner, Text } from "@openwarelabs/ui";
 import { Bot, Check, CircleDashed, GitPullRequest, Rocket } from "lucide-react";
 
 import "./FeaturesAlternating.css";
@@ -204,20 +204,22 @@ export function FeaturesAlternating() {
                     {features.map((feature) => (
                         <article key={feature.id} className="features-alternating__row" aria-labelledby={`features-alternating-${feature.id}`}>
                             <div className="features-alternating__copy">
-                                <span className="features-alternating__kicker">
+                                <Text variant="label" tone="primary" className="features-alternating__kicker">
                                     {feature.icon}
                                     {feature.kicker}
-                                </span>
-                                <h3 id={`features-alternating-${feature.id}`} className="features-alternating__title">
+                                </Text>
+                                <Text variant="heading" id={`features-alternating-${feature.id}`} className="features-alternating__title">
                                     {feature.title}
-                                </h3>
-                                <p className="features-alternating__text">{feature.text}</p>
+                                </Text>
+                                <Text variant="lead" className="features-alternating__text">
+                                    {feature.text}
+                                </Text>
                                 <ul className="features-alternating__points">
                                     {feature.points.map((point) => (
-                                        <li key={point}>
+                                        <Text as="li" key={point} tone="soft" className="features-alternating__point">
                                             <Check size={16} aria-hidden="true" />
                                             {point}
-                                        </li>
+                                        </Text>
                                     ))}
                                 </ul>
                                 <Link href="#" variant="standalone" className="features-alternating__link">

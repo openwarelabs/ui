@@ -1,6 +1,6 @@
 import { useId, useState, type FormEvent } from "react";
 
-import { Button, Checkbox, Field, Input, Link, Radio, RadioGroup, Select, Textarea, toast } from "@openwarelabs/ui";
+import { Button, Checkbox, Field, Input, Link, Radio, RadioGroup, Select, Text, Textarea, toast } from "@openwarelabs/ui";
 import { ArrowLeft, GitBranch } from "lucide-react";
 
 import "./FormSingle.css";
@@ -86,10 +86,12 @@ export function FormSingle() {
                     Projects
                 </Link>
                 <header className="form-single__header">
-                    <h1 id={fieldId("title")} className="form-single__title">
+                    <Text variant="heading" as="h1" id={fieldId("title")}>
                         New project
-                    </h1>
-                    <p className="form-single__lead">A project deploys one repository. Its agents, reviews and deploys all live inside it.</p>
+                    </Text>
+                    <Text variant="copy" className="form-single__lead">
+                        A project deploys one repository. Its agents, reviews and deploys all live inside it.
+                    </Text>
                 </header>
 
                 <form className="form-single__card" noValidate onSubmit={submit} aria-labelledby={fieldId("title")}>
@@ -129,7 +131,10 @@ export function FormSingle() {
                         <Field
                             label={
                                 <>
-                                    Description <span className="form-single__optional">Optional</span>
+                                    Description{" "}
+                                    <Text variant="caption" className="form-single__optional">
+                                        Optional
+                                    </Text>
                                 </>
                             }
                             hint={`Shown on the project's card, and given to agents as context. ${values.description.length} of ${descriptionLimit}.`}
@@ -163,7 +168,9 @@ export function FormSingle() {
                     </div>
 
                     <div className="form-single__footer">
-                        <p className="form-single__note">You can change all of this later in the project's settings.</p>
+                        <Text variant="caption" as="p" className="form-single__note">
+                            You can change all of this later in the project's settings.
+                        </Text>
                         <Button type="submit" variant="primary" loading={saving}>
                             Create project
                         </Button>

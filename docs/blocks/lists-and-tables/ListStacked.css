@@ -28,19 +28,9 @@
     gap: var(--ow-space-2xl);
 }
 
-.list-stacked__title {
-    margin: 0;
-    font-size: 20px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.3;
-    letter-spacing: -0.015em;
-}
-
 .list-stacked__lead {
     max-width: 60ch;
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
-    text-wrap: pretty;
+    margin-top: 4px;
 }
 
 .list-stacked__card {
@@ -71,7 +61,6 @@
     background: var(--ow-surface-muted);
 }
 
-.list-stacked__row[data-inactive] .list-stacked__name,
 .list-stacked__row[data-inactive] .list-stacked__icon {
     color: var(--ow-text-muted);
 }
@@ -103,24 +92,14 @@
     gap: 10px;
 }
 
-.list-stacked__name {
-    overflow: hidden;
-    font-weight: var(--ow-weight-emphasis);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
+/* The key's last characters in mono at 12px, a caption's size beside the name. */
 .list-stacked__key {
     flex-shrink: 0;
-    color: var(--ow-text-muted);
-    font-family: var(--ow-font-mono);
     font-size: 12px;
 }
 
 .list-stacked__detail {
     overflow: hidden;
-    color: var(--ow-text-muted);
-    font-size: 13px;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -132,12 +111,6 @@
 
 .list-stacked__menu {
     grid-area: menu;
-}
-
-.list-stacked__footer {
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
 }
 
 /* Phones: the status moves under the detail, and the detail may wrap. */

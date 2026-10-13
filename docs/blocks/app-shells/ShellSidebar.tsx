@@ -4,9 +4,9 @@ import {
     Avatar,
     Badge,
     Button,
+    Card,
     CommandPalette,
     Drawer,
-    Kbd,
     Menu,
     MenuItem,
     MenuLabel,
@@ -14,6 +14,7 @@ import {
     NavItem,
     NavList,
     Stat,
+    Text,
     type Command,
 } from "@openwarelabs/ui";
 import { Bot, Check, ChevronsUpDown, FolderKanban, Gauge, Inbox, LogOut, Menu as MenuIcon, Plus, Rocket, Search, Settings, User } from "lucide-react";
@@ -48,11 +49,12 @@ function Navigation({ active, onNavigate, onSearch }: { active: string; onNaviga
                 label="Workspaces"
                 width={232}
                 trigger={
-                    <button type="button" className="shell-sidebar__workspace">
+                    <Button variant="ghost" size="sm" fullWidth className="shell-sidebar__workspace" endIcon={<ChevronsUpDown size={15} />}>
                         <span className="shell-sidebar__mark" aria-hidden="true" />
-                        <span className="shell-sidebar__workspace-name">Acme</span>
-                        <ChevronsUpDown size={15} aria-hidden="true" />
-                    </button>
+                        <Text as="span" variant="card-title" tone="default" className="shell-sidebar__workspace-name">
+                            Acme
+                        </Text>
+                    </Button>
                 }
             >
                 <MenuLabel>Workspaces</MenuLabel>
@@ -62,11 +64,11 @@ function Navigation({ active, onNavigate, onSearch }: { active: string; onNaviga
                 <MenuItem icon={<Plus size={15} />}>New workspace</MenuItem>
             </Menu>
 
-            <button type="button" className="shell-sidebar__search" onClick={onSearch}>
-                <Search size={15} aria-hidden="true" />
-                <span className="shell-sidebar__search-text">Search</span>
-                <Kbd>⌘K</Kbd>
-            </button>
+            <Button size="sm" fullWidth className="shell-sidebar__search" startIcon={<Search size={15} />} shortcut="⌘K" onClick={onSearch}>
+                <Text as="span" tone="muted" className="shell-sidebar__search-text">
+                    Search
+                </Text>
+            </Button>
 
             <NavList label="Workspace">
                 {sections.map(({ id, label, icon: Icon, count }) => (
@@ -95,14 +97,17 @@ function Navigation({ active, onNavigate, onSearch }: { active: string; onNaviga
                     above
                     width={232}
                     trigger={
-                        <button type="button" className="shell-sidebar__user">
+                        <Button variant="ghost" fullWidth className="shell-sidebar__user" endIcon={<ChevronsUpDown size={15} />}>
                             <Avatar name="Maya Chen" size="sm" />
                             <span className="shell-sidebar__user-text">
-                                <span className="shell-sidebar__user-name">Maya Chen</span>
-                                <span className="shell-sidebar__user-email">maya@example.com</span>
+                                <Text as="span" variant="label" tone="default" truncate>
+                                    Maya Chen
+                                </Text>
+                                <Text variant="caption" truncate>
+                                    maya@example.com
+                                </Text>
                             </span>
-                            <ChevronsUpDown size={15} aria-hidden="true" />
-                        </button>
+                        </Button>
                     }
                 >
                     <MenuItem icon={<User size={15} />}>Profile</MenuItem>
@@ -156,10 +161,10 @@ export function ShellSidebar() {
                     <Button variant="ghost" iconOnly aria-label="Open navigation" onClick={() => setNavOpen(true)}>
                         <MenuIcon size={18} />
                     </Button>
-                    <span className="shell-sidebar__topbar-brand">
+                    <Text as="span" variant="card-title" className="shell-sidebar__topbar-brand">
                         <span className="shell-sidebar__mark" aria-hidden="true" />
                         Acme
-                    </span>
+                    </Text>
                     <Button variant="ghost" iconOnly aria-label="Search" onClick={() => setSearchOpen(true)}>
                         <Search size={18} />
                     </Button>
@@ -168,8 +173,12 @@ export function ShellSidebar() {
                 <main className="shell-sidebar__panel">
                     <div className="shell-sidebar__page-header">
                         <div>
-                            <h1 className="shell-sidebar__title">Overview</h1>
-                            <p className="shell-sidebar__subtitle">What your team shipped this week.</p>
+                            <Text as="h1" variant="heading">
+                                Overview
+                            </Text>
+                            <Text variant="copy" className="shell-sidebar__subtitle">
+                                What your team shipped this week.
+                            </Text>
                         </div>
                         <Button variant="primary" startIcon={<Plus size={16} />}>
                             New project
@@ -182,26 +191,28 @@ export function ShellSidebar() {
                         <Stat label="Agent runs" value="1,904" change="+31%" />
                     </div>
 
-                    <section className="shell-sidebar__card" aria-labelledby="shell-sidebar-recent">
-                        <h2 id="shell-sidebar-recent" className="shell-sidebar__card-title">
-                            Latest deploys
-                        </h2>
-                        <ul className="shell-sidebar__list">
-                            {recent.map((item) => (
-                                <li key={item.what} className="shell-sidebar__item">
-                                    <span className="shell-sidebar__item-text">
-                                        <span className="shell-sidebar__item-title">{item.what}</span>
-                                        <span className="shell-sidebar__item-meta">
-                                            {item.project} · {item.who} · {item.when}
+                    <Card padding="none">
+                        <section aria-labelledby="shell-sidebar-recent">
+                            <Text as="h2" variant="card-title" id="shell-sidebar-recent" className="shell-sidebar__card-title">
+                                Latest deploys
+                            </Text>
+                            <ul className="shell-sidebar__list">
+                                {recent.map((item) => (
+                                    <li key={item.what} className="shell-sidebar__item">
+                                        <span className="shell-sidebar__item-text">
+                                            <Text as="span">{item.what}</Text>
+                                            <Text variant="caption" truncate>
+                                                {item.project} · {item.who} · {item.when}
+                                            </Text>
                                         </span>
-                                    </span>
-                                    <Badge size="sm" variant={item.status === "Live" ? "success" : "active"}>
-                                        {item.status}
-                                    </Badge>
-                                </li>
-                            ))}
-                        </ul>
-                    </section>
+                                        <Badge size="sm" variant={item.status === "Live" ? "success" : "active"}>
+                                            {item.status}
+                                        </Badge>
+                                    </li>
+                                ))}
+                            </ul>
+                        </section>
+                    </Card>
                 </main>
             </div>
 

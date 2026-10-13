@@ -11,10 +11,6 @@
     color: var(--ow-text);
 }
 
-.testimonial-single__heading {
-    margin: 0;
-}
-
 .testimonial-single__figure {
     display: flex;
     max-width: 920px;
@@ -35,19 +31,9 @@
     margin: 28px 0 0;
 }
 
-/* The setup sits back in muted grey; the part worth remembering is in full colour. */
-.testimonial-single__quote p {
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 36px;
-    font-weight: 500;
-    line-height: 1.28;
-    letter-spacing: -0.03em;
-    text-wrap: balance;
-}
-
-.testimonial-single__emphasis {
-    color: var(--ow-text);
+/* Five lines of quote at a title's size: more leading than a one-line title needs. */
+.testimonial-single__text {
+    line-height: 1.25;
 }
 
 .testimonial-single__caption {
@@ -74,23 +60,12 @@
     font-weight: var(--ow-weight-control);
 }
 
-@media (max-width: 1024px) {
-    .testimonial-single__quote p {
-        font-size: 32px;
-    }
-}
-
 @media (max-width: 760px) {
     .testimonial-single {
         padding: 72px var(--ow-page-gutter);
     }
     .testimonial-single__quote {
         margin-top: 20px;
-    }
-    .testimonial-single__quote p {
-        font-size: 24px;
-        line-height: 1.32;
-        letter-spacing: -0.025em;
     }
     .testimonial-single__caption {
         margin-top: 32px;

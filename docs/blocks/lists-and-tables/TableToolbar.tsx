@@ -9,6 +9,7 @@ import {
     SearchField,
     Select,
     Table,
+    Text,
     User,
     toast,
     type BadgeVariant,
@@ -93,14 +94,16 @@ const columns: Array<TableColumn<Deploy>> = [
         sortable: true,
         render: (deploy) => (
             <span className="table-toolbar__commit">
-                <span className="table-toolbar__message">{deploy.message}</span>
-                <span className="table-toolbar__meta">
+                <Text as="span">{deploy.message}</Text>
+                <Text as="span" variant="code" tone="muted" className="table-toolbar__meta">
                     {deploy.sha}
                     <span className="table-toolbar__on">
                         {" on "}
-                        <span className="table-toolbar__branch">{deploy.branch}</span>
+                        <Text as="span" variant="code" tone="soft" className="table-toolbar__meta">
+                            {deploy.branch}
+                        </Text>
                     </span>
-                </span>
+                </Text>
             </span>
         ),
     },
@@ -116,13 +119,27 @@ const columns: Array<TableColumn<Deploy>> = [
             </Badge>
         ),
     },
-    { key: "seconds", header: "Took", align: "end", sortable: true, render: (deploy) => <span className="table-toolbar__muted">{took(deploy.seconds)}</span> },
+    {
+        key: "seconds",
+        header: "Took",
+        align: "end",
+        sortable: true,
+        render: (deploy) => (
+            <Text as="span" tone="muted" className="table-toolbar__nowrap">
+                {took(deploy.seconds)}
+            </Text>
+        ),
+    },
     {
         key: "minutesAgo",
         header: "Created",
         align: "end",
         sortable: true,
-        render: (deploy) => <span className="table-toolbar__muted">{ago(deploy.minutesAgo)}</span>,
+        render: (deploy) => (
+            <Text as="span" tone="muted" className="table-toolbar__nowrap">
+                {ago(deploy.minutesAgo)}
+            </Text>
+        ),
     },
 ];
 
@@ -176,10 +193,12 @@ export function TableToolbar() {
             <div className="table-toolbar__inner">
                 <div className="table-toolbar__header">
                     <div>
-                        <h2 id="table-toolbar-title" className="table-toolbar__title">
+                        <Text as="h2" variant="heading" id="table-toolbar-title">
                             Deploys
-                        </h2>
-                        <p className="table-toolbar__lead">Every build of every branch across Acme, newest first.</p>
+                        </Text>
+                        <Text variant="copy" className="table-toolbar__lead">
+                            Every build of every branch across Acme, newest first.
+                        </Text>
                     </div>
                     <Button
                         variant="primary"
@@ -224,9 +243,9 @@ export function TableToolbar() {
                                 ...["marketing-site", "billing-api", "mobile-app", "docs", "design-system"].map((id) => ({ value: id, label: id })),
                             ]}
                         />
-                        <span className="table-toolbar__count" aria-live="polite">
+                        <Text variant="caption" className="table-toolbar__count" aria-live="polite">
                             {matching.length === deploys.length ? `${deploys.length} deploys` : `${matching.length} of ${deploys.length} deploys`}
-                        </span>
+                        </Text>
                     </div>
 
                     <Table
@@ -253,9 +272,9 @@ export function TableToolbar() {
 
                     {sorted.length ? (
                         <div className="table-toolbar__footer">
-                            <span className="table-toolbar__range">
+                            <Text variant="caption" className="table-toolbar__range">
                                 {first}–{first + rows.length - 1} of {sorted.length}
-                            </span>
+                            </Text>
                             {pageCount > 1 ? <Pagination size="sm" page={current} pageCount={pageCount} onPageChange={setPage} label="Deploy pages" /> : null}
                         </div>
                     ) : null}

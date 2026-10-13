@@ -1,4 +1,4 @@
-import { Avatar, Card, Link, Tag, User } from "@openwarelabs/ui";
+import { Avatar, Card, Link, Tag, Text, User } from "@openwarelabs/ui";
 import { ArrowRight } from "lucide-react";
 
 import "./BlogFeatured.css";
@@ -81,9 +81,9 @@ export function BlogFeatured() {
         <section className="blog-featured" aria-labelledby="blog-featured-title">
             <div className="blog-featured__inner">
                 <div className="blog-featured__header">
-                    <h2 id="blog-featured-title" className="blog-featured__title">
+                    <Text variant="section-title" id="blog-featured-title">
                         Latest from Acme
-                    </h2>
+                    </Text>
                     <Link href="#" variant="standalone" className="blog-featured__all">
                         All posts
                         <ArrowRight size={16} aria-hidden="true" />
@@ -93,36 +93,50 @@ export function BlogFeatured() {
                 <Card padding="none" className="blog-featured__lead">
                     <Cover kind="horizon" />
                     <div className="blog-featured__lead-body">
-                        <div className="blog-featured__meta">
+                        <Text variant="caption" as="div" className="blog-featured__meta">
                             <Tag size="sm">Customer story</Tag>
                             <time dateTime="2026-09-15">15 Sep 2026</time>
-                        </div>
-                        <h3 className="blog-featured__lead-title">
-                            <a className="blog-featured__link" href="#">
+                        </Text>
+                        <Text variant="heading" as="h3" className="blog-featured__lead-title">
+                            <Link href="#" variant="standalone" className="blog-featured__link">
                                 How Halcyon ships twice a day with a team of six
-                            </a>
-                        </h3>
-                        <p className="blog-featured__excerpt">
+                            </Link>
+                        </Text>
+                        <Text variant="lead" className="blog-featured__excerpt">
                             Halcyon moved planning, reviews and deploys into Acme. Agents take the routine fixes, reviews land within the hour, and release day
                             is just another day.
-                        </p>
+                        </Text>
                         <dl className="blog-featured__facts">
                             <div className="blog-featured__fact">
-                                <dt>Deploys a day</dt>
-                                <dd>2.3</dd>
+                                <Text variant="caption" as="dt">
+                                    Deploys a day
+                                </Text>
+                                <Text variant="heading" as="dd" className="blog-featured__fact-value">
+                                    2.3
+                                </Text>
                             </div>
                             <div className="blog-featured__fact">
-                                <dt>Median review</dt>
-                                <dd>38m</dd>
+                                <Text variant="caption" as="dt">
+                                    Median review
+                                </Text>
+                                <Text variant="heading" as="dd" className="blog-featured__fact-value">
+                                    38m
+                                </Text>
                             </div>
                             <div className="blog-featured__fact">
-                                <dt>By agents</dt>
-                                <dd>31%</dd>
+                                <Text variant="caption" as="dt">
+                                    By agents
+                                </Text>
+                                <Text variant="heading" as="dd" className="blog-featured__fact-value">
+                                    31%
+                                </Text>
                             </div>
                         </dl>
                         <div className="blog-featured__byline">
                             <User name="Jonas Berg" description="Customer success" />
-                            <span className="blog-featured__read">6 min read</span>
+                            <Text variant="caption" className="blog-featured__read">
+                                6 min read
+                            </Text>
                         </div>
                     </div>
                 </Card>
@@ -133,20 +147,20 @@ export function BlogFeatured() {
                             <div className="blog-featured__item">
                                 <Cover kind={post.cover} className="blog-featured__thumb" />
                                 <div>
-                                    <div className="blog-featured__meta">
+                                    <Text variant="caption" as="div" className="blog-featured__meta">
                                         <span>{post.category}</span>
                                         <span aria-hidden="true">·</span>
                                         <time dateTime={post.iso}>{post.date}</time>
-                                    </div>
-                                    <h3 className="blog-featured__item-title">
-                                        <a className="blog-featured__link" href="#">
+                                    </Text>
+                                    <Text variant="card-title" as="h3" className="blog-featured__item-title">
+                                        <Link href="#" variant="standalone" className="blog-featured__link">
                                             {post.title}
-                                        </a>
-                                    </h3>
-                                    <div className="blog-featured__item-author">
+                                        </Link>
+                                    </Text>
+                                    <Text variant="caption" as="div" className="blog-featured__item-author">
                                         <Avatar name={post.author} size="sm" />
                                         {post.author}
-                                    </div>
+                                    </Text>
                                 </div>
                             </div>
                         </li>

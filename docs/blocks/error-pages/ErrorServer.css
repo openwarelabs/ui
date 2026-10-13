@@ -22,20 +22,17 @@
     padding: 0 28px;
 }
 
+/* The logo is a link, but keeps its own colour on hover: no underline, no brass. */
 .error-server__logo {
     display: inline-flex;
     align-items: center;
     gap: 9px;
     border-radius: var(--ow-radius-md);
-    color: var(--ow-text);
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
-    text-decoration: none;
+    text-decoration-line: none;
 }
 
-.error-server__logo:focus-visible {
-    outline: 2px solid var(--ow-focus-ring);
-    outline-offset: 2px;
+.error-server__logo:hover {
+    color: var(--ow-text);
 }
 
 .error-server__mark {
@@ -50,7 +47,6 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 14px;
 }
 
 .error-server__status-dot {
@@ -74,21 +70,12 @@
 }
 
 .error-server__title {
-    margin: 18px 0 0;
-    font-size: 34px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.15;
-    letter-spacing: -0.03em;
-    text-wrap: balance;
+    margin-top: 18px;
 }
 
 .error-server__text {
     max-width: 460px;
-    margin: 12px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 15px;
-    line-height: 1.6;
-    text-wrap: pretty;
+    margin-top: 12px;
 }
 
 .error-server__actions {
@@ -106,17 +93,8 @@
     padding-top: 22px;
 }
 
-.error-server__report-label {
-    margin: 0;
-    font-size: 13px;
-    font-weight: var(--ow-weight-emphasis);
-}
-
 .error-server__report-text {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 13.5px;
-    line-height: 1.55;
+    margin-top: 4px;
 }
 
 .error-server__id {
@@ -131,19 +109,9 @@
     padding: 0 6px 0 12px;
 }
 
-.error-server__id-label {
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-}
-
-.error-server__id code {
+.error-server__id-value {
     min-width: 0;
     flex: 1;
-    overflow: hidden;
-    font-family: var(--ow-font-mono);
-    font-size: 13px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 /* The request, drawn: where it went, and the step that didn't answer. */
@@ -280,12 +248,6 @@
     }
     .error-server__main {
         padding: 12px var(--ow-page-gutter) 40px;
-    }
-    .error-server__title {
-        font-size: 27px;
-    }
-    .error-server__text {
-        font-size: 14px;
     }
     .error-server__actions .ow-button {
         flex: 1;

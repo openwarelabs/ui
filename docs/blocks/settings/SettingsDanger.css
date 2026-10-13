@@ -21,27 +21,8 @@
     margin-bottom: 20px;
 }
 
-.settings-danger__title {
-    margin: 0;
-    font-size: 18px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-}
-
 .settings-danger__text {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
-    text-wrap: pretty;
-}
-
-.settings-danger__code {
-    border-radius: var(--ow-radius-sm);
-    background: var(--ow-code-ground);
-    padding: 1px 5px;
-    color: var(--ow-text);
-    font-family: var(--ow-font-mono);
-    font-size: 0.9em;
+    margin-top: 4px;
 }
 
 .settings-danger__card {
@@ -67,12 +48,10 @@
     gap: 6px;
     margin: -4px 0 4px;
     padding: 0 0 0 18px;
-    color: var(--ow-text-soft);
 }
 
-.settings-danger__contents strong {
-    color: var(--ow-text);
-    font-weight: var(--ow-weight-emphasis);
+/* Counts, so their figures line up down the list. */
+.settings-danger__count {
     font-variant-numeric: tabular-nums;
 }
 

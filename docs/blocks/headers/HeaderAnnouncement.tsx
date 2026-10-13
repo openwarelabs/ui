@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-import { Button, Chip, CloseButton, Menu, MenuItem, MenuSeparator } from "@openwarelabs/ui";
+import { Button, Chip, CloseButton, Link, Menu, MenuItem, MenuSeparator, Text } from "@openwarelabs/ui";
 import { ArrowRight, Menu as MenuIcon } from "lucide-react";
 
 import "./HeaderAnnouncement.css";
@@ -34,15 +34,15 @@ export function HeaderAnnouncement() {
             <aside className="header-announcement__notice" aria-label="Announcement" data-closed={closed || undefined} aria-hidden={closed || undefined}>
                 <div className="header-announcement__clip">
                     <div className="header-announcement__notice-inner">
-                        <p className="header-announcement__message">
+                        <Text className="header-announcement__message">
                             <span className="header-announcement__dot" aria-hidden="true" />
                             <strong>Acme 3.0 is out.</strong> <span className="header-announcement__detail">Agents now open their own pull requests.</span>
-                            <a href="#announcement" className="header-announcement__link">
+                            <Link href="#announcement" className="header-announcement__link">
                                 <span className="header-announcement__link-wide">Read the announcement</span>
                                 <span className="header-announcement__link-narrow">Read more</span>
                                 <ArrowRight size={14} aria-hidden="true" />
-                            </a>
-                        </p>
+                            </Link>
+                        </Text>
                         <CloseButton size="sm" label="Dismiss the announcement" onClick={dismiss} />
                     </div>
                 </div>
@@ -50,21 +50,21 @@ export function HeaderAnnouncement() {
 
             <header className="header-announcement__header">
                 <div className="header-announcement__inner">
-                    <a ref={brandRef} href="#" className="header-announcement__brand">
+                    <Link ref={brandRef} href="#" variant="standalone" className="header-announcement__brand">
                         <span className="header-announcement__mark" aria-hidden="true" />
                         Acme
-                    </a>
+                    </Link>
                     <nav className="header-announcement__nav" aria-label="Main">
                         {links.map((link) => (
-                            <a key={link.label} href={link.href} className="header-announcement__link-plain">
+                            <Link key={link.label} href={link.href} variant="standalone" className="header-announcement__link-plain">
                                 {link.label}
-                            </a>
+                            </Link>
                         ))}
                     </nav>
                     <div className="header-announcement__actions">
-                        <a href="#sign-in" className="header-announcement__link-plain">
+                        <Link href="#sign-in" variant="standalone" className="header-announcement__link-plain">
                             Sign in
-                        </a>
+                        </Link>
                         <Button variant="primary" shape="pill" size="sm">
                             Start for free
                         </Button>
@@ -95,10 +95,12 @@ export function HeaderAnnouncement() {
             {/* Your page */}
             <main className="header-announcement__page">
                 <Chip>Acme 3.0</Chip>
-                <h1 className="header-announcement__title">Agents that open their own pull requests</h1>
-                <p className="header-announcement__lead">
+                <Text variant="page-title" className="header-announcement__title">
+                    Agents that open their own pull requests
+                </Text>
+                <Text variant="lead" className="header-announcement__lead">
                     Assign a ticket to an agent and it branches, writes the change, runs your tests and asks for your review, reasoning included.
-                </p>
+                </Text>
             </main>
         </div>
     );

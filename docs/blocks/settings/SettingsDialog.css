@@ -27,9 +27,6 @@
     align-items: center;
     gap: 10px;
     padding: 6px 8px;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.01em;
 }
 
 .settings-dialog__mark {
@@ -65,17 +62,8 @@
     gap: var(--ow-space-2xl);
 }
 
-.settings-dialog__page-title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
 .settings-dialog__page-text {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
+    margin-top: 4px;
 }
 
 .settings-dialog__projects {
@@ -102,18 +90,6 @@
     display: grid;
     min-width: 0;
     gap: 2px;
-}
-
-.settings-dialog__project-name {
-    font-weight: var(--ow-weight-control);
-}
-
-.settings-dialog__project-detail {
-    overflow: hidden;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 /* The dialog: the canvas around, the sections down the left, the panel on the right. */
@@ -149,11 +125,7 @@
 .settings-dialog__saved {
     grid-column: 1;
     grid-row: 4;
-    margin: 0;
     padding: 0 12px 10px;
-    color: var(--ow-text-muted);
-    font-size: 12px;
-    line-height: 1.4;
 }
 
 .settings-dialog__panel {
@@ -181,16 +153,11 @@
 }
 
 .settings-dialog__section-title {
-    margin: 0;
     padding-right: 40px;
-    font-size: 16px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.3;
 }
 
 .settings-dialog__section-text {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
+    margin-top: 4px;
 }
 
 .settings-dialog__rows {

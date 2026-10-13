@@ -30,9 +30,6 @@
     align-items: center;
     gap: 9px;
     margin-right: 12px;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.01em;
 }
 
 .onboarding-welcome__mark {
@@ -45,34 +42,7 @@
 }
 
 .onboarding-welcome__nav {
-    display: flex;
     flex: 1;
-    gap: 2px;
-}
-
-.onboarding-welcome__nav-item {
-    border-radius: var(--ow-radius-lg);
-    padding: 6px 10px;
-    color: var(--ow-text-muted);
-    font-size: 13.5px;
-    font-weight: var(--ow-weight-control);
-    text-decoration: none;
-    transition: color var(--ow-duration-base) var(--ow-ease-standard);
-}
-
-.onboarding-welcome__nav-item:hover {
-    color: var(--ow-text);
-}
-
-.onboarding-welcome__nav-item:focus-visible {
-    outline: 2px solid var(--ow-focus-ring);
-    outline-offset: 2px;
-}
-
-.onboarding-welcome__nav-item[aria-current="page"] {
-    background: var(--ow-surface);
-    color: var(--ow-text);
-    box-shadow: var(--ow-shadow-control);
 }
 
 /* The way back to the dialog; the brass dot means there's something unread in it. */
@@ -105,17 +75,8 @@
     padding: 28px 32px;
 }
 
-.onboarding-welcome__title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
 .onboarding-welcome__subtitle {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
+    margin-top: 4px;
 }
 
 .onboarding-welcome__list {
@@ -144,21 +105,6 @@
     gap: 2px;
 }
 
-.onboarding-welcome__row-title {
-    overflow: hidden;
-    font-weight: var(--ow-weight-control);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.onboarding-welcome__row-meta {
-    overflow: hidden;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 /* The dialog. */
 .onboarding-welcome__dialog .ow-dialog__body {
     gap: var(--ow-space-4xl);
@@ -169,17 +115,10 @@
     justify-content: space-between;
 }
 
-.onboarding-welcome__changelog {
-    font-size: 13px;
-}
-
 .onboarding-welcome__eyebrow {
     display: inline-flex;
     align-items: center;
     gap: var(--ow-space-sm);
-    color: var(--ow-text-muted);
-    font-size: 12px;
-    font-weight: var(--ow-weight-control);
 }
 
 .onboarding-welcome__eyebrow-dot {
@@ -306,16 +245,6 @@
     display: grid;
     gap: 1px;
     padding-top: 1px;
-}
-
-.onboarding-welcome__change-title {
-    font-weight: var(--ow-weight-emphasis);
-}
-
-.onboarding-welcome__change-description {
-    color: var(--ow-text-muted);
-    font-size: 13.5px;
-    line-height: 1.45;
 }
 
 @media (max-width: 760px) {

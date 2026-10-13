@@ -21,22 +21,11 @@
 }
 
 .hero-centred__title {
-    margin: 24px 0 0;
-    color: var(--ow-text);
-    font-size: 72px;
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: -0.045em;
-    text-wrap: balance;
+    margin-top: 24px;
 }
 
 .hero-centred__lead {
-    max-width: 580px;
-    margin: 22px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 18px;
-    line-height: 1.6;
-    text-wrap: pretty;
+    margin-top: 22px;
 }
 
 .hero-centred__actions {
@@ -48,9 +37,7 @@
 }
 
 .hero-centred__note {
-    margin: 16px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
+    margin-top: 16px;
 }
 
 /* The product, cropped at the bottom so it runs on into the page. */
@@ -207,9 +194,6 @@
 }
 
 @media (max-width: 1024px) {
-    .hero-centred__title {
-        font-size: 60px;
-    }
     .hero-centred__app {
         grid-template-columns: minmax(0, 1fr);
     }
@@ -225,14 +209,6 @@
 @media (max-width: 760px) {
     .hero-centred {
         padding-top: 72px;
-    }
-    .hero-centred__title {
-        font-size: 42px;
-        line-height: 1.04;
-        letter-spacing: -0.04em;
-    }
-    .hero-centred__lead {
-        font-size: 16px;
     }
     .hero-centred__actions {
         width: 100%;

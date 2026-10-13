@@ -51,17 +51,11 @@
 }
 
 .contact-support__title {
-    margin: 20px 0 0;
-    font-size: 18px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.015em;
+    margin-top: 20px;
 }
 
 .contact-support__text {
-    margin: 8px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 14.5px;
-    line-height: 1.55;
+    margin-top: 8px;
 }
 
 .contact-support__list {
@@ -79,17 +73,15 @@
     gap: 12px;
     border-bottom: 1px solid var(--ow-border);
     padding: 10px 0;
-    font-size: 14px;
 }
 
 .contact-support__list a {
     min-width: 0;
 }
 
+/* Times and counts in tabular numerals, so they line up down the list. */
 .contact-support__meta {
     flex-shrink: 0;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
     font-variant-numeric: tabular-nums;
 }
 
@@ -103,8 +95,6 @@
     border-radius: var(--ow-radius-form);
     background: var(--ow-surface-muted);
     padding: 4px 4px 4px 12px;
-    font-size: 14px;
-    font-weight: var(--ow-weight-control);
 }
 
 .contact-support__foot {
@@ -121,7 +111,6 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 14px;
     white-space: nowrap;
 }
 
@@ -129,8 +118,6 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
     white-space: nowrap;
 }
 
@@ -140,10 +127,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px 20px;
-    margin: 40px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 14px;
-    text-align: center;
+    margin-top: 40px;
 }
 
 .contact-support__status > span:last-child {
@@ -154,8 +138,6 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: var(--ow-text);
-    font-weight: var(--ow-weight-control);
 }
 
 .contact-support__state::before {

@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 
-import { Badge, Button, ChoiceCard, Field, Input, Radio, RadioGroup, Steps } from "@openwarelabs/ui";
+import { Badge, Button, ChoiceCard, Field, Input, Radio, RadioGroup, Steps, Text } from "@openwarelabs/ui";
 import { ArrowLeft, Check, FilePlus2, FolderGit2, GitBranch, LayoutTemplate, ShieldCheck } from "lucide-react";
 
 import "./OnboardingChoice.css";
@@ -139,8 +139,12 @@ function ImportList({ onBack, onCreate }: { onBack: () => void; onCreate: (name:
                             <FolderGit2 size={16} />
                         </span>
                         <span className="onboarding-choice__repo-text">
-                            <span className="onboarding-choice__repo-name">{repository.name}</span>
-                            <span className="onboarding-choice__repo-meta">{repository.meta}</span>
+                            <Text variant="code" truncate>
+                                {repository.name}
+                            </Text>
+                            <Text variant="caption" truncate>
+                                {repository.meta}
+                            </Text>
                         </span>
                         <Button
                             size="sm"
@@ -166,13 +170,13 @@ function ImportList({ onBack, onCreate }: { onBack: () => void; onCreate: (name:
 export function OnboardingChoice() {
     const [view, setView] = useState<View>("choose");
     const [project, setProject] = useState("");
-    const title = useRef<HTMLHeadingElement>(null);
+    const titleId = useId();
     const moved = useRef(false);
 
     // Each view replaces the last, so move focus to its heading for screen readers and keyboards.
     useEffect(() => {
-        if (moved.current) title.current?.focus();
-    }, [view]);
+        if (moved.current) document.getElementById(titleId)?.focus();
+    }, [view, titleId]);
 
     const go = (next: View) => {
         moved.current = true;
@@ -189,10 +193,10 @@ export function OnboardingChoice() {
     return (
         <div className="onboarding-choice">
             <header className="onboarding-choice__top">
-                <span className="onboarding-choice__brand">
+                <Text variant="card-title" as="span" className="onboarding-choice__brand">
                     <span className="onboarding-choice__mark" aria-hidden="true" />
                     Acme
-                </span>
+                </Text>
                 <Steps
                     className="onboarding-choice__progress"
                     orientation="horizontal"
@@ -211,10 +215,12 @@ export function OnboardingChoice() {
                         <Check size={22} />
                     </span>
                 ) : null}
-                <h1 ref={title} tabIndex={-1} className="onboarding-choice__title">
+                <Text variant="heading" as="h2" id={titleId} tabIndex={-1} className="onboarding-choice__title">
                     {view === "done" ? `${project} is ready` : heading.title}
-                </h1>
-                <p className="onboarding-choice__lead">{heading.lead}</p>
+                </Text>
+                <Text variant="copy" className="onboarding-choice__lead">
+                    {heading.lead}
+                </Text>
 
                 <div className="onboarding-choice__content">
                     {view === "choose" ? (
@@ -238,10 +244,10 @@ export function OnboardingChoice() {
                                     </div>
                                 ))}
                             </div>
-                            <p className="onboarding-choice__note">
+                            <Text variant="copy" className="onboarding-choice__note">
                                 <ShieldCheck size={16} aria-hidden="true" />
                                 Nothing changes in GitHub until you merge a pull request.
-                            </p>
+                            </Text>
                         </>
                     ) : null}
                     {view === "scratch" ? <ScratchForm onBack={back} onCreate={create} /> : null}

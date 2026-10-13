@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 
-import { Badge, Button, Chip, Input } from "@openwarelabs/ui";
+import { Badge, Button, Chip, Input, Text } from "@openwarelabs/ui";
 import { Bot, Check, Mail } from "lucide-react";
 
 import "./HeroEmail.css";
@@ -90,23 +90,25 @@ export function HeroEmail() {
         <section className="hero-email" aria-labelledby="hero-email-title">
             <div className="hero-email__inner">
                 <Chip>Early access: Acme Agents</Chip>
-                <h1 id="hero-email-title" className="hero-email__title">
+                <Text variant="hero" align="center" id="hero-email-title" className="hero-email__title">
                     Your backlog, handled overnight
-                </h1>
-                <p className="hero-email__lead">
+                </Text>
+                <Text variant="lead" align="center" className="hero-email__lead">
                     Agents pick up the routine tickets after your team logs off and leave a pull request for each by morning, with their reasoning written down.
                     We're letting new teams in every week.
-                </p>
+                </Text>
 
                 {joined ? (
                     <div ref={doneRef} className="hero-email__done" tabIndex={-1}>
                         <span className="hero-email__done-icon" aria-hidden="true">
                             <Check size={16} />
                         </span>
-                        <span className="hero-email__done-text">
-                            <span className="hero-email__done-title">You're on the list</span>
-                            <span className="hero-email__done-detail">We'll write to {joined} when your team's place is ready.</span>
-                        </span>
+                        <div className="hero-email__done-text">
+                            <Text variant="label">You're on the list</Text>
+                            <Text variant="caption" as="p" className="hero-email__done-detail">
+                                We'll write to {joined} when your team's place is ready.
+                            </Text>
+                        </div>
                         <Button
                             variant="ghost"
                             size="sm"
@@ -142,13 +144,13 @@ export function HeroEmail() {
                             </Button>
                         </div>
                         {error ? (
-                            <p id={`${id}-error`} className="hero-email__error" role="alert">
+                            <Text tone="danger" id={`${id}-error`} className="hero-email__error" role="alert">
                                 {error}
-                            </p>
+                            </Text>
                         ) : null}
-                        <p id={`${id}-note`} className="hero-email__note">
+                        <Text variant="caption" as="p" id={`${id}-note`} className="hero-email__note">
                             One email when your place is ready. Nothing else.
-                        </p>
+                        </Text>
                     </form>
                 )}
 

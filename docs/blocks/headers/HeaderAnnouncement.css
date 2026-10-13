@@ -47,11 +47,7 @@
 
 .header-announcement__message {
     grid-column: 2;
-    margin: 0;
-    font-size: 13.5px;
-    line-height: 1.45;
     text-align: center;
-    text-wrap: balance;
 }
 
 .header-announcement__dot {
@@ -72,16 +68,13 @@
     color: color-mix(in srgb, var(--ow-on-primary) 78%, transparent);
 }
 
+/* A link on the midnight line: white, with a faint underline that firms up on hover. */
 .header-announcement__link {
     margin-left: 10px;
-    border-radius: var(--ow-radius-sm);
     color: var(--ow-on-primary);
     font-weight: var(--ow-weight-control);
-    text-decoration: underline;
     text-decoration-color: color-mix(in srgb, var(--ow-on-primary) 40%, transparent);
-    text-underline-offset: 3px;
     white-space: nowrap;
-    transition: text-decoration-color var(--ow-duration-base) var(--ow-ease-standard);
 }
 
 .header-announcement__link svg {
@@ -90,6 +83,7 @@
 }
 
 .header-announcement__link:hover {
+    color: var(--ow-on-primary);
     text-decoration-color: var(--ow-on-primary);
 }
 
@@ -125,13 +119,18 @@
     padding: 0 32px;
 }
 
+/* The wordmark keeps the logo's own lettering, as SiteHeader's brand does, and no link colour on hover. */
+.header-announcement__brand,
+.header-announcement__brand:hover {
+    color: var(--ow-text);
+}
+
 .header-announcement__brand {
     display: inline-flex;
     align-items: center;
     justify-self: start;
     gap: 9px;
     border-radius: var(--ow-radius-md);
-    color: var(--ow-text);
     font-size: 16px;
     font-weight: var(--ow-weight-emphasis);
     letter-spacing: -0.02em;
@@ -153,24 +152,15 @@
     gap: 26px;
 }
 
+/* Nav links as in SiteHeader: soft text that darkens on hover, never underlined. */
 .header-announcement__link-plain {
-    border-radius: var(--ow-radius-sm);
     color: var(--ow-text-soft);
-    font-size: 14px;
-    font-weight: var(--ow-weight-control);
     text-decoration: none;
     white-space: nowrap;
-    transition: color var(--ow-duration-base) var(--ow-ease-standard);
 }
 
 .header-announcement__link-plain:hover {
     color: var(--ow-text);
-}
-
-.header-announcement__brand:focus-visible,
-.header-announcement__link-plain:focus-visible {
-    outline: 2px solid var(--ow-focus-ring);
-    outline-offset: 3px;
 }
 
 .header-announcement__actions {
@@ -197,21 +187,11 @@
 
 .header-announcement__title {
     max-width: 720px;
-    margin: 22px 0 0;
-    font-size: 56px;
-    font-weight: 500;
-    line-height: 1.04;
-    letter-spacing: -0.04em;
-    text-wrap: balance;
+    margin-top: 22px;
 }
 
 .header-announcement__lead {
-    max-width: 540px;
-    margin: 20px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 17px;
-    line-height: 1.6;
-    text-wrap: pretty;
+    margin-top: 20px;
 }
 
 @media (max-width: 1024px) {
@@ -267,13 +247,6 @@
     }
     .header-announcement__page {
         padding: 64px var(--ow-page-gutter) 80px;
-    }
-    .header-announcement__title {
-        font-size: 38px;
-        line-height: 1.08;
-    }
-    .header-announcement__lead {
-        font-size: 16px;
     }
 }
 

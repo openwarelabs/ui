@@ -13,6 +13,7 @@ import {
     TabList,
     TabPanel,
     Tabs,
+    Text,
     toast,
     type BadgeVariant,
 } from "@openwarelabs/ui";
@@ -78,10 +79,15 @@ function RowList({ rows }: { rows: Row[] }) {
             {rows.map((row) => (
                 <li key={`${row.title}-${row.mono}`} className="page-heading-tabs__row">
                     <span className="page-heading-tabs__row-text">
-                        <span className="page-heading-tabs__row-title">{row.title}</span>
-                        <span className="page-heading-tabs__row-meta">
-                            <span className="page-heading-tabs__mono">{row.mono}</span> · {row.meta}
-                        </span>
+                        <Text as="span" truncate>
+                            {row.title}
+                        </Text>
+                        <Text variant="caption" truncate>
+                            <Text as="span" variant="code" className="page-heading-tabs__mono">
+                                {row.mono}
+                            </Text>{" "}
+                            · {row.meta}
+                        </Text>
                     </span>
                     <Badge size="sm" variant={row.tone}>
                         {row.status}
@@ -103,8 +109,12 @@ export function PageHeadingTabs() {
                     <Breadcrumbs items={[{ label: "Acme", href: "#" }, { label: "Projects", href: "#" }, { label: "mobile-app" }]} />
                     <div className="page-heading-tabs__header">
                         <div>
-                            <h1 className="page-heading-tabs__title">mobile-app</h1>
-                            <p className="page-heading-tabs__lead">The iOS and Android app, built from one codebase.</p>
+                            <Text as="h1" variant="heading">
+                                mobile-app
+                            </Text>
+                            <Text variant="copy" className="page-heading-tabs__lead">
+                                The iOS and Android app, built from one codebase.
+                            </Text>
                         </div>
                         <div className="page-heading-tabs__actions">
                             <AvatarGroup size="sm" max={4} label={`${members.length} people on mobile-app`}>
@@ -131,7 +141,9 @@ export function PageHeadingTabs() {
                         {lists.map((list) => (
                             <Tab key={list.id} value={list.id}>
                                 {list.label}
-                                <span className="page-heading-tabs__count">{list.rows.length}</span>
+                                <Text variant="badge" tone="muted" className="page-heading-tabs__count">
+                                    {list.rows.length}
+                                </Text>
                             </Tab>
                         ))}
                         <Tab value="settings">Settings</Tab>
@@ -140,22 +152,34 @@ export function PageHeadingTabs() {
                     <TabPanel value="overview" className="page-heading-tabs__tab-panel page-heading-tabs__overview">
                         <dl className="page-heading-tabs__figures">
                             <div className="page-heading-tabs__figure">
-                                <dt>Deploys this week</dt>
-                                <dd>9</dd>
+                                <Text as="dt" variant="caption">
+                                    Deploys this week
+                                </Text>
+                                <Text as="dd" variant="heading">
+                                    9
+                                </Text>
                             </div>
                             <div className="page-heading-tabs__figure">
-                                <dt>Crash-free sessions</dt>
-                                <dd>99.6%</dd>
+                                <Text as="dt" variant="caption">
+                                    Crash-free sessions
+                                </Text>
+                                <Text as="dd" variant="heading">
+                                    99.6%
+                                </Text>
                             </div>
                             <div className="page-heading-tabs__figure">
-                                <dt>Open reviews</dt>
-                                <dd>3</dd>
+                                <Text as="dt" variant="caption">
+                                    Open reviews
+                                </Text>
+                                <Text as="dd" variant="heading">
+                                    3
+                                </Text>
                             </div>
                         </dl>
                         <section className="page-heading-tabs__rollout" aria-labelledby="page-heading-tabs-rollout">
-                            <h2 id="page-heading-tabs-rollout" className="page-heading-tabs__rollout-title">
+                            <Text as="h2" variant="card-title" id="page-heading-tabs-rollout" className="page-heading-tabs__rollout-title">
                                 Release 2.4 rollout
-                            </h2>
+                            </Text>
                             <ProgressBar label="iOS" value={100} valueLabel="All users" tone="success" />
                             <ProgressBar label="Android" value={60} valueLabel="60% of users" />
                         </section>

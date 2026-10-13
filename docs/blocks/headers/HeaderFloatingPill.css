@@ -36,11 +36,18 @@
     color: var(--ow-text);
 }
 
+/* The wordmark takes SiteHeader's brand lettering, not the link's weight or its hover colour. */
+.header-floating-pill__brand,
+.header-floating-pill__brand:hover {
+    color: inherit;
+}
+
 .header-floating-pill__brand {
     display: inline-flex;
     align-items: center;
     gap: 9px;
     border-radius: var(--ow-radius-md);
+    font-weight: inherit;
 }
 
 .header-floating-pill__mark {
@@ -52,26 +59,16 @@
     box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
 }
 
+/* Sign in looks like the nav links beside it: soft text that darkens on hover, never underlined. */
 .header-floating-pill__sign-in {
     margin-right: 6px;
-    border-radius: var(--ow-radius-sm);
     color: var(--ow-text-soft);
-    font-size: 14px;
-    font-weight: var(--ow-weight-control);
     text-decoration: none;
     white-space: nowrap;
-    transition: color var(--ow-duration-base) var(--ow-ease-standard);
 }
 
 .header-floating-pill__sign-in:hover {
     color: var(--ow-text);
-}
-
-.header-floating-pill__brand:focus-visible,
-.header-floating-pill__sign-in:focus-visible,
-.header-floating-pill__menu-link:focus-visible {
-    outline: 2px solid var(--ow-focus-ring);
-    outline-offset: 2px;
 }
 
 .header-floating-pill__phone-menu {
@@ -84,18 +81,17 @@
     margin: -6px;
 }
 
+/* Menu rows: a soft ground on hover instead of the link's underline. */
 .header-floating-pill__menu-link {
     border-radius: var(--ow-radius-lg);
     padding: 9px 10px;
-    color: var(--ow-text);
-    font-size: 15px;
-    font-weight: var(--ow-weight-control);
     text-decoration: none;
     transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
 }
 
 .header-floating-pill__menu-link:hover {
     background: var(--ow-surface-muted);
+    color: var(--ow-text);
 }
 
 .header-floating-pill__menu-link[aria-current="page"] {
@@ -123,21 +119,12 @@
 }
 
 .header-floating-pill__title {
-    margin: 20px 0 0;
-    font-size: 52px;
-    font-weight: 500;
-    line-height: 1.04;
-    letter-spacing: -0.04em;
-    text-wrap: balance;
+    margin-top: 20px;
 }
 
 .header-floating-pill__lead {
     max-width: 520px;
-    margin: 16px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 17px;
-    line-height: 1.6;
-    text-wrap: pretty;
+    margin-top: 16px;
 }
 
 .header-floating-pill__entries {
@@ -156,8 +143,6 @@
 
 .header-floating-pill__date {
     padding-top: 2px;
-    color: var(--ow-text-muted);
-    font-size: 13px;
 }
 
 .header-floating-pill__entry-body {
@@ -167,19 +152,11 @@
 }
 
 .header-floating-pill__entry-title {
-    margin: 12px 0 0;
-    font-size: 20px;
-    font-weight: var(--ow-weight-emphasis);
-    line-height: 1.3;
-    letter-spacing: -0.015em;
+    margin-top: 12px;
 }
 
 .header-floating-pill__entry-text {
-    margin: 8px 0 0;
-    color: var(--ow-text-soft);
-    font-size: 15px;
-    line-height: 1.65;
-    text-wrap: pretty;
+    margin-top: 8px;
 }
 
 @media (max-width: 1024px) {
@@ -207,12 +184,6 @@
     }
     .header-floating-pill__page {
         padding: 56px var(--ow-page-gutter) 88px;
-    }
-    .header-floating-pill__title {
-        font-size: 38px;
-    }
-    .header-floating-pill__lead {
-        font-size: 16px;
     }
     .header-floating-pill__entries {
         margin-top: 44px;

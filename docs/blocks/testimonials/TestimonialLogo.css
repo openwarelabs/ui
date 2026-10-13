@@ -103,12 +103,8 @@
     margin: 20px 0 0;
 }
 
-.testimonial-logo__quote p {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 1.4;
-    letter-spacing: -0.02em;
+/* A quote of several lines wraps as running text, using the column's width, not balanced like a title. */
+.testimonial-logo__text {
     text-wrap: pretty;
 }
 
@@ -125,10 +121,7 @@
 }
 
 .testimonial-logo__about {
-    margin: 16px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 14px;
-    line-height: 1.55;
+    margin-top: 16px;
 }
 
 .testimonial-logo__facts {
@@ -144,25 +137,10 @@
     gap: 16px;
     border-top: 1px solid var(--ow-border);
     padding: 12px 0;
-    font-size: 13.5px;
-}
-
-.testimonial-logo__fact dt {
-    color: var(--ow-text-muted);
-}
-
-.testimonial-logo__fact dd {
-    margin: 0;
-    font-weight: var(--ow-weight-emphasis);
-    font-variant-numeric: tabular-nums;
-    text-align: right;
 }
 
 .testimonial-logo__note {
-    margin: 20px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-    text-align: center;
+    margin-top: 20px;
 }
 
 @media (max-width: 1024px) {
@@ -231,9 +209,6 @@
     }
     .testimonial-logo__body {
         padding: 28px 22px 26px;
-    }
-    .testimonial-logo__quote p {
-        font-size: 19px;
     }
     .testimonial-logo__person {
         margin-top: 28px;

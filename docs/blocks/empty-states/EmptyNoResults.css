@@ -21,17 +21,8 @@
     padding: 28px 32px 32px;
 }
 
-.empty-no-results__title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
 .empty-no-results__subtitle {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
+    margin-top: 4px;
 }
 
 .empty-no-results__toolbar {
@@ -47,10 +38,9 @@
     max-width: 100%;
 }
 
+/* Counts, so the figures don't shift as they change. */
 .empty-no-results__count {
     margin-left: auto;
-    color: var(--ow-text-muted);
-    font-size: 13px;
     font-variant-numeric: tabular-nums;
 }
 
@@ -68,17 +58,9 @@
     gap: 1px;
 }
 
-.empty-no-results__deploy strong {
-    font-weight: var(--ow-weight-emphasis);
-}
-
-.empty-no-results__deploy span {
-    overflow: hidden;
-    color: var(--ow-text-muted);
+/* Branch names are code, so they keep the mono face at the caption's size. */
+.empty-no-results__branch {
     font-family: var(--ow-font-mono);
-    font-size: 12px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .empty-no-results__by {
@@ -88,14 +70,8 @@
     white-space: nowrap;
 }
 
-.empty-no-results__muted {
-    color: var(--ow-text-muted);
+.empty-no-results__when {
     white-space: nowrap;
-}
-
-.empty-no-results__query {
-    color: var(--ow-text);
-    font-weight: var(--ow-weight-emphasis);
 }
 
 @media (max-width: 760px) {

@@ -22,26 +22,14 @@
     align-items: center;
     gap: var(--ow-space-xs);
     color: var(--ow-text-muted);
-    font-size: 13px;
-    font-weight: var(--ow-weight-control);
 }
 
 .form-single__header {
     margin: 20px 0 24px;
 }
 
-.form-single__title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
 .form-single__lead {
-    margin: 6px 0 0;
-    color: var(--ow-text-muted);
-    text-wrap: pretty;
+    margin-top: 6px;
 }
 
 .form-single__card {
@@ -59,9 +47,6 @@
 
 .form-single__optional {
     margin-left: var(--ow-space-2xs);
-    color: var(--ow-text-muted);
-    font-size: 12px;
-    font-weight: var(--ow-weight-regular);
 }
 
 .form-single__footer {
@@ -74,11 +59,6 @@
     padding: 14px 28px;
 }
 
-.form-single__note {
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
-}
 
 @media (max-width: 760px) {
     .form-single {
@@ -95,6 +75,5 @@
     .form-single__note {
         order: 1;
         text-align: center;
-        text-wrap: balance;
     }
 }

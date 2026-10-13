@@ -36,9 +36,6 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.01em;
 }
 
 .sign-in-magic-link__mark {
@@ -47,10 +44,6 @@
     border-radius: 7px;
     background: linear-gradient(180deg, var(--ow-brand-500), var(--ow-brand-700));
     box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
-}
-
-.sign-in-magic-link__bar-link {
-    font-size: 13px;
 }
 
 .sign-in-magic-link__body {
@@ -97,11 +90,7 @@
 }
 
 .sign-in-magic-link__title {
-    margin: 20px 0 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
+    margin-top: 20px;
 }
 
 .sign-in-magic-link__title:focus {
@@ -109,18 +98,13 @@
 }
 
 .sign-in-magic-link__lead {
-    margin: 8px 0 0;
-    color: var(--ow-text-muted);
-    line-height: 1.55;
-    text-wrap: pretty;
+    margin-top: 8px;
 }
 
 /* The address on a line of its own, so it's easy to check. */
 .sign-in-magic-link__email {
     display: block;
     margin: 2px 0 4px;
-    color: var(--ow-text);
-    font-weight: var(--ow-weight-emphasis);
     overflow-wrap: anywhere;
 }
 
@@ -139,10 +123,7 @@
 }
 
 .sign-in-magic-link__note {
-    margin: 22px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
-    line-height: 1.5;
+    margin-top: 22px;
     text-wrap: balance;
 }
 

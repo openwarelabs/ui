@@ -34,48 +34,24 @@
     display: block;
 }
 
+/* The workspace and account menus open from rows that span the sidebar, their text lined up on the left. */
 .shell-sidebar__workspace,
 .shell-sidebar__user {
-    display: flex;
-    width: 100%;
-    align-items: center;
+    justify-content: flex-start;
     gap: 10px;
-    border: 0;
-    border-radius: var(--ow-radius-lg);
-    background: transparent;
     padding: 6px 8px;
-    color: var(--ow-text);
-    font: inherit;
     text-align: left;
-    cursor: pointer;
-    transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
 }
 
-.shell-sidebar__workspace:hover,
-.shell-sidebar__user:hover,
+/* An open menu keeps its trigger lit, as on hover. */
 .shell-sidebar__workspace[aria-expanded="true"],
 .shell-sidebar__user[aria-expanded="true"] {
-    background: color-mix(in srgb, var(--ow-surface) 60%, transparent);
-}
-
-.shell-sidebar__workspace:focus-visible,
-.shell-sidebar__user:focus-visible,
-.shell-sidebar__search:focus-visible {
-    outline: 2px solid var(--ow-focus-ring);
-    outline-offset: 2px;
-}
-
-.shell-sidebar__workspace svg,
-.shell-sidebar__user > svg {
-    flex-shrink: 0;
-    color: var(--ow-icon);
+    border-color: var(--ow-border);
+    background: var(--ow-surface-muted);
 }
 
 .shell-sidebar__workspace-name {
     flex: 1;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.01em;
 }
 
 .shell-sidebar__mark {
@@ -93,23 +69,7 @@
 }
 
 .shell-sidebar__search {
-    display: flex;
-    height: 34px;
-    align-items: center;
-    gap: var(--ow-space-sm);
-    border: 1px solid var(--ow-border);
-    border-radius: var(--ow-radius-form);
-    background: var(--ow-surface);
-    padding: 0 6px 0 10px;
-    color: var(--ow-text-muted);
-    font: inherit;
-    cursor: pointer;
-    box-shadow: var(--ow-shadow-control);
-    transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
-}
-
-.shell-sidebar__search:hover {
-    border-color: var(--ow-border-strong);
+    justify-content: flex-start;
 }
 
 .shell-sidebar__search-text {
@@ -135,19 +95,6 @@
     flex: 1;
 }
 
-.shell-sidebar__user-name {
-    font-size: 13.5px;
-    font-weight: var(--ow-weight-emphasis);
-}
-
-.shell-sidebar__user-email {
-    overflow: hidden;
-    color: var(--ow-text-muted);
-    font-size: 12px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 .shell-sidebar__body {
     display: flex;
     min-width: 0;
@@ -167,8 +114,6 @@
     display: flex;
     align-items: center;
     gap: 9px;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
 }
 
 .shell-sidebar__panel {
@@ -192,17 +137,8 @@
     gap: var(--ow-space-2xl);
 }
 
-.shell-sidebar__title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
 .shell-sidebar__subtitle {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
+    margin-top: 4px;
 }
 
 .shell-sidebar__stats {
@@ -211,17 +147,9 @@
     gap: var(--ow-space-lg);
 }
 
-.shell-sidebar__card {
-    border: 1px solid var(--ow-border);
-    border-radius: var(--ow-radius-container);
-}
-
 .shell-sidebar__card-title {
-    margin: 0;
     border-bottom: 1px solid var(--ow-border);
     padding: 14px 18px;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
 }
 
 .shell-sidebar__list {
@@ -246,18 +174,6 @@
     display: grid;
     min-width: 0;
     gap: 2px;
-}
-
-.shell-sidebar__item-title {
-    font-weight: var(--ow-weight-control);
-}
-
-.shell-sidebar__item-meta {
-    overflow: hidden;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 @media (max-width: 900px) {

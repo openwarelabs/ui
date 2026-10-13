@@ -1,4 +1,4 @@
-import { Avatar, Badge, Button, DotGrid, SectionHeading, buttonClassName } from "@openwarelabs/ui";
+import { Avatar, Badge, Button, DotGrid, SectionHeading, Text, buttonClassName } from "@openwarelabs/ui";
 import { ArrowRight, Check, CircleCheck, GitPullRequest, Rocket } from "lucide-react";
 
 import "./CtaSplit.css";
@@ -109,10 +109,10 @@ export function CtaSplit() {
                     </div>
                     <ul className="cta-split__points">
                         {points.map((point) => (
-                            <li key={point}>
+                            <Text as="li" variant="body" tone="soft" key={point}>
                                 <Check size={16} aria-hidden="true" />
                                 {point}
-                            </li>
+                            </Text>
                         ))}
                     </ul>
                 </div>

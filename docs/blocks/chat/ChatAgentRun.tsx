@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-import { Badge, Button, Code, Link, Spinner, VisuallyHidden, type BadgeVariant } from "@openwarelabs/ui";
+import { Badge, Button, Code, Link, Spinner, Text, VisuallyHidden, type BadgeVariant, type TextTone } from "@openwarelabs/ui";
 import { Bot, Check, ChevronRight, CircleStop, Hand, RotateCcw, ShieldCheck, Square, X } from "lucide-react";
 
 import "./ChatAgentRun.css";
@@ -74,6 +74,18 @@ type Stage = 0 | 1 | 2 | 3 | 4;
 
 const formatElapsed = (seconds: number) => `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
 
+/** A path, a branch or a diff count: mono, at the size of the line it sits in. */
+function Mono({ children, tone, label }: { children: ReactNode; tone?: TextTone; label?: string }) {
+    return (
+        <Text variant="code" tone={tone} aria-label={label} className="chat-agent-run__mono">
+            {children}
+        </Text>
+    );
+}
+
+/** The colour of a step's status line: the ones that need a look stand out. */
+const statusTone: Partial<Record<Status, TextTone>> = { running: "primary", failed: "danger", approval: "warning" };
+
 function Marker({ status }: { status: Status }) {
     return (
         <span className={`chat-agent-run__marker chat-agent-run__marker--${status}`} aria-hidden="true">
@@ -93,18 +105,27 @@ function Files({ files, open, onToggle }: { files: FileChange[]; open: string[];
                 const expanded = open.includes(file.path);
                 return (
                     <li key={file.path} className="chat-agent-run__file">
-                        <button type="button" className="chat-agent-run__file-button" aria-expanded={expanded} onClick={() => onToggle(file.path)}>
-                            <ChevronRight className="chat-agent-run__chevron" size={14} aria-hidden="true" />
-                            <span className="chat-agent-run__path">{file.path}</span>
-                            <span className="chat-agent-run__added" aria-label={`${file.added} lines added`}>
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            fullWidth
+                            className="chat-agent-run__file-button"
+                            aria-expanded={expanded}
+                            startIcon={<ChevronRight className="chat-agent-run__chevron" size={14} />}
+                            onClick={() => onToggle(file.path)}
+                        >
+                            <Text variant="code" tone="default" truncate className="chat-agent-run__mono chat-agent-run__path">
+                                {file.path}
+                            </Text>
+                            <Mono tone="success" label={`${file.added} lines added`}>
                                 +{file.added}
-                            </span>
-                            <span className="chat-agent-run__removed" aria-label={`${file.removed} lines removed`}>
+                            </Mono>
+                            <Mono tone="danger" label={`${file.removed} lines removed`}>
                                 −{file.removed}
-                            </span>
-                        </button>
+                            </Mono>
+                        </Button>
                         {expanded ? (
-                            <pre className="chat-agent-run__diff" aria-label={`Changes to ${file.path}`}>
+                            <Text as="pre" variant="code" className="chat-agent-run__diff" aria-label={`Changes to ${file.path}`}>
                                 {file.diff.map((line, index) => {
                                     const kind = line.startsWith("@@") ? "hunk" : line[0] === "+" ? "add" : line[0] === "-" ? "remove" : "context";
                                     const sign = kind === "add" ? "+" : kind === "remove" ? "−" : "";
@@ -115,7 +136,7 @@ function Files({ files, open, onToggle }: { files: FileChange[]; open: string[];
                                         </span>
                                     );
                                 })}
-                            </pre>
+                            </Text>
                         ) : null}
                     </li>
                 );
@@ -185,16 +206,16 @@ export function ChatAgentRun() {
             title: "Read the issue and make a plan",
             status: "done",
             time: "6 s",
-            content: <p className="chat-agent-run__note">Format invoice dates in the customer's time zone, not the server's, and cover it with tests.</p>,
+            content: <Text variant="copy">Format invoice dates in the customer's time zone, not the server's, and cover it with tests.</Text>,
         },
         {
             title: "Find where invoice dates are formatted",
             status: "done",
             time: "11 s",
             content: (
-                <p className="chat-agent-run__note">
+                <Text variant="copy">
                     <Code>formatInvoiceDate</Code> in src/invoices/format.ts, used by the web invoice and the PDF.
-                </p>
+                </Text>
             ),
         },
         { title: "Edit 3 files", status: "done", time: "38 s", content: <Files files={edits} open={open} onToggle={toggleFile} /> },
@@ -203,9 +224,9 @@ export function ChatAgentRun() {
             status: "failed",
             time: "Failed after 24 s",
             content: (
-                <p className="chat-agent-run__error">
+                <Text as="p" variant="code" tone="danger" className="chat-agent-run__mono chat-agent-run__error">
                     1 of 86 failed: pdf › prints the issue date in the customer's time zone. Expected “15 July 2026”, got “14 July 2026”.
-                </p>
+                </Text>
             ),
         },
         {
@@ -214,9 +235,9 @@ export function ChatAgentRun() {
             time: "19 s",
             content: (
                 <>
-                    <p className="chat-agent-run__note">
+                    <Text variant="copy">
                         The PDF had its own date formatter. It uses <Code>formatInvoiceDate</Code> now.
-                    </p>
+                    </Text>
                     <Files files={pdfFix} open={open} onToggle={toggleFile} />
                 </>
             ),
@@ -233,11 +254,17 @@ export function ChatAgentRun() {
             content:
                 pushStatus === "approval" ? (
                     <div className="chat-agent-run__approval chat-agent-run__enter">
-                        <p className="chat-agent-run__approval-text">
-                            The agent wants to push <strong>fix/invoice-dates</strong> to GitHub and open a pull request against <strong>main</strong>. 4 files,{" "}
-                            <span className="chat-agent-run__added">+9</span> <span className="chat-agent-run__removed">−3</span>. Nothing reaches main until
-                            someone merges it.
-                        </p>
+                        <Text variant="copy" tone="soft">
+                            The agent wants to push{" "}
+                            <Text as="strong" variant="label" tone="default">
+                                fix/invoice-dates
+                            </Text>{" "}
+                            to GitHub and open a pull request against{" "}
+                            <Text as="strong" variant="label" tone="default">
+                                main
+                            </Text>
+                            . 4 files, <Mono tone="success">+9</Mono> <Mono tone="danger">−3</Mono>. Nothing reaches main until someone merges it.
+                        </Text>
                         <div className="chat-agent-run__approval-actions">
                             <Button variant="primary" size="sm" startIcon={<ShieldCheck size={16} />} onClick={() => decide(true)}>
                                 Approve and push
@@ -248,11 +275,11 @@ export function ChatAgentRun() {
                         </div>
                     </div>
                 ) : stage > 2 ? (
-                    <p className="chat-agent-run__note">
+                    <Text variant="copy">
                         Opened <Link href="#">#482 Fix invoice dates in the EU</Link>.
-                    </p>
+                    </Text>
                 ) : pushStatus === "stopped" ? (
-                    <p className="chat-agent-run__note">Nothing was pushed. The changes stay with this run if you want to come back to them.</p>
+                    <Text variant="copy">Nothing was pushed. The changes stay with this run if you want to come back to them.</Text>
                 ) : null,
         },
         {
@@ -287,29 +314,29 @@ export function ChatAgentRun() {
                         <Bot size={18} />
                     </span>
                     <div className="chat-agent-run__heading">
-                        <h2 id="chat-agent-run-title" className="chat-agent-run__title">
+                        <Text variant="card-title" as="h2" id="chat-agent-run-title">
                             Fix invoice dates in the EU
-                        </h2>
-                        <p className="chat-agent-run__meta">
+                        </Text>
+                        <Text variant="caption" as="p" className="chat-agent-run__meta">
                             <span>billing-api</span>
                             <span className="chat-agent-run__meta-sep" aria-hidden="true">
                                 /
                             </span>
-                            <span className="chat-agent-run__mono">fix/invoice-dates</span>
+                            <Mono>fix/invoice-dates</Mono>
                             <span className="chat-agent-run__meta-sep chat-agent-run__meta-sep--dot" aria-hidden="true">
                                 ·
                             </span>
                             <span>Started by Maya Chen</span>
-                        </p>
+                        </Text>
                     </div>
                     <div className="chat-agent-run__controls">
                         <Badge size="sm" variant={badge.tone} role="status">
                             {badge.label}
                         </Badge>
-                        <span className="chat-agent-run__elapsed">
+                        <Text variant="caption" className="chat-agent-run__elapsed">
                             <VisuallyHidden>Time taken: </VisuallyHidden>
                             {formatElapsed(elapsed)}
-                        </span>
+                        </Text>
                         {run === "running" ? (
                             <Button ref={control} size="sm" startIcon={<CircleStop size={16} />} onClick={() => setRun("stopped")}>
                                 Stop
@@ -328,10 +355,12 @@ export function ChatAgentRun() {
                             <Marker status={step.status} />
                             <div className="chat-agent-run__body">
                                 <div className="chat-agent-run__row">
-                                    <span className="chat-agent-run__step-title">{step.title}</span>
-                                    <span className={`chat-agent-run__status chat-agent-run__status--${step.status}`}>
+                                    <Text variant="label" tone={step.status === "waiting" || step.status === "stopped" ? "muted" : undefined}>
+                                        {step.title}
+                                    </Text>
+                                    <Text variant="caption" tone={statusTone[step.status]} className="chat-agent-run__status">
                                         {statusText(step.status, step.time)}
-                                    </span>
+                                    </Text>
                                 </div>
                                 {step.content}
                             </div>

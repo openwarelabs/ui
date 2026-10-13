@@ -1,4 +1,4 @@
-import { Button, SectionHeading } from "@openwarelabs/ui";
+import { Button, SectionHeading, Text } from "@openwarelabs/ui";
 import { ArrowRight } from "lucide-react";
 
 import "./SectionHeadingSplit.css";
@@ -10,9 +10,9 @@ export function SectionHeadingSplit() {
                 {/* The intro sits beside the title instead of under it, so SectionHeading gets none. */}
                 <SectionHeading eyebrow="Agents" title={<span id="section-heading-split-title">Hand the routine work to agents, and keep the final say</span>} />
                 <div className="section-heading-split__aside">
-                    <p className="section-heading-split__intro">
+                    <Text variant="lead" className="section-heading-split__intro">
                         Assign an issue and an agent branches, writes the change and runs your tests. It comes back as a pull request with its reasoning, ready for review.
-                    </p>
+                    </Text>
                     <Button shape="pill" endIcon={<ArrowRight size={16} />}>
                         How agents work
                     </Button>

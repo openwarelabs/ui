@@ -54,17 +54,12 @@
 }
 
 .sign-in-two-factor__title {
-    margin: 16px 0 0;
-    font-size: 22px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
+    margin-top: 16px;
 }
 
+/* Centred under the icon, so its lines balance rather than leave a broken word on a short last line. */
 .sign-in-two-factor__lead {
-    margin: 6px 0 0;
-    color: var(--ow-text-muted);
-    line-height: 1.55;
+    margin-top: 6px;
     text-wrap: balance;
 }
 
@@ -91,14 +86,7 @@
     min-height: 20px;
     align-items: center;
     gap: var(--ow-space-sm);
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
     text-wrap: balance;
-}
-
-.sign-in-two-factor__message[data-tone="wrong"] {
-    color: var(--ow-danger-text);
 }
 
 .sign-in-two-factor__backup {
@@ -122,22 +110,13 @@
     margin-top: 18px;
 }
 
-/* A text button that looks like a link: it switches the form, so it isn't one. */
-.sign-in-two-factor__switch {
-    margin-top: 16px;
-    border: 0;
-    background: none;
-    padding: 0;
-    font: inherit;
-    font-size: 13px;
-    cursor: pointer;
+/* It switches the form rather than going anywhere, so it's a quiet button, not a link. */
+.sign-in-two-factor__form > .sign-in-two-factor__switch {
+    margin-top: 10px;
 }
 
 .sign-in-two-factor__foot {
-    margin: 20px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
-    text-align: center;
+    margin-top: 20px;
 }
 
 @media (max-width: 760px) {

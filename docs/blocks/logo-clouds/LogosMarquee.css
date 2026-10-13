@@ -19,15 +19,6 @@
     padding: 0 32px;
 }
 
-.logos-marquee__title {
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 14px;
-    font-weight: var(--ow-weight-control);
-    line-height: 1.5;
-    text-align: center;
-}
-
 /* The strip runs the full width, fading out at both ends. It can't be scrolled, so focus never shifts it. */
 .logos-marquee__viewport {
     max-width: 1440px;

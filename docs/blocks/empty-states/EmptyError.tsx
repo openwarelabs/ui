@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Badge, Button, EmptyState, SegmentedControl, Spinner, toast } from "@openwarelabs/ui";
+import { Badge, Button, Code, EmptyState, SegmentedControl, Spinner, Text, toast } from "@openwarelabs/ui";
 import { Activity, Bot, CloudOff, RotateCw } from "lucide-react";
 
 import "./EmptyError.css";
@@ -42,16 +42,20 @@ export function EmptyError() {
             <main className="empty-error__panel">
                 <div className="empty-error__header">
                     <div>
-                        <h1 className="empty-error__title">Agent runs</h1>
-                        <p className="empty-error__subtitle">What your agents are working on, and what they've finished today.</p>
+                        <Text variant="heading" as="h2">
+                            Agent runs
+                        </Text>
+                        <Text variant="copy" className="empty-error__subtitle">
+                            What your agents are working on, and what they've finished today.
+                        </Text>
                     </div>
                 </div>
 
                 <section className="empty-error__card" aria-labelledby="empty-error-recent" aria-busy={load === "loading"}>
                     <div className="empty-error__card-head">
-                        <h2 id="empty-error-recent" className="empty-error__card-title">
+                        <Text variant="card-title" as="h3" id="empty-error-recent">
                             Today
-                        </h2>
+                        </Text>
                         <SegmentedControl size="sm" aria-label="Show runs" options={views} value={view} onChange={setView} disabled={load !== "loaded"} />
                     </div>
 
@@ -64,7 +68,7 @@ export function EmptyError() {
                                     <>
                                         The request timed out after 30 seconds. Your agents are still working; only this list didn't load.
                                         <br />
-                                        <code className="empty-error__detail">504 · req_8f2c41d9</code>
+                                        <Code className="empty-error__detail">504 · req_8f2c41d9</Code>
                                     </>
                                 }
                                 actions={
@@ -90,7 +94,7 @@ export function EmptyError() {
                         {load === "loading" ? (
                             <div className="empty-error__loading" role="status">
                                 <Spinner size="lg" label="" />
-                                Loading agent runs…
+                                <Text variant="copy">Loading agent runs…</Text>
                             </div>
                         ) : null}
 
@@ -102,12 +106,16 @@ export function EmptyError() {
                                             <Bot size={15} />
                                         </span>
                                         <span className="empty-error__run-text">
-                                            <strong>{run.task}</strong>
-                                            <span>
+                                            <Text variant="label" truncate>
+                                                {run.task}
+                                            </Text>
+                                            <Text variant="caption" truncate>
                                                 {run.project} · for {run.for}
-                                            </span>
+                                            </Text>
                                         </span>
-                                        <span className="empty-error__run-time">{run.time}</span>
+                                        <Text variant="caption" className="empty-error__run-time">
+                                            {run.time}
+                                        </Text>
                                         <Badge size="sm" variant={tone[run.status]}>
                                             {run.status}
                                         </Badge>

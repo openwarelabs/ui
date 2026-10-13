@@ -49,26 +49,14 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: var(--ow-primary-text);
-    font-size: 13px;
-    font-weight: var(--ow-weight-emphasis);
 }
 
 .features-alternating__title {
-    margin: 16px 0 0;
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 1.15;
-    letter-spacing: -0.03em;
-    text-wrap: balance;
+    margin-top: 16px;
 }
 
 .features-alternating__text {
-    margin: 16px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 16px;
-    line-height: 1.6;
-    text-wrap: pretty;
+    margin-top: 16px;
 }
 
 .features-alternating__points {
@@ -79,13 +67,10 @@
     list-style: none;
 }
 
-.features-alternating__points li {
+.features-alternating__point {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    color: var(--ow-text-soft);
-    font-size: 14.5px;
-    line-height: 1.45;
 }
 
 .features-alternating__points svg {
@@ -96,7 +81,6 @@
 
 .features-alternating__link {
     margin-top: 28px;
-    font-size: 14.5px;
 }
 
 /* The picture: a window on the dot grid, framed like a screenshot. */
@@ -398,9 +382,6 @@
     .features-alternating__rows {
         gap: 64px;
         margin-top: 48px;
-    }
-    .features-alternating__title {
-        font-size: 26px;
     }
     .features-alternating__stage.ow-dot-grid {
         min-height: 0;

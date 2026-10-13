@@ -1,4 +1,4 @@
-import { Button, Chip, ScrollShadow } from "@openwarelabs/ui";
+import { Button, Chip, Link, ScrollShadow, Text } from "@openwarelabs/ui";
 
 import "./HeaderCentredLogo.css";
 
@@ -15,9 +15,9 @@ const end = [
 
 function NavLink({ link }: { link: { label: string; href: string; current?: boolean } }) {
     return (
-        <a href={link.href} className="header-centred-logo__link" aria-current={link.current ? "page" : undefined}>
+        <Link href={link.href} variant="standalone" className="header-centred-logo__link" aria-current={link.current ? "page" : undefined}>
             {link.label}
-        </a>
+        </Link>
     );
 }
 
@@ -31,14 +31,14 @@ export function HeaderCentredLogo() {
                             <NavLink key={link.label} link={link} />
                         ))}
                     </nav>
-                    <a href="#sign-in" className="header-centred-logo__link header-centred-logo__phone-only">
+                    <Link href="#sign-in" variant="standalone" className="header-centred-logo__link header-centred-logo__phone-only">
                         Sign in
-                    </a>
+                    </Link>
 
-                    <a href="#" className="header-centred-logo__brand">
+                    <Link href="#" variant="standalone" className="header-centred-logo__brand">
                         <span className="header-centred-logo__mark" aria-hidden="true" />
                         Acme
-                    </a>
+                    </Link>
 
                     <div className="header-centred-logo__end">
                         <nav className="header-centred-logo__nav" aria-label="Resources">
@@ -47,9 +47,9 @@ export function HeaderCentredLogo() {
                             ))}
                         </nav>
                         <div className="header-centred-logo__actions">
-                            <a href="#sign-in" className="header-centred-logo__link">
+                            <Link href="#sign-in" variant="standalone" className="header-centred-logo__link">
                                 Sign in
-                            </a>
+                            </Link>
                             <Button variant="primary" shape="pill" size="sm">
                                 Start for free
                             </Button>
@@ -74,10 +74,12 @@ export function HeaderCentredLogo() {
             {/* Your page */}
             <main className="header-centred-logo__page">
                 <Chip>Journal</Chip>
-                <h1 className="header-centred-logo__title">Notes from a team that ships every day</h1>
-                <p className="header-centred-logo__lead">
+                <Text variant="page-title" align="center" className="header-centred-logo__title">
+                    Notes from a team that ships every day
+                </Text>
+                <Text variant="lead" align="center" className="header-centred-logo__lead">
                     How we plan, what we hand to agents, and what we've learned from reviewing four thousand of their pull requests.
-                </p>
+                </Text>
             </main>
         </div>
     );

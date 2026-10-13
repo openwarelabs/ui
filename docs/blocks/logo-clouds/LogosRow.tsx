@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import { Text } from "@openwarelabs/ui";
+
 import "./LogosRow.css";
 
 // Invented companies, drawn as a simple shape and a name. Swap in your customers' logos (as SVGs, in one colour).
@@ -49,9 +51,10 @@ export function LogosRow() {
     return (
         <section className="logos-row" aria-labelledby="logos-row-title">
             <div className="logos-row__inner">
-                <h2 id="logos-row-title" className="logos-row__title">
+                {/* A small heading: the logos are the point. */}
+                <Text as="h2" variant="body" tone="muted" align="center" id="logos-row-title">
                     Trusted by more than 4,000 software teams
-                </h2>
+                </Text>
                 <ul className="logos-row__list">
                     {logos.map((logo) => (
                         <li key={logo.name} className="logos-row__logo" data-name={logo.name}>

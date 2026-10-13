@@ -1,4 +1,4 @@
-import { Avatar, Badge, Button, Chip, DotGrid, ProgressBar } from "@openwarelabs/ui";
+import { Avatar, Badge, Button, Chip, DotGrid, ProgressBar, Text } from "@openwarelabs/ui";
 import { ArrowRight, Bot, Check, GitPullRequest, Rocket, SquareKanban } from "lucide-react";
 
 import "./HeroDotGrid.css";
@@ -81,13 +81,13 @@ export function HeroDotGrid() {
                     <PlanCards side="start" />
                     <div className="hero-dot-grid__text">
                         <Chip>Planning</Chip>
-                        <h1 id="hero-dot-grid-title" className="hero-dot-grid__title">
+                        <Text variant="hero" align="center" id="hero-dot-grid-title" className="hero-dot-grid__title">
                             Lay out the plan. Watch it ship.
-                        </h1>
-                        <p className="hero-dot-grid__lead">
+                        </Text>
+                        <Text variant="lead" align="center" className="hero-dot-grid__lead">
                             Sketch a project as tickets on one sheet, hand the routine ones to agents, and follow each piece from the first idea to a live
                             deploy.
-                        </p>
+                        </Text>
                         <div className="hero-dot-grid__actions">
                             <Button variant="primary" shape="pill" size="lg" endIcon={<ArrowRight size={16} />}>
                                 Start planning

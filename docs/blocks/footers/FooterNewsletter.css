@@ -29,22 +29,9 @@
     padding: 36px 40px;
 }
 
-.footer-newsletter__title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-emphasis);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-    text-wrap: balance;
-}
-
 .footer-newsletter__intro {
     max-width: 480px;
-    margin: 8px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 15px;
-    line-height: 1.6;
-    text-wrap: pretty;
+    margin-top: 8px;
 }
 
 .footer-newsletter__row {
@@ -61,12 +48,6 @@
 
 .footer-newsletter__note {
     margin: 10px 0 0 16px;
-    color: var(--ow-text-muted);
-    font-size: 13px;
-}
-
-.footer-newsletter__note--error {
-    color: var(--ow-danger-text);
 }
 
 .footer-newsletter__done {
@@ -90,16 +71,10 @@
     min-width: 0;
     flex: 1;
     gap: 2px;
-    font-size: 14px;
 }
 
-.footer-newsletter__done-text strong {
-    font-weight: var(--ow-weight-emphasis);
-}
-
-.footer-newsletter__done-text span {
+.footer-newsletter__done-detail {
     overflow-wrap: anywhere;
-    color: var(--ow-text-soft);
 }
 
 .footer-newsletter__done .ow-button {
@@ -121,28 +96,22 @@
     gap: 14px;
 }
 
-.footer-newsletter__brand p {
+.footer-newsletter__line {
     max-width: 240px;
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 14px;
-    line-height: 1.6;
 }
 
-.footer-newsletter__logo {
+/* The logo is a link home that stays the logo: ink, with no underline on hover. */
+.footer-newsletter__logo.ow-link,
+.footer-newsletter__logo.ow-link:hover {
     display: inline-flex;
     align-items: center;
     gap: 10px;
     border-radius: var(--ow-radius-md);
     color: var(--ow-text);
-    font-size: 17px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.02em;
     text-decoration: none;
 }
 
-.footer-newsletter__logo:focus-visible {
-    outline: 2px solid var(--ow-focus-ring);
+.footer-newsletter__logo.ow-link:focus-visible {
     outline-offset: 4px;
 }
 
@@ -156,9 +125,7 @@
 }
 
 .footer-newsletter__heading {
-    margin: 0 0 16px;
-    font-size: 13px;
-    font-weight: var(--ow-weight-emphasis);
+    margin-bottom: 16px;
 }
 
 .footer-newsletter__list {
@@ -167,9 +134,9 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    font-size: 14px;
 }
 
+/* Footer links sit back: muted and in the regular weight, ink on hover. */
 .footer-newsletter__list .ow-link {
     color: var(--ow-text-muted);
     font-weight: var(--ow-weight-regular);
@@ -186,12 +153,6 @@
     justify-content: space-between;
     gap: 12px 24px;
     padding-top: 24px;
-    color: var(--ow-text-muted);
-    font-size: 13px;
-}
-
-.footer-newsletter__bottom p {
-    margin: 0;
 }
 
 .footer-newsletter__legal {
@@ -214,7 +175,7 @@
     .footer-newsletter__brand {
         grid-column: 1 / -1;
     }
-    .footer-newsletter__brand p {
+    .footer-newsletter__line {
         max-width: 420px;
     }
 }
@@ -225,9 +186,6 @@
     }
     .footer-newsletter__signup {
         padding: 24px 20px;
-    }
-    .footer-newsletter__title {
-        font-size: 21px;
     }
     .footer-newsletter__row {
         flex-direction: column;

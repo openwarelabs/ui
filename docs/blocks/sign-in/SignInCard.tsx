@@ -1,6 +1,6 @@
 import { useId, useState, type FormEvent } from "react";
 
-import { Button, Card, Field, Input, Link, Separator, toast } from "@openwarelabs/ui";
+import { Button, Card, Field, Input, Link, Separator, Text, toast } from "@openwarelabs/ui";
 import { GitBranch } from "lucide-react";
 
 import "./SignInCard.css";
@@ -52,8 +52,12 @@ export function SignInCard() {
         <main className="sign-in-card">
             <div className="sign-in-card__inner">
                 <span className="sign-in-card__mark" aria-hidden="true" />
-                <h1 className="sign-in-card__title">Sign in to Acme</h1>
-                <p className="sign-in-card__lead">Welcome back. Your team's reviews are waiting.</p>
+                <Text variant="heading" as="h1" className="sign-in-card__title">
+                    Sign in to Acme
+                </Text>
+                <Text variant="copy" className="sign-in-card__lead">
+                    Welcome back. Your team's reviews are waiting.
+                </Text>
 
                 <Card padding="lg" className="sign-in-card__card">
                     <div className="sign-in-card__providers">
@@ -121,9 +125,9 @@ export function SignInCard() {
                     </form>
                 </Card>
 
-                <p className="sign-in-card__switch">
+                <Text variant="copy" className="sign-in-card__switch">
                     New to Acme? <Link href="#">Create an account</Link>
-                </p>
+                </Text>
             </div>
         </main>
     );

@@ -1,4 +1,4 @@
-import { Button, Link } from "@openwarelabs/ui";
+import { Button, Link, Text } from "@openwarelabs/ui";
 import { ArrowRight } from "lucide-react";
 
 import "./FooterBrand.css";
@@ -15,9 +15,12 @@ export function FooterBrand() {
             <div className="footer-brand__inner">
                 <div className="footer-brand__top">
                     <div className="footer-brand__pitch">
-                        <p className="footer-brand__line">
-                            Plan it, hand it off, review it, ship it. <span>All in one place.</span>
-                        </p>
+                        <Text variant="heading" as="p">
+                            Plan it, hand it off, review it, ship it.{" "}
+                            <Text variant="heading" as="span" tone="muted">
+                                All in one place.
+                            </Text>
+                        </Text>
                         <Button variant="primary" shape="pill" endIcon={<ArrowRight size={16} />}>
                             Start for free
                         </Button>
@@ -25,9 +28,9 @@ export function FooterBrand() {
                     <div className="footer-brand__columns">
                         {columns.map((column) => (
                             <nav key={column.title} aria-labelledby={`footer-brand-${column.title.toLowerCase()}`}>
-                                <h2 id={`footer-brand-${column.title.toLowerCase()}`} className="footer-brand__heading">
+                                <Text variant="label" as="h2" id={`footer-brand-${column.title.toLowerCase()}`} className="footer-brand__heading">
                                     {column.title}
-                                </h2>
+                                </Text>
                                 <ul className="footer-brand__list">
                                     {column.links.map((link) => (
                                         <li key={link}>
@@ -43,8 +46,10 @@ export function FooterBrand() {
                 </div>
 
                 <div className="footer-brand__legal">
-                    <p>© 2026 Acme Ltd.</p>
-                    <ul>
+                    <Text variant="caption" as="p">
+                        © 2026 Acme Ltd.
+                    </Text>
+                    <Text variant="caption" as="ul" className="footer-brand__legal-links">
                         {["Privacy", "Terms", "Security"].map((link) => (
                             <li key={link}>
                                 <Link href="#" variant="muted">
@@ -52,7 +57,7 @@ export function FooterBrand() {
                                 </Link>
                             </li>
                         ))}
-                    </ul>
+                    </Text>
                 </div>
 
                 <div className="footer-brand__name" aria-hidden="true">

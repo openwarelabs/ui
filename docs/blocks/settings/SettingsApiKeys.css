@@ -25,34 +25,15 @@
     margin-bottom: 24px;
 }
 
-.settings-api-keys__title {
-    margin: 0;
-    font-size: 18px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-}
-
 .settings-api-keys__text {
     max-width: 520px;
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
-    text-wrap: pretty;
+    margin-top: 4px;
 }
 
 .settings-api-keys__name {
     display: grid;
     gap: 1px;
     padding: 4px 0;
-}
-
-.settings-api-keys__name-text {
-    font-weight: var(--ow-weight-control);
-}
-
-.settings-api-keys__meta {
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
 }
 
 .settings-api-keys__meta-phone,
@@ -69,21 +50,11 @@
 
 .settings-api-keys__secret {
     overflow: hidden;
-    color: var(--ow-text-soft);
-    font-family: var(--ow-font-mono);
-    font-size: 12.5px;
     text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.settings-api-keys__never {
-    color: var(--ow-text-muted);
 }
 
 .settings-api-keys__note {
-    margin: 14px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
+    margin-top: 14px;
 }
 
 /* The dialog. */
@@ -95,15 +66,6 @@
 .settings-api-keys__created {
     display: grid;
     gap: var(--ow-space-sm);
-}
-
-.settings-api-keys__created-label {
-    font-weight: var(--ow-weight-emphasis);
-}
-
-.settings-api-keys__inline-code {
-    font-family: var(--ow-font-mono);
-    font-size: 13px;
 }
 
 @media (max-width: 1024px) {
@@ -137,6 +99,6 @@
     .settings-api-keys__key-phone {
         display: flex;
         min-width: 0;
-        margin: 4px 0 0 -2px;
+        margin-top: 4px;
     }
 }

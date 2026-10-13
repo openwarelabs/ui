@@ -1,4 +1,4 @@
-import { Avatar, Link, SectionHeading } from "@openwarelabs/ui";
+import { Avatar, Link, SectionHeading, Text } from "@openwarelabs/ui";
 
 import "./TeamGrid.css";
 
@@ -29,15 +29,19 @@ export function TeamGrid() {
                     {people.map((person) => (
                         <li key={person.name} className="team-grid__person" data-tone={person.tone}>
                             <Avatar name={person.name} size={96} className="team-grid__avatar" />
-                            <span className="team-grid__name">{person.name}</span>
-                            <span className="team-grid__role">{person.role}</span>
+                            <Text variant="card-title" as="span" className="team-grid__name">
+                                {person.name}
+                            </Text>
+                            <Text variant="body" as="span" tone="muted" className="team-grid__role">
+                                {person.role}
+                            </Text>
                         </li>
                     ))}
                 </ul>
 
-                <p className="team-grid__hiring">
+                <Text variant="copy" align="center" className="team-grid__hiring">
                     We're hiring for four roles in engineering and design. <Link href="#">See open roles</Link>
-                </p>
+                </Text>
             </div>
         </section>
     );

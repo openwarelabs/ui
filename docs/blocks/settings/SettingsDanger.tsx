@@ -1,6 +1,6 @@
 import { useId, useState } from "react";
 
-import { Button, Card, ConfirmDialog, EmptyState, Field, Input, Select, SettingsRow, toast } from "@openwarelabs/ui";
+import { Button, Card, Code, ConfirmDialog, EmptyState, Field, Input, Select, SettingsRow, Text, toast } from "@openwarelabs/ui";
 import { Archive, ArchiveRestore, ArrowLeftRight, Trash2 } from "lucide-react";
 
 import "./SettingsDanger.css";
@@ -45,12 +45,12 @@ export function SettingsDanger() {
         <section className="settings-danger" aria-labelledby={titleId}>
             <div className="settings-danger__inner">
                 <div className="settings-danger__header">
-                    <h2 id={titleId} className="settings-danger__title">
+                    <Text variant="dialog-title" as="h2" id={titleId}>
                         Danger zone
-                    </h2>
-                    <p className="settings-danger__text">
-                        These change <code className="settings-danger__code">{project}</code> for everyone in Acme. Only its owner can use them.
-                    </p>
+                    </Text>
+                    <Text variant="copy" className="settings-danger__text">
+                        These change <Code>{project}</Code> for everyone in Acme. Only its owner can use them.
+                    </Text>
                 </div>
 
                 {deleted ? (
@@ -156,15 +156,18 @@ export function SettingsDanger() {
             >
                 <ul className="settings-danger__contents">
                     {contents.map((item) => (
-                        <li key={item.what}>
-                            <strong>{item.count}</strong> {item.what}
-                        </li>
+                        <Text as="li" tone="soft" key={item.what}>
+                            <Text as="strong" variant="label" tone="default" className="settings-danger__count">
+                                {item.count}
+                            </Text>{" "}
+                            {item.what}
+                        </Text>
                     ))}
                 </ul>
                 <Field
                     label={
                         <>
-                            Type <code className="settings-danger__code">{project}</code> to confirm
+                            Type <Code>{project}</Code> to confirm
                         </>
                     }
                 >

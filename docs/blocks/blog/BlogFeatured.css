@@ -24,20 +24,10 @@
     gap: 12px 32px;
 }
 
-.blog-featured__title {
-    margin: 0;
-    font-size: 44px;
-    font-weight: 500;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    text-wrap: balance;
-}
-
 .blog-featured__all {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 15px;
 }
 
 /* The featured post: the cover on the left, the story on the right. */
@@ -79,22 +69,19 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 10px;
-    color: var(--ow-text-muted);
-    font-size: 13px;
 }
 
 .blog-featured__lead-title {
-    margin: 20px 0 0;
-    font-size: 34px;
-    font-weight: 500;
-    line-height: 1.12;
-    letter-spacing: -0.03em;
-    text-wrap: balance;
+    margin-top: 20px;
 }
 
-/* A title's link covers its whole post, so anywhere on it opens the post. */
-.blog-featured__link {
+/* A title's link covers its whole post, so anywhere on it opens the post. It keeps the title's weight and ink: the
+   card's border answers the hover, and its outline the focus. */
+.blog-featured__link.ow-link,
+.blog-featured__link.ow-link:hover,
+.blog-featured__link.ow-link:focus-visible {
     color: inherit;
+    font-weight: inherit;
     text-decoration: none;
     outline: none;
 }
@@ -107,11 +94,7 @@
 }
 
 .blog-featured__excerpt {
-    margin: 16px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 17px;
-    line-height: 1.6;
-    text-wrap: pretty;
+    margin-top: 16px;
 }
 
 .blog-featured__facts {
@@ -136,16 +119,11 @@
 
 .blog-featured__fact dt {
     order: 2;
-    color: var(--ow-text-muted);
-    font-size: 13px;
 }
 
-.blog-featured__fact dd {
+/* Figures in tabular numerals, so the three line up. */
+.blog-featured__fact-value {
     order: 1;
-    margin: 0;
-    font-size: 22px;
-    font-weight: 500;
-    letter-spacing: -0.02em;
     font-variant-numeric: tabular-nums;
 }
 
@@ -160,8 +138,6 @@
 
 .blog-featured__read {
     flex-shrink: 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
 }
 
 /* The next three posts: a small cover beside each title, hairlines between them. */
@@ -201,12 +177,9 @@
     transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
 }
 
+/* Short titles in a narrow column: balanced, so none ends on a lone word. */
 .blog-featured__item-title {
-    margin: 8px 0 0;
-    font-size: 15.5px;
-    font-weight: var(--ow-weight-emphasis);
-    line-height: 1.35;
-    letter-spacing: -0.01em;
+    margin-top: 8px;
     text-wrap: balance;
 }
 
@@ -215,8 +188,6 @@
     align-items: center;
     gap: 8px;
     margin-top: 10px;
-    color: var(--ow-text-muted);
-    font-size: 13px;
 }
 
 /* Covers: drawn from the brand scale on a dot grid. Night covers stay midnight in both themes; day covers are a
@@ -506,9 +477,6 @@
     .blog-featured {
         padding: 72px var(--ow-page-gutter);
     }
-    .blog-featured__title {
-        font-size: 34px;
-    }
     .blog-featured__lead.ow-card {
         margin-top: 28px;
         padding: 6px;
@@ -521,17 +489,6 @@
     }
     .blog-featured__lead-title {
         margin-top: 16px;
-        font-size: 26px;
-        line-height: 1.15;
-    }
-    .blog-featured__excerpt {
-        font-size: 15.5px;
-    }
-    .blog-featured__fact dt {
-        font-size: 12px;
-    }
-    .blog-featured__fact dd {
-        font-size: 19px;
     }
     .blog-featured__fact + .blog-featured__fact {
         padding-left: 12px;
@@ -549,7 +506,6 @@
     }
     .blog-featured__item-title {
         margin-top: 4px;
-        font-size: 15px;
     }
 }
 

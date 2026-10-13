@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Badge, Button, Card, Menu, MenuItem, MenuSeparator, copyText, toast, type BadgeVariant } from "@openwarelabs/ui";
+import { Badge, Button, Card, Menu, MenuItem, MenuSeparator, Text, copyText, toast, type BadgeVariant } from "@openwarelabs/ui";
 import { Copy, Ellipsis, KeyRound, Plus, RefreshCw, Trash2 } from "lucide-react";
 
 import "./ListStacked.css";
@@ -62,13 +62,13 @@ export function ListStacked() {
             <div className="list-stacked__inner">
                 <div className="list-stacked__header">
                     <div>
-                        <h2 id="list-stacked-title" className="list-stacked__title">
+                        <Text as="h2" variant="heading" id="list-stacked-title">
                             API keys
-                        </h2>
-                        <p className="list-stacked__lead">
+                        </Text>
+                        <Text variant="copy" className="list-stacked__lead">
                             {live === 1 ? "One key" : `${live} keys`} can reach the Acme API. Each one acts for the whole workspace, so keep them out of your
                             code.
-                        </p>
+                        </Text>
                     </div>
                     <Button variant="primary" startIcon={<Plus size={16} />} onClick={create}>
                         Create key
@@ -86,10 +86,16 @@ export function ListStacked() {
                                     </span>
                                     <span className="list-stacked__text">
                                         <span className="list-stacked__name-row">
-                                            <span className="list-stacked__name">{entry.name}</span>
-                                            <span className="list-stacked__key">{entry.key}</span>
+                                            <Text as="span" variant="label" tone={inactive ? "muted" : undefined} truncate>
+                                                {entry.name}
+                                            </Text>
+                                            <Text as="span" variant="code" tone="muted" className="list-stacked__key">
+                                                {entry.key}
+                                            </Text>
                                         </span>
-                                        <span className="list-stacked__detail">{entry.detail}</span>
+                                        <Text variant="caption" className="list-stacked__detail">
+                                            {entry.detail}
+                                        </Text>
                                     </span>
                                     <span className="list-stacked__status">
                                         <Badge size="sm" variant={tone[entry.status]}>
@@ -130,7 +136,9 @@ export function ListStacked() {
                     </ul>
                 </Card>
 
-                <p className="list-stacked__footer">A key's secret is shown once, when it's made. Keys nobody uses for 90 days expire on their own.</p>
+                <Text as="p" variant="caption">
+                    A key's secret is shown once, when it's made. Keys nobody uses for 90 days expire on their own.
+                </Text>
             </div>
         </section>
     );

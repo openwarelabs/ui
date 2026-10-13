@@ -1,11 +1,20 @@
 import { useEffect, useState, type ReactNode } from "react";
 
-import { Badge, Button, Card, SegmentedControl, Stat, Table, type BadgeVariant, type TableColumn } from "@openwarelabs/ui";
+import { Badge, Button, Card, SegmentedControl, Stat, Table, Text, type BadgeVariant, type TableColumn } from "@openwarelabs/ui";
 import { ArrowUp, Bot, CircleX, GitMerge, GitPullRequest, KeyRound, Rocket, UserPlus } from "lucide-react";
 
 import "./DashboardActivity.css";
 
 type Kind = "deploy" | "review" | "agent" | "team";
+
+/** Who and what in an event's sentence, set a step stronger than the words around them. */
+function Strong({ children }: { children: ReactNode }) {
+    return (
+        <Text as="strong" variant="label" tone="default">
+            {children}
+        </Text>
+    );
+}
 
 interface Event {
     id: string;
@@ -25,7 +34,7 @@ const events: Event[] = [
         tone: "success",
         text: (
             <>
-                <strong>Maya Chen</strong> deployed <strong>Pricing page copy</strong> to marketing-site
+                <Strong>Maya Chen</Strong> deployed <Strong>Pricing page copy</Strong> to marketing-site
             </>
         ),
         meta: "Live in 48 s · 4 min ago",
@@ -38,7 +47,7 @@ const events: Event[] = [
         tone: "primary",
         text: (
             <>
-                An agent opened <strong>#219 Fix invoice dates in the EU</strong> for Tomás Reyes
+                An agent opened <Strong>#219 Fix invoice dates in the EU</Strong> for Tomás Reyes
             </>
         ),
         meta: "billing-api · 6 files changed · 26 min ago",
@@ -50,7 +59,7 @@ const events: Event[] = [
         icon: <GitMerge size={14} />,
         text: (
             <>
-                <strong>Clara Novak</strong> merged <strong>#306 Cache avatars between launches</strong>
+                <Strong>Clara Novak</Strong> merged <Strong>#306 Cache avatars between launches</Strong>
             </>
         ),
         meta: "mobile-app · 1 h ago",
@@ -62,7 +71,7 @@ const events: Event[] = [
         icon: <GitPullRequest size={14} />,
         text: (
             <>
-                <strong>Lena Fischer</strong> asked for changes on <strong>#217 Round VAT per line</strong>
+                <Strong>Lena Fischer</Strong> asked for changes on <Strong>#217 Round VAT per line</Strong>
             </>
         ),
         meta: "billing-api · 3 comments · 2 h ago",
@@ -75,7 +84,7 @@ const events: Event[] = [
         tone: "danger",
         text: (
             <>
-                A deploy of <strong>docs</strong> failed while rebuilding the search index
+                A deploy of <Strong>docs</Strong> failed while rebuilding the search index
             </>
         ),
         meta: "Stopped at step 3 of 5 · 5 h ago",
@@ -87,7 +96,7 @@ const events: Event[] = [
         icon: <UserPlus size={14} />,
         text: (
             <>
-                <strong>Omar Haddad</strong> joined the workspace as a member
+                <Strong>Omar Haddad</Strong> joined the workspace as a member
             </>
         ),
         meta: "Invited by Maya Chen · Yesterday",
@@ -100,7 +109,7 @@ const events: Event[] = [
         tone: "primary",
         text: (
             <>
-                An agent finished <strong>Rename the colour tokens</strong> for Aiko Tanaka
+                An agent finished <Strong>Rename the colour tokens</Strong> for Aiko Tanaka
             </>
         ),
         meta: "design-system · 152 lines · Yesterday",
@@ -112,7 +121,7 @@ const events: Event[] = [
         icon: <KeyRound size={14} />,
         text: (
             <>
-                <strong>Jonas Berg</strong> created the API key <strong>CI deploys</strong>
+                <Strong>Jonas Berg</Strong> created the API key <Strong>CI deploys</Strong>
             </>
         ),
         meta: "Expires in 90 days · Yesterday",
@@ -128,7 +137,7 @@ const incoming: Event[] = [
         icon: <GitPullRequest size={14} />,
         text: (
             <>
-                <strong>Sam Okafor</strong> approved <strong>#482 Pricing page copy</strong>
+                <Strong>Sam Okafor</Strong> approved <Strong>#482 Pricing page copy</Strong>
             </>
         ),
         meta: "marketing-site · Just now",
@@ -141,7 +150,7 @@ const incoming: Event[] = [
         tone: "success",
         text: (
             <>
-                <strong>Aiko Tanaka</strong> deployed <strong>Tooltips flip when there's no room</strong> to design-system
+                <Strong>Aiko Tanaka</Strong> deployed <Strong>Tooltips flip when there's no room</Strong> to design-system
             </>
         ),
         meta: "Live in 1 min 05 s · Just now",
@@ -180,10 +189,10 @@ const columns: Array<TableColumn<ProjectRow>> = [
         header: "Project",
         sortable: true,
         render: (row) => (
-            <span className="dashboard-activity__project">
+            <Text as="span" className="dashboard-activity__project">
                 <span className="dashboard-activity__dot" style={{ background: row.color }} aria-hidden="true" />
                 {row.id}
-            </span>
+            </Text>
         ),
     },
     {
@@ -201,7 +210,11 @@ const columns: Array<TableColumn<ProjectRow>> = [
         header: "Succeeded",
         align: "end",
         sortable: true,
-        render: (row) => <span className="dashboard-activity__muted">{row.success.toFixed(row.success === 100 ? 0 : 1)}%</span>,
+        render: (row) => (
+            <Text as="span" tone="muted">
+                {row.success.toFixed(row.success === 100 ? 0 : 1)}%
+            </Text>
+        ),
     },
 ];
 
@@ -234,10 +247,12 @@ export function DashboardActivity() {
             <div className="dashboard-activity__inner">
                 <div className="dashboard-activity__header">
                     <div>
-                        <h1 id="dashboard-activity-title" className="dashboard-activity__title">
+                        <Text as="h1" variant="heading" id="dashboard-activity-title">
                             Overview
-                        </h1>
-                        <p className="dashboard-activity__lead">What changed across Acme this week, as it happens.</p>
+                        </Text>
+                        <Text variant="copy" className="dashboard-activity__lead">
+                            What changed across Acme this week, as it happens.
+                        </Text>
                     </div>
                 </div>
 
@@ -250,7 +265,9 @@ export function DashboardActivity() {
 
                 <Card padding="none" className="dashboard-activity__card dashboard-activity__table-card">
                     <div className="dashboard-activity__card-header">
-                        <h2 className="dashboard-activity__card-title">Projects</h2>
+                        <Text as="h2" variant="card-title">
+                            Projects
+                        </Text>
                     </div>
                     <Table
                         caption="Projects this week"
@@ -265,9 +282,9 @@ export function DashboardActivity() {
                 <Card padding="none" className="dashboard-activity__card dashboard-activity__feed">
                     <section aria-labelledby="dashboard-activity-feed">
                         <div className="dashboard-activity__card-header">
-                            <h2 id="dashboard-activity-feed" className="dashboard-activity__card-title">
+                            <Text as="h2" variant="card-title" id="dashboard-activity-feed">
                                 Activity
-                            </h2>
+                            </Text>
                             <SegmentedControl size="sm" aria-label="Show" options={filters} value={filter} onChange={setFilter} />
                         </div>
 
@@ -284,26 +301,30 @@ export function DashboardActivity() {
                         {days.length ? (
                             days.map((group) => (
                                 <div key={group.day}>
-                                    <h3 className="dashboard-activity__day">{group.day}</h3>
+                                    <Text as="h3" variant="caption" className="dashboard-activity__day">
+                                        {group.day}
+                                    </Text>
                                     <ol className="dashboard-activity__events">
                                         {group.items.map((event) => (
                                             <li key={event.id} className="dashboard-activity__event" data-fresh={fresh.includes(event.id) || undefined}>
                                                 <span className="dashboard-activity__icon" data-tone={event.tone} aria-hidden="true">
                                                     {event.icon}
                                                 </span>
-                                                <p className="dashboard-activity__event-text">
+                                                <Text tone="soft" className="dashboard-activity__event-text">
                                                     {event.text}
-                                                    <span className="dashboard-activity__event-meta">{event.meta}</span>
-                                                </p>
+                                                    <Text variant="caption" className="dashboard-activity__event-meta">
+                                                        {event.meta}
+                                                    </Text>
+                                                </Text>
                                             </li>
                                         ))}
                                     </ol>
                                 </div>
                             ))
                         ) : (
-                            <p className="dashboard-activity__none">
+                            <Text variant="copy" align="center" className="dashboard-activity__none">
                                 {earlier ? "Nothing like this happened this week." : "Nothing like this has happened today."}
-                            </p>
+                            </Text>
                         )}
 
                         {earlier ? null : (

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Avatar, Badge, Button, Menu, MenuItem, MenuSeparator, copyText, toast, type BadgeVariant } from "@openwarelabs/ui";
+import { Avatar, Badge, Button, Menu, MenuItem, MenuSeparator, Text, copyText, toast, type BadgeVariant } from "@openwarelabs/ui";
 import { Archive, Copy, Ellipsis, Pause, Play, Receipt, RotateCcw, Rocket } from "lucide-react";
 
 import "./PageHeadingActions.css";
@@ -99,10 +99,14 @@ export function PageHeadingActions() {
                         </span>
                         <div>
                             <div className="page-heading-actions__title-row">
-                                <h1 className="page-heading-actions__title">billing-api</h1>
+                                <Text as="h1" variant="heading">
+                                    billing-api
+                                </Text>
                                 <Badge variant={tone[status]}>{status}</Badge>
                             </div>
-                            <p className="page-heading-actions__lead">Invoices, payments and the EU tax rules behind them.</p>
+                            <Text variant="copy" className="page-heading-actions__lead">
+                                Invoices, payments and the EU tax rules behind them.
+                            </Text>
                         </div>
                     </div>
 
@@ -150,53 +154,71 @@ export function PageHeadingActions() {
 
                 <dl className="page-heading-actions__facts">
                     <div className="page-heading-actions__fact">
-                        <dt>Production</dt>
-                        <dd>
+                        <Text as="dt" variant="caption">
+                            Production
+                        </Text>
+                        <Text as="dd" className="page-heading-actions__value">
                             <span className="page-heading-actions__live-dot" data-state={paused ? "paused" : "live"} aria-hidden="true" />
                             <span>billing.example.com</span>
-                        </dd>
+                        </Text>
                     </div>
                     <div className="page-heading-actions__fact">
-                        <dt>Branch</dt>
-                        <dd>
-                            <span className="page-heading-actions__mono">main</span>
-                        </dd>
+                        <Text as="dt" variant="caption">
+                            Branch
+                        </Text>
+                        <Text as="dd" className="page-heading-actions__value">
+                            <Text as="span" variant="code">
+                                main
+                            </Text>
+                        </Text>
                     </div>
                     <div className="page-heading-actions__fact">
-                        <dt>Region</dt>
-                        <dd>
+                        <Text as="dt" variant="caption">
+                            Region
+                        </Text>
+                        <Text as="dd" className="page-heading-actions__value">
                             <span>Frankfurt, eu-central-1</span>
-                        </dd>
+                        </Text>
                     </div>
                     <div className="page-heading-actions__fact">
-                        <dt>Live deploy</dt>
-                        <dd>
+                        <Text as="dt" variant="caption">
+                            Live deploy
+                        </Text>
+                        <Text as="dd" className="page-heading-actions__value">
                             {live ? (
                                 <>
                                     <Avatar name={live.who} size="sm" label={`By ${live.who}`} />
                                     <span>
-                                        <span className="page-heading-actions__mono">{live.commit}</span> · {live.when}
+                                        <Text as="span" variant="code">
+                                            {live.commit}
+                                        </Text>{" "}
+                                        · {live.when}
                                     </span>
                                 </>
                             ) : (
                                 <span>None</span>
                             )}
-                        </dd>
+                        </Text>
                     </div>
                 </dl>
 
                 <section className="page-heading-actions__recent" aria-labelledby="page-heading-actions-recent">
-                    <h2 id="page-heading-actions-recent" className="page-heading-actions__recent-title">
+                    <Text as="h2" variant="card-title" id="page-heading-actions-recent" className="page-heading-actions__recent-title">
                         Recent deploys
-                    </h2>
+                    </Text>
                     <ul className="page-heading-actions__deploys">
                         {deploys.slice(0, 3).map((entry) => (
                             <li key={entry.id} className="page-heading-actions__deploy">
                                 <span className="page-heading-actions__deploy-text">
-                                    <span className="page-heading-actions__deploy-message">{entry.message}</span>
-                                    <span className="page-heading-actions__deploy-meta">
-                                        <span className="page-heading-actions__mono">{entry.commit}</span> · {entry.who} · {entry.when}
-                                    </span>
+                                    <Text as="span" truncate>
+                                        {entry.message}
+                                    </Text>
+                                    <Text variant="caption" truncate>
+                                        <Text as="span" variant="code" className="page-heading-actions__commit">
+                                            {entry.commit}
+                                        </Text>{" "}
+                                        · {entry.who} · {entry.when}
+                                    </Text>
                                 </span>
                                 <Badge size="sm" variant={deployTone[entry.status]}>
                                     {entry.status}

@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem, Link, SectionHeading } from "@openwarelabs/ui";
+import { Accordion, AccordionItem, Link, SectionHeading, Text } from "@openwarelabs/ui";
 import { ArrowRight } from "lucide-react";
 
 import "./FaqColumns.css";
@@ -65,7 +65,9 @@ export function FaqColumns() {
                 <Accordion className="faq-columns__list" type="multiple" defaultValue={["trial"]}>
                     {questions.map((item) => (
                         <AccordionItem key={item.id} value={item.id} title={item.question}>
-                            <p>{item.answer}</p>
+                            <Text variant="copy" className="faq-columns__answer">
+                                {item.answer}
+                            </Text>
                         </AccordionItem>
                     ))}
                 </Accordion>

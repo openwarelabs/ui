@@ -20,25 +20,6 @@
     margin: 0 auto;
 }
 
-.newsletter-inline__title {
-    margin: 0;
-    color: var(--ow-text);
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 1.15;
-    letter-spacing: -0.03em;
-    text-wrap: balance;
-}
-
-.newsletter-inline__lead {
-    max-width: 540px;
-    margin: 12px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 16px;
-    line-height: 1.6;
-    text-wrap: pretty;
-}
-
 .newsletter-inline__form {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
@@ -53,10 +34,6 @@
 
 .newsletter-inline__fine {
     grid-column: 1 / -1;
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-    line-height: 1.5;
 }
 
 .newsletter-inline__done {
@@ -85,43 +62,13 @@
     color: var(--ow-success-text);
 }
 
-.newsletter-inline__done-title {
-    margin: 0;
-    color: var(--ow-text);
-    font-size: 14px;
-    font-weight: var(--ow-weight-emphasis);
-}
-
 .newsletter-inline__done-text {
-    margin: 4px 0 0;
-    color: var(--ow-text-soft);
-    font-size: 13.5px;
-    line-height: 1.5;
+    margin-top: 4px;
 }
 
+/* A ghost button whose label lines up with the text above it: pulled left by its own padding. */
 .newsletter-inline__reset {
-    margin: 10px 0 0;
-    border: 0;
-    border-radius: var(--ow-radius-sm);
-    background: transparent;
-    padding: 0;
-    color: var(--ow-text);
-    font: inherit;
-    font-size: 13.5px;
-    font-weight: var(--ow-weight-control);
-    text-decoration: underline;
-    text-decoration-color: var(--ow-border-strong);
-    text-underline-offset: 3px;
-    cursor: pointer;
-}
-
-.newsletter-inline__reset:hover {
-    text-decoration-color: currentColor;
-}
-
-.newsletter-inline__reset:focus-visible {
-    outline: 2px solid var(--ow-focus-ring);
-    outline-offset: 2px;
+    margin: 6px 0 0 calc(var(--ow-space-md) * -1);
 }
 
 @keyframes newsletter-inline-in {
@@ -150,12 +97,6 @@
 @media (max-width: 760px) {
     .newsletter-inline {
         padding: 72px var(--ow-page-gutter);
-    }
-    .newsletter-inline__title {
-        font-size: 26px;
-    }
-    .newsletter-inline__lead {
-        font-size: 15px;
     }
     .newsletter-inline__form {
         grid-template-columns: minmax(0, 1fr);

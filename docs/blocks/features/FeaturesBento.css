@@ -26,11 +26,6 @@
 
 .features-bento__intro {
     max-width: 440px;
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 17px;
-    line-height: 1.6;
-    text-wrap: pretty;
 }
 
 /* Six columns: the agents card takes four columns and two rows, the rest two columns each. */
@@ -66,33 +61,12 @@
     padding: 32px 32px 24px;
 }
 
-.features-bento__title {
-    margin: 0;
-    font-size: 16px;
-    font-weight: var(--ow-weight-emphasis);
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-    text-wrap: balance;
-}
-
-.features-bento__card--agents .features-bento__title {
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 1.2;
-    letter-spacing: -0.025em;
-}
-
 .features-bento__text {
-    margin: 6px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 14px;
-    line-height: 1.55;
-    text-wrap: pretty;
+    margin-top: 6px;
 }
 
 .features-bento__card--agents .features-bento__text {
     margin-top: 10px;
-    font-size: 15.5px;
 }
 
 /* The picture sits in a tray inset from the card, and runs off its bottom edge like a cropped screenshot. */
@@ -381,18 +355,12 @@
     .features-bento {
         padding: 72px var(--ow-page-gutter);
     }
-    .features-bento__intro {
-        font-size: 16px;
-    }
     .features-bento__grid {
         grid-template-columns: minmax(0, 1fr);
         margin-top: 40px;
     }
     .features-bento__card--agents .features-bento__copy {
         padding: 24px 24px 20px;
-    }
-    .features-bento__card--agents .features-bento__title {
-        font-size: 21px;
     }
     .features-bento__card--agents .features-bento__visual {
         padding: 20px 16px 0;

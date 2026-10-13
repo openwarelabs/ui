@@ -1,6 +1,6 @@
 import { useId, useState, type FormEvent } from "react";
 
-import { Avatar, Badge, Button, Card, ConfirmDialog, copyText, Field, Input, Menu, MenuItem, MenuSeparator, Select, toast } from "@openwarelabs/ui";
+import { Avatar, Badge, Button, Card, ConfirmDialog, copyText, Field, Input, Menu, MenuItem, MenuSeparator, Select, Text, toast } from "@openwarelabs/ui";
 import { Copy, Ellipsis, Mail, RotateCw, Send, UserMinus, X } from "lucide-react";
 
 import "./SettingsMembers.css";
@@ -46,6 +46,15 @@ const initialInvites: Invite[] = [
 
 // The person looking at the page.
 const you = "maya@example.com";
+
+/** How many are in a list, beside its title. */
+function CountText({ children }: { children: number }) {
+    return (
+        <Text as="span" tone="muted" className="settings-members__count">
+            {children}
+        </Text>
+    );
+}
 
 export function SettingsMembers() {
     const titleId = useId();
@@ -102,13 +111,13 @@ export function SettingsMembers() {
         <section className="settings-members" aria-labelledby={titleId}>
             <div className="settings-members__inner">
                 <div className="settings-members__header">
-                    <h2 id={titleId} className="settings-members__title">
+                    <Text variant="dialog-title" as="h2" id={titleId}>
                         Members
-                    </h2>
-                    <p className="settings-members__text">
+                    </Text>
+                    <Text variant="copy" className="settings-members__text">
                         {members.length} people in Acme{invites.length ? `, and ${invites.length} invited` : ""}. Admins can invite people, change roles and
                         remove them.
-                    </p>
+                    </Text>
                 </div>
 
                 <Card padding="none" className="settings-members__card">
@@ -139,29 +148,33 @@ export function SettingsMembers() {
                         </Button>
                     </form>
 
-                    <h3 className="settings-members__list-title">
-                        Members <span className="settings-members__count">{members.length}</span>
-                    </h3>
+                    <Text variant="label" as="h3" tone="muted" className="settings-members__list-title">
+                        Members <CountText>{members.length}</CountText>
+                    </Text>
                     <ul className="settings-members__list">
                         {members.map((member) => (
                             <li key={member.email} className="settings-members__row">
                                 <span className="settings-members__person">
                                     <Avatar name={member.name} />
                                     <span className="settings-members__person-text">
-                                        <span className="settings-members__name">
+                                        <Text variant="label" className="settings-members__name">
                                             {member.name}
                                             {member.email === you ? (
                                                 <Badge size="sm" variant="neutral">
                                                     You
                                                 </Badge>
                                             ) : null}
-                                        </span>
-                                        <span className="settings-members__email">{member.email}</span>
+                                        </Text>
+                                        <Text variant="caption" truncate>
+                                            {member.email}
+                                        </Text>
                                     </span>
                                 </span>
                                 <span className="settings-members__controls">
                                     {member.role === "owner" ? (
-                                        <span className="settings-members__owner">Owner</span>
+                                        <Text as="span" tone="muted" className="settings-members__owner">
+                                            Owner
+                                        </Text>
                                     ) : (
                                         <Select
                                             aria-label={`Role for ${member.name}`}
@@ -205,9 +218,9 @@ export function SettingsMembers() {
 
                     {invites.length ? (
                         <>
-                            <h3 className="settings-members__list-title">
-                                Pending invites <span className="settings-members__count">{invites.length}</span>
-                            </h3>
+                            <Text variant="label" as="h3" tone="muted" className="settings-members__list-title">
+                                Pending invites <CountText>{invites.length}</CountText>
+                            </Text>
                             <ul className="settings-members__list">
                                 {invites.map((entry) => (
                                     <li key={entry.email} className="settings-members__row">
@@ -216,8 +229,12 @@ export function SettingsMembers() {
                                                 <Mail size={14} />
                                             </span>
                                             <span className="settings-members__person-text">
-                                                <span className="settings-members__name">{entry.email}</span>
-                                                <span className="settings-members__email">Invited {entry.sent.toLowerCase()} by Maya Chen</span>
+                                                <Text variant="label" truncate>
+                                                    {entry.email}
+                                                </Text>
+                                                <Text variant="caption" truncate>
+                                                    Invited {entry.sent.toLowerCase()} by Maya Chen
+                                                </Text>
                                             </span>
                                         </span>
                                         <span className="settings-members__controls">

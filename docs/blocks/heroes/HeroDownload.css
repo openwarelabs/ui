@@ -28,21 +28,12 @@
 }
 
 .hero-download__title {
-    margin: 24px 0 0;
-    font-size: 64px;
-    font-weight: 500;
-    line-height: 1.02;
-    letter-spacing: -0.045em;
-    text-wrap: balance;
+    margin-top: 24px;
 }
 
 .hero-download__lead {
     max-width: 480px;
-    margin: 22px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 18px;
-    line-height: 1.6;
-    text-wrap: pretty;
+    margin-top: 22px;
 }
 
 .hero-download__buttons {
@@ -57,9 +48,7 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 4px 14px;
-    margin: 18px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
+    margin-top: 18px;
 }
 
 .hero-download__meta > span + span::before {
@@ -322,9 +311,6 @@
 }
 
 @media (max-width: 1100px) {
-    .hero-download__title {
-        font-size: 56px;
-    }
     .hero-download__notification {
         right: 12px;
     }
@@ -338,9 +324,6 @@
         grid-template-columns: minmax(0, 1fr);
         gap: 48px;
     }
-    .hero-download__title {
-        font-size: 60px;
-    }
     .hero-download__lead {
         max-width: 560px;
     }
@@ -349,14 +332,6 @@
 @media (max-width: 760px) {
     .hero-download {
         padding: 72px var(--ow-page-gutter) 80px;
-    }
-    .hero-download__title {
-        font-size: 42px;
-        line-height: 1.04;
-        letter-spacing: -0.04em;
-    }
-    .hero-download__lead {
-        font-size: 16px;
     }
     .hero-download__buttons {
         width: 100%;

@@ -62,18 +62,8 @@
     gap: var(--ow-space-sm);
 }
 
-.pricing-plans__name {
-    margin: 0;
-    font-size: 17px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.01em;
-}
-
 .pricing-plans__summary {
-    margin: 6px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 14px;
-    line-height: 1.5;
+    margin-top: 6px;
 }
 
 .pricing-plans__price {
@@ -84,17 +74,10 @@
     margin: 28px 0 24px;
 }
 
+/* A price, not a title: no extra leading above the figure, and digits of one width. */
 .pricing-plans__amount {
-    font-size: 48px;
-    font-weight: 500;
     line-height: 1;
-    letter-spacing: -0.04em;
     font-variant-numeric: tabular-nums;
-}
-
-.pricing-plans__unit {
-    color: var(--ow-text-muted);
-    font-size: 14px;
 }
 
 .pricing-plans__body {
@@ -105,13 +88,6 @@
 
 .pricing-plans__card[data-recommended] .pricing-plans__body {
     padding-bottom: 44px;
-}
-
-.pricing-plans__lead {
-    margin: 0;
-    color: var(--ow-text);
-    font-size: 13px;
-    font-weight: var(--ow-weight-emphasis);
 }
 
 .pricing-plans__features {
@@ -126,9 +102,6 @@
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    color: var(--ow-text-soft);
-    font-size: 14px;
-    line-height: 1.45;
 }
 
 .pricing-plans__features svg {
@@ -165,15 +138,6 @@
 
 .pricing-plans__enterprise-text {
     flex: 1;
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-.pricing-plans__enterprise-text strong {
-    color: var(--ow-text);
-    font-weight: var(--ow-weight-emphasis);
 }
 
 .pricing-plans__enterprise-link {
@@ -185,10 +149,7 @@
 }
 
 .pricing-plans__note {
-    margin: 20px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
-    text-align: center;
+    margin-top: 20px;
 }
 
 @media (max-width: 1100px) {
@@ -247,9 +208,6 @@
     .pricing-plans__body,
     .pricing-plans__card[data-recommended] .pricing-plans__body {
         padding: 22px 22px 26px;
-    }
-    .pricing-plans__amount {
-        font-size: 44px;
     }
     .pricing-plans__enterprise {
         align-items: flex-start;

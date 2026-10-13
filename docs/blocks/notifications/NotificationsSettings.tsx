@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Select, SettingsRow, Switch, VisuallyHidden } from "@openwarelabs/ui";
+import { Select, SettingsRow, Switch, Text, VisuallyHidden } from "@openwarelabs/ui";
 import { Check, Mail, Smartphone } from "lucide-react";
 
 import "./NotificationsSettings.css";
@@ -104,21 +104,21 @@ export function NotificationsSettings() {
             <div className="notifications-settings__panel">
                 <div>
                     <div className="notifications-settings__header">
-                        <h2 id="notifications-settings-title" className="notifications-settings__title">
+                        <Text variant="heading" as="h2" id="notifications-settings-title">
                             Notifications
-                        </h2>
-                        <span className="notifications-settings__saved" role="status" data-hidden={saved ? undefined : ""}>
+                        </Text>
+                        <Text variant="caption" tone="success" className="notifications-settings__saved" role="status" data-hidden={saved ? undefined : ""}>
                             {saved ? (
                                 <>
                                     <Check size={15} aria-hidden="true" />
                                     Saved
                                 </>
                             ) : null}
-                        </span>
+                        </Text>
                     </div>
-                    <p className="notifications-settings__subtitle">
+                    <Text variant="copy" className="notifications-settings__subtitle">
                         Choose what reaches you by email and on your phone. Everything still shows in your Acme inbox.
-                    </p>
+                    </Text>
                 </div>
 
                 <div className="notifications-settings__card">
@@ -126,14 +126,14 @@ export function NotificationsSettings() {
                         <thead>
                             <tr>
                                 <th scope="col" className="notifications-settings__corner">
-                                    Event
+                                    <Text variant="caption">Event</Text>
                                 </th>
                                 {channels.map((channel) => (
                                     <th key={channel.id} scope="col" className="notifications-settings__channel" id={`notifications-settings-${channel.id}`}>
-                                        <span className="notifications-settings__channel-label">
+                                        <Text variant="label" tone="soft" className="notifications-settings__channel-label">
                                             <channel.icon size={15} aria-hidden="true" />
                                             {channel.label}
-                                        </span>
+                                        </Text>
                                     </th>
                                 ))}
                             </tr>
@@ -142,7 +142,7 @@ export function NotificationsSettings() {
                             <tbody key={group.id}>
                                 <tr className="notifications-settings__group">
                                     <th scope="colgroup" colSpan={channels.length + 1}>
-                                        {group.label}
+                                        <Text variant="overline">{group.label}</Text>
                                     </th>
                                 </tr>
                                 {group.events.map((event) => {
@@ -152,11 +152,15 @@ export function NotificationsSettings() {
                                         <tr key={event.id}>
                                             <th scope="row" className="notifications-settings__event">
                                                 <span className="notifications-settings__event-label">
-                                                    <span id={rowId}>{event.label}</span>
-                                                    {on.length === 0 ? <span className="notifications-settings__muted">Muted</span> : null}
+                                                    <Text as="span" id={rowId}>
+                                                        {event.label}
+                                                    </Text>
+                                                    {on.length === 0 ? <Text variant="caption">Muted</Text> : null}
                                                 </span>
                                                 {event.description ? (
-                                                    <span className="notifications-settings__event-description">{event.description}</span>
+                                                    <Text variant="caption" className="notifications-settings__event-description">
+                                                        {event.description}
+                                                    </Text>
                                                 ) : null}
                                             </th>
                                             {channels.map((channel) => (
@@ -186,7 +190,9 @@ export function NotificationsSettings() {
                 </div>
 
                 <div>
-                    <h3 className="notifications-settings__section-title">Delivery</h3>
+                    <Text variant="card-title" className="notifications-settings__section-title">
+                        Delivery
+                    </Text>
                     <div className="notifications-settings__rows">
                         <SettingsRow label="Send emails" description="Bundling sends fewer emails; anything that needs you still comes at once.">
                             <Select

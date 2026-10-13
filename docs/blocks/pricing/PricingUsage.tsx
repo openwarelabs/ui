@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Button, Card, SectionHeading, Slider } from "@openwarelabs/ui";
+import { Button, Card, SectionHeading, Slider, Text } from "@openwarelabs/ui";
 
 import "./PricingUsage.css";
 
@@ -50,32 +50,41 @@ export function PricingUsage() {
                         {tiers.map((tier, index) => (
                             <li key={tier.from} className="pricing-usage__tier" data-current={index === current || undefined}>
                                 <span className="pricing-usage__tier-dot" aria-hidden="true" />
-                                <span className="pricing-usage__tier-range">{rangeLabel(tier)}</span>
-                                <span className="pricing-usage__tier-price">
+                                <Text variant={index === current ? "label" : "body"} tone={index === current ? "default" : "soft"}>
+                                    {rangeLabel(tier)}
+                                </Text>
+                                <Text variant="label" className="pricing-usage__tier-price">
                                     {tier.price === 0 ? (
                                         "Free"
                                     ) : (
                                         <>
                                             {unitPrice.format(tier.price)}
-                                            <small>a run</small>
+                                            <Text as="small" variant="caption" className="pricing-usage__tier-unit">
+                                                a run
+                                            </Text>
                                         </>
                                     )}
-                                </span>
+                                </Text>
                             </li>
                         ))}
                     </ul>
-                    <p className="pricing-usage__aside">
+                    <Text variant="copy" className="pricing-usage__aside">
                         A run is one task handed to an agent, from reading the issue to opening the pull request. Retries after a failed build are free.
-                    </p>
+                    </Text>
                 </div>
 
                 <Card padding="none" className="pricing-usage__card">
-                    <h3 className="pricing-usage__card-title">Estimate your month</h3>
-                    <p className="pricing-usage__card-intro">Drag to the number of runs your team makes in a typical month.</p>
+                    <Text variant="card-title">Estimate your month</Text>
+                    <Text variant="copy" className="pricing-usage__card-intro">
+                        Drag to the number of runs your team makes in a typical month.
+                    </Text>
 
-                    <p className="pricing-usage__runs" aria-hidden="true">
-                        {number.format(runs)} <small>runs a month</small>
-                    </p>
+                    <Text as="p" variant="heading" className="pricing-usage__runs" aria-hidden="true">
+                        {number.format(runs)}{" "}
+                        <Text as="small" variant="body" tone="muted" className="pricing-usage__runs-unit">
+                            runs a month
+                        </Text>
+                    </Text>
                     {/* The big number above is the slider's visible label; screen readers hear the runs and the cost. */}
                     <Slider
                         aria-label="Agent runs a month"
@@ -95,27 +104,33 @@ export function PricingUsage() {
 
                     <div className="pricing-usage__breakdown">
                         {lines.map(({ tier, count, cost }) => (
-                            <div key={tier.from} className="pricing-usage__line" data-idle={count === 0 || undefined}>
+                            <Text as="div" variant="body" tone="soft" key={tier.from} className="pricing-usage__line" data-idle={count === 0 || undefined}>
                                 <span>
                                     {number.format(count)} runs {tier.price === 0 ? "free" : `at ${unitPrice.format(tier.price)}`}
                                 </span>
                                 <span>{euro.format(cost)}</span>
-                            </div>
+                            </Text>
                         ))}
                     </div>
 
                     <div className="pricing-usage__total">
-                        <p className="pricing-usage__total-label">
+                        <Text as="p" variant="label">
                             Estimated month
-                            <small>Before VAT, billed on the 1st</small>
-                        </p>
-                        <p className="pricing-usage__total-amount">{euro.format(total)}</p>
+                            <Text as="small" variant="caption" className="pricing-usage__total-note">
+                                Before VAT, billed on the 1st
+                            </Text>
+                        </Text>
+                        <Text as="p" variant="section-title" className="pricing-usage__total-amount">
+                            {euro.format(total)}
+                        </Text>
                     </div>
 
                     <Button variant="primary" shape="pill" size="lg" fullWidth className="pricing-usage__action">
                         Start with 500 free runs
                     </Button>
-                    <p className="pricing-usage__fine">Set a monthly cap in settings and Acme pauses agents at the cap rather than charging more.</p>
+                    <Text as="p" variant="caption" align="center" className="pricing-usage__fine">
+                        Set a monthly cap in settings and Acme pauses agents at the cap rather than charging more.
+                    </Text>
                 </Card>
             </div>
         </section>

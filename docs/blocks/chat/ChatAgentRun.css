@@ -50,30 +50,19 @@
     gap: 4px;
 }
 
-.chat-agent-run__title {
-    margin: 0;
-    font-size: 16px;
-    font-weight: var(--ow-weight-emphasis);
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-}
-
 .chat-agent-run__meta {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 4px 8px;
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
 }
 
 .chat-agent-run__meta-sep {
     color: var(--ow-border-strong);
 }
 
+/* Paths, branches, diff counts and test output in mono at caption size: the code style is 14px, louder than the step titles. */
 .chat-agent-run__mono {
-    font-family: var(--ow-font-mono);
     font-size: 12px;
 }
 
@@ -83,10 +72,9 @@
     gap: var(--ow-space-md);
 }
 
+/* The clock keeps its width as it ticks. */
 .chat-agent-run__elapsed {
     min-width: 36px;
-    color: var(--ow-text-muted);
-    font-size: 13px;
     font-variant-numeric: tabular-nums;
     text-align: right;
 }
@@ -175,55 +163,18 @@
     gap: var(--ow-space-lg);
 }
 
-.chat-agent-run__step-title {
-    min-width: 0;
-    font-weight: var(--ow-weight-control);
-    line-height: 1.4;
-}
-
-.chat-agent-run__step[data-status="waiting"] .chat-agent-run__step-title,
-.chat-agent-run__step[data-status="stopped"] .chat-agent-run__step-title {
-    color: var(--ow-text-muted);
-}
-
+/* Times line up as they change. */
 .chat-agent-run__status {
     flex-shrink: 0;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
 }
 
-.chat-agent-run__status--running {
-    color: var(--ow-primary-text);
-}
-
-.chat-agent-run__status--failed {
-    color: var(--ow-danger-text);
-}
-
-.chat-agent-run__status--approval {
-    color: var(--ow-warning-text);
-    font-weight: var(--ow-weight-control);
-}
-
-.chat-agent-run__note {
-    margin: 0;
-    color: var(--ow-text-muted);
-    line-height: 1.5;
-    text-wrap: pretty;
-}
-
 .chat-agent-run__error {
-    margin: 0;
     border: 1px solid var(--ow-danger-border);
     border-radius: var(--ow-radius-form);
     background: var(--ow-danger-surface);
     padding: 8px 12px;
-    color: var(--ow-danger-text);
-    font-family: var(--ow-font-mono);
-    font-size: 12px;
-    line-height: 1.5;
     overflow-wrap: anywhere;
 }
 
@@ -241,28 +192,19 @@
     border-top: 1px solid var(--ow-border);
 }
 
-.chat-agent-run__file-button {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    gap: var(--ow-space-sm);
-    margin: 0;
+/* Each file's toggle is a full-width row in the list, not a free-standing button: square, borderless, its text from the start. */
+.chat-agent-run__file-button.ow-button {
+    justify-content: flex-start;
     border: 0;
-    background: transparent;
+    border-radius: 0;
     padding: 8px 12px;
-    color: var(--ow-text);
-    font: inherit;
-    text-align: left;
-    cursor: pointer;
-    transition: background-color var(--ow-duration-fast) var(--ow-ease-standard);
 }
 
-.chat-agent-run__file-button:hover {
+.chat-agent-run__file-button.ow-button:hover:not(:disabled) {
     background: var(--ow-hover);
 }
 
-.chat-agent-run__file-button:focus-visible {
-    outline: 2px solid var(--ow-focus-ring);
+.chat-agent-run__file-button.ow-button:focus-visible {
     outline-offset: -2px;
 }
 
@@ -279,36 +221,16 @@
 .chat-agent-run__path {
     min-width: 0;
     flex: 1;
-    overflow: hidden;
-    font-family: var(--ow-font-mono);
-    font-size: 12.5px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    text-align: left;
 }
 
-.chat-agent-run__added,
-.chat-agent-run__removed {
-    font-family: var(--ow-font-mono);
-    font-size: 12px;
-    font-variant-numeric: tabular-nums;
-}
-
-.chat-agent-run__added {
-    color: var(--ow-success-text);
-}
-
-.chat-agent-run__removed {
-    color: var(--ow-danger-text);
-}
-
-/* A diff: removed lines on red, added on green, the rest as context. */
+/* A diff: removed lines on red, added on green, the rest as context. Its lines are as small as the paths above them,
+   with room between them for the red and green. */
 .chat-agent-run__diff {
-    margin: 0;
     overflow-x: auto;
     border-top: 1px solid var(--ow-border);
     background: var(--ow-surface-muted);
     padding: 6px 0;
-    font-family: var(--ow-font-mono);
     font-size: 12px;
     line-height: 1.7;
 }
@@ -357,17 +279,6 @@
     border-radius: var(--ow-radius-container);
     background: color-mix(in srgb, var(--ow-warning-surface) 55%, var(--ow-surface));
     padding: 14px 16px;
-}
-
-.chat-agent-run__approval-text {
-    margin: 0;
-    color: var(--ow-text-soft);
-    line-height: 1.5;
-}
-
-.chat-agent-run__approval-text strong {
-    color: var(--ow-text);
-    font-weight: var(--ow-weight-emphasis);
 }
 
 .chat-agent-run__approval-actions {

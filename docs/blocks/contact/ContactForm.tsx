@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 
-import { Button, Card, Field, Input, Link, SectionHeading, Select, Textarea } from "@openwarelabs/ui";
+import { Button, Card, Field, Input, Link, SectionHeading, Select, Text, Textarea } from "@openwarelabs/ui";
 import { CircleCheck, Clock, LifeBuoy, Mail } from "lucide-react";
 
 import "./ContactForm.css";
@@ -106,9 +106,15 @@ export function ContactForm() {
                                     <Icon size={16} />
                                 </span>
                                 <div>
-                                    <p className="contact-form__detail-label">{label}</p>
-                                    <p className="contact-form__detail-value">{href ? <Link href={href}>{value}</Link> : value}</p>
-                                    <p className="contact-form__detail-note">{note}</p>
+                                    <Text variant="caption" as="p">
+                                        {label}
+                                    </Text>
+                                    <Text variant="card-title" as="p" className="contact-form__detail-value">
+                                        {href ? <Link href={href}>{value}</Link> : value}
+                                    </Text>
+                                    <Text variant="copy" className="contact-form__detail-note">
+                                        {note}
+                                    </Text>
                                 </div>
                             </li>
                         ))}
@@ -121,12 +127,12 @@ export function ContactForm() {
                             <span className="contact-form__done-icon" aria-hidden="true">
                                 <CircleCheck size={22} />
                             </span>
-                            <h3 id="contact-form-done-title" className="contact-form__done-title">
+                            <Text variant="heading" as="h3" id="contact-form-done-title" className="contact-form__done-title">
                                 Thanks, {sent.name.trim().split(" ")[0]}
-                            </h3>
-                            <p className="contact-form__done-text">
+                            </Text>
+                            <Text variant="copy" className="contact-form__done-text">
                                 Your message is with our {team} team. We'll reply to {sent.email.trim()} within one working day.
-                            </p>
+                            </Text>
                             <Button shape="pill" onClick={startAgain}>
                                 Send another message
                             </Button>
@@ -149,7 +155,10 @@ export function ContactForm() {
                             <Field
                                 label={
                                     <>
-                                        Company <span className="contact-form__optional">(optional)</span>
+                                        Company{" "}
+                                        <Text variant="body" as="span" tone="muted">
+                                            (optional)
+                                        </Text>
                                     </>
                                 }
                             >
@@ -158,7 +167,10 @@ export function ContactForm() {
                             <Field
                                 label={
                                     <>
-                                        Team size <span className="contact-form__optional">(optional)</span>
+                                        Team size{" "}
+                                        <Text variant="body" as="span" tone="muted">
+                                            (optional)
+                                        </Text>
                                     </>
                                 }
                             >
@@ -176,7 +188,9 @@ export function ContactForm() {
                                 <Textarea id="contact-form-message" rows={5} value={values.message} onChange={(event) => set("message", event.target.value)} />
                             </Field>
                             <div className="contact-form__foot">
-                                <p className="contact-form__privacy">We use your details only to reply to you.</p>
+                                <Text variant="caption" as="p">
+                                    We use your details only to reply to you.
+                                </Text>
                                 <Button type="submit" variant="primary" shape="pill" loading={sending}>
                                     Send message
                                 </Button>

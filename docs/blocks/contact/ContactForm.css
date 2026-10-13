@@ -50,24 +50,9 @@
     color: var(--ow-text-soft);
 }
 
-.contact-form__detail-label {
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
-}
-
-.contact-form__detail-value {
-    margin: 4px 0 0;
-    color: var(--ow-text);
-    font-size: 15px;
-    font-weight: var(--ow-weight-control);
-}
-
+.contact-form__detail-value,
 .contact-form__detail-note {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 13.5px;
-    line-height: 1.5;
+    margin-top: 4px;
 }
 
 .contact-form__card {
@@ -85,11 +70,6 @@
     grid-column: 1 / -1;
 }
 
-.contact-form__optional {
-    color: var(--ow-text-muted);
-    font-weight: var(--ow-weight-regular);
-}
-
 .contact-form__foot {
     display: flex;
     grid-column: 1 / -1;
@@ -97,13 +77,6 @@
     justify-content: space-between;
     gap: 16px 24px;
     margin-top: 4px;
-}
-
-.contact-form__privacy {
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-    line-height: 1.5;
 }
 
 .contact-form__done {
@@ -130,18 +103,12 @@
 }
 
 .contact-form__done-title {
-    margin: 20px 0 0;
-    font-size: 22px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.02em;
+    margin-top: 20px;
 }
 
 .contact-form__done-text {
     max-width: 460px;
     margin: 8px 0 24px;
-    color: var(--ow-text-muted);
-    font-size: 15px;
-    line-height: 1.6;
 }
 
 @media (max-width: 1024px) {

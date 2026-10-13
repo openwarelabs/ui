@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Badge, Button, DotGrid, Link, ProgressBar, Steps, toast } from "@openwarelabs/ui";
+import { Badge, Button, DotGrid, Link, ProgressBar, Steps, Text, toast } from "@openwarelabs/ui";
 import { ArrowUpRight, BellRing, Check, Clock, RotateCw } from "lucide-react";
 
 import "./ErrorMaintenance.css";
@@ -40,10 +40,12 @@ export function ErrorMaintenance() {
         <div className="error-maintenance">
             <DotGrid fade className="error-maintenance__ground">
                 <header className="error-maintenance__bar">
-                    <a className="error-maintenance__logo" href="#" aria-label="Acme home">
+                    <Link href="#" variant="standalone" className="error-maintenance__logo" aria-label="Acme home">
                         <span className="error-maintenance__mark" aria-hidden="true" />
-                        Acme
-                    </a>
+                        <Text variant="card-title" as="span">
+                            Acme
+                        </Text>
+                    </Link>
                     <Link href="#" variant="standalone" className="error-maintenance__status">
                         Status page
                         <ArrowUpRight size={15} aria-hidden="true" />
@@ -55,19 +57,23 @@ export function ErrorMaintenance() {
                         <Badge size="sm" variant="warning">
                             Planned maintenance
                         </Badge>
-                        <h1 className="error-maintenance__title">Acme is down for maintenance</h1>
-                        <p className="error-maintenance__text">
+                        <Text variant="section-title" as="h1" className="error-maintenance__title">
+                            Acme is down for maintenance
+                        </Text>
+                        <Text variant="lead" className="error-maintenance__text">
                             We're moving every workspace to a faster database. Everything you've saved is safe, and paused agent runs will carry on afterwards.
-                        </p>
+                        </Text>
 
                         <div className="error-maintenance__back">
                             <span className="error-maintenance__clock" aria-hidden="true">
                                 <Clock size={20} />
                             </span>
-                            <p className="error-maintenance__time">
-                                <strong>Back by 07:00 CET</strong>
-                                <span>Tuesday 14 Oct, about 40 minutes from now</span>
-                            </p>
+                            <div className="error-maintenance__time">
+                                <Text variant="heading" as="p" className="error-maintenance__time-main">
+                                    Back by 07:00 CET
+                                </Text>
+                                <Text variant="copy">Tuesday 14 Oct, about 40 minutes from now</Text>
+                            </div>
                         </div>
 
                         <div className="error-maintenance__actions">

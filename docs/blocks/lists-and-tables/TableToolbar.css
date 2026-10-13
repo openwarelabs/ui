@@ -28,17 +28,8 @@
     gap: var(--ow-space-2xl);
 }
 
-.table-toolbar__title {
-    margin: 0;
-    font-size: 20px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.3;
-    letter-spacing: -0.015em;
-}
-
 .table-toolbar__lead {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
+    margin-top: 4px;
 }
 
 .table-toolbar__card {
@@ -63,11 +54,10 @@
     width: 160px;
 }
 
+/* The count changes as you search; digits of one width keep it from jittering. */
 .table-toolbar__count {
     margin-left: auto;
     padding-right: 4px;
-    color: var(--ow-text-muted);
-    font-size: 13px;
     font-variant-numeric: tabular-nums;
 }
 
@@ -84,26 +74,12 @@
     padding: 4px 0;
 }
 
-.table-toolbar__message {
-    font-weight: var(--ow-weight-control);
-}
-
+/* The commit's hash and branch in mono at 12px, a caption's size under the message. */
 .table-toolbar__meta {
-    color: var(--ow-text-muted);
-    font-family: var(--ow-font-mono);
     font-size: 12px;
 }
 
-.table-toolbar__branch {
-    color: var(--ow-text-soft);
-}
-
 .table-toolbar__nowrap {
-    white-space: nowrap;
-}
-
-.table-toolbar__muted {
-    color: var(--ow-text-muted);
     white-space: nowrap;
 }
 
@@ -123,8 +99,10 @@
     gap: var(--ow-space-lg);
     border-top: 1px solid var(--ow-border);
     padding: 10px 14px;
-    color: var(--ow-text-muted);
-    font-size: 13px;
+}
+
+/* The range changes page by page; digits of one width keep it from jittering. */
+.table-toolbar__range {
     font-variant-numeric: tabular-nums;
 }
 

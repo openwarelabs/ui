@@ -48,6 +48,62 @@ function splitSelectors(list) {
     return parts.filter(Boolean);
 }
 
+/** The library's component for each element a block shouldn't build by hand. */
+const componentFor = {
+    h1: "<Text variant=…>",
+    h2: "<Text variant=…>",
+    h3: "<Text variant=…>",
+    h4: "<Text variant=…>",
+    h5: "<Text variant=…>",
+    h6: "<Text variant=…>",
+    p: "<Text variant=…>",
+    button: "Button (or CloseButton, CopyButton, ToggleButton)",
+    a: "Link, or buttonClassName() / linkClassName() on the <a>",
+    kbd: "Kbd",
+    code: "Code",
+    input: "Input, Checkbox, Switch or another field",
+    textarea: "Textarea",
+    select: "Select",
+};
+
+/**
+ * Headings, paragraphs and controls written as plain elements, where the library has a component for them. Drawn
+ * product visuals are exempt: anything inside an element with role="img" or aria-hidden is a picture, not page text.
+ */
+function rawElements(source) {
+    const found = [];
+    const isPicture = (attributes) =>
+        attributes.properties.some((attribute) => {
+            if (!ts.isJsxAttribute(attribute)) return false;
+            const name = attribute.name.getText(source);
+            const value = attribute.initializer?.getText(source) ?? "true";
+            return (name === "role" && value === '"img"') || (name === "aria-hidden" && !/false/.test(value));
+        });
+    const usesLinkOrButtonClass = (attributes) =>
+        attributes.properties.some(
+            (attribute) =>
+                ts.isJsxAttribute(attribute) &&
+                attribute.name.getText(source) === "className" &&
+                /\b(buttonClassName|linkClassName)\(/.test(attribute.initializer?.getText(source) ?? ""),
+        );
+    const visit = (node, inPicture) => {
+        let opening = null;
+        if (ts.isJsxElement(node)) opening = node.openingElement;
+        else if (ts.isJsxSelfClosingElement(node)) opening = node;
+        let picture = inPicture;
+        if (opening) {
+            const tag = opening.tagName.getText(source);
+            picture = inPicture || isPicture(opening.attributes);
+            if (!picture && tag in componentFor && !(tag === "a" && usesLinkOrButtonClass(opening.attributes))) {
+                found.push({ tag, line: source.getLineAndCharacterOfPosition(opening.getStart(source)).line + 1 });
+            }
+        }
+        ts.forEachChild(node, (child) => visit(child, picture));
+    };
+    visit(source, false);
+    return found;
+}
+
 const problems = [];
 const problem = (id, text) => problems.push(`${id}: ${text}`);
 
@@ -94,6 +150,7 @@ for (const [id, { fixedHeight }] of expected) {
     if (exported.length !== 1 || exported[0] !== name)
         problem(id, `should export exactly one function, ${name}; it exports ${exported.join(", ") || "nothing"}`);
     if (!tsx.includes(`import "./${name}.css";`)) problem(id, `should import "./${name}.css"`);
+    for (const { tag, line } of rawElements(source)) problem(id, `line ${line}: <${tag}> by hand; use ${componentFor[tag]}`);
     if (/https?:\/\/(?!www\.w3\.org)/.test(tsx)) problem(id, "links to an outside address; use # for links and draw images with CSS or components");
     if (/lorem ipsum/i.test(tsx)) problem(id, "has placeholder Latin; write real copy");
 

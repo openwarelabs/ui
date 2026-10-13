@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Badge, Button, Chip, Popover, SiteHeader } from "@openwarelabs/ui";
+import { Badge, Button, Chip, Link, Popover, SiteHeader, Text } from "@openwarelabs/ui";
 import { Menu as MenuIcon } from "lucide-react";
 
 import "./HeaderFloatingPill.css";
@@ -51,10 +51,10 @@ const entries = [
 
 function Brand() {
     return (
-        <a href="#" className="header-floating-pill__brand">
+        <Link href="#" variant="standalone" className="header-floating-pill__brand">
             <span className="header-floating-pill__mark" aria-hidden="true" />
             Acme
-        </a>
+        </Link>
     );
 }
 
@@ -75,15 +75,15 @@ export function HeaderFloatingPill() {
                 <SiteHeader
                     brand={<Brand />}
                     nav={links.map((link) => (
-                        <a key={link.label} href={link.href} aria-current={link.current ? "page" : undefined}>
+                        <Link key={link.label} href={link.href} variant="standalone" aria-current={link.current ? "page" : undefined}>
                             {link.label}
-                        </a>
+                        </Link>
                     ))}
                     actions={
                         <>
-                            <a href="#sign-in" className="header-floating-pill__sign-in">
+                            <Link href="#sign-in" variant="standalone" className="header-floating-pill__sign-in">
                                 Sign in
-                            </a>
+                            </Link>
                             <Button variant="primary" shape="pill" size="sm">
                                 Start for free
                             </Button>
@@ -102,23 +102,25 @@ export function HeaderFloatingPill() {
                                 >
                                     <nav className="header-floating-pill__menu" aria-label="Main">
                                         {links.map((link) => (
-                                            <a
+                                            <Link
                                                 key={link.label}
                                                 href={link.href}
+                                                variant="standalone"
                                                 className="header-floating-pill__menu-link"
                                                 aria-current={link.current ? "page" : undefined}
                                                 onClick={() => setMenuOpen(false)}
                                             >
                                                 {link.label}
-                                            </a>
+                                            </Link>
                                         ))}
-                                        <a
+                                        <Link
                                             href="#sign-in"
+                                            variant="standalone"
                                             className="header-floating-pill__menu-link header-floating-pill__menu-link--sign-in"
                                             onClick={() => setMenuOpen(false)}
                                         >
                                             Sign in
-                                        </a>
+                                        </Link>
                                     </nav>
                                 </Popover>
                             </span>
@@ -131,21 +133,29 @@ export function HeaderFloatingPill() {
             <main className="header-floating-pill__page">
                 <div className="header-floating-pill__intro">
                     <Chip>Changelog</Chip>
-                    <h1 className="header-floating-pill__title">What's new in Acme</h1>
-                    <p className="header-floating-pill__lead">Everything we shipped, week by week. Follow along in the app, or get it by email on Fridays.</p>
+                    <Text variant="page-title" className="header-floating-pill__title">
+                        What's new in Acme
+                    </Text>
+                    <Text variant="lead" className="header-floating-pill__lead">
+                        Everything we shipped, week by week. Follow along in the app, or get it by email on Fridays.
+                    </Text>
                 </div>
                 <ol className="header-floating-pill__entries">
                     {entries.map((entry) => (
                         <li key={entry.title} className="header-floating-pill__entry">
-                            <time className="header-floating-pill__date" dateTime={entry.date}>
-                                {entry.day}
-                            </time>
+                            <Text variant="caption" className="header-floating-pill__date">
+                                <time dateTime={entry.date}>{entry.day}</time>
+                            </Text>
                             <div className="header-floating-pill__entry-body">
                                 <Badge size="sm" variant={entry.tone}>
                                     {entry.kind}
                                 </Badge>
-                                <h2 className="header-floating-pill__entry-title">{entry.title}</h2>
-                                <p className="header-floating-pill__entry-text">{entry.text}</p>
+                                <Text variant="heading" as="h2" className="header-floating-pill__entry-title">
+                                    {entry.title}
+                                </Text>
+                                <Text variant="copy" tone="soft" className="header-floating-pill__entry-text">
+                                    {entry.text}
+                                </Text>
                             </div>
                         </li>
                     ))}

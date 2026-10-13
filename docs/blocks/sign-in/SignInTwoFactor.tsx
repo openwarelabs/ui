@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 
-import { Button, Card, Checkbox, cx, Field, Input, InputOTP, Link, linkClassName, Spinner, toast } from "@openwarelabs/ui";
+import { Button, Card, Checkbox, Field, Input, InputOTP, Link, Spinner, Text, toast } from "@openwarelabs/ui";
 import { CircleCheck, KeyRound, ShieldCheck } from "lucide-react";
 
 import "./SignInTwoFactor.css";
@@ -80,8 +80,12 @@ export function SignInTwoFactor() {
                             <span className="sign-in-two-factor__icon sign-in-two-factor__icon--done" aria-hidden="true">
                                 <CircleCheck size={22} />
                             </span>
-                            <h1 className="sign-in-two-factor__title">You're in</h1>
-                            <p className="sign-in-two-factor__lead">Taking you to your workspace…</p>
+                            <Text variant="heading" as="h1" className="sign-in-two-factor__title">
+                                You're in
+                            </Text>
+                            <Text variant="copy" className="sign-in-two-factor__lead">
+                                Taking you to your workspace…
+                            </Text>
                             <Spinner size="sm" label="" />
                         </div>
                     ) : (
@@ -89,12 +93,14 @@ export function SignInTwoFactor() {
                             <span className="sign-in-two-factor__icon" aria-hidden="true">
                                 {mode === "app" ? <ShieldCheck size={22} /> : <KeyRound size={22} />}
                             </span>
-                            <h1 className="sign-in-two-factor__title">{mode === "app" ? "Enter your code" : "Use a backup code"}</h1>
-                            <p className="sign-in-two-factor__lead">
+                            <Text variant="heading" as="h1" className="sign-in-two-factor__title">
+                                {mode === "app" ? "Enter your code" : "Use a backup code"}
+                            </Text>
+                            <Text variant="copy" className="sign-in-two-factor__lead">
                                 {mode === "app"
                                     ? "Open your authenticator app and enter the six-digit code for Acme."
                                     : "Enter one of the codes you saved when you turned on two-factor. Each one works once."}
-                            </p>
+                            </Text>
 
                             {mode === "app" ? (
                                 <div className="sign-in-two-factor__code" ref={otpRef}>
@@ -110,7 +116,12 @@ export function SignInTwoFactor() {
                                         disabled={status === "checking"}
                                         aria-label="Six-digit code"
                                     />
-                                    <p className="sign-in-two-factor__message" role={status === "wrong" ? "alert" : undefined} data-tone={status}>
+                                    <Text
+                                        variant="body"
+                                        tone={status === "wrong" ? "danger" : "muted"}
+                                        className="sign-in-two-factor__message"
+                                        role={status === "wrong" ? "alert" : undefined}
+                                    >
                                         {status === "checking" ? (
                                             <>
                                                 <Spinner size="sm" label="" /> Checking the code…
@@ -120,7 +131,7 @@ export function SignInTwoFactor() {
                                         ) : (
                                             "It's checked as soon as you type the last digit."
                                         )}
-                                    </p>
+                                    </Text>
                                 </div>
                             ) : (
                                 <div className="sign-in-two-factor__backup">
@@ -149,21 +160,17 @@ export function SignInTwoFactor() {
                                 Verify
                             </Button>
 
-                            <button
-                                type="button"
-                                className={cx(linkClassName({ variant: "muted" }), "sign-in-two-factor__switch")}
-                                onClick={() => setMode(mode === "app" ? "backup" : "app")}
-                            >
+                            <Button variant="ghost" size="sm" className="sign-in-two-factor__switch" onClick={() => setMode(mode === "app" ? "backup" : "app")}>
                                 {mode === "app" ? "Use a backup code instead" : "Use your authenticator app"}
-                            </button>
+                            </Button>
                         </form>
                     )}
                 </Card>
 
                 {status === "done" ? null : (
-                    <p className="sign-in-two-factor__foot">
+                    <Text variant="copy" align="center" className="sign-in-two-factor__foot">
                         Signing in as maya@example.com. <Link href="#">Not you?</Link>
-                    </p>
+                    </Text>
                 )}
             </div>
         </main>

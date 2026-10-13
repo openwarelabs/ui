@@ -1,4 +1,4 @@
-import { Badge, Button, Card, Link, SectionHeading } from "@openwarelabs/ui";
+import { Badge, Button, Card, Link, SectionHeading, Text } from "@openwarelabs/ui";
 import { ArrowRight, Building2, Check } from "lucide-react";
 
 import "./PricingPlans.css";
@@ -93,20 +93,24 @@ export function PricingPlans() {
                         >
                             <div className="pricing-plans__head">
                                 <div className="pricing-plans__name-row">
-                                    <h3 id={`pricing-plans-${plan.id}`} className="pricing-plans__name">
+                                    <Text variant="card-title" id={`pricing-plans-${plan.id}`}>
                                         {plan.name}
-                                    </h3>
+                                    </Text>
                                     {plan.recommended ? (
                                         <Badge size="sm" variant="active">
                                             Most teams pick this
                                         </Badge>
                                     ) : null}
                                 </div>
-                                <p className="pricing-plans__summary">{plan.summary}</p>
-                                <p className="pricing-plans__price">
-                                    <span className="pricing-plans__amount">{plan.price}</span>
-                                    <span className="pricing-plans__unit">{plan.unit}</span>
-                                </p>
+                                <Text variant="copy" className="pricing-plans__summary">
+                                    {plan.summary}
+                                </Text>
+                                <Text as="p" variant="body" tone="muted" className="pricing-plans__price">
+                                    <Text as="span" variant="section-title" tone="default" className="pricing-plans__amount">
+                                        {plan.price}
+                                    </Text>
+                                    {plan.unit}
+                                </Text>
                                 <Button
                                     variant={plan.recommended ? "primary" : "secondary"}
                                     shape="pill"
@@ -117,13 +121,15 @@ export function PricingPlans() {
                                 </Button>
                             </div>
                             <div className="pricing-plans__body">
-                                <p className="pricing-plans__lead">{plan.lead}</p>
+                                <Text as="p" variant="label">
+                                    {plan.lead}
+                                </Text>
                                 <ul className="pricing-plans__features">
                                     {plan.features.map((feature) => (
-                                        <li key={feature}>
+                                        <Text as="li" variant="body" tone="soft" key={feature}>
                                             <Check size={16} aria-hidden="true" />
                                             {feature}
-                                        </li>
+                                        </Text>
                                     ))}
                                 </ul>
                             </div>
@@ -135,16 +141,21 @@ export function PricingPlans() {
                     <span className="pricing-plans__enterprise-icon" aria-hidden="true">
                         <Building2 size={18} />
                     </span>
-                    <p className="pricing-plans__enterprise-text">
-                        <strong>Enterprise</strong> for over 200 people, self-hosted runners or data kept in the EU. We'll build the plan with you.
-                    </p>
+                    <Text variant="copy" className="pricing-plans__enterprise-text">
+                        <Text as="strong" variant="label" tone="default">
+                            Enterprise
+                        </Text>{" "}
+                        for over 200 people, self-hosted runners or data kept in the EU. We'll build the plan with you.
+                    </Text>
                     <Link href="#" variant="standalone" className="pricing-plans__enterprise-link">
                         Talk to us
                         <ArrowRight size={14} aria-hidden="true" />
                     </Link>
                 </div>
 
-                <p className="pricing-plans__note">Prices in euro, before VAT. Pay monthly by card, or yearly by card or invoice.</p>
+                <Text as="p" variant="caption" align="center" className="pricing-plans__note">
+                    Prices in euro, before VAT. Pay monthly by card, or yearly by card or invoice.
+                </Text>
             </div>
         </section>
     );

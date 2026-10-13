@@ -31,11 +31,13 @@
     list-style: none;
 }
 
+/* A Link drawn as a tile: no underline, square corners inside the card, and the muted logo colour. */
 .logos-grid__tile {
     position: relative;
     display: grid;
     height: 136px;
     place-items: center;
+    border-radius: 0;
     background: var(--ow-surface);
     color: var(--ow-text-muted);
     text-decoration: none;
@@ -44,6 +46,7 @@
 
 .logos-grid__tile:hover {
     background: var(--ow-surface-muted);
+    color: var(--ow-text-muted);
 }
 
 .logos-grid__tile:focus-visible {
@@ -81,9 +84,6 @@
     align-items: center;
     justify-content: center;
     gap: 4px;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-    font-weight: var(--ow-weight-control);
     opacity: 0;
     transform: translateY(4px);
     transition:
@@ -141,10 +141,7 @@
 }
 
 .logos-grid__footer {
-    margin: 28px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 14px;
-    text-align: center;
+    margin-top: 28px;
 }
 
 @media (max-width: 760px) {

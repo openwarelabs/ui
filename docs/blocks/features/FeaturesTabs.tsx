@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { Avatar, AvatarGroup, Badge, ProgressBar, SectionHeading, Spinner, Tab, TabList, TabPanel, Tabs } from "@openwarelabs/ui";
+import { Avatar, AvatarGroup, Badge, ProgressBar, SectionHeading, Spinner, Tab, TabList, TabPanel, Tabs, Text } from "@openwarelabs/ui";
 import { Bot, Check, FileCode, GitPullRequest, ListTodo, Rocket } from "lucide-react";
 
 import "./FeaturesTabs.css";
@@ -349,7 +349,9 @@ export function FeaturesTabs() {
                     </TabList>
                     {parts.map((part) => (
                         <TabPanel key={part.value} value={part.value} className="features-tabs__panel">
-                            <p className="features-tabs__caption">{part.caption}</p>
+                            <Text variant="copy" align="center" className="features-tabs__caption">
+                                {part.caption}
+                            </Text>
                             <Frame path={part.path} label={part.shotLabel}>
                                 {part.screen}
                             </Frame>

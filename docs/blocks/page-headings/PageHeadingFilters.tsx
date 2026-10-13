@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Avatar, Badge, Button, EmptyState, Menu, MenuItem, SearchField, Tag, VisuallyHidden, toast, type BadgeVariant } from "@openwarelabs/ui";
+import { Avatar, Badge, Button, EmptyState, Menu, MenuItem, SearchField, Tag, Text, VisuallyHidden, toast, type BadgeVariant } from "@openwarelabs/ui";
 import { Bot, Check, ChevronDown, GitPullRequest, MessageSquare, SearchX } from "lucide-react";
 
 import "./PageHeadingFilters.css";
@@ -88,8 +88,12 @@ export function PageHeadingFilters() {
                 <div className="page-heading-filters__top">
                     <div className="page-heading-filters__header">
                         <div>
-                            <h1 className="page-heading-filters__title">Reviews</h1>
-                            <p className="page-heading-filters__lead">Changes from your team and its agents, waiting for someone to look at them.</p>
+                            <Text as="h1" variant="heading">
+                                Reviews
+                            </Text>
+                            <Text variant="copy" className="page-heading-filters__lead">
+                                Changes from your team and its agents, waiting for someone to look at them.
+                            </Text>
                         </div>
                         <Button
                             variant="primary"
@@ -161,9 +165,9 @@ export function PageHeadingFilters() {
                                 Clear filters
                             </Button>
                         ) : null}
-                        <span className="page-heading-filters__count" aria-live="polite">
+                        <Text variant="caption" className="page-heading-filters__count" aria-live="polite">
                             {shown.length} of {reviews.length} reviews
-                        </span>
+                        </Text>
                     </div>
                 </div>
 
@@ -179,20 +183,24 @@ export function PageHeadingFilters() {
                                     <Avatar name={review.author} />
                                 )}
                                 <span className="page-heading-filters__row-text">
-                                    <span className="page-heading-filters__row-title">{review.title}</span>
-                                    <span className="page-heading-filters__row-meta">
-                                        <span className="page-heading-filters__number">#{review.number}</span> · {review.project} ·{" "}
-                                        {review.agent ? `Agent for ${review.author}` : review.author} · {review.updated}
-                                    </span>
+                                    <Text as="span" className="page-heading-filters__row-line">
+                                        {review.title}
+                                    </Text>
+                                    <Text variant="caption" className="page-heading-filters__row-line">
+                                        <Text as="span" variant="code" className="page-heading-filters__number">
+                                            #{review.number}
+                                        </Text>{" "}
+                                        · {review.project} · {review.agent ? `Agent for ${review.author}` : review.author} · {review.updated}
+                                    </Text>
                                 </span>
                                 <Badge size="sm" variant={tone[review.status]}>
                                     {review.status}
                                 </Badge>
-                                <span className="page-heading-filters__comments" data-none={review.comments ? undefined : ""}>
+                                <Text variant="caption" className="page-heading-filters__comments" data-none={review.comments ? undefined : ""}>
                                     <MessageSquare size={14} aria-hidden="true" />
                                     {review.comments}
                                     <VisuallyHidden> comments</VisuallyHidden>
-                                </span>
+                                </Text>
                             </li>
                         ))}
                     </ul>

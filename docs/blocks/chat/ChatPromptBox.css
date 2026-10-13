@@ -18,23 +18,9 @@
     margin: 0 auto;
 }
 
-.chat-prompt-box__title {
-    margin: 0;
-    font-size: 26px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.025em;
-    text-align: center;
-    text-wrap: balance;
-}
-
 .chat-prompt-box__lead {
     max-width: 480px;
     margin: 8px auto 0;
-    color: var(--ow-text-muted);
-    line-height: 1.55;
-    text-align: center;
-    text-wrap: balance;
 }
 
 .chat-prompt-box__box {
@@ -92,12 +78,6 @@
     padding: 2px 0;
 }
 
-.chat-prompt-box__model-description {
-    color: var(--ow-text-muted);
-    font-size: 12px;
-    font-weight: var(--ow-weight-regular);
-}
-
 .chat-prompt-box__check-space {
     display: block;
     width: 15px;
@@ -106,8 +86,6 @@
 .chat-prompt-box__hint {
     margin-left: auto;
     padding-right: 6px;
-    color: var(--ow-text-muted);
-    font-size: 12px;
 }
 
 .chat-prompt-box__suggestions {
@@ -118,44 +96,18 @@
     margin-top: 20px;
 }
 
-.chat-prompt-box__suggestion {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--ow-space-sm);
-    border: 1px solid var(--ow-border);
-    border-radius: var(--ow-radius-pill);
-    background: var(--ow-surface);
-    padding: 7px 14px 7px 11px;
-    color: var(--ow-text-soft);
-    font: inherit;
-    font-size: 13px;
-    cursor: pointer;
-    transition:
-        border-color var(--ow-duration-base) var(--ow-ease-standard),
-        color var(--ow-duration-base) var(--ow-ease-standard);
-}
-
-.chat-prompt-box__suggestion:hover {
-    border-color: var(--ow-border-strong);
-    color: var(--ow-text);
-}
-
-.chat-prompt-box__suggestion:focus-visible {
-    outline: 2px solid var(--ow-focus-ring);
-    outline-offset: 2px;
+/* Suggestions stay quiet beside the prompt box: regular weight rather than a button's heavy label. */
+.chat-prompt-box__suggestion.ow-button {
+    font-weight: var(--ow-weight-regular);
 }
 
 .chat-prompt-box__suggestion svg {
-    flex-shrink: 0;
     color: var(--ow-icon);
 }
 
 @media (max-width: 760px) {
     .chat-prompt-box {
         padding: 48px var(--ow-page-gutter) 56px;
-    }
-    .chat-prompt-box__title {
-        font-size: 24px;
     }
     .chat-prompt-box__box {
         margin-top: 24px;
@@ -169,5 +121,8 @@
     .chat-prompt-box__suggestions {
         flex-direction: column;
         align-items: stretch;
+    }
+    .chat-prompt-box__suggestion.ow-button {
+        justify-content: flex-start;
     }
 }

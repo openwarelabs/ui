@@ -1,6 +1,6 @@
 import { useId, useState, type FormEvent, type ReactNode } from "react";
 
-import { Button, Card, Checkbox, Field, Input, NumberField, Radio, RadioGroup, Select, toast } from "@openwarelabs/ui";
+import { Button, Card, Checkbox, Field, Input, NumberField, Radio, RadioGroup, Select, Text, toast } from "@openwarelabs/ui";
 
 import "./FormSections.css";
 
@@ -73,10 +73,12 @@ function Section({ id, title, description, children }: { id: string; title: stri
     return (
         <section className="form-sections__section" aria-labelledby={id}>
             <div className="form-sections__intro">
-                <h2 id={id} className="form-sections__section-title">
+                <Text variant="card-title" as="h2" id={id}>
                     {title}
-                </h2>
-                <p className="form-sections__section-text">{description}</p>
+                </Text>
+                <Text variant="copy" className="form-sections__section-text">
+                    {description}
+                </Text>
             </div>
             <Card padding="none" className="form-sections__card">
                 {children}
@@ -128,12 +130,12 @@ export function FormSections() {
         <div className="form-sections">
             <form className="form-sections__inner" noValidate onSubmit={submit} aria-labelledby={fieldId("title")}>
                 <header className="form-sections__header">
-                    <h1 id={fieldId("title")} className="form-sections__title">
+                    <Text variant="heading" as="h1" id={fieldId("title")}>
                         Workspace
-                    </h1>
-                    <p className="form-sections__lead">
+                    </Text>
+                    <Text variant="copy" className="form-sections__lead">
                         What everyone in {lastSaved.name} sees, where the invoices go, and how far agents can go on their own.
-                    </p>
+                    </Text>
                 </header>
 
                 <Section id={fieldId("general")} title="General" description="How the workspace appears to your team, in emails and in every link to it.">
@@ -219,9 +221,9 @@ export function FormSections() {
                 </Section>
 
                 <div className="form-sections__actions">
-                    <p className="form-sections__status" aria-live="polite">
+                    <Text variant="caption" as="p" className="form-sections__status" aria-live="polite">
                         {dirty ? "You have unsaved changes." : "Everything is saved."}
-                    </p>
+                    </Text>
                     <Button type="button" disabled={!dirty || saving} onClick={discard}>
                         Discard
                     </Button>

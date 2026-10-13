@@ -16,17 +16,6 @@
     margin: 0 auto;
 }
 
-/* A small heading: the logos are the point. */
-.logos-row__title {
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 14px;
-    font-weight: var(--ow-weight-control);
-    line-height: 1.5;
-    text-align: center;
-    text-wrap: balance;
-}
-
 .logos-row__list {
     display: flex;
     max-width: 1040px;

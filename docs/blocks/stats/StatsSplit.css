@@ -28,7 +28,6 @@
 
 .stats-split__link {
     margin-top: 28px;
-    font-size: 14.5px;
 }
 
 .stats-split__grid {
@@ -46,36 +45,26 @@
     padding-top: 24px;
 }
 
+/* A figure, not a title: no extra leading, and digits of one width. */
 .stats-split__value {
     order: -1;
-    margin: 0;
-    font-size: 52px;
-    font-weight: 500;
     font-variant-numeric: tabular-nums;
     line-height: 1;
-    letter-spacing: -0.045em;
     white-space: nowrap;
 }
 
+/* The unit is just under half the figure's size, whatever size the figure is. */
 .stats-split__unit {
     margin-left: 0.08em;
-    color: var(--ow-text-muted);
     font-size: 0.46em;
-    letter-spacing: -0.02em;
 }
 
 .stats-split__label {
     margin-top: 16px;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
 }
 
 .stats-split__detail {
-    margin: 6px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 14px;
-    line-height: 1.5;
-    text-wrap: pretty;
+    margin-top: 6px;
 }
 
 /* The first number carries a brass tick on its hairline. */
@@ -110,14 +99,7 @@
     .stats-split__grid {
         gap: 36px 20px;
     }
-    .stats-split__value {
-        font-size: 38px;
-    }
     .stats-split__label {
         margin-top: 12px;
-        font-size: 14px;
-    }
-    .stats-split__detail {
-        font-size: 13px;
     }
 }

@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 
-import { Button, Checkbox, CheckboxGroup, Field, Input, Radio, RadioGroup, Select, Steps, Textarea, toast } from "@openwarelabs/ui";
+import { Button, Checkbox, CheckboxGroup, Field, Input, Radio, RadioGroup, Select, Steps, Text, Textarea, toast } from "@openwarelabs/ui";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 
 import "./FormSteps.css";
@@ -90,7 +90,6 @@ export function FormSteps() {
     const [values, setValues] = useState<Values>(emptyValues);
     const [errors, setErrors] = useState<Errors>({});
     const [saving, setSaving] = useState(false);
-    const headingRef = useRef<HTMLHeadingElement>(null);
     const shownStep = useRef(step);
 
     const fieldId = (name: string) => `${id}-${name}`;
@@ -101,7 +100,7 @@ export function FormSteps() {
     useEffect(() => {
         if (shownStep.current === step) return;
         shownStep.current = step;
-        headingRef.current?.focus();
+        document.getElementById(fieldId("step"))?.focus();
     }, [step]);
 
     function update<K extends keyof Values>(key: K, value: Values[K]) {
@@ -145,20 +144,22 @@ export function FormSteps() {
         <div className="form-steps">
             <form className="form-steps__card" noValidate onSubmit={submit} aria-labelledby={fieldId("title")}>
                 <header className="form-steps__header">
-                    <h1 id={fieldId("title")} className="form-steps__title">
+                    <Text variant="heading" as="h1" id={fieldId("title")}>
                         Create a team
-                    </h1>
-                    <p className="form-steps__lead">A team shares projects, a review queue and its own agents.</p>
+                    </Text>
+                    <Text variant="copy" className="form-steps__lead">
+                        A team shares projects, a review queue and its own agents.
+                    </Text>
                     <Steps items={steps} current={step} orientation="horizontal" label="Progress" className="form-steps__progress" />
                 </header>
 
                 <div className="form-steps__body">
-                    <h2 ref={headingRef} tabIndex={-1} className="form-steps__step-title">
-                        <span className="form-steps__step-count">
+                    <Text variant="card-title" as="h2" id={fieldId("step")} tabIndex={-1} className="form-steps__step-title">
+                        <Text variant="caption">
                             Step {step + 1} of {steps.length}
-                        </span>
+                        </Text>
                         {steps[step]?.heading}
-                    </h2>
+                    </Text>
 
                     {step === 0 ? (
                         <div className="form-steps__fields">
@@ -268,8 +269,12 @@ export function FormSteps() {
                                 { label: "Agents", value: agentMode?.label, step: 2 },
                             ].map((row) => (
                                 <div key={row.label} className="form-steps__review-row">
-                                    <dt className="form-steps__review-label">{row.label}</dt>
-                                    <dd className="form-steps__review-value">{row.value}</dd>
+                                    <Text as="dt" variant="caption" className="form-steps__review-label">
+                                        {row.label}
+                                    </Text>
+                                    <Text as="dd" className="form-steps__review-value">
+                                        {row.value}
+                                    </Text>
                                     <dd className="form-steps__review-edit">
                                         <Button
                                             type="button"

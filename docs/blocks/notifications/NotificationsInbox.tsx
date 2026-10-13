@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 
-import { Avatar, Badge, Button, Link, Popover, ScrollShadow, Tab, TabList, TabPanel, Tabs, type BadgeVariant } from "@openwarelabs/ui";
+import { Avatar, Badge, Button, Link, NavItem, NavList, Popover, ScrollShadow, Tab, TabList, TabPanel, Tabs, Text, type BadgeVariant } from "@openwarelabs/ui";
 import { Bell, Bot, CheckCheck, Rocket, Settings } from "lucide-react";
 
 import "./NotificationsInbox.css";
@@ -19,13 +19,20 @@ interface Notification {
     unread?: boolean;
 }
 
+/** A name or a title inside a notification, in the text colour against the muted line. */
+const Strong = ({ children }: { children: ReactNode }) => (
+    <Text as="strong" variant="label" tone="default">
+        {children}
+    </Text>
+);
+
 const initial: Notification[] = [
     {
         id: "n1",
         from: "Clara Novak",
         what: (
             <>
-                <strong>Clara Novak</strong> mentioned you in <strong>Fix invoice dates in the EU</strong>
+                <Strong>Clara Novak</Strong> mentioned you in <Strong>Fix invoice dates in the EU</Strong>
             </>
         ),
         summary: "Clara Novak mentioned you in Fix invoice dates in the EU",
@@ -40,7 +47,7 @@ const initial: Notification[] = [
         from: "agent",
         what: (
             <>
-                <strong>Agent</strong> opened <strong>#482 Add VAT to EU invoices</strong> for your review
+                <Strong>Agent</Strong> opened <Strong>#482 Add VAT to EU invoices</Strong> for your review
             </>
         ),
         summary: "Agent opened #482 Add VAT to EU invoices for your review",
@@ -53,7 +60,7 @@ const initial: Notification[] = [
         from: "deploy",
         what: (
             <>
-                <strong>Deploy failed</strong> on <strong>main</strong>: tests failed in checkout.spec.ts
+                <Strong>Deploy failed</Strong> on <Strong>main</Strong>: tests failed in checkout.spec.ts
             </>
         ),
         summary: "Deploy failed on main: tests failed in checkout.spec.ts",
@@ -66,7 +73,7 @@ const initial: Notification[] = [
         from: "Tomás Reyes",
         what: (
             <>
-                <strong>Tomás Reyes</strong> approved <strong>Pricing page copy</strong>
+                <Strong>Tomás Reyes</Strong> approved <Strong>Pricing page copy</Strong>
             </>
         ),
         summary: "Tomás Reyes approved Pricing page copy",
@@ -78,7 +85,7 @@ const initial: Notification[] = [
         from: "Jonas Berg",
         what: (
             <>
-                <strong>Jonas Berg</strong> mentioned you in <strong>Release 2.4</strong>
+                <Strong>Jonas Berg</Strong> mentioned you in <Strong>Release 2.4</Strong>
             </>
         ),
         summary: "Jonas Berg mentioned you in Release 2.4",
@@ -92,7 +99,7 @@ const initial: Notification[] = [
         from: "Aiko Tanaka",
         what: (
             <>
-                <strong>Aiko Tanaka</strong> added Sam Okafor to <strong>design-system</strong>
+                <Strong>Aiko Tanaka</Strong> added Sam Okafor to <Strong>design-system</Strong>
             </>
         ),
         summary: "Aiko Tanaka added Sam Okafor to design-system",
@@ -128,15 +135,22 @@ function Sender({ from }: { from: string }) {
 }
 
 function NotificationList({ items, onOpen }: { items: Notification[]; onOpen: (id: string) => void }) {
-    if (!items.length) return <p className="notifications-inbox__empty">Nothing here yet.</p>;
+    if (!items.length) {
+        return (
+            <Text tone="muted" align="center" className="notifications-inbox__empty">
+                Nothing here yet.
+            </Text>
+        );
+    }
     return (
         <ScrollShadow maxSize={320}>
             <ul className="notifications-inbox__list">
                 {items.map((item) => (
                     <li key={item.id}>
                         {/* Each one opens the thing it's about; opening it marks it read. */}
-                        <a
+                        <Link
                             href="#"
+                            variant="standalone"
                             className="notifications-inbox__item"
                             aria-label={`${item.unread ? "Unread: " : ""}${item.summary}, ${item.where}, ${item.when}`}
                             onClick={(event) => {
@@ -146,14 +160,20 @@ function NotificationList({ items, onOpen }: { items: Notification[]; onOpen: (i
                         >
                             <Sender from={item.from} />
                             <span className="notifications-inbox__text">
-                                <span className="notifications-inbox__what">{item.what}</span>
-                                {item.quote ? <span className="notifications-inbox__quote">{item.quote}</span> : null}
-                                <span className="notifications-inbox__meta">
+                                <Text as="span" tone="muted">
+                                    {item.what}
+                                </Text>
+                                {item.quote ? (
+                                    <Text variant="caption" tone="soft" className="notifications-inbox__quote">
+                                        {item.quote}
+                                    </Text>
+                                ) : null}
+                                <Text variant="caption">
                                     {item.where} · {item.when}
-                                </span>
+                                </Text>
                             </span>
                             {item.unread ? <span className="notifications-inbox__unread" /> : null}
-                        </a>
+                        </Link>
                     </li>
                 ))}
             </ul>
@@ -177,17 +197,17 @@ export function NotificationsInbox() {
     return (
         <div className="notifications-inbox">
             <header className="notifications-inbox__bar">
-                <span className="notifications-inbox__brand">
+                <Text variant="card-title" as="span" className="notifications-inbox__brand">
                     <span className="notifications-inbox__mark" aria-hidden="true" />
                     Acme
-                </span>
-                <nav className="notifications-inbox__nav" aria-label="Main">
+                </Text>
+                <NavList label="Main" orientation="horizontal" className="notifications-inbox__nav">
                     {["Projects", "Reviews", "Deploys", "Agents"].map((item) => (
-                        <a key={item} href="#" className="notifications-inbox__nav-item" aria-current={item === "Deploys" ? "page" : undefined}>
+                        <NavItem key={item} href="#" active={item === "Deploys"}>
                             {item}
-                        </a>
+                        </NavItem>
                     ))}
-                </nav>
+                </NavList>
 
                 <Popover
                     defaultOpen
@@ -214,7 +234,9 @@ export function NotificationsInbox() {
                     }
                 >
                     <div className="notifications-inbox__head">
-                        <h2 className="notifications-inbox__title">Notifications</h2>
+                        <Text variant="card-title" as="h2">
+                            Notifications
+                        </Text>
                         <Button variant="ghost" size="sm" startIcon={<CheckCheck size={16} />} disabled={!unread} onClick={markAllRead}>
                             Mark all as read
                         </Button>
@@ -224,11 +246,19 @@ export function NotificationsInbox() {
                         <TabList aria-label="Show">
                             <Tab value="all">
                                 All
-                                {unread ? <span className="notifications-inbox__tab-count">{unread}</span> : null}
+                                {unread ? (
+                                    <Badge size="sm" className="notifications-inbox__tab-count">
+                                        {unread}
+                                    </Badge>
+                                ) : null}
                             </Tab>
                             <Tab value="mentions">
                                 Mentions
-                                {unreadMentions ? <span className="notifications-inbox__tab-count">{unreadMentions}</span> : null}
+                                {unreadMentions ? (
+                                    <Badge size="sm" className="notifications-inbox__tab-count">
+                                        {unreadMentions}
+                                    </Badge>
+                                ) : null}
                             </Tab>
                         </TabList>
                         <TabPanel value="all">
@@ -253,14 +283,20 @@ export function NotificationsInbox() {
 
             <main className="notifications-inbox__panel">
                 <div>
-                    <h1 className="notifications-inbox__page-title">Deploys</h1>
-                    <p className="notifications-inbox__page-subtitle">Every deploy across your projects, newest first.</p>
+                    <Text variant="heading" as="h1">
+                        Deploys
+                    </Text>
+                    <Text variant="copy" className="notifications-inbox__page-subtitle">
+                        Every deploy across your projects, newest first.
+                    </Text>
                 </div>
                 <ul className="notifications-inbox__deploys">
                     {deploys.map((deploy) => (
                         <li key={deploy.project} className="notifications-inbox__deploy">
-                            <span className="notifications-inbox__project">{deploy.project}</span>
-                            <span className="notifications-inbox__branch">{deploy.branch}</span>
+                            <Text variant="label">{deploy.project}</Text>
+                            <Text variant="code" tone="muted" className="notifications-inbox__branch">
+                                {deploy.branch}
+                            </Text>
                             <Badge size="sm" variant={deploy.tone}>
                                 {deploy.status}
                             </Badge>

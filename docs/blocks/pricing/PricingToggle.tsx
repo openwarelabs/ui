@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Badge, Button, SectionHeading, SegmentedControl, VisuallyHidden } from "@openwarelabs/ui";
+import { Badge, Button, SectionHeading, SegmentedControl, Text, VisuallyHidden } from "@openwarelabs/ui";
 import { Check } from "lucide-react";
 
 import "./PricingToggle.css";
@@ -57,25 +57,43 @@ const plans: Plan[] = [
 // Paying yearly costs ten months: two months free.
 const yearlyMonths = 10;
 
+/** The big figure, with a muted unit beside it. */
+function Figure({ amount, unit, text = false }: { amount: string; unit?: string; text?: boolean }) {
+    return (
+        <Text as="p" variant="body" tone="muted" className="pricing-toggle__figure">
+            {/* The key restarts the fade when the amount changes. */}
+            <Text
+                as="span"
+                variant="section-title"
+                tone="default"
+                key={amount}
+                className={text ? "pricing-toggle__amount pricing-toggle__amount--text" : "pricing-toggle__amount"}
+            >
+                {amount}
+            </Text>
+            {unit}
+        </Text>
+    );
+}
+
 function Price({ plan, period }: { plan: Plan; period: Period }) {
     if (plan.monthly === null) {
         return (
             <div className="pricing-toggle__price">
-                <p className="pricing-toggle__figure">
-                    <span className="pricing-toggle__amount pricing-toggle__amount--text">Custom</span>
-                </p>
-                <p className="pricing-toggle__billing">Volume pricing, paid by invoice</p>
+                <Figure amount="Custom" text />
+                <Text as="p" variant="caption" className="pricing-toggle__billing">
+                    Volume pricing, paid by invoice
+                </Text>
             </div>
         );
     }
     if (plan.monthly === 0) {
         return (
             <div className="pricing-toggle__price">
-                <p className="pricing-toggle__figure">
-                    <span className="pricing-toggle__amount">€0</span>
-                    <span className="pricing-toggle__unit">for up to 5 people</span>
-                </p>
-                <p className="pricing-toggle__billing">Free for good, no card needed</p>
+                <Figure amount="€0" unit="for up to 5 people" />
+                <Text as="p" variant="caption" className="pricing-toggle__billing">
+                    Free for good, no card needed
+                </Text>
             </div>
         );
     }
@@ -83,22 +101,19 @@ function Price({ plan, period }: { plan: Plan; period: Period }) {
     const perYear = plan.monthly * yearlyMonths;
     return (
         <div className="pricing-toggle__price">
-            <p className="pricing-toggle__figure">
-                {/* The key restarts the fade when the period changes. */}
-                <span key={period} className="pricing-toggle__amount">
-                    €{perMonth}
-                </span>
-                <span className="pricing-toggle__unit">a person a month</span>
-            </p>
-            <p className="pricing-toggle__billing">
+            <Figure amount={`€${perMonth}`} unit="a person a month" />
+            <Text as="p" variant="caption" className="pricing-toggle__billing">
                 {period === "yearly" ? (
                     <>
-                        €{perYear} billed yearly · <span className="pricing-toggle__saving">save €{plan.monthly * 2}</span>
+                        €{perYear} billed yearly ·{" "}
+                        <Text variant="caption" tone="success">
+                            save €{plan.monthly * 2}
+                        </Text>
                     </>
                 ) : (
                     "Billed monthly, cancel any time"
                 )}
-            </p>
+            </Text>
         </div>
     );
 }
@@ -125,7 +140,9 @@ export function PricingToggle() {
                                 { value: "yearly", label: "Yearly" },
                             ]}
                         />
-                        <p className="pricing-toggle__switch-note">Pay yearly and get two months free.</p>
+                        <Text as="p" variant="caption">
+                            Pay yearly and get two months free.
+                        </Text>
                     </div>
                 </div>
 
@@ -135,31 +152,35 @@ export function PricingToggle() {
                     {plans.map((plan) => (
                         <div key={plan.id} className="pricing-toggle__plan" data-popular={plan.popular || undefined}>
                             <div className="pricing-toggle__name-row">
-                                <h3 className="pricing-toggle__name">{plan.name}</h3>
+                                <Text variant="card-title">{plan.name}</Text>
                                 {plan.popular ? (
                                     <Badge size="sm" variant="active">
                                         Popular
                                     </Badge>
                                 ) : null}
                             </div>
-                            <p className="pricing-toggle__summary">{plan.summary}</p>
+                            <Text variant="copy" className="pricing-toggle__summary">
+                                {plan.summary}
+                            </Text>
                             <Price plan={plan} period={period} />
                             <Button variant={plan.popular ? "primary" : "secondary"} shape="pill" fullWidth>
                                 {plan.action}
                             </Button>
                             <ul className="pricing-toggle__features" aria-label={`${plan.name} includes`}>
                                 {plan.features.map((feature) => (
-                                    <li key={feature}>
+                                    <Text as="li" variant="body" tone="soft" key={feature}>
                                         <Check size={16} aria-hidden="true" />
                                         {feature}
-                                    </li>
+                                    </Text>
                                 ))}
                             </ul>
                         </div>
                     ))}
                 </div>
 
-                <p className="pricing-toggle__note">Prices in euro, before VAT. Yearly plans can add people at any time; we bill them for the months left.</p>
+                <Text as="p" variant="caption" align="center" className="pricing-toggle__note">
+                    Prices in euro, before VAT. Yearly plans can add people at any time; we bill them for the months left.
+                </Text>
             </div>
         </section>
     );

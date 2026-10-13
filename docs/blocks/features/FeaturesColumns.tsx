@@ -1,4 +1,4 @@
-import { Link, SectionHeading } from "@openwarelabs/ui";
+import { Link, SectionHeading, Text } from "@openwarelabs/ui";
 import { Bot, Command, GitPullRequest, ListTodo, Rocket, ShieldCheck } from "lucide-react";
 
 import "./FeaturesColumns.css";
@@ -53,15 +53,19 @@ export function FeaturesColumns() {
                             <span className="features-columns__icon" aria-hidden="true">
                                 <Icon size={16} />
                             </span>
-                            <h3 className="features-columns__title">{title}</h3>
-                            <p className="features-columns__text">{text}</p>
+                            <Text variant="card-title" className="features-columns__title">
+                                {title}
+                            </Text>
+                            <Text variant="copy" className="features-columns__text">
+                                {text}
+                            </Text>
                         </li>
                     ))}
                 </ul>
 
-                <p className="features-columns__more">
+                <Text variant="copy" align="center" className="features-columns__more">
                     Plus webhooks, a command-line tool and a public API. <Link href="#">Read the docs</Link>
-                </p>
+                </Text>
             </div>
         </section>
     );

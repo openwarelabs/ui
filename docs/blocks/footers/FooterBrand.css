@@ -29,19 +29,6 @@
     max-width: 440px;
 }
 
-.footer-brand__line {
-    margin: 0;
-    font-size: 28px;
-    font-weight: 500;
-    line-height: 1.2;
-    letter-spacing: -0.03em;
-    text-wrap: balance;
-}
-
-.footer-brand__line span {
-    color: var(--ow-text-muted);
-}
-
 .footer-brand__pitch .ow-button {
     margin-top: 28px;
 }
@@ -53,9 +40,7 @@
 }
 
 .footer-brand__heading {
-    margin: 0 0 16px;
-    font-size: 13px;
-    font-weight: var(--ow-weight-emphasis);
+    margin-bottom: 16px;
 }
 
 .footer-brand__list {
@@ -64,9 +49,9 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    font-size: 14px;
 }
 
+/* Footer links sit back: muted and in the regular weight, ink on hover. */
 .footer-brand__list .ow-link {
     color: var(--ow-text-muted);
     font-weight: var(--ow-weight-regular);
@@ -83,15 +68,9 @@
     justify-content: space-between;
     gap: 8px 24px;
     margin-top: 72px;
-    color: var(--ow-text-muted);
-    font-size: 13px;
 }
 
-.footer-brand__legal p {
-    margin: 0;
-}
-
-.footer-brand__legal ul {
+.footer-brand__legal-links {
     display: flex;
     flex-wrap: wrap;
     gap: 6px 20px;
@@ -141,9 +120,6 @@
 @media (max-width: 760px) {
     .footer-brand {
         padding: 56px var(--ow-page-gutter) 0;
-    }
-    .footer-brand__line {
-        font-size: 24px;
     }
     .footer-brand__columns {
         grid-template-columns: repeat(2, minmax(0, 1fr));

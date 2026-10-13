@@ -50,35 +50,17 @@
     background: var(--ow-brass);
 }
 
-.pricing-usage__tier-range {
-    color: var(--ow-text-soft);
-    font-size: 15px;
-}
-
-.pricing-usage__tier[data-current] .pricing-usage__tier-range {
-    color: var(--ow-text);
-    font-weight: var(--ow-weight-control);
-}
-
+/* Prices in a column: digits of one width. */
 .pricing-usage__tier-price {
-    color: var(--ow-text);
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
     font-variant-numeric: tabular-nums;
 }
 
-.pricing-usage__tier-price small {
+.pricing-usage__tier-unit {
     margin-left: 4px;
-    color: var(--ow-text-muted);
-    font-size: 13px;
-    font-weight: var(--ow-weight-regular);
 }
 
 .pricing-usage__aside {
-    margin: 20px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 13.5px;
-    line-height: 1.55;
+    margin-top: 20px;
 }
 
 .pricing-usage__card {
@@ -86,35 +68,18 @@
     padding: 28px;
 }
 
-.pricing-usage__card-title {
-    margin: 0;
-    font-size: 17px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.01em;
-}
-
 .pricing-usage__card-intro {
-    margin: 6px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 14px;
-    line-height: 1.5;
+    margin-top: 6px;
 }
 
+/* The figure changes as the slider moves: digits of one width keep it from jittering. */
 .pricing-usage__runs {
     margin: 28px 0 16px;
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: -0.03em;
     font-variant-numeric: tabular-nums;
 }
 
-.pricing-usage__runs small {
+.pricing-usage__runs-unit {
     margin-left: 4px;
-    color: var(--ow-text-muted);
-    font-size: 14px;
-    font-weight: var(--ow-weight-regular);
-    letter-spacing: 0;
 }
 
 .pricing-usage__scale {
@@ -145,11 +110,10 @@
     justify-content: space-between;
     gap: 16px;
     padding: 6px 0;
-    color: var(--ow-text-soft);
-    font-size: 14px;
     font-variant-numeric: tabular-nums;
 }
 
+/* Bands the estimate doesn't reach fade back; Text has no tone for disabled text. */
 .pricing-usage__line[data-idle] {
     color: var(--ow-text-disabled);
 }
@@ -165,27 +129,14 @@
     padding-top: 18px;
 }
 
-.pricing-usage__total-label {
-    margin: 0;
-    color: var(--ow-text);
-    font-size: 14px;
-    font-weight: var(--ow-weight-emphasis);
-}
-
-.pricing-usage__total-label small {
+.pricing-usage__total-note {
     display: block;
     margin-top: 2px;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-    font-weight: var(--ow-weight-regular);
 }
 
+/* A price, not a title: no extra leading above the figure, and digits of one width as it changes. */
 .pricing-usage__total-amount {
-    margin: 0;
-    font-size: 40px;
-    font-weight: 500;
     line-height: 1;
-    letter-spacing: -0.04em;
     font-variant-numeric: tabular-nums;
 }
 
@@ -194,11 +145,7 @@
 }
 
 .pricing-usage__fine {
-    margin: 14px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-    line-height: 1.5;
-    text-align: center;
+    margin-top: 14px;
     text-wrap: balance;
 }
 
@@ -218,8 +165,5 @@
     }
     .pricing-usage__card {
         padding: 22px 18px;
-    }
-    .pricing-usage__total-amount {
-        font-size: 36px;
     }
 }

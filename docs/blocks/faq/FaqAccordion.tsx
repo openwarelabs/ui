@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem, Link, SectionHeading } from "@openwarelabs/ui";
+import { Accordion, AccordionItem, Link, SectionHeading, Text } from "@openwarelabs/ui";
 
 import "./FaqAccordion.css";
 
@@ -49,15 +49,17 @@ export function FaqAccordion() {
                 <Accordion className="faq-accordion__list" defaultValue={["runs"]}>
                     {questions.map((item) => (
                         <AccordionItem key={item.id} value={item.id} title={item.question}>
-                            <p>{item.answer}</p>
+                            <Text variant="copy" className="faq-accordion__answer">
+                                {item.answer}
+                            </Text>
                         </AccordionItem>
                     ))}
                 </Accordion>
 
-                <p className="faq-accordion__more">
+                <Text variant="body" tone="muted" align="center" className="faq-accordion__more">
                     Didn't find your question? <Link href="#">Read the docs</Link> or write to{" "}
                     <Link href="mailto:support@example.com">support@example.com</Link>.
-                </p>
+                </Text>
             </div>
         </section>
     );

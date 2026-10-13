@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Link, SegmentedControl, Separator } from "@openwarelabs/ui";
+import { Link, SegmentedControl, Separator, Text } from "@openwarelabs/ui";
 import { Monitor, Moon, Sun } from "lucide-react";
 
 import "./FooterColumns.css";
@@ -46,11 +46,13 @@ export function FooterColumns() {
             <div className="footer-columns__inner">
                 <div className="footer-columns__top">
                     <div className="footer-columns__brand">
-                        <a className="footer-columns__logo" href="#" aria-label="Acme home">
+                        <Link href="#" variant="standalone" className="footer-columns__logo" aria-label="Acme home">
                             <span className="footer-columns__mark" aria-hidden="true" />
-                            Acme
-                        </a>
-                        <p className="footer-columns__line">The workspace where software teams plan the work, hand the routine parts to agents, and ship.</p>
+                            <Text variant="dialog-title" as="span">
+                                Acme
+                            </Text>
+                        </Link>
+                        <Text variant="copy">The workspace where software teams plan the work, hand the routine parts to agents, and ship.</Text>
                         <Link href="#" variant="standalone" className="footer-columns__status">
                             <span className="footer-columns__status-dot" aria-hidden="true" />
                             All systems normal
@@ -59,16 +61,20 @@ export function FooterColumns() {
 
                     {columns.map((column) => (
                         <nav key={column.title} aria-labelledby={`footer-columns-${column.title.toLowerCase()}`}>
-                            <h2 id={`footer-columns-${column.title.toLowerCase()}`} className="footer-columns__heading">
+                            <Text variant="label" as="h2" id={`footer-columns-${column.title.toLowerCase()}`} className="footer-columns__heading">
                                 {column.title}
-                            </h2>
+                            </Text>
                             <ul className="footer-columns__links">
                                 {column.links.map((link) => (
                                     <li key={link}>
                                         <Link href="#" variant="standalone">
                                             {link}
                                         </Link>
-                                        {link === "Agents" ? <span className="footer-columns__new">New</span> : null}
+                                        {link === "Agents" ? (
+                                            <Text variant="badge" className="footer-columns__new">
+                                                New
+                                            </Text>
+                                        ) : null}
                                     </li>
                                 ))}
                             </ul>
@@ -79,14 +85,16 @@ export function FooterColumns() {
                 <Separator />
 
                 <div className="footer-columns__bottom">
-                    <p className="footer-columns__legal">
+                    <Text variant="caption" as="p" className="footer-columns__legal">
                         <span>© 2026 Acme Ltd. Registered in Ireland, no. 712345.</span>
                         <Link href="#" variant="muted">
                             Cookie settings
                         </Link>
-                    </p>
+                    </Text>
                     <div className="footer-columns__theme">
-                        <span id="footer-columns-theme">Theme</span>
+                        <Text variant="caption" id="footer-columns-theme">
+                            Theme
+                        </Text>
                         <SegmentedControl size="sm" aria-labelledby="footer-columns-theme" options={themes} value={theme} onChange={setTheme} />
                     </div>
                 </div>

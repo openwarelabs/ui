@@ -1,11 +1,12 @@
 import type { ReactNode } from "react";
 
-import { Button, Chip } from "@openwarelabs/ui";
+import { Button, Chip, Text } from "@openwarelabs/ui";
 import { ArrowRight } from "lucide-react";
 
 import "./HeroLogos.css";
 
 // Invented companies, drawn as a simple shape and a name. Swap in your customers' logos (as SVGs, in one colour).
+// Each name is lettered as its logo, so its type lives in the CSS rather than in a Text style.
 const logos: Array<{ name: string; glyph: ReactNode }> = [
     {
         name: "Halcyon",
@@ -65,14 +66,14 @@ export function HeroLogos() {
                 <div className="hero-logos__top">
                     <div className="hero-logos__heading">
                         <Chip>Acme 3.0 is out</Chip>
-                        <h1 id="hero-logos-title" className="hero-logos__title">
+                        <Text variant="hero" id="hero-logos-title" className="hero-logos__title">
                             Ship more of what you plan
-                        </h1>
+                        </Text>
                     </div>
                     <div>
-                        <p className="hero-logos__lead">
+                        <Text variant="lead">
                             Planning, agents, reviews and deploys in one quiet workspace, so a ticket turns into a release without anyone chasing it.
-                        </p>
+                        </Text>
                         <div className="hero-logos__actions">
                             <Button variant="primary" shape="pill" size="lg" endIcon={<ArrowRight size={16} />}>
                                 Start for free
@@ -85,9 +86,9 @@ export function HeroLogos() {
                 </div>
 
                 <div className="hero-logos__proof">
-                    <p className="hero-logos__proof-label" id="hero-logos-proof">
+                    <Text tone="muted" id="hero-logos-proof">
                         These teams ship with Acme every day
-                    </p>
+                    </Text>
                     <ul className="hero-logos__list" aria-labelledby="hero-logos-proof">
                         {logos.map((logo) => (
                             <li key={logo.name} className="hero-logos__logo" data-name={logo.name}>

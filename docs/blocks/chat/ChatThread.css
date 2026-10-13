@@ -62,24 +62,12 @@
     gap: 1px;
 }
 
-.chat-thread__title {
-    margin: 0;
-    overflow: hidden;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
-    line-height: 1.3;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 .chat-thread__context {
     display: flex;
     min-width: 0;
     align-items: center;
     gap: 6px;
     overflow: hidden;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
     white-space: nowrap;
 }
 
@@ -112,9 +100,6 @@
     display: flex;
     align-items: center;
     gap: var(--ow-space-lg);
-    color: var(--ow-text-muted);
-    font-size: 12px;
-    font-weight: var(--ow-weight-control);
 }
 
 .chat-thread__day::before,
@@ -153,22 +138,14 @@
     display: flex;
     align-items: baseline;
     gap: var(--ow-space-sm);
-    color: var(--ow-text-muted);
-    font-size: 12px;
 }
 
-.chat-thread__name {
-    color: var(--ow-text);
-    font-size: 13.5px;
-    font-weight: var(--ow-weight-emphasis);
-}
-
+/* The person's own words, kept as typed: their line breaks stay, and a long link breaks rather than overflowing. */
 .chat-thread__bubble {
     border: 1px solid var(--ow-border);
     border-radius: 16px 4px 16px 16px;
     background: var(--ow-surface-muted);
     padding: 10px 14px;
-    line-height: 1.55;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
 }
@@ -176,16 +153,10 @@
 .chat-thread__answer {
     display: grid;
     gap: var(--ow-space-lg);
-    line-height: 1.6;
 }
 
-.chat-thread__answer p {
-    margin: 0;
-    text-wrap: pretty;
-}
-
-/* The pull request the agent opened, as a link to it. */
-.chat-thread__pr {
+/* The pull request the agent opened: one link, laid out as a card rather than underlined text. */
+.chat-thread__pr.ow-link {
     display: flex;
     max-width: 460px;
     align-items: center;
@@ -200,13 +171,9 @@
     transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
 }
 
-.chat-thread__pr:hover {
+.chat-thread__pr.ow-link:hover {
     border-color: var(--ow-border-strong);
-}
-
-.chat-thread__pr:focus-visible {
-    outline: 2px solid var(--ow-focus-ring);
-    outline-offset: 2px;
+    color: inherit;
 }
 
 .chat-thread__pr > svg {
@@ -221,27 +188,8 @@
     gap: 2px;
 }
 
-.chat-thread__pr-title {
-    overflow: hidden;
-    font-weight: var(--ow-weight-emphasis);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.chat-thread__pr-meta {
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-}
-
-.chat-thread__added {
-    color: var(--ow-success-text);
-    font-family: var(--ow-font-mono);
-    font-size: 12px;
-}
-
-.chat-thread__removed {
-    color: var(--ow-danger-text);
-    font-family: var(--ow-font-mono);
+/* Diff counts in mono at caption size: the code style is 14px, louder than the line around it. */
+.chat-thread__diff {
     font-size: 12px;
 }
 
@@ -249,7 +197,6 @@
     display: inline-flex;
     align-items: center;
     gap: var(--ow-space-sm);
-    color: var(--ow-text-muted);
 }
 
 .chat-thread__enter {
@@ -306,8 +253,6 @@
 
 .chat-thread__hint {
     margin-right: auto;
-    color: var(--ow-text-muted);
-    font-size: 12px;
 }
 
 @media (max-width: 760px) {

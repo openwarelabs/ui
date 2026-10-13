@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { DotGrid, Link, SearchField, toast } from "@openwarelabs/ui";
+import { DotGrid, Link, SearchField, Text, toast } from "@openwarelabs/ui";
 import { BookOpen, Bot, FolderKanban, Gauge, Rocket, Settings } from "lucide-react";
 
 import "./ErrorNotFound.css";
@@ -23,11 +23,13 @@ export function ErrorNotFound() {
         <div className="error-not-found">
             <DotGrid fade interactive className="error-not-found__ground">
                 <header className="error-not-found__bar">
-                    <a className="error-not-found__logo" href="#" aria-label="Acme overview">
+                    <Link href="#" variant="standalone" className="error-not-found__logo" aria-label="Acme overview">
                         <span className="error-not-found__mark" aria-hidden="true" />
-                        Acme
-                    </a>
-                    <Link href="#" variant="standalone" className="error-not-found__help">
+                        <Text variant="card-title" as="span">
+                            Acme
+                        </Text>
+                    </Link>
+                    <Link href="#" variant="standalone">
                         Help centre
                     </Link>
                 </header>
@@ -38,8 +40,12 @@ export function ErrorNotFound() {
                         <span className="error-not-found__zero" aria-hidden="true" />
                         <span aria-hidden="true">4</span>
                     </div>
-                    <h1 className="error-not-found__title">This page isn't here</h1>
-                    <p className="error-not-found__text">The link may be old, or the page may have moved. Search for it, or start again from one of these.</p>
+                    <Text variant="heading" as="h1" className="error-not-found__title">
+                        This page isn't here
+                    </Text>
+                    <Text variant="copy" className="error-not-found__text">
+                        The link may be old, or the page may have moved. Search for it, or start again from one of these.
+                    </Text>
 
                     <div className="error-not-found__search">
                         <SearchField
@@ -54,21 +60,23 @@ export function ErrorNotFound() {
                     <ul className="error-not-found__places" aria-label="Places to go">
                         {matches.map(({ name, description, icon: Icon }) => (
                             <li key={name}>
-                                <a className="error-not-found__place" href="#">
+                                <Link href="#" variant="standalone" className="error-not-found__place">
                                     <span className="error-not-found__place-icon" aria-hidden="true">
                                         <Icon size={16} />
                                     </span>
                                     <span className="error-not-found__place-text">
-                                        <span className="error-not-found__place-name">{name}</span>
-                                        <span className="error-not-found__place-description">{description}</span>
+                                        <Text variant="label">{name}</Text>
+                                        <Text variant="caption" truncate className="error-not-found__place-description">
+                                            {description}
+                                        </Text>
                                     </span>
-                                </a>
+                                </Link>
                             </li>
                         ))}
                         {matches.length === 0 ? (
-                            <li className="error-not-found__none" role="status">
+                            <Text as="li" variant="body" tone="muted" align="center" className="error-not-found__none" role="status">
                                 Nothing here matches “{query.trim()}”. Press Enter to search all of Acme.
-                            </li>
+                            </Text>
                         ) : null}
                     </ul>
                 </main>

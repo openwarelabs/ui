@@ -57,54 +57,32 @@
     white-space: nowrap;
 }
 
+/*
+ * The workspace and account menus open from rows that span the sidebar. Their padding, inside the button's 1px
+ * border, puts the mark and the avatar on the folded sidebar's centre line; whatever doesn't fit is clipped.
+ */
 .shell-collapsible__workspace,
 .shell-collapsible__user {
-    display: flex;
-    width: 100%;
-    align-items: center;
+    justify-content: flex-start;
     gap: 10px;
-    border: 0;
-    border-radius: var(--ow-radius-lg);
-    background: transparent;
     overflow: hidden;
-    padding: 6px 8px 6px 5px;
-    color: var(--ow-text);
-    font: inherit;
+    padding: 5px 7px 5px 4px;
     text-align: left;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
 }
 
 .shell-collapsible__user {
-    padding-left: 4px;
+    padding-left: 3px;
 }
 
-.shell-collapsible__workspace:hover,
-.shell-collapsible__user:hover,
+/* An open menu keeps its trigger lit, as on hover. */
 .shell-collapsible__workspace[aria-expanded="true"],
 .shell-collapsible__user[aria-expanded="true"] {
-    background: color-mix(in srgb, var(--ow-surface) 60%, transparent);
-}
-
-.shell-collapsible__workspace:focus-visible,
-.shell-collapsible__user:focus-visible,
-.shell-collapsible__search:focus-visible {
-    outline: 2px solid var(--ow-focus-ring);
-    outline-offset: 2px;
-}
-
-.shell-collapsible__workspace > svg,
-.shell-collapsible__user > svg {
-    flex-shrink: 0;
-    color: var(--ow-icon);
+    border-color: var(--ow-border);
+    background: var(--ow-surface-muted);
 }
 
 .shell-collapsible__workspace-name {
     flex: 1;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.01em;
 }
 
 .shell-collapsible__mark {
@@ -122,30 +100,9 @@
 }
 
 .shell-collapsible__search {
-    display: flex;
-    width: 100%;
-    height: 34px;
-    align-items: center;
-    gap: var(--ow-space-sm);
-    border: 1px solid var(--ow-border);
+    justify-content: flex-start;
     overflow: hidden;
-    border-radius: var(--ow-radius-form);
-    background: var(--ow-surface);
     padding: 0 6px 0 7px;
-    color: var(--ow-text-muted);
-    font: inherit;
-    white-space: nowrap;
-    cursor: pointer;
-    box-shadow: var(--ow-shadow-control);
-    transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
-}
-
-.shell-collapsible__search > svg {
-    flex-shrink: 0;
-}
-
-.shell-collapsible__search:hover {
-    border-color: var(--ow-border-strong);
 }
 
 .shell-collapsible__search-text {
@@ -194,25 +151,12 @@
     flex: 1;
 }
 
-.shell-collapsible__user-name {
-    font-size: 13.5px;
-    font-weight: var(--ow-weight-emphasis);
-}
-
-.shell-collapsible__user-email {
-    overflow: hidden;
-    color: var(--ow-text-muted);
-    font-size: 12px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 /* What fades as the sidebar folds. */
 .shell-collapsible__aside .shell-collapsible__fade,
 .shell-collapsible__aside .ow-nav__label,
 .shell-collapsible__aside .ow-nav__end,
 .shell-collapsible__aside .ow-nav__heading,
-.shell-collapsible__aside .ow-kbd {
+.shell-collapsible__aside .ow-button__shortcut {
     transition: opacity var(--ow-duration-base) var(--ow-ease-standard);
 }
 
@@ -220,7 +164,7 @@
 .shell-collapsible--collapsed .shell-collapsible__aside .ow-nav__label,
 .shell-collapsible--collapsed .shell-collapsible__aside .ow-nav__end,
 .shell-collapsible--collapsed .shell-collapsible__aside .ow-nav__heading,
-.shell-collapsible--collapsed .shell-collapsible__aside .ow-kbd {
+.shell-collapsible--collapsed .shell-collapsible__aside .ow-button__shortcut {
     opacity: 0;
 }
 
@@ -244,8 +188,6 @@
     display: flex;
     align-items: center;
     gap: 9px;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
 }
 
 .shell-collapsible__panel {
@@ -267,13 +209,6 @@
     gap: var(--ow-space-sm);
     border-bottom: 1px solid var(--ow-border);
     padding: 0 16px 0 10px;
-    color: var(--ow-text-muted);
-    font-size: 13px;
-}
-
-.shell-collapsible__toolbar strong {
-    color: var(--ow-text);
-    font-weight: var(--ow-weight-control);
 }
 
 .shell-collapsible__toolbar-divider {
@@ -308,17 +243,8 @@
     gap: var(--ow-space-2xl);
 }
 
-.shell-collapsible__title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
 .shell-collapsible__subtitle {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
+    margin-top: 4px;
 }
 
 .shell-collapsible__task {
@@ -328,37 +254,18 @@
     padding: 4px 0;
 }
 
-.shell-collapsible__task-title {
-    font-weight: var(--ow-weight-control);
-}
-
-.shell-collapsible__task-meta {
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-}
-
+/* Branches and line counts in mono at 12px, the size of the caption around them. */
 .shell-collapsible__mono {
-    font-family: var(--ow-font-mono);
     font-size: 12px;
 }
 
 .shell-collapsible__changes {
-    font-family: var(--ow-font-mono);
-    font-size: 12px;
+    display: flex;
+    gap: 6px;
     white-space: nowrap;
 }
 
-.shell-collapsible__added {
-    color: var(--ow-success-text);
-}
-
-.shell-collapsible__removed {
-    margin-left: 6px;
-    color: var(--ow-danger-text);
-}
-
-.shell-collapsible__muted {
-    color: var(--ow-text-muted);
+.shell-collapsible__nowrap {
     white-space: nowrap;
 }
 
@@ -373,7 +280,7 @@
     .shell-collapsible__aside .ow-nav__label,
     .shell-collapsible__aside .ow-nav__end,
     .shell-collapsible__aside .ow-nav__heading,
-    .shell-collapsible__aside .ow-kbd {
+    .shell-collapsible__aside .ow-button__shortcut {
         transition: none;
     }
 }

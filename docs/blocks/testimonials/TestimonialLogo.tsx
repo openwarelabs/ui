@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { SectionHeading, Tab, TabList, TabPanel, Tabs, User } from "@openwarelabs/ui";
+import { SectionHeading, Tab, TabList, TabPanel, Tabs, Text, User } from "@openwarelabs/ui";
 import { Quote } from "lucide-react";
 
 import "./TestimonialLogo.css";
@@ -112,7 +112,9 @@ export function TestimonialLogo() {
                                 <div className="testimonial-logo__body">
                                     <Quote size={18} className="testimonial-logo__mark" aria-hidden="true" />
                                     <blockquote className="testimonial-logo__quote">
-                                        <p>{story.quote}</p>
+                                        <Text as="p" variant="heading" className="testimonial-logo__text">
+                                            {story.quote}
+                                        </Text>
                                     </blockquote>
                                     <figcaption className="testimonial-logo__person">
                                         <User name={story.name} description={`${story.role}, ${story.company}`} size="lg" />
@@ -120,12 +122,18 @@ export function TestimonialLogo() {
                                 </div>
                                 <div className="testimonial-logo__company">
                                     <Wordmark name={story.company} size="lg" />
-                                    <p className="testimonial-logo__about">{story.about}</p>
+                                    <Text variant="copy" className="testimonial-logo__about">
+                                        {story.about}
+                                    </Text>
                                     <dl className="testimonial-logo__facts">
                                         {story.facts.map((fact) => (
                                             <div key={fact.label} className="testimonial-logo__fact">
-                                                <dt>{fact.label}</dt>
-                                                <dd>{fact.value}</dd>
+                                                <Text as="dt" variant="body" tone="muted">
+                                                    {fact.label}
+                                                </Text>
+                                                <Text as="dd" variant="label" align="end">
+                                                    {fact.value}
+                                                </Text>
                                             </div>
                                         ))}
                                     </dl>
@@ -135,7 +143,9 @@ export function TestimonialLogo() {
                     ))}
                 </Tabs>
 
-                <p className="testimonial-logo__note">Sample quotes. The companies and people are invented.</p>
+                <Text as="p" variant="caption" align="center" className="testimonial-logo__note">
+                    Sample quotes. The companies and people are invented.
+                </Text>
             </div>
         </section>
     );

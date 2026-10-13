@@ -35,18 +35,8 @@
     gap: var(--ow-space-2xl);
 }
 
-.page-heading-filters__title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
 .page-heading-filters__lead {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
-    text-wrap: pretty;
+    margin-top: 4px;
 }
 
 .page-heading-filters__toolbar {
@@ -70,15 +60,15 @@
     margin-top: calc(var(--ow-space-sm) * -1);
 }
 
+/* The key in a filter tag keeps the Tag's own 13px type, a step quieter: no Text variant matches it. */
 .page-heading-filters__tag-key {
     color: var(--ow-text-muted);
     font-weight: var(--ow-weight-regular);
 }
 
+/* The count changes as filters come and go; digits of one width keep it from jittering. */
 .page-heading-filters__count {
     margin-left: auto;
-    color: var(--ow-text-muted);
-    font-size: 13px;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
 }
@@ -127,34 +117,24 @@
     gap: 2px;
 }
 
-.page-heading-filters__row-title {
+.page-heading-filters__row-line {
     overflow: hidden;
-    font-weight: var(--ow-weight-control);
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.page-heading-filters__row-meta {
-    overflow: hidden;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
+/* A review number in mono at 12px, the size of the caption it sits in. */
 .page-heading-filters__number {
-    font-family: var(--ow-font-mono);
     font-size: 12px;
 }
 
+/* Comment counts line up digit for digit down the list. */
 .page-heading-filters__comments {
     display: flex;
     min-width: 36px;
     align-items: center;
     justify-content: flex-end;
     gap: 5px;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
     font-variant-numeric: tabular-nums;
 }
 
@@ -196,8 +176,7 @@
         grid-column: 2;
         justify-self: start;
     }
-    .page-heading-filters__row-title,
-    .page-heading-filters__row-meta {
+    .page-heading-filters__row-line {
         white-space: normal;
     }
     .page-heading-filters__comments {

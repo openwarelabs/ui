@@ -1,4 +1,4 @@
-import { Button, Card, SectionHeading } from "@openwarelabs/ui";
+import { Button, Card, SectionHeading, Text } from "@openwarelabs/ui";
 import { ArrowRight, CalendarClock, Check, CreditCard, Users } from "lucide-react";
 
 import "./PricingSingle.css";
@@ -33,41 +33,51 @@ export function PricingSingle() {
 
                 <Card padding="none" className="pricing-single__card">
                     <div className="pricing-single__details">
-                        <h3 className="pricing-single__name">Acme for teams</h3>
-                        <p className="pricing-single__description">
+                        <Text variant="heading">Acme for teams</Text>
+                        <Text variant="copy" className="pricing-single__description">
                             Plan the work, hand routine tasks to agents, review every change and ship it. Every feature is on from day one.
-                        </p>
-                        <p className="pricing-single__included">What's included</p>
+                        </Text>
+                        <Text as="p" variant="label" tone="primary" className="pricing-single__included">
+                            What's included
+                        </Text>
                         <ul className="pricing-single__features">
                             {included.map((item) => (
-                                <li key={item}>
+                                <Text as="li" variant="body" tone="soft" key={item}>
                                     <Check size={16} aria-hidden="true" />
                                     {item}
-                                </li>
+                                </Text>
                             ))}
                         </ul>
                     </div>
 
                     <div className="pricing-single__offer">
-                        <p className="pricing-single__offer-label">Pay monthly, per person</p>
-                        <p className="pricing-single__price">
-                            <span className="pricing-single__amount">€12</span>
-                            <span className="pricing-single__currency">EUR</span>
-                        </p>
-                        <p className="pricing-single__unit">a person a month, before VAT</p>
+                        <Text as="p" variant="label" tone="soft">
+                            Pay monthly, per person
+                        </Text>
+                        <Text as="p" variant="label" tone="muted" className="pricing-single__price">
+                            <Text as="span" variant="page-title" tone="default" className="pricing-single__amount">
+                                €12
+                            </Text>
+                            EUR
+                        </Text>
+                        <Text variant="body" tone="muted" className="pricing-single__unit">
+                            a person a month, before VAT
+                        </Text>
                         <Button variant="primary" shape="pill" size="lg" fullWidth endIcon={<ArrowRight size={16} />}>
                             Start a 14-day trial
                         </Button>
-                        <p className="pricing-single__fine">No card needed for the trial. We'll email you three days before it ends.</p>
+                        <Text as="p" variant="caption" className="pricing-single__fine">
+                            No card needed for the trial. We'll email you three days before it ends.
+                        </Text>
                     </div>
                 </Card>
 
                 <ul className="pricing-single__promises">
                     {promises.map(({ icon: Icon, text }) => (
-                        <li key={text}>
+                        <Text as="li" variant="body" tone="muted" key={text}>
                             <Icon size={16} aria-hidden="true" />
                             {text}
-                        </li>
+                        </Text>
                     ))}
                 </ul>
             </div>

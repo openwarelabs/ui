@@ -1,4 +1,4 @@
-import { Avatar, AvatarGroup, Card, CopyButton, Link, SectionHeading } from "@openwarelabs/ui";
+import { Avatar, AvatarGroup, Card, CopyButton, Link, SectionHeading, Text } from "@openwarelabs/ui";
 import { ArrowRight, BookOpen, Mail, MessagesSquare } from "lucide-react";
 
 import "./ContactSupport.css";
@@ -39,16 +39,22 @@ export function ContactSupport() {
                             <span className="contact-support__icon" aria-hidden="true">
                                 <BookOpen size={20} />
                             </span>
-                            <h3 className="contact-support__title">Documentation</h3>
-                            <p className="contact-support__text">Guides for setup, agents and deploys, and the full API reference.</p>
+                            <Text variant="heading" as="h3" className="contact-support__title">
+                                Documentation
+                            </Text>
+                            <Text variant="copy" className="contact-support__text">
+                                Guides for setup, agents and deploys, and the full API reference.
+                            </Text>
                             <ul className="contact-support__list" aria-label="Popular guides">
                                 {guides.map((guide) => (
-                                    <li key={guide.title}>
+                                    <Text key={guide.title} variant="body" as="li">
                                         <Link href="#" variant="standalone">
                                             {guide.title}
                                         </Link>
-                                        <span className="contact-support__meta">{guide.time}</span>
-                                    </li>
+                                        <Text variant="caption" className="contact-support__meta">
+                                            {guide.time}
+                                        </Text>
+                                    </Text>
                                 ))}
                             </ul>
                         </div>
@@ -65,16 +71,22 @@ export function ContactSupport() {
                             <span className="contact-support__icon" aria-hidden="true">
                                 <MessagesSquare size={20} />
                             </span>
-                            <h3 className="contact-support__title">Community forum</h3>
-                            <p className="contact-support__text">Ask how other teams work with Acme. Our engineers answer there every week.</p>
+                            <Text variant="heading" as="h3" className="contact-support__title">
+                                Community forum
+                            </Text>
+                            <Text variant="copy" className="contact-support__text">
+                                Ask how other teams work with Acme. Our engineers answer there every week.
+                            </Text>
                             <ul className="contact-support__list" aria-label="Recent threads">
                                 {threads.map((thread) => (
-                                    <li key={thread.title}>
+                                    <Text key={thread.title} variant="body" as="li">
                                         <Link href="#" variant="standalone">
                                             {thread.title}
                                         </Link>
-                                        <span className="contact-support__meta">{thread.replies} replies</span>
-                                    </li>
+                                        <Text variant="caption" className="contact-support__meta">
+                                            {thread.replies} replies
+                                        </Text>
+                                    </Text>
                                 ))}
                             </ul>
                         </div>
@@ -83,14 +95,14 @@ export function ContactSupport() {
                                 Join the forum
                                 <ArrowRight size={14} aria-hidden="true" />
                             </Link>
-                            <span className="contact-support__members">
+                            <Text variant="caption" className="contact-support__members">
                                 <AvatarGroup size="sm" max={3}>
                                     <Avatar name="Jonas Berg" />
                                     <Avatar name="Aiko Tanaka" />
                                     <Avatar name="Sam Okafor" />
                                 </AvatarGroup>
                                 4,200 members
-                            </span>
+                            </Text>
                         </div>
                     </Card>
 
@@ -99,18 +111,26 @@ export function ContactSupport() {
                             <span className="contact-support__icon" aria-hidden="true">
                                 <Mail size={20} />
                             </span>
-                            <h3 className="contact-support__title">Email support</h3>
-                            <p className="contact-support__text">For anything about your own workspace: billing, access, or a deploy that won't go.</p>
+                            <Text variant="heading" as="h3" className="contact-support__title">
+                                Email support
+                            </Text>
+                            <Text variant="copy" className="contact-support__text">
+                                For anything about your own workspace: billing, access, or a deploy that won't go.
+                            </Text>
                             <div className="contact-support__address">
-                                <span>support@example.com</span>
+                                <Text variant="body" as="span">
+                                    support@example.com
+                                </Text>
                                 <CopyButton value="support@example.com" label="Copy address" iconOnly />
                             </div>
                             <ul className="contact-support__list" aria-label="Reply times by plan">
                                 {replyTimes.map((row) => (
-                                    <li key={row.plan}>
+                                    <Text key={row.plan} variant="body" as="li">
                                         <span>{row.plan}</span>
-                                        <span className="contact-support__meta">{row.time}</span>
-                                    </li>
+                                        <Text variant="caption" className="contact-support__meta">
+                                            {row.time}
+                                        </Text>
+                                    </Text>
                                 ))}
                             </ul>
                         </div>
@@ -123,12 +143,14 @@ export function ContactSupport() {
                     </Card>
                 </div>
 
-                <p className="contact-support__status">
-                    <span className="contact-support__state">All systems working</span>
+                <Text variant="body" tone="muted" align="center" className="contact-support__status">
+                    <Text variant="label" as="span" tone="default" className="contact-support__state">
+                        All systems working
+                    </Text>
                     <span>
                         Something broken? Check the <Link href="#">status page</Link> before you write.
                     </span>
-                </p>
+                </Text>
             </div>
         </section>
     );

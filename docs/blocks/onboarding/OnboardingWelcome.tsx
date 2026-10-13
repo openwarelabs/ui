@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Avatar, Badge, Button, Dialog, Link, VisuallyHidden, type BadgeVariant } from "@openwarelabs/ui";
+import { Avatar, Badge, Button, Dialog, Link, NavItem, NavList, Text, VisuallyHidden, type BadgeVariant } from "@openwarelabs/ui";
 import { Bot, GitPullRequest, ListChecks, Rocket, Sparkles } from "lucide-react";
 
 import "./OnboardingWelcome.css";
@@ -83,17 +83,17 @@ export function OnboardingWelcome() {
     return (
         <div className="onboarding-welcome">
             <header className="onboarding-welcome__bar">
-                <span className="onboarding-welcome__brand">
+                <Text variant="card-title" as="span" className="onboarding-welcome__brand">
                     <span className="onboarding-welcome__mark" aria-hidden="true" />
                     Acme
-                </span>
-                <nav className="onboarding-welcome__nav" aria-label="Main">
+                </Text>
+                <NavList label="Main" orientation="horizontal" className="onboarding-welcome__nav">
                     {["Projects", "Reviews", "Deploys", "Agents"].map((item) => (
-                        <a key={item} href="#" className="onboarding-welcome__nav-item" aria-current={item === "Reviews" ? "page" : undefined}>
+                        <NavItem key={item} href="#" active={item === "Reviews"}>
                             {item}
-                        </a>
+                        </NavItem>
                     ))}
-                </nav>
+                </NavList>
                 <Button className="onboarding-welcome__news" variant="ghost" size="sm" startIcon={<Sparkles size={16} />} onClick={() => setOpen(true)}>
                     What's new
                     {seen ? null : (
@@ -108,18 +108,24 @@ export function OnboardingWelcome() {
 
             <main className="onboarding-welcome__panel">
                 <div>
-                    <h1 className="onboarding-welcome__title">Reviews</h1>
-                    <p className="onboarding-welcome__subtitle">Changes waiting on you and your team.</p>
+                    <Text variant="heading" as="h2">
+                        Reviews
+                    </Text>
+                    <Text variant="copy" className="onboarding-welcome__subtitle">
+                        Changes waiting on you and your team.
+                    </Text>
                 </div>
                 <ul className="onboarding-welcome__list">
                     {reviews.map((review) => (
                         <li key={review.title} className="onboarding-welcome__row">
                             <Avatar name={review.who.replace("Agent for ", "")} size="sm" />
                             <span className="onboarding-welcome__row-text">
-                                <span className="onboarding-welcome__row-title">{review.title}</span>
-                                <span className="onboarding-welcome__row-meta">
+                                <Text variant="label" truncate>
+                                    {review.title}
+                                </Text>
+                                <Text variant="caption" truncate>
                                     {review.project} · {review.who}
-                                </span>
+                                </Text>
                             </span>
                             <Badge size="sm" variant={review.tone}>
                                 {review.status}
@@ -136,17 +142,17 @@ export function OnboardingWelcome() {
                 className="onboarding-welcome__dialog"
                 title={
                     <>
-                        <span className="onboarding-welcome__eyebrow">
+                        <Text variant="caption" className="onboarding-welcome__eyebrow">
                             <span className="onboarding-welcome__eyebrow-dot" aria-hidden="true" />
                             October update
-                        </span>
+                        </Text>
                         What's new in Acme
                     </>
                 }
                 description="Three changes from this month, and a few smaller fixes."
                 actions={
                     <>
-                        <Link className="onboarding-welcome__changelog" href="#" variant="muted">
+                        <Link href="#" variant="muted">
                             Read the changelog
                         </Link>
                         <Button ref={continueButton} variant="primary" onClick={close}>
@@ -163,8 +169,10 @@ export function OnboardingWelcome() {
                                 <change.icon size={15} />
                             </span>
                             <span className="onboarding-welcome__change-text">
-                                <span className="onboarding-welcome__change-title">{change.title}</span>
-                                <span className="onboarding-welcome__change-description">{change.description}</span>
+                                <Text variant="label">{change.title}</Text>
+                                <Text variant="copy" as="span">
+                                    {change.description}
+                                </Text>
                             </span>
                         </li>
                     ))}

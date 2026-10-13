@@ -34,12 +34,7 @@
 
 .features-tabs__caption {
     max-width: 640px;
-    margin: 28px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 15px;
-    line-height: 1.55;
-    text-align: center;
-    text-wrap: balance;
+    margin-top: 28px;
 }
 
 /* The window: everything inside is drawn, so it can't be clicked or focused. */

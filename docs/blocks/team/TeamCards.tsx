@@ -1,4 +1,4 @@
-import { Avatar, Card, SectionHeading, buttonClassName } from "@openwarelabs/ui";
+import { Avatar, Card, SectionHeading, Text, buttonClassName } from "@openwarelabs/ui";
 import { Link as LinkIcon, Mail, MapPin } from "lucide-react";
 
 import "./TeamCards.css";
@@ -48,8 +48,6 @@ const people = [
     },
 ];
 
-const iconLink = buttonClassName({ variant: "ghost", size: "sm", iconOnly: true });
-
 export function TeamCards() {
     return (
         <section className="team-cards" aria-labelledby="team-cards-title">
@@ -67,21 +65,33 @@ export function TeamCards() {
                                 <div className="team-cards__head">
                                     <Avatar name={person.name} size={56} />
                                     <div className="team-cards__who">
-                                        <h3 className="team-cards__name">{person.name}</h3>
-                                        <p className="team-cards__role">{person.role}</p>
+                                        <Text variant="card-title">{person.name}</Text>
+                                        <Text variant="body" tone="muted" className="team-cards__role">
+                                            {person.role}
+                                        </Text>
                                     </div>
                                 </div>
-                                <p className="team-cards__about">{person.about}</p>
+                                <Text variant="copy" tone="soft" className="team-cards__about">
+                                    {person.about}
+                                </Text>
                                 <div className="team-cards__foot">
-                                    <span className="team-cards__place">
+                                    <Text variant="caption" className="team-cards__place">
                                         <MapPin size={14} aria-hidden="true" />
                                         {person.place}
-                                    </span>
+                                    </Text>
                                     <span className="team-cards__links">
-                                        <a href={`mailto:${person.email}`} className={iconLink} aria-label={`Email ${person.name}`}>
+                                        <a
+                                            href={`mailto:${person.email}`}
+                                            className={buttonClassName({ variant: "ghost", size: "sm", iconOnly: true })}
+                                            aria-label={`Email ${person.name}`}
+                                        >
                                             <Mail size={16} />
                                         </a>
-                                        <a href="#" className={iconLink} aria-label={`${person.name}'s website`}>
+                                        <a
+                                            href="#"
+                                            className={buttonClassName({ variant: "ghost", size: "sm", iconOnly: true })}
+                                            aria-label={`${person.name}'s website`}
+                                        >
                                             <LinkIcon size={16} />
                                         </a>
                                     </span>

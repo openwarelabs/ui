@@ -1,6 +1,6 @@
 import { useRef, useState, type FormEvent } from "react";
 
-import { Button, Input, Link, Separator } from "@openwarelabs/ui";
+import { Button, Input, Link, Separator, Text } from "@openwarelabs/ui";
 import { ArrowRight, CircleCheck, Mail } from "lucide-react";
 
 import "./FooterNewsletter.css";
@@ -48,20 +48,22 @@ export function FooterNewsletter() {
             <div className="footer-newsletter__inner">
                 <section className="footer-newsletter__signup" aria-labelledby="footer-newsletter-title">
                     <div>
-                        <h2 id="footer-newsletter-title" className="footer-newsletter__title">
+                        <Text variant="heading" as="h2" id="footer-newsletter-title">
                             Get the changelog by email
-                        </h2>
-                        <p className="footer-newsletter__intro">
+                        </Text>
+                        <Text variant="copy" className="footer-newsletter__intro">
                             What we shipped this month, what's coming next, and one idea worth stealing from a team on Acme.
-                        </p>
+                        </Text>
                     </div>
 
                     {sentTo ? (
                         <div className="footer-newsletter__done" role="status">
                             <CircleCheck size={18} aria-hidden="true" />
                             <span className="footer-newsletter__done-text">
-                                <strong>Check your inbox</strong>
-                                <span>We've sent a link to {sentTo}. Open it to confirm your subscription.</span>
+                                <Text variant="label">Check your inbox</Text>
+                                <Text variant="body" as="span" tone="soft" className="footer-newsletter__done-detail">
+                                    We've sent a link to {sentTo}. Open it to confirm your subscription.
+                                </Text>
                             </span>
                             <Button size="sm" variant="ghost" onClick={startAgain}>
                                 Change
@@ -90,30 +92,37 @@ export function FooterNewsletter() {
                                     Subscribe
                                 </Button>
                             </div>
-                            <p
+                            <Text
+                                variant="caption"
+                                as="p"
                                 id="footer-newsletter-note"
-                                className={`footer-newsletter__note${error ? " footer-newsletter__note--error" : ""}`}
+                                tone={error ? "danger" : undefined}
+                                className="footer-newsletter__note"
                                 aria-live="polite"
                             >
                                 {error || "One email a month. Unsubscribe whenever you like."}
-                            </p>
+                            </Text>
                         </form>
                     )}
                 </section>
 
                 <div className="footer-newsletter__links">
                     <div className="footer-newsletter__brand">
-                        <a className="footer-newsletter__logo" href="#" aria-label="Acme home">
+                        <Link href="#" variant="standalone" className="footer-newsletter__logo" aria-label="Acme home">
                             <span className="footer-newsletter__mark" aria-hidden="true" />
-                            Acme
-                        </a>
-                        <p>Plan the work, hand the routine parts to agents, and ship.</p>
+                            <Text variant="dialog-title" as="span">
+                                Acme
+                            </Text>
+                        </Link>
+                        <Text variant="copy" className="footer-newsletter__line">
+                            Plan the work, hand the routine parts to agents, and ship.
+                        </Text>
                     </div>
                     {columns.map((column) => (
                         <nav key={column.title} aria-labelledby={`footer-newsletter-${column.title.toLowerCase()}`}>
-                            <h2 id={`footer-newsletter-${column.title.toLowerCase()}`} className="footer-newsletter__heading">
+                            <Text variant="label" as="h2" id={`footer-newsletter-${column.title.toLowerCase()}`} className="footer-newsletter__heading">
                                 {column.title}
-                            </h2>
+                            </Text>
                             <ul className="footer-newsletter__list">
                                 {column.links.map((link) => (
                                     <li key={link}>
@@ -130,8 +139,10 @@ export function FooterNewsletter() {
                 <Separator />
 
                 <div className="footer-newsletter__bottom">
-                    <p>© 2026 Acme Ltd.</p>
-                    <ul className="footer-newsletter__legal">
+                    <Text variant="caption" as="p">
+                        © 2026 Acme Ltd.
+                    </Text>
+                    <Text variant="caption" as="ul" className="footer-newsletter__legal">
                         {["Privacy", "Terms", "Cookies", "Security"].map((link) => (
                             <li key={link}>
                                 <Link href="#" variant="muted">
@@ -139,7 +150,7 @@ export function FooterNewsletter() {
                                 </Link>
                             </li>
                         ))}
-                    </ul>
+                    </Text>
                 </div>
             </div>
         </footer>

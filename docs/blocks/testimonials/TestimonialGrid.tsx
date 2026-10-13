@@ -1,4 +1,4 @@
-import { Badge, Card, SectionHeading, User } from "@openwarelabs/ui";
+import { Badge, Card, SectionHeading, Text, User } from "@openwarelabs/ui";
 
 import "./TestimonialGrid.css";
 
@@ -54,11 +54,14 @@ export function TestimonialGrid() {
 
                 <ul className="testimonial-grid__list">
                     {quotes.map((item) => (
-                        <li key={item.name} className="testimonial-grid__item" data-short={item.short || undefined}>
+                        <li key={item.name} className="testimonial-grid__item">
                             <Card padding="lg" className="testimonial-grid__card">
                                 <figure className="testimonial-grid__figure">
                                     <blockquote className="testimonial-grid__quote">
-                                        <p>{item.quote}</p>
+                                        {/* Short quotes read as headlines. */}
+                                        <Text as="p" variant={item.short ? "heading" : "copy"} tone={item.short ? "default" : "soft"}>
+                                            {item.quote}
+                                        </Text>
                                     </blockquote>
                                     <figcaption>
                                         <User name={item.name} description={item.role} />

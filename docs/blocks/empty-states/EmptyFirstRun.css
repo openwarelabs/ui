@@ -29,17 +29,8 @@
     gap: 16px;
 }
 
-.empty-first-run__title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
 .empty-first-run__subtitle {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
+    margin-top: 4px;
 }
 
 /* The empty area: what will be here, the one way to make it, and the other ways to start. */
@@ -97,16 +88,6 @@
     display: grid;
     min-width: 0;
     gap: 2px;
-}
-
-.empty-first-run__name strong {
-    font-weight: var(--ow-weight-emphasis);
-}
-
-.empty-first-run__name span,
-.empty-first-run__when {
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
 }
 
 @media (max-width: 1024px) {

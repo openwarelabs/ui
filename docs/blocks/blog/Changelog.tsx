@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 
-import { Badge, Button, Link, SectionHeading, buttonClassName } from "@openwarelabs/ui";
+import { Badge, Button, Link, SectionHeading, Text, buttonClassName } from "@openwarelabs/ui";
 import { Bot, Check, ChevronDown, GitPullRequest, Mail, RotateCcw, Rss } from "lucide-react";
 
 import "./Changelog.css";
@@ -199,10 +199,12 @@ export function Changelog() {
                     {shown.map((release, index) => (
                         <li key={release.version} className="changelog__release">
                             <div className="changelog__when">
-                                <span className="changelog__version">v{release.version}</span>
-                                <time className="changelog__date" dateTime={release.iso}>
-                                    {release.date}
-                                </time>
+                                <Text variant="code" as="span" className="changelog__version">
+                                    v{release.version}
+                                </Text>
+                                <Text variant="body" as="span" tone="muted">
+                                    <time dateTime={release.iso}>{release.date}</time>
+                                </Text>
                                 {index === 0 ? (
                                     <Badge size="sm" variant="neutral">
                                         Latest
@@ -211,10 +213,12 @@ export function Changelog() {
                             </div>
                             <article className="changelog__body" aria-labelledby={`changelog-${release.version}`}>
                                 <span className="changelog__node" aria-hidden="true" />
-                                <h3 id={`changelog-${release.version}`} className="changelog__title">
+                                <Text variant="heading" as="h3" id={`changelog-${release.version}`}>
                                     {release.title}
-                                </h3>
-                                <p className="changelog__summary">{release.summary}</p>
+                                </Text>
+                                <Text variant="prose" tone="muted" className="changelog__summary">
+                                    {release.summary}
+                                </Text>
                                 {release.visual}
                                 <div className="changelog__groups">
                                     {(Object.keys(groupBadge) as Group[]).map((group) =>
@@ -225,7 +229,9 @@ export function Changelog() {
                                                 </Badge>
                                                 <ul className="changelog__items" aria-label={`${group} in ${release.version}`}>
                                                     {release.changes[group].map((change) => (
-                                                        <li key={change}>{change}</li>
+                                                        <Text key={change} variant="copy" as="li" tone="soft">
+                                                            {change}
+                                                        </Text>
                                                     ))}
                                                 </ul>
                                             </div>

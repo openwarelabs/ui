@@ -35,16 +35,11 @@
 }
 
 .sign-in-card__title {
-    margin: 20px 0 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
+    margin-top: 20px;
 }
 
 .sign-in-card__lead {
-    margin: 6px 0 0;
-    color: var(--ow-text-muted);
+    margin-top: 6px;
 }
 
 .sign-in-card__card {
@@ -81,14 +76,12 @@
 
 .sign-in-card__forgot {
     position: absolute;
-    top: 1px;
+    top: 0;
     right: 0;
-    font-size: 13px;
 }
 
 .sign-in-card__switch {
-    margin: 22px 0 0;
-    color: var(--ow-text-muted);
+    margin-top: 22px;
 }
 
 @media (max-width: 760px) {

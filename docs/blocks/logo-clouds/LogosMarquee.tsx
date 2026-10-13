@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 
-import { Button, Tooltip } from "@openwarelabs/ui";
+import { Button, Text, Tooltip } from "@openwarelabs/ui";
 import { Pause, Play } from "lucide-react";
 
 import "./LogosMarquee.css";
@@ -79,9 +79,9 @@ export function LogosMarquee() {
     return (
         <section className="logos-marquee" aria-labelledby="logos-marquee-title" data-paused={paused || undefined}>
             <div className="logos-marquee__head">
-                <h2 id="logos-marquee-title" className="logos-marquee__title">
+                <Text as="h2" variant="body" tone="muted" align="center" id="logos-marquee-title">
                     Teams that ship with Acme
-                </h2>
+                </Text>
                 {/* Moving content needs a way to stop it for good; hover and focus only hold it still for a moment. */}
                 <Tooltip label={paused ? "Play the logos" : "Pause the logos"}>
                     <Button

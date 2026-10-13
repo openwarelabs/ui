@@ -30,23 +30,8 @@
     margin-bottom: var(--ow-space-sm);
 }
 
-.dashboard-usage__title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
 .dashboard-usage__lead {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
-}
-
-.dashboard-usage__card-title {
-    margin: 0;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
+    margin-top: 4px;
 }
 
 .dashboard-usage__card-header {
@@ -73,15 +58,10 @@
     gap: 4px 10px;
 }
 
+/* The month's spend is the number the page is about, so it's set larger than the heading style. */
 .dashboard-usage__spent {
     font-size: 34px;
-    font-weight: var(--ow-weight-display);
     line-height: 1.1;
-    letter-spacing: -0.03em;
-}
-
-.dashboard-usage__of {
-    color: var(--ow-text-muted);
 }
 
 .dashboard-usage__meter {
@@ -89,11 +69,10 @@
     gap: 10px;
 }
 
+/* The percentage changes with the budget; digits of one width keep the scale steady. */
 .dashboard-usage__scale {
     display: flex;
     justify-content: space-between;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
     font-variant-numeric: tabular-nums;
 }
 
@@ -101,14 +80,10 @@
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    margin: 0;
     border: 1px solid var(--ow-border);
     border-radius: var(--ow-radius-lg);
     background: var(--ow-surface-muted);
     padding: 10px 12px;
-    color: var(--ow-text-soft);
-    font-size: 13px;
-    line-height: 1.5;
 }
 
 .dashboard-usage__forecast svg {
@@ -129,20 +104,9 @@
     color: var(--ow-success-text);
 }
 
-.dashboard-usage__forecast strong {
-    color: var(--ow-text);
-    font-weight: var(--ow-weight-emphasis);
-}
-
 .dashboard-usage__popover-body {
     display: grid;
     gap: var(--ow-space-2xl);
-}
-
-.dashboard-usage__popover-note {
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
 }
 
 .dashboard-usage__popover-actions {
@@ -185,7 +149,6 @@
     display: inline-flex;
     align-items: center;
     gap: 9px;
-    font-weight: var(--ow-weight-control);
     white-space: nowrap;
 }
 
@@ -196,24 +159,14 @@
     border-radius: 50%;
 }
 
-.dashboard-usage__muted {
-    color: var(--ow-text-muted);
-}
-
+/* Shares line up digit for digit down the column. */
 .dashboard-usage__share {
     display: grid;
     grid-template-columns: minmax(48px, 1fr) 38px;
     align-items: center;
     gap: 10px;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
     font-variant-numeric: tabular-nums;
     text-align: right;
-}
-
-.dashboard-usage__legend {
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
 }
 
 /* The next invoice */
@@ -227,9 +180,7 @@
 }
 
 .dashboard-usage__due {
-    margin: 2px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
+    margin-top: 2px;
 }
 
 .dashboard-usage__lines {
@@ -245,19 +196,16 @@
     gap: var(--ow-space-lg);
 }
 
-.dashboard-usage__line dt {
+.dashboard-usage__item {
     min-width: 0;
-    color: var(--ow-text-soft);
 }
 
-.dashboard-usage__line dt span {
+.dashboard-usage__hint {
     display: block;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
 }
 
-.dashboard-usage__line dd {
-    margin: 0;
+/* Amounts line up digit for digit down the invoice. */
+.dashboard-usage__amount {
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
 }
@@ -267,21 +215,8 @@
     padding-top: 12px;
 }
 
-.dashboard-usage__total dt {
-    color: var(--ow-text);
-    font-weight: var(--ow-weight-emphasis);
-}
-
-.dashboard-usage__total dd {
-    font-size: 18px;
-    font-weight: var(--ow-weight-display);
-    letter-spacing: -0.01em;
-}
-
 .dashboard-usage__note {
-    margin: -8px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
+    margin-top: -8px;
 }
 
 .dashboard-usage__payment {
@@ -310,12 +245,6 @@
     display: grid;
     min-width: 0;
     flex: 1;
-    font-size: 13px;
-}
-
-.dashboard-usage__payment-text span:last-child {
-    color: var(--ow-text-muted);
-    font-size: 12px;
 }
 
 @media (max-width: 1023px) {

@@ -1,10 +1,10 @@
-import { Link, SectionHeading, Stat, type StatProps } from "@openwarelabs/ui";
+import { Link, SectionHeading, Stat, Text, type StatProps } from "@openwarelabs/ui";
 import { Bot, Rocket, Timer, Undo2 } from "lucide-react";
 
 import "./StatsCards.css";
 
 // Twelve weeks of totals across every Acme workspace, oldest first.
-const stats: Array<StatProps & { label: string }> = [
+const stats: Array<Omit<StatProps, "value"> & { label: string; value: string }> = [
     {
         icon: <Rocket size={14} />,
         label: "Deploys a week",
@@ -57,8 +57,18 @@ export function StatsCards() {
                 </div>
 
                 <div className="stats-cards__grid">
+                    {/* Stat is sized for an app's overview; on a marketing page the number takes a display size. */}
                     {stats.map((stat) => (
-                        <Stat key={stat.label} {...stat} className="stats-cards__stat" />
+                        <Stat
+                            key={stat.label}
+                            {...stat}
+                            value={
+                                <Text as="span" variant="section-title">
+                                    {stat.value}
+                                </Text>
+                            }
+                            className="stats-cards__stat"
+                        />
                     ))}
                 </div>
             </div>

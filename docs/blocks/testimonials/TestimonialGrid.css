@@ -59,23 +59,6 @@
     margin: 0;
 }
 
-.testimonial-grid__quote p {
-    margin: 0;
-    color: var(--ow-text-soft);
-    font-size: 15px;
-    line-height: 1.6;
-    text-wrap: pretty;
-}
-
-/* Short quotes read as headlines. */
-.testimonial-grid__item[data-short] .testimonial-grid__quote p {
-    color: var(--ow-text);
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 1.35;
-    letter-spacing: -0.02em;
-}
-
 @media (max-width: 1024px) {
     .testimonial-grid__list {
         columns: 2;

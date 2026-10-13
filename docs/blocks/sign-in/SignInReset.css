@@ -26,9 +26,6 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.01em;
 }
 
 .sign-in-reset__mark {
@@ -44,8 +41,6 @@
     align-items: center;
     gap: var(--ow-space-xs);
     color: var(--ow-text-muted);
-    font-size: 13px;
-    font-weight: var(--ow-weight-control);
 }
 
 .sign-in-reset__body {
@@ -85,11 +80,7 @@
 }
 
 .sign-in-reset__title {
-    margin: -4px 0 0;
-    font-size: 22px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
+    margin-top: -4px;
 }
 
 .sign-in-reset__title:focus {
@@ -98,14 +89,9 @@
 
 .sign-in-reset__lead {
     margin: -14px 0 4px;
-    color: var(--ow-text-muted);
-    line-height: 1.55;
-    text-wrap: pretty;
 }
 
 .sign-in-reset__email {
-    color: var(--ow-text);
-    font-weight: var(--ow-weight-emphasis);
     overflow-wrap: anywhere;
 }
 
@@ -122,8 +108,6 @@
     display: flex;
     align-items: center;
     gap: var(--ow-space-sm);
-    color: var(--ow-text-muted);
-    font-size: 13px;
     transition: color var(--ow-duration-base) var(--ow-ease-standard);
 }
 
@@ -141,10 +125,6 @@
         background-color var(--ow-duration-base) var(--ow-ease-standard),
         border-color var(--ow-duration-base) var(--ow-ease-standard),
         color var(--ow-duration-base) var(--ow-ease-standard);
-}
-
-.sign-in-reset__rule[data-met] {
-    color: var(--ow-text);
 }
 
 .sign-in-reset__rule[data-met] .sign-in-reset__rule-mark {

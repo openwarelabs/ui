@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 
-import { Button, Field, Input, SectionHeading } from "@openwarelabs/ui";
+import { Button, Field, Input, SectionHeading, Text } from "@openwarelabs/ui";
 import { CircleCheck } from "lucide-react";
 
 import "./NewsletterInline.css";
@@ -86,15 +86,15 @@ export function NewsletterInline() {
                         >
                             <CircleCheck size={20} className="newsletter-inline__done-icon" aria-hidden="true" />
                             <div>
-                                <p id="newsletter-inline-done-title" className="newsletter-inline__done-title">
+                                <Text as="p" variant="label" id="newsletter-inline-done-title">
                                     You're on the list
-                                </p>
-                                <p id="newsletter-inline-done-text" className="newsletter-inline__done-text">
+                                </Text>
+                                <Text variant="copy" tone="soft" id="newsletter-inline-done-text" className="newsletter-inline__done-text">
                                     The next changelog goes to {subscribed} on {nextIssueDate()}.
-                                </p>
-                                <button type="button" className="newsletter-inline__reset" onClick={reset}>
+                                </Text>
+                                <Button variant="ghost" size="sm" className="newsletter-inline__reset" onClick={reset}>
                                     Use a different email
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     ) : (
@@ -116,7 +116,9 @@ export function NewsletterInline() {
                             <Button type="submit" variant="primary" shape="pill" loading={sending} className="newsletter-inline__submit">
                                 Subscribe
                             </Button>
-                            <p className="newsletter-inline__fine">Unsubscribe in one click. We never share your address.</p>
+                            <Text as="p" variant="caption" className="newsletter-inline__fine">
+                                Unsubscribe in one click. We never share your address.
+                            </Text>
                         </form>
                     )}
                 </div>

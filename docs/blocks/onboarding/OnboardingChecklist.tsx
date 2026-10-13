@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Button, Link, ProgressBar, Steps, type StepItem } from "@openwarelabs/ui";
+import { Button, Link, ProgressBar, Steps, Text, type StepItem } from "@openwarelabs/ui";
 import { ArrowRight, LifeBuoy, RotateCcw } from "lucide-react";
 
 import "./OnboardingChecklist.css";
@@ -77,18 +77,18 @@ export function OnboardingChecklist() {
         <section className="onboarding-checklist" aria-labelledby="onboarding-checklist-title">
             <div className="onboarding-checklist__panel">
                 <div className="onboarding-checklist__intro">
-                    <p className="onboarding-checklist__eyebrow">
+                    <Text variant="caption" as="p" className="onboarding-checklist__eyebrow">
                         <span className="onboarding-checklist__dot" aria-hidden="true" />
                         Getting started
-                    </p>
-                    <h2 id="onboarding-checklist-title" className="onboarding-checklist__title">
+                    </Text>
+                    <Text variant="heading" as="h2" id="onboarding-checklist-title" className="onboarding-checklist__title">
                         {finished ? "Acme is ready for your team" : "Get Acme ready for your team"}
-                    </h2>
-                    <p className="onboarding-checklist__lead">
+                    </Text>
+                    <Text variant="copy" className="onboarding-checklist__lead">
                         {finished
                             ? "Your team is in, an agent has shipped its first change, and you know where deploys live."
                             : "Five short steps, about ten minutes. You can change any of it later in Settings."}
-                    </p>
+                    </Text>
 
                     <ProgressBar
                         className="onboarding-checklist__progress"
@@ -108,12 +108,12 @@ export function OnboardingChecklist() {
                             </Button>
                         </div>
                     ) : (
-                        <p className="onboarding-checklist__help">
+                        <Text variant="copy" className="onboarding-checklist__help">
                             <LifeBuoy size={16} aria-hidden="true" />
                             <span>
                                 Stuck? Read the <Link href="#">setup guide</Link> or ask us in the chat.
                             </span>
-                        </p>
+                        </Text>
                     )}
                 </div>
 

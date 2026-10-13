@@ -1,4 +1,4 @@
-import { Link, SectionHeading } from "@openwarelabs/ui";
+import { Link, SectionHeading, Text } from "@openwarelabs/ui";
 
 import "./StatsSplit.css";
 
@@ -27,12 +27,20 @@ export function StatsSplit() {
                 <dl className="stats-split__grid">
                     {stats.map((stat) => (
                         <div key={stat.label} className="stats-split__item">
-                            <dt className="stats-split__label">{stat.label}</dt>
-                            <dd className="stats-split__value">
+                            <Text as="dt" variant="card-title" className="stats-split__label">
+                                {stat.label}
+                            </Text>
+                            <Text as="dd" variant="page-title" className="stats-split__value">
                                 {stat.value}
-                                {stat.unit ? <span className="stats-split__unit">{stat.unit}</span> : null}
-                            </dd>
-                            <dd className="stats-split__detail">{stat.detail}</dd>
+                                {stat.unit ? (
+                                    <Text as="span" variant="page-title" tone="muted" className="stats-split__unit">
+                                        {stat.unit}
+                                    </Text>
+                                ) : null}
+                            </Text>
+                            <Text as="dd" variant="copy" className="stats-split__detail">
+                                {stat.detail}
+                            </Text>
                         </div>
                     ))}
                 </dl>

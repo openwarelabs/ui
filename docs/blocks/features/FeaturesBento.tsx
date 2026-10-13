@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { Avatar, Badge, Kbd, SectionHeading, SettingsRow, Spinner, Stat, Switch } from "@openwarelabs/ui";
+import { Avatar, Badge, Kbd, SectionHeading, SettingsRow, Spinner, Stat, Switch, Text } from "@openwarelabs/ui";
 import { Bot, FolderKanban, GitBranch, GitPullRequest, Search } from "lucide-react";
 
 import "./FeaturesBento.css";
@@ -217,11 +217,12 @@ export function FeaturesBento() {
             <div className="features-bento__inner">
                 <div className="features-bento__header">
                     <SectionHeading eyebrow="Features" title={<span id="features-bento-title">Less waiting on the work around the work</span>} />
-                    <p className="features-bento__intro">
+                    <Text variant="lead" className="features-bento__intro">
                         The parts of shipping that used to need a person, a ping and a wait now happen on their own, and show you what they did.
-                    </p>
+                    </Text>
                 </div>
 
+                {/* The agents card is the big one, with a heading and a lead; the rest are dense cards. */}
                 <div className="features-bento__grid">
                     {features.map((feature) => (
                         <article
@@ -230,10 +231,12 @@ export function FeaturesBento() {
                             aria-labelledby={`features-bento-${feature.id}`}
                         >
                             <div className="features-bento__copy">
-                                <h3 id={`features-bento-${feature.id}`} className="features-bento__title">
+                                <Text variant={feature.id === "agents" ? "heading" : "card-title"} id={`features-bento-${feature.id}`}>
                                     {feature.title}
-                                </h3>
-                                <p className="features-bento__text">{feature.text}</p>
+                                </Text>
+                                <Text variant={feature.id === "agents" ? "lead" : "copy"} className="features-bento__text">
+                                    {feature.text}
+                                </Text>
                             </div>
                             <div className="features-bento__visual" role="img" aria-label={feature.shotLabel}>
                                 {feature.shot}

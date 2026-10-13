@@ -50,28 +50,16 @@
 }
 
 .features-columns__title {
-    margin: 24px 0 0;
-    font-size: 16px;
-    font-weight: var(--ow-weight-emphasis);
-    line-height: 1.35;
-    letter-spacing: -0.01em;
+    margin-top: 24px;
 }
 
 .features-columns__text {
     max-width: 340px;
-    margin: 8px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 14.5px;
-    line-height: 1.6;
-    text-wrap: pretty;
+    margin-top: 8px;
 }
 
 .features-columns__more {
-    margin: 32px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 14px;
-    text-align: center;
-    text-wrap: balance;
+    margin-top: 32px;
 }
 
 @media (max-width: 1024px) {

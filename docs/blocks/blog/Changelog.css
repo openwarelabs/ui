@@ -28,7 +28,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px 22px;
-    font-size: 14px;
 }
 
 .changelog__subscribe .ow-link {
@@ -61,15 +60,9 @@
     padding: 2px 24px 0 0;
 }
 
+/* The version is the release's name, so it takes the emphasis weight. */
 .changelog__version {
-    font-family: var(--ow-font-mono);
-    font-size: 14px;
     font-weight: var(--ow-weight-emphasis);
-}
-
-.changelog__date {
-    color: var(--ow-text-muted);
-    font-size: 13.5px;
 }
 
 .changelog__body {
@@ -111,22 +104,9 @@
     box-shadow: 0 0 0 1px var(--ow-brass);
 }
 
-.changelog__title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-emphasis);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-    text-wrap: balance;
-}
-
 .changelog__summary {
     max-width: 620px;
-    margin: 10px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 16px;
-    line-height: 1.6;
-    text-wrap: pretty;
+    margin-top: 10px;
 }
 
 .changelog__groups {
@@ -156,10 +136,6 @@
 .changelog__items li {
     position: relative;
     padding-left: 16px;
-    color: var(--ow-text-soft);
-    font-size: 15px;
-    line-height: 1.55;
-    text-wrap: pretty;
 }
 
 .changelog__items li::before {
@@ -376,12 +352,6 @@
     }
     .changelog__node {
         top: 4px;
-    }
-    .changelog__title {
-        font-size: 21px;
-    }
-    .changelog__summary {
-        font-size: 15px;
     }
     .changelog__group {
         grid-template-columns: minmax(0, 1fr);

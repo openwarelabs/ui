@@ -33,23 +33,8 @@
     max-width: 620px;
 }
 
-.cta-banner__title {
-    margin: 0;
-    color: var(--ow-text);
-    font-size: 44px;
-    font-weight: 500;
-    line-height: 1.08;
-    letter-spacing: -0.035em;
-    text-wrap: balance;
-}
-
 .cta-banner__lead {
-    max-width: 540px;
-    margin: 16px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 17px;
-    line-height: 1.6;
-    text-wrap: pretty;
+    margin-top: 16px;
 }
 
 .cta-banner__side {
@@ -70,9 +55,6 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
 }
 
 .cta-banner__note svg {
@@ -100,13 +82,6 @@
     .cta-banner__content {
         gap: 32px;
         padding: 40px 22px;
-    }
-    .cta-banner__title {
-        font-size: 32px;
-        line-height: 1.12;
-    }
-    .cta-banner__lead {
-        font-size: 16px;
     }
     .cta-banner__side,
     .cta-banner__actions {

@@ -13,6 +13,7 @@ import {
     Table,
     Tag,
     TagGroup,
+    Text,
     type TableColumn,
 } from "@openwarelabs/ui";
 import { ListFilter, SearchX } from "lucide-react";
@@ -76,10 +77,12 @@ const columns: Array<TableColumn<Deploy>> = [
         header: "Deploy",
         render: (deploy) => (
             <span className="empty-no-results__deploy">
-                <strong>
+                <Text variant="label">
                     #{deploy.id} {deploy.title}
-                </strong>
-                <span>{deploy.branch}</span>
+                </Text>
+                <Text variant="caption" truncate className="empty-no-results__branch">
+                    {deploy.branch}
+                </Text>
             </span>
         ),
     },
@@ -105,7 +108,17 @@ const columns: Array<TableColumn<Deploy>> = [
             </span>
         ),
     },
-    { key: "when", header: "When", width: 110, align: "end", render: (deploy) => <span className="empty-no-results__muted">{deploy.when}</span> },
+    {
+        key: "when",
+        header: "When",
+        width: 110,
+        align: "end",
+        render: (deploy) => (
+            <Text variant="body" tone="muted" className="empty-no-results__when">
+                {deploy.when}
+            </Text>
+        ),
+    },
 ];
 
 export function EmptyNoResults() {
@@ -133,8 +146,12 @@ export function EmptyNoResults() {
     return (
         <div className="empty-no-results">
             <main className="empty-no-results__panel">
-                <h1 className="empty-no-results__title">Deploys</h1>
-                <p className="empty-no-results__subtitle">Deploys from the last 30 days, across every project.</p>
+                <Text variant="heading" as="h2">
+                    Deploys
+                </Text>
+                <Text variant="copy" className="empty-no-results__subtitle">
+                    Deploys from the last 30 days, across every project.
+                </Text>
 
                 <div className="empty-no-results__toolbar">
                     <div className="empty-no-results__search">
@@ -174,9 +191,9 @@ export function EmptyNoResults() {
                             ))}
                         </Menu>
                     </TagGroup>
-                    <span className="empty-no-results__count" aria-live="polite">
+                    <Text variant="caption" className="empty-no-results__count" aria-live="polite">
                         {rows.length} of {deploys.length} deploys
-                    </span>
+                    </Text>
                 </div>
 
                 <Table
@@ -188,15 +205,7 @@ export function EmptyNoResults() {
                     emptyContent={
                         <EmptyState
                             icon={<SearchX size={20} />}
-                            title={
-                                searched ? (
-                                    <>
-                                        No deploys match <span className="empty-no-results__query">“{searched}”</span>
-                                    </>
-                                ) : (
-                                    "No deploys match these filters"
-                                )
-                            }
+                            title={searched ? `No deploys match “${searched}”` : "No deploys match these filters"}
                             description={`We looked ${where}. ${searched && filtered ? "Try other words, or clear the filters to look wider." : searched ? "Try fewer or different words." : "Clear the filters to see them all."}`}
                             actions={
                                 <>

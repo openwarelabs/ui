@@ -31,20 +31,9 @@
     gap: var(--ow-space-2xl);
 }
 
-.notifications-settings__title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
 .notifications-settings__subtitle {
     max-width: 520px;
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
-    line-height: 1.5;
-    text-wrap: pretty;
+    margin-top: 4px;
 }
 
 .notifications-settings__saved {
@@ -53,9 +42,6 @@
     flex-shrink: 0;
     align-items: center;
     gap: 6px;
-    color: var(--ow-success-text);
-    font-size: 13px;
-    font-weight: var(--ow-weight-control);
     white-space: nowrap;
     transition: opacity var(--ow-duration-base) var(--ow-ease-standard);
 }
@@ -95,9 +81,6 @@
     align-items: center;
     justify-content: center;
     gap: 7px;
-    color: var(--ow-text-soft);
-    font-size: 13px;
-    font-weight: var(--ow-weight-emphasis);
 }
 
 .notifications-settings__channel-label svg {
@@ -108,18 +91,11 @@
     border-bottom: 1px solid var(--ow-border);
     background: var(--ow-surface-muted);
     padding: 0 18px;
-    color: var(--ow-text-muted);
-    font-size: 12px;
-    font-weight: var(--ow-weight-control);
 }
 
 .notifications-settings__group th {
     border-top: 1px solid var(--ow-border);
     padding: 18px 18px 6px;
-    color: var(--ow-text-muted);
-    font-size: 12px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: 0.02em;
 }
 
 .notifications-settings__grid tbody:first-of-type .notifications-settings__group th {
@@ -135,24 +111,11 @@
     flex-wrap: wrap;
     align-items: baseline;
     gap: 2px 8px;
-    font-weight: var(--ow-weight-control);
-    line-height: 1.4;
-}
-
-.notifications-settings__muted {
-    color: var(--ow-text-muted);
-    font-size: 12px;
-    font-weight: var(--ow-weight-regular);
 }
 
 .notifications-settings__event-description {
     display: block;
     margin-top: 2px;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-    font-weight: var(--ow-weight-regular);
-    line-height: 1.45;
-    text-wrap: pretty;
 }
 
 .notifications-settings__cell {
@@ -167,9 +130,7 @@
 }
 
 .notifications-settings__section-title {
-    margin: 0 0 10px;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
+    margin-bottom: 10px;
 }
 
 .notifications-settings__rows {
@@ -200,7 +161,6 @@
         flex-direction: column;
         gap: 2px;
         height: 54px;
-        font-size: 12px;
     }
     .notifications-settings__corner {
         padding: 0 12px;

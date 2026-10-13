@@ -13,6 +13,7 @@ import {
     Select,
     SettingsRow,
     Switch,
+    Text,
     toast,
 } from "@openwarelabs/ui";
 import { Bell, Bot, FolderKanban, Gauge, Inbox, Monitor, Moon, Palette, Rocket, Settings, SlidersHorizontal, Sun, UserRound } from "lucide-react";
@@ -304,10 +305,10 @@ function AppBehind({ onOpenSettings }: { onOpenSettings: () => void }) {
     return (
         <>
             <aside className="settings-dialog__aside" aria-label="Main navigation">
-                <span className="settings-dialog__brand">
+                <Text variant="card-title" as="span" className="settings-dialog__brand">
                     <span className="settings-dialog__mark" aria-hidden="true" />
                     Acme
-                </span>
+                </Text>
                 <NavList label="Workspace">
                     <NavItem icon={<Gauge size={15} />}>Overview</NavItem>
                     <NavItem icon={<FolderKanban size={15} />} active end={12}>
@@ -330,8 +331,12 @@ function AppBehind({ onOpenSettings }: { onOpenSettings: () => void }) {
             <main className="settings-dialog__page">
                 <div className="settings-dialog__page-header">
                     <div>
-                        <h1 className="settings-dialog__page-title">Projects</h1>
-                        <p className="settings-dialog__page-text">12 projects, 3 deploying today.</p>
+                        <Text variant="heading" as="h1">
+                            Projects
+                        </Text>
+                        <Text variant="copy" className="settings-dialog__page-text">
+                            12 projects, 3 deploying today.
+                        </Text>
                     </div>
                     <Button startIcon={<Settings size={16} />} shortcut="⌘," onClick={onOpenSettings}>
                         Settings
@@ -341,10 +346,10 @@ function AppBehind({ onOpenSettings }: { onOpenSettings: () => void }) {
                     {projects.map((project) => (
                         <li key={project.name} className="settings-dialog__project">
                             <span className="settings-dialog__project-text">
-                                <span className="settings-dialog__project-name">{project.name}</span>
-                                <span className="settings-dialog__project-detail">
+                                <Text variant="label">{project.name}</Text>
+                                <Text variant="caption" truncate className="settings-dialog__project-detail">
                                     {project.detail} · {project.when}
-                                </span>
+                                </Text>
                             </span>
                             <Badge size="sm" variant={statusTone[project.status]}>
                                 {project.status}
@@ -407,15 +412,19 @@ export function SettingsDialog() {
                 <NavList label="Settings sections" orientation="horizontal" className="settings-dialog__nav settings-dialog__nav--top">
                     {navItems}
                 </NavList>
-                <p className="settings-dialog__saved">Changes save as you go.</p>
+                <Text variant="caption" as="p" className="settings-dialog__saved">
+                    Changes save as you go.
+                </Text>
 
                 <CloseButton label="Close settings" className="settings-dialog__close" onClick={() => setOpen(false)} />
                 <div className="settings-dialog__panel">
                     <section aria-labelledby={headingId} className="settings-dialog__section">
-                        <h3 id={headingId} className="settings-dialog__section-title">
+                        <Text variant="dialog-title" as="h3" id={headingId} className="settings-dialog__section-title">
                             {current.label}
-                        </h3>
-                        <p className="settings-dialog__section-text">{current.description}</p>
+                        </Text>
+                        <Text variant="copy" className="settings-dialog__section-text">
+                            {current.description}
+                        </Text>
                         <div className="settings-dialog__rows">
                             <SectionRows section={section} prefs={prefs} set={set} />
                         </div>

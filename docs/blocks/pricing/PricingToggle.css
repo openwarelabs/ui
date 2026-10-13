@@ -35,12 +35,6 @@
     gap: 10px;
 }
 
-.pricing-toggle__switch-note {
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
-}
-
 /* Four plans in one panel, divided by hairlines rather than set apart as cards. */
 .pricing-toggle__panel {
     display: grid;
@@ -78,18 +72,8 @@
     gap: var(--ow-space-sm);
 }
 
-.pricing-toggle__name {
-    margin: 0;
-    font-size: 16px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.01em;
-}
-
 .pricing-toggle__summary {
-    margin: 8px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 14px;
-    line-height: 1.5;
+    margin-top: 8px;
 }
 
 .pricing-toggle__price {
@@ -98,43 +82,24 @@
 
 .pricing-toggle__figure {
     display: flex;
-    min-height: 44px;
     flex-wrap: wrap;
     align-items: baseline;
     gap: 2px 8px;
-    margin: 0;
 }
 
+/* A price, not a title: no extra leading above the figure, and digits of one width. */
 .pricing-toggle__amount {
-    font-size: 44px;
-    font-weight: 500;
     line-height: 1;
-    letter-spacing: -0.04em;
     font-variant-numeric: tabular-nums;
     animation: pricing-toggle-in var(--ow-duration-slow) var(--ow-ease-emphasized);
 }
 
 .pricing-toggle__amount--text {
-    font-size: 36px;
-    letter-spacing: -0.035em;
     animation: none;
 }
 
-.pricing-toggle__unit {
-    color: var(--ow-text-muted);
-    font-size: 13px;
-}
-
 .pricing-toggle__billing {
-    margin: 10px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
-    line-height: 1.5;
-}
-
-.pricing-toggle__saving {
-    color: var(--ow-success-text);
-    font-weight: var(--ow-weight-control);
+    margin-top: 10px;
 }
 
 .pricing-toggle__features {
@@ -149,9 +114,6 @@
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    color: var(--ow-text-soft);
-    font-size: 14px;
-    line-height: 1.45;
 }
 
 .pricing-toggle__features svg {
@@ -161,10 +123,7 @@
 }
 
 .pricing-toggle__note {
-    margin: 20px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
-    text-align: center;
+    margin-top: 20px;
 }
 
 @keyframes pricing-toggle-in {

@@ -1,6 +1,6 @@
 import { useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 
-import { Card, SegmentedControl, Select, Stat, VisuallyHidden } from "@openwarelabs/ui";
+import { Card, SegmentedControl, Select, Stat, Text, VisuallyHidden } from "@openwarelabs/ui";
 import { Bot, CircleCheck, Rocket, Timer } from "lucide-react";
 
 import "./DashboardChart.css";
@@ -279,10 +279,12 @@ export function DashboardChart() {
             <div className="dashboard-chart__inner">
                 <div className="dashboard-chart__header">
                     <div>
-                        <h1 id="dashboard-chart-title" className="dashboard-chart__title">
+                        <Text as="h1" variant="heading" id="dashboard-chart-title">
                             Deploys
-                        </h1>
-                        <p className="dashboard-chart__lead">How often your team ships, and how well it goes.</p>
+                        </Text>
+                        <Text variant="copy" className="dashboard-chart__lead">
+                            How often your team ships, and how well it goes.
+                        </Text>
                     </div>
                     <div className="dashboard-chart__filters">
                         <Select
@@ -333,21 +335,23 @@ export function DashboardChart() {
                 <Card className="dashboard-chart__card" padding="none">
                     <div className="dashboard-chart__card-header">
                         <div>
-                            <h2 className="dashboard-chart__card-title">Deploys per day</h2>
-                            <p className="dashboard-chart__summary">
+                            <Text as="h2" variant="card-title">
+                                Deploys per day
+                            </Text>
+                            <Text as="p" variant="caption" className="dashboard-chart__summary">
                                 {now.deploys.toLocaleString("en-GB")} deploys in the last {length} days,{" "}
                                 {project === "all" ? "across five projects" : `to ${project}`}
-                            </p>
+                            </Text>
                         </div>
                         <ul className="dashboard-chart__legend" aria-label="Legend">
-                            <li>
+                            <Text as="li" variant="caption" className="dashboard-chart__legend-item">
                                 <span className="dashboard-chart__key-line" aria-hidden="true" />
                                 Deploys
-                            </li>
-                            <li>
+                            </Text>
+                            <Text as="li" variant="caption" className="dashboard-chart__legend-item">
                                 <span className="dashboard-chart__key-bar" aria-hidden="true" />
                                 Failed
-                            </li>
+                            </Text>
                         </ul>
                     </div>
                     <DeployChart days={current} label={`Deploys per day${project === "all" ? "" : ` to ${project}`}`} />

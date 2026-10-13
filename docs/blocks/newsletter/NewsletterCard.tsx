@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 
-import { Avatar, AvatarGroup, Button, Card, Field, Input, Link, toast } from "@openwarelabs/ui";
+import { Avatar, AvatarGroup, Button, Card, Field, Input, Link, Text, toast } from "@openwarelabs/ui";
 import { ArrowRight, Mail } from "lucide-react";
 
 import "./NewsletterCard.css";
@@ -44,12 +44,12 @@ export function NewsletterCard() {
                     <span className="newsletter-card__icon" aria-hidden="true">
                         <Mail size={20} />
                     </span>
-                    <h2 id="newsletter-card-title" className="newsletter-card__title">
+                    <Text as="h2" variant="heading" id="newsletter-card-title" className="newsletter-card__title">
                         Get the next post by email
-                    </h2>
-                    <p className="newsletter-card__lead">
+                    </Text>
+                    <Text variant="copy" className="newsletter-card__lead">
                         Field notes on shipping software with agents, from the people who build Acme. A new post every other Thursday, about a six-minute read.
-                    </p>
+                    </Text>
                     <form className="newsletter-card__form" aria-labelledby="newsletter-card-title" noValidate onSubmit={submit}>
                         <Field label="Email address" error={error}>
                             <Input
@@ -75,9 +75,12 @@ export function NewsletterCard() {
                                 <Avatar key={name} name={name} />
                             ))}
                         </AvatarGroup>
-                        <span>
-                            <strong>Clara, Jonas and Sam</strong> write it for 9,400 readers.
-                        </span>
+                        <Text variant="body" tone="muted">
+                            <Text as="strong" variant="label" tone="soft">
+                                Clara, Jonas and Sam
+                            </Text>{" "}
+                            write it for 9,400 readers.
+                        </Text>
                     </div>
                     <Link href="#" variant="standalone" className="newsletter-card__past">
                         Read past posts

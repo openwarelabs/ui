@@ -29,9 +29,6 @@
     grid-area: brand;
     align-items: center;
     gap: 9px;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.01em;
 }
 
 .onboarding-choice__mark {
@@ -62,25 +59,14 @@
     text-align: center;
 }
 
-.onboarding-choice__title {
-    margin: 0;
-    font-size: 30px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.2;
-    letter-spacing: -0.025em;
-    text-wrap: balance;
-}
-
 .onboarding-choice__title:focus {
     outline: none;
 }
 
+/* Centred under the title, so its lines balance rather than leave a short last line. */
 .onboarding-choice__lead {
     max-width: 520px;
-    margin: 12px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 15px;
-    line-height: 1.55;
+    margin-top: 12px;
     text-wrap: balance;
 }
 
@@ -114,11 +100,8 @@
     align-items: center;
     justify-content: center;
     gap: var(--ow-space-sm);
-    margin: 28px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
+    margin-top: 28px;
     text-align: center;
-    text-wrap: pretty;
 }
 
 .onboarding-choice__note svg {
@@ -183,23 +166,6 @@
     gap: 2px;
 }
 
-.onboarding-choice__repo-name {
-    overflow: hidden;
-    font-family: var(--ow-font-mono);
-    font-size: 13px;
-    font-weight: var(--ow-weight-control);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.onboarding-choice__repo-meta {
-    overflow: hidden;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 .onboarding-choice__done-icon {
     display: inline-flex;
     margin-bottom: 20px;
@@ -241,9 +207,6 @@
     .onboarding-choice__body {
         padding-top: 40px;
     }
-    .onboarding-choice__title {
-        font-size: 26px;
-    }
     .onboarding-choice__content {
         margin-top: 28px;
     }
@@ -258,6 +221,6 @@
         text-align: left;
     }
     .onboarding-choice__note svg {
-        margin-top: 1px;
+        margin-top: 3px;
     }
 }

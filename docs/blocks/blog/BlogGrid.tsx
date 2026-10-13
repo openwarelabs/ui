@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Button, Card, SectionHeading, SegmentedControl, Tag, User } from "@openwarelabs/ui";
+import { Button, Card, Link, SectionHeading, SegmentedControl, Tag, Text, User } from "@openwarelabs/ui";
 import { ArrowRight } from "lucide-react";
 
 import "./BlogGrid.css";
@@ -197,19 +197,23 @@ export function BlogGrid() {
                             <Card padding="none" className="blog-grid__post">
                                 <Cover kind={post.cover} />
                                 <div className="blog-grid__body">
-                                    <div className="blog-grid__meta">
+                                    <Text variant="caption" as="div" className="blog-grid__meta">
                                         <Tag size="sm">{post.category}</Tag>
                                         <time dateTime={post.iso}>{post.date}</time>
-                                    </div>
-                                    <h3 className="blog-grid__post-title">
-                                        <a className="blog-grid__link" href="#">
+                                    </Text>
+                                    <Text variant="heading" as="h3" className="blog-grid__post-title">
+                                        <Link href="#" variant="standalone" className="blog-grid__link">
                                             {post.title}
-                                        </a>
-                                    </h3>
-                                    <p className="blog-grid__excerpt">{post.excerpt}</p>
+                                        </Link>
+                                    </Text>
+                                    <Text variant="copy" className="blog-grid__excerpt">
+                                        {post.excerpt}
+                                    </Text>
                                     <div className="blog-grid__byline">
                                         <User name={post.author} description={post.role} size="sm" />
-                                        <span className="blog-grid__read">{post.read}</span>
+                                        <Text variant="caption" className="blog-grid__read">
+                                            {post.read}
+                                        </Text>
                                     </div>
                                 </div>
                             </Card>

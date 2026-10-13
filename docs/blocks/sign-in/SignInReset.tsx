@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 
-import { Button, Card, Field, Input, Link, VisuallyHidden } from "@openwarelabs/ui";
+import { Button, Card, Field, Input, Link, Text, VisuallyHidden } from "@openwarelabs/ui";
 import { ArrowLeft, Check, CircleCheck, Eye, EyeOff, KeyRound } from "lucide-react";
 
 import "./SignInReset.css";
@@ -26,21 +26,21 @@ export function SignInReset() {
     const [shown, setShown] = useState(false);
     const [error, setError] = useState("");
     const [busy, setBusy] = useState(false);
-    const titleRef = useRef<HTMLHeadingElement>(null);
     const shownStep = useRef(step);
 
     const emailId = `${id}-email`;
     const passwordId = `${id}-password`;
     const rulesId = `${id}-rules`;
+    const doneTitleId = `${id}-done-title`;
 
     // A new step moves focus: into the password field, or onto the title of the last page. Not on first load.
     useEffect(() => {
         if (shownStep.current === step) return;
         shownStep.current = step;
         if (step === "password") document.getElementById(passwordId)?.focus();
-        else if (step === "done") titleRef.current?.focus();
+        else if (step === "done") document.getElementById(doneTitleId)?.focus();
         else document.getElementById(emailId)?.focus();
-    }, [step, emailId, passwordId]);
+    }, [step, emailId, passwordId, doneTitleId]);
 
     function wait(then: () => void) {
         setBusy(true);
@@ -88,10 +88,10 @@ export function SignInReset() {
     return (
         <main className="sign-in-reset">
             <header className="sign-in-reset__bar">
-                <span className="sign-in-reset__brand">
+                <Text variant="card-title" as="span" className="sign-in-reset__brand">
                     <span className="sign-in-reset__mark" aria-hidden="true" />
                     Acme
-                </span>
+                </Text>
                 <Link href="#" variant="standalone" className="sign-in-reset__back">
                     <ArrowLeft size={15} aria-hidden="true" />
                     Back to sign in
@@ -105,8 +105,12 @@ export function SignInReset() {
                             <span className="sign-in-reset__icon" aria-hidden="true">
                                 <KeyRound size={20} />
                             </span>
-                            <h1 className="sign-in-reset__title">Reset your password</h1>
-                            <p className="sign-in-reset__lead">Enter the email you use for Acme, and we'll send you a link to choose a new password.</p>
+                            <Text variant="heading" as="h1" className="sign-in-reset__title">
+                                Reset your password
+                            </Text>
+                            <Text variant="copy" className="sign-in-reset__lead">
+                                Enter the email you use for Acme, and we'll send you a link to choose a new password.
+                            </Text>
                             <Field label="Email" error={error}>
                                 <Input
                                     id={emailId}
@@ -131,12 +135,18 @@ export function SignInReset() {
                             <span className="sign-in-reset__icon" aria-hidden="true">
                                 <KeyRound size={20} />
                             </span>
-                            <h1 className="sign-in-reset__title">Choose a new password</h1>
-                            <p className="sign-in-reset__lead">
-                                For <strong className="sign-in-reset__email">{email.trim()}</strong>. You'll be signed in as soon as it's saved.
-                            </p>
+                            <Text variant="heading" as="h1" className="sign-in-reset__title">
+                                Choose a new password
+                            </Text>
+                            <Text variant="copy" className="sign-in-reset__lead">
+                                For{" "}
+                                <Text variant="label" as="strong" tone="default" className="sign-in-reset__email">
+                                    {email.trim()}
+                                </Text>
+                                . You'll be signed in as soon as it's saved.
+                            </Text>
                             {/* A hidden username lets password managers save the new password against the right account. */}
-                            <input type="email" name="username" value={email.trim()} autoComplete="username" readOnly hidden />
+                            <Input type="email" name="username" value={email.trim()} autoComplete="username" readOnly hidden />
                             <Field label="New password" error={error}>
                                 <Input
                                     id={passwordId}
@@ -166,13 +176,20 @@ export function SignInReset() {
                                 {rules.map((rule) => {
                                     const met = rule.test(password);
                                     return (
-                                        <li key={rule.label} className="sign-in-reset__rule" data-met={met || undefined}>
+                                        <Text
+                                            key={rule.label}
+                                            variant="caption"
+                                            as="li"
+                                            tone={met ? "default" : "muted"}
+                                            className="sign-in-reset__rule"
+                                            data-met={met || undefined}
+                                        >
                                             <span className="sign-in-reset__rule-mark" aria-hidden="true">
                                                 <Check size={11} strokeWidth={3} />
                                             </span>
                                             {rule.label}
                                             <VisuallyHidden>{met ? " (done)" : " (not yet)"}</VisuallyHidden>
-                                        </li>
+                                        </Text>
                                     );
                                 })}
                             </ul>
@@ -187,10 +204,12 @@ export function SignInReset() {
                             <span className="sign-in-reset__icon sign-in-reset__icon--done" aria-hidden="true">
                                 <CircleCheck size={20} />
                             </span>
-                            <h1 ref={titleRef} tabIndex={-1} className="sign-in-reset__title">
+                            <Text variant="heading" as="h1" id={doneTitleId} tabIndex={-1} className="sign-in-reset__title">
                                 Password changed
-                            </h1>
-                            <p className="sign-in-reset__lead">You're signed in. To be safe, we've signed you out of Acme on every other device.</p>
+                            </Text>
+                            <Text variant="copy" className="sign-in-reset__lead">
+                                You're signed in. To be safe, we've signed you out of Acme on every other device.
+                            </Text>
                             <Button
                                 variant="primary"
                                 fullWidth

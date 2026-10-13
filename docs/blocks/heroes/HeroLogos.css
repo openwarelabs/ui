@@ -31,20 +31,7 @@
 }
 
 .hero-logos__title {
-    margin: 24px 0 0;
-    font-size: 72px;
-    font-weight: 500;
-    line-height: 0.98;
-    letter-spacing: -0.045em;
-    text-wrap: balance;
-}
-
-.hero-logos__lead {
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 18px;
-    line-height: 1.6;
-    text-wrap: pretty;
+    margin-top: 24px;
 }
 
 .hero-logos__actions {
@@ -59,12 +46,6 @@
     margin-top: 104px;
     border-top: 1px solid var(--ow-border);
     padding-top: 36px;
-}
-
-.hero-logos__proof-label {
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 14px;
 }
 
 .hero-logos__list {
@@ -141,12 +122,6 @@
         grid-template-columns: minmax(0, 1fr);
         gap: 28px;
     }
-    .hero-logos__title {
-        font-size: 64px;
-    }
-    .hero-logos__lead {
-        max-width: 560px;
-    }
     .hero-logos__list {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -157,14 +132,6 @@
 @media (max-width: 760px) {
     .hero-logos {
         padding: 72px var(--ow-page-gutter) 64px;
-    }
-    .hero-logos__title {
-        font-size: 44px;
-        line-height: 1.02;
-        letter-spacing: -0.04em;
-    }
-    .hero-logos__lead {
-        font-size: 16px;
     }
     .hero-logos__actions {
         flex-direction: column;

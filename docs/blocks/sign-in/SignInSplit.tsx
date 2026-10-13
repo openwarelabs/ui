@@ -1,6 +1,6 @@
 import { useId, useState, type FormEvent } from "react";
 
-import { Avatar, AvatarGroup, Badge, Button, Field, Input, Link, Separator, toast } from "@openwarelabs/ui";
+import { Avatar, AvatarGroup, Badge, Button, Field, Input, Link, Separator, Text, toast } from "@openwarelabs/ui";
 import { Bot, Check, GitBranch, GitPullRequest } from "lucide-react";
 
 import "./SignInSplit.css";
@@ -95,14 +95,18 @@ export function SignInSplit() {
     return (
         <main className="sign-in-split">
             <div className="sign-in-split__form-side">
-                <span className="sign-in-split__brand">
+                <Text variant="card-title" as="span" className="sign-in-split__brand">
                     <span className="sign-in-split__mark" aria-hidden="true" />
                     Acme
-                </span>
+                </Text>
 
                 <div className="sign-in-split__form-wrap">
-                    <h1 className="sign-in-split__title">Create your account</h1>
-                    <p className="sign-in-split__lead">Free for teams of up to five. No card needed.</p>
+                    <Text variant="heading" as="h1">
+                        Create your account
+                    </Text>
+                    <Text variant="copy" className="sign-in-split__lead">
+                        Free for teams of up to five. No card needed.
+                    </Text>
 
                     <Button
                         fullWidth
@@ -155,7 +159,7 @@ export function SignInSplit() {
                         </Button>
                     </form>
 
-                    <p className="sign-in-split__terms">
+                    <Text variant="caption" as="p" align="center" className="sign-in-split__terms">
                         By creating an account you agree to the{" "}
                         <Link href="#" variant="muted">
                             terms
@@ -165,29 +169,31 @@ export function SignInSplit() {
                             privacy policy
                         </Link>
                         .
-                    </p>
+                    </Text>
                 </div>
 
-                <p className="sign-in-split__switch">
+                <Text variant="copy" align="center">
                     Already have an account? <Link href="#">Sign in</Link>
-                </p>
+                </Text>
             </div>
 
             <aside className="sign-in-split__plate" aria-label="About Acme">
                 <div className="sign-in-split__plate-inner">
-                    <p className="sign-in-split__eyebrow">
+                    <Text variant="caption" as="p" className="sign-in-split__eyebrow">
                         <span className="sign-in-split__brass" aria-hidden="true" />
                         Agents that open their own pull requests
-                    </p>
-                    <p className="sign-in-split__headline">Hand the routine work to agents. Review every change before it ships.</p>
+                    </Text>
+                    <Text variant="heading" as="p" className="sign-in-split__headline">
+                        Hand the routine work to agents. Review every change before it ships.
+                    </Text>
                     <ReviewVignette />
                     <figure className="sign-in-split__quote">
-                        <blockquote className="sign-in-split__quote-text">
+                        <Text variant="body" as="blockquote" className="sign-in-split__quote-text">
                             “We give the dull fixes to agents now, and spend our reviews on the parts that need us.”
-                        </blockquote>
-                        <figcaption className="sign-in-split__quote-by">
+                        </Text>
+                        <Text variant="caption" as="figcaption" className="sign-in-split__quote-by">
                             Lena Fischer, Head of Platform at Halcyon <span className="sign-in-split__sample">Sample quote</span>
-                        </figcaption>
+                        </Text>
                     </figure>
                 </div>
             </aside>

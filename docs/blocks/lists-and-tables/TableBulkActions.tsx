@@ -1,6 +1,6 @@
 import { useState, type Key } from "react";
 
-import { Avatar, Badge, Button, Card, Menu, MenuItem, MenuLabel, Table, Tooltip, toast, type TableColumn } from "@openwarelabs/ui";
+import { Avatar, Badge, Button, Card, Menu, MenuItem, MenuLabel, Table, Text, Tooltip, toast, type TableColumn } from "@openwarelabs/ui";
 import { BellRing, ChevronDown, Mail, Trash2, UserPlus, X } from "lucide-react";
 
 import "./TableBulkActions.css";
@@ -49,8 +49,12 @@ const columns: Array<TableColumn<Person>> = [
                     </span>
                 )}
                 <span className="table-bulk-actions__person-text">
-                    <span className="table-bulk-actions__name">{person.name ?? person.email}</span>
-                    <span className="table-bulk-actions__email">{person.name ? person.email : "Hasn't accepted yet"}</span>
+                    <Text as="span" truncate>
+                        {person.name ?? person.email}
+                    </Text>
+                    <Text variant="caption" truncate>
+                        {person.name ? person.email : "Hasn't accepted yet"}
+                    </Text>
                 </span>
             </span>
         ),
@@ -60,14 +64,16 @@ const columns: Array<TableColumn<Person>> = [
         header: "Role",
         sortable: true,
         sortValue: (person) => roleOrder[person.role],
-        render: (person) => <span className="table-bulk-actions__role">{person.role}</span>,
+        render: (person) => <span className="table-bulk-actions__nowrap">{person.role}</span>,
     },
     {
         key: "twoFactor",
         header: "Two-factor",
         render: (person) =>
             person.twoFactor === null ? (
-                <span className="table-bulk-actions__muted">Not yet</span>
+                <Text as="span" tone="muted" className="table-bulk-actions__nowrap">
+                    Not yet
+                </Text>
             ) : (
                 <Badge size="sm" variant={person.twoFactor === "On" ? "success" : person.twoFactor === "Reminded" ? "active" : "warning"}>
                     {person.twoFactor === "Reminded" ? "Off, reminded" : person.twoFactor}
@@ -80,7 +86,11 @@ const columns: Array<TableColumn<Person>> = [
         align: "end",
         sortable: true,
         sortValue: (person) => person.minutesAgo,
-        render: (person) => <span className="table-bulk-actions__muted">{person.lastActive}</span>,
+        render: (person) => (
+            <Text as="span" tone="muted" className="table-bulk-actions__nowrap">
+                {person.lastActive}
+            </Text>
+        ),
     },
 ];
 
@@ -130,10 +140,12 @@ export function TableBulkActions() {
             <div className="table-bulk-actions__inner">
                 <div className="table-bulk-actions__header">
                     <div>
-                        <h2 id="table-bulk-actions-title" className="table-bulk-actions__title">
+                        <Text as="h2" variant="heading" id="table-bulk-actions-title">
                             Members
-                        </h2>
-                        <p className="table-bulk-actions__lead">Everyone in the Acme workspace, and what they can do in it.</p>
+                        </Text>
+                        <Text variant="copy" className="table-bulk-actions__lead">
+                            Everyone in the Acme workspace, and what they can do in it.
+                        </Text>
                     </div>
                     <Button
                         variant="primary"
@@ -147,9 +159,9 @@ export function TableBulkActions() {
                 <Card padding="none" className="table-bulk-actions__card">
                     {chosen.length ? (
                         <div className="table-bulk-actions__bar" role="region" aria-label="Selected people">
-                            <span className="table-bulk-actions__selected" aria-live="polite">
+                            <Text variant="label" tone="primary" className="table-bulk-actions__selected" aria-live="polite">
                                 {chosen.length} selected
-                            </span>
+                            </Text>
                             <div className="table-bulk-actions__actions">
                                 <Menu
                                     label="Change role"
@@ -183,11 +195,15 @@ export function TableBulkActions() {
                         </div>
                     ) : (
                         <div className="table-bulk-actions__top">
-                            <span>
-                                <strong>{plural(rows.length - invited, "person", "people")}</strong>
+                            <Text as="span" tone="muted">
+                                <Text as="strong" variant="label" tone="default">
+                                    {plural(rows.length - invited, "person", "people")}
+                                </Text>
                                 {invited ? ` and ${plural(invited, "invitation")} waiting` : ""}
-                            </span>
-                            <span className="table-bulk-actions__hint">Select people to change their role or remove them together.</span>
+                            </Text>
+                            <Text variant="caption" className="table-bulk-actions__hint">
+                                Select people to change their role or remove them together.
+                            </Text>
                         </div>
                     )}
 

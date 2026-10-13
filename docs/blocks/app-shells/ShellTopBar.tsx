@@ -4,15 +4,16 @@ import {
     Avatar,
     Badge,
     Button,
+    Card,
     CommandPalette,
     Drawer,
-    Kbd,
     Menu,
     MenuItem,
     MenuLabel,
     MenuSeparator,
     NavItem,
     NavList,
+    Text,
     type BadgeVariant,
     type Command,
 } from "@openwarelabs/ui";
@@ -140,11 +141,12 @@ function WorkspaceMenu() {
             label="Workspaces"
             width={232}
             trigger={
-                <button type="button" className="shell-top-bar__workspace">
+                <Button variant="ghost" size="sm" className="shell-top-bar__workspace" endIcon={<ChevronsUpDown size={15} />}>
                     <span className="shell-top-bar__mark" aria-hidden="true" />
-                    <span className="shell-top-bar__workspace-name">Acme</span>
-                    <ChevronsUpDown size={15} aria-hidden="true" />
-                </button>
+                    <Text as="span" variant="card-title" tone="default">
+                        Acme
+                    </Text>
+                </Button>
             }
         >
             <MenuLabel>Workspaces</MenuLabel>
@@ -214,20 +216,24 @@ export function ShellTopBar() {
                 </NavList>
 
                 <div className="shell-top-bar__end">
-                    <button type="button" className="shell-top-bar__search" onClick={() => setSearchOpen(true)} aria-label="Search">
-                        <Search size={15} aria-hidden="true" />
-                        <span className="shell-top-bar__search-text">Search</span>
-                        <Kbd>⌘K</Kbd>
-                    </button>
+                    <Button size="sm" className="shell-top-bar__search" startIcon={<Search size={15} />} shortcut="⌘K" onClick={() => setSearchOpen(true)}>
+                        <Text as="span" tone="muted" className="shell-top-bar__search-text">
+                            Search
+                        </Text>
+                    </Button>
+                    {/* Under 1024px wide the search field folds to its icon. */}
+                    <Button variant="ghost" iconOnly className="shell-top-bar__search-icon" aria-label="Search" onClick={() => setSearchOpen(true)}>
+                        <Search size={18} />
+                    </Button>
                     <span className="shell-top-bar__account">
                         <Menu
                             label="Account"
                             align="end"
                             width={232}
                             trigger={
-                                <button type="button" className="shell-top-bar__avatar" aria-label="Account: Maya Chen">
+                                <Button variant="ghost" iconOnly aria-label="Account: Maya Chen">
                                     <Avatar name="Maya Chen" size="md" />
-                                </button>
+                                </Button>
                             }
                         >
                             <MenuLabel>maya@example.com</MenuLabel>
@@ -246,8 +252,12 @@ export function ShellTopBar() {
                 <div className="shell-top-bar__page">
                     <div className="shell-top-bar__page-header">
                         <div>
-                            <h1 className="shell-top-bar__title">{section.label}</h1>
-                            <p className="shell-top-bar__subtitle">{section.description}</p>
+                            <Text as="h1" variant="heading">
+                                {section.label}
+                            </Text>
+                            <Text variant="copy" className="shell-top-bar__subtitle">
+                                {section.description}
+                            </Text>
                         </div>
                         <Button variant="primary" startIcon={<ActionIcon size={16} />}>
                             {section.action.label}
@@ -257,33 +267,45 @@ export function ShellTopBar() {
                     <dl className="shell-top-bar__figures">
                         {section.figures.map((figure) => (
                             <div key={figure.label} className="shell-top-bar__figure">
-                                <dt>{figure.label}</dt>
-                                <dd>{figure.value}</dd>
+                                <Text as="dt" variant="caption">
+                                    {figure.label}
+                                </Text>
+                                <Text as="dd" variant="heading">
+                                    {figure.value}
+                                </Text>
                             </div>
                         ))}
                     </dl>
 
-                    <section className="shell-top-bar__card" aria-labelledby="shell-top-bar-list">
-                        <h2 id="shell-top-bar-list" className="shell-top-bar__card-title">
-                            {section.listTitle}
-                        </h2>
-                        <ul className="shell-top-bar__list">
-                            {section.rows.map((row) => (
-                                <li key={row.title} className="shell-top-bar__item">
-                                    <span className="shell-top-bar__item-text">
-                                        <span className="shell-top-bar__item-title">{row.title}</span>
-                                        <span className="shell-top-bar__item-meta">{row.meta}</span>
-                                    </span>
-                                    <span className="shell-top-bar__item-end">
-                                        <span className="shell-top-bar__item-when">{row.when}</span>
-                                        <Badge size="sm" variant={row.tone}>
-                                            {row.status}
-                                        </Badge>
-                                    </span>
-                                </li>
-                            ))}
-                        </ul>
-                    </section>
+                    <Card padding="none">
+                        <section aria-labelledby="shell-top-bar-list">
+                            <Text as="h2" variant="card-title" id="shell-top-bar-list" className="shell-top-bar__card-title">
+                                {section.listTitle}
+                            </Text>
+                            <ul className="shell-top-bar__list">
+                                {section.rows.map((row) => (
+                                    <li key={row.title} className="shell-top-bar__item">
+                                        <span className="shell-top-bar__item-text">
+                                            <Text as="span" truncate>
+                                                {row.title}
+                                            </Text>
+                                            <Text variant="caption" truncate>
+                                                {row.meta}
+                                            </Text>
+                                        </span>
+                                        <span className="shell-top-bar__item-end">
+                                            <Text variant="caption" className="shell-top-bar__item-when">
+                                                {row.when}
+                                            </Text>
+                                            <Badge size="sm" variant={row.tone}>
+                                                {row.status}
+                                            </Badge>
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </section>
+                    </Card>
                 </div>
             </main>
 
@@ -296,14 +318,17 @@ export function ShellTopBar() {
                             above
                             width={232}
                             trigger={
-                                <button type="button" className="shell-top-bar__user">
+                                <Button variant="ghost" fullWidth className="shell-top-bar__user" endIcon={<ChevronsUpDown size={15} />}>
                                     <Avatar name="Maya Chen" size="sm" />
                                     <span className="shell-top-bar__user-text">
-                                        <span className="shell-top-bar__user-name">Maya Chen</span>
-                                        <span className="shell-top-bar__user-email">maya@example.com</span>
+                                        <Text as="span" variant="label" tone="default" truncate>
+                                            Maya Chen
+                                        </Text>
+                                        <Text variant="caption" truncate>
+                                            maya@example.com
+                                        </Text>
                                     </span>
-                                    <ChevronsUpDown size={15} aria-hidden="true" />
-                                </button>
+                                </Button>
                             }
                         >
                             <AccountItems />

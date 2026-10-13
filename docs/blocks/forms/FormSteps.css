@@ -26,17 +26,8 @@
     padding: 28px 28px 24px;
 }
 
-.form-steps__title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
 .form-steps__lead {
-    margin: 6px 0 0;
-    color: var(--ow-text-muted);
+    margin-top: 6px;
 }
 
 .form-steps__progress {
@@ -50,10 +41,7 @@
 .form-steps__step-title {
     display: grid;
     gap: 4px;
-    margin: 0 0 22px;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
-    line-height: 1.3;
+    margin-bottom: 22px;
 }
 
 .form-steps__step-title:focus {
@@ -64,13 +52,6 @@
     outline: 2px solid var(--ow-focus-ring);
     outline-offset: 4px;
     border-radius: var(--ow-radius-sm);
-}
-
-.form-steps__step-count {
-    color: var(--ow-text-muted);
-    font-size: 12px;
-    font-weight: var(--ow-weight-control);
-    font-variant-numeric: tabular-nums;
 }
 
 .form-steps__fields {
@@ -104,13 +85,7 @@
     border-top: 1px solid var(--ow-border);
 }
 
-.form-steps__review-label {
-    color: var(--ow-text-muted);
-    font-size: 13px;
-}
-
 .form-steps__review-value {
-    margin: 0;
     overflow-wrap: anywhere;
 }
 

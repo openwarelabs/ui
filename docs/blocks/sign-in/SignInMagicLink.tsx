@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 
-import { Button, Field, Input, Link, toast } from "@openwarelabs/ui";
+import { Button, Field, Input, Link, Text, toast } from "@openwarelabs/ui";
 import { ArrowLeft, Mail, MailCheck } from "lucide-react";
 
 import "./SignInMagicLink.css";
@@ -10,12 +10,12 @@ const cooldown = 30;
 
 export function SignInMagicLink() {
     const emailId = useId();
+    const titleId = useId();
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
     const [sending, setSending] = useState(false);
     const [sentTo, setSentTo] = useState<string | null>(null);
     const [wait, setWait] = useState(0);
-    const titleRef = useRef<HTMLHeadingElement>(null);
     const shown = useRef<string | null>(null);
 
     // Count the resend wait down a second at a time.
@@ -29,9 +29,9 @@ export function SignInMagicLink() {
     useEffect(() => {
         if (shown.current === sentTo) return;
         shown.current = sentTo;
-        if (sentTo) titleRef.current?.focus();
+        if (sentTo) document.getElementById(titleId)?.focus();
         else document.getElementById(emailId)?.focus();
-    }, [sentTo, emailId]);
+    }, [sentTo, emailId, titleId]);
 
     function send(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -59,11 +59,11 @@ export function SignInMagicLink() {
         <main className="sign-in-magic-link">
             <div className="sign-in-magic-link__panel">
                 <header className="sign-in-magic-link__bar">
-                    <span className="sign-in-magic-link__brand">
+                    <Text variant="card-title" as="span" className="sign-in-magic-link__brand">
                         <span className="sign-in-magic-link__mark" aria-hidden="true" />
                         Acme
-                    </span>
-                    <Link href="#" variant="muted" className="sign-in-magic-link__bar-link">
+                    </Text>
+                    <Link href="#" variant="muted">
                         Sign in with a password
                     </Link>
                 </header>
@@ -74,14 +74,16 @@ export function SignInMagicLink() {
                             <span className="sign-in-magic-link__icon sign-in-magic-link__icon--sent" aria-hidden="true">
                                 <MailCheck size={22} />
                             </span>
-                            <h1 ref={titleRef} tabIndex={-1} className="sign-in-magic-link__title">
+                            <Text variant="heading" as="h1" id={titleId} tabIndex={-1} className="sign-in-magic-link__title">
                                 Check your email
-                            </h1>
-                            <p className="sign-in-magic-link__lead">
+                            </Text>
+                            <Text variant="copy" className="sign-in-magic-link__lead">
                                 We sent a sign-in link to
-                                <strong className="sign-in-magic-link__email">{sentTo}</strong>
+                                <Text variant="label" as="strong" tone="default" className="sign-in-magic-link__email">
+                                    {sentTo}
+                                </Text>
                                 It works once, for the next 15 minutes, on any device.
-                            </p>
+                            </Text>
                             <div className="sign-in-magic-link__actions">
                                 <Button fullWidth disabled={wait > 0} onClick={resend}>
                                     {wait > 0 ? `Send again in ${wait} s` : "Send the link again"}
@@ -90,15 +92,21 @@ export function SignInMagicLink() {
                                     Use a different email
                                 </Button>
                             </div>
-                            <p className="sign-in-magic-link__note">Can't see it? Look in your spam folder, or search your inbox for “Acme”.</p>
+                            <Text variant="caption" as="p" className="sign-in-magic-link__note">
+                                Can't see it? Look in your spam folder, or search your inbox for “Acme”.
+                            </Text>
                         </div>
                     ) : (
                         <form className="sign-in-magic-link__content" key="ask" noValidate onSubmit={send}>
                             <span className="sign-in-magic-link__icon" aria-hidden="true">
                                 <Mail size={22} />
                             </span>
-                            <h1 className="sign-in-magic-link__title">Sign in with email</h1>
-                            <p className="sign-in-magic-link__lead">We'll email you a link that signs you in. There's no password to remember.</p>
+                            <Text variant="heading" as="h1" className="sign-in-magic-link__title">
+                                Sign in with email
+                            </Text>
+                            <Text variant="copy" className="sign-in-magic-link__lead">
+                                We'll email you a link that signs you in. There's no password to remember.
+                            </Text>
                             <div className="sign-in-magic-link__fields">
                                 <Field label="Email" error={error}>
                                     <Input

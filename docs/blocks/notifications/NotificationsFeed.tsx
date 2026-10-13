@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-import { Avatar, AvatarGroup, Badge, Button, Link, SegmentedControl } from "@openwarelabs/ui";
+import { Avatar, AvatarGroup, Badge, Button, Link, SegmentedControl, Text } from "@openwarelabs/ui";
 import { Bot, Rocket } from "lucide-react";
 
 import "./NotificationsFeed.css";
@@ -24,7 +24,17 @@ interface Day {
     events: FeedEvent[];
 }
 
-const Who = ({ children }: { children: ReactNode }) => <span className="notifications-feed__who">{children}</span>;
+const Who = ({ children }: { children: ReactNode }) => (
+    <Text as="span" variant="label" tone="default">
+        {children}
+    </Text>
+);
+/** A commit, a branch or a diff count: mono, at the size of the line it sits in. */
+const Mono = ({ children, tone }: { children: ReactNode; tone?: "success" | "danger" }) => (
+    <Text variant="code" tone={tone} className="notifications-feed__mono">
+        {children}
+    </Text>
+);
 const To = ({ children }: { children: ReactNode }) => (
     <Link href="#" variant="standalone">
         {children}
@@ -52,7 +62,7 @@ const recent: Day[] = [
                         <Badge size="sm" variant="success">
                             Live
                         </Badge>
-                        <span className="notifications-feed__mono">main · 3f9c2a1</span>
+                        <Mono>main · 3f9c2a1</Mono>
                         <span>Built in 48 s</span>
                     </>
                 ),
@@ -69,8 +79,8 @@ const recent: Day[] = [
                 ),
                 detail: (
                     <>
-                        <span className="notifications-feed__added">+124</span>
-                        <span className="notifications-feed__removed">−38</span>
+                        <Mono tone="success">+124</Mono>
+                        <Mono tone="danger">−38</Mono>
                         <span>6 files · asked Tomás Reyes to review</span>
                     </>
                 ),
@@ -85,7 +95,11 @@ const recent: Day[] = [
                         <Who>Clara Novak</Who> commented on <To>Fix invoice dates in the EU</To>
                     </>
                 ),
-                detail: <p className="notifications-feed__quote">The rounding looks right now. Can we add a test for a customer in Dublin at 23:30 UTC?</p>,
+                detail: (
+                    <Text variant="caption" as="p" tone="soft" className="notifications-feed__quote">
+                        The rounding looks right now. Can we add a test for a customer in Dublin at 23:30 UTC?
+                    </Text>
+                ),
             },
             {
                 id: "e4",
@@ -112,7 +126,7 @@ const recent: Day[] = [
                 at: "18:10",
                 line: (
                     <>
-                        <To>mobile-app</To> failed to deploy from <span className="notifications-feed__mono">release/2.4</span>
+                        <To>mobile-app</To> failed to deploy from <Mono>release/2.4</Mono>
                     </>
                 ),
                 detail: (
@@ -199,7 +213,7 @@ const earlier: Day[] = [
                         <Badge size="sm" variant="success">
                             Live
                         </Badge>
-                        <span className="notifications-feed__mono">main · 8d41e07</span>
+                        <Mono>main · 8d41e07</Mono>
                         <span>Built in 1 min 6 s</span>
                     </>
                 ),
@@ -221,7 +235,11 @@ const earlier: Day[] = [
                         <Who>Maya Chen</Who> requested changes on <To>#471 Release 2.4</To>
                     </>
                 ),
-                detail: <p className="notifications-feed__quote">The changelog still lists the old Team price. It's €12 a person now.</p>,
+                detail: (
+                    <Text variant="caption" as="p" tone="soft" className="notifications-feed__quote">
+                        The changelog still lists the old Team price. It's €12 a person now.
+                    </Text>
+                ),
             },
             {
                 id: "e11",
@@ -295,10 +313,12 @@ export function NotificationsFeed() {
             <div ref={panel} className="notifications-feed__panel">
                 <header className="notifications-feed__header">
                     <div>
-                        <h2 id="notifications-feed-title" className="notifications-feed__title">
+                        <Text variant="heading" as="h2" id="notifications-feed-title">
                             Activity
-                        </h2>
-                        <p className="notifications-feed__subtitle">What happened across Acme, newest first.</p>
+                        </Text>
+                        <Text variant="copy" className="notifications-feed__subtitle">
+                            What happened across Acme, newest first.
+                        </Text>
                     </div>
                     <SegmentedControl
                         className="notifications-feed__filter"
@@ -318,33 +338,45 @@ export function NotificationsFeed() {
                             aria-labelledby={`notifications-feed-${day.id}`}
                             data-earlier={earlier.some((older) => older.id === day.id) || undefined}
                         >
-                            <h3 id={`notifications-feed-${day.id}`} className="notifications-feed__day-title" tabIndex={-1}>
+                            <Text variant="label" as="h3" id={`notifications-feed-${day.id}`} className="notifications-feed__day-title" tabIndex={-1}>
                                 {day.label}
-                                <span className="notifications-feed__day-date">{day.date}</span>
-                            </h3>
+                                <Text as="span" tone="muted">
+                                    {day.date}
+                                </Text>
+                            </Text>
                             <ol className="notifications-feed__events">
                                 {day.events.map((event) => (
                                     <li key={event.id} className="notifications-feed__event">
                                         <Node by={event.by} />
                                         <div className="notifications-feed__body">
-                                            <p className="notifications-feed__line">{event.line}</p>
-                                            {event.detail ? <div className="notifications-feed__detail">{event.detail}</div> : null}
+                                            <Text variant="copy" className="notifications-feed__line">
+                                                {event.line}
+                                            </Text>
+                                            {event.detail ? (
+                                                <Text as="div" variant="caption" className="notifications-feed__detail">
+                                                    {event.detail}
+                                                </Text>
+                                            ) : null}
                                         </div>
-                                        <time className="notifications-feed__time" dateTime={`${day.id}T${event.at}`}>
-                                            {event.at}
-                                        </time>
+                                        <Text variant="caption" className="notifications-feed__time">
+                                            <time dateTime={`${day.id}T${event.at}`}>{event.at}</time>
+                                        </Text>
                                     </li>
                                 ))}
                             </ol>
                         </section>
                     ))
                 ) : (
-                    <p className="notifications-feed__empty">Nothing of this kind in the last two days.</p>
+                    <Text tone="muted" align="center" className="notifications-feed__empty">
+                        Nothing of this kind in the last two days.
+                    </Text>
                 )}
 
                 <div className="notifications-feed__more">
                     {showEarlier ? (
-                        <p className="notifications-feed__end">That's everything from the past week.</p>
+                        <Text variant="caption" as="p">
+                            That's everything from the past week.
+                        </Text>
                     ) : (
                         <Button loading={loading} onClick={loadEarlier}>
                             Show earlier activity

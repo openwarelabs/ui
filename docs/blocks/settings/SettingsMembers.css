@@ -21,19 +21,9 @@
     margin-bottom: 24px;
 }
 
-.settings-members__title {
-    margin: 0;
-    font-size: 18px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-}
-
 .settings-members__text {
     max-width: 640px;
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
-    text-wrap: pretty;
+    margin-top: 4px;
 }
 
 .settings-members__card {
@@ -61,16 +51,11 @@
     display: flex;
     align-items: center;
     gap: var(--ow-space-sm);
-    margin: 0;
     padding: 18px 20px 6px;
-    color: var(--ow-text-muted);
-    font-size: 13px;
-    font-weight: var(--ow-weight-emphasis);
 }
 
+/* A count, so its figures line up as it changes. */
 .settings-members__count {
-    color: var(--ow-text-muted);
-    font-weight: var(--ow-weight-regular);
     font-variant-numeric: tabular-nums;
 }
 
@@ -111,16 +96,6 @@
     align-items: center;
     gap: var(--ow-space-sm);
     overflow: hidden;
-    font-weight: var(--ow-weight-control);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.settings-members__email {
-    overflow: hidden;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-    text-overflow: ellipsis;
     white-space: nowrap;
 }
 
@@ -150,8 +125,6 @@
 .settings-members__owner {
     width: 118px;
     padding-left: 11px;
-    color: var(--ow-text-muted);
-    font-size: 13px;
 }
 
 .settings-members__menu-spacer {

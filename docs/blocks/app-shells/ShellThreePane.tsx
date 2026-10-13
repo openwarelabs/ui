@@ -9,10 +9,12 @@ import {
     MenuItem,
     MenuLabel,
     MenuSeparator,
+    NavItem,
     ScrollShadow,
     SearchField,
     SettingsRow,
     Switch,
+    Text,
     Tooltip,
     User,
     toast,
@@ -202,15 +204,15 @@ export function ShellThreePane() {
     const visible = projects.filter((entry) => entry.id.includes(query.trim().toLowerCase()));
 
     // When a narrow screen swaps panes, take focus to the new pane's heading so keyboards and screen readers follow.
-    const titleRef = useRef<HTMLHeadingElement>(null);
-    const inspectorTitleRef = useRef<HTMLHeadingElement>(null);
+    const itemRef = useRef<HTMLElement>(null);
+    const inspectorRef = useRef<HTMLElement>(null);
     const listRef = useRef<HTMLDivElement>(null);
     const moved = useRef(false);
     useEffect(() => {
         if (!moved.current) return;
-        if (view === "item") titleRef.current?.focus();
-        if (view === "inspector") inspectorTitleRef.current?.focus();
-        if (view === "list") listRef.current?.querySelector<HTMLElement>('[aria-current="true"]')?.focus();
+        if (view === "item") itemRef.current?.querySelector<HTMLElement>("h1")?.focus();
+        if (view === "inspector") inspectorRef.current?.querySelector<HTMLElement>("h2")?.focus();
+        if (view === "list") listRef.current?.querySelector<HTMLElement>('[aria-current="page"]')?.focus();
     }, [view]);
     const go = (next: View) => {
         moved.current = true;
@@ -246,11 +248,12 @@ export function ShellThreePane() {
                     label="Workspaces"
                     width={232}
                     trigger={
-                        <button type="button" className="shell-three-pane__workspace">
+                        <Button variant="ghost" size="sm" fullWidth className="shell-three-pane__workspace" endIcon={<ChevronsUpDown size={15} />}>
                             <span className="shell-three-pane__mark" aria-hidden="true" />
-                            <span className="shell-three-pane__workspace-name">Acme</span>
-                            <ChevronsUpDown size={15} aria-hidden="true" />
-                        </button>
+                            <Text as="span" variant="card-title" tone="default" className="shell-three-pane__workspace-name">
+                                Acme
+                            </Text>
+                        </Button>
                     }
                 >
                     <MenuLabel>Workspaces</MenuLabel>
@@ -261,9 +264,12 @@ export function ShellThreePane() {
                 </Menu>
 
                 <div className="shell-three-pane__list-heading">
-                    <span className="shell-three-pane__list-title">
-                        Projects<span className="shell-three-pane__list-count">{projects.length}</span>
-                    </span>
+                    <Text variant="label">
+                        Projects
+                        <Text as="span" tone="muted" className="shell-three-pane__list-count">
+                            {projects.length}
+                        </Text>
+                    </Text>
                     <Tooltip label="New project">
                         <Button variant="ghost" size="sm" iconOnly aria-label="New project">
                             <Plus size={16} />
@@ -288,30 +294,36 @@ export function ShellThreePane() {
                                     const entryStatus = statusOf(entry);
                                     return (
                                         <li key={entry.id}>
-                                            <button
-                                                type="button"
+                                            <NavItem
                                                 className="shell-three-pane__project"
-                                                aria-current={entry.id === selectedId ? "true" : undefined}
+                                                icon={<span className="shell-three-pane__dot" style={{ background: entry.color }} aria-hidden="true" />}
+                                                active={entry.id === selectedId}
+                                                end={
+                                                    <Badge size="sm" variant={tone[entryStatus]}>
+                                                        {entryStatus}
+                                                    </Badge>
+                                                }
                                                 onClick={() => {
                                                     setSelectedId(entry.id);
                                                     go("item");
                                                 }}
                                             >
-                                                <span className="shell-three-pane__dot" style={{ background: entry.color }} aria-hidden="true" />
+                                                {/* The name takes the item's own type, which turns heavier on the open project. */}
                                                 <span className="shell-three-pane__project-text">
                                                     <span className="shell-three-pane__project-name">{entry.id}</span>
-                                                    <span className="shell-three-pane__project-meta">{(added[entry.id]?.[0] ?? entry.deploys[0]!).when}</span>
+                                                    <Text variant="caption" truncate>
+                                                        {(added[entry.id]?.[0] ?? entry.deploys[0]!).when}
+                                                    </Text>
                                                 </span>
-                                                <Badge size="sm" variant={tone[entryStatus]}>
-                                                    {entryStatus}
-                                                </Badge>
-                                            </button>
+                                            </NavItem>
                                         </li>
                                     );
                                 })}
                             </ul>
                         ) : (
-                            <p className="shell-three-pane__no-match">No projects match “{query.trim()}”.</p>
+                            <Text variant="copy" className="shell-three-pane__no-match">
+                                No projects match “{query.trim()}”.
+                            </Text>
                         )}
                     </nav>
                 </ScrollShadow>
@@ -321,14 +333,17 @@ export function ShellThreePane() {
                     above
                     width={232}
                     trigger={
-                        <button type="button" className="shell-three-pane__user">
+                        <Button variant="ghost" fullWidth className="shell-three-pane__user" endIcon={<ChevronsUpDown size={15} />}>
                             <Avatar name="Maya Chen" size="sm" />
                             <span className="shell-three-pane__user-text">
-                                <span className="shell-three-pane__user-name">Maya Chen</span>
-                                <span className="shell-three-pane__user-email">maya@example.com</span>
+                                <Text as="span" variant="label" tone="default" truncate>
+                                    Maya Chen
+                                </Text>
+                                <Text variant="caption" truncate>
+                                    maya@example.com
+                                </Text>
                             </span>
-                            <ChevronsUpDown size={15} aria-hidden="true" />
-                        </button>
+                        </Button>
                     }
                 >
                     <MenuItem icon={<UserIcon size={15} />}>Profile</MenuItem>
@@ -339,18 +354,20 @@ export function ShellThreePane() {
             </div>
 
             <div className="shell-three-pane__panel">
-                <main className="shell-three-pane__item">
+                <main ref={itemRef} className="shell-three-pane__item">
                     <div className="shell-three-pane__toolbar">
                         <span className="shell-three-pane__back">
                             <Button variant="ghost" size="sm" startIcon={<ChevronLeft size={16} />} onClick={() => go("list")}>
                                 Projects
                             </Button>
                         </span>
-                        <span className="shell-three-pane__crumbs" aria-hidden="true">
+                        <Text as="span" tone="muted" className="shell-three-pane__crumbs" aria-hidden="true">
                             Projects
                             <ChevronRight size={14} />
-                            <strong>{project.id}</strong>
-                        </span>
+                            <Text as="span" variant="label" tone="default" truncate>
+                                {project.id}
+                            </Text>
+                        </Text>
                         <Tooltip label={wide && inspectorOpen ? "Hide details" : "Show details"}>
                             <Button
                                 variant="ghost"
@@ -369,12 +386,14 @@ export function ShellThreePane() {
                         <div className="shell-three-pane__header">
                             <div>
                                 <div className="shell-three-pane__title-row">
-                                    <h1 ref={titleRef} tabIndex={-1} className="shell-three-pane__title">
+                                    <Text as="h1" variant="heading" tabIndex={-1} className="shell-three-pane__title">
                                         {project.id}
-                                    </h1>
+                                    </Text>
                                     <Badge variant={tone[status]}>{status}</Badge>
                                 </div>
-                                <p className="shell-three-pane__description">{project.description}</p>
+                                <Text variant="copy" className="shell-three-pane__description">
+                                    {project.description}
+                                </Text>
                             </div>
                             <Button variant="primary" startIcon={<Rocket size={16} />} onClick={deploy}>
                                 Deploy
@@ -384,27 +403,40 @@ export function ShellThreePane() {
                         <dl className="shell-three-pane__figures">
                             {project.figures.map(([label, value]) => (
                                 <div key={label} className="shell-three-pane__figure">
-                                    <dt>{label}</dt>
-                                    <dd>{value}</dd>
+                                    <Text as="dt" variant="caption">
+                                        {label}
+                                    </Text>
+                                    <Text as="dd" variant="heading" className="shell-three-pane__figure-value">
+                                        {value}
+                                    </Text>
                                 </div>
                             ))}
                         </dl>
 
                         <section aria-labelledby="shell-three-pane-deploys">
-                            <h2 id="shell-three-pane-deploys" className="shell-three-pane__section-title">
+                            <Text as="h2" variant="card-title" id="shell-three-pane-deploys" className="shell-three-pane__section-title">
                                 Recent deploys
-                            </h2>
+                            </Text>
                             <ul className="shell-three-pane__deploys">
                                 {deploys.map((entry, index) => (
                                     <li key={`${entry.message}-${index}`} className="shell-three-pane__deploy">
                                         <span className="shell-three-pane__deploy-text">
-                                            <span className="shell-three-pane__deploy-title">{entry.message}</span>
-                                            <span className="shell-three-pane__deploy-meta">
-                                                <span className="shell-three-pane__branch">{entry.branch}</span> · {entry.who} · {entry.when}
-                                            </span>
+                                            <Text as="span" truncate>
+                                                {entry.message}
+                                            </Text>
+                                            <Text variant="caption" truncate>
+                                                <Text as="span" variant="code" className="shell-three-pane__mono">
+                                                    {entry.branch}
+                                                </Text>{" "}
+                                                · {entry.who} · {entry.when}
+                                            </Text>
                                         </span>
                                         <span className="shell-three-pane__deploy-end">
-                                            {entry.duration ? <span className="shell-three-pane__duration">{entry.duration}</span> : null}
+                                            {entry.duration ? (
+                                                <Text variant="caption" className="shell-three-pane__duration">
+                                                    {entry.duration}
+                                                </Text>
+                                            ) : null}
                                             <Badge size="sm" variant={tone[entry.status]}>
                                                 {entry.status}
                                             </Badge>
@@ -416,16 +448,16 @@ export function ShellThreePane() {
                     </div>
                 </main>
 
-                <aside className="shell-three-pane__inspector" aria-labelledby="shell-three-pane-details">
+                <aside ref={inspectorRef} className="shell-three-pane__inspector" aria-labelledby="shell-three-pane-details">
                     <div className="shell-three-pane__inspector-header">
                         <span className="shell-three-pane__inspector-back">
                             <Button variant="ghost" size="sm" iconOnly aria-label={`Back to ${project.id}`} onClick={() => go("item")}>
                                 <ChevronLeft size={16} />
                             </Button>
                         </span>
-                        <h2 id="shell-three-pane-details" ref={inspectorTitleRef} tabIndex={-1} className="shell-three-pane__inspector-title">
+                        <Text as="h2" variant="card-title" id="shell-three-pane-details" tabIndex={-1} className="shell-three-pane__inspector-title">
                             Details
-                        </h2>
+                        </Text>
                         <span className="shell-three-pane__inspector-close">
                             <Button variant="ghost" size="sm" iconOnly aria-label="Hide details" onClick={() => setInspectorOpen(false)}>
                                 <X size={16} />
@@ -436,13 +468,17 @@ export function ShellThreePane() {
                     <div className="shell-three-pane__inspector-body">
                         <dl className="shell-three-pane__details">
                             <div className="shell-three-pane__detail">
-                                <dt>Owner</dt>
+                                <Text as="dt" tone="muted">
+                                    Owner
+                                </Text>
                                 <dd>
                                     <User name={project.owner} size="sm" />
                                 </dd>
                             </div>
                             <div className="shell-three-pane__detail">
-                                <dt>Members</dt>
+                                <Text as="dt" tone="muted">
+                                    Members
+                                </Text>
                                 <dd>
                                     <AvatarGroup size="sm" max={4} label={`${project.members.length} people on ${project.id}`}>
                                         {project.members.map((name) => (
@@ -452,29 +488,51 @@ export function ShellThreePane() {
                                 </dd>
                             </div>
                             <div className="shell-three-pane__detail">
-                                <dt>Repository</dt>
-                                <dd className="shell-three-pane__mono">{project.repo}</dd>
+                                <Text as="dt" tone="muted">
+                                    Repository
+                                </Text>
+                                <Text as="dd" variant="code" truncate className="shell-three-pane__mono">
+                                    {project.repo}
+                                </Text>
                             </div>
                             <div className="shell-three-pane__detail">
-                                <dt>Production</dt>
-                                <dd className="shell-three-pane__mono">{project.branch}</dd>
+                                <Text as="dt" tone="muted">
+                                    Production
+                                </Text>
+                                <Text as="dd" variant="code" truncate className="shell-three-pane__mono">
+                                    {project.branch}
+                                </Text>
                             </div>
                             <div className="shell-three-pane__detail">
-                                <dt>Region</dt>
-                                <dd>{project.region}</dd>
+                                <Text as="dt" tone="muted">
+                                    Region
+                                </Text>
+                                <Text as="dd" truncate>
+                                    {project.region}
+                                </Text>
                             </div>
                             <div className="shell-three-pane__detail">
-                                <dt>Runtime</dt>
-                                <dd>{project.runtime}</dd>
+                                <Text as="dt" tone="muted">
+                                    Runtime
+                                </Text>
+                                <Text as="dd" truncate>
+                                    {project.runtime}
+                                </Text>
                             </div>
                             <div className="shell-three-pane__detail">
-                                <dt>Created</dt>
-                                <dd>{project.created}</dd>
+                                <Text as="dt" tone="muted">
+                                    Created
+                                </Text>
+                                <Text as="dd" truncate>
+                                    {project.created}
+                                </Text>
                             </div>
                         </dl>
 
                         <div className="shell-three-pane__settings">
-                            <h3 className="shell-three-pane__settings-title">Settings</h3>
+                            <Text as="h3" variant="caption" className="shell-three-pane__settings-title">
+                                Settings
+                            </Text>
                             <SettingsRow label="Preview deploys" description="Build every pull request on its own address.">
                                 <Switch checked={own.previews} onChange={(previews) => setOwn({ previews })} label="Preview deploys" />
                             </SettingsRow>

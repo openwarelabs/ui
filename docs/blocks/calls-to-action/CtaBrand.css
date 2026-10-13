@@ -11,7 +11,8 @@
 }
 
 /* The plate: the brand's deep steps, in both themes, with its own faint dots. The brand scale is built so
-   white text holds its contrast on 600 and darker, whatever colour the brand is. */
+   white text holds its contrast on 600 and darker, whatever colour the brand is. Text has no tone for that
+   white, so the text on the plate takes its colour here. */
 .cta-brand .cta-brand__plate {
     --ow-dot: color-mix(in srgb, var(--ow-on-primary) 13%, transparent);
     max-width: var(--ow-page-max);
@@ -31,18 +32,15 @@
     text-align: center;
 }
 
-.cta-brand__eyebrow {
+.cta-brand .cta-brand__eyebrow {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin: 0;
     border: 1px solid color-mix(in srgb, var(--ow-on-primary) 22%, transparent);
     border-radius: var(--ow-radius-pill);
     background: color-mix(in srgb, var(--ow-on-primary) 8%, transparent);
-    padding: 5px 12px;
+    padding: 3px 12px;
     color: color-mix(in srgb, var(--ow-on-primary) 88%, transparent);
-    font-size: 13px;
-    font-weight: var(--ow-weight-control);
 }
 
 .cta-brand__eyebrow::before {
@@ -53,24 +51,15 @@
     background: var(--ow-brass);
 }
 
-.cta-brand__title {
+.cta-brand .cta-brand__title {
     max-width: 760px;
-    margin: 24px 0 0;
+    margin-top: 24px;
     color: var(--ow-on-primary);
-    font-size: 52px;
-    font-weight: 500;
-    line-height: 1.05;
-    letter-spacing: -0.04em;
-    text-wrap: balance;
 }
 
-.cta-brand__lead {
-    max-width: 540px;
-    margin: 20px 0 0;
+.cta-brand .cta-brand__lead {
+    margin-top: 20px;
     color: color-mix(in srgb, var(--ow-on-primary) 78%, transparent);
-    font-size: 17px;
-    line-height: 1.6;
-    text-wrap: pretty;
 }
 
 .cta-brand__actions {
@@ -99,19 +88,19 @@
 }
 
 .cta-brand .cta-brand__action:focus-visible,
-.cta-brand__link:focus-visible {
+.cta-brand .cta-brand__link:focus-visible {
     outline: 2px solid var(--ow-on-primary);
     outline-offset: 3px;
 }
 
-.cta-brand__link {
+/* A Link in the plate's white, with no underline: the arrow moves instead. */
+.cta-brand .cta-brand__link,
+.cta-brand .cta-brand__link:hover {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     border-radius: var(--ow-radius-sm);
     color: var(--ow-on-primary);
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
     text-decoration: none;
 }
 
@@ -131,7 +120,6 @@
     margin: 48px 0 0;
     padding: 0;
     color: color-mix(in srgb, var(--ow-on-primary) 70%, transparent);
-    font-size: 13.5px;
     list-style: none;
 }
 
@@ -156,13 +144,6 @@
     }
     .cta-brand__content {
         padding: 56px 22px 52px;
-    }
-    .cta-brand__title {
-        font-size: 36px;
-        line-height: 1.1;
-    }
-    .cta-brand__lead {
-        font-size: 16px;
     }
     .cta-brand__actions {
         width: 100%;

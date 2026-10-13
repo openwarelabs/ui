@@ -37,10 +37,6 @@
     display: inline-flex;
     align-items: center;
     gap: var(--ow-space-sm);
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
-    font-weight: var(--ow-weight-control);
 }
 
 .onboarding-checklist__dot {
@@ -51,20 +47,12 @@
 }
 
 .onboarding-checklist__title {
-    margin: 14px 0 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-    text-wrap: balance;
+    margin-top: 14px;
 }
 
 .onboarding-checklist__lead {
     max-width: 380px;
-    margin: 10px 0 0;
-    color: var(--ow-text-muted);
-    line-height: 1.55;
-    text-wrap: pretty;
+    margin-top: 10px;
 }
 
 .onboarding-checklist__progress {
@@ -79,17 +67,14 @@
     max-width: 380px;
     align-items: flex-start;
     gap: var(--ow-space-md);
-    margin: 28px 0 0;
+    margin-top: 28px;
     border-top: 1px solid var(--ow-border);
     padding-top: 20px;
-    color: var(--ow-text-muted);
-    line-height: 1.5;
-    text-wrap: pretty;
 }
 
 .onboarding-checklist__help svg {
     flex-shrink: 0;
-    margin-top: 1px;
+    margin-top: 3px;
     color: var(--ow-icon);
 }
 

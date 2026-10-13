@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Badge, Button, ChoiceCard, Dialog, EmptyState, Field, Input, Separator, toast } from "@openwarelabs/ui";
+import { Badge, Button, ChoiceCard, Dialog, EmptyState, Field, Input, Separator, Text, toast } from "@openwarelabs/ui";
 import { FileUp, FolderKanban, GitBranch, LayoutTemplate, Plus } from "lucide-react";
 
 import "./EmptyFirstRun.css";
@@ -61,8 +61,12 @@ export function EmptyFirstRun() {
             <main className="empty-first-run__panel">
                 <div className="empty-first-run__header">
                     <div>
-                        <h1 className="empty-first-run__title">Projects</h1>
-                        <p className="empty-first-run__subtitle">Each project holds a repository's tasks, agent runs, reviews and deploys.</p>
+                        <Text variant="heading" as="h2">
+                            Projects
+                        </Text>
+                        <Text variant="copy" className="empty-first-run__subtitle">
+                            Each project holds a repository's tasks, agent runs, reviews and deploys.
+                        </Text>
                     </div>
                     {projects.length > 0 ? (
                         <Button variant="primary" startIcon={<Plus size={16} />} onClick={() => start("blank")}>
@@ -105,10 +109,14 @@ export function EmptyFirstRun() {
                             <li key={project.name} className="empty-first-run__row">
                                 <span className="empty-first-run__dot" aria-hidden="true" />
                                 <span className="empty-first-run__name">
-                                    <strong>{project.name}</strong>
-                                    <span>{project.source}</span>
+                                    <Text variant="label" truncate>
+                                        {project.name}
+                                    </Text>
+                                    <Text variant="caption">{project.source}</Text>
                                 </span>
-                                <span className="empty-first-run__when">Created just now</span>
+                                <Text variant="caption" className="empty-first-run__when">
+                                    Created just now
+                                </Text>
                                 <Badge size="sm" variant="active">
                                     New
                                 </Badge>

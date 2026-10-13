@@ -34,9 +34,6 @@
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    color: var(--ow-text-soft);
-    font-size: 14.5px;
-    line-height: 1.4;
 }
 
 .features-checklist__tick {

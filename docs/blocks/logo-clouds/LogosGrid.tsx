@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { Link, SectionHeading } from "@openwarelabs/ui";
+import { Link, SectionHeading, Text } from "@openwarelabs/ui";
 import { ArrowRight } from "lucide-react";
 
 import "./LogosGrid.css";
@@ -76,24 +76,24 @@ export function LogosGrid() {
                 <ul className="logos-grid__tiles">
                     {logos.map((logo) => (
                         <li key={logo.name}>
-                            <a href={`#customers/${logo.slug}`} className="logos-grid__tile">
+                            <Link href={`#customers/${logo.slug}`} variant="standalone" className="logos-grid__tile">
                                 <span className="logos-grid__logo" data-name={logo.name}>
                                     <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         {logo.glyph}
                                     </svg>
                                     {logo.name}
                                 </span>
-                                <span className="logos-grid__more">
+                                <Text variant="caption" className="logos-grid__more">
                                     Read the story
                                     <ArrowRight size={13} aria-hidden="true" />
-                                </span>
-                            </a>
+                                </Text>
+                            </Link>
                         </li>
                     ))}
                 </ul>
-                <p className="logos-grid__footer">
+                <Text variant="body" tone="muted" align="center" className="logos-grid__footer">
                     <Link href="#customers">See all 40 customer stories</Link>
-                </p>
+                </Text>
             </div>
         </section>
     );

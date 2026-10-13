@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Badge, Button, CopyButton, Link, toast } from "@openwarelabs/ui";
+import { Badge, Button, CopyButton, Link, Text, toast } from "@openwarelabs/ui";
 import { Check, House, RotateCw, X } from "lucide-react";
 
 import "./ErrorServer.css";
@@ -33,10 +33,12 @@ export function ErrorServer() {
     return (
         <div className="error-server">
             <header className="error-server__bar">
-                <a className="error-server__logo" href="#" aria-label="Acme overview">
+                <Link href="#" variant="standalone" className="error-server__logo" aria-label="Acme overview">
                     <span className="error-server__mark" aria-hidden="true" />
-                    Acme
-                </a>
+                    <Text variant="card-title" as="span">
+                        Acme
+                    </Text>
+                </Link>
                 <Link href="#" variant="standalone" className="error-server__status-link">
                     <span className="error-server__status-dot" aria-hidden="true" />
                     Some systems slow
@@ -48,10 +50,12 @@ export function ErrorServer() {
                     <Badge size="sm" variant="danger">
                         Error 500
                     </Badge>
-                    <h1 className="error-server__title">Something went wrong on our side</h1>
-                    <p className="error-server__text">
+                    <Text variant="section-title" as="h1" className="error-server__title">
+                        Something went wrong on our side
+                    </Text>
+                    <Text variant="lead" className="error-server__text">
                         We couldn't load this page. It isn't something you did, and nothing you've saved is lost. Try again in a moment.
-                    </p>
+                    </Text>
                     <div className="error-server__actions">
                         <Button variant="primary" startIcon={<RotateCw size={16} />} loading={retrying} onClick={tryAgain}>
                             {retrying ? "Trying again…" : "Try again"}
@@ -60,14 +64,18 @@ export function ErrorServer() {
                     </div>
 
                     <div className="error-server__report">
-                        <p className="error-server__report-label">If it keeps happening</p>
-                        <p className="error-server__report-text">
+                        <Text variant="label" as="p">
+                            If it keeps happening
+                        </Text>
+                        <Text variant="copy" className="error-server__report-text">
                             Send this error ID to <Link href="#">support@example.com</Link> and we'll find exactly what went wrong.
                             {tries > 1 ? ` You've tried ${tries} times.` : ""}
-                        </p>
+                        </Text>
                         <div className="error-server__id">
-                            <span className="error-server__id-label">Error ID</span>
-                            <code>{errorId}</code>
+                            <Text variant="caption">Error ID</Text>
+                            <Text variant="code" truncate className="error-server__id-value">
+                                {errorId}
+                            </Text>
                             <CopyButton value={errorId} label="Copy ID" />
                         </div>
                     </div>

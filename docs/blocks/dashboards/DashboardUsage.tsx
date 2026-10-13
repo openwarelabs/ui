@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
-import { Button, Card, Checkbox, Field, NumberField, Popover, ProgressBar, Table, toast, type TableColumn } from "@openwarelabs/ui";
+import { Button, Card, Checkbox, Field, NumberField, Popover, ProgressBar, Table, Text, toast, type TableColumn } from "@openwarelabs/ui";
 import { CircleCheck, CreditCard, Download, Pencil, TriangleAlert } from "lucide-react";
 
 import "./DashboardUsage.css";
@@ -31,16 +31,25 @@ const forecast = (total / daysGone) * daysInMonth;
 const seats = 14;
 const seatPrice = 24;
 
+/** An amount in the forecast's sentence, set a step stronger than the words around it. */
+function Strong({ children }: { children: ReactNode }) {
+    return (
+        <Text as="strong" variant="label" tone="default">
+            {children}
+        </Text>
+    );
+}
+
 const columns: Array<TableColumn<ProjectSpend>> = [
     {
         key: "id",
         header: "Project",
         sortable: true,
         render: (row) => (
-            <span className="dashboard-usage__project">
+            <Text as="span" className="dashboard-usage__project">
                 <span className="dashboard-usage__dot" style={{ background: row.color }} aria-hidden="true" />
                 {row.id}
-            </span>
+            </Text>
         ),
     },
     {
@@ -48,14 +57,22 @@ const columns: Array<TableColumn<ProjectSpend>> = [
         header: "Agent runs",
         align: "end",
         sortable: true,
-        render: (row) => <span className="dashboard-usage__muted">{euros.format(row.agents)}</span>,
+        render: (row) => (
+            <Text as="span" tone="muted">
+                {euros.format(row.agents)}
+            </Text>
+        ),
     },
     {
         key: "builds",
         header: "Builds",
         align: "end",
         sortable: true,
-        render: (row) => <span className="dashboard-usage__muted">{euros.format(row.builds)}</span>,
+        render: (row) => (
+            <Text as="span" tone="muted">
+                {euros.format(row.builds)}
+            </Text>
+        ),
     },
     {
         key: "total",
@@ -74,7 +91,7 @@ const columns: Array<TableColumn<ProjectSpend>> = [
             return (
                 <span className="dashboard-usage__share">
                     <ProgressBar value={share} showValue={false} aria-label={`${row.id}: ${Math.round(share)}% of this month's spend`} />
-                    {Math.round(share)}%
+                    <Text variant="caption">{Math.round(share)}%</Text>
                 </span>
             );
         },
@@ -104,15 +121,19 @@ export function DashboardUsage() {
         <section className="dashboard-usage" aria-labelledby="dashboard-usage-title">
             <div className="dashboard-usage__inner">
                 <div className="dashboard-usage__header">
-                    <h1 id="dashboard-usage-title" className="dashboard-usage__title">
+                    <Text as="h1" variant="heading" id="dashboard-usage-title">
                         Usage and billing
-                    </h1>
-                    <p className="dashboard-usage__lead">October 2026 on the Business plan. Usage resets on 1 November.</p>
+                    </Text>
+                    <Text variant="copy" className="dashboard-usage__lead">
+                        October 2026 on the Business plan. Usage resets on 1 November.
+                    </Text>
                 </div>
 
                 <Card padding="none" className="dashboard-usage__budget">
                     <div className="dashboard-usage__card-header">
-                        <h2 className="dashboard-usage__card-title">Spend this month</h2>
+                        <Text as="h2" variant="card-title">
+                            Spend this month
+                        </Text>
                         <Popover
                             title="Monthly budget"
                             width={300}
@@ -151,7 +172,9 @@ export function DashboardUsage() {
                                 >
                                     Pause agent runs at the budget
                                 </Checkbox>
-                                <p className="dashboard-usage__popover-note">Owners get an email at 80% either way.</p>
+                                <Text as="p" variant="caption">
+                                    Owners get an email at 80% either way.
+                                </Text>
                                 <div className="dashboard-usage__popover-actions">
                                     <Button size="sm" variant="ghost" onClick={() => setEditing(false)}>
                                         Cancel
@@ -165,8 +188,12 @@ export function DashboardUsage() {
                     </div>
 
                     <div className="dashboard-usage__figure">
-                        <span className="dashboard-usage__spent">{euros.format(total)}</span>
-                        <span className="dashboard-usage__of">of a {wholeEuros.format(budget)} budget</span>
+                        <Text as="span" variant="heading" className="dashboard-usage__spent">
+                            {euros.format(total)}
+                        </Text>
+                        <Text as="span" tone="muted">
+                            of a {wholeEuros.format(budget)} budget
+                        </Text>
                     </div>
 
                     <div className="dashboard-usage__meter">
@@ -178,35 +205,37 @@ export function DashboardUsage() {
                             aria-label={`${Math.round(used)}% of the monthly budget spent`}
                         />
                         <div className="dashboard-usage__scale">
-                            <span>{Math.round(used)}% used</span>
-                            <span>{daysInMonth - daysGone} days left</span>
+                            <Text variant="caption">{Math.round(used)}% used</Text>
+                            <Text variant="caption">{daysInMonth - daysGone} days left</Text>
                         </div>
                     </div>
 
                     {over > 0 ? (
-                        <p className="dashboard-usage__forecast" data-tone="warning">
+                        <Text tone="soft" className="dashboard-usage__forecast" data-tone="warning">
                             <TriangleAlert size={16} aria-hidden="true" />
                             <span>
-                                At this pace you'll spend about <strong>{wholeEuros.format(forecast)}</strong> by 31 October, {wholeEuros.format(over)} over
+                                At this pace you'll spend about <Strong>{wholeEuros.format(forecast)}</Strong> by 31 October, {wholeEuros.format(over)} over
                                 budget.
                                 {pauseAgents ? " Agent runs would pause on the last day or two." : ""}
                             </span>
-                        </p>
+                        </Text>
                     ) : (
-                        <p className="dashboard-usage__forecast" data-tone="success">
+                        <Text tone="soft" className="dashboard-usage__forecast" data-tone="success">
                             <CircleCheck size={16} aria-hidden="true" />
                             <span>
-                                At this pace you'll spend about <strong>{wholeEuros.format(forecast)}</strong> by 31 October, {wholeEuros.format(-over)} under
+                                At this pace you'll spend about <Strong>{wholeEuros.format(forecast)}</Strong> by 31 October, {wholeEuros.format(-over)} under
                                 budget.
                             </span>
-                        </p>
+                        </Text>
                     )}
                 </Card>
 
                 <Card padding="none" className="dashboard-usage__projects">
                     <div className="dashboard-usage__card-header">
-                        <h2 className="dashboard-usage__card-title">By project</h2>
-                        <span className="dashboard-usage__legend">So far this month</span>
+                        <Text as="h2" variant="card-title">
+                            By project
+                        </Text>
+                        <Text variant="caption">So far this month</Text>
                     </div>
                     <Table
                         caption="Spend by project this month"
@@ -220,47 +249,67 @@ export function DashboardUsage() {
 
                 <Card padding="none" className="dashboard-usage__invoice">
                     <div>
-                        <h2 className="dashboard-usage__card-title">Next invoice</h2>
-                        <p className="dashboard-usage__due">Due on 1 November 2026</p>
+                        <Text as="h2" variant="card-title">
+                            Next invoice
+                        </Text>
+                        <Text as="p" variant="caption" className="dashboard-usage__due">
+                            Due on 1 November 2026
+                        </Text>
                     </div>
                     <dl className="dashboard-usage__lines">
                         <div className="dashboard-usage__line">
-                            <dt>
+                            <Text as="dt" tone="soft" className="dashboard-usage__item">
                                 Business plan
-                                <span>
+                                <Text variant="caption" className="dashboard-usage__hint">
                                     {seats} people × {wholeEuros.format(seatPrice)}
-                                </span>
-                            </dt>
-                            <dd>{euros.format(seats * seatPrice)}</dd>
+                                </Text>
+                            </Text>
+                            <Text as="dd" className="dashboard-usage__amount">
+                                {euros.format(seats * seatPrice)}
+                            </Text>
                         </div>
                         <div className="dashboard-usage__line">
-                            <dt>
+                            <Text as="dt" tone="soft" className="dashboard-usage__item">
                                 Agent runs
-                                <span>Forecast to 31 October</span>
-                            </dt>
-                            <dd>{euros.format((spend.reduce((sum, row) => sum + row.agents, 0) / daysGone) * daysInMonth)}</dd>
+                                <Text variant="caption" className="dashboard-usage__hint">
+                                    Forecast to 31 October
+                                </Text>
+                            </Text>
+                            <Text as="dd" className="dashboard-usage__amount">
+                                {euros.format((spend.reduce((sum, row) => sum + row.agents, 0) / daysGone) * daysInMonth)}
+                            </Text>
                         </div>
                         <div className="dashboard-usage__line">
-                            <dt>
+                            <Text as="dt" tone="soft" className="dashboard-usage__item">
                                 Builds
-                                <span>Forecast to 31 October</span>
-                            </dt>
-                            <dd>{euros.format((spend.reduce((sum, row) => sum + row.builds, 0) / daysGone) * daysInMonth)}</dd>
+                                <Text variant="caption" className="dashboard-usage__hint">
+                                    Forecast to 31 October
+                                </Text>
+                            </Text>
+                            <Text as="dd" className="dashboard-usage__amount">
+                                {euros.format((spend.reduce((sum, row) => sum + row.builds, 0) / daysGone) * daysInMonth)}
+                            </Text>
                         </div>
                         <div className="dashboard-usage__line dashboard-usage__total">
-                            <dt>Estimated total</dt>
-                            <dd>{euros.format(seats * seatPrice + forecast)}</dd>
+                            <Text as="dt" variant="label" className="dashboard-usage__item">
+                                Estimated total
+                            </Text>
+                            <Text as="dd" variant="dialog-title" className="dashboard-usage__amount">
+                                {euros.format(seats * seatPrice + forecast)}
+                            </Text>
                         </div>
                     </dl>
-                    <p className="dashboard-usage__note">Before VAT. The final amount follows your usage to the end of the month.</p>
+                    <Text as="p" variant="caption" className="dashboard-usage__note">
+                        Before VAT. The final amount follows your usage to the end of the month.
+                    </Text>
 
                     <div className="dashboard-usage__payment">
                         <span className="dashboard-usage__card-mark" aria-hidden="true">
                             <CreditCard size={15} />
                         </span>
                         <span className="dashboard-usage__payment-text">
-                            <span>Visa ending 4242</span>
-                            <span>Expires 08/2028</span>
+                            <Text as="span">Visa ending 4242</Text>
+                            <Text variant="caption">Expires 08/2028</Text>
                         </span>
                         <Button size="sm" variant="ghost" onClick={() => toast("Your card details open in a secure form from the payment provider.")}>
                             Change

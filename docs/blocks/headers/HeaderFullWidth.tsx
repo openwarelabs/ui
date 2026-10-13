@@ -1,6 +1,6 @@
 import { useEffect, useId, useState } from "react";
 
-import { Badge, Button, Chip, Menu, MenuItem, MenuSeparator, Popover } from "@openwarelabs/ui";
+import { Badge, Button, buttonClassName, Chip, cx, Link, Menu, MenuItem, MenuSeparator, Popover, Text } from "@openwarelabs/ui";
 import {
     Activity,
     ArrowRight,
@@ -51,10 +51,10 @@ function go(href: string) {
 
 function Brand() {
     return (
-        <a href="#" className="header-full-width__brand">
+        <Link href="#" variant="standalone" className="header-full-width__brand">
             <span className="header-full-width__mark" aria-hidden="true" />
             Acme
-        </a>
+        </Link>
     );
 }
 
@@ -64,28 +64,28 @@ function ProductPanel({ onNavigate }: { onNavigate: () => void }) {
             <ul className="header-full-width__features">
                 {product.map(({ icon: Icon, title, text, href }) => (
                     <li key={title}>
-                        <a href={href} className="header-full-width__feature" onClick={onNavigate}>
+                        <Link href={href} variant="standalone" className="header-full-width__feature" onClick={onNavigate}>
                             <span className="header-full-width__feature-icon" aria-hidden="true">
                                 <Icon size={16} />
                             </span>
                             <span className="header-full-width__feature-text">
-                                <span className="header-full-width__feature-title">{title}</span>
-                                <span className="header-full-width__feature-description">{text}</span>
+                                <Text variant="label">{title}</Text>
+                                <Text variant="caption">{text}</Text>
                             </span>
-                        </a>
+                        </Link>
                     </li>
                 ))}
             </ul>
-            <a href="#announcement" className="header-full-width__news" onClick={onNavigate}>
+            <Link href="#announcement" variant="standalone" className="header-full-width__news" onClick={onNavigate}>
                 <Badge size="sm" variant="active">
                     New
                 </Badge>
-                <span className="header-full-width__news-title">Agents now open their own pull requests</span>
-                <span className="header-full-width__news-link">
+                <Text variant="label">Agents now open their own pull requests</Text>
+                <Text as="span" tone="primary" className="header-full-width__news-link">
                     Read the announcement
                     <ArrowRight size={14} aria-hidden="true" />
-                </span>
-            </a>
+                </Text>
+            </Link>
         </div>
     );
 }
@@ -117,10 +117,15 @@ export function HeaderFullWidth() {
                             open={productOpen}
                             onOpenChange={setProductOpen}
                             trigger={
-                                <button type="button" className="header-full-width__item">
+                                <Button
+                                    variant="ghost"
+                                    shape="pill"
+                                    size="sm"
+                                    className="header-full-width__item"
+                                    endIcon={<ChevronDown size={14} aria-hidden="true" />}
+                                >
                                     Product
-                                    <ChevronDown size={14} aria-hidden="true" />
-                                </button>
+                                </Button>
                             }
                         >
                             <ProductPanel onNavigate={() => setProductOpen(false)} />
@@ -129,10 +134,15 @@ export function HeaderFullWidth() {
                             label="Resources"
                             width={220}
                             trigger={
-                                <button type="button" className="header-full-width__item">
+                                <Button
+                                    variant="ghost"
+                                    shape="pill"
+                                    size="sm"
+                                    className="header-full-width__item"
+                                    endIcon={<ChevronDown size={14} aria-hidden="true" />}
+                                >
                                     Resources
-                                    <ChevronDown size={14} aria-hidden="true" />
-                                </button>
+                                </Button>
                             }
                         >
                             {resources.map(({ icon: Icon, label, href }) => (
@@ -148,13 +158,23 @@ export function HeaderFullWidth() {
                             ))}
                         </Menu>
                         {links.map((link) => (
-                            <a key={link.label} href={link.href} className="header-full-width__item">
+                            <a
+                                key={link.label}
+                                href={link.href}
+                                className={cx(buttonClassName({ variant: "ghost", shape: "pill", size: "sm" }), "header-full-width__item")}
+                            >
                                 {link.label}
                             </a>
                         ))}
                     </nav>
                     <div className="header-full-width__actions">
-                        <a href="#sign-in" className="header-full-width__item header-full-width__sign-in">
+                        <a
+                            href="#sign-in"
+                            className={cx(
+                                buttonClassName({ variant: "ghost", shape: "pill", size: "sm" }),
+                                "header-full-width__item header-full-width__sign-in",
+                            )}
+                        >
                             Sign in
                         </a>
                         <Button variant="primary" shape="pill" size="sm">
@@ -177,33 +197,37 @@ export function HeaderFullWidth() {
 
                 {/* Phones: everything in the bar, folded into a panel under it. */}
                 <nav id={panelId} className="header-full-width__panel" aria-label="Main" hidden={!panelOpen}>
-                    <p className="header-full-width__panel-label">Product</p>
+                    <Text variant="overline" as="p" className="header-full-width__panel-label">
+                        Product
+                    </Text>
                     <ul className="header-full-width__panel-list">
                         {product.map(({ icon: Icon, title, href }) => (
                             <li key={title}>
-                                <a href={href} className="header-full-width__panel-link" onClick={() => setPanelOpen(false)}>
+                                <Link href={href} variant="standalone" className="header-full-width__panel-link" onClick={() => setPanelOpen(false)}>
                                     <Icon size={16} aria-hidden="true" />
                                     {title}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>
-                    <p className="header-full-width__panel-label">Resources</p>
+                    <Text variant="overline" as="p" className="header-full-width__panel-label">
+                        Resources
+                    </Text>
                     <ul className="header-full-width__panel-list header-full-width__panel-list--columns">
                         {[...resources, ...community].map(({ label, href }) => (
                             <li key={label}>
-                                <a href={href} className="header-full-width__panel-link" onClick={() => setPanelOpen(false)}>
+                                <Link href={href} variant="standalone" className="header-full-width__panel-link" onClick={() => setPanelOpen(false)}>
                                     {label}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>
                     <ul className="header-full-width__panel-list header-full-width__panel-list--ruled">
                         {links.map((link) => (
                             <li key={link.label}>
-                                <a href={link.href} className="header-full-width__panel-link" onClick={() => setPanelOpen(false)}>
+                                <Link href={link.href} variant="standalone" className="header-full-width__panel-link" onClick={() => setPanelOpen(false)}>
                                     {link.label}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>
@@ -216,10 +240,12 @@ export function HeaderFullWidth() {
             {/* Your page */}
             <main className="header-full-width__page">
                 <Chip>Reviews</Chip>
-                <h1 className="header-full-width__title">One queue for every change</h1>
-                <p className="header-full-width__lead">
+                <Text variant="page-title" className="header-full-width__title">
+                    One queue for every change
+                </Text>
+                <Text variant="lead" className="header-full-width__lead">
                     Pull requests from your team and from agents land side by side, each with its diff, its tests and the reasoning behind it.
-                </p>
+                </Text>
             </main>
         </div>
     );

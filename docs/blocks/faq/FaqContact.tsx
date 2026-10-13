@@ -1,4 +1,4 @@
-import { Avatar, AvatarGroup, Card, SectionHeading, buttonClassName } from "@openwarelabs/ui";
+import { Avatar, AvatarGroup, Card, SectionHeading, Text, buttonClassName } from "@openwarelabs/ui";
 import { CalendarDays, Mail } from "lucide-react";
 
 import "./FaqContact.css";
@@ -51,8 +51,10 @@ export function FaqContact() {
                 <div className="faq-contact__grid">
                     {questions.map((item) => (
                         <div key={item.id} className="faq-contact__item">
-                            <h3 className="faq-contact__question">{item.question}</h3>
-                            <p className="faq-contact__answer">{item.answer}</p>
+                            <Text variant="card-title">{item.question}</Text>
+                            <Text variant="copy" className="faq-contact__answer">
+                                {item.answer}
+                            </Text>
                         </div>
                     ))}
                 </div>
@@ -64,9 +66,13 @@ export function FaqContact() {
                         ))}
                     </AvatarGroup>
                     <div className="faq-contact__card-text">
-                        <h3 className="faq-contact__card-title">Still have a question?</h3>
-                        <p className="faq-contact__card-body">Ask Lena, Omar or Aiko. They work on Acme every day and reply within a working day.</p>
-                        <p className="faq-contact__status">Most replies come within two hours</p>
+                        <Text variant="card-title">Still have a question?</Text>
+                        <Text variant="copy" className="faq-contact__card-body">
+                            Ask Lena, Omar or Aiko. They work on Acme every day and reply within a working day.
+                        </Text>
+                        <Text as="p" variant="caption" tone="soft" className="faq-contact__status">
+                            Most replies come within two hours
+                        </Text>
                     </div>
                     <div className="faq-contact__actions">
                         <a href="mailto:support@example.com" className={buttonClassName({ variant: "primary", shape: "pill" })}>

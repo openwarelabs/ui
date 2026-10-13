@@ -1,4 +1,4 @@
-import { Avatar, Badge, Button, buttonClassName, Chip, Steps } from "@openwarelabs/ui";
+import { Avatar, Badge, Button, buttonClassName, Chip, Steps, Text } from "@openwarelabs/ui";
 import { ArrowRight, Bot, Check, GitPullRequest, Play } from "lucide-react";
 
 import "./HeroSplit.css";
@@ -93,13 +93,14 @@ export function HeroSplit() {
             <div className="hero-split__inner">
                 <div className="hero-split__text">
                     <Chip>Acme Agents</Chip>
-                    <h1 id="hero-split-title" className="hero-split__title">
+                    {/* In half the width, the title takes the page-title size; the hero size would stack it word by word. */}
+                    <Text variant="page-title" id="hero-split-title" className="hero-split__title">
                         Hand the routine work to agents
-                    </h1>
-                    <p className="hero-split__lead">
+                    </Text>
+                    <Text variant="lead" className="hero-split__lead">
                         Assign a ticket and an agent branches, writes the change and runs your tests. It comes back as a pull request with its reasoning, ready
                         for your review.
-                    </p>
+                    </Text>
                     <div className="hero-split__actions">
                         <Button variant="primary" shape="pill" size="lg" endIcon={<ArrowRight size={16} />}>
                             Start for free
@@ -110,10 +111,10 @@ export function HeroSplit() {
                     </div>
                     <ul className="hero-split__points">
                         {points.map((point) => (
-                            <li key={point}>
+                            <Text as="li" key={point} tone="muted" className="hero-split__point">
                                 <Check size={15} aria-hidden="true" />
                                 {point}
-                            </li>
+                            </Text>
                         ))}
                     </ul>
                 </div>

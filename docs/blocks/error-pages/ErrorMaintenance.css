@@ -31,20 +31,17 @@
     padding: 0 28px;
 }
 
+/* The logo is a link, but keeps its own colour on hover: no underline, no brass. */
 .error-maintenance__logo {
     display: inline-flex;
     align-items: center;
     gap: 9px;
     border-radius: var(--ow-radius-md);
-    color: var(--ow-text);
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
-    text-decoration: none;
+    text-decoration-line: none;
 }
 
-.error-maintenance__logo:focus-visible {
-    outline: 2px solid var(--ow-focus-ring);
-    outline-offset: 2px;
+.error-maintenance__logo:hover {
+    color: var(--ow-text);
 }
 
 .error-maintenance__mark {
@@ -59,7 +56,6 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 14px;
 }
 
 .error-maintenance__main {
@@ -75,21 +71,12 @@
 }
 
 .error-maintenance__title {
-    margin: 18px 0 0;
-    font-size: 34px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.15;
-    letter-spacing: -0.03em;
-    text-wrap: balance;
+    margin-top: 18px;
 }
 
 .error-maintenance__text {
     max-width: 470px;
-    margin: 12px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 15px;
-    line-height: 1.6;
-    text-wrap: pretty;
+    margin-top: 12px;
 }
 
 /* When it'll be back: the time large, the day and how long under it. */
@@ -116,19 +103,11 @@
 .error-maintenance__time {
     display: grid;
     gap: 2px;
-    margin: 0;
 }
 
-.error-maintenance__time strong {
-    font-size: 22px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.02em;
+/* A time, so its figures are tabular. */
+.error-maintenance__time-main {
     font-variant-numeric: tabular-nums;
-}
-
-.error-maintenance__time span {
-    color: var(--ow-text-muted);
-    font-size: 13.5px;
 }
 
 .error-maintenance__actions {
@@ -170,12 +149,6 @@
     }
     .error-maintenance__main {
         padding: 8px var(--ow-page-gutter) 40px;
-    }
-    .error-maintenance__title {
-        font-size: 27px;
-    }
-    .error-maintenance__text {
-        font-size: 14px;
     }
     .error-maintenance__actions .ow-button {
         flex: 1;

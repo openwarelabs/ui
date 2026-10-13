@@ -39,26 +39,18 @@
 
 .faq-accordion__list .ow-disclosure__content {
     padding: 0 24px 22px 50px;
-    color: var(--ow-text-muted);
-    font-size: 15px;
-    line-height: 1.65;
 }
 
-.faq-accordion__list .ow-disclosure__content p {
+.faq-accordion__answer {
     max-width: 640px;
-    margin: 0;
-    text-wrap: pretty;
 }
 
 .faq-accordion__more {
-    margin: 28px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 14px;
-    text-align: center;
+    margin-top: 28px;
     text-wrap: balance;
 }
 
-.faq-accordion__more a {
+.faq-accordion__more .ow-link {
     white-space: nowrap;
 }
 
@@ -81,6 +73,5 @@
     }
     .faq-accordion__list .ow-disclosure__content {
         padding: 0 16px 18px 42px;
-        font-size: 14.5px;
     }
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Avatar, Badge, Button, Chip, Kbd, Link, toast } from "@openwarelabs/ui";
+import { Avatar, Badge, Button, Chip, Kbd, Link, Text, toast } from "@openwarelabs/ui";
 import { Bot, Download, FolderKanban, Gauge, Inbox, Plus, Rocket, Search, Settings } from "lucide-react";
 
 import "./HeroDownload.css";
@@ -140,12 +140,13 @@ export function HeroDownload() {
             <div className="hero-download__inner">
                 <div className="hero-download__text">
                     <Chip>Acme for desktop</Chip>
-                    <h1 id="hero-download-title" className="hero-download__title">
+                    {/* In half the width, the title takes the page-title size; the hero size would stack it word by word. */}
+                    <Text variant="page-title" id="hero-download-title" className="hero-download__title">
                         Your workspace, a keystroke away
-                    </h1>
-                    <p className="hero-download__lead">
+                    </Text>
+                    <Text variant="lead" className="hero-download__lead">
                         Open Acme from anywhere with one shortcut, hear the moment an agent needs a decision, and keep working on a train with no signal.
-                    </p>
+                    </Text>
                     <div className="hero-download__buttons">
                         {order.map((platform, index) =>
                             index === 0 ? (
@@ -172,7 +173,7 @@ export function HeroDownload() {
                             ),
                         )}
                     </div>
-                    <p className="hero-download__meta">
+                    <Text variant="caption" as="p" className="hero-download__meta">
                         <span>Version {version}</span>
                         <span>{platforms[current].requirement}</span>
                         <span className="hero-download__other">
@@ -180,7 +181,7 @@ export function HeroDownload() {
                                 Other downloads
                             </Link>
                         </span>
-                    </p>
+                    </Text>
                 </div>
                 <AppShot />
             </div>

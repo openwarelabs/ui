@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Button, Chip, Drawer } from "@openwarelabs/ui";
+import { Button, Chip, Drawer, Link, Text } from "@openwarelabs/ui";
 import { ChevronRight, Menu as MenuIcon } from "lucide-react";
 
 import "./HeaderPhoneMenu.css";
@@ -40,21 +40,27 @@ export function HeaderPhoneMenu() {
         <div className="header-phone-menu">
             <header className="header-phone-menu__bar">
                 <div className="header-phone-menu__inner">
-                    <a href="#" className="header-phone-menu__brand">
+                    <Link href="#" variant="standalone" className="header-phone-menu__brand">
                         <span className="header-phone-menu__mark" aria-hidden="true" />
                         Acme
-                    </a>
+                    </Link>
                     <nav className="header-phone-menu__nav" aria-label="Main">
                         {links.map((link) => (
-                            <a key={link.label} href={link.href} className="header-phone-menu__link" aria-current={link.current ? "page" : undefined}>
+                            <Link
+                                key={link.label}
+                                href={link.href}
+                                variant="standalone"
+                                className="header-phone-menu__link"
+                                aria-current={link.current ? "page" : undefined}
+                            >
                                 {link.label}
-                            </a>
+                            </Link>
                         ))}
                     </nav>
                     <div className="header-phone-menu__actions">
-                        <a href="#sign-in" className="header-phone-menu__link">
+                        <Link href="#sign-in" variant="standalone" className="header-phone-menu__link">
                             Sign in
-                        </a>
+                        </Link>
                         <Button variant="primary" shape="pill" size="sm">
                             Start for free
                         </Button>
@@ -96,24 +102,30 @@ export function HeaderPhoneMenu() {
                     <ul className="header-phone-menu__drawer-list">
                         {links.map((link) => (
                             <li key={link.label}>
-                                <a href={link.href} className="header-phone-menu__drawer-link" aria-current={link.current ? "page" : undefined} onClick={close}>
+                                <Link
+                                    href={link.href}
+                                    variant="standalone"
+                                    className="header-phone-menu__drawer-link"
+                                    aria-current={link.current ? "page" : undefined}
+                                    onClick={close}
+                                >
                                     {link.label}
                                     {link.current ? <span className="header-phone-menu__current" aria-hidden="true" /> : null}
                                     <ChevronRight size={16} aria-hidden="true" />
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>
                     <div className="header-phone-menu__more">
-                        <p className="header-phone-menu__more-label" id="header-phone-menu-more">
+                        <Text variant="overline" as="p" className="header-phone-menu__more-label" id="header-phone-menu-more">
                             More from Acme
-                        </p>
+                        </Text>
                         <ul className="header-phone-menu__more-list" aria-labelledby="header-phone-menu-more">
                             {more.map((link) => (
                                 <li key={link.label}>
-                                    <a href={link.href} className="header-phone-menu__more-link" onClick={close}>
+                                    <Link href={link.href} variant="standalone" className="header-phone-menu__more-link" onClick={close}>
                                         {link.label}
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -124,10 +136,12 @@ export function HeaderPhoneMenu() {
             {/* Your page */}
             <main className="header-phone-menu__page">
                 <Chip>Product</Chip>
-                <h1 className="header-phone-menu__title">Plan it, hand it off, review it, ship it</h1>
-                <p className="header-phone-menu__lead">
+                <Text variant="page-title" className="header-phone-menu__title">
+                    Plan it, hand it off, review it, ship it
+                </Text>
+                <Text variant="lead" className="header-phone-menu__lead">
                     One workspace from the first ticket to the deploy, with agents taking the routine steps and your team keeping the final say.
-                </p>
+                </Text>
             </main>
         </div>
     );

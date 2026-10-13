@@ -1,4 +1,4 @@
-import { Badge, Button, Link, SectionHeading, SettingsRow, Switch } from "@openwarelabs/ui";
+import { Badge, Button, Link, SectionHeading, SettingsRow, Switch, Text } from "@openwarelabs/ui";
 import { ArrowRight, Bot, Building2, Check, KeyRound, Settings, ShieldCheck, Users } from "lucide-react";
 
 import "./FeaturesChecklist.css";
@@ -97,12 +97,12 @@ export function FeaturesChecklist() {
                     />
                     <ul className="features-checklist__list">
                         {included.map((item) => (
-                            <li key={item} className="features-checklist__item">
+                            <Text as="li" key={item} tone="soft" className="features-checklist__item">
                                 <span className="features-checklist__tick" aria-hidden="true">
                                     <Check size={12} strokeWidth={3} />
                                 </span>
                                 {item}
-                            </li>
+                            </Text>
                         ))}
                     </ul>
                     <div className="features-checklist__actions">

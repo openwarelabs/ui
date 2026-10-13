@@ -1,4 +1,4 @@
-import { SectionHeading } from "@openwarelabs/ui";
+import { SectionHeading, Text } from "@openwarelabs/ui";
 
 import "./StatsRow.css";
 
@@ -22,16 +22,24 @@ export function StatsRow() {
                 <dl className="stats-row__list">
                     {stats.map((stat) => (
                         <div key={stat.label} className="stats-row__item">
-                            <dt className="stats-row__label">{stat.label}</dt>
-                            <dd className="stats-row__value">
+                            <Text as="dt" variant="body" tone="muted">
+                                {stat.label}
+                            </Text>
+                            <Text as="dd" variant="page-title" className="stats-row__value">
                                 {stat.value}
-                                {stat.unit ? <span className="stats-row__unit">{stat.unit}</span> : null}
-                            </dd>
+                                {stat.unit ? (
+                                    <Text as="span" variant="page-title" tone="muted" className="stats-row__unit">
+                                        {stat.unit}
+                                    </Text>
+                                ) : null}
+                            </Text>
                         </div>
                     ))}
                 </dl>
 
-                <p className="stats-row__note">From Acme's own figures, September 2026.</p>
+                <Text as="p" variant="caption" className="stats-row__note">
+                    From Acme's own figures, September 2026.
+                </Text>
             </div>
         </section>
     );

@@ -6,7 +6,6 @@ import {
     Button,
     CommandPalette,
     Drawer,
-    Kbd,
     Menu,
     MenuItem,
     MenuLabel,
@@ -14,6 +13,7 @@ import {
     NavItem,
     NavList,
     Table,
+    Text,
     Tooltip,
     User,
     type BadgeVariant,
@@ -111,14 +111,16 @@ const columns: Array<TableColumn<Run>> = [
         sortable: true,
         render: (run) => (
             <span className="shell-collapsible__task">
-                <span className="shell-collapsible__task-title">{run.task}</span>
-                <span className="shell-collapsible__task-meta">
+                <Text as="span">{run.task}</Text>
+                <Text variant="caption">
                     {run.project}
                     <span className="shell-collapsible__branch">
                         {" · "}
-                        <span className="shell-collapsible__mono">{run.branch}</span>
+                        <Text as="span" variant="code" className="shell-collapsible__mono">
+                            {run.branch}
+                        </Text>
                     </span>
-                </span>
+                </Text>
             </span>
         ),
     },
@@ -139,11 +141,17 @@ const columns: Array<TableColumn<Run>> = [
         render: (run) =>
             run.added + run.removed ? (
                 <span className="shell-collapsible__changes">
-                    <span className="shell-collapsible__added">+{run.added}</span>
-                    <span className="shell-collapsible__removed">−{run.removed}</span>
+                    <Text as="span" variant="code" tone="success" className="shell-collapsible__mono">
+                        +{run.added}
+                    </Text>
+                    <Text as="span" variant="code" tone="danger" className="shell-collapsible__mono">
+                        −{run.removed}
+                    </Text>
                 </span>
             ) : (
-                <span className="shell-collapsible__muted">None</span>
+                <Text as="span" tone="muted" className="shell-collapsible__nowrap">
+                    None
+                </Text>
             ),
     },
     {
@@ -152,7 +160,11 @@ const columns: Array<TableColumn<Run>> = [
         align: "end",
         sortable: true,
         sortValue: (run) => run.minutes,
-        render: (run) => <span className="shell-collapsible__muted">{run.minutes} min</span>,
+        render: (run) => (
+            <Text as="span" tone="muted" className="shell-collapsible__nowrap">
+                {run.minutes} min
+            </Text>
+        ),
     },
     {
         key: "started",
@@ -160,7 +172,11 @@ const columns: Array<TableColumn<Run>> = [
         align: "end",
         sortable: true,
         sortValue: (run) => run.startedMinutesAgo,
-        render: (run) => <span className="shell-collapsible__muted">{ago(run.startedMinutesAgo)}</span>,
+        render: (run) => (
+            <Text as="span" tone="muted" className="shell-collapsible__nowrap">
+                {ago(run.startedMinutesAgo)}
+            </Text>
+        ),
     },
 ];
 
@@ -194,11 +210,18 @@ function Navigation({
                     label="Workspaces"
                     width={232}
                     trigger={
-                        <button type="button" className="shell-collapsible__workspace">
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            fullWidth
+                            className="shell-collapsible__workspace"
+                            endIcon={<ChevronsUpDown size={15} className="shell-collapsible__fade" />}
+                        >
                             <span className="shell-collapsible__mark" aria-hidden="true" />
-                            <span className="shell-collapsible__workspace-name shell-collapsible__fade">Acme</span>
-                            <ChevronsUpDown size={15} aria-hidden="true" className="shell-collapsible__fade" />
-                        </button>
+                            <Text as="span" variant="card-title" tone="default" className="shell-collapsible__workspace-name shell-collapsible__fade">
+                                Acme
+                            </Text>
+                        </Button>
                     }
                 >
                     <MenuLabel>Workspaces</MenuLabel>
@@ -210,11 +233,11 @@ function Navigation({
             </Tip>
 
             <Tip show={collapsed} label="Search">
-                <button type="button" className="shell-collapsible__search" onClick={onSearch}>
-                    <Search size={15} aria-hidden="true" />
-                    <span className="shell-collapsible__search-text shell-collapsible__fade">Search</span>
-                    <Kbd>⌘K</Kbd>
-                </button>
+                <Button size="sm" fullWidth className="shell-collapsible__search" startIcon={<Search size={15} />} shortcut="⌘K" onClick={onSearch}>
+                    <Text as="span" tone="muted" className="shell-collapsible__search-text shell-collapsible__fade">
+                        Search
+                    </Text>
+                </Button>
             </Tip>
 
             <NavList label="Workspace">
@@ -258,14 +281,22 @@ function Navigation({
                         above
                         width={232}
                         trigger={
-                            <button type="button" className="shell-collapsible__user">
+                            <Button
+                                variant="ghost"
+                                fullWidth
+                                className="shell-collapsible__user"
+                                endIcon={<ChevronsUpDown size={15} className="shell-collapsible__fade" />}
+                            >
                                 <Avatar name="Maya Chen" size="sm" />
                                 <span className="shell-collapsible__user-text shell-collapsible__fade">
-                                    <span className="shell-collapsible__user-name">Maya Chen</span>
-                                    <span className="shell-collapsible__user-email">maya@example.com</span>
+                                    <Text as="span" variant="label" tone="default" truncate>
+                                        Maya Chen
+                                    </Text>
+                                    <Text variant="caption" truncate>
+                                        maya@example.com
+                                    </Text>
                                 </span>
-                                <ChevronsUpDown size={15} aria-hidden="true" className="shell-collapsible__fade" />
-                            </button>
+                            </Button>
                         }
                     >
                         <MenuItem icon={<UserIcon size={15} />}>Profile</MenuItem>
@@ -322,10 +353,10 @@ export function ShellCollapsible() {
                     <Button variant="ghost" iconOnly aria-label="Open navigation" onClick={() => setNavOpen(true)}>
                         <MenuIcon size={18} />
                     </Button>
-                    <span className="shell-collapsible__topbar-brand">
+                    <Text as="span" variant="card-title" className="shell-collapsible__topbar-brand">
                         <span className="shell-collapsible__mark" aria-hidden="true" />
                         Acme
-                    </span>
+                    </Text>
                     <Button variant="ghost" iconOnly aria-label="Search" onClick={() => setSearchOpen(true)}>
                         <Search size={18} />
                     </Button>
@@ -347,18 +378,24 @@ export function ShellCollapsible() {
                             </Button>
                         </Tooltip>
                         <span className="shell-collapsible__toolbar-divider" aria-hidden="true" />
-                        <span className="shell-collapsible__crumbs">
+                        <Text as="span" tone="muted" className="shell-collapsible__crumbs">
                             Agents
                             <ChevronRight size={14} aria-hidden="true" />
-                            <strong>Runs</strong>
-                        </span>
+                            <Text as="span" variant="label" tone="default">
+                                Runs
+                            </Text>
+                        </Text>
                     </div>
 
                     <div className="shell-collapsible__page">
                         <div className="shell-collapsible__page-header">
                             <div>
-                                <h1 className="shell-collapsible__title">Agent runs</h1>
-                                <p className="shell-collapsible__subtitle">Routine work your agents picked up, and where each run stands.</p>
+                                <Text as="h1" variant="heading">
+                                    Agent runs
+                                </Text>
+                                <Text variant="copy" className="shell-collapsible__subtitle">
+                                    Routine work your agents picked up, and where each run stands.
+                                </Text>
                             </div>
                             <Button variant="primary" startIcon={<Sparkles size={16} />}>
                                 Start a run

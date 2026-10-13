@@ -29,17 +29,8 @@
     margin-bottom: var(--ow-space-sm);
 }
 
-.dashboard-chart__title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
 .dashboard-chart__lead {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
+    margin-top: 4px;
 }
 
 .dashboard-chart__filters {
@@ -74,16 +65,8 @@
     margin-bottom: var(--ow-space-4xl);
 }
 
-.dashboard-chart__card-title {
-    margin: 0;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
-}
-
 .dashboard-chart__summary {
-    margin: 2px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
+    margin-top: 2px;
 }
 
 .dashboard-chart__legend {
@@ -91,12 +74,10 @@
     gap: var(--ow-space-2xl);
     margin: 0;
     padding: 0;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
     list-style: none;
 }
 
-.dashboard-chart__legend li {
+.dashboard-chart__legend-item {
     display: flex;
     align-items: center;
     gap: 7px;

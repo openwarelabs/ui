@@ -1,6 +1,6 @@
 import { useRef, useState, type ChangeEvent, type FormEvent, type KeyboardEvent } from "react";
 
-import { Button, Kbd, Menu, MenuItem, MenuLabel, Tag, TagGroup, Textarea, toast } from "@openwarelabs/ui";
+import { Button, Kbd, Menu, MenuItem, MenuLabel, Tag, TagGroup, Text, Textarea, toast } from "@openwarelabs/ui";
 import { ArrowUp, Check, ChevronDown, FileCode2, FileImage, FileText, Lightbulb, Paperclip, Sparkles } from "lucide-react";
 
 import "./ChatPromptBox.css";
@@ -58,10 +58,12 @@ export function ChatPromptBox() {
     return (
         <section className="chat-prompt-box" aria-labelledby="chat-prompt-box-title">
             <div className="chat-prompt-box__inner">
-                <h2 id="chat-prompt-box-title" className="chat-prompt-box__title">
+                <Text variant="heading" as="h2" align="center" id="chat-prompt-box-title">
                     What should the agent work on?
-                </h2>
-                <p className="chat-prompt-box__lead">Describe the task in plain words. The agent plans it first, and asks before it pushes anything.</p>
+                </Text>
+                <Text variant="copy" align="center" className="chat-prompt-box__lead">
+                    Describe the task in plain words. The agent plans it first, and asks before it pushes anything.
+                </Text>
 
                 <form className="chat-prompt-box__box" onSubmit={send}>
                     {files.length ? (
@@ -122,15 +124,15 @@ export function ChatPromptBox() {
                                 >
                                     <span className="chat-prompt-box__model-option">
                                         {option.label}
-                                        <span className="chat-prompt-box__model-description">{option.description}</span>
+                                        <Text variant="caption">{option.description}</Text>
                                     </span>
                                 </MenuItem>
                             ))}
                         </Menu>
 
-                        <span className="chat-prompt-box__hint">
+                        <Text variant="caption" className="chat-prompt-box__hint">
                             <Kbd>Shift</Kbd> + <Kbd>Enter</Kbd> for a new line
-                        </span>
+                        </Text>
                         <Button className="chat-prompt-box__send" type="submit" variant="primary" size="sm" iconOnly aria-label="Send" disabled={!ready}>
                             <ArrowUp size={16} />
                         </Button>
@@ -139,10 +141,16 @@ export function ChatPromptBox() {
 
                 <div className="chat-prompt-box__suggestions" role="group" aria-label="Ideas to start from">
                     {suggestions.map((suggestion) => (
-                        <button key={suggestion} type="button" className="chat-prompt-box__suggestion" onClick={() => pickSuggestion(suggestion)}>
-                            <Lightbulb size={14} aria-hidden="true" />
+                        <Button
+                            key={suggestion}
+                            size="sm"
+                            shape="pill"
+                            startIcon={<Lightbulb size={14} />}
+                            className="chat-prompt-box__suggestion"
+                            onClick={() => pickSuggestion(suggestion)}
+                        >
                             {suggestion}
-                        </button>
+                        </Button>
                     ))}
                 </div>
             </div>

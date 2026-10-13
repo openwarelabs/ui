@@ -20,6 +20,8 @@ The list of blocks, with each one's name and description, is `docs/app/blocks.ts
 
 **Two files, nothing else.** A block imports only `react`, `@openwarelabs/ui`, `lucide-react` and its own `./<Name>.css`, so it can be copied as is. It exports one function, named like its file. Sample data, small helper components and types sit above it in the same file, unexported. No images or outside URLs: draw product visuals with Openware components and CSS, and use `Avatar` initials for people.
 
+**Components, not look-alikes.** Text is `<Text variant="…">`: every heading, paragraph and styled run of text (a label, a caption, a price) takes the variant that matches it, with `as` for the outline and `tone` for its colour. Controls are the library's: `Button` (or `CloseButton`, `CopyButton`, `ToggleButton`), `Link` (or `buttonClassName()` / `linkClassName()` on an `<a>`), `Kbd`, `Code`, `Input` and the other fields, `Badge`, `Avatar`, `Card`. Plain elements are only for layout, and for drawn product visuals (inside `role="img"` or `aria-hidden`), which are pictures rather than page text. `npm run blocks:check` flags a hand-made heading, paragraph or control.
+
 **Its own class, and only its own.** Every selector starts with the block's class: `HeroCentred` → `.hero-centred`, `.hero-centred__title`, `.hero-centred--compact`. Inside it you can reach a library class when you must (`.shell-sidebar .ow-menu { display: block; }`), never the page (`body`, `:root`, bare elements). Start each stylesheet with:
 
 ```css
@@ -31,7 +33,7 @@ The list of blocks, with each one's name and description, is `docs/app/blocks.ts
 }
 ```
 
-**Tokens for everything that has one.** Colours are `var(--ow-…)` (or `color-mix()` of them, and `transparent`), never hex or rgb, so a block follows the theme and the brand colour. Spaces, radii, shadows, weights, durations and easings come from the tokens where one fits. Type can use the `ow-type-*` classes, but set marketing headline sizes yourself, since they shrink on phones.
+**Tokens for everything that has one.** Colours are `var(--ow-…)` (or `color-mix()` of them, and `transparent`), never hex or rgb, so a block follows the theme and the brand colour. Spaces, radii, shadows, weights, durations and easings come from the tokens where one fits. Type comes from `Text`, whose display variants shrink on phones by themselves; a block's CSS sets its layout (margins, widths, alignment), not its type.
 
 **Every width.** It must look designed at 1280, 1024, 768 and 390 pixels wide, with nothing scrolling sideways. Phones are under 760px (the library's own breakpoint), tablets under 1024px. Only blocks with a fixed `height` in the list may use viewport units (`100dvh`); the others are measured to fit, and `vh` would make them grow forever.
 
@@ -41,14 +43,14 @@ The list of blocks, with each one's name and description, is `docs/app/blocks.ts
 
 - On `--ow-paper`, which is warm in light: put cards and controls on `--ow-surface`, not straight on the paper, when they need a ground.
 - A section is `padding: var(--ow-section-y) 32px` with its content in `max-width: var(--ow-page-max); margin: 0 auto`; on phones, `72px var(--ow-page-gutter)`.
-- Titles are big and light: 44px (section) to 72px (hero), weight 500, letter-spacing around −0.03em to −0.045em, `text-wrap: balance`. `SectionHeading` does a section's Chip, title and intro for you. The intro is 17px in `--ow-text-muted`, under 560px wide.
+- Titles are big and light: `Text` variant `hero` for a page's first screen, `page-title` for a page's heading, `section-title` for a section's. `SectionHeading` does a section's Chip, title and intro for you. The intro is `variant="lead"`: muted and under 560px wide.
 - Buttons are `shape="pill"`. One primary button per section.
 - Cards: `--ow-surface`, a 1px `--ow-border`, `--ow-radius-card` (18px). A product visual standing alone can take `--ow-shadow-lift`, the only decorative shadow.
 
 ### Application blocks
 
 - On `--ow-canvas`, with the page on a raised `--ow-surface` panel (`--ow-radius-panel`) or in cards (`--ow-radius-container`), each with a 1px `--ow-border`.
-- 14px text. Page titles 24px at `--ow-weight-display`; card titles 15px at `--ow-weight-emphasis`.
+- 14px text: `Text` variant `body`, `copy` for descriptions, `caption` for meta. Page titles `heading`; card titles `card-title`; dialog titles come from `Dialog`.
 - Buttons are the default rounded shape, `md` in pages and `sm` in toolbars and rows. One primary button per view.
 - Blocks that open a dialog, drawer or popover open it as they load, over a believable page, so the preview shows it; closing it leaves a button that opens it again.
 

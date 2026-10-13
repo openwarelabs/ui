@@ -30,17 +30,8 @@
     gap: var(--ow-space-2xl) var(--ow-space-4xl);
 }
 
-.notifications-feed__title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
 .notifications-feed__subtitle {
-    margin: 4px 0 0;
-    color: var(--ow-text-muted);
+    margin-top: 4px;
 }
 
 .notifications-feed__day {
@@ -51,20 +42,13 @@
     display: flex;
     align-items: baseline;
     gap: var(--ow-space-sm);
-    margin: 0 0 6px;
+    margin-bottom: 6px;
     border-bottom: 1px solid var(--ow-border);
     padding-bottom: 10px;
-    font-size: 13px;
-    font-weight: var(--ow-weight-emphasis);
 }
 
 .notifications-feed__day-title:focus {
     outline: none;
-}
-
-.notifications-feed__day-date {
-    color: var(--ow-text-muted);
-    font-weight: var(--ow-weight-regular);
 }
 
 .notifications-feed__events {
@@ -124,26 +108,14 @@
     padding-top: 4px;
 }
 
-.notifications-feed__line {
-    margin: 0;
-    color: var(--ow-text-muted);
-    line-height: 1.5;
-    text-wrap: pretty;
-}
-
-.notifications-feed__who {
-    color: var(--ow-text);
-    font-weight: var(--ow-weight-emphasis);
-}
-
+/* Links in a muted line keep the text colour, like the names beside them. */
 .notifications-feed__line .ow-link {
     color: var(--ow-text);
 }
 
+/* Times line up down the rail. */
 .notifications-feed__time {
     padding-top: 5px;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
 }
@@ -154,37 +126,19 @@
     flex-wrap: wrap;
     align-items: center;
     gap: var(--ow-space-sm) var(--ow-space-md);
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-    text-wrap: pretty;
 }
 
+/* Commits, branches and diff counts in mono at caption size: the code style is 14px, louder than the line around it. */
 .notifications-feed__mono {
-    font-family: var(--ow-font-mono);
-    font-size: 12px;
-}
-
-.notifications-feed__added {
-    color: var(--ow-success-text);
-    font-family: var(--ow-font-mono);
-    font-size: 12px;
-}
-
-.notifications-feed__removed {
-    color: var(--ow-danger-text);
-    font-family: var(--ow-font-mono);
     font-size: 12px;
 }
 
 .notifications-feed__quote {
     max-width: 560px;
-    margin: 0;
     border: 1px solid var(--ow-border);
     border-radius: var(--ow-radius-form);
     background: var(--ow-surface-muted);
     padding: 10px 12px;
-    color: var(--ow-text-soft);
-    line-height: 1.5;
 }
 
 .notifications-feed__more {
@@ -195,19 +149,11 @@
     padding-top: 24px;
 }
 
-.notifications-feed__end {
-    margin: 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
-}
-
 .notifications-feed__empty {
-    margin: 32px 0 0;
+    margin-top: 32px;
     border: 1px dashed var(--ow-border-strong);
     border-radius: var(--ow-radius-container);
     padding: 32px 16px;
-    color: var(--ow-text-muted);
-    text-align: center;
 }
 
 @media (max-width: 760px) {

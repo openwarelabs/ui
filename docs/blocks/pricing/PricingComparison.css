@@ -38,11 +38,7 @@
 
 .pricing-comparison__plans-label {
     align-self: end;
-    margin: 0;
     padding: 0 16px;
-    color: var(--ow-text-muted);
-    font-size: 13px;
-    line-height: 1.5;
 }
 
 .pricing-comparison__plan {
@@ -59,21 +55,11 @@
     height: 22px;
     align-items: center;
     gap: 8px;
-    margin: 0;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
 }
 
 .pricing-comparison__plan-price {
-    margin: 0 0 12px;
-    color: var(--ow-text-muted);
-    font-size: 13px;
+    margin-bottom: 12px;
     white-space: nowrap;
-}
-
-.pricing-comparison__plan-price strong {
-    color: var(--ow-text);
-    font-weight: var(--ow-weight-emphasis);
 }
 
 .pricing-comparison__groups {
@@ -124,14 +110,11 @@
 .pricing-comparison__feature {
     display: block;
     padding: 6px 0;
-    line-height: 1.4;
 }
 
 .pricing-comparison__feature-note {
     display: block;
     margin-top: 2px;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
 }
 
 .pricing-comparison__yes {
@@ -155,10 +138,7 @@
 }
 
 .pricing-comparison__note {
-    margin: 24px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 13px;
-    text-align: center;
+    margin-top: 24px;
     text-wrap: balance;
 }
 
@@ -166,7 +146,7 @@
     .pricing-comparison {
         --pricing-comparison-first: 26%;
     }
-    .pricing-comparison__plan-price strong {
+    .pricing-comparison__plan-amount {
         display: block;
     }
     .pricing-comparison__plan-name .ow-badge {
@@ -214,7 +194,7 @@
         grid-column: 1;
         margin: 0;
     }
-    .pricing-comparison__plan-price strong {
+    .pricing-comparison__plan-amount {
         display: inline;
     }
     .pricing-comparison__plan-name .ow-badge {

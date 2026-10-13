@@ -26,9 +26,6 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 15px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.01em;
 }
 
 .sign-in-split__mark {
@@ -45,17 +42,8 @@
     margin: auto;
 }
 
-.sign-in-split__title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: var(--ow-weight-display);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
 .sign-in-split__lead {
-    margin: 6px 0 0;
-    color: var(--ow-text-muted);
+    margin-top: 6px;
 }
 
 .sign-in-split__provider {
@@ -68,18 +56,8 @@
 }
 
 .sign-in-split__terms {
-    margin: 16px 0 0;
-    color: var(--ow-text-muted);
-    font-size: 12.5px;
-    line-height: 1.5;
-    text-align: center;
+    margin-top: 16px;
     text-wrap: balance;
-}
-
-.sign-in-split__switch {
-    margin: 0;
-    color: var(--ow-text-muted);
-    text-align: center;
 }
 
 /* The plate: inset from the window's edge, midnight in both themes. */
@@ -104,14 +82,12 @@
     padding: 40px 44px;
 }
 
-.sign-in-split__eyebrow {
+/* On the midnight plate the plate's softened white stands in for the caption's muted grey, which no tone gives. */
+.sign-in-split__plate .sign-in-split__eyebrow {
     display: flex;
     align-items: center;
     gap: var(--ow-space-sm);
-    margin: 0;
     color: color-mix(in srgb, var(--ow-on-primary) 72%, transparent);
-    font-size: 13px;
-    font-weight: var(--ow-weight-control);
 }
 
 .sign-in-split__brass {
@@ -123,12 +99,7 @@
 }
 
 .sign-in-split__headline {
-    margin: -14px 0 0;
-    font-size: 30px;
-    font-weight: 500;
-    line-height: 1.15;
-    letter-spacing: -0.03em;
-    text-wrap: balance;
+    margin-top: -14px;
 }
 
 /* The drawn product: a review card, with a deploy notice tucked under its corner. */
@@ -300,27 +271,23 @@
 }
 
 .sign-in-split__quote-text {
-    margin: 0;
-    font-size: 15px;
-    line-height: 1.55;
     text-wrap: pretty;
 }
 
-.sign-in-split__quote-by {
+.sign-in-split__plate .sign-in-split__quote-by {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: var(--ow-space-sm);
     margin-top: 10px;
     color: color-mix(in srgb, var(--ow-on-primary) 68%, transparent);
-    font-size: 13px;
 }
 
+/* The sample label, outlined in the plate's own white: a Badge would sit on a light ground. */
 .sign-in-split__sample {
     border: 1px solid color-mix(in srgb, var(--ow-on-primary) 28%, transparent);
     border-radius: var(--ow-radius-pill);
     padding: 1px 8px;
-    font-size: 11.5px;
 }
 
 @media (max-width: 1024px) {
@@ -329,9 +296,6 @@
     }
     .sign-in-split__plate-inner {
         padding: 32px 28px;
-    }
-    .sign-in-split__headline {
-        font-size: 24px;
     }
     .sign-in-split__deploy {
         width: 78%;

@@ -2,6 +2,7 @@ import { useId, useState } from "react";
 
 import {
     Button,
+    Code,
     ConfirmDialog,
     CopyButton,
     Dialog,
@@ -12,6 +13,7 @@ import {
     Select,
     Snippet,
     Table,
+    Text,
     toast,
     VisuallyHidden,
     type TableColumn,
@@ -66,11 +68,11 @@ function newKey() {
 function KeyValue({ apiKey }: { apiKey: ApiKey }) {
     return (
         <span className="settings-api-keys__key">
-            <code className="settings-api-keys__secret">
+            <Code className="settings-api-keys__secret">
                 {apiKey.prefix}
                 <span aria-hidden="true">_••••••••</span>
                 <VisuallyHidden>, then the secret, hidden</VisuallyHidden>
-            </code>
+            </Code>
             <CopyButton iconOnly value={apiKey.prefix} label={`Copy the ID of ${apiKey.name}`} />
         </span>
     );
@@ -129,11 +131,11 @@ export function SettingsApiKeys() {
             header: "Name",
             render: (key) => (
                 <span className="settings-api-keys__name">
-                    <span className="settings-api-keys__name-text">{key.name}</span>
-                    <span className="settings-api-keys__meta">
+                    <Text variant="label">{key.name}</Text>
+                    <Text variant="caption">
                         {key.access} · <span className="settings-api-keys__meta-wide">{key.by}</span>
                         <span className="settings-api-keys__meta-phone">{usedText(key.lastUsed)}</span>
-                    </span>
+                    </Text>
                     {/* On phones the key column folds in here. */}
                     <span className="settings-api-keys__key-phone">
                         <KeyValue apiKey={key} />
@@ -151,7 +153,11 @@ export function SettingsApiKeys() {
             key: "lastUsed",
             header: "Last used",
             width: 130,
-            render: (key) => <span className={key.lastUsed === "Never" ? "settings-api-keys__never" : undefined}>{key.lastUsed}</span>,
+            render: (key) => (
+                <Text as="span" tone={key.lastUsed === "Never" ? "muted" : undefined}>
+                    {key.lastUsed}
+                </Text>
+            ),
         },
         {
             key: "actions",
@@ -171,12 +177,12 @@ export function SettingsApiKeys() {
             <div className="settings-api-keys__inner">
                 <div className="settings-api-keys__header">
                     <div>
-                        <h2 id={titleId} className="settings-api-keys__title">
+                        <Text variant="dialog-title" as="h2" id={titleId}>
                             API keys
-                        </h2>
-                        <p className="settings-api-keys__text">
+                        </Text>
+                        <Text variant="copy" className="settings-api-keys__text">
                             Keys let scripts and CI use the Acme API on behalf of this workspace. Treat them like passwords.
-                        </p>
+                        </Text>
                     </div>
                     <Button variant="primary" startIcon={<Plus size={16} />} onClick={openCreate}>
                         Create key
@@ -194,9 +200,9 @@ export function SettingsApiKeys() {
                     }
                 />
 
-                <p className="settings-api-keys__note">
+                <Text variant="caption" as="p" className="settings-api-keys__note">
                     Use a separate key for each place you use one, so you can revoke it without breaking the rest. <Link href="#">Read the API guide</Link>
-                </p>
+                </Text>
             </div>
 
             <Dialog
@@ -229,7 +235,7 @@ export function SettingsApiKeys() {
             >
                 {created ? (
                     <div className="settings-api-keys__created">
-                        <span className="settings-api-keys__created-label">{created.name}</span>
+                        <Text variant="label">{created.name}</Text>
                         <Snippet value={created.full} prompt={null} />
                     </div>
                 ) : (
@@ -264,8 +270,7 @@ export function SettingsApiKeys() {
                 title={`Revoke ${revoking?.name ?? "this key"}?`}
                 description={
                     <>
-                        Anything still using <code className="settings-api-keys__inline-code">{revoking?.prefix}</code> stops working straight away. You can't
-                        undo this.
+                        Anything still using <Code>{revoking?.prefix}</Code> stops working straight away. You can't undo this.
                     </>
                 }
                 confirmLabel="Revoke key"
