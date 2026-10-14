@@ -4,6 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { build } from "esbuild";
 import { readStyles } from "./css.mjs";
+import { pureCalls } from "./pure-calls.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
@@ -17,6 +18,7 @@ const shared = {
     target: "es2020",
     jsx: "automatic",
     logLevel: "warning",
+    plugins: [pureCalls],
 };
 
 await build({ ...shared, format: "esm", outfile: path.join(dist, "index.js"), external, sourcemap: true });

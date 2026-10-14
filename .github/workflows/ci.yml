@@ -1,5 +1,5 @@
 # Checks every pull request and every push to main: the library, the blocks package, the MCP server and the docs. "Checks" and "Cleaner" are required to merge into main
-# (scripts/setup-github.sh sets that up), alongside "PR title" from pr-title.yml and "Visual" from visual.yml.
+# (scripts/setup-github.sh sets that up), alongside "PR title" from pr-title.yml, "Visual" from visual.yml and "Accessibility" from accessibility.yml.
 name: CI
 
 on:
@@ -22,6 +22,7 @@ jobs:
       - run: npm run contrast
       - run: npm run blocks:check
       - run: npm run blocks:build
+      - run: npm run size # what an app pays for each package, and for one piece of it alone (size-limits.json)
       - run: npm run mcp:build
       - run: npm run docs:build
 

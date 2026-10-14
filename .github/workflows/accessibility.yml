@@ -1,0 +1,50 @@
+# Accessibility check on every pull request and push to main: axe over every block (desktop and phone width) and
+# every component example, in light and dark, against WCAG 2.2 A and AA (scripts/a11y.mjs). "Accessibility" is
+# required to merge into main (scripts/setup-github.sh sets that up). The problems, with the element and how to
+# fix each, are on the run's summary page and in the "accessibility-report" artifact.
+name: Accessibility
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: accessibility-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  accessibility:
+    name: Accessibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run blocks:build
+      - run: npm run docs:build
+
+      - name: Cache the browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      - run: npx playwright install --with-deps chromium
+
+      - run: node scripts/a11y.mjs --dir docs-dist --out accessibility-report
+
+      - name: Upload the report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: accessibility-report
+          path: accessibility-report
+          if-no-files-found: ignore
+          retention-days: 14
