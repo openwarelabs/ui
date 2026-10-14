@@ -1,54 +1,3 @@
-/* The list on the canvas; the open item and its inspector side by side on a raised panel. */
-.shell-three-pane,
-.shell-three-pane *,
-.shell-three-pane *::before,
-.shell-three-pane *::after {
-    box-sizing: border-box;
-}
-
-.shell-three-pane {
-    display: grid;
-    grid-template-columns: 272px minmax(0, 1fr);
-    height: 100dvh;
-    background: var(--ow-canvas);
-    color: var(--ow-text);
-}
-
-/* The list */
-
-.shell-three-pane__list {
-    display: flex;
-    min-height: 0;
-    flex-direction: column;
-    gap: var(--ow-space-lg);
-    padding: 10px 12px 12px;
-}
-
-/* Menus wrap their trigger in an inline span; let these triggers take the full width. */
-.shell-three-pane__list .ow-menu {
-    display: block;
-}
-
-/* The workspace and account menus open from rows that span the list, their text lined up on the left. */
-.shell-three-pane__workspace,
-.shell-three-pane__user {
-    justify-content: flex-start;
-    gap: 10px;
-    padding: 6px 8px;
-    text-align: left;
-}
-
-/* An open menu keeps its trigger lit, as on hover. */
-.shell-three-pane__workspace[aria-expanded="true"],
-.shell-three-pane__user[aria-expanded="true"] {
-    border-color: var(--ow-border);
-    background: var(--ow-surface-muted);
-}
-
-.shell-three-pane__workspace-name {
-    flex: 1;
-}
-
 .shell-three-pane__mark {
     width: 22px;
     height: 22px;
@@ -58,143 +7,10 @@
     box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
 }
 
-.shell-three-pane__menu-spacer {
-    display: block;
-    width: 15px;
-}
-
-.shell-three-pane__list-heading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: var(--ow-space-sm);
-    padding-left: 8px;
-}
-
-.shell-three-pane__list-count {
-    margin-left: 6px;
-}
-
-.shell-three-pane__search .ow-input {
-    background: var(--ow-surface);
-}
-
-.shell-three-pane__scroll {
-    min-height: 0;
-    flex: 1;
-    margin: 0 -4px;
-    padding: 0 4px;
-}
-
-.shell-three-pane__projects {
-    display: grid;
-    gap: 2px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-/* Each project is a NavItem, a little roomier for its second line; the open one is raised on the surface. */
-.shell-three-pane__project {
-    width: 100%;
-    gap: 10px;
-    padding: 8px 10px;
-}
-
 .shell-three-pane__dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-}
-
-.shell-three-pane__project-text {
-    display: grid;
-    min-width: 0;
-    gap: 1px;
-}
-
-.shell-three-pane__project-name {
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.shell-three-pane__no-match {
-    padding: 12px 10px;
-}
-
-.shell-three-pane__user-text {
-    display: grid;
-    min-width: 0;
-    flex: 1;
-}
-
-/* The panel: the item, and the inspector beside it */
-
-.shell-three-pane__panel {
-    display: grid;
-    min-height: 0;
-    grid-template-columns: minmax(0, 1fr) 300px;
-    overflow: hidden;
-    margin: 8px 8px 8px 0;
-    border: 1px solid var(--ow-border);
-    border-radius: var(--ow-radius-panel);
-    background: var(--ow-surface);
-}
-
-.shell-three-pane[data-inspector="closed"] .shell-three-pane__panel {
-    grid-template-columns: minmax(0, 1fr);
-}
-
-.shell-three-pane[data-inspector="closed"] .shell-three-pane__inspector {
-    display: none;
-}
-
-.shell-three-pane__item,
-.shell-three-pane__inspector {
-    min-height: 0;
-    overflow-y: auto;
-}
-
-/* The item pane's width depends on the panes beside it, so its figures answer to the pane, not the window. */
-.shell-three-pane__item {
-    container-type: inline-size;
-}
-
-.shell-three-pane__toolbar {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    display: flex;
-    height: 52px;
-    align-items: center;
-    gap: var(--ow-space-sm);
-    border-bottom: 1px solid var(--ow-border);
-    background: var(--ow-surface);
-    padding: 0 12px 0 20px;
-}
-
-.shell-three-pane__crumbs {
-    display: flex;
-    min-width: 0;
-    flex: 1;
-    align-items: center;
-    gap: 6px;
-}
-
-.shell-three-pane__crumbs svg {
-    flex-shrink: 0;
-    color: var(--ow-icon);
-}
-
-.shell-three-pane__back {
-    display: none;
-}
-
-.shell-three-pane__content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--ow-space-7xl);
-    padding: 28px 28px 40px;
 }
 
 .shell-three-pane__header {
@@ -291,40 +107,6 @@
     font-variant-numeric: tabular-nums;
 }
 
-/* The inspector */
-
-.shell-three-pane__inspector {
-    border-left: 1px solid var(--ow-border);
-}
-
-.shell-three-pane__inspector-header {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    display: flex;
-    height: 52px;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--ow-space-sm);
-    border-bottom: 1px solid var(--ow-border);
-    background: var(--ow-surface);
-    padding: 0 12px 0 20px;
-}
-
-.shell-three-pane__inspector-title:focus {
-    outline: none;
-}
-
-.shell-three-pane__inspector-back {
-    display: none;
-}
-
-.shell-three-pane__inspector-body {
-    display: grid;
-    gap: var(--ow-space-4xl);
-    padding: 16px 20px 28px;
-}
-
 .shell-three-pane__details {
     display: grid;
     gap: 14px;
@@ -353,38 +135,6 @@
     margin-bottom: 2px;
 }
 
-/* Tablets: the inspector takes the item's place when asked for. */
-@media (max-width: 1023px) {
-    .shell-three-pane {
-        grid-template-columns: 248px minmax(0, 1fr);
-    }
-    .shell-three-pane__panel,
-    .shell-three-pane[data-inspector="closed"] .shell-three-pane__panel {
-        grid-template-columns: minmax(0, 1fr);
-    }
-    .shell-three-pane__inspector,
-    .shell-three-pane[data-inspector="closed"] .shell-three-pane__inspector {
-        display: none;
-        border-left: 0;
-    }
-    .shell-three-pane[data-view="inspector"] .shell-three-pane__item {
-        display: none;
-    }
-    .shell-three-pane[data-view="inspector"] .shell-three-pane__inspector {
-        display: block;
-    }
-    .shell-three-pane__inspector-back {
-        display: block;
-    }
-    .shell-three-pane__inspector-close {
-        display: none;
-    }
-    .shell-three-pane__inspector-header {
-        justify-content: flex-start;
-        padding-left: 8px;
-    }
-}
-
 /* A narrow pane on a wide screen: the phone rule for the heading size doesn't fire, so the figures shrink here. */
 @container (max-width: 560px) {
     .shell-three-pane__figure {
@@ -395,30 +145,7 @@
     }
 }
 
-/* Phones: one pane at a time, each with a way back. */
 @media (max-width: 759px) {
-    .shell-three-pane {
-        grid-template-columns: minmax(0, 1fr);
-    }
-    .shell-three-pane[data-view="list"] .shell-three-pane__panel,
-    .shell-three-pane:not([data-view="list"]) .shell-three-pane__list {
-        display: none;
-    }
-    .shell-three-pane__panel {
-        margin: 8px;
-    }
-    .shell-three-pane__toolbar {
-        padding-left: 8px;
-    }
-    .shell-three-pane__back {
-        display: block;
-    }
-    .shell-three-pane__crumbs {
-        visibility: hidden;
-    }
-    .shell-three-pane__content {
-        padding: 22px 18px 32px;
-    }
     .shell-three-pane__deploy {
         padding: 12px 14px;
     }

@@ -1,22 +1,7 @@
 import { useState } from "react";
 
-import {
-    Avatar,
-    AvatarGroup,
-    Badge,
-    Breadcrumbs,
-    Button,
-    ProgressBar,
-    SettingsRow,
-    Switch,
-    Tab,
-    TabList,
-    TabPanel,
-    Tabs,
-    Text,
-    toast,
-    type BadgeVariant,
-} from "@openwarelabs/ui";
+import { PageHeading02 } from "@openwarelabs/blocks";
+import { Badge, ProgressBar, SettingsRow, Switch, Text, toast, type BadgeVariant } from "@openwarelabs/ui";
 import { Rocket } from "lucide-react";
 
 import "./PageHeadingTabs.css";
@@ -61,7 +46,13 @@ const lists: Array<{ id: string; label: string; rows: Row[] }> = [
         id: "runs",
         label: "Agent runs",
         rows: [
-            { title: "Update React Native to 0.76", mono: "agent/rn-076", meta: "For Clara Novak · 23 min · 14 files", status: "Needs review", tone: "warning" },
+            {
+                title: "Update React Native to 0.76",
+                mono: "agent/rn-076",
+                meta: "For Clara Novak · 23 min · 14 files",
+                status: "Needs review",
+                tone: "warning",
+            },
             {
                 title: "Translate onboarding into Japanese",
                 mono: "agent/onboarding-ja",
@@ -99,99 +90,67 @@ function RowList({ rows }: { rows: Row[] }) {
 }
 
 export function PageHeadingTabs() {
-    const [tab, setTab] = useState("overview");
     const [settings, setSettings] = useState({ testFlight: true, crashes: true });
 
     return (
-        <div className="page-heading-tabs">
-            <div className="page-heading-tabs__panel">
-                <div className="page-heading-tabs__top">
-                    <Breadcrumbs items={[{ label: "Acme", href: "#" }, { label: "Projects", href: "#" }, { label: "mobile-app" }]} />
-                    <div className="page-heading-tabs__header">
-                        <div>
-                            <Text as="h1" variant="heading">
-                                mobile-app
-                            </Text>
-                            <Text variant="copy" className="page-heading-tabs__lead">
-                                The iOS and Android app, built from one codebase.
-                            </Text>
+        <PageHeading02
+            breadcrumbs={[{ label: "Acme", href: "#" }, { label: "Projects", href: "#" }, { label: "mobile-app" }]}
+            title="mobile-app"
+            description="The iOS and Android app, built from one codebase."
+            members={members.map((name) => ({ name }))}
+            labels={{ members: (count) => `${count} people on mobile-app` }}
+            primaryAction={{
+                label: "New release",
+                icon: <Rocket size={16} />,
+                onClick: () => toast("Release 2.5 is building", { description: "It goes to TestFlight and the Play Store's internal track first." }),
+            }}
+            tabs={[
+                {
+                    value: "overview",
+                    label: "Overview",
+                    content: (
+                        <div className="page-heading-tabs__overview">
+                            <dl className="page-heading-tabs__figures">
+                                <div className="page-heading-tabs__figure">
+                                    <Text as="dt" variant="caption">
+                                        Deploys this week
+                                    </Text>
+                                    <Text as="dd" variant="heading">
+                                        9
+                                    </Text>
+                                </div>
+                                <div className="page-heading-tabs__figure">
+                                    <Text as="dt" variant="caption">
+                                        Crash-free sessions
+                                    </Text>
+                                    <Text as="dd" variant="heading">
+                                        99.6%
+                                    </Text>
+                                </div>
+                                <div className="page-heading-tabs__figure">
+                                    <Text as="dt" variant="caption">
+                                        Open reviews
+                                    </Text>
+                                    <Text as="dd" variant="heading">
+                                        3
+                                    </Text>
+                                </div>
+                            </dl>
+                            <section className="page-heading-tabs__rollout" aria-labelledby="page-heading-tabs-rollout">
+                                <Text as="h2" variant="card-title" id="page-heading-tabs-rollout" className="page-heading-tabs__rollout-title">
+                                    Release 2.4 rollout
+                                </Text>
+                                <ProgressBar label="iOS" value={100} valueLabel="All users" tone="success" />
+                                <ProgressBar label="Android" value={60} valueLabel="60% of users" />
+                            </section>
                         </div>
-                        <div className="page-heading-tabs__actions">
-                            <AvatarGroup size="sm" max={4} label={`${members.length} people on mobile-app`}>
-                                {members.map((name) => (
-                                    <Avatar key={name} name={name} label={name} />
-                                ))}
-                            </AvatarGroup>
-                            <Button
-                                variant="primary"
-                                startIcon={<Rocket size={16} />}
-                                onClick={() =>
-                                    toast("Release 2.5 is building", { description: "It goes to TestFlight and the Play Store's internal track first." })
-                                }
-                            >
-                                New release
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-
-                <Tabs variant="line" value={tab} onValueChange={setTab} className="page-heading-tabs__tabs">
-                    <TabList aria-label="mobile-app">
-                        <Tab value="overview">Overview</Tab>
-                        {lists.map((list) => (
-                            <Tab key={list.id} value={list.id}>
-                                {list.label}
-                                <Text variant="badge" tone="muted" className="page-heading-tabs__count">
-                                    {list.rows.length}
-                                </Text>
-                            </Tab>
-                        ))}
-                        <Tab value="settings">Settings</Tab>
-                    </TabList>
-
-                    <TabPanel value="overview" className="page-heading-tabs__tab-panel page-heading-tabs__overview">
-                        <dl className="page-heading-tabs__figures">
-                            <div className="page-heading-tabs__figure">
-                                <Text as="dt" variant="caption">
-                                    Deploys this week
-                                </Text>
-                                <Text as="dd" variant="heading">
-                                    9
-                                </Text>
-                            </div>
-                            <div className="page-heading-tabs__figure">
-                                <Text as="dt" variant="caption">
-                                    Crash-free sessions
-                                </Text>
-                                <Text as="dd" variant="heading">
-                                    99.6%
-                                </Text>
-                            </div>
-                            <div className="page-heading-tabs__figure">
-                                <Text as="dt" variant="caption">
-                                    Open reviews
-                                </Text>
-                                <Text as="dd" variant="heading">
-                                    3
-                                </Text>
-                            </div>
-                        </dl>
-                        <section className="page-heading-tabs__rollout" aria-labelledby="page-heading-tabs-rollout">
-                            <Text as="h2" variant="card-title" id="page-heading-tabs-rollout" className="page-heading-tabs__rollout-title">
-                                Release 2.4 rollout
-                            </Text>
-                            <ProgressBar label="iOS" value={100} valueLabel="All users" tone="success" />
-                            <ProgressBar label="Android" value={60} valueLabel="60% of users" />
-                        </section>
-                    </TabPanel>
-
-                    {lists.map((list) => (
-                        <TabPanel key={list.id} value={list.id} className="page-heading-tabs__tab-panel">
-                            <RowList rows={list.rows} />
-                        </TabPanel>
-                    ))}
-
-                    <TabPanel value="settings" className="page-heading-tabs__tab-panel">
+                    ),
+                },
+                ...lists.map((list) => ({ value: list.id, label: list.label, count: list.rows.length, content: <RowList rows={list.rows} /> })),
+                {
+                    value: "settings",
+                    label: "Settings",
+                    content: (
                         <div className="page-heading-tabs__settings">
                             <SettingsRow label="Send builds to TestFlight" description="Every release goes to internal testers before the App Store.">
                                 <Switch
@@ -204,9 +163,9 @@ export function PageHeadingTabs() {
                                 <Switch checked={settings.crashes} onChange={(crashes) => setSettings({ ...settings, crashes })} label="Alert on new crashes" />
                             </SettingsRow>
                         </div>
-                    </TabPanel>
-                </Tabs>
-            </div>
-        </div>
+                    ),
+                },
+            ]}
+        />
     );
 }

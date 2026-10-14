@@ -1,0 +1,260 @@
+.ow-shell04,
+.ow-shell04 *,
+.ow-shell04 *::before,
+.ow-shell04 *::after {
+    box-sizing: border-box;
+}
+
+/* ShellSidebar's frame, with a sidebar that folds down to its icons. */
+.ow-shell04 {
+    display: flex;
+    min-height: 100dvh;
+    background: var(--ow-canvas);
+    color: var(--ow-text);
+}
+
+/*
+ * Folded, the sidebar is 55px: 12px of padding either side of a 31px item, so each 15px icon sits on the centre
+ * line. Nothing moves sideways as it folds; the labels fade and the edge closes over them.
+ */
+.ow-shell04__aside {
+    position: sticky;
+    top: 0;
+    width: 248px;
+    height: 100dvh;
+    flex-shrink: 0;
+    overflow: hidden auto;
+    padding: 10px 12px 12px;
+    transition: width var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+.ow-shell04--collapsed .ow-shell04__aside {
+    width: 55px;
+    overflow-y: hidden;
+}
+
+.ow-shell04__nav {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    gap: var(--ow-space-3xl);
+}
+
+/* Menus and tooltips wrap their child in an inline span; let these take the full width. */
+.ow-shell04__nav .ow-menu,
+.ow-shell04__nav .ow-tooltip {
+    display: block;
+}
+
+/* Items never grow wider than the sidebar, so focusing one can't scroll the folded sidebar sideways. */
+.ow-shell04__nav .ow-nav {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.ow-shell04__nav .ow-nav__item {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/*
+ * The workspace and account menus open from rows that span the sidebar. Their padding, inside the button's 1px
+ * border, puts the mark and the avatar on the folded sidebar's centre line; whatever doesn't fit is clipped.
+ */
+.ow-shell04__workspace,
+.ow-shell04__user {
+    justify-content: flex-start;
+    gap: 10px;
+    overflow: hidden;
+    padding: 5px 7px 5px 4px;
+    text-align: left;
+}
+
+.ow-shell04__user {
+    padding-left: 3px;
+}
+
+/* An open menu keeps its trigger lit, as on hover. */
+.ow-shell04__workspace[aria-expanded="true"],
+.ow-shell04__user[aria-expanded="true"] {
+    border-color: var(--ow-border);
+    background: var(--ow-surface-muted);
+}
+
+.ow-shell04__workspace-name {
+    flex: 1;
+}
+
+.ow-shell04__menu-spacer {
+    display: block;
+    width: 15px;
+}
+
+.ow-shell04__search {
+    justify-content: flex-start;
+    overflow: hidden;
+    padding: 0 6px 0 7px;
+}
+
+.ow-shell04__search-text {
+    flex: 1;
+    text-align: left;
+}
+
+.ow-shell04__icon {
+    position: relative;
+    display: inline-flex;
+}
+
+/* Folded, the inbox count becomes a small brass dot on its icon. */
+.ow-shell04__unread {
+    position: absolute;
+    top: -2px;
+    right: -3px;
+    width: 7px;
+    height: 7px;
+    border: 1.5px solid var(--ow-canvas);
+    border-radius: 50%;
+    background: var(--ow-brass);
+    opacity: 0;
+    transition: opacity var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-shell04--collapsed .ow-shell04__aside .ow-shell04__unread {
+    opacity: 1;
+}
+
+.ow-shell04__account {
+    margin-top: auto;
+}
+
+.ow-shell04__user-text {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+}
+
+/* What fades as the sidebar folds, the menus' chevrons among it. */
+.ow-shell04__aside .ow-shell04__fade,
+.ow-shell04__aside :is(.ow-shell04__workspace, .ow-shell04__user) > .ow-button__icon:last-child,
+.ow-shell04__aside .ow-nav__label,
+.ow-shell04__aside .ow-nav__end,
+.ow-shell04__aside .ow-nav__heading,
+.ow-shell04__aside .ow-button__shortcut {
+    transition: opacity var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-shell04--collapsed .ow-shell04__aside .ow-shell04__fade,
+.ow-shell04--collapsed .ow-shell04__aside :is(.ow-shell04__workspace, .ow-shell04__user) > .ow-button__icon:last-child,
+.ow-shell04--collapsed .ow-shell04__aside .ow-nav__label,
+.ow-shell04--collapsed .ow-shell04__aside .ow-nav__end,
+.ow-shell04--collapsed .ow-shell04__aside .ow-nav__heading,
+.ow-shell04--collapsed .ow-shell04__aside .ow-button__shortcut {
+    opacity: 0;
+}
+
+.ow-shell04__body {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+}
+
+/* On phones the sidebar folds into a drawer behind this bar. */
+.ow-shell04__topbar {
+    display: none;
+    height: 52px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+}
+
+.ow-shell04__topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.ow-shell04__panel {
+    display: flex;
+    min-width: 0;
+    min-height: calc(100dvh - 16px);
+    flex: 1;
+    flex-direction: column;
+    margin: 8px 8px 8px 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+}
+
+.ow-shell04__toolbar {
+    display: flex;
+    height: 48px;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    border-bottom: 1px solid var(--ow-border);
+    padding: 0 16px 0 10px;
+}
+
+.ow-shell04__toolbar-divider {
+    width: 1px;
+    height: 16px;
+    margin: 0 4px;
+    background: var(--ow-border);
+}
+
+.ow-shell04__crumbs {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ow-shell04__crumbs svg {
+    color: var(--ow-icon);
+}
+
+.ow-shell04__page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ow-space-6xl);
+    padding: 28px 32px 40px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-shell04__aside,
+    .ow-shell04__aside .ow-shell04__fade,
+    .ow-shell04__aside :is(.ow-shell04__workspace, .ow-shell04__user) > .ow-button__icon:last-child,
+    .ow-shell04__aside .ow-shell04__unread,
+    .ow-shell04__aside .ow-nav__label,
+    .ow-shell04__aside .ow-nav__end,
+    .ow-shell04__aside .ow-nav__heading,
+    .ow-shell04__aside .ow-button__shortcut {
+        transition: none;
+    }
+}
+
+@media (max-width: 1023px) {
+    .ow-shell04__page {
+        padding: 24px 24px 36px;
+    }
+}
+
+@media (max-width: 759px) {
+    .ow-shell04 {
+        flex-direction: column;
+    }
+    .ow-shell04__aside,
+    .ow-shell04__toolbar {
+        display: none;
+    }
+    .ow-shell04__topbar {
+        display: flex;
+    }
+    .ow-shell04__panel {
+        min-height: calc(100dvh - 60px);
+        margin: 0 8px 8px;
+    }
+    .ow-shell04__page {
+        padding: 22px 18px 32px;
+    }
+}

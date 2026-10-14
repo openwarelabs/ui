@@ -1,9 +1,8 @@
 import { useState } from "react";
 
-import { Badge, Button, Card, Menu, MenuItem, MenuSeparator, Text, copyText, toast, type BadgeVariant } from "@openwarelabs/ui";
-import { Copy, Ellipsis, KeyRound, Plus, RefreshCw, Trash2 } from "lucide-react";
-
-import "./ListStacked.css";
+import { List03 } from "@openwarelabs/blocks";
+import { copyText, toast, type BadgeVariant } from "@openwarelabs/ui";
+import { Copy, KeyRound, Plus, RefreshCw, Trash2 } from "lucide-react";
 
 type Status = "Active" | "Expires soon" | "Expired" | "Revoked";
 
@@ -58,88 +57,44 @@ export function ListStacked() {
     const live = list.filter((entry) => entry.status === "Active" || entry.status === "Expires soon").length;
 
     return (
-        <section className="list-stacked" aria-labelledby="list-stacked-title">
-            <div className="list-stacked__inner">
-                <div className="list-stacked__header">
-                    <div>
-                        <Text as="h2" variant="heading" id="list-stacked-title">
-                            API keys
-                        </Text>
-                        <Text variant="copy" className="list-stacked__lead">
-                            {live === 1 ? "One key" : `${live} keys`} can reach the Acme API. Each one acts for the whole workspace, so keep them out of your
-                            code.
-                        </Text>
-                    </div>
-                    <Button variant="primary" startIcon={<Plus size={16} />} onClick={create}>
-                        Create key
-                    </Button>
-                </div>
-
-                <Card padding="none" className="list-stacked__card">
-                    <ul className="list-stacked__list">
-                        {list.map((entry) => {
-                            const inactive = entry.status === "Expired" || entry.status === "Revoked";
-                            return (
-                                <li key={entry.id} className="list-stacked__row" data-inactive={inactive || undefined}>
-                                    <span className="list-stacked__icon" aria-hidden="true">
-                                        <KeyRound size={16} />
-                                    </span>
-                                    <span className="list-stacked__text">
-                                        <span className="list-stacked__name-row">
-                                            <Text as="span" variant="label" tone={inactive ? "muted" : undefined} truncate>
-                                                {entry.name}
-                                            </Text>
-                                            <Text as="span" variant="code" tone="muted" className="list-stacked__key">
-                                                {entry.key}
-                                            </Text>
-                                        </span>
-                                        <Text variant="caption" className="list-stacked__detail">
-                                            {entry.detail}
-                                        </Text>
-                                    </span>
-                                    <span className="list-stacked__status">
-                                        <Badge size="sm" variant={tone[entry.status]}>
-                                            {entry.status}
-                                        </Badge>
-                                    </span>
-                                    <span className="list-stacked__menu">
-                                        <Menu
-                                            label={`${entry.name} actions`}
-                                            align="end"
-                                            trigger={
-                                                <Button variant="ghost" size="sm" iconOnly aria-label={`Actions for ${entry.name}`}>
-                                                    <Ellipsis size={16} />
-                                                </Button>
-                                            }
-                                        >
-                                            <MenuItem
-                                                icon={<Copy size={15} />}
-                                                onSelect={async () => {
-                                                    const copied = await copyText(entry.id);
-                                                    toast(copied ? `Copied the ID of ${entry.name}` : "Couldn't copy the key ID");
-                                                }}
-                                            >
-                                                Copy key ID
-                                            </MenuItem>
-                                            <MenuItem icon={<RefreshCw size={15} />} disabled={entry.status === "Revoked"} onSelect={() => roll(entry)}>
-                                                Roll the secret
-                                            </MenuItem>
-                                            <MenuSeparator />
-                                            <MenuItem icon={<Trash2 size={15} />} destructive disabled={inactive} onSelect={() => revoke(entry)}>
-                                                Revoke key
-                                            </MenuItem>
-                                        </Menu>
-                                    </span>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </Card>
-
-                <Text as="p" variant="caption">
-                    A key's secret is shown once, when it's made. Keys nobody uses for 90 days expire on their own.
-                </Text>
-            </div>
-        </section>
+        <List03
+            title="API keys"
+            description={
+                <>{live === 1 ? "One key" : `${live} keys`} can reach the Acme API. Each one acts for the whole workspace, so keep them out of your code.</>
+            }
+            primaryAction={{ label: "Create key", icon: <Plus size={16} />, onClick: create }}
+            items={list.map((entry) => {
+                const inactive = entry.status === "Expired" || entry.status === "Revoked";
+                return {
+                    id: entry.id,
+                    title: entry.name,
+                    code: entry.key,
+                    detail: entry.detail,
+                    status: { label: entry.status, tone: tone[entry.status] },
+                    inactive,
+                    icon: <KeyRound size={16} />,
+                    menu: [
+                        {
+                            label: "Copy key ID",
+                            icon: <Copy size={15} />,
+                            onSelect: async () => {
+                                const copied = await copyText(entry.id);
+                                toast(copied ? `Copied the ID of ${entry.name}` : "Couldn't copy the key ID");
+                            },
+                        },
+                        { label: "Roll the secret", icon: <RefreshCw size={15} />, disabled: entry.status === "Revoked", onSelect: () => roll(entry) },
+                        {
+                            label: "Revoke key",
+                            icon: <Trash2 size={15} />,
+                            destructive: true,
+                            disabled: inactive,
+                            onSelect: () => revoke(entry),
+                            separatorBefore: true,
+                        },
+                    ],
+                };
+            })}
+            footnote="A key's secret is shown once, when it's made. Keys nobody uses for 90 days expire on their own."
+        />
     );
 }

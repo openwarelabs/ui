@@ -1,6 +1,7 @@
 import { useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 
-import { Card, SegmentedControl, Select, Stat, Text, VisuallyHidden } from "@openwarelabs/ui";
+import { Dashboard01 } from "@openwarelabs/blocks";
+import { VisuallyHidden } from "@openwarelabs/ui";
 import { Bot, CircleCheck, Rocket, Timer } from "lucide-react";
 
 import "./DashboardChart.css";
@@ -275,88 +276,64 @@ export function DashboardChart() {
     const buildChange = Math.round(now.build - before.build);
 
     return (
-        <section className="dashboard-chart" aria-labelledby="dashboard-chart-title">
-            <div className="dashboard-chart__inner">
-                <div className="dashboard-chart__header">
-                    <div>
-                        <Text as="h1" variant="heading" id="dashboard-chart-title">
-                            Deploys
-                        </Text>
-                        <Text variant="copy" className="dashboard-chart__lead">
-                            How often your team ships, and how well it goes.
-                        </Text>
-                    </div>
-                    <div className="dashboard-chart__filters">
-                        <Select
-                            className="dashboard-chart__project"
-                            size="sm"
-                            aria-label="Project"
-                            value={project}
-                            onChange={setProject}
-                            options={[{ value: "all", label: "All projects" }, ...projects.map((entry) => ({ value: entry.id, label: entry.id }))]}
-                        />
-                        <SegmentedControl size="sm" aria-label="Time range" options={ranges} value={range} onChange={setRange} />
-                    </div>
-                </div>
-
-                <div className="dashboard-chart__stats">
-                    <Stat
-                        icon={<Rocket size={14} />}
-                        label="Deploys"
-                        value={now.deploys.toLocaleString("en-GB")}
-                        change={sign(deployChange, "%")}
-                        description={`vs the ${length} days before`}
-                    />
-                    <Stat
-                        icon={<CircleCheck size={14} />}
-                        label="Succeeded"
-                        value={`${now.success.toFixed(1)}%`}
-                        change={sign(now.success - before.success, " pts")}
-                        description="of deploys went live"
-                    />
-                    <Stat
-                        icon={<Timer size={14} />}
-                        label="Average build"
-                        value={duration(now.build)}
-                        change={sign(buildChange, " s")}
-                        changeTone={buildChange === 0 ? "neutral" : buildChange < 0 ? "positive" : "negative"}
-                        description="from push to live"
-                    />
-                    <Stat
-                        icon={<Bot size={14} />}
-                        label="Shipped by agents"
-                        value={`${Math.round(now.agents)}%`}
-                        change={sign(now.agents - before.agents, " pts")}
-                        changeTone="neutral"
-                        description="of all deploys"
-                    />
-                </div>
-
-                <Card className="dashboard-chart__card" padding="none">
-                    <div className="dashboard-chart__card-header">
-                        <div>
-                            <Text as="h2" variant="card-title">
-                                Deploys per day
-                            </Text>
-                            <Text as="p" variant="caption" className="dashboard-chart__summary">
-                                {now.deploys.toLocaleString("en-GB")} deploys in the last {length} days,{" "}
-                                {project === "all" ? "across five projects" : `to ${project}`}
-                            </Text>
-                        </div>
-                        <ul className="dashboard-chart__legend" aria-label="Legend">
-                            <Text as="li" variant="caption" className="dashboard-chart__legend-item">
-                                <span className="dashboard-chart__key-line" aria-hidden="true" />
-                                Deploys
-                            </Text>
-                            <Text as="li" variant="caption" className="dashboard-chart__legend-item">
-                                <span className="dashboard-chart__key-bar" aria-hidden="true" />
-                                Failed
-                            </Text>
-                        </ul>
-                    </div>
-                    <DeployChart days={current} label={`Deploys per day${project === "all" ? "" : ` to ${project}`}`} />
-                </Card>
-            </div>
-        </section>
+        <Dashboard01
+            title="Deploys"
+            description="How often your team ships, and how well it goes."
+            filters={[
+                {
+                    kind: "select",
+                    label: "Project",
+                    value: project,
+                    onChange: setProject,
+                    options: [{ value: "all", label: "All projects" }, ...projects.map((entry) => ({ value: entry.id, label: entry.id }))],
+                },
+                { kind: "segmented", label: "Time range", options: ranges, value: range, onChange: setRange },
+            ]}
+            stats={[
+                {
+                    icon: <Rocket size={14} />,
+                    label: "Deploys",
+                    value: now.deploys.toLocaleString("en-GB"),
+                    change: sign(deployChange, "%"),
+                    description: `vs the ${length} days before`,
+                },
+                {
+                    icon: <CircleCheck size={14} />,
+                    label: "Succeeded",
+                    value: `${now.success.toFixed(1)}%`,
+                    change: sign(now.success - before.success, " pts"),
+                    description: "of deploys went live",
+                },
+                {
+                    icon: <Timer size={14} />,
+                    label: "Average build",
+                    value: duration(now.build),
+                    change: sign(buildChange, " s"),
+                    changeTone: buildChange === 0 ? "neutral" : buildChange < 0 ? "positive" : "negative",
+                    description: "from push to live",
+                },
+                {
+                    icon: <Bot size={14} />,
+                    label: "Shipped by agents",
+                    value: `${Math.round(now.agents)}%`,
+                    change: sign(now.agents - before.agents, " pts"),
+                    changeTone: "neutral",
+                    description: "of all deploys",
+                },
+            ]}
+            chart={{
+                title: "Deploys per day",
+                description: (
+                    <>
+                        {now.deploys.toLocaleString("en-GB")} deploys in the last {length} days, {project === "all" ? "across five projects" : `to ${project}`}
+                    </>
+                ),
+                legend: [
+                    { label: "Deploys", swatch: <span className="dashboard-chart__key-line" aria-hidden="true" /> },
+                    { label: "Failed", swatch: <span className="dashboard-chart__key-bar" aria-hidden="true" /> },
+                ],
+                content: <DeployChart days={current} label={`Deploys per day${project === "all" ? "" : ` to ${project}`}`} />,
+            }}
+        />
     );
 }

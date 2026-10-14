@@ -1,0 +1,155 @@
+.ow-list01,
+.ow-list01 *,
+.ow-list01 *::before,
+.ow-list01 *::after {
+    box-sizing: border-box;
+}
+
+/* A section title with its primary action, then one card: search and filters, a sortable table, and the pages. */
+.ow-list01 {
+    background: var(--ow-canvas);
+    padding: 32px;
+    color: var(--ow-text);
+}
+
+.ow-list01__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 1200px;
+    gap: var(--ow-space-4xl);
+    margin: 0 auto;
+}
+
+.ow-list01__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+}
+
+.ow-list01__lead {
+    margin-top: 4px;
+}
+
+.ow-list01__card {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.ow-list01__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    border-bottom: 1px solid var(--ow-border);
+    padding: 12px 14px;
+}
+
+.ow-list01__search {
+    width: 280px;
+}
+
+.ow-list01__select {
+    width: 160px;
+}
+
+/* The count changes as you search; digits of one width keep it from jittering. */
+.ow-list01__count {
+    margin-left: auto;
+    padding-right: 4px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* The Table sits edge to edge in the card; the card draws the border. */
+.ow-list01__card .ow-table-wrap {
+    border: 0;
+    border-radius: 0;
+}
+
+.ow-list01__card .ow-user {
+    white-space: nowrap;
+}
+
+.ow-list01__empty {
+    padding: 16px 0 20px;
+}
+
+.ow-list01__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-lg);
+    border-top: 1px solid var(--ow-border);
+    padding: 10px 14px;
+}
+
+/* The range changes page by page; digits of one width keep it from jittering. */
+.ow-list01__range {
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 1023px) {
+    .ow-list01 {
+        padding: 28px 24px;
+    }
+    .ow-list01__search {
+        width: 100%;
+    }
+    .ow-list01__count {
+        margin-left: 4px;
+    }
+}
+
+@media (max-width: 759px) {
+    .ow-list01 {
+        padding: 24px var(--ow-page-gutter) 32px;
+    }
+    .ow-list01__header > .ow-button {
+        width: 100%;
+    }
+    .ow-list01__select {
+        width: auto;
+        flex: 1;
+    }
+    .ow-list01__count {
+        width: 100%;
+        margin-left: 2px;
+    }
+    .ow-list01__footer {
+        justify-content: center;
+    }
+    .ow-list01__range {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* The columns that step aside under 1024px wide (a column's hideBelow). */
+@media (max-width: 1023px) {
+    .ow-list01__card[data-hide-tablet~="1"] :is(th, td):nth-child(1),
+    .ow-list01__card[data-hide-tablet~="2"] :is(th, td):nth-child(2),
+    .ow-list01__card[data-hide-tablet~="3"] :is(th, td):nth-child(3),
+    .ow-list01__card[data-hide-tablet~="4"] :is(th, td):nth-child(4),
+    .ow-list01__card[data-hide-tablet~="5"] :is(th, td):nth-child(5),
+    .ow-list01__card[data-hide-tablet~="6"] :is(th, td):nth-child(6),
+    .ow-list01__card[data-hide-tablet~="7"] :is(th, td):nth-child(7),
+    .ow-list01__card[data-hide-tablet~="8"] :is(th, td):nth-child(8) {
+        display: none;
+    }
+}
+
+/* The columns that step aside under 760px wide (a column's hideBelow). */
+@media (max-width: 759px) {
+    .ow-list01__card[data-hide-phone~="1"] :is(th, td):nth-child(1),
+    .ow-list01__card[data-hide-phone~="2"] :is(th, td):nth-child(2),
+    .ow-list01__card[data-hide-phone~="3"] :is(th, td):nth-child(3),
+    .ow-list01__card[data-hide-phone~="4"] :is(th, td):nth-child(4),
+    .ow-list01__card[data-hide-phone~="5"] :is(th, td):nth-child(5),
+    .ow-list01__card[data-hide-phone~="6"] :is(th, td):nth-child(6),
+    .ow-list01__card[data-hide-phone~="7"] :is(th, td):nth-child(7),
+    .ow-list01__card[data-hide-phone~="8"] :is(th, td):nth-child(8) {
+        display: none;
+    }
+}

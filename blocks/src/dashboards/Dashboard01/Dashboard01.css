@@ -1,0 +1,124 @@
+.ow-dashboard01,
+.ow-dashboard01 *,
+.ow-dashboard01 *::before,
+.ow-dashboard01 *::after {
+    box-sizing: border-box;
+}
+
+/* A page title with its filters, a row of stats, then a chart across the page, drawn in SVG from the tokens. */
+.ow-dashboard01 {
+    background: var(--ow-canvas);
+    padding: 32px;
+    color: var(--ow-text);
+}
+
+.ow-dashboard01__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 1200px;
+    gap: var(--ow-space-2xl);
+    margin: 0 auto;
+}
+
+.ow-dashboard01__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+    margin-bottom: var(--ow-space-sm);
+}
+
+.ow-dashboard01__lead {
+    margin-top: 4px;
+}
+
+.ow-dashboard01__filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-sm);
+}
+
+.ow-dashboard01__select {
+    width: 180px;
+}
+
+.ow-dashboard01__stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--ow-space-2xl);
+}
+
+/* The chart card */
+.ow-dashboard01__card {
+    padding: 20px 20px 16px;
+}
+
+.ow-dashboard01__card-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--ow-space-lg) var(--ow-space-2xl);
+    margin-bottom: var(--ow-space-4xl);
+}
+
+.ow-dashboard01__summary {
+    margin-top: 2px;
+}
+
+.ow-dashboard01__legend {
+    display: flex;
+    gap: var(--ow-space-2xl);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-dashboard01__legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+@media (max-width: 1023px) {
+    .ow-dashboard01 {
+        padding: 28px 24px;
+    }
+    .ow-dashboard01__stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 759px) {
+    .ow-dashboard01 {
+        padding: 24px var(--ow-page-gutter) 32px;
+    }
+    .ow-dashboard01__filters,
+    .ow-dashboard01__filters > * {
+        width: 100%;
+    }
+    .ow-dashboard01__select {
+        width: 100%;
+    }
+    .ow-dashboard01__filters .ow-segmented {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+    .ow-dashboard01__filters .ow-segmented__item {
+        flex: 1;
+    }
+    .ow-dashboard01__stats {
+        gap: var(--ow-space-lg);
+    }
+    .ow-dashboard01__stats .ow-stat {
+        padding: 14px 16px;
+    }
+    .ow-dashboard01__stats .ow-stat__value {
+        font-size: 22px;
+    }
+    .ow-dashboard01__card {
+        padding: 16px 14px 12px;
+    }
+}

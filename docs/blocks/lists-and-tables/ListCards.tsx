@@ -1,24 +1,8 @@
 import { useState, type ComponentType } from "react";
 
-import {
-    Avatar,
-    AvatarGroup,
-    Badge,
-    Button,
-    Card,
-    EmptyState,
-    Menu,
-    MenuItem,
-    MenuSeparator,
-    SearchField,
-    Text,
-    copyText,
-    toast,
-    type BadgeVariant,
-} from "@openwarelabs/ui";
-import { Archive, BookOpen, Copy, Ellipsis, Globe, Palette, Plus, Receipt, SearchX, Smartphone, Star, StarOff, type LucideProps } from "lucide-react";
-
-import "./ListCards.css";
+import { List04 } from "@openwarelabs/blocks";
+import { copyText, toast, type BadgeVariant } from "@openwarelabs/ui";
+import { Archive, BookOpen, Copy, Globe, Palette, Plus, Receipt, SearchX, Smartphone, Star, StarOff, type LucideProps } from "lucide-react";
 
 type Status = "Live" | "Building" | "Failed";
 
@@ -84,7 +68,6 @@ const projects: Project[] = [
 
 export function ListCards() {
     const [list, setList] = useState(projects);
-    const [query, setQuery] = useState("");
 
     const update = (id: string, change: Partial<Project>) =>
         setList((current) => current.map((project) => (project.id === id ? { ...project, ...change } : project)));
@@ -116,122 +99,51 @@ export function ListCards() {
         toast.success(`Created ${id}`, { description: "Connect a repository and the first deploy starts on its own." });
     };
 
-    const text = query.trim().toLowerCase();
-    const shown = list.filter((project) => !text || project.id.includes(text) || project.description.toLowerCase().includes(text));
-
     return (
-        <section className="list-cards" aria-labelledby="list-cards-title">
-            <div className="list-cards__inner">
-                <div className="list-cards__header">
-                    <div>
-                        <Text as="h2" variant="heading" id="list-cards-title">
-                            Projects
-                            <Text as="span" variant="heading" tone="muted" className="list-cards__count">
-                                {list.length}
-                            </Text>
-                        </Text>
-                        <Text variant="copy" className="list-cards__lead">
-                            Everything Acme builds and deploys. Pinned projects stay in the sidebar.
-                        </Text>
-                    </div>
-                    <div className="list-cards__tools">
-                        <SearchField
-                            className="list-cards__search"
-                            size="sm"
-                            placeholder="Find a project"
-                            aria-label="Find a project"
-                            value={query}
-                            onChange={setQuery}
-                        />
-                        <Button variant="primary" size="sm" startIcon={<Plus size={16} />} onClick={create}>
-                            New project
-                        </Button>
-                    </div>
-                </div>
-
-                {shown.length ? (
-                    <ul className="list-cards__grid">
-                        {shown.map((project) => {
-                            const Icon = project.icon;
-                            return (
-                                <li key={project.id}>
-                                    <Card padding="none" role="article" className="list-cards__card" aria-labelledby={`list-cards-${project.id}`}>
-                                        <div className="list-cards__top">
-                                            <span className="list-cards__tile" aria-hidden="true">
-                                                <Icon size={17} />
-                                            </span>
-                                            <div className="list-cards__names">
-                                                <Text as="h3" variant="card-title" id={`list-cards-${project.id}`} className="list-cards__name">
-                                                    <span className="list-cards__name-text">{project.id}</span>
-                                                    {project.pinned ? <Star size={13} className="list-cards__star" aria-label="Pinned" /> : null}
-                                                </Text>
-                                                <Text as="span" variant="code" tone="muted" truncate className="list-cards__repo">
-                                                    acme/{project.id}
-                                                </Text>
-                                            </div>
-                                            <Menu
-                                                label={`${project.id} actions`}
-                                                align="end"
-                                                trigger={
-                                                    <Button variant="ghost" size="sm" iconOnly aria-label={`Actions for ${project.id}`}>
-                                                        <Ellipsis size={16} />
-                                                    </Button>
-                                                }
-                                            >
-                                                <MenuItem
-                                                    icon={project.pinned ? <StarOff size={15} /> : <Star size={15} />}
-                                                    onSelect={() => update(project.id, { pinned: !project.pinned })}
-                                                >
-                                                    {project.pinned ? "Unpin from the sidebar" : "Pin to the sidebar"}
-                                                </MenuItem>
-                                                <MenuItem
-                                                    icon={<Copy size={15} />}
-                                                    onSelect={async () => {
-                                                        const copied = await copyText(project.id);
-                                                        toast(copied ? `Copied “${project.id}”` : "Couldn't copy the project ID");
-                                                    }}
-                                                >
-                                                    Copy project ID
-                                                </MenuItem>
-                                                <MenuSeparator />
-                                                <MenuItem icon={<Archive size={15} />} destructive onSelect={() => archive(project)}>
-                                                    Archive project
-                                                </MenuItem>
-                                            </Menu>
-                                        </div>
-
-                                        <Text variant="copy" tone="soft" className="list-cards__description">
-                                            {project.description}
-                                        </Text>
-
-                                        <div className="list-cards__foot">
-                                            <Badge size="sm" variant={tone[project.status]}>
-                                                {project.status}
-                                            </Badge>
-                                            <Text variant="caption" truncate className="list-cards__when">
-                                                {project.when}
-                                            </Text>
-                                            <AvatarGroup size="sm" max={3} label={`${project.members.length} people on ${project.id}`}>
-                                                {project.members.map((name) => (
-                                                    <Avatar key={name} name={name} label={name} />
-                                                ))}
-                                            </AvatarGroup>
-                                        </div>
-                                    </Card>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                ) : (
-                    <EmptyState
-                        bordered
-                        icon={<SearchX size={20} />}
-                        title={list.length ? "No projects match" : "No projects yet"}
-                        description={list.length ? `Nothing is called “${query.trim()}”, and no description mentions it.` : "Create one to start deploying."}
-                        actions={list.length ? <Button onClick={() => setQuery("")}>Clear search</Button> : undefined}
-                    />
-                )}
-            </div>
-        </section>
+        <List04
+            title="Projects"
+            count={list.length}
+            description="Everything Acme builds and deploys. Pinned projects stay in the sidebar."
+            primaryAction={{ label: "New project", icon: <Plus size={16} />, onClick: create }}
+            items={list.map((project) => {
+                const Icon = project.icon;
+                return {
+                    id: project.id,
+                    title: project.id,
+                    subtitle: `acme/${project.id}`,
+                    icon: <Icon size={17} />,
+                    description: project.description,
+                    status: { label: project.status, tone: tone[project.status] },
+                    meta: project.when,
+                    members: project.members,
+                    pinned: project.pinned,
+                    searchText: [project.id, project.description],
+                    menu: [
+                        {
+                            label: project.pinned ? "Unpin from the sidebar" : "Pin to the sidebar",
+                            icon: project.pinned ? <StarOff size={15} /> : <Star size={15} />,
+                            onSelect: () => update(project.id, { pinned: !project.pinned }),
+                        },
+                        {
+                            label: "Copy project ID",
+                            icon: <Copy size={15} />,
+                            onSelect: async () => {
+                                const copied = await copyText(project.id);
+                                toast(copied ? `Copied “${project.id}”` : "Couldn't copy the project ID");
+                            },
+                        },
+                        { label: "Archive project", icon: <Archive size={15} />, destructive: true, onSelect: () => archive(project), separatorBefore: true },
+                    ],
+                };
+            })}
+            emptyIcon={<SearchX size={20} />}
+            labels={{
+                search: "Find a project",
+                emptyTitle: "No projects match",
+                emptyDescription: (query) => `Nothing is called “${query}”, and no description mentions it.`,
+                noItemsTitle: "No projects yet",
+                noItemsDescription: "Create one to start deploying.",
+            }}
+        />
     );
 }

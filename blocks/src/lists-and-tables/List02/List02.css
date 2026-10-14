@@ -1,0 +1,153 @@
+.ow-list02,
+.ow-list02 *,
+.ow-list02 *::before,
+.ow-list02 *::after {
+    box-sizing: border-box;
+}
+
+/* A table of people; once some are selected, a bar takes over the card's header with what can be done to all of them. */
+.ow-list02 {
+    background: var(--ow-canvas);
+    padding: 32px;
+    color: var(--ow-text);
+}
+
+.ow-list02__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 1200px;
+    gap: var(--ow-space-4xl);
+    margin: 0 auto;
+}
+
+.ow-list02__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+}
+
+.ow-list02__lead {
+    margin-top: 4px;
+}
+
+.ow-list02__card {
+    min-width: 0;
+    overflow: hidden;
+}
+
+/* The header row and the bulk bar share one height, so nothing below moves when the bar appears. */
+.ow-list02__top,
+.ow-list02__bar {
+    display: flex;
+    min-height: 56px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-sm) var(--ow-space-lg);
+    border-bottom: 1px solid var(--ow-border);
+    padding: 8px 12px 8px 16px;
+}
+
+.ow-list02__top {
+    justify-content: space-between;
+}
+
+.ow-list02__bar {
+    background: var(--ow-primary-subtle);
+    animation: ow-list02-in var(--ow-duration-base) var(--ow-ease-emphasized);
+}
+
+@keyframes ow-list02-in {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+}
+
+/* The count changes as rows are ticked; digits of one width keep the bar's buttons still. */
+.ow-list02__selected {
+    margin-right: var(--ow-space-xs);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.ow-list02__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-sm);
+}
+
+.ow-list02__clear {
+    margin-left: auto;
+}
+
+/* The Table sits edge to edge in the card; the card draws the border. */
+.ow-list02__card .ow-table-wrap {
+    border: 0;
+    border-radius: 0;
+}
+
+.ow-list02__card .ow-table__select {
+    padding-left: 16px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-list02__bar {
+        animation: none;
+    }
+}
+
+@media (max-width: 1023px) {
+    .ow-list02 {
+        padding: 28px 24px;
+    }
+}
+
+@media (max-width: 759px) {
+    .ow-list02 {
+        padding: 24px var(--ow-page-gutter) 32px;
+    }
+    .ow-list02__header > .ow-button {
+        width: 100%;
+    }
+    .ow-list02__hint {
+        display: none;
+    }
+    .ow-list02__bar {
+        padding: 10px 12px;
+    }
+    .ow-list02__actions {
+        order: 3;
+        width: 100%;
+    }
+}
+
+/* The columns that step aside under 1024px wide (a column's hideBelow). */
+@media (max-width: 1023px) {
+    .ow-list02__card[data-hide-tablet~="1"] :is(th, td):nth-child(1),
+    .ow-list02__card[data-hide-tablet~="2"] :is(th, td):nth-child(2),
+    .ow-list02__card[data-hide-tablet~="3"] :is(th, td):nth-child(3),
+    .ow-list02__card[data-hide-tablet~="4"] :is(th, td):nth-child(4),
+    .ow-list02__card[data-hide-tablet~="5"] :is(th, td):nth-child(5),
+    .ow-list02__card[data-hide-tablet~="6"] :is(th, td):nth-child(6),
+    .ow-list02__card[data-hide-tablet~="7"] :is(th, td):nth-child(7),
+    .ow-list02__card[data-hide-tablet~="8"] :is(th, td):nth-child(8) {
+        display: none;
+    }
+}
+
+/* The columns that step aside under 760px wide (a column's hideBelow). */
+@media (max-width: 759px) {
+    .ow-list02__card[data-hide-phone~="1"] :is(th, td):nth-child(1),
+    .ow-list02__card[data-hide-phone~="2"] :is(th, td):nth-child(2),
+    .ow-list02__card[data-hide-phone~="3"] :is(th, td):nth-child(3),
+    .ow-list02__card[data-hide-phone~="4"] :is(th, td):nth-child(4),
+    .ow-list02__card[data-hide-phone~="5"] :is(th, td):nth-child(5),
+    .ow-list02__card[data-hide-phone~="6"] :is(th, td):nth-child(6),
+    .ow-list02__card[data-hide-phone~="7"] :is(th, td):nth-child(7),
+    .ow-list02__card[data-hide-phone~="8"] :is(th, td):nth-child(8) {
+        display: none;
+    }
+}

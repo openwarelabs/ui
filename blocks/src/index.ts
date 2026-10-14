@@ -164,4 +164,86 @@ export type { Onboarding02Choice, Onboarding02Controls, Onboarding02Labels, Onbo
 export { Onboarding03 } from "./onboarding/Onboarding03/Onboarding03";
 export type { Onboarding03Change, Onboarding03Labels, Onboarding03Props } from "./onboarding/Onboarding03/Onboarding03.types";
 
-export type { BlockAction, BlockBrand, BlockLink, FooterColumn, HeaderLink, SignInProvider } from "./shared/shared.types";
+export { Shell01 } from "./app-shells/Shell01/Shell01";
+export type { Shell01Labels, Shell01Props } from "./app-shells/Shell01/Shell01.types";
+export { Shell02 } from "./app-shells/Shell02/Shell02";
+export type { Shell02Labels, Shell02Props } from "./app-shells/Shell02/Shell02.types";
+export { Shell03 } from "./app-shells/Shell03/Shell03";
+export type { Shell03Item, Shell03Labels, Shell03Props } from "./app-shells/Shell03/Shell03.types";
+export { Shell04 } from "./app-shells/Shell04/Shell04";
+export type { Shell04Labels, Shell04NavGroup, Shell04NavItem, Shell04Props } from "./app-shells/Shell04/Shell04.types";
+
+export { PageHeading01 } from "./page-headings/PageHeading01/PageHeading01";
+export type { PageHeading01Fact, PageHeading01Labels, PageHeading01Props } from "./page-headings/PageHeading01/PageHeading01.types";
+export { PageHeading02 } from "./page-headings/PageHeading02/PageHeading02";
+export type { PageHeading02Labels, PageHeading02Member, PageHeading02Props, PageHeading02Tab } from "./page-headings/PageHeading02/PageHeading02.types";
+export { PageHeading03 } from "./page-headings/PageHeading03/PageHeading03";
+export type {
+    PageHeading03Facet,
+    PageHeading03Filter,
+    PageHeading03Item,
+    PageHeading03Labels,
+    PageHeading03Props,
+} from "./page-headings/PageHeading03/PageHeading03.types";
+
+export { Dashboard01 } from "./dashboards/Dashboard01/Dashboard01";
+export type {
+    Dashboard01Chart,
+    Dashboard01Filter,
+    Dashboard01Labels,
+    Dashboard01LegendItem,
+    Dashboard01Props,
+} from "./dashboards/Dashboard01/Dashboard01.types";
+export { Dashboard02 } from "./dashboards/Dashboard02/Dashboard02";
+export type {
+    Dashboard02Event,
+    Dashboard02EventFilter,
+    Dashboard02Labels,
+    Dashboard02Props,
+    Dashboard02Table,
+} from "./dashboards/Dashboard02/Dashboard02.types";
+export { Dashboard03 } from "./dashboards/Dashboard03/Dashboard03";
+export type {
+    Dashboard03BudgetOption,
+    Dashboard03Forecast,
+    Dashboard03Invoice,
+    Dashboard03InvoiceLine,
+    Dashboard03Labels,
+    Dashboard03Props,
+    Dashboard03Table,
+} from "./dashboards/Dashboard03/Dashboard03.types";
+
+export { List01 } from "./lists-and-tables/List01/List01";
+export type { List01Filter, List01Labels, List01Props } from "./lists-and-tables/List01/List01.types";
+export { List02 } from "./lists-and-tables/List02/List02";
+export type { List02BulkAction, List02Labels, List02Props } from "./lists-and-tables/List02/List02.types";
+export { List03 } from "./lists-and-tables/List03/List03";
+export type { List03Item, List03Labels, List03Props } from "./lists-and-tables/List03/List03.types";
+export { List04 } from "./lists-and-tables/List04/List04";
+export type { List04Item, List04Labels, List04Props } from "./lists-and-tables/List04/List04.types";
+
+export { Chat01 } from "./chat/Chat01/Chat01";
+export type { Chat01Empty, Chat01Labels, Chat01Message, Chat01Props, Chat01Suggestion } from "./chat/Chat01/Chat01.types";
+export { Chat02 } from "./chat/Chat02/Chat02";
+export type { Chat02Labels, Chat02Message, Chat02Picker, Chat02PickerOption, Chat02Props, Chat02Suggestion } from "./chat/Chat02/Chat02.types";
+export { Chat03 } from "./chat/Chat03/Chat03";
+export type { Chat03File, Chat03Labels, Chat03Props, Chat03Reasoning, Chat03Status, Chat03Step, Chat03Tool } from "./chat/Chat03/Chat03.types";
+
+export type {
+    AppAccount,
+    AppCommand,
+    AppMenuItem,
+    AppNavGroup,
+    AppNavItem,
+    AppWorkspace,
+    BlockAction,
+    BlockBrand,
+    BlockButton,
+    BlockLink,
+    BlockMenuItem,
+    BlockStatus,
+    BlockTableColumn,
+    FooterColumn,
+    HeaderLink,
+    SignInProvider,
+} from "./shared/shared.types";

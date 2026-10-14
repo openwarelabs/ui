@@ -1,18 +1,18 @@
-/* A page title over a search field and filter menus; the filters in use show as tags above the list they narrow. */
-.page-heading-filters,
-.page-heading-filters *,
-.page-heading-filters *::before,
-.page-heading-filters *::after {
+.ow-page-heading03,
+.ow-page-heading03 *,
+.ow-page-heading03 *::before,
+.ow-page-heading03 *::after {
     box-sizing: border-box;
 }
 
-.page-heading-filters {
+/* A page title over a search field and filter menus; the filters in use show as tags above the list they narrow. */
+.ow-page-heading03 {
     background: var(--ow-canvas);
     padding: 32px;
     color: var(--ow-text);
 }
 
-.page-heading-filters__panel {
+.ow-page-heading03__panel {
     max-width: 1120px;
     margin: 0 auto;
     overflow: hidden;
@@ -21,13 +21,13 @@
     background: var(--ow-surface);
 }
 
-.page-heading-filters__top {
+.ow-page-heading03__top {
     display: grid;
     gap: var(--ow-space-6xl);
     padding: 28px 32px 20px;
 }
 
-.page-heading-filters__header {
+.ow-page-heading03__header {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
@@ -35,23 +35,23 @@
     gap: var(--ow-space-2xl);
 }
 
-.page-heading-filters__lead {
+.ow-page-heading03__lead {
     margin-top: 4px;
 }
 
-.page-heading-filters__toolbar {
+.ow-page-heading03__toolbar {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: var(--ow-space-sm);
 }
 
-.page-heading-filters__search {
+.ow-page-heading03__search {
     width: 300px;
     margin-right: var(--ow-space-xs);
 }
 
-.page-heading-filters__applied {
+.ow-page-heading03__applied {
     display: flex;
     min-height: 28px;
     flex-wrap: wrap;
@@ -61,33 +61,32 @@
 }
 
 /* The key in a filter tag keeps the Tag's own 13px type, a step quieter: no Text variant matches it. */
-.page-heading-filters__tag-key {
+.ow-page-heading03__tag-key {
     color: var(--ow-text-muted);
     font-weight: var(--ow-weight-regular);
 }
 
 /* The count changes as filters come and go; digits of one width keep it from jittering. */
-.page-heading-filters__count {
+.ow-page-heading03__count {
     margin-left: auto;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
 }
 
-.page-heading-filters__menu-spacer {
+.ow-page-heading03__menu-spacer {
     display: block;
     width: 15px;
 }
 
 /* The start of the list */
-
-.page-heading-filters__list {
+.ow-page-heading03__list {
     margin: 0;
     border-top: 1px solid var(--ow-border);
     padding: 0;
     list-style: none;
 }
 
-.page-heading-filters__row {
+.ow-page-heading03__row {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto auto;
     align-items: center;
@@ -95,11 +94,11 @@
     padding: 12px 32px;
 }
 
-.page-heading-filters__row + .page-heading-filters__row {
+.ow-page-heading03__row + .ow-page-heading03__row {
     border-top: 1px solid var(--ow-border);
 }
 
-.page-heading-filters__agent {
+.ow-page-heading03__agent {
     display: flex;
     width: 28px;
     height: 28px;
@@ -111,25 +110,25 @@
     color: var(--ow-text-soft);
 }
 
-.page-heading-filters__row-text {
+.ow-page-heading03__row-text {
     display: grid;
     min-width: 0;
     gap: 2px;
 }
 
-.page-heading-filters__row-line {
+.ow-page-heading03__row-line {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 /* A review number in mono at 12px, the size of the caption it sits in. */
-.page-heading-filters__number {
+.ow-page-heading03__number {
     font-size: 12px;
 }
 
 /* Comment counts line up digit for digit down the list. */
-.page-heading-filters__comments {
+.ow-page-heading03__comments {
     display: flex;
     min-width: 36px;
     align-items: center;
@@ -138,48 +137,48 @@
     font-variant-numeric: tabular-nums;
 }
 
-.page-heading-filters__comments[data-none] {
+.ow-page-heading03__comments[data-none] {
     visibility: hidden;
 }
 
-.page-heading-filters__empty {
+.ow-page-heading03__empty {
     border-top: 1px solid var(--ow-border);
     padding: 40px 24px 48px;
 }
 
 @media (max-width: 1023px) {
-    .page-heading-filters__search {
+    .ow-page-heading03__search {
         width: 100%;
         margin-right: 0;
     }
 }
 
 @media (max-width: 759px) {
-    .page-heading-filters {
+    .ow-page-heading03 {
         padding: 8px;
     }
-    .page-heading-filters__top {
+    .ow-page-heading03__top {
         gap: var(--ow-space-4xl);
         padding: 22px 18px 18px;
     }
-    .page-heading-filters__header > .ow-button {
+    .ow-page-heading03__header > .ow-button {
         width: 100%;
     }
     /* On phones the status drops under the title, so the title and its details can wrap in full. */
-    .page-heading-filters__row {
+    .ow-page-heading03__row {
         grid-template-columns: auto minmax(0, 1fr);
         align-items: start;
         gap: 8px var(--ow-space-lg);
         padding: 14px 18px;
     }
-    .page-heading-filters__row > .ow-badge {
+    .ow-page-heading03__row > .ow-badge {
         grid-column: 2;
         justify-self: start;
     }
-    .page-heading-filters__row-line {
+    .ow-page-heading03__row-line {
         white-space: normal;
     }
-    .page-heading-filters__comments {
+    .ow-page-heading03__comments {
         display: none;
     }
 }

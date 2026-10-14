@@ -1,0 +1,254 @@
+.ow-dashboard02,
+.ow-dashboard02 *,
+.ow-dashboard02 *::before,
+.ow-dashboard02 *::after {
+    box-sizing: border-box;
+}
+
+/* The numbers on the left, what just happened in a feed on the right. */
+.ow-dashboard02 {
+    background: var(--ow-canvas);
+    padding: 32px;
+    color: var(--ow-text);
+}
+
+.ow-dashboard02__inner {
+    display: grid;
+    max-width: 1200px;
+    grid-template-areas:
+        "header header"
+        "stats feed"
+        "table feed";
+    grid-template-columns: minmax(0, 1fr) 380px;
+    grid-template-rows: auto auto 1fr;
+    gap: var(--ow-space-2xl);
+    margin: 0 auto;
+}
+
+.ow-dashboard02__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+    grid-area: header;
+    margin-bottom: var(--ow-space-sm);
+}
+
+.ow-dashboard02__lead {
+    margin-top: 4px;
+}
+
+.ow-dashboard02__stats {
+    display: grid;
+    grid-area: stats;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--ow-space-2xl);
+}
+
+.ow-dashboard02__card {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.ow-dashboard02__card-header {
+    display: flex;
+    min-height: 56px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-sm) var(--ow-space-lg);
+    border-bottom: 1px solid var(--ow-border);
+    padding: 10px 14px 10px 18px;
+}
+
+.ow-dashboard02__table-card {
+    grid-area: table;
+    align-self: start;
+}
+
+/* The Table sits edge to edge in its card; the card draws the border. */
+.ow-dashboard02__table-card .ow-table-wrap {
+    border: 0;
+    border-radius: 0;
+}
+
+/* The feed */
+.ow-dashboard02__feed {
+    display: flex;
+    flex-direction: column;
+    grid-area: feed;
+}
+
+.ow-dashboard02__new {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid var(--ow-border);
+    padding: 10px;
+}
+
+.ow-dashboard02__day {
+    padding: 14px 18px 2px;
+}
+
+.ow-dashboard02__events {
+    margin: 0;
+    padding: 4px 0 6px;
+    list-style: none;
+}
+
+.ow-dashboard02__event {
+    position: relative;
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: var(--ow-space-lg);
+    padding: 9px 18px;
+}
+
+/* A hairline runs from each event's icon down to the next one's. */
+.ow-dashboard02__event:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 41px;
+    bottom: -5px;
+    left: 31.5px;
+    width: 1px;
+    background: var(--ow-border);
+}
+
+.ow-dashboard02__event[data-fresh] {
+    animation: ow-dashboard02-arrive var(--ow-duration-panel) var(--ow-ease-emphasized);
+}
+
+@keyframes ow-dashboard02-arrive {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+}
+
+.ow-dashboard02__icon {
+    display: flex;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: 50%;
+    background: var(--ow-surface-muted);
+    color: var(--ow-text-soft);
+}
+
+.ow-dashboard02__icon[data-tone="success"] {
+    border-color: var(--ow-success-border);
+    background: var(--ow-success-surface);
+    color: var(--ow-success-text);
+}
+
+.ow-dashboard02__icon[data-tone="danger"] {
+    border-color: var(--ow-danger-border);
+    background: var(--ow-danger-surface);
+    color: var(--ow-danger-text);
+}
+
+.ow-dashboard02__icon[data-tone="primary"] {
+    border-color: var(--ow-primary-border);
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.ow-dashboard02__event-text {
+    min-width: 0;
+    padding-top: 4px;
+    text-wrap: pretty;
+}
+
+.ow-dashboard02__event-meta {
+    display: block;
+    margin-top: 2px;
+}
+
+.ow-dashboard02__earlier {
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid var(--ow-border);
+    padding: 10px;
+}
+
+.ow-dashboard02__none {
+    padding: 28px 18px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-dashboard02__event[data-fresh] {
+        animation: none;
+    }
+}
+
+@media (max-width: 1023px) {
+    .ow-dashboard02 {
+        padding: 28px 24px;
+    }
+    .ow-dashboard02__inner {
+        grid-template-areas:
+            "header"
+            "stats"
+            "feed"
+            "table";
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: none;
+    }
+}
+
+@media (max-width: 759px) {
+    .ow-dashboard02 {
+        padding: 24px var(--ow-page-gutter) 32px;
+    }
+    .ow-dashboard02__stats {
+        gap: var(--ow-space-lg);
+    }
+    .ow-dashboard02__stats .ow-stat {
+        padding: 14px 16px;
+    }
+    .ow-dashboard02__stats .ow-stat__value {
+        font-size: 22px;
+    }
+    .ow-dashboard02__card-header {
+        padding-left: 16px;
+    }
+    .ow-dashboard02__event {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+    .ow-dashboard02__event:not(:last-child)::after {
+        left: 29.5px;
+    }
+}
+
+/* The columns that step aside under 1024px wide (a column's hideBelow). */
+@media (max-width: 1023px) {
+    .ow-dashboard02__table-card[data-hide-tablet~="1"] :is(th, td):nth-child(1),
+    .ow-dashboard02__table-card[data-hide-tablet~="2"] :is(th, td):nth-child(2),
+    .ow-dashboard02__table-card[data-hide-tablet~="3"] :is(th, td):nth-child(3),
+    .ow-dashboard02__table-card[data-hide-tablet~="4"] :is(th, td):nth-child(4),
+    .ow-dashboard02__table-card[data-hide-tablet~="5"] :is(th, td):nth-child(5),
+    .ow-dashboard02__table-card[data-hide-tablet~="6"] :is(th, td):nth-child(6),
+    .ow-dashboard02__table-card[data-hide-tablet~="7"] :is(th, td):nth-child(7),
+    .ow-dashboard02__table-card[data-hide-tablet~="8"] :is(th, td):nth-child(8) {
+        display: none;
+    }
+}
+
+/* The columns that step aside under 760px wide (a column's hideBelow). */
+@media (max-width: 759px) {
+    .ow-dashboard02__table-card[data-hide-phone~="1"] :is(th, td):nth-child(1),
+    .ow-dashboard02__table-card[data-hide-phone~="2"] :is(th, td):nth-child(2),
+    .ow-dashboard02__table-card[data-hide-phone~="3"] :is(th, td):nth-child(3),
+    .ow-dashboard02__table-card[data-hide-phone~="4"] :is(th, td):nth-child(4),
+    .ow-dashboard02__table-card[data-hide-phone~="5"] :is(th, td):nth-child(5),
+    .ow-dashboard02__table-card[data-hide-phone~="6"] :is(th, td):nth-child(6),
+    .ow-dashboard02__table-card[data-hide-phone~="7"] :is(th, td):nth-child(7),
+    .ow-dashboard02__table-card[data-hide-phone~="8"] :is(th, td):nth-child(8) {
+        display: none;
+    }
+}

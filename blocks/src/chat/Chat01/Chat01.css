@@ -1,0 +1,73 @@
+.ow-chat01,
+.ow-chat01 *,
+.ow-chat01 *::before,
+.ow-chat01 *::after {
+    box-sizing: border-box;
+}
+
+/* Fills its frame: a header, then the conversation, which scrolls and keeps the reply box docked below it. */
+.ow-chat01 {
+    display: flex;
+    height: 100dvh;
+    flex-direction: column;
+    background: var(--ow-canvas);
+    padding: 8px;
+}
+
+.ow-chat01__panel {
+    display: flex;
+    min-height: 0;
+    flex: 1;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+}
+
+.ow-chat01__header {
+    display: flex;
+    min-height: 60px;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--ow-space-lg);
+    border-bottom: 1px solid var(--ow-border);
+    padding: 10px 12px 10px 20px;
+}
+
+.ow-chat01__heading {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+    gap: 2px;
+}
+
+.ow-chat01__context {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 6px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.ow-chat01__context-dot {
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--ow-success-solid);
+}
+
+@media (max-width: 760px) {
+    .ow-chat01 {
+        padding: 0;
+    }
+    .ow-chat01__panel {
+        border: 0;
+        border-radius: 0;
+    }
+    .ow-chat01__header {
+        padding: 8px 8px 8px 16px;
+    }
+}

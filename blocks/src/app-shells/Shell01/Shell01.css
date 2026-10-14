@@ -1,0 +1,130 @@
+.ow-shell01,
+.ow-shell01 *,
+.ow-shell01 *::before,
+.ow-shell01 *::after {
+    box-sizing: border-box;
+}
+
+/* Navigation down the left on the canvas; the page on a raised panel beside it. */
+.ow-shell01 {
+    display: grid;
+    grid-template-columns: 248px minmax(0, 1fr);
+    min-height: 100dvh;
+    background: var(--ow-canvas);
+    color: var(--ow-text);
+}
+
+.ow-shell01__aside {
+    position: sticky;
+    top: 0;
+    height: 100dvh;
+    overflow-y: auto;
+    padding: 10px 12px 12px;
+}
+
+.ow-shell01__nav {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    gap: var(--ow-space-3xl);
+}
+
+/* Menus wrap their trigger in an inline span; let these triggers take the full width. */
+.ow-shell01__nav .ow-menu {
+    display: block;
+}
+
+/* The workspace and account menus open from rows that span the sidebar, their text lined up on the left. */
+.ow-shell01__workspace,
+.ow-shell01__user {
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 6px 8px;
+    text-align: left;
+}
+
+/* An open menu keeps its trigger lit, as on hover. */
+.ow-shell01__workspace[aria-expanded="true"],
+.ow-shell01__user[aria-expanded="true"] {
+    border-color: var(--ow-border);
+    background: var(--ow-surface-muted);
+}
+
+.ow-shell01__workspace-name {
+    flex: 1;
+}
+
+.ow-shell01__menu-spacer {
+    display: block;
+    width: 15px;
+}
+
+.ow-shell01__search {
+    justify-content: flex-start;
+}
+
+.ow-shell01__search-text {
+    flex: 1;
+    text-align: left;
+}
+
+.ow-shell01__account {
+    margin-top: auto;
+}
+
+.ow-shell01__user-text {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+}
+
+.ow-shell01__body {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+}
+
+/* On phones the sidebar folds into a drawer behind this bar. */
+.ow-shell01__topbar {
+    display: none;
+    height: 52px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+}
+
+.ow-shell01__topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.ow-shell01__panel {
+    display: flex;
+    min-height: calc(100dvh - 16px);
+    flex: 1;
+    flex-direction: column;
+    gap: var(--ow-space-7xl);
+    margin: 8px 8px 8px 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+    padding: 28px 32px 40px;
+}
+
+@media (max-width: 900px) {
+    .ow-shell01 {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .ow-shell01__aside {
+        display: none;
+    }
+    .ow-shell01__topbar {
+        display: flex;
+    }
+    .ow-shell01__panel {
+        min-height: calc(100dvh - 60px);
+        margin: 0 8px 8px;
+        padding: 22px 18px 32px;
+    }
+}

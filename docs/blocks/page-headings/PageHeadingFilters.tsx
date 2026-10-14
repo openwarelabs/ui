@@ -1,9 +1,6 @@
-import { useState } from "react";
-
-import { Avatar, Badge, Button, EmptyState, Menu, MenuItem, SearchField, Tag, Text, VisuallyHidden, toast, type BadgeVariant } from "@openwarelabs/ui";
-import { Bot, Check, ChevronDown, GitPullRequest, MessageSquare, SearchX } from "lucide-react";
-
-import "./PageHeadingFilters.css";
+import { PageHeading03 } from "@openwarelabs/blocks";
+import { toast, type BadgeVariant } from "@openwarelabs/ui";
+import { Bot, GitPullRequest, SearchX } from "lucide-react";
 
 type Status = "Needs review" | "Changes requested" | "Approved";
 
@@ -38,183 +35,53 @@ const reviews: Review[] = [
     row(306, "Cache avatars between launches", "mobile-app", "Sam Okafor", false, "Approved", "2 days ago", 2),
 ];
 
-/** Each filter menu: what it's called, its choices, and how a review matches one. */
+/** Each filter menu: what it's called and its choices. */
 const facets = [
-    { id: "status", label: "Status", options: ["Needs review", "Changes requested", "Approved"], value: (review: Review) => review.status },
-    {
-        id: "project",
-        label: "Project",
-        options: ["marketing-site", "billing-api", "mobile-app", "docs", "design-system"],
-        value: (review: Review) => review.project,
-    },
-    { id: "author", label: "Opened by", options: ["A person", "An agent"], value: (review: Review) => (review.agent ? "An agent" : "A person") },
-] as const;
-
-type FacetId = (typeof facets)[number]["id"];
-
-interface Filter {
-    facet: FacetId;
-    value: string;
-}
+    { id: "status", label: "Status", options: ["Needs review", "Changes requested", "Approved"] },
+    { id: "project", label: "Project", options: ["marketing-site", "billing-api", "mobile-app", "docs", "design-system"] },
+    { id: "author", label: "Opened by", options: ["A person", "An agent"] },
+];
 
 export function PageHeadingFilters() {
-    const [query, setQuery] = useState("");
-    const [filters, setFilters] = useState<Filter[]>([{ facet: "status", value: "Needs review" }]);
-
-    const isOn = (facet: FacetId, value: string) => filters.some((filter) => filter.facet === facet && filter.value === value);
-    const toggle = (facet: FacetId, value: string) =>
-        setFilters((current) =>
-            isOn(facet, value) ? current.filter((filter) => !(filter.facet === facet && filter.value === value)) : [...current, { facet, value }],
-        );
-    const clearAll = () => {
-        setFilters([]);
-        setQuery("");
-    };
-
-    // Choices in the same menu widen the list (any of them); different menus narrow it (all of them).
-    const text = query.trim().toLowerCase();
-    const shown = reviews.filter((review) => {
-        const matchesText = !text || [review.title, review.project, review.author, `#${review.number}`].some((field) => field.toLowerCase().includes(text));
-        const matchesFilters = facets.every((facet) => {
-            const chosen = filters.filter((filter) => filter.facet === facet.id).map((filter) => filter.value);
-            return chosen.length === 0 || chosen.includes(facet.value(review));
-        });
-        return matchesText && matchesFilters;
-    });
-
     return (
-        <div className="page-heading-filters">
-            <div className="page-heading-filters__panel">
-                <div className="page-heading-filters__top">
-                    <div className="page-heading-filters__header">
-                        <div>
-                            <Text as="h1" variant="heading">
-                                Reviews
-                            </Text>
-                            <Text variant="copy" className="page-heading-filters__lead">
-                                Changes from your team and its agents, waiting for someone to look at them.
-                            </Text>
-                        </div>
-                        <Button
-                            variant="primary"
-                            startIcon={<GitPullRequest size={16} />}
-                            onClick={() => toast("Pick a branch to review", { description: "Opening a review asks the project's owners first." })}
-                        >
-                            Request review
-                        </Button>
-                    </div>
-
-                    <div className="page-heading-filters__toolbar">
-                        <SearchField
-                            className="page-heading-filters__search"
-                            size="sm"
-                            placeholder="Search by title, project or #number"
-                            aria-label="Search reviews"
-                            value={query}
-                            onChange={setQuery}
-                        />
-                        {facets.map((facet) => {
-                            const count = filters.filter((filter) => filter.facet === facet.id).length;
-                            return (
-                                <Menu
-                                    key={facet.id}
-                                    label={facet.label}
-                                    trigger={
-                                        <Button size="sm" endIcon={<ChevronDown size={14} />}>
-                                            {facet.label}
-                                            {count ? ` · ${count}` : ""}
-                                        </Button>
-                                    }
-                                >
-                                    {facet.options.map((option) => (
-                                        <MenuItem
-                                            key={option}
-                                            role="menuitemcheckbox"
-                                            aria-checked={isOn(facet.id, option)}
-                                            icon={isOn(facet.id, option) ? <Check size={15} /> : <span className="page-heading-filters__menu-spacer" />}
-                                            onClick={(event) => {
-                                                // Keep the menu open, so several choices can be ticked in a row.
-                                                event.preventDefault();
-                                                toggle(facet.id, option);
-                                            }}
-                                        >
-                                            {option}
-                                        </MenuItem>
-                                    ))}
-                                </Menu>
-                            );
-                        })}
-                    </div>
-
-                    <div className="page-heading-filters__applied">
-                        {filters.map((filter) => {
-                            const facet = facets.find((entry) => entry.id === filter.facet)!;
-                            return (
-                                <Tag
-                                    key={`${filter.facet}-${filter.value}`}
-                                    variant="active"
-                                    removeLabel={`${facet.label} filter: ${filter.value}`}
-                                    onRemove={() => toggle(filter.facet, filter.value)}
-                                >
-                                    <span className="page-heading-filters__tag-key">{facet.label}:</span> {filter.value}
-                                </Tag>
-                            );
-                        })}
-                        {filters.length ? (
-                            <Button variant="ghost" size="sm" onClick={() => setFilters([])}>
-                                Clear filters
-                            </Button>
-                        ) : null}
-                        <Text variant="caption" className="page-heading-filters__count" aria-live="polite">
-                            {shown.length} of {reviews.length} reviews
-                        </Text>
-                    </div>
-                </div>
-
-                {shown.length ? (
-                    <ul className="page-heading-filters__list" aria-label="Reviews">
-                        {shown.map((review) => (
-                            <li key={review.number} className="page-heading-filters__row">
-                                {review.agent ? (
-                                    <span className="page-heading-filters__agent" aria-hidden="true">
-                                        <Bot size={15} />
-                                    </span>
-                                ) : (
-                                    <Avatar name={review.author} />
-                                )}
-                                <span className="page-heading-filters__row-text">
-                                    <Text as="span" className="page-heading-filters__row-line">
-                                        {review.title}
-                                    </Text>
-                                    <Text variant="caption" className="page-heading-filters__row-line">
-                                        <Text as="span" variant="code" className="page-heading-filters__number">
-                                            #{review.number}
-                                        </Text>{" "}
-                                        · {review.project} · {review.agent ? `Agent for ${review.author}` : review.author} · {review.updated}
-                                    </Text>
-                                </span>
-                                <Badge size="sm" variant={tone[review.status]}>
-                                    {review.status}
-                                </Badge>
-                                <Text variant="caption" className="page-heading-filters__comments" data-none={review.comments ? undefined : ""}>
-                                    <MessageSquare size={14} aria-hidden="true" />
-                                    {review.comments}
-                                    <VisuallyHidden> comments</VisuallyHidden>
-                                </Text>
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <div className="page-heading-filters__empty">
-                        <EmptyState
-                            icon={<SearchX size={20} />}
-                            title="No reviews match"
-                            description="Try a different search, or take a filter off to see more."
-                            actions={<Button onClick={clearAll}>Clear search and filters</Button>}
-                        />
-                    </div>
-                )}
-            </div>
-        </div>
+        <PageHeading03
+            title="Reviews"
+            description="Changes from your team and its agents, waiting for someone to look at them."
+            primaryAction={{
+                label: "Request review",
+                icon: <GitPullRequest size={16} />,
+                onClick: () => toast("Pick a branch to review", { description: "Opening a review asks the project's owners first." }),
+            }}
+            facets={facets}
+            defaultFilters={[{ facet: "status", value: "Needs review" }]}
+            items={reviews.map((review) => ({
+                id: String(review.number),
+                title: review.title,
+                reference: `#${review.number}`,
+                meta: (
+                    <>
+                        {review.project} · {review.agent ? `Agent for ${review.author}` : review.author} · {review.updated}
+                    </>
+                ),
+                person: review.author,
+                icon: review.agent ? <Bot size={15} /> : undefined,
+                status: { label: review.status, tone: tone[review.status] },
+                comments: review.comments,
+                facets: { status: review.status, project: review.project, author: review.agent ? "An agent" : "A person" },
+                searchText: [review.title, review.project, review.author, `#${review.number}`],
+            }))}
+            emptyIcon={<SearchX size={20} />}
+            labels={{
+                searchPlaceholder: "Search by title, project or #number",
+                search: "Search reviews",
+                list: "Reviews",
+                count: (shown, total) => (
+                    <>
+                        {shown} of {total} reviews
+                    </>
+                ),
+                emptyTitle: "No reviews match",
+            }}
+        />
     );
 }

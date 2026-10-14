@@ -1,18 +1,18 @@
-/* Projects as a grid of cards: what each is, how its last deploy went, who works on it, and a menu of actions. */
-.list-cards,
-.list-cards *,
-.list-cards *::before,
-.list-cards *::after {
+.ow-list04,
+.ow-list04 *,
+.ow-list04 *::before,
+.ow-list04 *::after {
     box-sizing: border-box;
 }
 
-.list-cards {
+/* Projects as a grid of cards: what each is, how its last deploy went, who works on it, and a menu of actions. */
+.ow-list04 {
     background: var(--ow-canvas);
     padding: 32px;
     color: var(--ow-text);
 }
 
-.list-cards__inner {
+.ow-list04__inner {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     max-width: 1200px;
@@ -20,7 +20,7 @@
     margin: 0 auto;
 }
 
-.list-cards__header {
+.ow-list04__header {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
@@ -28,30 +28,30 @@
     gap: var(--ow-space-2xl);
 }
 
-.list-cards__count {
+.ow-list04__count {
     margin-left: 8px;
 }
 
-.list-cards__lead {
+.ow-list04__lead {
     margin-top: 4px;
 }
 
-.list-cards__tools {
+.ow-list04__tools {
     display: flex;
     align-items: center;
     gap: var(--ow-space-sm);
 }
 
-.list-cards__search {
+.ow-list04__search {
     width: 240px;
     min-width: 0;
 }
 
-.list-cards__search .ow-input {
+.ow-list04__search .ow-input {
     background: var(--ow-surface);
 }
 
-.list-cards__grid {
+.ow-list04__grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--ow-space-2xl);
@@ -60,7 +60,7 @@
     list-style: none;
 }
 
-.list-cards__card {
+.ow-list04__card {
     display: flex;
     height: 100%;
     flex-direction: column;
@@ -69,23 +69,18 @@
     transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
 }
 
-.list-cards__card:hover,
-.list-cards__card:focus-within {
+.ow-list04__card:hover,
+.ow-list04__card:focus-within {
     border-color: var(--ow-border-strong);
 }
 
-.list-cards__card[data-state="archived"] {
-    border-style: dashed;
-    background: transparent;
-}
-
-.list-cards__top {
+.ow-list04__top {
     display: flex;
     align-items: flex-start;
     gap: var(--ow-space-lg);
 }
 
-.list-cards__tile {
+.ow-list04__tile {
     display: flex;
     width: 36px;
     height: 36px;
@@ -98,7 +93,7 @@
     color: var(--ow-text-soft);
 }
 
-.list-cards__names {
+.ow-list04__names {
     display: grid;
     min-width: 0;
     flex: 1;
@@ -106,37 +101,41 @@
     padding-top: 1px;
 }
 
-.list-cards__name {
+.ow-list04__name {
     display: flex;
     min-width: 0;
     align-items: center;
     gap: 6px;
 }
 
-.list-cards__name-text {
+.ow-list04__name-text {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-/* Pinned projects get a small brass star. */
-.list-cards__star {
+/* Pinned cards get a small brass star. */
+.ow-list04__star {
+    display: flex;
     flex-shrink: 0;
     color: var(--ow-brass);
+}
+
+.ow-list04__star svg {
     fill: var(--ow-brass);
 }
 
 /* The repository in mono at 12px, a caption's size under the name. */
-.list-cards__repo {
+.ow-list04__repo {
     font-size: 12px;
 }
 
-.list-cards__description {
+.ow-list04__description {
     flex: 1;
     padding-right: 6px;
 }
 
-.list-cards__foot {
+.ow-list04__foot {
     display: flex;
     align-items: center;
     gap: var(--ow-space-md);
@@ -145,37 +144,32 @@
     padding-right: 6px;
 }
 
-.list-cards__when {
+.ow-list04__when {
     min-width: 0;
     flex: 1;
 }
 
-.list-cards__menu-spacer {
-    display: block;
-    width: 15px;
-}
-
 @media (max-width: 1023px) {
-    .list-cards {
+    .ow-list04 {
         padding: 28px 24px;
     }
-    .list-cards__grid {
+    .ow-list04__grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
 @media (max-width: 759px) {
-    .list-cards {
+    .ow-list04 {
         padding: 24px var(--ow-page-gutter) 32px;
     }
-    .list-cards__tools {
+    .ow-list04__tools {
         width: 100%;
     }
-    .list-cards__search {
+    .ow-list04__search {
         width: auto;
         flex: 1;
     }
-    .list-cards__grid {
+    .ow-list04__grid {
         grid-template-columns: minmax(0, 1fr);
         gap: var(--ow-space-lg);
     }

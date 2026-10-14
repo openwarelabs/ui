@@ -1,7 +1,8 @@
 import { useEffect, useState, type ReactNode } from "react";
 
-import { Badge, Button, Card, SegmentedControl, Stat, Table, Text, type BadgeVariant, type TableColumn } from "@openwarelabs/ui";
-import { ArrowUp, Bot, CircleX, GitMerge, GitPullRequest, KeyRound, Rocket, UserPlus } from "lucide-react";
+import { Dashboard02, type BlockTableColumn, type Dashboard02Event } from "@openwarelabs/blocks";
+import { Badge, Text, type BadgeVariant } from "@openwarelabs/ui";
+import { Bot, CircleX, GitMerge, GitPullRequest, KeyRound, Rocket, UserPlus } from "lucide-react";
 
 import "./DashboardActivity.css";
 
@@ -16,13 +17,8 @@ function Strong({ children }: { children: ReactNode }) {
     );
 }
 
-interface Event {
-    id: string;
+interface Event extends Dashboard02Event {
     kind: Kind;
-    icon: ReactNode;
-    tone?: "success" | "danger" | "primary";
-    text: ReactNode;
-    meta: string;
     day: "Today" | "Yesterday";
 }
 
@@ -159,7 +155,6 @@ const incoming: Event[] = [
 ];
 
 const filters = [
-    { value: "all", label: "All" },
     { value: "deploy", label: "Deploys" },
     { value: "review", label: "Reviews" },
     { value: "agent", label: "Agents" },
@@ -183,7 +178,7 @@ const projectRows: ProjectRow[] = [
     { id: "docs", color: "var(--ow-danger-solid)", status: "Failed", deploys: 6, success: 83.3 },
 ];
 
-const columns: Array<TableColumn<ProjectRow>> = [
+const columns: Array<BlockTableColumn<ProjectRow>> = [
     {
         key: "id",
         header: "Project",
@@ -208,6 +203,7 @@ const columns: Array<TableColumn<ProjectRow>> = [
     {
         key: "success",
         header: "Succeeded",
+        hideBelow: "phone",
         align: "end",
         sortable: true,
         render: (row) => (
@@ -219,11 +215,7 @@ const columns: Array<TableColumn<ProjectRow>> = [
 ];
 
 export function DashboardActivity() {
-    const [filter, setFilter] = useState("all");
-    const [feed, setFeed] = useState(events);
-    const [waiting, setWaiting] = useState<Event[]>([]);
-    const [fresh, setFresh] = useState<string[]>([]);
-    const [earlier, setEarlier] = useState(false);
+    const [waiting, setWaiting] = useState<Dashboard02Event[]>([]);
 
     // A moment after the page opens, two new events are waiting at the top of the feed.
     useEffect(() => {
@@ -231,112 +223,26 @@ export function DashboardActivity() {
         return () => window.clearTimeout(timer);
     }, []);
 
-    const showWaiting = () => {
-        setFeed((current) => [...waiting, ...current]);
-        setFresh(waiting.map((event) => event.id));
-        setWaiting([]);
-    };
-
-    const shown = feed.filter((event) => (filter === "all" || event.kind === filter) && (earlier || event.day === "Today"));
-    const days = (["Today", "Yesterday"] as const)
-        .map((day) => ({ day, items: shown.filter((event) => event.day === day) }))
-        .filter((group) => group.items.length);
-
     return (
-        <section className="dashboard-activity" aria-labelledby="dashboard-activity-title">
-            <div className="dashboard-activity__inner">
-                <div className="dashboard-activity__header">
-                    <div>
-                        <Text as="h1" variant="heading" id="dashboard-activity-title">
-                            Overview
-                        </Text>
-                        <Text variant="copy" className="dashboard-activity__lead">
-                            What changed across Acme this week, as it happens.
-                        </Text>
-                    </div>
-                </div>
-
-                <div className="dashboard-activity__stats">
-                    <Stat label="Deploys this week" value="128" change="+12%" trend={[8, 12, 10, 15, 14, 19, 22]} />
-                    <Stat label="Open reviews" value="9" change="−4" changeTone="positive" trend={[16, 15, 13, 14, 12, 11, 9]} />
-                    <Stat label="Agent runs" value="1,904" change="+31%" trend={[20, 26, 25, 33, 38, 41, 52]} />
-                    <Stat label="Median time to review" value="42 min" change="−18%" changeTone="positive" trend={[70, 64, 66, 55, 50, 46, 42]} />
-                </div>
-
-                <Card padding="none" className="dashboard-activity__card dashboard-activity__table-card">
-                    <div className="dashboard-activity__card-header">
-                        <Text as="h2" variant="card-title">
-                            Projects
-                        </Text>
-                    </div>
-                    <Table
-                        caption="Projects this week"
-                        hideCaption
-                        density="compact"
-                        columns={columns}
-                        rows={projectRows}
-                        defaultSort={{ key: "deploys", direction: "descending" }}
-                    />
-                </Card>
-
-                <Card padding="none" className="dashboard-activity__card dashboard-activity__feed">
-                    <section aria-labelledby="dashboard-activity-feed">
-                        <div className="dashboard-activity__card-header">
-                            <Text as="h2" variant="card-title" id="dashboard-activity-feed">
-                                Activity
-                            </Text>
-                            <SegmentedControl size="sm" aria-label="Show" options={filters} value={filter} onChange={setFilter} />
-                        </div>
-
-                        <div aria-live="polite">
-                            {waiting.length ? (
-                                <div className="dashboard-activity__new">
-                                    <Button size="sm" variant="ghost" startIcon={<ArrowUp size={14} />} onClick={showWaiting}>
-                                        {waiting.length} new events
-                                    </Button>
-                                </div>
-                            ) : null}
-                        </div>
-
-                        {days.length ? (
-                            days.map((group) => (
-                                <div key={group.day}>
-                                    <Text as="h3" variant="caption" className="dashboard-activity__day">
-                                        {group.day}
-                                    </Text>
-                                    <ol className="dashboard-activity__events">
-                                        {group.items.map((event) => (
-                                            <li key={event.id} className="dashboard-activity__event" data-fresh={fresh.includes(event.id) || undefined}>
-                                                <span className="dashboard-activity__icon" data-tone={event.tone} aria-hidden="true">
-                                                    {event.icon}
-                                                </span>
-                                                <Text tone="soft" className="dashboard-activity__event-text">
-                                                    {event.text}
-                                                    <Text variant="caption" className="dashboard-activity__event-meta">
-                                                        {event.meta}
-                                                    </Text>
-                                                </Text>
-                                            </li>
-                                        ))}
-                                    </ol>
-                                </div>
-                            ))
-                        ) : (
-                            <Text variant="copy" align="center" className="dashboard-activity__none">
-                                {earlier ? "Nothing like this happened this week." : "Nothing like this has happened today."}
-                            </Text>
-                        )}
-
-                        {earlier ? null : (
-                            <div className="dashboard-activity__earlier">
-                                <Button size="sm" variant="ghost" onClick={() => setEarlier(true)}>
-                                    Show earlier activity
-                                </Button>
-                            </div>
-                        )}
-                    </section>
-                </Card>
-            </div>
-        </section>
+        <Dashboard02
+            title="Overview"
+            description="What changed across Acme this week, as it happens."
+            stats={[
+                { label: "Deploys this week", value: "128", change: "+12%", trend: [8, 12, 10, 15, 14, 19, 22] },
+                { label: "Open reviews", value: "9", change: "−4", changeTone: "positive", trend: [16, 15, 13, 14, 12, 11, 9] },
+                { label: "Agent runs", value: "1,904", change: "+31%", trend: [20, 26, 25, 33, 38, 41, 52] },
+                { label: "Median time to review", value: "42 min", change: "−18%", changeTone: "positive", trend: [70, 64, 66, 55, 50, 46, 42] },
+            ]}
+            table={{
+                title: "Projects",
+                caption: "Projects this week",
+                columns,
+                rows: projectRows,
+                defaultSort: { key: "deploys", direction: "descending" },
+            }}
+            events={events}
+            newEvents={waiting}
+            eventFilters={filters}
+        />
     );
 }

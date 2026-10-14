@@ -1,90 +1,3 @@
-/* ShellSidebar's frame, with a sidebar that folds down to its icons. */
-.shell-collapsible,
-.shell-collapsible *,
-.shell-collapsible *::before,
-.shell-collapsible *::after {
-    box-sizing: border-box;
-}
-
-.shell-collapsible {
-    display: flex;
-    min-height: 100dvh;
-    background: var(--ow-canvas);
-    color: var(--ow-text);
-}
-
-/*
- * Folded, the sidebar is 55px: 12px of padding either side of a 31px item, so each 15px icon sits on the centre
- * line. Nothing moves sideways as it folds; the labels fade and the edge closes over them.
- */
-.shell-collapsible__aside {
-    position: sticky;
-    top: 0;
-    width: 248px;
-    height: 100dvh;
-    flex-shrink: 0;
-    overflow: hidden auto;
-    padding: 10px 12px 12px;
-    transition: width var(--ow-duration-slow) var(--ow-ease-emphasized);
-}
-
-.shell-collapsible--collapsed .shell-collapsible__aside {
-    width: 55px;
-    overflow-y: hidden;
-}
-
-.shell-collapsible__nav {
-    display: flex;
-    min-height: 100%;
-    flex-direction: column;
-    gap: var(--ow-space-3xl);
-}
-
-/* Menus and tooltips wrap their child in an inline span; let these take the full width. */
-.shell-collapsible__nav .ow-menu,
-.shell-collapsible__nav .ow-tooltip {
-    display: block;
-}
-
-/* Items never grow wider than the sidebar, so focusing one can't scroll the folded sidebar sideways. */
-.shell-collapsible__nav .ow-nav {
-    grid-template-columns: minmax(0, 1fr);
-}
-
-.shell-collapsible__nav .ow-nav__item {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-/*
- * The workspace and account menus open from rows that span the sidebar. Their padding, inside the button's 1px
- * border, puts the mark and the avatar on the folded sidebar's centre line; whatever doesn't fit is clipped.
- */
-.shell-collapsible__workspace,
-.shell-collapsible__user {
-    justify-content: flex-start;
-    gap: 10px;
-    overflow: hidden;
-    padding: 5px 7px 5px 4px;
-    text-align: left;
-}
-
-.shell-collapsible__user {
-    padding-left: 3px;
-}
-
-/* An open menu keeps its trigger lit, as on hover. */
-.shell-collapsible__workspace[aria-expanded="true"],
-.shell-collapsible__user[aria-expanded="true"] {
-    border-color: var(--ow-border);
-    background: var(--ow-surface-muted);
-}
-
-.shell-collapsible__workspace-name {
-    flex: 1;
-}
-
 .shell-collapsible__mark {
     width: 22px;
     height: 22px;
@@ -94,145 +7,12 @@
     box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
 }
 
-.shell-collapsible__menu-spacer {
-    display: block;
-    width: 15px;
-}
-
-.shell-collapsible__search {
-    justify-content: flex-start;
-    overflow: hidden;
-    padding: 0 6px 0 7px;
-}
-
-.shell-collapsible__search-text {
-    flex: 1;
-    text-align: left;
-}
-
-.shell-collapsible__icon {
-    position: relative;
-    display: inline-flex;
-}
-
-/* Folded, the inbox count becomes a small brass dot on its icon. */
-.shell-collapsible__unread {
-    position: absolute;
-    top: -2px;
-    right: -3px;
-    width: 7px;
-    height: 7px;
-    border: 1.5px solid var(--ow-canvas);
-    border-radius: 50%;
-    background: var(--ow-brass);
-    opacity: 0;
-    transition: opacity var(--ow-duration-base) var(--ow-ease-standard);
-}
-
-.shell-collapsible--collapsed .shell-collapsible__aside .shell-collapsible__unread {
-    opacity: 1;
-}
-
 .shell-collapsible__dot {
     display: block;
     width: 8px;
     height: 8px;
     margin: 0 3.5px;
     border-radius: 50%;
-}
-
-.shell-collapsible__account {
-    margin-top: auto;
-}
-
-.shell-collapsible__user-text {
-    display: grid;
-    min-width: 0;
-    flex: 1;
-}
-
-/* What fades as the sidebar folds. */
-.shell-collapsible__aside .shell-collapsible__fade,
-.shell-collapsible__aside .ow-nav__label,
-.shell-collapsible__aside .ow-nav__end,
-.shell-collapsible__aside .ow-nav__heading,
-.shell-collapsible__aside .ow-button__shortcut {
-    transition: opacity var(--ow-duration-base) var(--ow-ease-standard);
-}
-
-.shell-collapsible--collapsed .shell-collapsible__aside .shell-collapsible__fade,
-.shell-collapsible--collapsed .shell-collapsible__aside .ow-nav__label,
-.shell-collapsible--collapsed .shell-collapsible__aside .ow-nav__end,
-.shell-collapsible--collapsed .shell-collapsible__aside .ow-nav__heading,
-.shell-collapsible--collapsed .shell-collapsible__aside .ow-button__shortcut {
-    opacity: 0;
-}
-
-.shell-collapsible__body {
-    display: flex;
-    min-width: 0;
-    flex: 1;
-    flex-direction: column;
-}
-
-/* On phones the sidebar folds into a drawer behind this bar. */
-.shell-collapsible__topbar {
-    display: none;
-    height: 52px;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 6px;
-}
-
-.shell-collapsible__topbar-brand {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-}
-
-.shell-collapsible__panel {
-    display: flex;
-    min-width: 0;
-    min-height: calc(100dvh - 16px);
-    flex: 1;
-    flex-direction: column;
-    margin: 8px 8px 8px 0;
-    border: 1px solid var(--ow-border);
-    border-radius: var(--ow-radius-panel);
-    background: var(--ow-surface);
-}
-
-.shell-collapsible__toolbar {
-    display: flex;
-    height: 48px;
-    align-items: center;
-    gap: var(--ow-space-sm);
-    border-bottom: 1px solid var(--ow-border);
-    padding: 0 16px 0 10px;
-}
-
-.shell-collapsible__toolbar-divider {
-    width: 1px;
-    height: 16px;
-    margin: 0 4px;
-    background: var(--ow-border);
-}
-
-.shell-collapsible__crumbs {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.shell-collapsible__crumbs svg {
-    color: var(--ow-icon);
-}
-
-.shell-collapsible__page {
-    display: flex;
-    flex-direction: column;
-    gap: var(--ow-space-6xl);
-    padding: 28px 32px 40px;
 }
 
 .shell-collapsible__page-header {
@@ -273,22 +53,7 @@
     white-space: nowrap;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .shell-collapsible__aside,
-    .shell-collapsible__aside .shell-collapsible__fade,
-    .shell-collapsible__aside .shell-collapsible__unread,
-    .shell-collapsible__aside .ow-nav__label,
-    .shell-collapsible__aside .ow-nav__end,
-    .shell-collapsible__aside .ow-nav__heading,
-    .shell-collapsible__aside .ow-button__shortcut {
-        transition: none;
-    }
-}
-
 @media (max-width: 1023px) {
-    .shell-collapsible__page {
-        padding: 24px 24px 36px;
-    }
     /* The table keeps the columns that say what happened. */
     .shell-collapsible__table th:nth-child(3),
     .shell-collapsible__table td:nth-child(3) {
@@ -297,23 +62,6 @@
 }
 
 @media (max-width: 759px) {
-    .shell-collapsible {
-        flex-direction: column;
-    }
-    .shell-collapsible__aside,
-    .shell-collapsible__toolbar {
-        display: none;
-    }
-    .shell-collapsible__topbar {
-        display: flex;
-    }
-    .shell-collapsible__panel {
-        min-height: calc(100dvh - 60px);
-        margin: 0 8px 8px;
-    }
-    .shell-collapsible__page {
-        padding: 22px 18px 32px;
-    }
     .shell-collapsible__table th:nth-child(n + 4),
     .shell-collapsible__table td:nth-child(n + 4),
     .shell-collapsible__branch {

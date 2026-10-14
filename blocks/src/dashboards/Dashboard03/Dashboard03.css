@@ -1,0 +1,288 @@
+.ow-dashboard03,
+.ow-dashboard03 *,
+.ow-dashboard03 *::before,
+.ow-dashboard03 *::after {
+    box-sizing: border-box;
+}
+
+/* This month's spend against its budget, the same spend by project, and what the next invoice will be. */
+.ow-dashboard03 {
+    background: var(--ow-canvas);
+    padding: 32px;
+    color: var(--ow-text);
+}
+
+.ow-dashboard03__inner {
+    display: grid;
+    max-width: 1200px;
+    grid-template-areas:
+        "header header"
+        "budget invoice"
+        "projects invoice";
+    grid-template-columns: minmax(0, 1fr) 340px;
+    grid-template-rows: auto auto 1fr;
+    gap: var(--ow-space-2xl);
+    margin: 0 auto;
+}
+
+.ow-dashboard03__header {
+    grid-area: header;
+    margin-bottom: var(--ow-space-sm);
+}
+
+.ow-dashboard03__lead {
+    margin-top: 4px;
+}
+
+.ow-dashboard03__card-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-sm) var(--ow-space-lg);
+}
+
+/* The budget */
+.ow-dashboard03__budget {
+    display: grid;
+    grid-area: budget;
+    gap: var(--ow-space-4xl);
+    padding: 20px 22px 22px;
+}
+
+.ow-dashboard03__figure {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+}
+
+/* The month's spend is the number the page is about, so it's set larger than the heading style. */
+.ow-dashboard03__spent {
+    font-size: 34px;
+    line-height: 1.1;
+}
+
+.ow-dashboard03__meter {
+    display: grid;
+    gap: 10px;
+}
+
+/* The percentage changes with the budget; digits of one width keep the scale steady. */
+.ow-dashboard03__scale {
+    display: flex;
+    justify-content: space-between;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-dashboard03__forecast {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-lg);
+    background: var(--ow-surface-muted);
+    padding: 10px 12px;
+}
+
+.ow-dashboard03__forecast svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.ow-dashboard03__forecast[data-tone="warning"] {
+    border-color: var(--ow-warning-border);
+    background: var(--ow-warning-surface);
+}
+
+.ow-dashboard03__forecast[data-tone="warning"] svg {
+    color: var(--ow-warning-text);
+}
+
+.ow-dashboard03__forecast[data-tone="success"] svg {
+    color: var(--ow-success-text);
+}
+
+.ow-dashboard03__popover-body {
+    display: grid;
+    gap: var(--ow-space-2xl);
+}
+
+.ow-dashboard03__popover-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--ow-space-sm);
+}
+
+/* Spend by project */
+.ow-dashboard03__projects {
+    grid-area: projects;
+    align-self: start;
+    overflow: hidden;
+}
+
+.ow-dashboard03__projects .ow-dashboard03__card-header {
+    min-height: 56px;
+    border-bottom: 1px solid var(--ow-border);
+    padding: 12px 22px;
+}
+
+/* The Table sits edge to edge in its card; the card draws the border. */
+.ow-dashboard03__projects .ow-table-wrap {
+    border: 0;
+    border-radius: 0;
+}
+
+.ow-dashboard03__projects th:first-child,
+.ow-dashboard03__projects td:first-child {
+    padding-left: 22px;
+}
+
+.ow-dashboard03__projects th:last-child,
+.ow-dashboard03__projects td:last-child {
+    padding-right: 22px;
+}
+
+/* The next invoice */
+.ow-dashboard03__invoice {
+    display: grid;
+    grid-area: invoice;
+    align-self: start;
+    gap: var(--ow-space-4xl);
+    padding: 20px 22px 22px;
+}
+
+.ow-dashboard03__due {
+    margin-top: 2px;
+}
+
+.ow-dashboard03__lines {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+}
+
+.ow-dashboard03__line {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--ow-space-lg);
+}
+
+.ow-dashboard03__item {
+    min-width: 0;
+}
+
+.ow-dashboard03__hint {
+    display: block;
+}
+
+/* Amounts line up digit for digit down the invoice. */
+.ow-dashboard03__amount {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.ow-dashboard03__total {
+    border-top: 1px solid var(--ow-border);
+    padding-top: 12px;
+}
+
+.ow-dashboard03__note {
+    margin-top: -8px;
+}
+
+.ow-dashboard03__payment {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-lg);
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-lg);
+    padding: 10px 8px 10px 12px;
+}
+
+.ow-dashboard03__card-mark {
+    display: flex;
+    width: 36px;
+    height: 24px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-sm);
+    background: var(--ow-surface-muted);
+    color: var(--ow-text-soft);
+}
+
+.ow-dashboard03__payment-text {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+}
+
+@media (max-width: 1023px) {
+    .ow-dashboard03 {
+        padding: 28px 24px;
+    }
+    .ow-dashboard03__inner {
+        grid-template-areas:
+            "header"
+            "budget"
+            "invoice"
+            "projects";
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: none;
+    }
+}
+
+@media (max-width: 759px) {
+    .ow-dashboard03 {
+        padding: 24px var(--ow-page-gutter) 32px;
+    }
+    .ow-dashboard03__budget,
+    .ow-dashboard03__invoice {
+        padding: 18px 16px 20px;
+    }
+    .ow-dashboard03__spent {
+        font-size: 30px;
+    }
+    .ow-dashboard03__projects .ow-dashboard03__card-header {
+        padding: 12px 16px;
+    }
+    .ow-dashboard03__projects th:first-child,
+    .ow-dashboard03__projects td:first-child {
+        padding-left: 16px;
+    }
+    .ow-dashboard03__projects th:last-child,
+    .ow-dashboard03__projects td:last-child {
+        padding-right: 16px;
+    }
+}
+
+/* The columns that step aside under 1024px wide (a column's hideBelow). */
+@media (max-width: 1023px) {
+    .ow-dashboard03__projects[data-hide-tablet~="1"] :is(th, td):nth-child(1),
+    .ow-dashboard03__projects[data-hide-tablet~="2"] :is(th, td):nth-child(2),
+    .ow-dashboard03__projects[data-hide-tablet~="3"] :is(th, td):nth-child(3),
+    .ow-dashboard03__projects[data-hide-tablet~="4"] :is(th, td):nth-child(4),
+    .ow-dashboard03__projects[data-hide-tablet~="5"] :is(th, td):nth-child(5),
+    .ow-dashboard03__projects[data-hide-tablet~="6"] :is(th, td):nth-child(6),
+    .ow-dashboard03__projects[data-hide-tablet~="7"] :is(th, td):nth-child(7),
+    .ow-dashboard03__projects[data-hide-tablet~="8"] :is(th, td):nth-child(8) {
+        display: none;
+    }
+}
+
+/* The columns that step aside under 760px wide (a column's hideBelow). */
+@media (max-width: 759px) {
+    .ow-dashboard03__projects[data-hide-phone~="1"] :is(th, td):nth-child(1),
+    .ow-dashboard03__projects[data-hide-phone~="2"] :is(th, td):nth-child(2),
+    .ow-dashboard03__projects[data-hide-phone~="3"] :is(th, td):nth-child(3),
+    .ow-dashboard03__projects[data-hide-phone~="4"] :is(th, td):nth-child(4),
+    .ow-dashboard03__projects[data-hide-phone~="5"] :is(th, td):nth-child(5),
+    .ow-dashboard03__projects[data-hide-phone~="6"] :is(th, td):nth-child(6),
+    .ow-dashboard03__projects[data-hide-phone~="7"] :is(th, td):nth-child(7),
+    .ow-dashboard03__projects[data-hide-phone~="8"] :is(th, td):nth-child(8) {
+        display: none;
+    }
+}

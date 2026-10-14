@@ -1,7 +1,8 @@
 import { useState, type Key } from "react";
 
-import { Avatar, Badge, Button, Card, Menu, MenuItem, MenuLabel, Table, Text, Tooltip, toast, type TableColumn } from "@openwarelabs/ui";
-import { BellRing, ChevronDown, Mail, Trash2, UserPlus, X } from "lucide-react";
+import { List02, type BlockTableColumn } from "@openwarelabs/blocks";
+import { Avatar, Badge, Text, toast } from "@openwarelabs/ui";
+import { BellRing, Mail, Trash2, UserPlus } from "lucide-react";
 
 import "./TableBulkActions.css";
 
@@ -33,7 +34,7 @@ const people: Person[] = [
 
 const roleOrder: Record<Role, number> = { Owner: 0, Admin: 1, Member: 2, Guest: 3 };
 
-const columns: Array<TableColumn<Person>> = [
+const columns: Array<BlockTableColumn<Person>> = [
     {
         key: "name",
         header: "Person",
@@ -69,6 +70,7 @@ const columns: Array<TableColumn<Person>> = [
     {
         key: "twoFactor",
         header: "Two-factor",
+        hideBelow: "phone",
         render: (person) =>
             person.twoFactor === null ? (
                 <Text as="span" tone="muted" className="table-bulk-actions__nowrap">
@@ -83,6 +85,7 @@ const columns: Array<TableColumn<Person>> = [
     {
         key: "lastActive",
         header: "Last active",
+        hideBelow: "tablet",
         align: "end",
         sortable: true,
         sortValue: (person) => person.minutesAgo,
@@ -136,90 +139,44 @@ export function TableBulkActions() {
     const invited = rows.filter((person) => person.name === null).length;
 
     return (
-        <section className="table-bulk-actions" aria-labelledby="table-bulk-actions-title">
-            <div className="table-bulk-actions__inner">
-                <div className="table-bulk-actions__header">
-                    <div>
-                        <Text as="h2" variant="heading" id="table-bulk-actions-title">
-                            Members
-                        </Text>
-                        <Text variant="copy" className="table-bulk-actions__lead">
-                            Everyone in the Acme workspace, and what they can do in it.
-                        </Text>
-                    </div>
-                    <Button
-                        variant="primary"
-                        startIcon={<UserPlus size={16} />}
-                        onClick={() => toast("Invite people by email", { description: "They join as members unless you choose otherwise." })}
-                    >
-                        Invite people
-                    </Button>
-                </div>
-
-                <Card padding="none" className="table-bulk-actions__card">
-                    {chosen.length ? (
-                        <div className="table-bulk-actions__bar" role="region" aria-label="Selected people">
-                            <Text variant="label" tone="primary" className="table-bulk-actions__selected" aria-live="polite">
-                                {chosen.length} selected
-                            </Text>
-                            <div className="table-bulk-actions__actions">
-                                <Menu
-                                    label="Change role"
-                                    trigger={
-                                        <Button size="sm" endIcon={<ChevronDown size={14} />} disabled={!changeable.length}>
-                                            Change role
-                                        </Button>
-                                    }
-                                >
-                                    <MenuLabel>Make {changeable.length === 1 ? "them" : "them all"}</MenuLabel>
-                                    {(["Admin", "Member", "Guest"] as const).map((role) => (
-                                        <MenuItem key={role} icon={<span className="table-bulk-actions__menu-spacer" />} onSelect={() => setRole(role)}>
-                                            {role}
-                                        </MenuItem>
-                                    ))}
-                                </Menu>
-                                <Button size="sm" startIcon={<BellRing size={14} />} disabled={!withoutTwoFactor.length} onClick={remind}>
-                                    Remind about two-factor
-                                </Button>
-                                <Button size="sm" variant="danger" startIcon={<Trash2 size={14} />} disabled={!changeable.length} onClick={remove}>
-                                    Remove
-                                </Button>
-                            </div>
-                            <span className="table-bulk-actions__clear">
-                                <Tooltip label="Clear selection">
-                                    <Button size="sm" variant="ghost" iconOnly aria-label="Clear selection" onClick={() => setSelected([])}>
-                                        <X size={16} />
-                                    </Button>
-                                </Tooltip>
-                            </span>
-                        </div>
-                    ) : (
-                        <div className="table-bulk-actions__top">
-                            <Text as="span" tone="muted">
-                                <Text as="strong" variant="label" tone="default">
-                                    {plural(rows.length - invited, "person", "people")}
-                                </Text>
-                                {invited ? ` and ${plural(invited, "invitation")} waiting` : ""}
-                            </Text>
-                            <Text variant="caption" className="table-bulk-actions__hint">
-                                Select people to change their role or remove them together.
-                            </Text>
-                        </div>
-                    )}
-
-                    <Table
-                        caption="Members"
-                        hideCaption
-                        columns={columns}
-                        rows={rows}
-                        selectionMode="multiple"
-                        selectedKeys={selected}
-                        onSelectionChange={setSelected}
-                        rowLabel={(member) => member.name ?? member.email}
-                        defaultSort={{ key: "role", direction: "ascending" }}
-                    />
-                </Card>
-            </div>
-        </section>
+        <List02
+            title="Members"
+            description="Everyone in the Acme workspace, and what they can do in it."
+            primaryAction={{
+                label: "Invite people",
+                icon: <UserPlus size={16} />,
+                onClick: () => toast("Invite people by email", { description: "They join as members unless you choose otherwise." }),
+            }}
+            columns={columns}
+            rows={rows}
+            rowLabel={(member) => member.name ?? member.email}
+            defaultSort={{ key: "role", direction: "ascending" }}
+            selectedKeys={selected}
+            onSelectionChange={setSelected}
+            bulkActions={() => [
+                {
+                    label: "Change role",
+                    disabled: !changeable.length,
+                    menuHeading: <>Make {changeable.length === 1 ? "them" : "them all"}</>,
+                    menu: (["Admin", "Member", "Guest"] as const).map((role) => ({
+                        label: role,
+                        icon: <span className="table-bulk-actions__menu-spacer" />,
+                        onSelect: () => setRole(role),
+                    })),
+                },
+                { label: "Remind about two-factor", icon: <BellRing size={14} />, disabled: !withoutTwoFactor.length, onClick: remind },
+                { label: "Remove", icon: <Trash2 size={14} />, variant: "danger", disabled: !changeable.length, onClick: remove },
+            ]}
+            summary={
+                <Text as="span" tone="muted">
+                    <Text as="strong" variant="label" tone="default">
+                        {plural(rows.length - invited, "person", "people")}
+                    </Text>
+                    {invited ? ` and ${plural(invited, "invitation")} waiting` : ""}
+                </Text>
+            }
+            hint="Select people to change their role or remove them together."
+            labels={{ caption: "Members", bar: "Selected people" }}
+        />
     );
 }

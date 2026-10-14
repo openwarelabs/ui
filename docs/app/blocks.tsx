@@ -297,10 +297,10 @@ export const blockCategories: BlockCategory[] = [
         sketch: "shell",
         uses: ["NavList", "NavItem", "Avatar", "Menu", "CommandPalette", "Drawer", "ScrollShadow"],
         variants: [
-            { id: "ShellSidebar", name: "Sidebar", description: "Navigation down the left, the account at the bottom, the page on a raised panel.", height: 640 },
-            { id: "ShellTopBar", name: "Top bar", description: "Navigation across the top, for apps with a few sections.", sketch: "shell-topbar", height: 640 },
-            { id: "ShellThreePane", name: "Three panes", description: "A list, the item open beside it and an inspector on the right, like Commandr's projects.", sketch: "shell-three-pane", height: 640 },
-            { id: "ShellCollapsible", name: "Collapsible sidebar", description: "A sidebar that folds down to icons, and into a drawer on phones.", height: 640 },
+            { id: "ShellSidebar", component: "Shell01", name: "Sidebar", description: "Navigation down the left, the account at the bottom, the page on a raised panel.", height: 640 },
+            { id: "ShellTopBar", component: "Shell02", name: "Top bar", description: "Navigation across the top, for apps with a few sections.", sketch: "shell-topbar", height: 640 },
+            { id: "ShellThreePane", component: "Shell03", name: "Three panes", description: "A list, the item open beside it and an inspector on the right, like Commandr's projects.", sketch: "shell-three-pane", height: 640 },
+            { id: "ShellCollapsible", component: "Shell04", name: "Collapsible sidebar", description: "A sidebar that folds down to icons, and into a drawer on phones.", height: 640 },
         ],
     },
     {
@@ -311,9 +311,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "page-heading",
         uses: ["Breadcrumbs", "Button", "Tabs", "Badge", "SearchField"],
         variants: [
-            { id: "PageHeadingActions", name: "Title and actions", description: "The page's name with one primary action and a menu for the rest." },
-            { id: "PageHeadingTabs", name: "With breadcrumbs and tabs", description: "Where it sits above, and tabs for its views below." },
-            { id: "PageHeadingFilters", name: "With search and filters", description: "A search field and filter tags for the list under it." },
+            { id: "PageHeadingActions", component: "PageHeading01", name: "Title and actions", description: "The page's name with one primary action and a menu for the rest." },
+            { id: "PageHeadingTabs", component: "PageHeading02", name: "With breadcrumbs and tabs", description: "Where it sits above, and tabs for its views below." },
+            { id: "PageHeadingFilters", component: "PageHeading03", name: "With search and filters", description: "A search field and filter tags for the list under it." },
         ],
     },
     {
@@ -324,9 +324,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "dashboard",
         uses: ["Stat", "Card", "Table", "ProgressBar", "Badge"],
         variants: [
-            { id: "DashboardChart", name: "Stats and a chart", description: "A row of stats, then a chart across the page." },
-            { id: "DashboardActivity", name: "Activity", description: "Recent events in a feed beside the numbers." },
-            { id: "DashboardUsage", name: "Usage and billing", description: "Spend against a budget, by project, with the next invoice." },
+            { id: "DashboardChart", component: "Dashboard01", name: "Stats and a chart", description: "A row of stats, then a chart across the page." },
+            { id: "DashboardActivity", component: "Dashboard02", name: "Activity", description: "Recent events in a feed beside the numbers." },
+            { id: "DashboardUsage", component: "Dashboard03", name: "Usage and billing", description: "Spend against a budget, by project, with the next invoice." },
         ],
     },
     {
@@ -337,10 +337,10 @@ export const blockCategories: BlockCategory[] = [
         sketch: "table",
         uses: ["Table", "Pagination", "SearchField", "Tag", "Menu", "EmptyState", "Checkbox"],
         variants: [
-            { id: "TableToolbar", name: "Table with a toolbar", description: "Search, filters and a primary action above a sortable table." },
-            { id: "TableBulkActions", name: "Bulk actions", description: "Select rows and a bar appears with what you can do to all of them." },
-            { id: "ListStacked", name: "Stacked list", description: "Rows with a title, a line of detail and a status, for phones too.", sketch: "list" },
-            { id: "ListCards", name: "Grid of cards", description: "Projects or files as cards, with a menu on each." },
+            { id: "TableToolbar", component: "List01", name: "Table with a toolbar", description: "Search, filters and a primary action above a sortable table." },
+            { id: "TableBulkActions", component: "List02", name: "Bulk actions", description: "Select rows and a bar appears with what you can do to all of them." },
+            { id: "ListStacked", component: "List03", name: "Stacked list", description: "Rows with a title, a line of detail and a status, for phones too.", sketch: "list" },
+            { id: "ListCards", component: "List04", name: "Grid of cards", description: "Projects or files as cards, with a menu on each." },
         ],
     },
     {
@@ -446,9 +446,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "chat",
         uses: ["Textarea", "Button", "Avatar", "CodeBlock", "Steps", "Badge"],
         variants: [
-            { id: "ChatThread", name: "Chat thread", description: "Messages with avatars and times, code in blocks, and a box to reply.", height: 640 },
-            { id: "ChatPromptBox", name: "Prompt box", description: "A growing text box with attachments, a model menu and a send button." },
-            { id: "ChatAgentRun", name: "Agent run", description: "An agent's steps as they happen, each with its status and what it changed.", sketch: "list" },
+            { id: "ChatThread", component: "Chat01", name: "Chat thread", description: "Messages with avatars and times, code in blocks, and a box to reply.", height: 640 },
+            { id: "ChatPromptBox", component: "Chat02", name: "Prompt box", description: "A growing text box with attachments, a model menu and a send button." },
+            { id: "ChatAgentRun", component: "Chat03", name: "Agent run", description: "An agent's steps as they happen, each with its status and what it changed.", sketch: "list" },
         ],
     },
 ];
