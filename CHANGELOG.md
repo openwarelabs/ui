@@ -2,6 +2,12 @@
 
 Every release of @openwarelabs/ui and @openwarelabs/ui-mcp. `npm run release` writes it from the commits.
 
+## 0.10.1 (2026-10-14)
+
+### Fixes
+
+- fix 40 of the 42 known accessibility problems (#16) ([10ce344](https://github.com/openwarelabs/ui/commit/10ce34477133fd3944266c35ce28c8f0c0e23090))
+
 ## 0.10.0 (2026-10-14)
 
 ### Features
