@@ -1,5 +1,6 @@
-import { Badge, Button, Link, SectionHeading, SettingsRow, Switch, Text } from "@openwarelabs/ui";
-import { ArrowRight, Bot, Building2, Check, KeyRound, Settings, ShieldCheck, Users } from "lucide-react";
+import { Features05 } from "@openwarelabs/blocks";
+import { Badge, SettingsRow, Switch } from "@openwarelabs/ui";
+import { ArrowRight, Bot, Building2, KeyRound, Settings, ShieldCheck, Users } from "lucide-react";
 
 import "./FeaturesChecklist.css";
 
@@ -87,37 +88,14 @@ function SettingsShot() {
 
 export function FeaturesChecklist() {
     return (
-        <section className="features-checklist" aria-labelledby="features-checklist-title">
-            <div className="features-checklist__inner">
-                <div className="features-checklist__copy">
-                    <SectionHeading
-                        eyebrow="Included"
-                        title={<span id="features-checklist-title">Move fast, with the guardrails on</span>}
-                        intro="Every workspace comes with the checks that keep a quick team safe. They apply to people and agents alike, and take a minute to set up."
-                    />
-                    <ul className="features-checklist__list">
-                        {included.map((item) => (
-                            <Text as="li" key={item} tone="soft" className="features-checklist__item">
-                                <span className="features-checklist__tick" aria-hidden="true">
-                                    <Check size={12} strokeWidth={3} />
-                                </span>
-                                {item}
-                            </Text>
-                        ))}
-                    </ul>
-                    <div className="features-checklist__actions">
-                        <Button variant="primary" shape="pill" size="lg" endIcon={<ArrowRight size={16} />}>
-                            Start for free
-                        </Button>
-                        <Link href="#" variant="standalone">
-                            Compare plans
-                        </Link>
-                    </div>
-                </div>
-                <div className="features-checklist__visual">
-                    <SettingsShot />
-                </div>
-            </div>
-        </section>
+        <Features05
+            eyebrow="Included"
+            title="Move fast, with the guardrails on"
+            description="Every workspace comes with the checks that keep a quick team safe. They apply to people and agents alike, and take a minute to set up."
+            items={included}
+            primaryAction={{ label: "Start for free", href: "#start", endIcon: <ArrowRight size={16} /> }}
+            secondaryLink={{ label: "Compare plans", href: "#" }}
+            visual={<SettingsShot />}
+        />
     );
 }

@@ -138,11 +138,11 @@ export const blockCategories: BlockCategory[] = [
         sketch: "features",
         uses: ["SectionHeading", "Card", "Tabs", "Badge"],
         variants: [
-            { id: "FeaturesColumns", name: "Three columns with icons", description: "An icon, a short title and a sentence each, in a grid that drops to one column on phones." },
-            { id: "FeaturesAlternating", name: "Alternating image and text", description: "Rows that swap sides, each with a screenshot and a few lines.", sketch: "features-alternating" },
-            { id: "FeaturesBento", name: "Bento grid", description: "Cards of different sizes, the biggest for the feature that matters most.", sketch: "features-bento" },
-            { id: "FeaturesTabs", name: "Tabs that change the screenshot", description: "A row of tabs; each one shows its part of the product." },
-            { id: "FeaturesChecklist", name: "Checklist beside a screenshot", description: "A list of what's included next to one large image.", sketch: "features-alternating" },
+            { id: "FeaturesColumns", component: "Features01", name: "Three columns with icons", description: "An icon, a short title and a sentence each, in a grid that drops to one column on phones." },
+            { id: "FeaturesAlternating", component: "Features02", name: "Alternating image and text", description: "Rows that swap sides, each with a screenshot and a few lines.", sketch: "features-alternating" },
+            { id: "FeaturesBento", component: "Features03", name: "Bento grid", description: "Cards of different sizes, the biggest for the feature that matters most.", sketch: "features-bento" },
+            { id: "FeaturesTabs", component: "Features04", name: "Tabs that change the screenshot", description: "A row of tabs; each one shows its part of the product." },
+            { id: "FeaturesChecklist", component: "Features05", name: "Checklist beside a screenshot", description: "A list of what's included next to one large image.", sketch: "features-alternating" },
         ],
     },
     {

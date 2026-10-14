@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
-import { Avatar, Badge, Kbd, SectionHeading, SettingsRow, Spinner, Stat, Switch, Text } from "@openwarelabs/ui";
+import { Features03 } from "@openwarelabs/blocks";
+import { Avatar, Badge, Kbd, SettingsRow, Spinner, Stat, Switch } from "@openwarelabs/ui";
 import { Bot, FolderKanban, GitBranch, GitPullRequest, Search } from "lucide-react";
 
 import "./FeaturesBento.css";
@@ -17,7 +18,7 @@ const runSteps = [
 function AgentShot() {
     return (
         <>
-            <div className="features-bento__window">
+            <div className="features-bento__window features-bento__window--run">
                 <div className="features-bento__window-head">
                     <span className="features-bento__bot">
                         <Bot size={14} />
@@ -213,38 +214,11 @@ const features: Feature[] = [
 
 export function FeaturesBento() {
     return (
-        <section className="features-bento" aria-labelledby="features-bento-title">
-            <div className="features-bento__inner">
-                <div className="features-bento__header">
-                    <SectionHeading eyebrow="Features" title={<span id="features-bento-title">Less waiting on the work around the work</span>} />
-                    <Text variant="lead" className="features-bento__intro">
-                        The parts of shipping that used to need a person, a ping and a wait now happen on their own, and show you what they did.
-                    </Text>
-                </div>
-
-                {/* The agents card is the big one, with a heading and a lead; the rest are dense cards. */}
-                <div className="features-bento__grid">
-                    {features.map((feature) => (
-                        <article
-                            key={feature.id}
-                            className={`features-bento__card features-bento__card--${feature.id}`}
-                            aria-labelledby={`features-bento-${feature.id}`}
-                        >
-                            <div className="features-bento__copy">
-                                <Text variant={feature.id === "agents" ? "heading" : "card-title"} id={`features-bento-${feature.id}`}>
-                                    {feature.title}
-                                </Text>
-                                <Text variant={feature.id === "agents" ? "lead" : "copy"} className="features-bento__text">
-                                    {feature.text}
-                                </Text>
-                            </div>
-                            <div className="features-bento__visual" role="img" aria-label={feature.shotLabel}>
-                                {feature.shot}
-                            </div>
-                        </article>
-                    ))}
-                </div>
-            </div>
-        </section>
+        <Features03
+            eyebrow="Features"
+            title="Less waiting on the work around the work"
+            description="The parts of shipping that used to need a person, a ping and a wait now happen on their own, and show you what they did."
+            cards={features.map((feature) => ({ title: feature.title, description: feature.text, visual: feature.shot, visualLabel: feature.shotLabel }))}
+        />
     );
 }

@@ -35,4 +35,15 @@ export type { Pricing04Props } from "./pricing/Pricing04/Pricing04.types";
 export { Pricing05 } from "./pricing/Pricing05/Pricing05";
 export type { Pricing05Labels, Pricing05Props, Pricing05Tier } from "./pricing/Pricing05/Pricing05.types";
 
+export { Features01 } from "./features/Features01/Features01";
+export type { Features01Feature, Features01Props } from "./features/Features01/Features01.types";
+export { Features02 } from "./features/Features02/Features02";
+export type { Features02Props, Features02Row } from "./features/Features02/Features02.types";
+export { Features03 } from "./features/Features03/Features03";
+export type { Features03Card, Features03Props } from "./features/Features03/Features03.types";
+export { Features04 } from "./features/Features04/Features04";
+export type { Features04Labels, Features04Props, Features04Tab } from "./features/Features04/Features04.types";
+export { Features05 } from "./features/Features05/Features05";
+export type { Features05Props } from "./features/Features05/Features05.types";
+
 export type { BlockAction, BlockBrand, BlockLink, HeaderLink } from "./shared/shared.types";

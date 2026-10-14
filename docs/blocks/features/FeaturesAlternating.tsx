@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
-import { Avatar, Badge, DotGrid, Link, ProgressBar, SectionHeading, Spinner, Text } from "@openwarelabs/ui";
+import { Features02 } from "@openwarelabs/blocks";
+import { Avatar, Badge, ProgressBar, Spinner } from "@openwarelabs/ui";
 import { Bot, Check, CircleDashed, GitPullRequest, Rocket } from "lucide-react";
 
 import "./FeaturesAlternating.css";
@@ -192,47 +193,20 @@ const features: Feature[] = [
 
 export function FeaturesAlternating() {
     return (
-        <section className="features-alternating" aria-labelledby="features-alternating-title">
-            <div className="features-alternating__inner">
-                <SectionHeading
-                    eyebrow="How it works"
-                    title={<span id="features-alternating-title">From the first idea to the deploy</span>}
-                    intro="Acme follows a change the whole way: who asked for it, who or what made it, who approved it and when it went live."
-                />
-
-                <div className="features-alternating__rows">
-                    {features.map((feature) => (
-                        <article key={feature.id} className="features-alternating__row" aria-labelledby={`features-alternating-${feature.id}`}>
-                            <div className="features-alternating__copy">
-                                <Text variant="label" tone="primary" className="features-alternating__kicker">
-                                    {feature.icon}
-                                    {feature.kicker}
-                                </Text>
-                                <Text variant="heading" id={`features-alternating-${feature.id}`} className="features-alternating__title">
-                                    {feature.title}
-                                </Text>
-                                <Text variant="lead" className="features-alternating__text">
-                                    {feature.text}
-                                </Text>
-                                <ul className="features-alternating__points">
-                                    {feature.points.map((point) => (
-                                        <Text as="li" key={point} tone="soft" className="features-alternating__point">
-                                            <Check size={16} aria-hidden="true" />
-                                            {point}
-                                        </Text>
-                                    ))}
-                                </ul>
-                                <Link href="#" variant="standalone" className="features-alternating__link">
-                                    {feature.link} →
-                                </Link>
-                            </div>
-                            <DotGrid className="features-alternating__stage" role="img" aria-label={feature.shotLabel}>
-                                {feature.shot}
-                            </DotGrid>
-                        </article>
-                    ))}
-                </div>
-            </div>
-        </section>
+        <Features02
+            eyebrow="How it works"
+            title="From the first idea to the deploy"
+            description="Acme follows a change the whole way: who asked for it, who or what made it, who approved it and when it went live."
+            rows={features.map((feature) => ({
+                kicker: feature.kicker,
+                icon: feature.icon,
+                title: feature.title,
+                description: feature.text,
+                points: feature.points,
+                link: { label: feature.link, href: "#" },
+                visual: feature.shot,
+                visualLabel: feature.shotLabel,
+            }))}
+        />
     );
 }

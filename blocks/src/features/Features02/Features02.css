@@ -1,0 +1,152 @@
+.ow-features02,
+.ow-features02 *,
+.ow-features02 *::before,
+.ow-features02 *::after {
+    box-sizing: border-box;
+}
+
+.ow-features02 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.ow-features02__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+.ow-features02__rows {
+    display: grid;
+    gap: 112px;
+    margin-top: 80px;
+}
+
+.ow-features02__row {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+    gap: 72px;
+}
+
+/* Every other row puts the picture first. */
+
+.ow-features02__row:nth-child(even) {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+}
+
+.ow-features02__row:nth-child(even) .ow-features02__copy {
+    order: 2;
+}
+
+.ow-features02__copy {
+    display: flex;
+    max-width: 460px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.ow-features02__kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ow-features02__title {
+    margin-top: 16px;
+}
+
+.ow-features02__text {
+    margin-top: 16px;
+}
+
+.ow-features02__points {
+    display: grid;
+    gap: 10px;
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-features02__point {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.ow-features02__points svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: var(--ow-primary-text);
+}
+
+.ow-features02__link {
+    margin-top: 28px;
+}
+
+/* The picture: a window on the dot grid, framed like a screenshot. */
+
+.ow-features02__stage.ow-dot-grid {
+    display: flex;
+    min-height: 400px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-card);
+    background: color-mix(in srgb, var(--ow-primary) 3%, var(--ow-paper));
+    padding: 48px 40px;
+    pointer-events: none;
+    user-select: none;
+}
+
+.ow-features02__stage > .ow-dot-grid__content {
+    width: 100%;
+    max-width: 480px;
+}
+
+@media (max-width: 1024px) {
+    .ow-features02__row,
+    .ow-features02__row:nth-child(even) {
+        gap: 48px;
+    
+    }
+}
+
+@media (max-width: 900px) {
+    .ow-features02__rows {
+        gap: 80px;
+    
+    }
+    .ow-features02__row,
+    .ow-features02__row:nth-child(even) {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 36px;
+    
+    }
+    .ow-features02__row:nth-child(even) .ow-features02__copy {
+        order: 0;
+    
+    }
+    .ow-features02__copy {
+        max-width: 560px;
+    
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-features02 {
+        padding: 72px var(--ow-page-gutter);
+    
+    }
+    .ow-features02__rows {
+        gap: 64px;
+        margin-top: 48px;
+    
+    }
+    .ow-features02__stage.ow-dot-grid {
+        min-height: 0;
+        padding: 28px 14px;
+    
+    }
+}
