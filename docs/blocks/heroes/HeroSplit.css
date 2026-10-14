@@ -5,63 +5,8 @@
     box-sizing: border-box;
 }
 
-.hero-split {
-    overflow: hidden;
-    background: var(--ow-paper);
-    padding: 112px 32px 120px;
-    color: var(--ow-text);
-}
-
-.hero-split__inner {
-    display: grid;
-    max-width: var(--ow-page-max);
-    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-    align-items: center;
-    gap: 72px;
-    margin: 0 auto;
-}
-
-.hero-split__text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.hero-split__title {
-    margin-top: 24px;
-}
-
-.hero-split__lead {
-    max-width: 500px;
-    margin-top: 22px;
-}
-
-.hero-split__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--ow-space-lg);
-    margin-top: 34px;
-}
-
-.hero-split__points {
-    display: grid;
-    gap: 8px;
-    margin: 32px 0 0;
-    padding: 0;
-    list-style: none;
-}
-
-.hero-split__point {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-}
-
-.hero-split__points svg {
-    color: var(--ow-primary-text);
-}
-
 /* The product: an agent's pull request, waiting for review. */
+
 .hero-split__shot {
     overflow: hidden;
     border: 1px solid var(--ow-border);
@@ -255,43 +200,12 @@
 }
 
 /* Drawn buttons: they look like the real ones but can't be focused or pressed. */
+
 .hero-split__buttons > span {
     pointer-events: none;
 }
 
-@media (max-width: 960px) {
-    .hero-split {
-        padding-top: 88px;
-    }
-    .hero-split__inner {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 56px;
-    }
-    .hero-split__lead {
-        max-width: 580px;
-    }
-    .hero-split__points {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px 22px;
-    }
-}
-
 @media (max-width: 760px) {
-    .hero-split {
-        padding: 72px var(--ow-page-gutter) 80px;
-    }
-    .hero-split__inner {
-        gap: 48px;
-    }
-    .hero-split__actions {
-        width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-    }
-    .hero-split__points {
-        display: grid;
-    }
     .hero-split__shot-header,
     .hero-split__steps {
         padding-right: 16px;

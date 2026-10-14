@@ -34,6 +34,34 @@ const cell = (text: string | undefined) => (text ?? "").replace(/\s*\n\s*/g, " "
 
 const join = (parts: Array<string | false | null | undefined>) => `${parts.filter(Boolean).join("\n\n").trim()}\n`;
 
+/** One props interface as a Markdown section: its description, the element it extends, and a row per prop. */
+export function propsTable(name: string, doc: PropsDoc, level = "###") {
+    const rows = doc.props.map(
+        (prop) =>
+            `| \`${prop.name}\`${prop.required ? " (required)" : ""} | \`${cell(prop.type)}\` | ${prop.default ? `\`${cell(prop.default)}\`` : ""} | ${cell(prop.description)} |`,
+    );
+    return join([
+        `${level} ${name}`,
+        doc.description,
+        doc.element ? `Also takes every \`<${doc.element}>\` attribute.` : null,
+        `| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n${rows.join("\n")}`,
+    ]).trimEnd();
+}
+
+/** The interfaces a props interface's types refer to (BlockAction, Hero06Platform), and theirs, once each. */
+export function referencedTypes(name: string, props: Record<string, PropsDoc>, seen = new Set<string>([name])): string[] {
+    const found: string[] = [];
+    for (const prop of props[name]?.props ?? []) {
+        for (const word of prop.type.match(/\b[A-Z]\w+\b/g) ?? []) {
+            if (!seen.has(word) && props[word]?.props.length) {
+                seen.add(word);
+                found.push(word, ...referencedTypes(word, props, seen));
+            }
+        }
+    }
+    return found;
+}
+
 /** What every AI tool should know before it writes Openware code. */
 export function setupMarkdown(version?: string) {
     return join([
@@ -58,6 +86,8 @@ export function setupMarkdown(version?: string) {
             `- Tailwind v4: \`@import "${packageName}/tailwind.css";\` after \`@import "tailwindcss";\` gives \`bg-surface\`, \`text-text-muted\`, \`rounded-container\`, \`p-lg\` and the rest.`,
             `- Rebrand with \`applyBrand("#0d9488")\` (or a preset from \`brandPresets\`); the primary button, focus ring and tints follow in both themes.`,
         ].join("\n"),
+        "## Blocks",
+        `Whole page sections (heroes and, in time, every block in the docs) come as components in \`${blocksPackage}\`: \`npm install ${blocksPackage}\`, \`import "${blocksPackage}/styles.css";\` once after the library's styles, then \`<Hero01 title="…" description="…" primaryAction={{ label: "Start for free", href: "/signup" }} />\`. Content is props; use them rather than copying their code. Blocks without a component yet are code to copy.`,
         "## Rules",
         [
             "- One primary button per view. Everything else is secondary or ghost.",
@@ -100,18 +130,7 @@ export function componentMarkdown({ meta, examples, props }: AiComponentInput) {
         meta.keyboard?.length ? `## Keyboard\n\n| Key | What it does |\n| --- | --- |\n${meta.keyboard.map(([keys, action]) => `| ${cell(keys)} | ${cell(action)} |`).join("\n")}` : null,
         meta.notes?.length ? `## Notes\n\n${meta.notes.map((note) => `- ${note}`).join("\n")}` : null,
         propsOf({ meta, props }).length ? "## API reference" : null,
-        ...propsOf({ meta, props }).map((name) => {
-            const doc = props[name]!;
-            const rows = doc.props.map(
-                (prop) => `| \`${prop.name}\`${prop.required ? " (required)" : ""} | \`${cell(prop.type)}\` | ${prop.default ? `\`${cell(prop.default)}\`` : ""} | ${cell(prop.description)} |`,
-            );
-            return join([
-                `### ${name}`,
-                doc.description,
-                doc.element ? `Also takes every \`<${doc.element}>\` attribute.` : null,
-                `| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n${rows.join("\n")}`,
-            ]).trimEnd();
-        }),
+        ...propsOf({ meta, props }).map((name) => propsTable(name, props[name]!)),
         meta.related?.length ? `## Related\n\n${meta.related.join(", ")}` : null,
     ]);
 }
@@ -139,10 +158,97 @@ export interface AiBlockInput {
     description: string;
     category: { title: string; uses: string[] };
     files: AiBlockFile[];
+    /** Its component in @openwarelabs/blocks, with every props interface the docs know, when it has one. */
+    component?: { name: string; props: Record<string, PropsDoc> };
+}
+
+export const blocksPackage = "@openwarelabs/blocks";
+
+/**
+ * The docs' example cut down to the block in use: its exported function, the top-level constants that function
+ * reads (sample data), and the imports those need. The drawn sample visuals (other functions) and their
+ * stylesheet are left out, since a real page passes its own.
+ */
+export function usageExample(code: string) {
+    const lines = code.split("\n");
+    const start = lines.findIndex((line) => line.startsWith("export function "));
+    if (start === -1) return { code, visuals: [] as string[] };
+    const usage = lines.slice(start).join("\n");
+    const constants: Array<{ name: string; text: string }> = [];
+    const visuals: string[] = [];
+    for (let index = 0; index < start; index += 1) {
+        const line = lines[index]!;
+        const visual = /^function (\w+)/.exec(line);
+        if (visual) visuals.push(visual[1]!);
+        const constant = /^const (\w+)/.exec(line);
+        if (!constant) continue;
+        let end = index;
+        while (end < start && !(/;\s*$/.test(lines[end]!) && (end === index || /^\S/.test(lines[end]!)))) end += 1;
+        constants.push({ name: constant[1]!, text: lines.slice(index, end + 1).join("\n") });
+        index = end;
+    }
+    // Names in code, not in the words of quoted strings ("handled overnight" doesn't use `overnight`).
+    const withoutStrings = (text: string) => text.replace(/"(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*'/g, '""');
+    const uses = (text: string, name: string) => new RegExp(`\\b${name}\\b`).test(withoutStrings(text));
+    const kept = constants.filter((constant) => uses(usage, constant.name));
+    const body = [...kept.map((constant) => constant.text), usage].join("\n\n");
+    const imports = lines
+        .slice(0, start)
+        .filter((line) => line.startsWith("import ") && !/\.css";$/.test(line))
+        .map((line) => {
+            const match = /^import (type )?\{ ([^}]+) \} from (.+)$/.exec(line);
+            if (!match) return line;
+            const names = match[2]!
+                .split(",")
+                .map((name) => name.trim())
+                .filter((name) =>
+                    uses(
+                        body,
+                        name
+                            .replace(/^type /, "")
+                            .split(" as ")
+                            .pop()!,
+                    ),
+                );
+            return names.length ? `import ${match[1] ?? ""}{ ${names.join(", ")} } from ${match[3]}` : null;
+        })
+        .filter((line): line is string => Boolean(line));
+    return { code: `${imports.join("\n")}\n\n${body}`, visuals: visuals.filter((name) => uses(usage, name)) };
+}
+
+/** A block that's a component: how to install it, its props, and the docs' example of it in use. */
+function blockComponentMarkdown({ name, description, category, files, component }: AiBlockInput & { component: NonNullable<AiBlockInput["component"]> }) {
+    const propsName = `${component.name}Props`;
+    const example = files.find((file) => file.language === "tsx");
+    const sample = files.find((file) => file.language === "css");
+    return join([
+        `# ${component.name}: ${name} (${category.title})`,
+        description,
+        `A whole page section from \`${blocksPackage}\`, built from \`${packageName}\` components. It takes its content as props, so use the component rather than copying its code: \`<${component.name} title="…" … />\`. Its layout follows the theme, the brand colour and every screen width by itself.`,
+        "## Set up",
+        fence(`npm install ${blocksPackage}`, "sh"),
+        fence(
+            `import "${packageName}/styles.css";\nimport "${blocksPackage}/styles.css"; // once, after the library's\n\nimport { ${component.name} } from "${blocksPackage}";`,
+        ),
+        "## Props",
+        component.props[propsName] ? propsTable(propsName, component.props[propsName]!, "###") : null,
+        ...referencedTypes(propsName, component.props).map((type) => propsTable(type, component.props[type]!, "###")),
+        example
+            ? (() => {
+                  const { code, visuals } = usageExample(example.code);
+                  const drawn = visuals.length
+                      ? ` ${visuals.map((visual) => `\`<${visual} />\``).join(" and ")} ${visuals.length === 1 ? "is a product visual" : "are product visuals"} drawn for the docs${sample ? ` (with \`${sample.name}\`)` : ""} and left out here: pass your own, usually a screenshot, such as \`<img src="/screenshot.png" alt="…" />\`.`
+                      : "";
+                  return join(["## Example", `The docs' example, with sample content.${drawn}`, fence(code, "tsx")]).trimEnd();
+              })()
+            : null,
+    ]);
 }
 
 /** A block's reference: what it is, what it's made from, and both its files. */
-export function blockMarkdown({ id, name, description, category, files }: AiBlockInput) {
+export function blockMarkdown(input: AiBlockInput) {
+    if (input.component) return blockComponentMarkdown({ ...input, component: input.component });
+    const { id, name, description, category, files } = input;
     const component = id.split("/").pop()!;
     return join([
         `# ${name} (${category.title})`,
@@ -155,6 +261,13 @@ export function blockMarkdown({ id, name, description, category, files }: AiBloc
 
 /** A ready-to-paste instruction to add a block, with its files under it. */
 export function blockPrompt(input: AiBlockInput) {
+    if (input.component) {
+        return join([
+            `Add the "${input.name}" block from Openware UI to my page with the \`${input.component.name}\` component from \`${blocksPackage}\`. Install it if it isn't yet and import its styles once after the library's, then render \`<${input.component.name}>\` with my content as its props, following the props and the example below. Don't copy or rewrite the component's code.`,
+            "---",
+            blockMarkdown(input),
+        ]);
+    }
     const component = input.id.split("/").pop()!;
     return join([
         `Add the "${input.name}" block from Openware UI to my project. Create \`${component}.tsx\` and \`${component}.css\` from the files below, next to my other components, keep the stylesheet import, and then replace the sample content with mine. Keep using the \`${packageName}\` components it's made from. If the package isn't set up yet: \`npm install ${packageName} lucide-react\`, import \`${packageName}/fonts.css\` and \`${packageName}/styles.css\` once, and put \`data-theme="light"\` on <html> and \`class="ow-app"\` on <body>.`,

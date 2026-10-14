@@ -1,9 +1,8 @@
-import { Avatar, Badge, Button, buttonClassName, Chip, Steps, Text } from "@openwarelabs/ui";
-import { ArrowRight, Bot, Check, GitPullRequest, Play } from "lucide-react";
+import { Hero02 } from "@openwarelabs/blocks";
+import { Avatar, Badge, buttonClassName, Steps } from "@openwarelabs/ui";
+import { ArrowRight, Bot, GitPullRequest, Play } from "lucide-react";
 
 import "./HeroSplit.css";
-
-const points = ["Runs in your own CI", "Never merges without a person", "Free for up to five people"];
 
 const run = [
     { title: "Ticket", description: "BIL-482" },
@@ -89,37 +88,14 @@ function ProductShot() {
 
 export function HeroSplit() {
     return (
-        <section className="hero-split" aria-labelledby="hero-split-title">
-            <div className="hero-split__inner">
-                <div className="hero-split__text">
-                    <Chip>Acme Agents</Chip>
-                    {/* In half the width, the title takes the page-title size; the hero size would stack it word by word. */}
-                    <Text variant="page-title" id="hero-split-title" className="hero-split__title">
-                        Hand the routine work to agents
-                    </Text>
-                    <Text variant="lead" className="hero-split__lead">
-                        Assign a ticket and an agent branches, writes the change and runs your tests. It comes back as a pull request with its reasoning, ready
-                        for your review.
-                    </Text>
-                    <div className="hero-split__actions">
-                        <Button variant="primary" shape="pill" size="lg" endIcon={<ArrowRight size={16} />}>
-                            Start for free
-                        </Button>
-                        <Button shape="pill" size="lg" startIcon={<Play size={16} />}>
-                            Watch the demo
-                        </Button>
-                    </div>
-                    <ul className="hero-split__points">
-                        {points.map((point) => (
-                            <Text as="li" key={point} tone="muted" className="hero-split__point">
-                                <Check size={15} aria-hidden="true" />
-                                {point}
-                            </Text>
-                        ))}
-                    </ul>
-                </div>
-                <ProductShot />
-            </div>
-        </section>
+        <Hero02
+            eyebrow="Acme Agents"
+            title="Hand the routine work to agents"
+            description="Assign a ticket and an agent branches, writes the change and runs your tests. It comes back as a pull request with its reasoning, ready for your review."
+            primaryAction={{ label: "Start for free", href: "#start", endIcon: <ArrowRight size={16} /> }}
+            secondaryAction={{ label: "Watch the demo", href: "#demo", startIcon: <Play size={16} /> }}
+            points={["Runs in your own CI", "Never merges without a person", "Free for up to five people"]}
+            visual={<ProductShot />}
+        />
     );
 }

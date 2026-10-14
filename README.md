@@ -69,6 +69,23 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 
 Hooks for your own components: `useControllableState`, `useFloating` (top-layer positioning that flips), `usePresence` (keeps a layer mounted while it animates out), `useDismiss`, `useModalDialog`, `useMenuKeyboard`. Every prop is typed and described, so your editor explains it on hover.
 
+## Blocks as components
+
+Blocks are becoming components in their own package, `@openwarelabs/blocks`, that take their content as props, so you don't copy their code. The heroes are first, `Hero01` to `Hero06`:
+
+```sh
+npm install @openwarelabs/blocks
+```
+
+```tsx
+import "@openwarelabs/blocks/styles.css"; // after @openwarelabs/ui/styles.css
+import { Hero01 } from "@openwarelabs/blocks";
+
+<Hero01 title="The workspace for shipping software" description="…" primaryAction={{ label: "Start for free", href: "/signup" }} />;
+```
+
+Each block's page in the docs shows its props under the preview. The source is `blocks/src/<category>/<Name>/` (the component, its `.types.ts` and its `.css`); `npm run blocks:build` builds the package, and `npm run release` publishes it with the library at the same version.
+
 ## Use with AI
 
 The MCP server, `@openwarelabs/ui-mcp`, gives Claude Code, Codex, Cursor and other AI tools the setup, every component's examples and props, every block's code and the tokens, so they build with the real components:

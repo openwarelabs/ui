@@ -1,7 +1,6 @@
-import { useEffect, useId, useRef, useState, type FormEvent } from "react";
-
-import { Badge, Button, Chip, Input, Text } from "@openwarelabs/ui";
-import { Bot, Check, Mail } from "lucide-react";
+import { Hero03 } from "@openwarelabs/blocks";
+import { Badge } from "@openwarelabs/ui";
+import { Bot } from "lucide-react";
 
 import "./HeroEmail.css";
 
@@ -11,8 +10,6 @@ const overnight = [
     { project: "mobile-app", change: "Stop the upload test timing out", status: "Needs you", tone: "warning" },
     { project: "docs", change: "Update the API examples for version 3", status: "Ready", tone: "success" },
 ] as const;
-
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /** What an agent leaves by morning, drawn with Openware components. */
 function Digest() {
@@ -48,114 +45,18 @@ function Digest() {
 }
 
 export function HeroEmail() {
-    const [email, setEmail] = useState("");
-    const [error, setError] = useState<string | null>(null);
-    const [sending, setSending] = useState(false);
-    const [joined, setJoined] = useState<string | null>(null);
-    const inputRef = useRef<HTMLInputElement>(null);
-    const doneRef = useRef<HTMLDivElement>(null);
-    const touched = useRef(false);
-    const id = useId();
-
-    // Moving between the form and the confirmation, take focus along so it isn't lost with the element that had it.
-    useEffect(() => {
-        if (!touched.current) return;
-        if (joined) doneRef.current?.focus();
-        else inputRef.current?.focus();
-    }, [joined]);
-
-    const submit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const value = email.trim();
-        const problem = !value
-            ? "Enter your work email to join the waitlist."
-            : !emailPattern.test(value)
-              ? "That doesn't look like an email address. Try one like maya@example.com."
-              : null;
-        setError(problem);
-        if (problem) {
-            inputRef.current?.focus();
-            return;
-        }
-        setSending(true);
-        // Stands in for the request to your waitlist.
-        window.setTimeout(() => {
-            touched.current = true;
-            setSending(false);
-            setJoined(value);
-        }, 700);
-    };
-
     return (
-        <section className="hero-email" aria-labelledby="hero-email-title">
-            <div className="hero-email__inner">
-                <Chip>Early access: Acme Agents</Chip>
-                <Text variant="hero" align="center" id="hero-email-title" className="hero-email__title">
-                    Your backlog, handled overnight
-                </Text>
-                <Text variant="lead" align="center" className="hero-email__lead">
-                    Agents pick up the routine tickets after your team logs off and leave a pull request for each by morning, with their reasoning written down.
-                    We're letting new teams in every week.
-                </Text>
-
-                {joined ? (
-                    <div ref={doneRef} className="hero-email__done" tabIndex={-1}>
-                        <span className="hero-email__done-icon" aria-hidden="true">
-                            <Check size={16} />
-                        </span>
-                        <div className="hero-email__done-text">
-                            <Text variant="label">You're on the list</Text>
-                            <Text variant="caption" as="p" className="hero-email__done-detail">
-                                We'll write to {joined} when your team's place is ready.
-                            </Text>
-                        </div>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => {
-                                touched.current = true;
-                                setJoined(null);
-                            }}
-                        >
-                            Change email
-                        </Button>
-                    </div>
-                ) : (
-                    <form className="hero-email__form" noValidate onSubmit={submit}>
-                        <div className="hero-email__row">
-                            <Input
-                                ref={inputRef}
-                                className="hero-email__input"
-                                type="email"
-                                autoComplete="email"
-                                aria-label="Work email"
-                                aria-describedby={error ? `${id}-error` : `${id}-note`}
-                                placeholder="you@company.com"
-                                startContent={<Mail size={16} />}
-                                value={email}
-                                isInvalid={Boolean(error)}
-                                onChange={(event) => {
-                                    setEmail(event.target.value);
-                                    if (error) setError(null);
-                                }}
-                            />
-                            <Button type="submit" variant="primary" shape="pill" size="lg" loading={sending}>
-                                Join the waitlist
-                            </Button>
-                        </div>
-                        {error ? (
-                            <Text tone="danger" id={`${id}-error`} className="hero-email__error" role="alert">
-                                {error}
-                            </Text>
-                        ) : null}
-                        <Text variant="caption" as="p" id={`${id}-note`} className="hero-email__note">
-                            One email when your place is ready. Nothing else.
-                        </Text>
-                    </form>
-                )}
-
-                <Digest />
-            </div>
-        </section>
+        <Hero03
+            eyebrow="Early access: Acme Agents"
+            title="Your backlog, handled overnight"
+            description="Agents pick up the routine tickets after your team logs off and leave a pull request for each by morning, with their reasoning written down. We're letting new teams in every week."
+            submitLabel="Join the waitlist"
+            // Stands in for the request to your waitlist.
+            onSubmit={() => new Promise((resolve) => window.setTimeout(resolve, 700))}
+            note="One email when your place is ready. Nothing else."
+            successTitle="You're on the list"
+            successDescription={(email) => `We'll write to ${email} when your team's place is ready.`}
+            visual={<Digest />}
+        />
     );
 }

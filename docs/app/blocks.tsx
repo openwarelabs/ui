@@ -53,6 +53,8 @@ export interface BlockVariant {
     description: string;
     /** Defaults to the category's sketch. */
     sketch?: SketchKind;
+    /** Its component in @openwarelabs/blocks, which takes the content as props. Without one, the block is code to copy. */
+    component?: string;
     /**
      * A fixed height for the preview, in pixels, for blocks that fill the window (app shells, sign-in pages) or
      * open something over the page. Without it the preview grows to fit the block.
@@ -106,12 +108,12 @@ export const blockCategories: BlockCategory[] = [
         sketch: "hero",
         uses: ["SectionHeading", "Chip", "Button", "Input", "DotGrid"],
         variants: [
-            { id: "HeroCentred", name: "Centred with a screenshot", description: "A headline, a line under it, two buttons, and the product below in a framed screenshot." },
-            { id: "HeroSplit", name: "Split with an image", description: "Words on the left, the product on the right; they stack on phones.", sketch: "hero-split" },
-            { id: "HeroEmail", name: "With an email field", description: "A headline and a field to join a waitlist or start a trial in one step." },
-            { id: "HeroDotGrid", name: "On a dot grid", description: "The headline on Openware's dot grid, with the dots turning brass under the pointer." },
-            { id: "HeroLogos", name: "With logos below", description: "The usual hero, then a row of customers' logos as the first proof." },
-            { id: "HeroDownload", name: "Download buttons", description: "For a desktop app: buttons for each platform, with the one for this computer first.", sketch: "hero-split" },
+            { id: "HeroCentred", component: "Hero01", name: "Centred with a screenshot", description: "A headline, a line under it, two buttons, and the product below in a framed screenshot." },
+            { id: "HeroSplit", component: "Hero02", name: "Split with an image", description: "Words on the left, the product on the right; they stack on phones.", sketch: "hero-split" },
+            { id: "HeroEmail", component: "Hero03", name: "With an email field", description: "A headline and a field to join a waitlist or start a trial in one step." },
+            { id: "HeroDotGrid", component: "Hero04", name: "On a dot grid", description: "The headline on Openware's dot grid, with the dots turning brass under the pointer." },
+            { id: "HeroLogos", component: "Hero05", name: "With logos below", description: "The usual hero, then a row of customers' logos as the first proof." },
+            { id: "HeroDownload", component: "Hero06", name: "Download buttons", description: "For a desktop app: buttons for each platform, with the one for this computer first.", sketch: "hero-split" },
         ],
     },
     {

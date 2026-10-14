@@ -2659,3 +2659,16 @@ a.docs-block-uses__item:focus-visible {
         padding: 28px 16px;
     }
 }
+
+/* A block's component in @openwarelabs/blocks, under its preview: the import and the props. */
+.docs-block-component {
+    display: grid;
+    gap: var(--ow-space-md);
+    margin-top: var(--ow-space-xl);
+}
+
+.docs-block-component__type {
+    display: grid;
+    gap: var(--ow-space-sm);
+    margin-top: var(--ow-space-sm);
+}

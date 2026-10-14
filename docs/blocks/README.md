@@ -7,7 +7,7 @@ docs/blocks/<category slug>/<Name>.tsx   the component: export function <Name>()
 docs/blocks/<category slug>/<Name>.css   its styles, every selector under .<name-in-kebab-case>
 ```
 
-The list of blocks, with each one's name and description, is `docs/app/blocks.tsx`. A block appears in the docs once its files exist. `npm run blocks:check` checks every block against the rules below.
+The list of blocks, with each one's name and description, is `docs/app/blocks.tsx`. A block with a `component` there is also a component in `@openwarelabs/blocks` (`blocks/src/<category>/<Name>/`); its file here is then the docs' example of it in use, and its stylesheet styles only the sample visuals the example passes in. A block appears in the docs once its files exist. `npm run blocks:check` checks every block against the rules below.
 
 ## Adding a block
 

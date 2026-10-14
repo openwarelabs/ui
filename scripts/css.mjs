@@ -95,3 +95,22 @@ export function readStyles() {
     const components = cssOrder.map((file) => `/* ${file} */\n${read(file)}`).join("\n");
     return { tokens, components };
 }
+
+/** Every stylesheet of @openwarelabs/blocks, in source order: blocks/src/<category>/<Name>/<Name>.css. */
+export function blockStylesheets() {
+    const src = path.join(root, "blocks/src");
+    if (!fs.existsSync(src)) return [];
+    return fs
+        .readdirSync(src, { recursive: true })
+        .map(String)
+        .filter((file) => file.endsWith(".css"))
+        .sort()
+        .map((file) => path.join(src, file));
+}
+
+/** The blocks' styles as one string, each file headed by its path. */
+export function readBlockStyles() {
+    return blockStylesheets()
+        .map((file) => `/* ${path.relative(path.join(root, "blocks/src"), file)} */\n${fs.readFileSync(file, "utf8").trim()}\n`)
+        .join("\n");
+}

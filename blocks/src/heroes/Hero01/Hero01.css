@@ -1,0 +1,64 @@
+.ow-hero01,
+.ow-hero01 *,
+.ow-hero01 *::before,
+.ow-hero01 *::after {
+    box-sizing: border-box;
+}
+
+.ow-hero01 {
+    overflow: hidden;
+    background: var(--ow-paper);
+    padding: 112px var(--ow-page-gutter) 0;
+}
+
+.ow-hero01__inner {
+    display: flex;
+    max-width: 880px;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.ow-hero01__title {
+    margin-top: 24px;
+}
+
+.ow-hero01__lead {
+    margin-top: 22px;
+}
+
+.ow-hero01__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--ow-space-lg);
+    margin-top: 34px;
+}
+
+.ow-hero01__note {
+    margin-top: 16px;
+}
+
+/* The product, cropped at the bottom so it runs on into the page. */
+
+.ow-hero01__visual {
+    max-width: 1080px;
+    margin: 72px auto 0;
+    -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent);
+    mask-image: linear-gradient(to bottom, #000 70%, transparent);
+}
+
+@media (max-width: 760px) {
+    .ow-hero01 {
+        padding-top: 72px;
+    }
+    .ow-hero01__actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .ow-hero01__visual {
+        margin-top: 48px;
+    }
+}

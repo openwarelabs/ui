@@ -14,11 +14,11 @@ import type { ComponentDoc } from "./types";
 export const repository = "https://github.com/openwarelabs/ui";
 
 /** `import { A, B } from "@openwarelabs/ui";`, highlighted in the code block's colours. */
-export function importSnippet(names: string[]) {
-    const code = `import { ${names.join(", ")} } from "@openwarelabs/ui";`;
+export function importSnippet(names: string[], from = "@openwarelabs/ui") {
+    const code = `import { ${names.join(", ")} } from "${from}";`;
     const html =
         `<span style="color:#FF7B72">import</span><span style="color:#E6EDF3"> { ${names.join(", ")} } </span>` +
-        `<span style="color:#FF7B72">from</span><span style="color:#A5D6FF"> "@openwarelabs/ui"</span><span style="color:#E6EDF3">;</span>`;
+        `<span style="color:#FF7B72">from</span><span style="color:#A5D6FF"> "${from}"</span><span style="color:#E6EDF3">;</span>`;
     return { code, html };
 }
 

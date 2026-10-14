@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { Button, Chip, Text } from "@openwarelabs/ui";
+import { Hero05 } from "@openwarelabs/blocks";
 import { ArrowRight } from "lucide-react";
 
 import "./HeroLogos.css";
@@ -61,46 +61,24 @@ const logos: Array<{ name: string; glyph: ReactNode }> = [
 
 export function HeroLogos() {
     return (
-        <section className="hero-logos" aria-labelledby="hero-logos-title">
-            <div className="hero-logos__inner">
-                <div className="hero-logos__top">
-                    <div className="hero-logos__heading">
-                        <Chip>Acme 3.0 is out</Chip>
-                        <Text variant="hero" id="hero-logos-title" className="hero-logos__title">
-                            Ship more of what you plan
-                        </Text>
-                    </div>
-                    <div>
-                        <Text variant="lead">
-                            Planning, agents, reviews and deploys in one quiet workspace, so a ticket turns into a release without anyone chasing it.
-                        </Text>
-                        <div className="hero-logos__actions">
-                            <Button variant="primary" shape="pill" size="lg" endIcon={<ArrowRight size={16} />}>
-                                Start for free
-                            </Button>
-                            <Button shape="pill" size="lg">
-                                Talk to sales
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="hero-logos__proof">
-                    <Text tone="muted" id="hero-logos-proof">
-                        These teams ship with Acme every day
-                    </Text>
-                    <ul className="hero-logos__list" aria-labelledby="hero-logos-proof">
-                        {logos.map((logo) => (
-                            <li key={logo.name} className="hero-logos__logo" data-name={logo.name}>
-                                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    {logo.glyph}
-                                </svg>
-                                {logo.name}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-        </section>
+        <Hero05
+            eyebrow="Acme 3.0 is out"
+            title="Ship more of what you plan"
+            description="Planning, agents, reviews and deploys in one quiet workspace, so a ticket turns into a release without anyone chasing it."
+            primaryAction={{ label: "Start for free", href: "#start", endIcon: <ArrowRight size={16} /> }}
+            secondaryAction={{ label: "Talk to sales", href: "#sales" }}
+            logosTitle="These teams ship with Acme every day"
+            logos={logos.map((logo) => ({
+                name: logo.name,
+                logo: (
+                    <span className="hero-logos__logo" data-name={logo.name}>
+                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            {logo.glyph}
+                        </svg>
+                        {logo.name}
+                    </span>
+                ),
+            }))}
+        />
     );
 }
