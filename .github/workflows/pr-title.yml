@@ -1,0 +1,18 @@
+# Pull requests are squash-merged with their title as the commit subject, and `npm run release` reads those
+# subjects to pick the version, so the title has to follow Conventional Commits: "feat: …", "fix(Menu): …".
+# Required to merge into main. It runs again whenever the title is edited.
+name: PR title
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  title:
+    name: PR title
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: node scripts/check-commits.mjs --title "$TITLE"
+        env:
+          TITLE: ${{ github.event.pull_request.title }}

@@ -3,7 +3,7 @@
   "compilerOptions": {
     "noEmit": true,
     "baseUrl": "..",
-    "paths": { "@openwarelabs/ui": ["src/index.ts"] }
+    "paths": { "@openwarelabs/ui": ["src/index.ts"], "@/*": ["src/*"], "@docs/*": ["docs/*"] }
   },
   "include": ["./**/*.ts", "./**/*.tsx", "../src"],
   "exclude": ["./snippets"]

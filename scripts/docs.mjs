@@ -107,7 +107,11 @@ const docsPlugin = {
             return undefined;
         });
         build.onResolve({ filter: /^docs:/ }, (args) => ({ path: args.path, namespace: "docs" }));
-        build.onResolve({ filter: /\?highlight$/ }, (args) => ({ path: path.resolve(args.resolveDir, args.path.replace(/\?highlight$/, "")), namespace: "highlight" }));
+        build.onResolve({ filter: /\?highlight$/ }, (args) => {
+            const file = args.path.replace(/\?highlight$/, "");
+            // "@docs/snippets/x.tsx?highlight", the alias in docs/tsconfig.json, or a relative path.
+            return { path: file.startsWith("@docs/") ? path.join(docs, file.slice("@docs/".length)) : path.resolve(args.resolveDir, file), namespace: "highlight" };
+        });
         build.onResolve({ filter: /^@openwarelabs\/ui$/ }, () => ({ path: path.join(root, "src/index.ts") }));
 
         build.onLoad({ filter: /.*/, namespace: "highlight" }, (args) => {

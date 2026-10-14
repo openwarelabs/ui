@@ -1,5 +1,5 @@
-# Checks every push to main and every pull request: types, contrast, blocks, the build and the MCP server, and
-# that commit subjects follow the convention `npm run release` reads (feat:, fix:, chore: and so on).
+# Checks every pull request and every push to main. "Checks" and "Cleaner" are required to merge into main
+# (scripts/setup-github.sh sets that up), alongside "PR title" from pr-title.yml.
 name: CI
 
 on:
@@ -8,22 +8,44 @@ on:
   pull_request:
 
 jobs:
-  check:
+  checks:
+    name: Checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
       - uses: actions/setup-node@v5
         with:
           node-version: 24
           cache: npm
-      - run: npm ci
+      - run: npm ci # also builds dist/, through the prepare script
       - run: npm run typecheck
       - run: npm run contrast
       - run: npm run blocks:check
       - run: npm run mcp:build
       - run: npm run docs:build
-      - name: Check commit messages
-        if: github.event_name == 'pull_request'
-        run: node scripts/check-commits.mjs "${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
+
+  # openwarelabs/cleaner on the .ts and .tsx files the pull request adds or changes: types in their own
+  # .types.ts files and path aliases instead of ../ imports. The rest of the repo catches up as it's touched.
+  cleaner:
+    name: Cleaner
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Find the changed files
+        id: changed
+        run: |
+          range="${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }}"
+          files=$(git diff --name-only --diff-filter=ACMR "$range" -- '*.ts' '*.tsx' ':!**/*.d.ts')
+          {
+            echo "files<<EOF"
+            echo "$files"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+          if [ -n "$files" ]; then echo "Checking:"; echo "$files"; else echo "No .ts or .tsx files changed."; fi
+      - uses: openwarelabs/cleaner@v1
+        if: steps.changed.outputs.files != ''
+        with:
+          paths: ${{ steps.changed.outputs.files }}

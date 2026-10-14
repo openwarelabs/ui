@@ -1,4 +1,5 @@
 // Makes the declarations tsc writes to dist/ work under every TypeScript module resolution, not only "bundler":
+//   @/x      the src/ alias in tsconfig.json becomes a relative path, since the projects using the types don't have it
 //   *.d.ts   ESM types: relative imports get the .js (or /index.js) Node needs, so "node16" and "nodenext" find them
 //   *.d.cts  the same types for require(), pointing at each other with .cjs, so CommonJS projects get CommonJS types
 // package.json's exports send "import" to index.d.ts and "require" to index.d.cts.
@@ -26,8 +27,17 @@ function withExtension(file, target, extension) {
     throw new Error(`${path.relative(dist, file)}: can't find the declaration for "${target}"`);
 }
 
+// from "@/hooks/useFloating": the alias for src/, which is dist/ once built.
+const alias = /((?:from|import)\s*\(?\s*)(["'])@\/([^"']*)\2/g;
+
+/** "@/hooks/useFloating" in dist/components/Menu/Menu.d.ts → "../../hooks/useFloating". */
+function unalias(file, target) {
+    const relative = path.relative(path.dirname(file), path.join(dist, target)).split(path.sep).join("/");
+    return relative.startsWith(".") ? relative : `./${relative}`;
+}
+
 for (const file of declarations) {
-    const text = fs.readFileSync(file, "utf8");
+    const text = fs.readFileSync(file, "utf8").replace(alias, (_, before, quote, target) => `${before}${quote}${unalias(file, target)}${quote}`);
     const rewrite = (extension) => text.replace(specifier, (_, before, quote, target) => `${before}${quote}${withExtension(file, target, extension)}${quote}`);
     fs.writeFileSync(file, rewrite(".js"));
     fs.writeFileSync(file.replace(/\.d\.ts$/, ".d.cts"), rewrite(".cjs"));

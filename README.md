@@ -104,6 +104,18 @@ The docs' header has a colour picker that does this live, and the Theming page s
 
 **No bundler?** `dist/openware-ui.iife.js` sets `window.OpenwareUI`, reading React from `window.React`. A CDN serves it straight from npm: `https://cdn.jsdelivr.net/npm/@openwarelabs/ui/dist/openware-ui.iife.js`, with `dist/styles.css` beside it.
 
+## Contributing
+
+`main` takes changes only through pull requests, squash-merged, so each one lands as a single commit named after the PR. The PR title follows [Conventional Commits](https://www.conventionalcommits.org) because `npm run release` reads it: `feat: add a date range picker`, `fix(Menu): close on Escape`, `feat!: rename Stack's gap sizes`. Put `BREAKING CHANGE: …` in the PR description for a breaking change.
+
+Three checks have to pass to merge:
+
+- **Checks**: types, contrast, blocks, the library, the MCP server and the docs.
+- **PR title**: the title follows the convention (`npm run commits:check -- --title "feat: …"` locally).
+- **Cleaner**: [openwarelabs/cleaner](https://github.com/openwarelabs/cleaner) on the `.ts` and `.tsx` files the PR changes. Types go in a `<name>.types.ts` beside the component, and imports from another folder use the aliases instead of `../`: `@/…` for `src/` (in the library and the docs), `@docs/…` for `docs/` (`?highlight` imports too) and `@build/…` in `mcp/`. Files that haven't been touched yet don't follow it; they catch up as they change.
+
+`scripts/setup-github.sh` sets this up on GitHub (squash merges only, the PR title as the commit, the ruleset for `main`). Repository admins can bypass the ruleset, which `npm run release` uses to push its version commit and tag.
+
 ## Releasing
 
 ```sh
@@ -114,7 +126,7 @@ npm run release -- minor     # forces patch, minor, major or an exact version
 
 The version comes from the commit subjects since the last release, written as [Conventional Commits](https://www.conventionalcommits.org): `feat:` makes a minor release, `fix:` and `perf:` a patch, and `feat!:` or a `BREAKING CHANGE:` line a major one (a minor one before 1.0). `chore:`, `docs:`, `refactor:`, `test:`, `ci:`, `build:` and `style:` don't release on their own. The command checks that `main` is clean and up to date, runs every check and build, bumps both packages, writes `CHANGELOG.md`, commits, tags `vX.Y.Z` and pushes.
 
-The tag starts `.github/workflows/release.yml`, which runs the checks again, publishes `@openwarelabs/ui` and `@openwarelabs/ui-mcp` to npm with trusted publishing (no token, with provenance), and makes the GitHub release from the changelog. CI checks every pull request's commit subjects against the convention; `npm run commits:check` does the same locally.
+The tag starts `.github/workflows/release.yml`, which runs the checks again, publishes `@openwarelabs/ui` and `@openwarelabs/ui-mcp` to npm with trusted publishing (no token, with provenance), and makes the GitHub release from the changelog. Pull requests are squash-merged with their title as the commit, so the titles are what it reads.
 
 ## Rules worth keeping
 
