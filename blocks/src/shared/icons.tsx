@@ -4,7 +4,7 @@ import type { BlockIconProps } from "@blocks/shared/shared.types";
 
 // The few icons the blocks draw themselves, as Lucide shapes (ISC licence), so the package needs no icon library.
 const icon = (paths: ReactNode) =>
-    function BlockIcon({ size = 16 }: BlockIconProps) {
+    function BlockIcon({ size = 16, strokeWidth = 2 }: BlockIconProps) {
         return (
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +13,7 @@ const icon = (paths: ReactNode) =>
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth={2}
+                strokeWidth={strokeWidth}
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
@@ -58,3 +58,4 @@ export const ArrowRightIcon = icon(
         <path d="m12 5 7 7-7 7" />
     </>,
 );
+export const MinusIcon = icon(<path d="M5 12h14" />);

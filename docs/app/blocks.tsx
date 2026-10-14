@@ -192,11 +192,11 @@ export const blockCategories: BlockCategory[] = [
         sketch: "pricing",
         uses: ["Card", "Badge", "Button", "SegmentedControl", "Table"],
         variants: [
-            { id: "PricingPlans", name: "Three plans", description: "Three cards, the middle one marked as the one most people pick." },
-            { id: "PricingToggle", name: "Monthly or yearly", description: "The same plans with a switch between monthly and yearly prices." },
-            { id: "PricingComparison", name: "Comparison table", description: "Every feature down the side and a tick or a limit for each plan.", sketch: "pricing-table" },
-            { id: "PricingSingle", name: "One plan", description: "A single price with what's included, for a simple product." },
-            { id: "PricingUsage", name: "Pay as you go", description: "A price per unit with a slider to estimate the monthly cost." },
+            { id: "PricingPlans", component: "Pricing01", name: "Three plans", description: "Three cards, the middle one marked as the one most people pick." },
+            { id: "PricingToggle", component: "Pricing02", name: "Monthly or yearly", description: "The same plans with a switch between monthly and yearly prices." },
+            { id: "PricingComparison", component: "Pricing03", name: "Comparison table", description: "Every feature down the side and a tick or a limit for each plan.", sketch: "pricing-table" },
+            { id: "PricingSingle", component: "Pricing04", name: "One plan", description: "A single price with what's included, for a simple product." },
+            { id: "PricingUsage", component: "Pricing05", name: "Pay as you go", description: "A price per unit with a slider to estimate the monthly cost." },
         ],
     },
     {

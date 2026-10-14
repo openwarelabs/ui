@@ -1,47 +1,47 @@
-.pricing-comparison,
-.pricing-comparison *,
-.pricing-comparison *::before,
-.pricing-comparison *::after {
+.ow-pricing03,
+.ow-pricing03 *,
+.ow-pricing03 *::before,
+.ow-pricing03 *::after {
     box-sizing: border-box;
 }
 
-.pricing-comparison {
-    --pricing-comparison-first: 32%;
+.ow-pricing03 {
+    --ow-pricing03-first: 32%;
     background: var(--ow-paper);
     padding: var(--ow-section-y) 32px;
     color: var(--ow-text);
 }
 
-.pricing-comparison__inner {
+.ow-pricing03__inner {
     max-width: var(--ow-page-max);
     margin: 0 auto;
 }
 
 /* Phones compare one plan at a time; wider screens see every column. */
-.pricing-comparison__picker {
+.ow-pricing03__picker {
     display: none;
 }
 
 /* The plan names, prices and buttons, in columns that line up with the tables below. Sticks under the top
    of the window as the tables scroll past. */
-.pricing-comparison__plans {
+.ow-pricing03__plans {
     position: sticky;
     top: 0;
     z-index: 2;
     display: grid;
-    grid-template-columns: var(--pricing-comparison-first) repeat(4, minmax(0, 1fr));
+    grid-template-columns: var(--ow-pricing03-first) repeat(4, minmax(0, 1fr));
     margin-top: 56px;
     border-bottom: 1px solid var(--ow-border);
     background: var(--ow-paper);
     padding: 16px 1px 20px;
 }
 
-.pricing-comparison__plans-label {
+.ow-pricing03__plans-label {
     align-self: end;
     padding: 0 16px;
 }
 
-.pricing-comparison__plan {
+.ow-pricing03__plan {
     display: flex;
     min-width: 0;
     flex-direction: column;
@@ -50,74 +50,74 @@
     padding: 0 16px;
 }
 
-.pricing-comparison__plan-name {
+.ow-pricing03__plan-name {
     display: flex;
     height: 22px;
     align-items: center;
     gap: 8px;
 }
 
-.pricing-comparison__plan-price {
+.ow-pricing03__plan-price {
     margin-bottom: 12px;
     white-space: nowrap;
 }
 
-.pricing-comparison__groups {
+.ow-pricing03__groups {
     display: grid;
     gap: 20px;
     margin-top: 28px;
 }
 
 /* The library's Table, quietened for a marketing page: the group's name heads the first column. */
-.pricing-comparison__group {
+.ow-pricing03__group {
     border-radius: var(--ow-radius-card);
 }
 
-.pricing-comparison__group .ow-table {
+.ow-pricing03__group .ow-table {
     table-layout: fixed;
 }
 
-.pricing-comparison__group th:first-child {
-    width: var(--pricing-comparison-first);
+.ow-pricing03__group th:first-child {
+    width: var(--ow-pricing03-first);
 }
 
-.pricing-comparison__group th {
+.ow-pricing03__group th {
     height: 44px;
     background: var(--ow-surface);
     padding: 0 16px;
 }
 
-.pricing-comparison__group th:first-child {
+.ow-pricing03__group th:first-child {
     color: var(--ow-text);
     font-size: 14px;
 }
 
-.pricing-comparison__group td {
+.ow-pricing03__group td {
     padding-right: 16px;
     padding-left: 16px;
     color: var(--ow-text-soft);
     font-size: 14px;
 }
 
-.pricing-comparison__group td:first-child {
+.ow-pricing03__group td:first-child {
     color: var(--ow-text);
 }
 
-.pricing-comparison__group .ow-table tbody tr:hover td {
+.ow-pricing03__group .ow-table tbody tr:hover td {
     background: transparent;
 }
 
-.pricing-comparison__feature {
+.ow-pricing03__feature {
     display: block;
     padding: 6px 0;
 }
 
-.pricing-comparison__feature-note {
+.ow-pricing03__feature-note {
     display: block;
     margin-top: 2px;
 }
 
-.pricing-comparison__yes {
+.ow-pricing03__yes {
     display: inline-flex;
     width: 22px;
     height: 22px;
@@ -129,7 +129,7 @@
     vertical-align: middle;
 }
 
-.pricing-comparison__no {
+.ow-pricing03__no {
     display: inline-flex;
     width: 22px;
     justify-content: center;
@@ -137,87 +137,87 @@
     vertical-align: middle;
 }
 
-.pricing-comparison__note {
+.ow-pricing03__note {
     margin-top: 24px;
     text-wrap: balance;
 }
 
 @media (max-width: 1024px) {
-    .pricing-comparison {
-        --pricing-comparison-first: 26%;
+    .ow-pricing03 {
+        --ow-pricing03-first: 26%;
     }
-    .pricing-comparison__plan-amount {
+    .ow-pricing03__plan-amount {
         display: block;
     }
-    .pricing-comparison__plan-name .ow-badge {
+    .ow-pricing03__plan-name .ow-badge {
         display: none;
     }
-    .pricing-comparison__plan,
-    .pricing-comparison__plans-label {
+    .ow-pricing03__plan,
+    .ow-pricing03__plans-label {
         padding: 0 12px;
     }
-    .pricing-comparison__group th,
-    .pricing-comparison__group td {
+    .ow-pricing03__group th,
+    .ow-pricing03__group td {
         padding-right: 12px;
         padding-left: 12px;
     }
     /* Keeps its column, so the plans still line up with the tables. */
-    .pricing-comparison__plans-label {
+    .ow-pricing03__plans-label {
         visibility: hidden;
     }
 }
 
 @media (max-width: 760px) {
-    .pricing-comparison {
+    .ow-pricing03 {
         padding: 72px var(--ow-page-gutter);
     }
-    .pricing-comparison__picker {
+    .ow-pricing03__picker {
         display: block;
         margin-top: 32px;
     }
-    .pricing-comparison__plans-label {
+    .ow-pricing03__plans-label {
         display: none;
     }
-    .pricing-comparison__plans {
+    .ow-pricing03__plans {
         grid-template-columns: minmax(0, 1fr);
         margin-top: 0;
         padding: 16px 0;
     }
-    .pricing-comparison__plan {
+    .ow-pricing03__plan {
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto;
         align-items: center;
         gap: 2px 16px;
         padding: 0;
     }
-    .pricing-comparison__plan-price {
+    .ow-pricing03__plan-price {
         grid-column: 1;
         margin: 0;
     }
-    .pricing-comparison__plan-amount {
+    .ow-pricing03__plan-amount {
         display: inline;
     }
-    .pricing-comparison__plan-name .ow-badge {
+    .ow-pricing03__plan-name .ow-badge {
         display: inline-flex;
     }
-    .pricing-comparison__group th:first-child {
+    .ow-pricing03__group th:first-child {
         width: auto;
     }
-    .pricing-comparison__plan .ow-button {
+    .ow-pricing03__plan .ow-button {
         grid-row: 1 / span 2;
         grid-column: 2;
     }
-    .pricing-comparison__groups {
+    .ow-pricing03__groups {
         gap: 16px;
         margin-top: 20px;
     }
-    .pricing-comparison__group th,
-    .pricing-comparison__group td {
+    .ow-pricing03__group th,
+    .ow-pricing03__group td {
         padding-right: 12px;
         padding-left: 12px;
     }
-    .pricing-comparison__group th:last-child,
-    .pricing-comparison__group td:last-child {
+    .ow-pricing03__group th:last-child,
+    .ow-pricing03__group td:last-child {
         width: 36%;
         text-align: right !important;
     }

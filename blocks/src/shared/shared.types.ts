@@ -68,6 +68,8 @@ export interface BlockActionsProps {
 
 export interface BlockIconProps {
     size?: number;
+    /** @default 2 */
+    strokeWidth?: number;
 }
 
 export interface BlockBrandLinkProps {

@@ -1,17 +1,17 @@
-.pricing-plans,
-.pricing-plans *,
-.pricing-plans *::before,
-.pricing-plans *::after {
+.ow-pricing01,
+.ow-pricing01 *,
+.ow-pricing01 *::before,
+.ow-pricing01 *::after {
     box-sizing: border-box;
 }
 
-.pricing-plans {
+.ow-pricing01 {
     background: var(--ow-paper);
     padding: var(--ow-section-y) 32px;
     color: var(--ow-text);
 }
 
-.pricing-plans__inner {
+.ow-pricing01__inner {
     display: flex;
     max-width: var(--ow-page-max);
     flex-direction: column;
@@ -20,7 +20,7 @@
 }
 
 /* The recommended card stands 14px proud of its neighbours at both ends, padded so every row inside still lines up. */
-.pricing-plans__grid {
+.ow-pricing01__grid {
     display: grid;
     width: 100%;
     max-width: 1080px;
@@ -29,13 +29,13 @@
     margin-top: 72px;
 }
 
-.pricing-plans__card {
+.ow-pricing01__card {
     display: flex;
     flex-direction: column;
     border-radius: var(--ow-radius-card);
 }
 
-.pricing-plans__card[data-recommended] {
+.ow-pricing01__card[data-recommended] {
     position: relative;
     z-index: 1;
     margin: -14px 0;
@@ -43,17 +43,17 @@
     box-shadow: var(--ow-shadow-lift);
 }
 
-.pricing-plans__head {
+.ow-pricing01__head {
     display: flex;
     flex-direction: column;
     padding: 28px 28px 24px;
 }
 
-.pricing-plans__card[data-recommended] .pricing-plans__head {
+.ow-pricing01__card[data-recommended] .ow-pricing01__head {
     padding-top: 42px;
 }
 
-.pricing-plans__name-row {
+.ow-pricing01__name-row {
     display: flex;
     min-height: 26px;
     flex-wrap: wrap;
@@ -62,11 +62,11 @@
     gap: var(--ow-space-sm);
 }
 
-.pricing-plans__summary {
+.ow-pricing01__summary {
     margin-top: 6px;
 }
 
-.pricing-plans__price {
+.ow-pricing01__price {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -75,22 +75,22 @@
 }
 
 /* A price, not a title: no extra leading above the figure, and digits of one width. */
-.pricing-plans__amount {
+.ow-pricing01__amount {
     line-height: 1;
     font-variant-numeric: tabular-nums;
 }
 
-.pricing-plans__body {
+.ow-pricing01__body {
     flex: 1;
     border-top: 1px solid var(--ow-border);
     padding: 24px 28px 30px;
 }
 
-.pricing-plans__card[data-recommended] .pricing-plans__body {
+.ow-pricing01__card[data-recommended] .ow-pricing01__body {
     padding-bottom: 44px;
 }
 
-.pricing-plans__features {
+.ow-pricing01__features {
     display: grid;
     gap: 12px;
     margin: 16px 0 0;
@@ -98,19 +98,19 @@
     list-style: none;
 }
 
-.pricing-plans__features li {
+.ow-pricing01__features li {
     display: flex;
     align-items: flex-start;
     gap: 10px;
 }
 
-.pricing-plans__features svg {
+.ow-pricing01__features svg {
     flex-shrink: 0;
     margin-top: 1px;
     color: var(--ow-primary-text);
 }
 
-.pricing-plans__enterprise {
+.ow-pricing01__enterprise {
     display: flex;
     width: 100%;
     max-width: 1080px;
@@ -123,7 +123,7 @@
     padding: 18px 24px;
 }
 
-.pricing-plans__enterprise-icon {
+.ow-pricing01__enterprise-icon {
     display: inline-flex;
     width: 36px;
     height: 36px;
@@ -136,11 +136,11 @@
     color: var(--ow-text-soft);
 }
 
-.pricing-plans__enterprise-text {
+.ow-pricing01__enterprise-text {
     flex: 1;
 }
 
-.pricing-plans__enterprise-link {
+.ow-pricing01__enterprise-link {
     display: inline-flex;
     flex-shrink: 0;
     align-items: center;
@@ -148,68 +148,68 @@
     white-space: nowrap;
 }
 
-.pricing-plans__note {
+.ow-pricing01__note {
     margin-top: 20px;
 }
 
 @media (max-width: 1100px) {
-    .pricing-plans__head {
+    .ow-pricing01__head {
         padding-right: 24px;
         padding-left: 24px;
     }
-    .pricing-plans__body {
+    .ow-pricing01__body {
         padding-right: 24px;
         padding-left: 24px;
     }
 }
 
 @media (max-width: 900px) {
-    .pricing-plans__grid {
+    .ow-pricing01__grid {
         max-width: 520px;
         grid-template-columns: minmax(0, 1fr);
         gap: 16px;
         margin-top: 48px;
     }
     /* Stacked, the recommended plan goes first. */
-    .pricing-plans__card[data-recommended] {
+    .ow-pricing01__card[data-recommended] {
         order: -1;
         margin: 0;
         box-shadow: 0 0 0 1px var(--ow-primary-border);
     }
-    .pricing-plans__card[data-recommended] .pricing-plans__head {
+    .ow-pricing01__card[data-recommended] .ow-pricing01__head {
         padding-top: 28px;
     }
-    .pricing-plans__card[data-recommended] .pricing-plans__body {
+    .ow-pricing01__card[data-recommended] .ow-pricing01__body {
         padding-bottom: 30px;
     }
-    .pricing-plans__enterprise {
+    .ow-pricing01__enterprise {
         max-width: 520px;
         flex-wrap: wrap;
         margin-top: 16px;
     }
-    .pricing-plans__enterprise-text {
+    .ow-pricing01__enterprise-text {
         flex-basis: calc(100% - 60px);
     }
-    .pricing-plans__enterprise-link {
+    .ow-pricing01__enterprise-link {
         margin-left: 52px;
     }
 }
 
 @media (max-width: 760px) {
-    .pricing-plans {
+    .ow-pricing01 {
         padding: 72px var(--ow-page-gutter);
     }
-    .pricing-plans__head {
+    .ow-pricing01__head {
         padding: 24px 22px 22px;
     }
-    .pricing-plans__card[data-recommended] .pricing-plans__head {
+    .ow-pricing01__card[data-recommended] .ow-pricing01__head {
         padding: 24px 22px 22px;
     }
-    .pricing-plans__body,
-    .pricing-plans__card[data-recommended] .pricing-plans__body {
+    .ow-pricing01__body,
+    .ow-pricing01__card[data-recommended] .ow-pricing01__body {
         padding: 22px 22px 26px;
     }
-    .pricing-plans__enterprise {
+    .ow-pricing01__enterprise {
         align-items: flex-start;
         padding: 18px;
     }

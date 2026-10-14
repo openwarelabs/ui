@@ -1,17 +1,17 @@
-.pricing-single,
-.pricing-single *,
-.pricing-single *::before,
-.pricing-single *::after {
+.ow-pricing04,
+.ow-pricing04 *,
+.ow-pricing04 *::before,
+.ow-pricing04 *::after {
     box-sizing: border-box;
 }
 
-.pricing-single {
+.ow-pricing04 {
     background: var(--ow-paper);
     padding: var(--ow-section-y) 32px;
     color: var(--ow-text);
 }
 
-.pricing-single__inner {
+.ow-pricing04__inner {
     display: flex;
     max-width: var(--ow-page-max);
     flex-direction: column;
@@ -20,7 +20,7 @@
 }
 
 /* What's included on the left; the price on an inset panel on the right. */
-.pricing-single__card {
+.ow-pricing04__card {
     display: grid;
     width: 100%;
     max-width: 1000px;
@@ -31,16 +31,16 @@
     padding: 8px;
 }
 
-.pricing-single__details {
+.ow-pricing04__details {
     padding: 32px 32px 36px;
 }
 
-.pricing-single__description {
+.ow-pricing04__description {
     max-width: 480px;
     margin-top: 10px;
 }
 
-.pricing-single__included {
+.ow-pricing04__included {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -48,14 +48,14 @@
     white-space: nowrap;
 }
 
-.pricing-single__included::after {
+.ow-pricing04__included::after {
     content: "";
     height: 1px;
     flex: 1;
     background: var(--ow-border);
 }
 
-.pricing-single__features {
+.ow-pricing04__features {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px 24px;
@@ -64,19 +64,19 @@
     list-style: none;
 }
 
-.pricing-single__features li {
+.ow-pricing04__features li {
     display: flex;
     align-items: flex-start;
     gap: 10px;
 }
 
-.pricing-single__features svg {
+.ow-pricing04__features svg {
     flex-shrink: 0;
     margin-top: 1px;
     color: var(--ow-primary-text);
 }
 
-.pricing-single__offer {
+.ow-pricing04__offer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -88,7 +88,7 @@
     text-align: center;
 }
 
-.pricing-single__price {
+.ow-pricing04__price {
     display: flex;
     align-items: baseline;
     justify-content: center;
@@ -97,21 +97,21 @@
 }
 
 /* A price, not a title: no extra leading above the figure, and digits of one width. */
-.pricing-single__amount {
+.ow-pricing04__amount {
     line-height: 1;
     font-variant-numeric: tabular-nums;
 }
 
-.pricing-single__unit {
+.ow-pricing04__unit {
     margin: 8px 0 28px;
 }
 
-.pricing-single__fine {
+.ow-pricing04__fine {
     margin-top: 16px;
     text-wrap: balance;
 }
 
-.pricing-single__promises {
+.ow-pricing04__promises {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -121,48 +121,48 @@
     list-style: none;
 }
 
-.pricing-single__promises li {
+.ow-pricing04__promises li {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.pricing-single__promises svg {
+.ow-pricing04__promises svg {
     color: var(--ow-icon);
 }
 
 @media (max-width: 1024px) {
-    .pricing-single__card {
+    .ow-pricing04__card {
         grid-template-columns: minmax(0, 1fr) 300px;
     }
-    .pricing-single__details {
+    .ow-pricing04__details {
         padding: 28px 24px 32px;
     }
-    .pricing-single__features {
+    .ow-pricing04__features {
         grid-template-columns: minmax(0, 1fr);
     }
-    .pricing-single__offer {
+    .ow-pricing04__offer {
         padding: 36px 24px;
     }
 }
 
 @media (max-width: 760px) {
-    .pricing-single {
+    .ow-pricing04 {
         padding: 72px var(--ow-page-gutter);
     }
-    .pricing-single__card {
+    .ow-pricing04__card {
         grid-template-columns: minmax(0, 1fr);
         margin-top: 40px;
         padding: 6px;
     }
-    .pricing-single__details {
+    .ow-pricing04__details {
         padding: 22px 18px 26px;
     }
-    .pricing-single__offer {
+    .ow-pricing04__offer {
         order: -1;
         padding: 32px 20px;
     }
-    .pricing-single__promises {
+    .ow-pricing04__promises {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
