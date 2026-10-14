@@ -1,0 +1,29 @@
+# Weekly pull requests to update the npm packages and the GitHub Actions the workflows use. Each one goes through
+# every check (types, builds, size, Visual, Accessibility, the package smoke test), so a green one is safe to merge.
+# Minor and patch updates come grouped in one pull request per ecosystem; major ones each get their own. Titles
+# follow the commit convention ("chore(deps): …"), which the PR title check requires.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: chore
+      include: scope
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: ci
+    groups:
+      actions:
+        update-types: [minor, patch, major]
