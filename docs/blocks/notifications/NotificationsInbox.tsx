@@ -22,7 +22,6 @@ const notifications: Notifications01Item[] = [
                 <Strong>Clara Novak</Strong> mentioned you in <Strong>Fix invoice dates in the EU</Strong>
             </>
         ),
-        summary: "Clara Novak mentioned you in Fix invoice dates in the EU",
         quote: "@maya can you check the rounding on the Irish invoices before we merge?",
         where: "billing-api",
         when: "4 min ago",
@@ -37,7 +36,6 @@ const notifications: Notifications01Item[] = [
                 <Strong>Agent</Strong> opened <Strong>#482 Add VAT to EU invoices</Strong> for your review
             </>
         ),
-        summary: "Agent opened #482 Add VAT to EU invoices for your review",
         where: "billing-api",
         when: "12 min ago",
         unread: true,
@@ -51,7 +49,6 @@ const notifications: Notifications01Item[] = [
                 <Strong>Deploy failed</Strong> on <Strong>main</Strong>: tests failed in checkout.spec.ts
             </>
         ),
-        summary: "Deploy failed on main: tests failed in checkout.spec.ts",
         where: "marketing-site",
         when: "26 min ago",
         unread: true,
@@ -64,7 +61,6 @@ const notifications: Notifications01Item[] = [
                 <Strong>Tomás Reyes</Strong> approved <Strong>Pricing page copy</Strong>
             </>
         ),
-        summary: "Tomás Reyes approved Pricing page copy",
         where: "marketing-site",
         when: "1 h ago",
     },
@@ -76,7 +72,6 @@ const notifications: Notifications01Item[] = [
                 <Strong>Jonas Berg</Strong> mentioned you in <Strong>Release 2.4</Strong>
             </>
         ),
-        summary: "Jonas Berg mentioned you in Release 2.4",
         quote: "The release notes are ready. @maya, can you sign them off by Thursday?",
         where: "mobile-app",
         when: "3 h ago",
@@ -90,7 +85,6 @@ const notifications: Notifications01Item[] = [
                 <Strong>Aiko Tanaka</Strong> added Sam Okafor to <Strong>design-system</Strong>
             </>
         ),
-        summary: "Aiko Tanaka added Sam Okafor to design-system",
         where: "design-system",
         when: "Yesterday",
     },

@@ -16,7 +16,7 @@
     margin: 0 auto;
 }
 
-/* The logos are the tabs: muted until chosen, with the underline under the one showing. */
+/* The logos are the tabs: their marks muted until chosen, with the underline under the one showing. */
 .ow-testimonial03__tabs {
     gap: 0;
     margin-top: 48px;
@@ -32,13 +32,14 @@
     padding: 0 4px;
 }
 
-.ow-testimonial03__tab > * {
+/* Only the marks dim: the names stay at full strength, so they keep their contrast. */
+.ow-testimonial03__tab :is(svg, img) {
     opacity: 0.6;
     transition: opacity var(--ow-duration-base) var(--ow-ease-standard);
 }
 
-.ow-testimonial03__tab:hover > *,
-.ow-testimonial03__tab[aria-selected="true"] > * {
+.ow-testimonial03__tab:hover :is(svg, img),
+.ow-testimonial03__tab[aria-selected="true"] :is(svg, img) {
     opacity: 1;
 }
 

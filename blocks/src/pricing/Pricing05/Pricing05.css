@@ -115,7 +115,7 @@
 
 /* Bands the estimate doesn't reach fade back; Text has no tone for disabled text. */
 .ow-pricing05__line[data-idle] {
-    color: var(--ow-text-disabled);
+    color: var(--ow-text-muted);
 }
 
 .ow-pricing05__total {

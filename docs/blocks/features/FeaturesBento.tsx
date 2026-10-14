@@ -148,12 +148,13 @@ const noop = () => {};
 
 function AccessShot() {
     return (
-        <div className="features-bento__window features-bento__settings">
+        // Drawn switches, not real ones: inert keeps them out of the keyboard and screen reader order.
+        <div className="features-bento__window features-bento__settings" {...{ inert: "" }}>
             <SettingsRow label="Single sign-on" description="Okta, Google or any SAML provider">
-                <Switch checked onChange={noop} label="Single sign-on" tabIndex={-1} />
+                <Switch checked onChange={noop} label="Single sign-on" />
             </SettingsRow>
             <SettingsRow label="Require a review to deploy" description="Applies to people and agents">
-                <Switch checked onChange={noop} label="Require a review to deploy" tabIndex={-1} />
+                <Switch checked onChange={noop} label="Require a review to deploy" />
             </SettingsRow>
         </div>
     );

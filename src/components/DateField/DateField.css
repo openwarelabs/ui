@@ -83,7 +83,14 @@
 }
 
 .ow-date-field__segment {
+    /* At least 24px each way, the smallest a pointer target may be (WCAG 2.2, 2.5.8). */
+    box-sizing: border-box;
+    display: inline-flex;
+    min-width: 24px;
+    min-height: 24px;
     flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
     border-radius: var(--ow-radius-sm);
     padding: 2px;
     color: var(--ow-text);
@@ -93,6 +100,11 @@
     transition-property: color, background-color, box-shadow;
     transition-duration: var(--ow-duration-fast);
     transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-date-field__segment[data-segment="0"] {
+    /* The first, often one digit ("6:12"), keeps to the separator after it; the spare width goes before it. */
+    justify-content: flex-end;
 }
 
 .ow-date-field__segment::selection {
