@@ -1,0 +1,290 @@
+.ow-blog02,
+.ow-blog02 *,
+.ow-blog02 *::before,
+.ow-blog02 *::after {
+    box-sizing: border-box;
+}
+
+.ow-blog02 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.ow-blog02__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+.ow-blog02__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px 32px;
+}
+
+.ow-blog02__all {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* The featured post: the cover on the left, the story on the right. */
+.ow-blog02__lead.ow-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    margin-top: 40px;
+    border-radius: var(--ow-radius-card);
+    padding: 8px;
+    transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-blog02__lead.ow-card:hover,
+.ow-blog02__item:hover .ow-blog02__thumb::after {
+    border-color: var(--ow-border-strong);
+}
+
+.ow-blog02__lead.ow-card:has(.ow-blog02__link:focus-visible),
+.ow-blog02__item:has(.ow-blog02__link:focus-visible) {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 4px;
+}
+
+/* The featured cover's frame, which an image or a drawing fills. */
+.ow-blog02__lead-cover {
+    position: relative;
+    height: 100%;
+    min-height: 360px;
+}
+
+.ow-blog02__lead-body {
+    display: flex;
+    flex-direction: column;
+    padding: 32px 36px 28px 44px;
+}
+
+.ow-blog02__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.ow-blog02__lead-title {
+    margin-top: 20px;
+}
+
+/* A title's link covers its whole post, so anywhere on it opens the post. It keeps the title's weight and ink: the
+   card's border answers the hover, and its outline the focus. */
+.ow-blog02__link.ow-link,
+.ow-blog02__link.ow-link:hover,
+.ow-blog02__link.ow-link:focus-visible {
+    color: inherit;
+    font-weight: inherit;
+    text-decoration: none;
+    outline: none;
+}
+
+.ow-blog02__link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+}
+
+.ow-blog02__excerpt {
+    margin-top: 16px;
+}
+
+.ow-blog02__facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 28px 0 0;
+    border-top: 1px solid var(--ow-border);
+    border-bottom: 1px solid var(--ow-border);
+    padding: 0;
+}
+
+.ow-blog02__fact {
+    display: grid;
+    gap: 2px;
+    padding: 16px 0;
+}
+
+.ow-blog02__fact + .ow-blog02__fact {
+    border-left: 1px solid var(--ow-border);
+    padding-left: 18px;
+}
+
+.ow-blog02__fact dt {
+    order: 2;
+}
+
+/* Figures in tabular numerals, so the three line up. */
+.ow-blog02__fact-value {
+    order: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-blog02__byline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 28px;
+}
+
+.ow-blog02__read {
+    flex-shrink: 0;
+}
+
+/* The next three posts: a small cover beside each title, hairlines between them. */
+.ow-blog02__more {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 40px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-blog02__more > li + li {
+    border-left: 1px solid var(--ow-border);
+}
+
+.ow-blog02__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 128px minmax(0, 1fr);
+    align-items: start;
+    gap: 18px;
+    border-radius: var(--ow-radius-container);
+    padding: 4px 28px;
+}
+
+.ow-blog02__more > li:first-child .ow-blog02__item {
+    padding-left: 0;
+}
+
+.ow-blog02__more > li:last-child .ow-blog02__item {
+    padding-right: 0;
+}
+
+/* A post's small cover, with a hairline drawn over its edge when the post is hovered. */
+.ow-blog02__thumb {
+    position: relative;
+    border-radius: var(--ow-radius-container);
+}
+
+.ow-blog02__thumb::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid transparent;
+    border-radius: inherit;
+    pointer-events: none;
+    transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+/* Short titles in a narrow column: balanced, so none ends on a lone word. */
+.ow-blog02__item-title {
+    margin-top: 8px;
+    text-wrap: balance;
+}
+
+.ow-blog02__item-author {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+/* Images passed as covers fill their frames. */
+.ow-blog02__lead-cover > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--ow-radius-container);
+    object-fit: cover;
+}
+
+.ow-blog02__thumb > img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: inherit;
+    object-fit: cover;
+}
+
+@media (max-width: 1024px) {
+    .ow-blog02__lead.ow-card {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .ow-blog02__lead-cover {
+        min-height: 0;
+        aspect-ratio: 16 / 8;
+    }
+    .ow-blog02__lead-body {
+        padding: 28px 24px 20px;
+    }
+    .ow-blog02__more {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .ow-blog02__more > li + li {
+        border-top: 1px solid var(--ow-border);
+        border-left: 0;
+    }
+    .ow-blog02__more .ow-blog02__item,
+    .ow-blog02__more > li:first-child .ow-blog02__item,
+    .ow-blog02__more > li:last-child .ow-blog02__item {
+        grid-template-columns: 160px minmax(0, 1fr);
+        align-items: center;
+        padding: 20px 0;
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-blog02 {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .ow-blog02__lead.ow-card {
+        margin-top: 28px;
+        padding: 6px;
+    }
+    .ow-blog02__lead-cover {
+        aspect-ratio: 16 / 10;
+    }
+    .ow-blog02__lead-body {
+        padding: 22px 14px 14px;
+    }
+    .ow-blog02__lead-title {
+        margin-top: 16px;
+    }
+    .ow-blog02__fact + .ow-blog02__fact {
+        padding-left: 12px;
+    }
+    .ow-blog02__more {
+        margin-top: 24px;
+    }
+    .ow-blog02__more .ow-blog02__item,
+    .ow-blog02__more > li:first-child .ow-blog02__item,
+    .ow-blog02__more > li:last-child .ow-blog02__item {
+        grid-template-columns: 96px minmax(0, 1fr);
+        align-items: start;
+        gap: 14px;
+        padding: 18px 0;
+    }
+    .ow-blog02__item-title {
+        margin-top: 4px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-blog02__lead.ow-card,
+    .ow-blog02__thumb::after {
+        transition: none;
+    }
+}

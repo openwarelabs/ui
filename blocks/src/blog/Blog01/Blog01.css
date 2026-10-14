@@ -1,0 +1,156 @@
+.ow-blog01,
+.ow-blog01 *,
+.ow-blog01 *::before,
+.ow-blog01 *::after {
+    box-sizing: border-box;
+}
+
+.ow-blog01 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.ow-blog01__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+.ow-blog01__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 28px 40px;
+}
+
+.ow-blog01__filter {
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.ow-blog01__posts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin: 56px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-blog01__post.ow-card {
+    position: relative;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    border-radius: var(--ow-radius-card);
+    padding: 6px;
+    transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-blog01__post.ow-card:hover {
+    border-color: var(--ow-border-strong);
+}
+
+.ow-blog01__post.ow-card:has(.ow-blog01__link:focus-visible) {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-blog01__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 18px 16px 14px;
+}
+
+.ow-blog01__meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ow-blog01__post-title {
+    margin-top: 14px;
+}
+
+/* The title's link covers the whole card, so anywhere on it opens the post. It keeps the title's weight and ink: the
+   card's border answers the hover, and its outline the focus. */
+.ow-blog01__link.ow-link,
+.ow-blog01__link.ow-link:hover,
+.ow-blog01__link.ow-link:focus-visible {
+    color: inherit;
+    font-weight: inherit;
+    text-decoration: none;
+    outline: none;
+}
+
+.ow-blog01__link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+}
+
+.ow-blog01__excerpt {
+    margin: 8px 0 22px;
+}
+
+.ow-blog01__byline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: auto;
+    border-top: 1px solid var(--ow-border);
+    padding-top: 14px;
+}
+
+.ow-blog01__read {
+    flex-shrink: 0;
+}
+
+.ow-blog01__footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 48px;
+}
+
+/* A post's cover, in the card's top: a 16:10 frame that an image or a drawing fills. */
+.ow-blog01__cover {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    flex-shrink: 0;
+}
+
+.ow-blog01__cover > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--ow-radius-container);
+    object-fit: cover;
+}
+
+@media (max-width: 1024px) {
+    .ow-blog01__posts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-blog01 {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .ow-blog01__posts {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+        margin-top: 36px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-blog01__post.ow-card {
+        transition: none;
+    }
+}

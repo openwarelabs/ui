@@ -1,0 +1,120 @@
+.ow-logos03,
+.ow-logos03 *,
+.ow-logos03 *::before,
+.ow-logos03 *::after {
+    box-sizing: border-box;
+}
+
+.ow-logos03 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 0;
+    color: var(--ow-text);
+}
+
+.ow-logos03__head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 32px;
+}
+
+/* The strip runs the full width, fading out at both ends. It can't be scrolled, so focus never shifts it. */
+.ow-logos03__viewport {
+    max-width: 1440px;
+    margin: 36px auto 0;
+    overflow: clip;
+    border-radius: var(--ow-radius-lg);
+    padding: 6px 0;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent);
+}
+
+.ow-logos03__viewport:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
+
+/* Two copies of the list side by side; moving the pair left by one copy's width starts the loop again unseen. */
+.ow-logos03__track {
+    display: flex;
+    width: max-content;
+    animation: ow-logos03-scroll 52s linear infinite;
+}
+
+.ow-logos03__viewport:hover .ow-logos03__track,
+.ow-logos03__viewport:focus-within .ow-logos03__track,
+.ow-logos03[data-paused] .ow-logos03__track {
+    animation-play-state: paused;
+}
+
+@keyframes ow-logos03-scroll {
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.ow-logos03__list {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 80px;
+    margin: 0;
+    padding: 0 40px;
+    list-style: none;
+}
+
+/* Each logo sits on its own, as tall as it is, so a row of them lines up on its centres. */
+.ow-logos03__logo {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 760px) {
+    .ow-logos03 {
+        padding: 72px 0;
+    }
+    .ow-logos03__head {
+        padding: 0 var(--ow-page-gutter);
+    }
+    .ow-logos03__viewport {
+        margin-top: 28px;
+    }
+    .ow-logos03__list {
+        gap: 56px;
+        padding: 0 28px;
+    }
+}
+
+/* With reduced motion it stands still: one copy, wrapped into rows, and no pause button. */
+@media (prefers-reduced-motion: reduce) {
+    .ow-logos03 .ow-logos03__toggle,
+    .ow-logos03 .ow-logos03__list--copy {
+        display: none;
+    }
+    .ow-logos03__viewport {
+        max-width: 1040px;
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+    .ow-logos03__track {
+        display: block;
+        width: auto;
+        animation: none;
+    }
+    .ow-logos03__list {
+        display: grid;
+        grid-template-columns: repeat(4, auto);
+        justify-content: space-evenly;
+        gap: 36px 56px;
+        padding: 0 32px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) and (max-width: 760px) {
+    .ow-logos03__list {
+        grid-template-columns: repeat(2, auto);
+        gap: 28px 32px;
+        padding: 0 var(--ow-page-gutter);
+    }
+}

@@ -125,9 +125,9 @@ export const blockCategories: BlockCategory[] = [
         uses: ["SectionHeading", "Chip", "Button", "Link"],
         component: "SectionHeading",
         variants: [
-            { id: "SectionHeadingCentred", name: "Centred", description: "The label, the title and the intro centred over the section, for features and pricing." },
-            { id: "SectionHeadingWithLink", name: "With a link", description: "The heading on the left and a link to the rest on the right, for a preview of posts or releases." },
-            { id: "SectionHeadingSplit", name: "Split", description: "The title on the left; the intro and a button on the right, for a wide section." },
+            { id: "SectionHeadingCentred", component: "SectionHeading01", name: "Centred", description: "The label, the title and the intro centred over the section, for features and pricing." },
+            { id: "SectionHeadingWithLink", component: "SectionHeading02", name: "With a link", description: "The heading on the left and a link to the rest on the right, for a preview of posts or releases." },
+            { id: "SectionHeadingSplit", component: "SectionHeading03", name: "Split", description: "The title on the left; the intro and a button on the right, for a wide section." },
         ],
     },
     {
@@ -153,9 +153,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "logos",
         uses: ["SectionHeading"],
         variants: [
-            { id: "LogosRow", name: "Single row", description: "Five or six logos in one row under a small heading." },
-            { id: "LogosGrid", name: "Grid", description: "Logos in tiles, for a longer list." },
-            { id: "LogosMarquee", name: "Scrolling", description: "A slow, endless row that pauses on hover and stands still with reduced motion." },
+            { id: "LogosRow", component: "Logos01", name: "Single row", description: "Five or six logos in one row under a small heading." },
+            { id: "LogosGrid", component: "Logos02", name: "Grid", description: "Logos in tiles, for a longer list." },
+            { id: "LogosMarquee", component: "Logos03", name: "Scrolling", description: "A slow, endless row that pauses on hover and stands still with reduced motion." },
         ],
     },
     {
@@ -166,9 +166,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "stats",
         uses: ["Stat", "SectionHeading"],
         variants: [
-            { id: "StatsRow", name: "Row of numbers", description: "Three or four large numbers, each with a short label." },
-            { id: "StatsCards", name: "On cards", description: "Each number on its own card, with a trend line." },
-            { id: "StatsSplit", name: "Beside a heading", description: "A heading and a paragraph on the left, numbers on the right." },
+            { id: "StatsRow", component: "Stats01", name: "Row of numbers", description: "Three or four large numbers, each with a short label." },
+            { id: "StatsCards", component: "Stats02", name: "On cards", description: "Each number on its own card, with a trend line." },
+            { id: "StatsSplit", component: "Stats03", name: "Beside a heading", description: "A heading and a paragraph on the left, numbers on the right." },
         ],
     },
     {
@@ -179,9 +179,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "testimonials",
         uses: ["Card", "User", "Avatar"],
         variants: [
-            { id: "TestimonialSingle", name: "Single quote", description: "One large quote with the person under it." },
-            { id: "TestimonialGrid", name: "Grid of quotes", description: "Several short quotes in cards, in columns." },
-            { id: "TestimonialLogo", name: "With a company logo", description: "A quote, the person, and their company's logo." },
+            { id: "TestimonialSingle", component: "Testimonial01", name: "Single quote", description: "One large quote with the person under it." },
+            { id: "TestimonialGrid", component: "Testimonial02", name: "Grid of quotes", description: "Several short quotes in cards, in columns." },
+            { id: "TestimonialLogo", component: "Testimonial03", name: "With a company logo", description: "A quote, the person, and their company's logo." },
         ],
     },
     {
@@ -207,9 +207,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "faq",
         uses: ["Accordion", "SectionHeading", "Link"],
         variants: [
-            { id: "FaqAccordion", name: "Accordion", description: "Questions that open one at a time." },
-            { id: "FaqColumns", name: "Two columns", description: "A heading on the left, the questions on the right." },
-            { id: "FaqContact", name: "With a contact card", description: "The questions, and a card for anything they don't cover." },
+            { id: "FaqAccordion", component: "Faq01", name: "Accordion", description: "Questions that open one at a time." },
+            { id: "FaqColumns", component: "Faq02", name: "Two columns", description: "A heading on the left, the questions on the right." },
+            { id: "FaqContact", component: "Faq03", name: "With a contact card", description: "The questions, and a card for anything they don't cover." },
         ],
     },
     {
@@ -233,8 +233,8 @@ export const blockCategories: BlockCategory[] = [
         sketch: "newsletter",
         uses: ["Input", "Button", "Field"],
         variants: [
-            { id: "NewsletterInline", name: "Inline", description: "A heading, a field and a button in one row." },
-            { id: "NewsletterCard", name: "Card", description: "The same in a card, for the end of a post." },
+            { id: "NewsletterInline", component: "Newsletter01", name: "Inline", description: "A heading, a field and a button in one row." },
+            { id: "NewsletterCard", component: "Newsletter02", name: "Card", description: "The same in a card, for the end of a post." },
         ],
     },
     {
@@ -245,10 +245,10 @@ export const blockCategories: BlockCategory[] = [
         sketch: "blog",
         uses: ["Card", "Badge", "User", "Tag"],
         variants: [
-            { id: "BlogGrid", name: "Post grid", description: "Cards with an image, a title, a date and the author." },
-            { id: "BlogFeatured", name: "Featured post", description: "One large post on top, smaller ones below." },
-            { id: "Changelog", name: "Changelog", description: "Releases down a timeline, each with New, Improved and Fixed.", sketch: "list" },
-            { id: "BlogArticle", name: "Article", description: "A post's page: title, author, the text at a readable width, and an On this page list.", sketch: "list" },
+            { id: "BlogGrid", component: "Blog01", name: "Post grid", description: "Cards with an image, a title, a date and the author." },
+            { id: "BlogFeatured", component: "Blog02", name: "Featured post", description: "One large post on top, smaller ones below." },
+            { id: "Changelog", component: "Blog03", name: "Changelog", description: "Releases down a timeline, each with New, Improved and Fixed.", sketch: "list" },
+            { id: "BlogArticle", component: "Blog04", name: "Article", description: "A post's page: title, author, the text at a readable width, and an On this page list.", sketch: "list" },
         ],
     },
     {
@@ -259,8 +259,8 @@ export const blockCategories: BlockCategory[] = [
         sketch: "team",
         uses: ["Avatar", "Card"],
         variants: [
-            { id: "TeamGrid", name: "Avatar grid", description: "Faces, names and roles in a grid." },
-            { id: "TeamCards", name: "Cards", description: "A card each, with a line about what they do." },
+            { id: "TeamGrid", component: "Team01", name: "Avatar grid", description: "Faces, names and roles in a grid." },
+            { id: "TeamCards", component: "Team02", name: "Cards", description: "A card each, with a line about what they do." },
         ],
     },
     {
@@ -271,8 +271,8 @@ export const blockCategories: BlockCategory[] = [
         sketch: "contact",
         uses: ["Field", "Input", "Textarea", "Select", "Button", "Card"],
         variants: [
-            { id: "ContactForm", name: "Form with details", description: "A short form beside an email address and a reply time." },
-            { id: "ContactSupport", name: "Support options", description: "Cards for docs, community and email, before any form." },
+            { id: "ContactForm", component: "Contact01", name: "Form with details", description: "A short form beside an email address and a reply time." },
+            { id: "ContactSupport", component: "Contact02", name: "Support options", description: "Cards for docs, community and email, before any form." },
         ],
     },
     {

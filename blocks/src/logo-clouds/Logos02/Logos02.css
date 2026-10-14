@@ -1,0 +1,120 @@
+.ow-logos02,
+.ow-logos02 *,
+.ow-logos02 *::before,
+.ow-logos02 *::after {
+    box-sizing: border-box;
+}
+
+.ow-logos02 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.ow-logos02__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+/* Tiles drawn on one card: the 1px gaps between them show the border colour underneath. */
+.ow-logos02__tiles {
+    display: grid;
+    max-width: 1080px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    margin: 56px auto 0;
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-card);
+    background: var(--ow-border);
+    padding: 0;
+    list-style: none;
+}
+
+/* A Link drawn as a tile: no underline, square corners inside the card, and the muted logo colour. */
+.ow-logos02__tile {
+    position: relative;
+    display: grid;
+    height: 136px;
+    place-items: center;
+    border-radius: 0;
+    background: var(--ow-surface);
+    color: var(--ow-text-muted);
+    text-decoration: none;
+    transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-logos02__tile:hover {
+    background: var(--ow-surface-muted);
+    color: var(--ow-text-muted);
+}
+
+.ow-logos02__tile:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -4px;
+}
+
+.ow-logos02__logo {
+    display: inline-flex;
+    align-items: center;
+    transition:
+        color var(--ow-duration-base) var(--ow-ease-standard),
+        transform var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+/* Hovered or focused, the logo darkens and makes room for where the tile goes. */
+.ow-logos02__more {
+    position: absolute;
+    right: 0;
+    bottom: 16px;
+    left: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+        opacity var(--ow-duration-base) var(--ow-ease-standard),
+        transform var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+.ow-logos02__tile:hover .ow-logos02__logo,
+.ow-logos02__tile:focus-visible .ow-logos02__logo {
+    color: var(--ow-text);
+    transform: translateY(-8px);
+}
+
+.ow-logos02__tile:hover .ow-logos02__more,
+.ow-logos02__tile:focus-visible .ow-logos02__more {
+    opacity: 1;
+    transform: none;
+}
+
+.ow-logos02__footer {
+    margin-top: 28px;
+}
+
+@media (max-width: 760px) {
+    .ow-logos02 {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .ow-logos02__tiles {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 40px;
+    }
+    .ow-logos02__tile {
+        height: 108px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-logos02__logo,
+    .ow-logos02__more {
+        transition: none;
+    }
+    .ow-logos02__tile:hover .ow-logos02__logo,
+    .ow-logos02__tile:focus-visible .ow-logos02__logo {
+        transform: none;
+    }
+}

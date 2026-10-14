@@ -1,0 +1,103 @@
+.ow-newsletter02,
+.ow-newsletter02 *,
+.ow-newsletter02 *::before,
+.ow-newsletter02 *::after {
+    box-sizing: border-box;
+}
+
+.ow-newsletter02 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+/* At the end of a post, so it takes the article's reading width rather than the page's. */
+.ow-newsletter02__card {
+    max-width: 720px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: var(--ow-radius-card);
+}
+
+.ow-newsletter02__body {
+    padding: 36px 40px 32px;
+}
+
+.ow-newsletter02__icon {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-primary-border);
+    border-radius: var(--ow-radius-tile);
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.ow-newsletter02__title {
+    margin-top: 20px;
+}
+
+.ow-newsletter02__lead {
+    max-width: 560px;
+    margin-top: 10px;
+}
+
+.ow-newsletter02__form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+/* The button lines up with the field, not its label: the label's line plus the Field's gap. */
+.ow-newsletter02__submit {
+    margin-top: calc(14px * 1.4 + var(--ow-space-sm));
+}
+
+.ow-newsletter02__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    border-top: 1px solid var(--ow-border);
+    background: var(--ow-surface-muted);
+    padding: 16px 40px;
+}
+
+.ow-newsletter02__authors {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 12px;
+}
+
+.ow-newsletter02__past {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 6px;
+}
+
+@media (max-width: 760px) {
+    .ow-newsletter02 {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .ow-newsletter02__body {
+        padding: 26px 20px 24px;
+    }
+    .ow-newsletter02__form {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .ow-newsletter02__submit {
+        width: 100%;
+        margin-top: 0;
+    }
+    .ow-newsletter02__foot {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px 20px;
+    }
+}

@@ -4,7 +4,7 @@ import type { BlockIconProps } from "@blocks/shared/shared.types";
 
 // The few icons the blocks draw themselves, as Lucide shapes (ISC licence), so the package needs no icon library.
 const icon = (paths: ReactNode) =>
-    function BlockIcon({ size = 16, strokeWidth = 2 }: BlockIconProps) {
+    function BlockIcon({ size = 16, strokeWidth = 2, className }: BlockIconProps) {
         return (
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -17,6 +17,7 @@ const icon = (paths: ReactNode) =>
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
+                className={className}
             >
                 {paths}
             </svg>
@@ -86,5 +87,61 @@ export const CircleCheckIcon = icon(
     <>
         <circle cx="12" cy="12" r="10" />
         <path d="m16 9-5.5 5.5L8 12" />
+    </>,
+);
+export const PauseIcon = icon(
+    <>
+        <rect x="14" y="3" width="5" height="18" rx="1" />
+        <rect x="5" y="3" width="5" height="18" rx="1" />
+    </>,
+);
+export const PlayIcon = icon(<path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" />);
+export const QuoteIcon = icon(
+    <>
+        <path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" />
+        <path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" />
+    </>,
+);
+
+export const ArrowLeftIcon = icon(
+    <>
+        <path d="m12 19-7-7 7-7" />
+        <path d="M19 12H5" />
+    </>,
+);
+
+export const CalendarDaysIcon = icon(
+    <>
+        <path d="M8 2v3" />
+        <path d="M16 2v3" />
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M3 9h18" />
+        <path d="M8 13h.01" />
+        <path d="M12 13h.01" />
+        <path d="M16 13h.01" />
+        <path d="M8 17h.01" />
+        <path d="M12 17h.01" />
+        <path d="M16 17h.01" />
+    </>,
+);
+
+export const ClockIcon = icon(
+    <>
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 6v6l4 2" />
+    </>,
+);
+
+export const MapPinIcon = icon(
+    <>
+        <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+        <circle cx="12" cy="10" r="3" />
+    </>,
+);
+
+export const LinkIcon = icon(
+    <>
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
     </>,
 );

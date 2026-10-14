@@ -1,0 +1,201 @@
+.ow-blog03,
+.ow-blog03 *,
+.ow-blog03 *::before,
+.ow-blog03 *::after {
+    box-sizing: border-box;
+}
+
+.ow-blog03 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.ow-blog03__inner {
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+.ow-blog03__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px 40px;
+}
+
+.ow-blog03__subscribe {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+}
+
+.ow-blog03__subscribe .ow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.ow-blog03__subscribe svg {
+    color: var(--ow-icon);
+}
+
+.ow-blog03__list {
+    margin: 64px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Each release: when on the left, what on the right, joined by the rail. */
+.ow-blog03__release {
+    display: grid;
+    grid-template-columns: 184px minmax(0, 1fr);
+}
+
+.ow-blog03__when {
+    display: grid;
+    align-content: start;
+    justify-items: start;
+    gap: 6px;
+    padding: 2px 24px 0 0;
+}
+
+/* The version is the release's name, so it takes the emphasis weight. */
+.ow-blog03__version {
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.ow-blog03__body {
+    position: relative;
+    border-left: 1px solid var(--ow-border);
+    padding: 0 0 72px 40px;
+}
+
+.ow-blog03__release:last-child .ow-blog03__body {
+    border-left-color: transparent;
+    padding-bottom: 0;
+}
+
+/* The rail fades out under the last release instead of stopping dead. */
+.ow-blog03__release:last-child .ow-blog03__body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -1px;
+    width: 1px;
+    height: 120px;
+    background: linear-gradient(var(--ow-border), transparent);
+}
+
+.ow-blog03__node {
+    position: absolute;
+    top: 7px;
+    left: -6px;
+    width: 11px;
+    height: 11px;
+    border: 2px solid var(--ow-border-strong);
+    border-radius: 50%;
+    background: var(--ow-paper);
+}
+
+.ow-blog03__release:first-child .ow-blog03__node {
+    border-color: var(--ow-paper);
+    background: var(--ow-brass);
+    box-shadow: 0 0 0 1px var(--ow-brass);
+}
+
+.ow-blog03__summary {
+    max-width: 620px;
+    margin-top: 10px;
+}
+
+.ow-blog03__groups {
+    display: grid;
+    gap: 18px;
+    margin-top: 28px;
+}
+
+.ow-blog03__group {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+    align-items: start;
+}
+
+.ow-blog03__group .ow-badge {
+    margin-top: 1px;
+}
+
+.ow-blog03__items {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-blog03__items li {
+    position: relative;
+    padding-left: 16px;
+}
+
+.ow-blog03__items li::before {
+    content: "";
+    position: absolute;
+    top: 0.72em;
+    left: 0;
+    width: 5px;
+    height: 1px;
+    background: var(--ow-text-muted);
+}
+
+.ow-blog03__more {
+    display: flex;
+    margin: 48px 0 0 224px;
+}
+
+@media (max-width: 760px) {
+    .ow-blog03 {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .ow-blog03__list {
+        margin-top: 44px;
+    }
+    .ow-blog03__release {
+        position: relative;
+        grid-template-columns: minmax(0, 1fr);
+        border-left: 1px solid var(--ow-border);
+        padding: 0 0 56px 24px;
+    }
+    .ow-blog03__release:last-child {
+        border-left-color: transparent;
+        padding-bottom: 0;
+    }
+    .ow-blog03__when {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px 12px;
+        margin-bottom: 10px;
+        padding: 0;
+    }
+    .ow-blog03__body,
+    .ow-blog03__release:last-child .ow-blog03__body {
+        position: static;
+        border-left: 0;
+        padding: 0;
+    }
+    .ow-blog03__release:last-child .ow-blog03__body::after {
+        top: 0;
+        left: -1px;
+    }
+    .ow-blog03__node {
+        top: 4px;
+    }
+    .ow-blog03__group {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+    }
+    .ow-blog03__more {
+        margin: 36px 0 0 24px;
+    }
+}

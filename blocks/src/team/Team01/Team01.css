@@ -1,0 +1,89 @@
+.ow-team01,
+.ow-team01 *,
+.ow-team01 *::before,
+.ow-team01 *::after {
+    box-sizing: border-box;
+}
+
+.ow-team01 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.ow-team01__inner {
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+.ow-team01__list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 56px 32px;
+    margin: 64px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-team01__person {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.ow-team01__avatar.ow-avatar {
+    font-weight: var(--ow-weight-control);
+    letter-spacing: -0.02em;
+    box-shadow:
+        0 0 0 4px var(--ow-paper),
+        0 0 0 5px var(--ow-border);
+}
+
+.ow-team01__person[data-tone="soft"] .ow-team01__avatar {
+    background: var(--ow-primary-soft);
+    color: var(--ow-primary-text);
+}
+
+.ow-team01__person[data-tone="ink"] .ow-team01__avatar {
+    background: var(--ow-text);
+    color: var(--ow-surface);
+}
+
+.ow-team01__name {
+    margin-top: 20px;
+}
+
+.ow-team01__role {
+    margin-top: 4px;
+}
+
+.ow-team01__hiring {
+    margin-top: 64px;
+    border-top: 1px solid var(--ow-border);
+    padding-top: 32px;
+}
+
+@media (max-width: 760px) {
+    .ow-team01 {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .ow-team01__list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 40px 16px;
+        margin-top: 44px;
+    }
+    /* Smaller faces in the two columns on phones. */
+    .ow-team01__avatar.ow-avatar {
+        width: 72px;
+        height: 72px;
+        font-size: 23px;
+    }
+    .ow-team01__name {
+        margin-top: 16px;
+    }
+    .ow-team01__hiring {
+        margin-top: 48px;
+        padding-top: 28px;
+    }
+}

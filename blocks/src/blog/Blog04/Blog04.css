@@ -1,0 +1,263 @@
+.ow-blog04,
+.ow-blog04 *,
+.ow-blog04 *::before,
+.ow-blog04 *::after {
+    box-sizing: border-box;
+}
+
+.ow-blog04 {
+    background: var(--ow-paper);
+    padding: 72px 32px var(--ow-section-y);
+    color: var(--ow-text);
+}
+
+.ow-blog04__inner {
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+.ow-blog04__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ow-blog04__header {
+    max-width: 800px;
+    margin-top: 40px;
+}
+
+.ow-blog04__meta-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.ow-blog04__title {
+    margin-top: 20px;
+}
+
+.ow-blog04__dek {
+    margin-top: 20px;
+}
+
+.ow-blog04__byline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 28px;
+    margin-top: 32px;
+}
+
+.ow-blog04__byline-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+}
+
+.ow-blog04__byline-facts span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ow-blog04__byline-facts svg {
+    color: var(--ow-icon);
+}
+
+/* The cover's frame, which an image or a drawing fills. */
+.ow-blog04__cover {
+    position: relative;
+    aspect-ratio: 12 / 5;
+    margin-top: 48px;
+}
+
+.ow-blog04__cover > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--ow-radius-card);
+    object-fit: cover;
+}
+
+/* The text at a readable width, with On this page beside it. */
+.ow-blog04__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 200px;
+    align-items: start;
+    gap: 80px;
+    margin-top: 56px;
+}
+
+/* About 68 characters of prose a line. */
+.ow-blog04__prose {
+    max-width: 708px;
+}
+
+.ow-blog04__prose > p {
+    margin-bottom: 1.25em;
+}
+
+/* The headings that On this page links to, scrolled to just below the top of the window. */
+.ow-blog04__prose > h2 {
+    margin: 2.1em 0 0.6em;
+    scroll-margin-top: 24px;
+}
+
+.ow-blog04__prose > h2:first-child {
+    margin-top: 0;
+}
+
+.ow-blog04__prose > ol,
+.ow-blog04__prose > ul {
+    margin: 0 0 1.25em;
+    padding-left: 1.4em;
+}
+
+.ow-blog04__prose > ol li,
+.ow-blog04__prose > ul li {
+    margin-top: 0.35em;
+    padding-left: 0.3em;
+}
+
+.ow-blog04__prose > ol li::marker,
+.ow-blog04__prose > ul li::marker {
+    color: var(--ow-text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-blog04__prose strong {
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.ow-blog04__prose .ow-code-block {
+    margin: 28px 0;
+}
+
+.ow-blog04__prose > blockquote {
+    margin: 32px 0;
+    border-top: 1px solid var(--ow-border);
+    border-bottom: 1px solid var(--ow-border);
+    padding: 28px 0;
+}
+
+.ow-blog04__prose > blockquote > p::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 14px;
+    border-radius: 50%;
+    background: var(--ow-brass);
+    vertical-align: 0.22em;
+}
+
+.ow-blog04__end {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 40px;
+    border-top: 1px solid var(--ow-border);
+    padding-top: 24px;
+}
+
+/* On this page: beside the text on desktop, folded into a disclosure above it on smaller screens. */
+.ow-blog04__aside {
+    position: sticky;
+    top: 32px;
+}
+
+.ow-blog04__toc-label {
+    margin-bottom: 12px;
+}
+
+.ow-blog04__toc {
+    display: grid;
+    margin: 0;
+    border-left: 1px solid var(--ow-border);
+    padding: 0;
+    list-style: none;
+}
+
+/* A rail of links rather than a list of standalone ones: muted until hovered, the current section marked on the rail
+   and in the control weight. */
+.ow-blog04__toc-link.ow-link {
+    display: block;
+    margin-left: -1px;
+    border-left: 1px solid transparent;
+    padding: 6px 0 6px 14px;
+    color: var(--ow-text-muted);
+    font-weight: var(--ow-weight-regular);
+    text-decoration: none;
+    transition-property: color, border-color;
+}
+
+.ow-blog04__toc-link.ow-link:hover {
+    color: var(--ow-text);
+}
+
+.ow-blog04__toc-link.ow-link:focus-visible {
+    border-radius: var(--ow-radius-sm);
+}
+
+.ow-blog04__toc-link.ow-link[aria-current="location"] {
+    border-left-color: var(--ow-primary-text);
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-control);
+}
+
+.ow-blog04__aside-share {
+    margin-top: 24px;
+    border-top: 1px solid var(--ow-border);
+    padding-top: 16px;
+}
+
+.ow-blog04__aside-share .ow-copy-button {
+    margin-left: -8px;
+}
+
+.ow-blog04__toc-fold {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .ow-blog04__layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 32px;
+        margin-top: 40px;
+    }
+    .ow-blog04__aside {
+        display: none;
+    }
+    .ow-blog04__toc-fold {
+        display: block;
+        background: var(--ow-surface);
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-blog04 {
+        padding: 48px var(--ow-page-gutter) 72px;
+    }
+    .ow-blog04__header {
+        margin-top: 28px;
+    }
+    .ow-blog04__cover {
+        aspect-ratio: 16 / 10;
+        margin-top: 36px;
+    }
+    .ow-blog04__cover > img {
+        border-radius: var(--ow-radius-container);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-blog04__toc-link.ow-link {
+        transition: none;
+    }
+}

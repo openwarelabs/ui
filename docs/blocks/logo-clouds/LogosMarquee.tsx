@@ -1,11 +1,11 @@
-import { useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 
-import { Button, Text, Tooltip } from "@openwarelabs/ui";
-import { Pause, Play } from "lucide-react";
+import { Logos03 } from "@openwarelabs/blocks";
 
 import "./LogosMarquee.css";
 
 // Invented companies, drawn as a simple shape and a name. Swap in your customers' logos (as SVGs, in one colour).
+// Each name is lettered as its logo, so its type lives in the CSS rather than in a Text style.
 const logos: Array<{ name: string; glyph: ReactNode }> = [
     {
         name: "Halcyon",
@@ -58,51 +58,21 @@ const logos: Array<{ name: string; glyph: ReactNode }> = [
     },
 ];
 
-function LogoList({ copy = false }: { copy?: boolean }) {
-    return (
-        <ul className={copy ? "logos-marquee__list logos-marquee__list--copy" : "logos-marquee__list"} aria-hidden={copy || undefined}>
-            {logos.map((logo) => (
-                <li key={logo.name} className="logos-marquee__logo" data-name={logo.name}>
-                    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        {logo.glyph}
-                    </svg>
-                    {logo.name}
-                </li>
-            ))}
-        </ul>
-    );
-}
-
 export function LogosMarquee() {
-    const [paused, setPaused] = useState(false);
-
     return (
-        <section className="logos-marquee" aria-labelledby="logos-marquee-title" data-paused={paused || undefined}>
-            <div className="logos-marquee__head">
-                <Text as="h2" variant="body" tone="muted" align="center" id="logos-marquee-title">
-                    Teams that ship with Acme
-                </Text>
-                {/* Moving content needs a way to stop it for good; hover and focus only hold it still for a moment. */}
-                <Tooltip label={paused ? "Play the logos" : "Pause the logos"}>
-                    <Button
-                        className="logos-marquee__toggle"
-                        variant="ghost"
-                        size="sm"
-                        iconOnly
-                        aria-label={paused ? "Play the logos" : "Pause the logos"}
-                        onClick={() => setPaused((value) => !value)}
-                    >
-                        {paused ? <Play size={14} /> : <Pause size={14} />}
-                    </Button>
-                </Tooltip>
-            </div>
-            {/* Focusable, so a keyboard can hold it still too. */}
-            <div className="logos-marquee__viewport" role="region" aria-label="Customer logos" tabIndex={0}>
-                <div className="logos-marquee__track">
-                    <LogoList />
-                    <LogoList copy />
-                </div>
-            </div>
-        </section>
+        <Logos03
+            title="Teams that ship with Acme"
+            logos={logos.map((logo) => ({
+                name: logo.name,
+                logo: (
+                    <span className="logos-marquee__logo" data-name={logo.name}>
+                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            {logo.glyph}
+                        </svg>
+                        {logo.name}
+                    </span>
+                ),
+            }))}
+        />
     );
 }

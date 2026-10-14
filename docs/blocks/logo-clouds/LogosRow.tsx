@@ -1,10 +1,11 @@
 import type { ReactNode } from "react";
 
-import { Text } from "@openwarelabs/ui";
+import { Logos01 } from "@openwarelabs/blocks";
 
 import "./LogosRow.css";
 
 // Invented companies, drawn as a simple shape and a name. Swap in your customers' logos (as SVGs, in one colour).
+// Each name is lettered as its logo, so its type lives in the CSS rather than in a Text style.
 const logos: Array<{ name: string; glyph: ReactNode }> = [
     {
         name: "Halcyon",
@@ -49,23 +50,19 @@ const logos: Array<{ name: string; glyph: ReactNode }> = [
 
 export function LogosRow() {
     return (
-        <section className="logos-row" aria-labelledby="logos-row-title">
-            <div className="logos-row__inner">
-                {/* A small heading: the logos are the point. */}
-                <Text as="h2" variant="body" tone="muted" align="center" id="logos-row-title">
-                    Trusted by more than 4,000 software teams
-                </Text>
-                <ul className="logos-row__list">
-                    {logos.map((logo) => (
-                        <li key={logo.name} className="logos-row__logo" data-name={logo.name}>
-                            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                {logo.glyph}
-                            </svg>
-                            {logo.name}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </section>
+        <Logos01
+            title="Trusted by more than 4,000 software teams"
+            logos={logos.map((logo) => ({
+                name: logo.name,
+                logo: (
+                    <span className="logos-row__logo" data-name={logo.name}>
+                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            {logo.glyph}
+                        </svg>
+                        {logo.name}
+                    </span>
+                ),
+            }))}
+        />
     );
 }

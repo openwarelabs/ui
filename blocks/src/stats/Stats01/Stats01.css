@@ -1,0 +1,106 @@
+.ow-stats01,
+.ow-stats01 *,
+.ow-stats01 *::before,
+.ow-stats01 *::after {
+    box-sizing: border-box;
+}
+
+.ow-stats01 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.ow-stats01__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+/* Four numbers split by hairlines; the number shows first, though the label comes first in the markup. */
+.ow-stats01__list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 64px 0 0;
+}
+
+.ow-stats01__item {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 24px;
+    text-align: center;
+}
+
+.ow-stats01__item + .ow-stats01__item {
+    border-left: 1px solid var(--ow-border);
+}
+
+/* A figure, not a title: no extra leading, and digits of one width. */
+.ow-stats01__value {
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+/* The unit is half the figure's size, whatever size the figure is. */
+.ow-stats01__unit {
+    margin-left: 0.06em;
+    font-size: 0.5em;
+}
+
+.ow-stats01__note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 48px;
+}
+
+/* A brass dot, the section's one touch of colour. */
+.ow-stats01__note::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--ow-brass);
+}
+
+@media (max-width: 1024px) {
+    .ow-stats01__item {
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 900px) {
+    .ow-stats01__list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ow-stats01__item {
+        padding: 28px 16px;
+    }
+    .ow-stats01__item + .ow-stats01__item {
+        border-left: 0;
+    }
+    .ow-stats01__item:nth-child(even) {
+        border-left: 1px solid var(--ow-border);
+    }
+    .ow-stats01__item:nth-child(n + 3) {
+        border-top: 1px solid var(--ow-border);
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-stats01 {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .ow-stats01__list {
+        margin-top: 40px;
+    }
+    .ow-stats01__item {
+        padding: 24px 12px;
+    }
+    .ow-stats01__note {
+        margin-top: 32px;
+    }
+}

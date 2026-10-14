@@ -1,23 +1,8 @@
-import { useState, type ReactNode } from "react";
-
-import { Badge, Button, Link, SectionHeading, Text, buttonClassName } from "@openwarelabs/ui";
-import { Bot, Check, ChevronDown, GitPullRequest, Mail, RotateCcw, Rss } from "lucide-react";
+import { Blog03, type Blog03Release } from "@openwarelabs/blocks";
+import { Badge, buttonClassName } from "@openwarelabs/ui";
+import { Bot, Check, GitPullRequest, Mail, RotateCcw, Rss } from "lucide-react";
 
 import "./Changelog.css";
-
-type Group = "New" | "Improved" | "Fixed";
-
-const groupBadge = { New: "active", Improved: "success", Fixed: "neutral" } as const;
-
-interface Release {
-    version: string;
-    date: string;
-    iso: string;
-    title: string;
-    summary: string;
-    visual?: ReactNode;
-    changes: Partial<Record<Group, string[]>>;
-}
 
 /** The headline of 2.14, drawn: a pull request an agent opened. */
 function AgentPullRequest() {
@@ -100,157 +85,105 @@ function Rollback() {
     );
 }
 
-const releases: Release[] = [
+const releases: Blog03Release[] = [
     {
         version: "2.14",
         date: "8 Oct 2026",
-        iso: "2026-10-08",
+        dateTime: "2026-10-08",
         title: "Agents open their own pull requests",
         summary:
             "Assign a task to an agent and it works on a branch of its own, runs your checks and opens a pull request for your team to review. You can follow every step as it happens.",
         visual: <AgentPullRequest />,
-        changes: {
-            New: [
-                "Agents open pull requests, with a summary of what changed and why.",
-                "Reply to a review comment and the agent pushes a fix to the same branch.",
-            ],
-            Improved: ["Agent runs list every command they ran, with its output.", "Runs on large repositories start about 40% sooner."],
-            Fixed: ["Review requests no longer go to people who have left the project."],
-        },
+        changes: [
+            {
+                label: "New",
+                variant: "active",
+                items: [
+                    "Agents open pull requests, with a summary of what changed and why.",
+                    "Reply to a review comment and the agent pushes a fix to the same branch.",
+                ],
+            },
+            {
+                label: "Improved",
+                variant: "success",
+                items: ["Agent runs list every command they ran, with its output.", "Runs on large repositories start about 40% sooner."],
+            },
+            { label: "Fixed", variant: "neutral", items: ["Review requests no longer go to people who have left the project."] },
+        ],
     },
     {
         version: "2.13",
         date: "22 Sep 2026",
-        iso: "2026-09-22",
+        dateTime: "2026-09-22",
         title: "Roll back any deploy in one click",
         summary: "Every project keeps its last good build warm. When a deploy goes wrong, roll back from the deploy page and you're live again in seconds.",
         visual: <Rollback />,
-        changes: {
-            New: ["Roll back from a deploy's page, its menu or the command palette.", "Deploys can pause for approval before they go to production."],
-            Improved: ["Build logs stream as they're written, and keep your place when you scroll up."],
-            Fixed: ["Deploys started from a tag show the tag instead of a commit hash.", "The deploy list no longer jumps when a build finishes."],
-        },
+        changes: [
+            {
+                label: "New",
+                variant: "active",
+                items: ["Roll back from a deploy's page, its menu or the command palette.", "Deploys can pause for approval before they go to production."],
+            },
+            { label: "Improved", variant: "success", items: ["Build logs stream as they're written, and keep your place when you scroll up."] },
+            {
+                label: "Fixed",
+                variant: "neutral",
+                items: ["Deploys started from a tag show the tag instead of a commit hash.", "The deploy list no longer jumps when a build finishes."],
+            },
+        ],
     },
     {
         version: "2.12",
         date: "9 Sep 2026",
-        iso: "2026-09-09",
+        dateTime: "2026-09-09",
         title: "A review queue that knows what's waiting on you",
         summary: "Reviews now has a queue of the changes that need you, oldest first, with how long each has been waiting.",
-        changes: {
-            New: ["The review queue, with filters for project and size."],
-            Improved: ["Suggested reviewers are the people who last changed those files.", "Diffs over 1,000 lines open in a quarter of the time."],
-            Fixed: ["The diff view keeps your place when new commits arrive."],
-        },
+        changes: [
+            { label: "New", variant: "active", items: ["The review queue, with filters for project and size."] },
+            {
+                label: "Improved",
+                variant: "success",
+                items: ["Suggested reviewers are the people who last changed those files.", "Diffs over 1,000 lines open in a quarter of the time."],
+            },
+            { label: "Fixed", variant: "neutral", items: ["The diff view keeps your place when new commits arrive."] },
+        ],
     },
     {
         version: "2.11",
         date: "26 Aug 2026",
-        iso: "2026-08-26",
+        dateTime: "2026-08-26",
         title: "API keys for each project",
         summary: "Create keys that can only reach one project, give each a name, and see when it was last used.",
-        changes: {
-            New: ["Project API keys, with read-only and read-write scopes."],
-            Improved: ["Workspace keys show when they were last used, and from where."],
-            Fixed: ["Revoked keys stop working everywhere within a second."],
-        },
+        changes: [
+            { label: "New", variant: "active", items: ["Project API keys, with read-only and read-write scopes."] },
+            { label: "Improved", variant: "success", items: ["Workspace keys show when they were last used, and from where."] },
+            { label: "Fixed", variant: "neutral", items: ["Revoked keys stop working everywhere within a second."] },
+        ],
     },
     {
         version: "2.10",
         date: "12 Aug 2026",
-        iso: "2026-08-12",
+        dateTime: "2026-08-12",
         title: "Two-step sign-in for every workspace",
         summary: "Owners can require two-step sign-in for everyone in the workspace, with an authenticator app or a security key.",
-        changes: {
-            New: ["Security keys as a second step.", "A setting to require two-step sign-in for every member."],
-            Fixed: ["Invitations sent to an address in capitals can be accepted again."],
-        },
+        changes: [
+            { label: "New", variant: "active", items: ["Security keys as a second step.", "A setting to require two-step sign-in for every member."] },
+            { label: "Fixed", variant: "neutral", items: ["Invitations sent to an address in capitals can be accepted again."] },
+        ],
     },
 ];
 
-const shownAtFirst = 3;
-
 export function Changelog() {
-    const [showAll, setShowAll] = useState(false);
-    const shown = showAll ? releases : releases.slice(0, shownAtFirst);
-
     return (
-        <section className="changelog" aria-labelledby="changelog-title">
-            <div className="changelog__inner">
-                <div className="changelog__header">
-                    <SectionHeading
-                        eyebrow="Changelog"
-                        title={<span id="changelog-title">What's new in Acme</span>}
-                        intro="Everything we ship, newest first. Most weeks bring something new."
-                    />
-                    <div className="changelog__subscribe">
-                        <Link href="#" variant="standalone">
-                            <Rss size={15} aria-hidden="true" />
-                            RSS feed
-                        </Link>
-                        <Link href="#" variant="standalone">
-                            <Mail size={15} aria-hidden="true" />
-                            Monthly email
-                        </Link>
-                    </div>
-                </div>
-
-                <ol className="changelog__list">
-                    {shown.map((release, index) => (
-                        <li key={release.version} className="changelog__release">
-                            <div className="changelog__when">
-                                <Text variant="code" as="span" className="changelog__version">
-                                    v{release.version}
-                                </Text>
-                                <Text variant="body" as="span" tone="muted">
-                                    <time dateTime={release.iso}>{release.date}</time>
-                                </Text>
-                                {index === 0 ? (
-                                    <Badge size="sm" variant="neutral">
-                                        Latest
-                                    </Badge>
-                                ) : null}
-                            </div>
-                            <article className="changelog__body" aria-labelledby={`changelog-${release.version}`}>
-                                <span className="changelog__node" aria-hidden="true" />
-                                <Text variant="heading" as="h3" id={`changelog-${release.version}`}>
-                                    {release.title}
-                                </Text>
-                                <Text variant="prose" tone="muted" className="changelog__summary">
-                                    {release.summary}
-                                </Text>
-                                {release.visual}
-                                <div className="changelog__groups">
-                                    {(Object.keys(groupBadge) as Group[]).map((group) =>
-                                        release.changes[group] ? (
-                                            <div key={group} className="changelog__group">
-                                                <Badge size="sm" variant={groupBadge[group]}>
-                                                    {group}
-                                                </Badge>
-                                                <ul className="changelog__items" aria-label={`${group} in ${release.version}`}>
-                                                    {release.changes[group].map((change) => (
-                                                        <Text key={change} variant="copy" as="li" tone="soft">
-                                                            {change}
-                                                        </Text>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        ) : null,
-                                    )}
-                                </div>
-                            </article>
-                        </li>
-                    ))}
-                </ol>
-
-                {showAll ? null : (
-                    <div className="changelog__more">
-                        <Button shape="pill" endIcon={<ChevronDown size={16} />} onClick={() => setShowAll(true)}>
-                            Show {releases.length - shownAtFirst} older releases
-                        </Button>
-                    </div>
-                )}
-            </div>
-        </section>
+        <Blog03
+            eyebrow="Changelog"
+            title="What's new in Acme"
+            description="Everything we ship, newest first. Most weeks bring something new."
+            links={[
+                { label: "RSS feed", href: "#", icon: <Rss size={15} aria-hidden="true" /> },
+                { label: "Monthly email", href: "#", icon: <Mail size={15} aria-hidden="true" /> },
+            ]}
+            releases={releases}
+        />
     );
 }

@@ -1,0 +1,55 @@
+.ow-logos01,
+.ow-logos01 *,
+.ow-logos01 *::before,
+.ow-logos01 *::after {
+    box-sizing: border-box;
+}
+
+.ow-logos01 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.ow-logos01__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+.ow-logos01__list {
+    display: flex;
+    max-width: 1040px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    margin: 36px auto 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Each logo sits on its own, as tall as it is, so a row of them lines up on its centres. */
+.ow-logos01__logo {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 900px) {
+    .ow-logos01__list {
+        display: grid;
+        max-width: 560px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        justify-items: center;
+        gap: 36px 24px;
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-logos01 {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .ow-logos01__list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 32px 16px;
+        margin-top: 32px;
+    }
+}

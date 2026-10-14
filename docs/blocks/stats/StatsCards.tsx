@@ -1,10 +1,8 @@
-import { Link, SectionHeading, Stat, Text, type StatProps } from "@openwarelabs/ui";
+import { Stats02, type Stats02Stat } from "@openwarelabs/blocks";
 import { Bot, Rocket, Timer, Undo2 } from "lucide-react";
 
-import "./StatsCards.css";
-
 // Twelve weeks of totals across every Acme workspace, oldest first.
-const stats: Array<Omit<StatProps, "value"> & { label: string; value: string }> = [
+const stats: Stats02Stat[] = [
     {
         icon: <Rocket size={14} />,
         label: "Deploys a week",
@@ -43,35 +41,12 @@ const stats: Array<Omit<StatProps, "value"> & { label: string; value: string }> 
 
 export function StatsCards() {
     return (
-        <section className="stats-cards" aria-labelledby="stats-cards-title">
-            <div className="stats-cards__inner">
-                <div className="stats-cards__header">
-                    <SectionHeading
-                        eyebrow="Last 12 weeks"
-                        title={<span id="stats-cards-title">Faster every quarter</span>}
-                        intro="Across every Acme workspace, the last twelve weeks against the twelve before. Updated each Monday."
-                    />
-                    <Link href="#" variant="standalone" className="stats-cards__link">
-                        How we count →
-                    </Link>
-                </div>
-
-                <div className="stats-cards__grid">
-                    {/* Stat is sized for an app's overview; on a marketing page the number takes a display size. */}
-                    {stats.map((stat) => (
-                        <Stat
-                            key={stat.label}
-                            {...stat}
-                            value={
-                                <Text as="span" variant="section-title">
-                                    {stat.value}
-                                </Text>
-                            }
-                            className="stats-cards__stat"
-                        />
-                    ))}
-                </div>
-            </div>
-        </section>
+        <Stats02
+            eyebrow="Last 12 weeks"
+            title="Faster every quarter"
+            description="Across every Acme workspace, the last twelve weeks against the twelve before. Updated each Monday."
+            link={{ label: "How we count →", href: "#methodology" }}
+            stats={stats}
+        />
     );
 }

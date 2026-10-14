@@ -1,0 +1,108 @@
+.ow-newsletter01,
+.ow-newsletter01 *,
+.ow-newsletter01 *::before,
+.ow-newsletter01 *::after {
+    box-sizing: border-box;
+}
+
+.ow-newsletter01 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.ow-newsletter01__inner {
+    display: grid;
+    max-width: var(--ow-page-max);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 480px);
+    align-items: end;
+    gap: 32px 72px;
+    margin: 0 auto;
+}
+
+.ow-newsletter01__form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 12px;
+}
+
+/* The button lines up with the field, not its label: the label's line plus the Field's gap. */
+.ow-newsletter01__submit {
+    margin-top: calc(14px * 1.4 + var(--ow-space-sm));
+}
+
+.ow-newsletter01__fine {
+    grid-column: 1 / -1;
+}
+
+.ow-newsletter01__done {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    border: 1px solid var(--ow-success-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-success-surface);
+    padding: 16px 18px;
+    animation: ow-newsletter01-in var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+.ow-newsletter01__done:focus {
+    outline: none;
+}
+
+.ow-newsletter01__done:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-newsletter01__done > svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: var(--ow-success-text);
+}
+
+.ow-newsletter01__done-text {
+    margin-top: 4px;
+}
+
+/* A ghost button whose label lines up with the text above it: pulled left by its own padding. */
+.ow-newsletter01__reset {
+    margin: 6px 0 0 calc(var(--ow-space-md) * -1);
+}
+
+@keyframes ow-newsletter01-in {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-newsletter01__done {
+        animation: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .ow-newsletter01__inner {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .ow-newsletter01__form,
+    .ow-newsletter01__done {
+        max-width: 560px;
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-newsletter01 {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .ow-newsletter01__form {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .ow-newsletter01__submit {
+        width: 100%;
+        margin-top: 0;
+    }
+}

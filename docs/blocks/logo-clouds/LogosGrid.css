@@ -5,55 +5,6 @@
     box-sizing: border-box;
 }
 
-.logos-grid {
-    background: var(--ow-paper);
-    padding: var(--ow-section-y) 32px;
-    color: var(--ow-text);
-}
-
-.logos-grid__inner {
-    max-width: var(--ow-page-max);
-    margin: 0 auto;
-}
-
-/* Tiles drawn on one card: the 1px gaps between them show the border colour underneath. */
-.logos-grid__tiles {
-    display: grid;
-    max-width: 1080px;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1px;
-    margin: 56px auto 0;
-    overflow: hidden;
-    border: 1px solid var(--ow-border);
-    border-radius: var(--ow-radius-card);
-    background: var(--ow-border);
-    padding: 0;
-    list-style: none;
-}
-
-/* A Link drawn as a tile: no underline, square corners inside the card, and the muted logo colour. */
-.logos-grid__tile {
-    position: relative;
-    display: grid;
-    height: 136px;
-    place-items: center;
-    border-radius: 0;
-    background: var(--ow-surface);
-    color: var(--ow-text-muted);
-    text-decoration: none;
-    transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
-}
-
-.logos-grid__tile:hover {
-    background: var(--ow-surface-muted);
-    color: var(--ow-text-muted);
-}
-
-.logos-grid__tile:focus-visible {
-    outline: 2px solid var(--ow-focus-ring);
-    outline-offset: -4px;
-}
-
 .logos-grid__logo {
     display: inline-flex;
     align-items: center;
@@ -63,44 +14,12 @@
     line-height: 1;
     letter-spacing: -0.02em;
     white-space: nowrap;
-    transition:
-        color var(--ow-duration-base) var(--ow-ease-standard),
-        transform var(--ow-duration-slow) var(--ow-ease-emphasized);
 }
 
 .logos-grid__logo svg {
     width: 22px;
     height: 22px;
     flex-shrink: 0;
-}
-
-/* Hovered or focused, the logo darkens and makes room for where the tile goes. */
-.logos-grid__more {
-    position: absolute;
-    right: 0;
-    bottom: 16px;
-    left: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    opacity: 0;
-    transform: translateY(4px);
-    transition:
-        opacity var(--ow-duration-base) var(--ow-ease-standard),
-        transform var(--ow-duration-slow) var(--ow-ease-emphasized);
-}
-
-.logos-grid__tile:hover .logos-grid__logo,
-.logos-grid__tile:focus-visible .logos-grid__logo {
-    color: var(--ow-text);
-    transform: translateY(-8px);
-}
-
-.logos-grid__tile:hover .logos-grid__more,
-.logos-grid__tile:focus-visible .logos-grid__more {
-    opacity: 1;
-    transform: none;
 }
 
 /* Each invented company gets its own lettering, as real wordmarks differ. */
@@ -140,21 +59,7 @@
     letter-spacing: -0.045em;
 }
 
-.logos-grid__footer {
-    margin-top: 28px;
-}
-
 @media (max-width: 760px) {
-    .logos-grid {
-        padding: 72px var(--ow-page-gutter);
-    }
-    .logos-grid__tiles {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        margin-top: 40px;
-    }
-    .logos-grid__tile {
-        height: 108px;
-    }
     .logos-grid__logo {
         font-size: 18px;
     }
@@ -164,16 +69,5 @@
     }
     .logos-grid__logo[data-name="Lumen"] {
         font-size: 20px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .logos-grid__logo,
-    .logos-grid__more {
-        transition: none;
-    }
-    .logos-grid__tile:hover .logos-grid__logo,
-    .logos-grid__tile:focus-visible .logos-grid__logo {
-        transform: none;
     }
 }

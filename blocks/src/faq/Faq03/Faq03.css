@@ -1,0 +1,119 @@
+.ow-faq03,
+.ow-faq03 *,
+.ow-faq03 *::before,
+.ow-faq03 *::after {
+    box-sizing: border-box;
+}
+
+.ow-faq03 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.ow-faq03__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+/* Every answer on show, two to a row, each under a hairline. */
+.ow-faq03__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px 64px;
+    margin: 56px 0 0;
+}
+
+.ow-faq03__item {
+    border-top: 1px solid var(--ow-border);
+    padding-top: 22px;
+}
+
+.ow-faq03__answer {
+    max-width: 520px;
+    margin-top: 10px;
+}
+
+.ow-faq03__card {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 64px;
+    border-radius: var(--ow-radius-card);
+    padding: 28px 32px;
+}
+
+.ow-faq03__people {
+    flex-shrink: 0;
+}
+
+.ow-faq03__card-text {
+    min-width: 0;
+    flex: 1;
+}
+
+.ow-faq03__card-body {
+    margin-top: 4px;
+}
+
+.ow-faq03__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.ow-faq03__status::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ow-success-solid);
+    box-shadow: 0 0 0 3px var(--ow-success-surface);
+}
+
+.ow-faq03__actions {
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    gap: var(--ow-space-lg);
+}
+
+@media (max-width: 1024px) {
+    .ow-faq03__grid {
+        gap: 36px 40px;
+    }
+    .ow-faq03__card {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: start;
+        gap: 20px 24px;
+    }
+    .ow-faq03__actions {
+        grid-column: 2;
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-faq03 {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .ow-faq03__grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+        margin-top: 40px;
+    }
+    .ow-faq03__item {
+        padding-top: 20px;
+    }
+    .ow-faq03__card {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+        margin-top: 48px;
+        padding: 22px 20px;
+    }
+    .ow-faq03__actions {
+        grid-column: auto;
+        flex-direction: column;
+    }
+}

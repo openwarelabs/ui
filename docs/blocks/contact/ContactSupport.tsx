@@ -1,7 +1,6 @@
-import { Avatar, AvatarGroup, Card, CopyButton, Link, SectionHeading, Text } from "@openwarelabs/ui";
-import { ArrowRight, BookOpen, Mail, MessagesSquare } from "lucide-react";
-
-import "./ContactSupport.css";
+import { Contact02, type Contact02Option } from "@openwarelabs/blocks";
+import { Avatar, AvatarGroup, Link } from "@openwarelabs/ui";
+import { BookOpen, Mail, MessagesSquare } from "lucide-react";
 
 const guides = [
     { title: "Connect your first repository", time: "4 min" },
@@ -22,136 +21,59 @@ const replyTimes = [
     { plan: "Enterprise", time: "Within 1 hour, any day" },
 ];
 
+const options: Contact02Option[] = [
+    {
+        icon: <BookOpen size={20} />,
+        title: "Documentation",
+        description: "Guides for setup, agents and deploys, and the full API reference.",
+        listLabel: "Popular guides",
+        list: guides.map((guide) => ({ label: guide.title, href: "#", meta: guide.time })),
+        link: { label: "Browse the docs", href: "#" },
+    },
+    {
+        icon: <MessagesSquare size={20} />,
+        title: "Community forum",
+        description: "Ask how other teams work with Acme. Our engineers answer there every week.",
+        listLabel: "Recent threads",
+        list: threads.map((thread) => ({ label: thread.title, href: "#", meta: <>{thread.replies} replies</> })),
+        link: { label: "Join the forum", href: "#" },
+        footNote: (
+            <>
+                <AvatarGroup size="sm" max={3}>
+                    <Avatar name="Jonas Berg" />
+                    <Avatar name="Aiko Tanaka" />
+                    <Avatar name="Sam Okafor" />
+                </AvatarGroup>
+                4,200 members
+            </>
+        ),
+    },
+    {
+        icon: <Mail size={20} />,
+        title: "Email support",
+        description: "For anything about your own workspace: billing, access, or a deploy that won't go.",
+        email: "support@example.com",
+        listLabel: "Reply times by plan",
+        list: replyTimes.map((row) => ({ label: row.plan, meta: row.time })),
+        link: { label: "Write to support", href: "mailto:support@example.com" },
+    },
+];
+
 export function ContactSupport() {
     return (
-        <section className="contact-support" aria-labelledby="contact-support-title">
-            <div className="contact-support__inner">
-                <SectionHeading
-                    align="center"
-                    eyebrow="Support"
-                    title={<span id="contact-support-title">How can we help?</span>}
-                    intro="Most answers are already written down. When they aren't, the people who build Acme read every message."
-                />
-
-                <div className="contact-support__grid">
-                    <Card padding="none" className="contact-support__card">
-                        <div className="contact-support__body">
-                            <span className="contact-support__icon" aria-hidden="true">
-                                <BookOpen size={20} />
-                            </span>
-                            <Text variant="heading" as="h3" className="contact-support__title">
-                                Documentation
-                            </Text>
-                            <Text variant="copy" className="contact-support__text">
-                                Guides for setup, agents and deploys, and the full API reference.
-                            </Text>
-                            <ul className="contact-support__list" aria-label="Popular guides">
-                                {guides.map((guide) => (
-                                    <Text key={guide.title} variant="body" as="li">
-                                        <Link href="#" variant="standalone">
-                                            {guide.title}
-                                        </Link>
-                                        <Text variant="caption" className="contact-support__meta">
-                                            {guide.time}
-                                        </Text>
-                                    </Text>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="contact-support__foot">
-                            <Link href="#" variant="standalone" className="contact-support__foot-link">
-                                Browse the docs
-                                <ArrowRight size={14} aria-hidden="true" />
-                            </Link>
-                        </div>
-                    </Card>
-
-                    <Card padding="none" className="contact-support__card">
-                        <div className="contact-support__body">
-                            <span className="contact-support__icon" aria-hidden="true">
-                                <MessagesSquare size={20} />
-                            </span>
-                            <Text variant="heading" as="h3" className="contact-support__title">
-                                Community forum
-                            </Text>
-                            <Text variant="copy" className="contact-support__text">
-                                Ask how other teams work with Acme. Our engineers answer there every week.
-                            </Text>
-                            <ul className="contact-support__list" aria-label="Recent threads">
-                                {threads.map((thread) => (
-                                    <Text key={thread.title} variant="body" as="li">
-                                        <Link href="#" variant="standalone">
-                                            {thread.title}
-                                        </Link>
-                                        <Text variant="caption" className="contact-support__meta">
-                                            {thread.replies} replies
-                                        </Text>
-                                    </Text>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="contact-support__foot">
-                            <Link href="#" variant="standalone" className="contact-support__foot-link">
-                                Join the forum
-                                <ArrowRight size={14} aria-hidden="true" />
-                            </Link>
-                            <Text variant="caption" className="contact-support__members">
-                                <AvatarGroup size="sm" max={3}>
-                                    <Avatar name="Jonas Berg" />
-                                    <Avatar name="Aiko Tanaka" />
-                                    <Avatar name="Sam Okafor" />
-                                </AvatarGroup>
-                                4,200 members
-                            </Text>
-                        </div>
-                    </Card>
-
-                    <Card padding="none" className="contact-support__card">
-                        <div className="contact-support__body">
-                            <span className="contact-support__icon" aria-hidden="true">
-                                <Mail size={20} />
-                            </span>
-                            <Text variant="heading" as="h3" className="contact-support__title">
-                                Email support
-                            </Text>
-                            <Text variant="copy" className="contact-support__text">
-                                For anything about your own workspace: billing, access, or a deploy that won't go.
-                            </Text>
-                            <div className="contact-support__address">
-                                <Text variant="body" as="span">
-                                    support@example.com
-                                </Text>
-                                <CopyButton value="support@example.com" label="Copy address" iconOnly />
-                            </div>
-                            <ul className="contact-support__list" aria-label="Reply times by plan">
-                                {replyTimes.map((row) => (
-                                    <Text key={row.plan} variant="body" as="li">
-                                        <span>{row.plan}</span>
-                                        <Text variant="caption" className="contact-support__meta">
-                                            {row.time}
-                                        </Text>
-                                    </Text>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="contact-support__foot">
-                            <Link href="mailto:support@example.com" variant="standalone" className="contact-support__foot-link">
-                                Write to support
-                                <ArrowRight size={14} aria-hidden="true" />
-                            </Link>
-                        </div>
-                    </Card>
-                </div>
-
-                <Text variant="body" tone="muted" align="center" className="contact-support__status">
-                    <Text variant="label" as="span" tone="default" className="contact-support__state">
-                        All systems working
-                    </Text>
-                    <span>
+        <Contact02
+            eyebrow="Support"
+            title="How can we help?"
+            description="Most answers are already written down. When they aren't, the people who build Acme read every message."
+            options={options}
+            status={{
+                label: "All systems working",
+                description: (
+                    <>
                         Something broken? Check the <Link href="#">status page</Link> before you write.
-                    </span>
-                </Text>
-            </div>
-        </section>
+                    </>
+                ),
+            }}
+        />
     );
 }
