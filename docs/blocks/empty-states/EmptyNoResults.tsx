@@ -1,22 +1,5 @@
-import { useState } from "react";
-
-import {
-    Avatar,
-    Badge,
-    Button,
-    EmptyState,
-    Menu,
-    MenuItem,
-    MenuLabel,
-    MenuSeparator,
-    SearchField,
-    Table,
-    Tag,
-    TagGroup,
-    Text,
-    type TableColumn,
-} from "@openwarelabs/ui";
-import { ListFilter, SearchX } from "lucide-react";
+import { Empty02 } from "@openwarelabs/blocks";
+import { Avatar, Badge, Text, type TableColumn } from "@openwarelabs/ui";
 
 import "./EmptyNoResults.css";
 
@@ -67,8 +50,6 @@ const deploys: Deploy[] = [
     },
 ];
 
-const statuses: Status[] = ["Live", "Building", "Failed"];
-const projects = ["marketing-site", "billing-api", "mobile-app", "docs"];
 const tone = { Live: "success", Building: "active", Failed: "danger" } as const;
 
 const columns: Array<TableColumn<Deploy>> = [
@@ -121,110 +102,31 @@ const columns: Array<TableColumn<Deploy>> = [
     },
 ];
 
+const statuses: Status[] = ["Live", "Building", "Failed"];
+const projects = ["marketing-site", "billing-api", "mobile-app", "docs"];
+
 export function EmptyNoResults() {
-    const [query, setQuery] = useState("invoice dates");
-    const [status, setStatus] = useState<Status | null>("Failed");
-    const [project, setProject] = useState<string | null>("billing-api");
-
-    const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
-    const rows = deploys.filter(
-        (deploy) =>
-            (!status || deploy.status === status) &&
-            (!project || deploy.project === project) &&
-            words.every((word) => `#${deploy.id} ${deploy.title} ${deploy.branch} ${deploy.project}`.toLowerCase().includes(word)),
-    );
-    const filtered = Boolean(status || project);
-    const searched = query.trim();
-
-    const clearFilters = () => {
-        setStatus(null);
-        setProject(null);
-    };
-
-    const where = `${project ? `in ${project}` : "in every project"}${status ? `, only at ${status.toLowerCase()} deploys` : ""}`;
-
     return (
-        <div className="empty-no-results">
-            <main className="empty-no-results__panel">
-                <Text variant="heading" as="h2">
-                    Deploys
-                </Text>
-                <Text variant="copy" className="empty-no-results__subtitle">
-                    Deploys from the last 30 days, across every project.
-                </Text>
-
-                <div className="empty-no-results__toolbar">
-                    <div className="empty-no-results__search">
-                        <SearchField size="sm" aria-label="Search deploys" placeholder="Search deploys" value={query} onChange={setQuery} />
-                    </div>
-                    <TagGroup label="Filters">
-                        {status ? (
-                            <Tag variant="active" onRemove={() => setStatus(null)} removeLabel={`status filter: ${status}`}>
-                                Status: {status}
-                            </Tag>
-                        ) : null}
-                        {project ? (
-                            <Tag variant="active" onRemove={() => setProject(null)} removeLabel={`project filter: ${project}`}>
-                                Project: {project}
-                            </Tag>
-                        ) : null}
-                        <Menu
-                            label="Add a filter"
-                            trigger={
-                                <Button size="sm" variant="ghost" startIcon={<ListFilter size={16} />}>
-                                    {filtered ? "Filter" : "Add filter"}
-                                </Button>
-                            }
-                        >
-                            <MenuLabel>Status</MenuLabel>
-                            {statuses.map((value) => (
-                                <MenuItem key={value} onSelect={() => setStatus(value)}>
-                                    {value}
-                                </MenuItem>
-                            ))}
-                            <MenuSeparator />
-                            <MenuLabel>Project</MenuLabel>
-                            {projects.map((value) => (
-                                <MenuItem key={value} onSelect={() => setProject(value)}>
-                                    {value}
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </TagGroup>
-                    <Text variant="caption" className="empty-no-results__count" aria-live="polite">
-                        {rows.length} of {deploys.length} deploys
-                    </Text>
-                </div>
-
-                <Table
-                    className="empty-no-results__table"
-                    caption="Deploys"
-                    hideCaption
-                    columns={columns}
-                    rows={rows}
-                    emptyContent={
-                        <EmptyState
-                            icon={<SearchX size={20} />}
-                            title={searched ? `No deploys match “${searched}”` : "No deploys match these filters"}
-                            description={`We looked ${where}. ${searched && filtered ? "Try other words, or clear the filters to look wider." : searched ? "Try fewer or different words." : "Clear the filters to see them all."}`}
-                            actions={
-                                <>
-                                    {searched ? (
-                                        <Button variant={filtered ? "secondary" : "primary"} onClick={() => setQuery("")}>
-                                            Clear search
-                                        </Button>
-                                    ) : null}
-                                    {filtered ? (
-                                        <Button variant="primary" onClick={clearFilters}>
-                                            Clear filters
-                                        </Button>
-                                    ) : null}
-                                </>
-                            }
-                        />
-                    }
-                />
-            </main>
-        </div>
+        <Empty02
+            className="empty-no-results"
+            title="Deploys"
+            description="Deploys from the last 30 days, across every project."
+            columns={columns}
+            rows={deploys}
+            searchText={(deploy) => `#${deploy.id} ${deploy.title} ${deploy.branch} ${deploy.project}`}
+            filters={[
+                { key: "status", label: "Status", options: statuses, value: (deploy) => deploy.status },
+                { key: "project", label: "Project", options: projects, value: (deploy) => deploy.project },
+            ]}
+            defaultQuery="invoice dates"
+            defaultFilters={{ status: "Failed", project: "billing-api" }}
+            emptyTitle={({ query }) => (query ? `No deploys match “${query}”` : "No deploys match these filters")}
+            emptyDescription={({ query, filters }) => {
+                const filtered = Boolean(filters.status || filters.project);
+                const where = `${filters.project ? `in ${filters.project}` : "in every project"}${filters.status ? `, only at ${filters.status.toLowerCase()} deploys` : ""}`;
+                return `We looked ${where}. ${query && filtered ? "Try other words, or clear the filters to look wider." : query ? "Try fewer or different words." : "Clear the filters to see them all."}`;
+            }}
+            labels={{ search: "Search deploys", count: (shown, total) => `${shown} of ${total} deploys` }}
+        />
     );
 }

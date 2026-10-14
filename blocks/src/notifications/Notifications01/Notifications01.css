@@ -1,0 +1,158 @@
+.ow-notifications01,
+.ow-notifications01 *,
+.ow-notifications01 *::before,
+.ow-notifications01 *::after {
+    box-sizing: border-box;
+}
+
+/* The bell and its popover, as one item in a top bar. */
+.ow-notifications01 {
+    display: flex;
+}
+
+/* The bell, with the unread count cut out of its corner. */
+.ow-notifications01__bell {
+    position: relative;
+}
+
+.ow-notifications01__bell[aria-expanded="true"] {
+    background: var(--ow-surface);
+    box-shadow: var(--ow-shadow-control);
+}
+
+.ow-notifications01__count.ow-badge {
+    position: absolute;
+    top: 2px;
+    right: 1px;
+    min-width: 18px;
+    min-height: 18px;
+    border: 2px solid var(--ow-canvas);
+    background: var(--ow-primary);
+    padding: 0 4px;
+    color: var(--ow-on-primary);
+    font-size: 10.5px;
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+}
+
+.ow-notifications01__bell[aria-expanded="true"] .ow-notifications01__count.ow-badge {
+    border-color: var(--ow-surface);
+}
+
+/* The popover: edge-to-edge rows, so its own padding goes. */
+.ow-notifications01__popover.ow-popover {
+    gap: 0;
+    padding: 0;
+}
+
+.ow-notifications01__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-md);
+    padding: 10px 8px 4px 16px;
+}
+
+.ow-notifications01__tabs.ow-tabs {
+    gap: 0;
+}
+
+.ow-notifications01__tabs .ow-tabs__list {
+    padding: 0 16px;
+}
+
+/* A small count inside the tab, so the tab keeps its height; its figures line up as it changes. */
+.ow-notifications01__tab-count.ow-badge {
+    min-width: 18px;
+    min-height: 18px;
+    padding: 0 5px;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-notifications01__list {
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+}
+
+/* Each notification is one link, laid out as a row rather than a line of underlined text. */
+.ow-notifications01__item.ow-link {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--ow-space-lg);
+    border-radius: var(--ow-radius-form);
+    padding: 10px 28px 10px 10px;
+    color: inherit;
+    text-decoration: none;
+    transition: background-color var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.ow-notifications01__item.ow-link:hover {
+    background: var(--ow-hover);
+    color: inherit;
+}
+
+.ow-notifications01__item.ow-link:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
+
+.ow-notifications01__agent {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-primary-border);
+    border-radius: 50%;
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.ow-notifications01__agent--danger {
+    border-color: var(--ow-danger-border);
+    background: var(--ow-danger-surface);
+    color: var(--ow-danger-text);
+}
+
+.ow-notifications01__text {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+    gap: 4px;
+}
+
+.ow-notifications01__quote {
+    display: -webkit-box;
+    overflow: hidden;
+    border-left: 2px solid var(--ow-border-strong);
+    margin: 2px 0 0;
+    padding-left: 10px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.ow-notifications01__unread {
+    position: absolute;
+    top: 18px;
+    right: 12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ow-brass);
+}
+
+.ow-notifications01__empty {
+    padding: 40px 16px;
+}
+
+.ow-notifications01__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-md);
+    border-top: 1px solid var(--ow-border);
+    padding: 6px 8px 6px 16px;
+}

@@ -407,9 +407,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "empty",
         uses: ["EmptyState", "Button", "ChoiceCard"],
         variants: [
-            { id: "EmptyFirstRun", name: "First run", description: "What will be here and the button that makes the first one." },
-            { id: "EmptyNoResults", name: "No results", description: "What was searched for and a way back." },
-            { id: "EmptyError", name: "Couldn't load", description: "What went wrong and a button to try again." },
+            { id: "EmptyFirstRun", component: "Empty01", name: "First run", description: "What will be here and the button that makes the first one." },
+            { id: "EmptyNoResults", component: "Empty02", name: "No results", description: "What was searched for and a way back." },
+            { id: "EmptyError", component: "Empty03", name: "Couldn't load", description: "What went wrong and a button to try again." },
         ],
     },
     {
@@ -420,9 +420,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "error",
         uses: ["Button", "Link", "DotGrid"],
         variants: [
-            { id: "ErrorNotFound", name: "Not found", description: "A 404 with a search field and links to the main places.", height: 600 },
-            { id: "ErrorServer", name: "Something went wrong", description: "A 500 with a button to try again and how to report it.", height: 600 },
-            { id: "ErrorMaintenance", name: "Down for maintenance", description: "When it'll be back, and where to follow the status.", height: 600 },
+            { id: "ErrorNotFound", component: "ErrorPage01", name: "Not found", description: "A 404 with a search field and links to the main places.", height: 600 },
+            { id: "ErrorServer", component: "ErrorPage02", name: "Something went wrong", description: "A 500 with a button to try again and how to report it.", height: 600 },
+            { id: "ErrorMaintenance", component: "ErrorPage03", name: "Down for maintenance", description: "When it'll be back, and where to follow the status.", height: 600 },
         ],
     },
     {
@@ -433,9 +433,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "notifications",
         uses: ["Popover", "Badge", "Avatar", "Tabs", "Switch"],
         variants: [
-            { id: "NotificationsInbox", name: "Inbox popover", description: "A bell with a count that opens the latest, with Mark all as read.", height: 560 },
-            { id: "NotificationsFeed", name: "Activity feed", description: "Events in order, each with who, what and when." },
-            { id: "NotificationsSettings", name: "Notification settings", description: "Which events reach email, push or nowhere, in a grid of switches." },
+            { id: "NotificationsInbox", component: "Notifications01", name: "Inbox popover", description: "A bell with a count that opens the latest, with Mark all as read.", height: 560 },
+            { id: "NotificationsFeed", component: "Notifications02", name: "Activity feed", description: "Events in order, each with who, what and when." },
+            { id: "NotificationsSettings", component: "Notifications03", name: "Notification settings", description: "Which events reach email, push or nowhere, in a grid of switches." },
         ],
     },
     {

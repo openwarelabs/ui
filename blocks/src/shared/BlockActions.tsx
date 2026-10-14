@@ -5,7 +5,7 @@ import { Button, buttonClassName, cx } from "@openwarelabs/ui";
 import type { BlockActionButtonProps, BlockActionsProps } from "@blocks/shared/shared.types";
 
 /** One action as a large pill: a link styled as a button when it has an href, a button otherwise. */
-export function BlockActionButton({ action, variant, size = "lg", className, onAfterClick, fullWidth = false }: BlockActionButtonProps) {
+export function BlockActionButton({ action, variant, size = "lg", shape = "pill", className, onAfterClick, fullWidth = false }: BlockActionButtonProps) {
     const { label, href, onClick, startIcon, endIcon, target, "aria-label": ariaLabel } = action;
     const click =
         onClick || onAfterClick
@@ -17,7 +17,7 @@ export function BlockActionButton({ action, variant, size = "lg", className, onA
     if (href !== undefined) {
         return (
             <a
-                className={cx(buttonClassName({ variant, size, shape: "pill" }), fullWidth && "ow-button--full", className)}
+                className={cx(buttonClassName({ variant, size, shape }), fullWidth && "ow-button--full", className)}
                 href={href}
                 target={target}
                 rel={target === "_blank" ? "noopener noreferrer" : undefined}
@@ -33,7 +33,7 @@ export function BlockActionButton({ action, variant, size = "lg", className, onA
     return (
         <Button
             variant={variant}
-            shape="pill"
+            shape={shape}
             size={size}
             startIcon={startIcon}
             endIcon={endIcon}

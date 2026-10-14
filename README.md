@@ -71,7 +71,7 @@ Hooks for your own components: `useControllableState`, `useFloating` (top-layer 
 
 ## Blocks as components
 
-Blocks are becoming components in their own package, `@openwarelabs/blocks`, that take their content as props, so you don't copy their code. The heroes are first, `Hero01` to `Hero06`:
+Every block is also a component in its own package, `@openwarelabs/blocks`, that takes its content as props, so you don't copy its code: all 95, from `Header01` and `Hero01` to `Settings03` and `Chat03` ([the list](blocks/README.md#blocks)).
 
 ```sh
 npm install @openwarelabs/blocks

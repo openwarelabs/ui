@@ -1,0 +1,224 @@
+.ow-error-page01,
+.ow-error-page01 *,
+.ow-error-page01 *::before,
+.ow-error-page01 *::after {
+    box-sizing: border-box;
+}
+
+.ow-error-page01 {
+    min-height: 100dvh;
+    color: var(--ow-text);
+}
+
+.ow-error-page01__ground.ow-dot-grid {
+    min-height: 100dvh;
+    background: var(--ow-canvas);
+}
+
+.ow-error-page01 .ow-dot-grid__content {
+    display: flex;
+    min-height: 100dvh;
+    flex-direction: column;
+}
+
+.ow-error-page01__bar {
+    display: flex;
+    height: 60px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+}
+
+/* The logo and the places are links, but keep their own colour on hover: no underline, no brass. */
+.ow-error-page01__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    border-radius: var(--ow-radius-md);
+    text-decoration-line: none;
+}
+
+.ow-error-page01__logo:hover {
+    color: var(--ow-text);
+}
+
+.ow-error-page01__main {
+    display: flex;
+    width: 100%;
+    max-width: 548px;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 8px 24px 68px;
+    text-align: center;
+}
+
+/* 404, with the zero drawn as an orbit: something should be here, and isn't. */
+.ow-error-page01__code {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ow-text);
+    font-size: 96px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-error-page01__zero {
+    position: relative;
+    display: block;
+    width: 74px;
+    height: 74px;
+    border: 1.5px solid var(--ow-border-strong);
+    border-radius: 50%;
+    background: var(--ow-surface);
+}
+
+.ow-error-page01__zero::before {
+    content: "";
+    position: absolute;
+    inset: 16px;
+    border: 1.5px dashed var(--ow-border-strong);
+    border-radius: 50%;
+}
+
+.ow-error-page01__zero::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--ow-brass);
+    transform: translate(-50%, -50%) rotate(-40deg) translateX(37px);
+}
+
+.ow-error-page01__title {
+    margin-top: 24px;
+}
+
+.ow-error-page01__text {
+    max-width: 460px;
+    margin-top: 10px;
+}
+
+.ow-error-page01__search {
+    width: 100%;
+    margin-top: 24px;
+}
+
+.ow-error-page01__search .ow-input-group {
+    background: var(--ow-surface);
+}
+
+.ow-error-page01__places {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+}
+
+.ow-error-page01__place {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: 11px 12px;
+    text-decoration-line: none;
+    transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-error-page01__place:hover {
+    border-color: var(--ow-border-hover);
+    color: var(--ow-text);
+}
+
+.ow-error-page01__place-icon {
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-surface-muted);
+    color: var(--ow-text-muted);
+}
+
+.ow-error-page01__place:hover .ow-error-page01__place-icon {
+    color: var(--ow-primary-text);
+}
+
+.ow-error-page01__place-text {
+    display: grid;
+    min-width: 0;
+    gap: 1px;
+}
+
+.ow-error-page01__none {
+    grid-column: 1 / -1;
+    border: 1px dashed var(--ow-border-strong);
+    border-radius: var(--ow-radius-container);
+    padding: 16px;
+}
+
+@media (max-width: 760px) {
+    .ow-error-page01__bar {
+        padding: 0 var(--ow-page-gutter);
+    }
+    .ow-error-page01__main {
+        padding: 4px var(--ow-page-gutter) 40px;
+    }
+    .ow-error-page01__code {
+        gap: 8px;
+        font-size: 64px;
+    }
+    .ow-error-page01__zero {
+        width: 50px;
+        height: 50px;
+    }
+    .ow-error-page01__zero::before {
+        inset: 11px;
+    }
+    .ow-error-page01__zero::after {
+        width: 7px;
+        height: 7px;
+        transform: translate(-50%, -50%) rotate(-40deg) translateX(25px);
+    }
+    .ow-error-page01__title {
+        margin-top: 18px;
+    }
+    .ow-error-page01__search {
+        margin-top: 20px;
+    }
+    .ow-error-page01__places {
+        gap: 8px;
+    }
+    .ow-error-page01__place {
+        gap: 10px;
+        padding: 8px 10px;
+    }
+    .ow-error-page01__place-description {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-error-page01__place {
+        transition: none;
+    }
+}

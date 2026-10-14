@@ -1,18 +1,18 @@
-.empty-error,
-.empty-error *,
-.empty-error *::before,
-.empty-error *::after {
+.ow-empty03,
+.ow-empty03 *,
+.ow-empty03 *::before,
+.ow-empty03 *::after {
     box-sizing: border-box;
 }
 
-.empty-error {
+.ow-empty03 {
     background: var(--ow-canvas);
     padding: 24px;
     color: var(--ow-text);
     font-size: 14px;
 }
 
-.empty-error__panel {
+.ow-empty03__panel {
     max-width: 1080px;
     margin: 0 auto;
     border: 1px solid var(--ow-border);
@@ -21,7 +21,7 @@
     padding: 28px 32px 32px;
 }
 
-.empty-error__header {
+.ow-empty03__header {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
@@ -29,17 +29,17 @@
     gap: 16px;
 }
 
-.empty-error__subtitle {
+.ow-empty03__subtitle {
     margin-top: 4px;
 }
 
-.empty-error__card {
+.ow-empty03__card {
     margin-top: 24px;
     border: 1px solid var(--ow-border);
     border-radius: var(--ow-radius-container);
 }
 
-.empty-error__card-head {
+.ow-empty03__card-head {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -50,39 +50,39 @@
 }
 
 /* The error and the spinner take the same space, so the page doesn't jump between them. */
-.empty-error__body {
+.ow-empty03__body {
     display: grid;
     place-items: center;
 }
 
-.empty-error__body--waiting {
+.ow-empty03__body--waiting {
     min-height: 300px;
 }
 
-.empty-error__body .ow-empty {
+.ow-empty03__body .ow-empty {
     padding: 36px 20px;
 }
 
-.empty-error__body .ow-empty__icon {
+.ow-empty03__body .ow-empty__icon {
     border-color: var(--ow-danger-border);
     background: var(--ow-danger-surface);
     color: var(--ow-danger-text);
 }
 
 /* The status and request ID for support: muted, so it doesn't compete with the message above it. */
-.empty-error__detail {
+.ow-empty03__detail {
     display: inline-block;
     margin-top: 8px;
     color: var(--ow-text-muted);
 }
 
-.empty-error__loading {
+.ow-empty03__loading {
     display: grid;
     justify-items: center;
     gap: 12px;
 }
 
-.empty-error__runs {
+.ow-empty03__runs {
     width: 100%;
     align-self: start;
     margin: 0;
@@ -90,7 +90,7 @@
     list-style: none;
 }
 
-.empty-error__run {
+.ow-empty03__run {
     display: grid;
     grid-template-columns: 28px minmax(0, 1fr) auto auto;
     align-items: center;
@@ -98,11 +98,11 @@
     padding: 12px 18px;
 }
 
-.empty-error__run + .empty-error__run {
+.ow-empty03__run + .ow-empty03__run {
     border-top: 1px solid var(--ow-border);
 }
 
-.empty-error__agent {
+.ow-empty03__agent {
     display: inline-flex;
     width: 28px;
     height: 28px;
@@ -114,33 +114,33 @@
     color: var(--ow-primary-text);
 }
 
-.empty-error__run-text {
+.ow-empty03__run-text {
     display: grid;
     min-width: 0;
     gap: 2px;
 }
 
 /* Durations, so their figures line up down the list. */
-.empty-error__run-time {
+.ow-empty03__run-time {
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
 }
 
 @media (max-width: 760px) {
-    .empty-error {
+    .ow-empty03 {
         padding: 8px;
     }
-    .empty-error__panel {
+    .ow-empty03__panel {
         padding: 22px 16px 16px;
     }
-    .empty-error__card-head {
+    .ow-empty03__card-head {
         padding-left: 14px;
     }
-    .empty-error__run {
+    .ow-empty03__run {
         grid-template-columns: 28px minmax(0, 1fr) auto;
         padding: 12px 14px;
     }
-    .empty-error__run-time {
+    .ow-empty03__run-time {
         display: none;
     }
 }

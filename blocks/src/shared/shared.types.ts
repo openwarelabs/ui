@@ -63,6 +63,9 @@ export interface BlockActionButtonProps {
     /** lg for heroes and calls to action, sm for headers.
      * @default "lg" */
     size?: "sm" | "md" | "lg";
+    /** pill for marketing pages, rounded for application pages.
+     * @default "pill" */
+    shape?: "pill" | "rounded";
     className?: string;
     /** Runs after the action's own onClick, such as closing a menu. */
     onAfterClick?(): void;
