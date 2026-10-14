@@ -2,6 +2,12 @@
 
 Every release of @openwarelabs/ui and @openwarelabs/ui-mcp. `npm run release` writes it from the commits.
 
+## 0.9.0 (2026-10-14)
+
+### Features
+
+- **blocks:** add Cta01 to Cta03 (#7) ([a75ff4a](https://github.com/openwarelabs/ui/commit/a75ff4a2f72073ee3233d4158f338abe9476a3cd))
+
 ## 0.8.0 (2026-10-14)
 
 ### Features
