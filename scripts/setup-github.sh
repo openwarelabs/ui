@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # One-time GitHub setup for openwarelabs/ui, with the GitHub CLI (gh auth login first). Safe to run again.
 #   - Pull requests are squash-merged only, with the PR title as the commit subject; branches are deleted after.
+#     Auto-merge is on, so `gh pr merge --squash --auto` merges once the checks pass.
 #   - main takes changes only through pull requests, which need the Checks, Cleaner, PR title and Visual checks to pass.
 #     Repository admins can bypass it, so `npm run release` can push its version commit and tag.
 #   - main can't be force-pushed or deleted.
@@ -18,6 +19,7 @@ gh api --method PATCH "repos/$repo" --silent \
   -f squash_merge_commit_title=PR_TITLE \
   -f squash_merge_commit_message=PR_BODY \
   -F delete_branch_on_merge=true \
+  -F allow_auto_merge=true \
   -F allow_update_branch=true
 
 ruleset=$(cat <<'JSON'
