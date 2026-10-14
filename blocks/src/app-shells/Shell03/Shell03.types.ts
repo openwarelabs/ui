@@ -71,3 +71,5 @@ export interface Shell03Props extends Omit<HTMLAttributes<HTMLDivElement>, "chil
     /** Words that aren't content (names for screen readers, the filter), in English unless you pass your own. */
     labels?: Shell03Labels;
 }
+
+export type Shell03View = "list" | "item" | "inspector";

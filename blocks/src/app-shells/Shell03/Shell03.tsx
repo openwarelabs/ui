@@ -5,10 +5,9 @@ import { Avatar, Badge, Button, cx, Menu, NavItem, ScrollShadow, SearchField, Te
 import { AppWorkspaceItems } from "@blocks/shared/AppWorkspaceItems";
 import { BlockMenuItems } from "@blocks/shared/BlockMenuItems";
 import { ChevronLeftIcon, ChevronRightIcon, ChevronsUpDownIcon, PanelRightIcon, PlusIcon, XIcon } from "@blocks/shared/icons";
-import type { Shell03Props } from "./Shell03.types";
+import type { Shell03Props, Shell03View } from "./Shell03.types";
 
 /** On phones one pane shows at a time; under 1024px the inspector takes the item's place. */
-type View = "list" | "item" | "inspector";
 
 function useMediaQuery(query: string) {
     const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
@@ -49,7 +48,7 @@ export function Shell03({
 }: Shell03Props) {
     const id = useId();
     const [ownSelected, setOwnSelected] = useState(defaultSelected ?? items[0]?.id);
-    const [view, setView] = useState<View>("list");
+    const [view, setView] = useState<Shell03View>("list");
     const [inspectorOpen, setInspectorOpen] = useState(defaultInspectorOpen);
     const [query, setQuery] = useState("");
     const wide = useMediaQuery("(min-width: 1024px)");
@@ -69,7 +68,7 @@ export function Shell03({
         if (view === "inspector") inspectorRef.current?.querySelector<HTMLElement>("h2")?.focus();
         if (view === "list") listRef.current?.querySelector<HTMLElement>('[aria-current="page"]')?.focus();
     }, [view]);
-    const go = (next: View) => {
+    const go = (next: Shell03View) => {
         moved.current = true;
         setView(next);
     };
