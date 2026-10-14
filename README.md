@@ -137,7 +137,7 @@ Five checks have to pass to merge:
 - **Visual**: every block (desktop and phone width) and every component example, in light and dark, rendered from the PR and from `main` and compared pixel by pixel. If something looks different, the run's summary lists it and the `visual-report` artifact shows each one before, after and with the changed pixels marked. When the change is meant, add the **visual change** label and the check passes. `npm run visual` runs the same comparison locally against `main` (`-- --filter Hero` for a few).
 - **Accessibility**: axe over every block (desktop and phone width) and every component example, in light and dark, against WCAG 2.2 A and AA. The run's summary lists each problem with the element and how to fix it. `a11y-known.json` lists the problems there already were, which don't fail it; fixing one means lowering its count. `npm run a11y` runs it locally (`-- --filter Hero` for a few).
 
-Dependabot opens a pull request each Monday with the week's npm and GitHub Actions updates, minor and patch ones grouped; every check above runs on it.
+Dependabot opens a pull request each Monday with the week's npm and GitHub Actions updates, minor and patch ones grouped, and React with React DOM in one. Only Checks runs on those (types, builds, size and the package smoke test): PR title, Cleaner, Visual and Accessibility are for changes people make, and skipped jobs count as passing.
 
 `scripts/setup-github.sh` sets this up on GitHub (squash merges only, the PR title as the commit, the ruleset for `main`, the visual change label). Repository admins can bypass the ruleset, which `npm run release` uses to push its version commit and tag.
 

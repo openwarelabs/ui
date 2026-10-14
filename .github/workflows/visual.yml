@@ -22,6 +22,9 @@ permissions:
 jobs:
   visual:
     name: Visual
+    # Not on Dependabot's pull requests: they only update dependencies, which Checks verifies. (A skipped job counts as
+    # passing for a required check, so they can still merge.)
+    if: github.event.pull_request.user.login != 'dependabot[bot]'
     # It runs again whenever a label is added or removed, not just "visual change": a skipped run would count as
     # passing, so skipping the others would let any label through.
     runs-on: ubuntu-latest
