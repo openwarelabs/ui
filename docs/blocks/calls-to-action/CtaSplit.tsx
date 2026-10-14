@@ -1,4 +1,5 @@
-import { Avatar, Badge, Button, DotGrid, SectionHeading, Text, buttonClassName } from "@openwarelabs/ui";
+import { Cta03 } from "@openwarelabs/blocks";
+import { Avatar, Badge, DotGrid, buttonClassName } from "@openwarelabs/ui";
 import { ArrowRight, Check, CircleCheck, GitPullRequest, Rocket } from "lucide-react";
 
 import "./CtaSplit.css";
@@ -91,33 +92,14 @@ function PullRequest() {
 
 export function CtaSplit() {
     return (
-        <section className="cta-split" aria-labelledby="cta-split-title">
-            <div className="cta-split__inner">
-                <div>
-                    <SectionHeading
-                        eyebrow="Get started"
-                        title={<span id="cta-split-title">Hand off the routine work this afternoon</span>}
-                        intro="Connect a repository, give an agent an issue, and review its pull request before the day is out. Every change still goes through your team."
-                    />
-                    <div className="cta-split__actions">
-                        <Button variant="primary" shape="pill" size="lg" endIcon={<ArrowRight size={16} />}>
-                            Start for free
-                        </Button>
-                        <Button shape="pill" size="lg">
-                            Book a demo
-                        </Button>
-                    </div>
-                    <ul className="cta-split__points">
-                        {points.map((point) => (
-                            <Text as="li" variant="body" tone="soft" key={point}>
-                                <Check size={16} aria-hidden="true" />
-                                {point}
-                            </Text>
-                        ))}
-                    </ul>
-                </div>
-                <PullRequest />
-            </div>
-        </section>
+        <Cta03
+            eyebrow="Get started"
+            title="Hand off the routine work this afternoon"
+            description="Connect a repository, give an agent an issue, and review its pull request before the day is out. Every change still goes through your team."
+            primaryAction={{ label: "Start for free", href: "#start", endIcon: <ArrowRight size={16} /> }}
+            secondaryAction={{ label: "Book a demo", href: "#demo" }}
+            points={points}
+            visual={<PullRequest />}
+        />
     );
 }

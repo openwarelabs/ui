@@ -1,0 +1,67 @@
+.ow-cta03,
+.ow-cta03 *,
+.ow-cta03 *::before,
+.ow-cta03 *::after {
+    box-sizing: border-box;
+}
+
+.ow-cta03 {
+    overflow: hidden;
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.ow-cta03__inner {
+    display: grid;
+    max-width: var(--ow-page-max);
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: center;
+    gap: 72px;
+    margin: 0 auto;
+}
+
+.ow-cta03__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ow-space-lg);
+    margin-top: 32px;
+}
+
+.ow-cta03__points {
+    display: grid;
+    gap: 10px;
+    margin: 32px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-cta03__points li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ow-cta03__points svg {
+    flex-shrink: 0;
+    color: var(--ow-primary-text);
+}
+
+@media (max-width: 1024px) {
+    .ow-cta03__inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 56px;
+    
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-cta03 {
+        padding: 72px var(--ow-page-gutter);
+    
+    }
+    .ow-cta03__actions {
+        flex-direction: column;
+    
+    }
+}
