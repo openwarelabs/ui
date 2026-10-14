@@ -5,39 +5,8 @@
     box-sizing: border-box;
 }
 
-.features-tabs {
-    overflow: hidden;
-    background: var(--ow-paper);
-    padding: var(--ow-section-y) 32px;
-    color: var(--ow-text);
-}
-
-.features-tabs__inner {
-    max-width: var(--ow-page-max);
-    margin: 0 auto;
-}
-
-.features-tabs__tabs {
-    gap: 0;
-    margin-top: 48px;
-}
-
-.features-tabs__tabs .ow-tabs__list {
-    justify-self: center;
-}
-
-.features-tabs__panel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.features-tabs__caption {
-    max-width: 640px;
-    margin-top: 28px;
-}
-
 /* The window: everything inside is drawn, so it can't be clicked or focused. */
+
 .features-tabs__frame {
     width: 100%;
     max-width: 1080px;
@@ -104,6 +73,7 @@
 }
 
 /* The screen: a fixed height, so switching tabs doesn't move the page. */
+
 .features-tabs__screen {
     height: 404px;
     overflow: hidden;
@@ -179,6 +149,7 @@
 }
 
 /* Plan */
+
 .features-tabs__board {
     display: grid;
     grid-template-columns: repeat(3, minmax(196px, 1fr));
@@ -266,6 +237,7 @@
 }
 
 /* Delegate */
+
 .features-tabs__runs {
     overflow: hidden;
     border: 1px solid var(--ow-border);
@@ -300,6 +272,7 @@
 }
 
 /* Review */
+
 .features-tabs__review {
     display: grid;
     grid-template-columns: 200px minmax(0, 1fr) 236px;
@@ -462,6 +435,7 @@
 }
 
 /* Drawn, not a real button. */
+
 .features-tabs__merge {
     display: flex;
     height: 32px;
@@ -476,6 +450,7 @@
 }
 
 /* Ship */
+
 .features-tabs__ship {
     display: grid;
     gap: 14px;
@@ -533,62 +508,64 @@
 @media (max-width: 1024px) {
     .features-tabs__review {
         grid-template-columns: minmax(0, 1fr) 220px;
+    
     }
     .features-tabs__files {
         display: none;
+    
     }
     .features-tabs__run-state,
     .features-tabs__by {
         display: none;
+    
     }
 }
 
 @media (max-width: 760px) {
-    .features-tabs {
-        padding: 72px var(--ow-page-gutter);
-    }
-    .features-tabs__tabs {
-        margin-top: 36px;
-    }
-    .features-tabs__tabs .ow-tab__icon {
-        display: none;
-    }
-    .features-tabs__caption {
-        margin-top: 22px;
-    }
     .features-tabs__frame {
         margin-top: 24px;
+    
     }
     .features-tabs__people {
         display: none;
+    
     }
     .features-tabs__screen {
         height: 380px;
         padding: 12px;
+    
     }
     /* The board keeps its width and runs off the right edge, like a cropped screenshot. */
     .features-tabs__board {
         grid-template-columns: repeat(3, 232px);
+    
     }
     .features-tabs__review {
         grid-template-columns: minmax(0, 1fr);
+    
     }
     .features-tabs__checks {
         display: none;
+    
     }
     .features-tabs__time {
         display: none;
+    
     }
     .features-tabs__run .ow-badge {
         display: none;
+    
     }
     .features-tabs__deploy .ow-badge {
         width: auto;
+    
     }
     .features-tabs__line {
         grid-template-columns: 0 28px 16px minmax(0, 1fr);
+    
     }
     .features-tabs__line .features-tabs__gutter:first-child {
         visibility: hidden;
+    
     }
 }

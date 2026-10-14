@@ -5,92 +5,6 @@
     box-sizing: border-box;
 }
 
-.features-bento {
-    background: var(--ow-paper);
-    padding: var(--ow-section-y) 32px;
-    color: var(--ow-text);
-}
-
-.features-bento__inner {
-    max-width: var(--ow-page-max);
-    margin: 0 auto;
-}
-
-/* The title on the left, the intro on the right, sharing a baseline at the bottom. */
-.features-bento__header {
-    display: grid;
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    align-items: end;
-    gap: 48px;
-}
-
-.features-bento__intro {
-    max-width: 440px;
-}
-
-/* Six columns: the agents card takes four columns and two rows, the rest two columns each. */
-.features-bento__grid {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 16px;
-    margin-top: 56px;
-}
-
-.features-bento__card {
-    display: flex;
-    min-width: 0;
-    flex-direction: column;
-    overflow: hidden;
-    grid-column: span 2;
-    border: 1px solid var(--ow-border);
-    border-radius: var(--ow-radius-card);
-    background: var(--ow-surface);
-}
-
-.features-bento__card--agents {
-    grid-column: span 4;
-    grid-row: span 2;
-}
-
-.features-bento__copy {
-    padding: 24px 24px 20px;
-}
-
-.features-bento__card--agents .features-bento__copy {
-    max-width: 540px;
-    padding: 32px 32px 24px;
-}
-
-.features-bento__text {
-    margin-top: 6px;
-}
-
-.features-bento__card--agents .features-bento__text {
-    margin-top: 10px;
-}
-
-/* The picture sits in a tray inset from the card, and runs off its bottom edge like a cropped screenshot. */
-.features-bento__visual {
-    position: relative;
-    display: flex;
-    min-height: 168px;
-    flex: 1;
-    flex-direction: column;
-    overflow: hidden;
-    margin: 0 8px 8px;
-    border-radius: var(--ow-radius-tile);
-    background: var(--ow-canvas);
-    padding: 20px;
-    font-size: 13px;
-    pointer-events: none;
-    user-select: none;
-}
-
-.features-bento__card--agents .features-bento__visual {
-    min-height: 380px;
-    padding: 32px 32px 0;
-}
-
 .features-bento__window {
     border: 1px solid var(--ow-border);
     border-radius: var(--ow-radius-container);
@@ -130,7 +44,8 @@
 }
 
 /* The run as a timeline: dots on a hairline, spread to fill the window. */
-.features-bento__card--agents .features-bento__window:first-child {
+
+.features-bento__window--run {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -197,6 +112,7 @@
 }
 
 /* The pull request it opened, laid over the run's corner. */
+
 .features-bento__pull-request {
     position: relative;
     display: flex;
@@ -237,6 +153,7 @@
 }
 
 /* Rows for reviews, previews and search results. */
+
 .features-bento__row {
     display: flex;
     align-items: center;
@@ -329,50 +246,18 @@
     font-size: 13px;
 }
 
-@media (max-width: 1024px) {
-    .features-bento__header {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 16px;
-    }
-    .features-bento__grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .features-bento__card,
-    .features-bento__card--agents {
-        grid-column: span 1;
-        grid-row: auto;
-    }
-    .features-bento__card--agents,
-    .features-bento__card--access {
-        grid-column: 1 / -1;
-    }
-    .features-bento__card--agents .features-bento__visual {
-        min-height: 0;
-    }
-}
-
 @media (max-width: 760px) {
-    .features-bento {
-        padding: 72px var(--ow-page-gutter);
-    }
-    .features-bento__grid {
-        grid-template-columns: minmax(0, 1fr);
-        margin-top: 40px;
-    }
-    .features-bento__card--agents .features-bento__copy {
-        padding: 24px 24px 20px;
-    }
-    .features-bento__card--agents .features-bento__visual {
-        padding: 20px 16px 0;
-    }
     .features-bento__timeline-time {
         display: none;
+    
     }
     .features-bento__pull-request {
         width: auto;
         margin: -16px -8px 24px 12px;
+    
     }
     .features-bento__pull-request .ow-badge {
         display: none;
+    
     }
 }

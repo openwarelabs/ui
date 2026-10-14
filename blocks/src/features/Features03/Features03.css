@@ -1,0 +1,142 @@
+.ow-features03,
+.ow-features03 *,
+.ow-features03 *::before,
+.ow-features03 *::after {
+    box-sizing: border-box;
+}
+
+.ow-features03 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.ow-features03__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+/* The title on the left, the intro on the right, sharing a baseline at the bottom. */
+
+.ow-features03__header {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: end;
+    gap: 48px;
+}
+
+.ow-features03__intro {
+    max-width: 440px;
+}
+
+/* Six columns: the agents card takes four columns and two rows, the rest two columns each. */
+
+.ow-features03__grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 56px;
+}
+
+.ow-features03__card {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    overflow: hidden;
+    grid-column: span 2;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-card);
+    background: var(--ow-surface);
+}
+
+.ow-features03__card--featured {
+    grid-column: span 4;
+    grid-row: span 2;
+}
+
+.ow-features03__copy {
+    padding: 24px 24px 20px;
+}
+
+.ow-features03__card--featured .ow-features03__copy {
+    max-width: 540px;
+    padding: 32px 32px 24px;
+}
+
+.ow-features03__text {
+    margin-top: 6px;
+}
+
+.ow-features03__card--featured .ow-features03__text {
+    margin-top: 10px;
+}
+
+/* The picture sits in a tray inset from the card, and runs off its bottom edge like a cropped screenshot. */
+
+.ow-features03__visual {
+    position: relative;
+    display: flex;
+    min-height: 168px;
+    flex: 1;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 0 8px 8px;
+    border-radius: var(--ow-radius-tile);
+    background: var(--ow-canvas);
+    padding: 20px;
+    font-size: 13px;
+    pointer-events: none;
+    user-select: none;
+}
+
+.ow-features03__card--featured .ow-features03__visual {
+    min-height: 380px;
+    padding: 32px 32px 0;
+}
+
+@media (max-width: 1024px) {
+    .ow-features03__header {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    
+    }
+    .ow-features03__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    
+    }
+    .ow-features03__card,
+    .ow-features03__card--featured {
+        grid-column: span 1;
+        grid-row: auto;
+    
+    }
+    .ow-features03__card--featured,
+    .ow-features03__card--last {
+        grid-column: 1 / -1;
+    
+    }
+    .ow-features03__card--featured .ow-features03__visual {
+        min-height: 0;
+    
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-features03 {
+        padding: 72px var(--ow-page-gutter);
+    
+    }
+    .ow-features03__grid {
+        grid-template-columns: minmax(0, 1fr);
+        margin-top: 40px;
+    
+    }
+    .ow-features03__card--featured .ow-features03__copy {
+        padding: 24px 24px 20px;
+    
+    }
+    .ow-features03__card--featured .ow-features03__visual {
+        padding: 20px 16px 0;
+    
+    }
+}

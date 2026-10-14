@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
-import { Avatar, AvatarGroup, Badge, ProgressBar, SectionHeading, Spinner, Tab, TabList, TabPanel, Tabs, Text } from "@openwarelabs/ui";
+import { Features04 } from "@openwarelabs/blocks";
+import { Avatar, AvatarGroup, Badge, ProgressBar, Spinner } from "@openwarelabs/ui";
 import { Bot, Check, FileCode, GitPullRequest, ListTodo, Rocket } from "lucide-react";
 
 import "./FeaturesTabs.css";
@@ -330,35 +331,21 @@ const parts = [
 
 export function FeaturesTabs() {
     return (
-        <section className="features-tabs" aria-labelledby="features-tabs-title">
-            <div className="features-tabs__inner">
-                <SectionHeading
-                    align="center"
-                    eyebrow="One workspace"
-                    title={<span id="features-tabs-title">Plan it, hand it off, review it, ship it</span>}
-                    intro="Each part of the work has its own screen, and they all share the same issues, people and history."
-                />
-
-                <Tabs defaultValue="plan" className="features-tabs__tabs">
-                    <TabList aria-label="Parts of Acme">
-                        {parts.map((part) => (
-                            <Tab key={part.value} value={part.value} icon={part.icon}>
-                                {part.label}
-                            </Tab>
-                        ))}
-                    </TabList>
-                    {parts.map((part) => (
-                        <TabPanel key={part.value} value={part.value} className="features-tabs__panel">
-                            <Text variant="copy" align="center" className="features-tabs__caption">
-                                {part.caption}
-                            </Text>
-                            <Frame path={part.path} label={part.shotLabel}>
-                                {part.screen}
-                            </Frame>
-                        </TabPanel>
-                    ))}
-                </Tabs>
-            </div>
-        </section>
+        <Features04
+            eyebrow="One workspace"
+            title="Plan it, hand it off, review it, ship it"
+            description="Each part of the work has its own screen, and they all share the same issues, people and history."
+            tabs={parts.map((part) => ({
+                label: part.label,
+                icon: part.icon,
+                caption: part.caption,
+                visual: (
+                    <Frame path={part.path} label={part.shotLabel}>
+                        {part.screen}
+                    </Frame>
+                ),
+            }))}
+            labels={{ tabs: "Parts of Acme" }}
+        />
     );
 }

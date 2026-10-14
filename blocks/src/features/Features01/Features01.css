@@ -1,23 +1,24 @@
-.features-columns,
-.features-columns *,
-.features-columns *::before,
-.features-columns *::after {
+.ow-features01,
+.ow-features01 *,
+.ow-features01 *::before,
+.ow-features01 *::after {
     box-sizing: border-box;
 }
 
-.features-columns {
+.ow-features01 {
     background: var(--ow-paper);
     padding: var(--ow-section-y) 32px;
     color: var(--ow-text);
 }
 
-.features-columns__inner {
+.ow-features01__inner {
     max-width: var(--ow-page-max);
     margin: 0 auto;
 }
 
 /* Six cells in one card, split by hairlines: the 1px gaps show the border colour behind them. */
-.features-columns__grid {
+
+.ow-features01__grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1px;
@@ -30,14 +31,14 @@
     list-style: none;
 }
 
-.features-columns__item {
+.ow-features01__item {
     display: flex;
     flex-direction: column;
     background: var(--ow-surface);
     padding: 32px 32px 36px;
 }
 
-.features-columns__icon {
+.ow-features01__icon {
     display: inline-flex;
     width: 36px;
     height: 36px;
@@ -49,46 +50,53 @@
     color: var(--ow-primary-text);
 }
 
-.features-columns__title {
+.ow-features01__title {
     margin-top: 24px;
 }
 
-.features-columns__text {
+.ow-features01__text {
     max-width: 340px;
     margin-top: 8px;
 }
 
-.features-columns__more {
+.ow-features01__more {
     margin-top: 32px;
 }
 
 @media (max-width: 1024px) {
-    .features-columns__grid {
+    .ow-features01__grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    
     }
 }
 
 @media (max-width: 760px) {
-    .features-columns {
+    .ow-features01 {
         padding: 72px var(--ow-page-gutter);
+    
     }
-    .features-columns__grid {
+    .ow-features01__grid {
         grid-template-columns: minmax(0, 1fr);
         margin-top: 40px;
+    
     }
-    .features-columns__item {
+    .ow-features01__item {
         display: grid;
         grid-template-columns: auto minmax(0, 1fr);
         column-gap: 16px;
         padding: 24px 20px;
+    
     }
-    .features-columns__icon {
+    .ow-features01__icon {
         grid-row: span 2;
+    
     }
-    .features-columns__title {
+    .ow-features01__title {
         margin-top: 6px;
+    
     }
-    .features-columns__text {
+    .ow-features01__text {
         margin-top: 4px;
+    
     }
 }

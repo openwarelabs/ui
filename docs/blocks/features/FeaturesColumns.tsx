@@ -1,7 +1,6 @@
-import { Link, SectionHeading, Text } from "@openwarelabs/ui";
+import { Features01 } from "@openwarelabs/blocks";
+import { Link } from "@openwarelabs/ui";
 import { Bot, Command, GitPullRequest, ListTodo, Rocket, ShieldCheck } from "lucide-react";
-
-import "./FeaturesColumns.css";
 
 const features = [
     {
@@ -38,35 +37,16 @@ const features = [
 
 export function FeaturesColumns() {
     return (
-        <section className="features-columns" aria-labelledby="features-columns-title">
-            <div className="features-columns__inner">
-                <SectionHeading
-                    align="center"
-                    eyebrow="What's in Acme"
-                    title={<span id="features-columns-title">Everything between the idea and the deploy</span>}
-                    intro="Planning, agents, review and deploys in one workspace, so nothing falls between tools and nobody has to ask where things stand."
-                />
-
-                <ul className="features-columns__grid">
-                    {features.map(({ icon: Icon, title, text }) => (
-                        <li key={title} className="features-columns__item">
-                            <span className="features-columns__icon" aria-hidden="true">
-                                <Icon size={16} />
-                            </span>
-                            <Text variant="card-title" className="features-columns__title">
-                                {title}
-                            </Text>
-                            <Text variant="copy" className="features-columns__text">
-                                {text}
-                            </Text>
-                        </li>
-                    ))}
-                </ul>
-
-                <Text variant="copy" align="center" className="features-columns__more">
+        <Features01
+            eyebrow="What's in Acme"
+            title="Everything between the idea and the deploy"
+            description="Planning, agents, review and deploys in one workspace, so nothing falls between tools and nobody has to ask where things stand."
+            features={features.map(({ icon: Icon, title, text }) => ({ icon: <Icon size={16} />, title, description: text }))}
+            footer={
+                <>
                     Plus webhooks, a command-line tool and a public API. <Link href="#">Read the docs</Link>
-                </Text>
-            </div>
-        </section>
+                </>
+            }
+        />
     );
 }
