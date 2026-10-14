@@ -60,7 +60,8 @@ function SettingsShot() {
                 <div className="features-checklist__page">
                     <span className="features-checklist__page-title">Guardrails</span>
                     <span className="features-checklist__page-text">Rules for every change in the Acme workspace, whoever or whatever makes it.</span>
-                    <div className="features-checklist__card">
+                    {/* Drawn switches, not real ones: inert keeps them out of the keyboard and screen reader order. */}
+                    <div className="features-checklist__card" {...{ inert: "" }}>
                         {guardrails.map((row) => (
                             <SettingsRow
                                 key={row.label}
@@ -76,7 +77,7 @@ function SettingsShot() {
                                 }
                                 description={row.description}
                             >
-                                <Switch checked={row.on} onChange={noop} label={row.label} tabIndex={-1} />
+                                <Switch checked={row.on} onChange={noop} label={row.label} />
                             </SettingsRow>
                         ))}
                     </div>

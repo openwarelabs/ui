@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Avatar, Badge, Button, cx, Link, Popover, ScrollShadow, Tab, TabList, TabPanel, Tabs, Text } from "@openwarelabs/ui";
+import { Avatar, Badge, Button, cx, Link, Popover, ScrollShadow, Tab, TabList, TabPanel, Tabs, Text, VisuallyHidden } from "@openwarelabs/ui";
 
 import { BellIcon, CheckCheckIcon, SettingsIcon } from "@blocks/shared/icons";
 import type { Notifications01Item, Notifications01ListProps, Notifications01Props } from "./Notifications01.types";
@@ -36,12 +36,13 @@ function NotificationList({ items, isUnread, onOpen, labels }: Notifications01Li
                                 href={item.href ?? "#"}
                                 variant="standalone"
                                 className="ow-notifications01__item"
-                                aria-label={`${unread ? (labels.unread ?? "Unread: ") : ""}${item.summary}, ${item.where}, ${item.when}`}
                                 onClick={(event) => {
                                     if (item.href === undefined) event.preventDefault();
                                     onOpen(item);
                                 }}
                             >
+                                {/* Named by what it shows, so voice control matches it; "Unread" is for screen readers only. */}
+                                {unread ? <VisuallyHidden>{labels.unread ?? "Unread: "}</VisuallyHidden> : null}
                                 <Sender item={item} />
                                 <span className="ow-notifications01__text">
                                     <Text as="span" tone="muted">

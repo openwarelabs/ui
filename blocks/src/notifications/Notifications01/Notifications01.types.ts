@@ -13,8 +13,8 @@ export interface Notifications01Item {
     tone?: "primary" | "danger";
     /** What happened, with the names in bold: <><strong>Clara Novak</strong> mentioned you in …</>. */
     message: ReactNode;
-    /** The same in plain words, read out in place of `message`. */
-    summary: string;
+    /** @deprecated No longer used: an item is named by the text it shows. Kept so code from 0.10.0 still compiles. */
+    summary?: string;
     /** A line or two quoted from a comment, clamped to two lines. */
     quote?: ReactNode;
     /** Where it happened: "billing-api". */
