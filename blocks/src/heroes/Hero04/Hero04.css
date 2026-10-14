@@ -1,0 +1,66 @@
+.ow-hero04,
+.ow-hero04 *,
+.ow-hero04 *::before,
+.ow-hero04 *::after {
+    box-sizing: border-box;
+}
+
+.ow-hero04 {
+    overflow: hidden;
+    background: var(--ow-paper);
+    color: var(--ow-text);
+}
+
+.ow-hero04__grid {
+    padding: 128px 32px 136px;
+}
+
+/* The headline in the middle column; the sample work sits either side of it on wide screens. */
+
+.ow-hero04__layout {
+    display: grid;
+    max-width: var(--ow-page-max);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 640px) minmax(0, 1fr);
+    align-items: center;
+    gap: 40px;
+    margin: 0 auto;
+}
+
+.ow-hero04__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ow-hero04__title {
+    margin-top: 24px;
+}
+
+.ow-hero04__lead {
+    margin-top: 22px;
+}
+
+.ow-hero04__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--ow-space-lg);
+    margin-top: 34px;
+}
+
+@media (max-width: 1180px) {
+    .ow-hero04__layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-hero04__grid {
+        padding: 80px var(--ow-page-gutter) 88px;
+    }
+    .ow-hero04__actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

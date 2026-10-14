@@ -1,5 +1,5 @@
 # Publishes a release when `npm run release` pushes its tag (v1.2.3): checks everything again, then publishes
-# @openwarelabs/ui and @openwarelabs/ui-mcp to npm with trusted publishing (no npm token, with provenance), and
+# @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp to npm with trusted publishing (no npm token, with provenance), and
 # makes the GitHub release from the changelog. Safe to re-run: anything already published is skipped.
 name: Release
 
@@ -35,8 +35,9 @@ jobs:
           tag="${GITHUB_REF_NAME#v}"
           ui=$(node -p "require('./package.json').version")
           mcp=$(node -p "require('./mcp/package.json').version")
-          if [ "$tag" != "$ui" ] || [ "$tag" != "$mcp" ]; then
-            echo "::error::The tag is $GITHUB_REF_NAME, but package.json says $ui and mcp/package.json says $mcp."
+          blocks=$(node -p "require('./blocks/package.json').version")
+          if [ "$tag" != "$ui" ] || [ "$tag" != "$mcp" ] || [ "$tag" != "$blocks" ]; then
+            echo "::error::The tag is $GITHUB_REF_NAME, but package.json says $ui, mcp/package.json $mcp and blocks/package.json $blocks."
             exit 1
           fi
           echo "VERSION=$tag" >> "$GITHUB_ENV"
@@ -45,6 +46,7 @@ jobs:
       - run: npm run typecheck
       - run: npm run contrast
       - run: npm run blocks:check
+      - run: npm run blocks:build
       - run: npm run mcp:build
 
       - name: Publish @openwarelabs/ui
@@ -53,6 +55,15 @@ jobs:
             echo "@openwarelabs/ui@$VERSION is already on npm."
           else
             npm publish --ignore-scripts
+          fi
+
+      - name: Publish @openwarelabs/blocks
+        working-directory: blocks
+        run: |
+          if npm view "@openwarelabs/blocks@$VERSION" version > /dev/null 2>&1; then
+            echo "@openwarelabs/blocks@$VERSION is already on npm."
+          else
+            npm publish
           fi
 
       - name: Publish @openwarelabs/ui-mcp
@@ -77,7 +88,7 @@ jobs:
           [ -s notes.md ] || echo "Release $VERSION." > notes.md
           cat >> notes.md <<NOTES
 
-          **npm:** [@openwarelabs/ui@$VERSION](https://www.npmjs.com/package/@openwarelabs/ui/v/$VERSION) · [@openwarelabs/ui-mcp@$VERSION](https://www.npmjs.com/package/@openwarelabs/ui-mcp/v/$VERSION)
+          **npm:** [@openwarelabs/ui@$VERSION](https://www.npmjs.com/package/@openwarelabs/ui/v/$VERSION) · [@openwarelabs/blocks@$VERSION](https://www.npmjs.com/package/@openwarelabs/blocks/v/$VERSION) · [@openwarelabs/ui-mcp@$VERSION](https://www.npmjs.com/package/@openwarelabs/ui-mcp/v/$VERSION)
           NOTES
           if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
             gh release edit "$GITHUB_REF_NAME" --notes-file notes.md

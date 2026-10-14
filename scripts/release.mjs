@@ -1,6 +1,6 @@
 // `npm run release`: works out the next version from the commits since the last release, checks everything,
 // writes the changelog, then commits, tags and pushes. The tag starts .github/workflows/release.yml, which
-// publishes @openwarelabs/ui and @openwarelabs/ui-mcp to npm and makes the GitHub release.
+// publishes @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp to npm and makes the GitHub release.
 //
 // The version follows the Conventional Commits in the subjects:
 //   feat: …                         a minor release (0.5.0 → 0.6.0)
@@ -133,12 +133,18 @@ run("npm", ["run", "typecheck"]);
 run("npm", ["run", "contrast"]);
 run("npm", ["run", "blocks:check"]);
 run("npm", ["run", "build"]);
+run("npm", ["run", "blocks:build"]);
 
 // 7. The new version everywhere: the library, its lockfile, and the MCP server, which matches it.
 run("npm", ["version", next, "--no-git-tag-version", "--allow-same-version"]);
 const mcp = readJson("mcp/package.json");
 mcp.version = next;
 writeJson("mcp/package.json", mcp);
+// The blocks package goes out with the library it's built on, and asks for that version or a later compatible one.
+const blocks = readJson("blocks/package.json");
+blocks.version = next;
+blocks.peerDependencies["@openwarelabs/ui"] = `^${next}`;
+writeJson("blocks/package.json", blocks);
 run("npm", ["run", "mcp:build"]);
 
 const changelogPath = path.join(root, "CHANGELOG.md");
@@ -148,7 +154,7 @@ fs.writeFileSync(changelogPath, `${heading}${section}\n${previous}`.replace(/\n{
 
 // 8. Commit, tag and push, all at once so main and the tag can't disagree.
 const tag = `v${next}`;
-git("add", "package.json", "package-lock.json", "mcp/package.json", "CHANGELOG.md");
+git("add", "package.json", "package-lock.json", "mcp/package.json", "blocks/package.json", "CHANGELOG.md");
 git("commit", "--quiet", "-m", `chore(release): ${next}`);
 git("tag", "-a", tag, "-m", `Release ${next}`);
 git("push", "--atomic", "origin", "main", tag);

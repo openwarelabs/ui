@@ -3,6 +3,8 @@ import { useEffect, useId, useRef, useState, type KeyboardEvent, type PointerEve
 import { buttonClassName, CodeBlock, SegmentedControl, Spinner, Tooltip } from "@openwarelabs/ui";
 import { ArrowUpRight, Code2, Eye, Monitor, Smartphone, Tablet } from "lucide-react";
 
+import { props as allProps } from "docs:props";
+
 import { blockMarkdown, blockPrompt, type AiBlockInput } from "./ai";
 import { CopyForAI } from "./CopyForAI";
 
@@ -113,6 +115,7 @@ export function BlockPreview({
     height,
     description,
     category,
+    component,
 }: {
     id: string;
     name: string;
@@ -120,6 +123,8 @@ export function BlockPreview({
     /** For "Copy for AI". */
     description: string;
     category: AiBlockInput["category"];
+    /** Its component in @openwarelabs/blocks, if it has one. */
+    component?: string;
 }) {
     const [view, setView] = useState<View>("preview");
     // A preset width, or any width dragged to with the handle (null is the stage's full width).
@@ -183,7 +188,14 @@ export function BlockPreview({
         return () => window.removeEventListener("message", onMessage);
     }, [fits]);
 
-    const aiInput = async (): Promise<AiBlockInput> => ({ id, name, description, category, files: await loadCode(id) });
+    const aiInput = async (): Promise<AiBlockInput> => ({
+        id,
+        name,
+        description,
+        category,
+        files: await loadCode(id),
+        component: component ? { name: component, props: allProps } : undefined,
+    });
 
     const src = `./frame.html?block=${id}${fits ? "&fit=content" : ""}`;
     const frameHeight = fits ? (contentHeight ?? 320) : height;

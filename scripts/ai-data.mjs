@@ -52,8 +52,26 @@ export async function readAiData() {
             const files = [tsx, path.join(blocksDir, category.slug, `${variant.id}.css`)]
                 .filter((file) => fs.existsSync(file))
                 .map((file) => ({ name: path.basename(file), language: langOf(file), code: fs.readFileSync(file, "utf8") }));
-            const input = { id, name: variant.name, description: variant.description, category: { title: category.title, uses: category.uses }, files };
-            return [{ id, name: variant.name, description: variant.description, category: category.slug, uses: category.uses, markdown: ai.blockMarkdown(input) }];
+            const component = variant.component ? { name: variant.component, props } : undefined;
+            const input = {
+                id,
+                name: variant.name,
+                description: variant.description,
+                category: { title: category.title, uses: category.uses },
+                files,
+                component,
+            };
+            return [
+                {
+                    id,
+                    name: variant.name,
+                    description: variant.description,
+                    category: category.slug,
+                    uses: category.uses,
+                    component: variant.component ?? null,
+                    markdown: ai.blockMarkdown(input),
+                },
+            ];
         }),
     );
 

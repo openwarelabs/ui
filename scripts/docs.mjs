@@ -4,7 +4,7 @@
 // Virtual modules feed it:
 //   docs:examples     every docs/examples/*.tsx file: its module, plus each exported example's code, highlighted
 //   docs:props        the props of every exported *Props interface, read from the TypeScript source
-//   docs:styles       tokens.css and every component stylesheet, read fresh from src/ on each rebuild
+//   docs:styles       tokens.css, every component stylesheet and the blocks package's, read fresh on each rebuild
 //   docs:blocks       every block in docs/blocks/<category>/<Name>.tsx, for the frame that previews them
 //   docs:block-index  the ids of the blocks that exist, for the docs pages
 // and any import ending in ?highlight returns that file's text and highlighted HTML.
@@ -18,7 +18,7 @@ import * as esbuild from "esbuild";
 import { createHighlighter } from "shiki";
 
 import { buildTokens } from "./build-tokens.mjs";
-import { cssOrder, readStyles, root } from "./css.mjs";
+import { blockStylesheets, cssOrder, readBlockStyles, readStyles, root } from "./css.mjs";
 import { blocksDir, docs, examplesDir, readBlocks, readExamples, readProps } from "./docs-data.mjs";
 import { writeAiFiles } from "./ai-data.mjs";
 
@@ -91,7 +91,7 @@ function propsModule() {
     return `export const props = ${JSON.stringify(readProps())};`;
 }
 
-const watchFiles = () => [path.join(root, "tokens/tokens.json"), ...cssOrder.map((file) => path.join(root, "src", file))];
+const watchFiles = () => [path.join(root, "tokens/tokens.json"), ...cssOrder.map((file) => path.join(root, "src", file)), ...blockStylesheets()];
 
 const outdir = mode === "build" ? path.join(root, "docs-dist/build") : path.join(docs, "build");
 
@@ -113,6 +113,7 @@ const docsPlugin = {
             return { path: file.startsWith("@docs/") ? path.join(docs, file.slice("@docs/".length)) : path.resolve(args.resolveDir, file), namespace: "highlight" };
         });
         build.onResolve({ filter: /^@openwarelabs\/ui$/ }, () => ({ path: path.join(root, "src/index.ts") }));
+        build.onResolve({ filter: /^@openwarelabs\/blocks$/ }, () => ({ path: path.join(root, "blocks/src/index.ts") }));
 
         build.onLoad({ filter: /.*/, namespace: "highlight" }, (args) => {
             const code = fs.readFileSync(args.path, "utf8");
@@ -124,12 +125,22 @@ const docsPlugin = {
                 return { contents: examplesModule(), loader: "js", resolveDir: examplesDir, watchDirs: [examplesDir], watchFiles: fs.readdirSync(examplesDir).map((f) => path.join(examplesDir, f)) };
             }
             if (args.path === "docs:props") {
-                return { contents: propsModule(), loader: "js", watchDirs: [path.join(root, "src")], watchFiles: fs.readdirSync(path.join(root, "src"), { recursive: true }).filter((f) => /\.tsx?$/.test(String(f))).map((f) => path.join(root, "src", String(f))) };
+                return {
+                    contents: propsModule(),
+                    loader: "js",
+                    watchDirs: [path.join(root, "src"), path.join(root, "blocks/src")],
+                    watchFiles: ["src", "blocks/src"].flatMap((dir) =>
+                        fs
+                            .readdirSync(path.join(root, dir), { recursive: true })
+                            .filter((f) => /\.tsx?$/.test(String(f)))
+                            .map((f) => path.join(root, dir, String(f))),
+                    ),
+                };
             }
             if (args.path === "docs:styles") {
                 buildTokens();
                 const { tokens, components } = readStyles();
-                return { contents: `${tokens}\n${components}`, loader: "css", watchFiles: watchFiles() };
+                return { contents: `${tokens}\n${components}\n${readBlockStyles()}`, loader: "css", watchFiles: watchFiles() };
             }
             if (args.path === "docs:blocks") {
                 return { contents: blocksModule(), loader: "js", resolveDir: blocksDir, ...blockWatch() };

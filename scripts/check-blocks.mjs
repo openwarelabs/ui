@@ -3,6 +3,7 @@
 //   <Name>.tsx exports one function, <Name>, and imports nothing local but ./<Name>.css
 //   every selector in <Name>.css starts with the block's own class, so blocks can't touch each other
 //   colours come from tokens, and only blocks with a fixed preview height use viewport units
+// and the components in blocks/src (@openwarelabs/blocks) follow the same rules for their styles, under .ow-<name>.
 // `node scripts/check-blocks.mjs` prints what's wrong and exits 1, or says how many blocks passed.
 import fs from "node:fs";
 import path from "node:path";
@@ -104,6 +105,36 @@ function rawElements(source) {
     return found;
 }
 
+/** A stylesheet's rules: every selector under its own class, colours from tokens, viewport heights only when fixed. */
+function checkStyles(id, cssPath, className, fixedHeight) {
+    const prefix = `.${className}`;
+    const css = fs.readFileSync(cssPath, "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+    // Selectors: whatever comes before a { that isn't an at-rule or a keyframe step.
+    const selectorPattern = /([^{};]+)\{/g;
+    for (let match; (match = selectorPattern.exec(css));) {
+        const selector = match[1].trim();
+        if (!selector || selector.startsWith("@") || /^(from|to|\d+%)(\s*,\s*(from|to|\d+%))*$/.test(selector)) continue;
+        for (const part of splitSelectors(selector)) {
+            if (!part.startsWith(prefix) || /^([a-z0-9]|-(?!-)|_(?!_))/i.test(part.slice(prefix.length))) {
+                problem(id, `selector "${part}" should start with ${prefix} (its own class, or ${prefix}__part / ${prefix}--modifier)`);
+            }
+        }
+    }
+    for (const keyframes of css.matchAll(/@keyframes\s+([\w-]+)/g)) {
+        if (!keyframes[1].startsWith(className)) problem(id, `@keyframes ${keyframes[1]} should start with ${className}`);
+    }
+    for (const declaration of css.matchAll(/([\w-]+)\s*:\s*([^;{}]+);/g)) {
+        const [, property, value] = declaration;
+        if (property.startsWith("--")) continue;
+        const masking = /mask/.test(property);
+        if (!masking && /#[0-9a-f]{3,8}\b|\brgba?\(|\bhsla?\(|\boklch\(/i.test(value))
+            problem(id, `${property}: ${value.trim()} — use a colour token (var(--ow-…))`);
+        if (!fixedHeight && /\d(dvh|svh|lvh|vh)\b/.test(value))
+            problem(id, `${property} uses viewport height; the preview fits the block to its content, so only blocks with a fixed height may`);
+    }
+    if (/\banimation\s*:/.test(css) && !/prefers-reduced-motion/.test(css)) problem(id, "animates without a prefers-reduced-motion rule");
+}
+
 const problems = [];
 const problem = (id, text) => problems.push(`${id}: ${text}`);
 
@@ -140,8 +171,8 @@ for (const [id, { fixedHeight }] of expected) {
         if (ts.isImportDeclaration(statement)) {
             const from = statement.moduleSpecifier.text;
             if (from.startsWith(".") && from !== `./${name}.css`) problem(id, `imports ${from}; a block is its two files and nothing else local`);
-            if (!from.startsWith(".") && !["react", "@openwarelabs/ui", "lucide-react"].includes(from))
-                problem(id, `imports ${from}; use react, @openwarelabs/ui and lucide-react only`);
+            if (!from.startsWith(".") && !["react", "@openwarelabs/ui", "@openwarelabs/blocks", "lucide-react"].includes(from))
+                problem(id, `imports ${from}; use react, @openwarelabs/ui, @openwarelabs/blocks and lucide-react only`);
         }
         if (statement.modifiers?.some((m) => m.kind === ts.SyntaxKind.ExportKeyword)) {
             exported.push(ts.isFunctionDeclaration(statement) ? statement.name?.text : "(something other than a function)");
@@ -159,32 +190,30 @@ for (const [id, { fixedHeight }] of expected) {
         problem(id, `has no ${name}.css`);
         continue;
     }
-    const prefix = `.${kebab(name)}`;
-    const css = fs.readFileSync(cssPath, "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
-    // Selectors: whatever comes before a { that isn't an at-rule or a keyframe step.
-    const selectorPattern = /([^{};]+)\{/g;
-    for (let match; (match = selectorPattern.exec(css)); ) {
-        const selector = match[1].trim();
-        if (!selector || selector.startsWith("@") || /^(from|to|\d+%)(\s*,\s*(from|to|\d+%))*$/.test(selector)) continue;
-        for (const part of splitSelectors(selector)) {
-            if (!part.startsWith(prefix) || /^([a-z0-9]|-(?!-)|_(?!_))/i.test(part.slice(prefix.length))) {
-                problem(id, `selector "${part}" should start with ${prefix} (its own class, or ${prefix}__part / ${prefix}--modifier)`);
-            }
-        }
+    checkStyles(id, cssPath, kebab(name), fixedHeight);
+}
+
+// The components in @openwarelabs/blocks: blocks/src/<category>/<Name>/<Name>.css, under .ow-<name>.
+let components = 0;
+const packageDir = path.join(root, "blocks/src");
+if (fs.existsSync(packageDir)) {
+    for (const file of fs
+        .readdirSync(packageDir, { recursive: true })
+        .map(String)
+        .filter((entry) => entry.endsWith(".css"))) {
+        const name = path.basename(file, ".css");
+        const id = `blocks/src/${file}`;
+        if (path.basename(path.dirname(file)) !== name) problem(id, `should sit in a folder named ${name}, beside ${name}.tsx`);
+        const tsxPath = path.join(packageDir, path.dirname(file), `${name}.tsx`);
+        if (!fs.existsSync(tsxPath)) problem(id, `has no ${name}.tsx beside it`);
+        else
+            for (const { tag, line } of rawElements(
+                ts.createSourceFile(tsxPath, fs.readFileSync(tsxPath, "utf8"), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX),
+            ))
+                problem(`blocks/src/${path.dirname(file)}/${name}.tsx`, `line ${line}: <${tag}> by hand; use ${componentFor[tag]}`);
+        checkStyles(id, path.join(packageDir, file), `ow-${kebab(name)}`, false);
+        components += 1;
     }
-    for (const keyframes of css.matchAll(/@keyframes\s+([\w-]+)/g)) {
-        if (!keyframes[1].startsWith(kebab(name))) problem(id, `@keyframes ${keyframes[1]} should start with ${kebab(name)}`);
-    }
-    for (const declaration of css.matchAll(/([\w-]+)\s*:\s*([^;{}]+);/g)) {
-        const [, property, value] = declaration;
-        if (property.startsWith("--")) continue;
-        const masking = /mask/.test(property);
-        if (!masking && /#[0-9a-f]{3,8}\b|\brgba?\(|\bhsla?\(|\boklch\(/i.test(value))
-            problem(id, `${property}: ${value.trim()} — use a colour token (var(--ow-…))`);
-        if (!fixedHeight && /\d(dvh|svh|lvh|vh)\b/.test(value))
-            problem(id, `${property} uses viewport height; the preview fits the block to its content, so only blocks with a fixed height may`);
-    }
-    if (/\banimation\s*:/.test(css) && !/prefers-reduced-motion/.test(css)) problem(id, "animates without a prefers-reduced-motion rule");
 }
 
 if (problems.length) {
@@ -192,4 +221,4 @@ if (problems.length) {
     console.log(`\n${problems.length} problem${problems.length === 1 ? "" : "s"} in ${checked} block${checked === 1 ? "" : "s"}.`);
     process.exit(1);
 }
-console.log(`${checked} of ${expected.size} blocks built, and all follow the rules.`);
+console.log(`${checked} of ${expected.size} blocks built, and ${components} block components; all follow the rules.`);

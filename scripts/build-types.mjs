@@ -7,7 +7,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const dist = path.join(path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."), "dist");
+// `node scripts/build-types.mjs [<dist> <alias>]`: the library's dist/ and its @/ alias by default; the blocks
+// package passes blocks/dist and @blocks/.
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const dist = path.resolve(root, process.argv[2] ?? "dist");
+const aliasPrefix = process.argv[3] ?? "@/";
 
 const declarations = fs
     .readdirSync(dist, { recursive: true })
@@ -28,7 +32,8 @@ function withExtension(file, target, extension) {
 }
 
 // from "@/hooks/useFloating": the alias for src/, which is dist/ once built.
-const alias = /((?:from|import)\s*\(?\s*)(["'])@\/([^"']*)\2/g;
+const escaped = aliasPrefix.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&");
+const alias = new RegExp(`((?:from|import)\\s*\\(?\\s*)(["'])${escaped}([^"']*)\\2`, "g");
 
 /** "@/hooks/useFloating" in dist/components/Menu/Menu.d.ts → "../../hooks/useFloating". */
 function unalias(file, target) {
@@ -43,4 +48,4 @@ for (const file of declarations) {
     fs.writeFileSync(file.replace(/\.d\.ts$/, ".d.cts"), rewrite(".cjs"));
 }
 
-console.log(`types: ${declarations.length} declarations, as .d.ts for import and .d.cts for require`);
+console.log(`types: ${path.relative(root, dist)}: ${declarations.length} declarations, as .d.ts for import and .d.cts for require`);

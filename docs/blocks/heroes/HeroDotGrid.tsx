@@ -1,4 +1,5 @@
-import { Avatar, Badge, Button, Chip, DotGrid, ProgressBar, Text } from "@openwarelabs/ui";
+import { Hero04 } from "@openwarelabs/blocks";
+import { Avatar, Badge, ProgressBar } from "@openwarelabs/ui";
 import { ArrowRight, Bot, Check, GitPullRequest, Rocket, SquareKanban } from "lucide-react";
 
 import "./HeroDotGrid.css";
@@ -75,31 +76,14 @@ function PlanCards({ side }: { side: "start" | "end" }) {
 
 export function HeroDotGrid() {
     return (
-        <section className="hero-dot-grid" aria-labelledby="hero-dot-grid-title">
-            <DotGrid fade interactive className="hero-dot-grid__grid">
-                <div className="hero-dot-grid__layout">
-                    <PlanCards side="start" />
-                    <div className="hero-dot-grid__text">
-                        <Chip>Planning</Chip>
-                        <Text variant="hero" align="center" id="hero-dot-grid-title" className="hero-dot-grid__title">
-                            Lay out the plan. Watch it ship.
-                        </Text>
-                        <Text variant="lead" align="center" className="hero-dot-grid__lead">
-                            Sketch a project as tickets on one sheet, hand the routine ones to agents, and follow each piece from the first idea to a live
-                            deploy.
-                        </Text>
-                        <div className="hero-dot-grid__actions">
-                            <Button variant="primary" shape="pill" size="lg" endIcon={<ArrowRight size={16} />}>
-                                Start planning
-                            </Button>
-                            <Button shape="pill" size="lg">
-                                See a sample plan
-                            </Button>
-                        </div>
-                    </div>
-                    <PlanCards side="end" />
-                </div>
-            </DotGrid>
-        </section>
+        <Hero04
+            eyebrow="Planning"
+            title="Lay out the plan. Watch it ship."
+            description="Sketch a project as tickets on one sheet, hand the routine ones to agents, and follow each piece from the first idea to a live deploy."
+            primaryAction={{ label: "Start planning", href: "#start", endIcon: <ArrowRight size={16} /> }}
+            secondaryAction={{ label: "See a sample plan", href: "#sample" }}
+            start={<PlanCards side="start" />}
+            end={<PlanCards side="end" />}
+        />
     );
 }

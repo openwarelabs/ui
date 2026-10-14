@@ -1,30 +1,16 @@
-import { useEffect, useState } from "react";
-
-import { Avatar, Badge, Button, Chip, Kbd, Link, Text, toast } from "@openwarelabs/ui";
-import { Bot, Download, FolderKanban, Gauge, Inbox, Plus, Rocket, Search, Settings } from "lucide-react";
+import { Hero06 } from "@openwarelabs/blocks";
+import { Avatar, Badge, Kbd, toast } from "@openwarelabs/ui";
+import { Bot, FolderKanban, Gauge, Inbox, Plus, Rocket, Search, Settings } from "lucide-react";
 
 import "./HeroDownload.css";
 
-type Platform = "mac" | "windows" | "linux";
-
 const version = "3.2.0";
 
-const platforms: Record<Platform, { name: string; requirement: string; file: string }> = {
-    mac: { name: "macOS", requirement: "macOS 13 or later", file: "Acme-3.2.0-universal.dmg · 118 MB" },
-    windows: { name: "Windows", requirement: "Windows 10 or later", file: "Acme-Setup-3.2.0.exe · 96 MB" },
-    linux: { name: "Linux", requirement: "Ubuntu 22.04, Fedora 39 or later", file: "acme_3.2.0_amd64.deb · 102 MB" },
-};
-
-/** The computer this page is open on, or null for phones, tablets and anything unknown. */
-function detectPlatform(): Platform | null {
-    const nav = navigator as Navigator & { userAgentData?: { platform?: string } };
-    const name = `${nav.userAgentData?.platform ?? ""} ${navigator.platform} ${navigator.userAgent}`.toLowerCase();
-    if (/android|iphone|ipad|ipod/.test(name) || (name.includes("mac") && navigator.maxTouchPoints > 1)) return null;
-    if (name.includes("mac")) return "mac";
-    if (name.includes("win")) return "windows";
-    if (name.includes("linux") || name.includes("x11")) return "linux";
-    return null;
-}
+const platforms = [
+    { id: "mac", name: "macOS", requirement: "macOS 13 or later", file: "Acme-3.2.0-universal.dmg · 118 MB" },
+    { id: "windows", name: "Windows", requirement: "Windows 10 or later", file: "Acme-Setup-3.2.0.exe · 96 MB" },
+    { id: "linux", name: "Linux", requirement: "Ubuntu 22.04, Fedora 39 or later", file: "acme_3.2.0_amd64.deb · 102 MB" },
+] as const;
 
 const inbox = [
     { title: "Merge the invoice fix?", project: "billing-api", who: "Agent", status: "Needs you", tone: "warning" },
@@ -120,71 +106,17 @@ function AppShot() {
 }
 
 export function HeroDownload() {
-    // Until the page knows which computer it's on (after it mounts), macOS goes first.
-    const [current, setCurrent] = useState<Platform>("mac");
-
-    useEffect(() => {
-        const detected = detectPlatform();
-        if (detected) setCurrent(detected);
-    }, []);
-
-    const order: Platform[] = [current, ...(["mac", "windows", "linux"] as const).filter((platform) => platform !== current)];
-
-    const download = (platform: Platform) => {
-        // Start the real download here: window.location.href = "/download/…".
-        toast.success(`Downloading Acme ${version} for ${platforms[platform].name}`, { description: platforms[platform].file });
-    };
-
+    // Start the real download here instead, or give each platform an href.
+    const download = (name: string, file: string) => toast.success(`Downloading Acme ${version} for ${name}`, { description: file });
     return (
-        <section className="hero-download" aria-labelledby="hero-download-title">
-            <div className="hero-download__inner">
-                <div className="hero-download__text">
-                    <Chip>Acme for desktop</Chip>
-                    {/* In half the width, the title takes the page-title size; the hero size would stack it word by word. */}
-                    <Text variant="page-title" id="hero-download-title" className="hero-download__title">
-                        Your workspace, a keystroke away
-                    </Text>
-                    <Text variant="lead" className="hero-download__lead">
-                        Open Acme from anywhere with one shortcut, hear the moment an agent needs a decision, and keep working on a train with no signal.
-                    </Text>
-                    <div className="hero-download__buttons">
-                        {order.map((platform, index) =>
-                            index === 0 ? (
-                                <Button
-                                    key={platform}
-                                    variant="primary"
-                                    shape="pill"
-                                    size="lg"
-                                    startIcon={<Download size={16} />}
-                                    onClick={() => download(platform)}
-                                >
-                                    Download for {platforms[platform].name}
-                                </Button>
-                            ) : (
-                                <Button
-                                    key={platform}
-                                    shape="pill"
-                                    size="lg"
-                                    aria-label={`Download for ${platforms[platform].name}`}
-                                    onClick={() => download(platform)}
-                                >
-                                    {platforms[platform].name}
-                                </Button>
-                            ),
-                        )}
-                    </div>
-                    <Text variant="caption" as="p" className="hero-download__meta">
-                        <span>Version {version}</span>
-                        <span>{platforms[current].requirement}</span>
-                        <span className="hero-download__other">
-                            <Link href="#downloads" variant="muted">
-                                Other downloads
-                            </Link>
-                        </span>
-                    </Text>
-                </div>
-                <AppShot />
-            </div>
-        </section>
+        <Hero06
+            eyebrow="Acme for desktop"
+            title="Your workspace, a keystroke away"
+            description="Open Acme from anywhere with one shortcut, hear the moment an agent needs a decision, and keep working on a train with no signal."
+            platforms={platforms.map((platform) => ({ ...platform, onDownload: () => download(platform.name, platform.file) }))}
+            version={`Version ${version}`}
+            otherDownloads={{ label: "Other downloads", href: "#downloads" }}
+            visual={<AppShot />}
+        />
     );
 }

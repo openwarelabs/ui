@@ -1,0 +1,8 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "noEmit": true,
+        "paths": { "@blocks/*": ["./src/*"], "@openwarelabs/ui": ["../src/index.ts"], "@/*": ["../src/*"] }
+    },
+    "include": ["src"]
+}

@@ -21,6 +21,8 @@ interface Component {
 
 interface Block {
     id: string;
+    /** Its component in @openwarelabs/blocks, such as "Hero01", or null for a block that's code to copy. */
+    component: string | null;
     name: string;
     description: string;
     category: string;
@@ -58,7 +60,13 @@ function findComponent(name: string) {
 
 function findBlock(id: string) {
     const key = normal(id);
-    return data.blocks.find((block) => normal(block.id) === key || normal(block.id.split("/")[1]!) === key || normal(block.name) === key);
+    return data.blocks.find(
+        (block) =>
+            normal(block.id) === key ||
+            normal(block.id.split("/")[1]!) === key ||
+            normal(block.name) === key ||
+            (block.component !== null && normal(block.component) === key),
+    );
 }
 
 /** Close matches for a name that wasn't found, to suggest. */
@@ -96,7 +104,7 @@ const server = new McpServer(
             `Openware UI (@openwarelabs/ui ${data.version}) is a React component library and design system with light and dark themes.`,
             "Before writing UI with it, call get_setup once for the install, the styles to import and the rules.",
             "Then call get_component for every component you use, and follow its examples and props: import components from @openwarelabs/ui instead of writing look-alikes.",
-            "For whole page sections (headers, heroes, pricing, settings, sign-in, dashboards, chat), call list_blocks and get_block, and copy the block's two files.",
+            "For whole page sections (headers, heroes, pricing, settings, sign-in, dashboards, chat), call list_blocks and get_block. Blocks with a component (Hero01, Hero02…) come from @openwarelabs/blocks and take their content as props: render the component, don't copy its code. The others are two files to copy.",
             "Use search when you don't know a name, and get_tokens before writing your own CSS: colours, spaces and radii come from the --ow-… variables, never hard-coded values.",
         ].join(" "),
     },
@@ -163,7 +171,9 @@ server.registerTool(
         const sections = chosen.flatMap((entry) => {
             const list = data.blocks.filter((block) => block.category === entry.slug);
             if (!list.length) return [];
-            return [`## ${entry.title} (${entry.group})\n\n${entry.description}\n\n${list.map((block) => `- \`${block.id}\`: **${block.name}**. ${block.description}`).join("\n")}`];
+            return [
+                `## ${entry.title} (${entry.group})\n\n${entry.description}\n\n${list.map((block) => `- \`${block.id}\`${block.component ? ` (component \`<${block.component}>\` from @openwarelabs/blocks)` : ""}: **${block.name}**. ${block.description}`).join("\n")}`,
+            ];
         });
         return text(`# Openware UI blocks\n\nCall get_block with an id for both files.\n\n${sections.join("\n\n")}\n`);
     },
@@ -174,7 +184,7 @@ server.registerTool(
     {
         title: "Get a block",
         description: "A block's two files, .tsx and .css, ready to copy into a project, with what it's made from.",
-        inputSchema: { id: z.string().describe('The block\'s id from list_blocks, e.g. "heroes/HeroCentred", or just "HeroCentred".') },
+        inputSchema: { id: z.string().describe('The block\'s id from list_blocks, e.g. "heroes/HeroCentred", "HeroCentred", or its component, "Hero01".') },
         annotations: { readOnlyHint: true },
     },
     async ({ id }) => {
@@ -203,8 +213,8 @@ server.registerTool(
                 line: `- Component **${component.name}** (${component.category}): ${component.description} → get_component("${component.name}")`,
             })),
             ...data.blocks.map((block) => ({
-                score: score(query, `${categoryTitle(block.category)} ${block.name}`, block.description, block.uses.join(" "), ""),
-                line: `- Block **${block.name}** (\`${block.id}\`): ${block.description} → get_block("${block.id}")`,
+                score: score(query, `${categoryTitle(block.category)} ${block.name} ${block.component ?? ""}`, block.description, block.uses.join(" "), ""),
+                line: `- Block **${block.name}** (\`${block.id}\`${block.component ? `, component <${block.component}>` : ""}): ${block.description} → get_block("${block.id}")`,
             })),
         ]
             .filter((result) => result.score > 0)

@@ -114,12 +114,23 @@ export function readBlocks() {
 const elementNames = { HTMLButtonElement: "button", HTMLInputElement: "input", HTMLTextAreaElement: "textarea", HTMLAnchorElement: "a", HTMLDivElement: "div", HTMLSpanElement: "span", HTMLElement: "element" };
 
 export function readProps() {
-    const program = ts.createProgram([path.join(root, "src/index.ts")], { jsx: ts.JsxEmit.ReactJSX, strict: true, skipLibCheck: true, moduleResolution: ts.ModuleResolutionKind.Bundler, module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2020 });
+    // The library and the blocks package, with the aliases their tsconfig files give them.
+    const program = ts.createProgram([path.join(root, "src/index.ts"), path.join(root, "blocks/src/index.ts")], {
+        jsx: ts.JsxEmit.ReactJSX,
+        strict: true,
+        skipLibCheck: true,
+        moduleResolution: ts.ModuleResolutionKind.Bundler,
+        module: ts.ModuleKind.ESNext,
+        target: ts.ScriptTarget.ES2020,
+        baseUrl: root,
+        paths: { "@/*": ["src/*"], "@blocks/*": ["blocks/src/*"], "@openwarelabs/ui": ["src/index.ts"] },
+    });
     const checker = program.getTypeChecker();
-    const srcDir = path.join(root, "src") + path.sep;
+    const sourceDirs = [path.join(root, "src") + path.sep, path.join(root, "blocks/src") + path.sep];
+    const inSource = (fileName) => sourceDirs.some((dir) => path.normalize(fileName).startsWith(dir));
     const interfaces = new Map();
     for (const file of program.getSourceFiles()) {
-        if (!file.fileName.startsWith(srcDir.split(path.sep).join("/")) && !file.fileName.startsWith(srcDir)) continue;
+        if (!inSource(file.fileName)) continue;
         ts.forEachChild(file, (node) => {
             if (ts.isInterfaceDeclaration(node) && node.modifiers?.some((m) => m.kind === ts.SyntaxKind.ExportKeyword)) interfaces.set(node.name.text, node);
         });
@@ -152,7 +163,7 @@ export function readProps() {
             const declaration = symbol.declarations?.[0];
             if (!declaration) continue;
             const fileName = path.normalize(declaration.getSourceFile().fileName);
-            if (!fileName.startsWith(srcDir)) continue;
+            if (!inSource(fileName)) continue;
             const tags = symbol.getJsDocTags(checker);
             if (tags.some((tag) => tag.name === "internal")) continue;
             const defaultTag = tags.find((tag) => tag.name === "default");
@@ -174,7 +185,14 @@ export function readProps() {
                 description: ts.displayPartsToString(symbol.getDocumentationComment(checker)).trim(),
             });
         }
-        result[name] = { props, element: elementOf(node), description: ts.displayPartsToString(checker.getSymbolAtLocation(node.name)?.getDocumentationComment(checker) ?? []) };
+        // A block is a <section>: say so rather than "element".
+        const element = elementOf(node);
+        const isBlock = path.normalize(node.getSourceFile().fileName).startsWith(sourceDirs[1]);
+        result[name] = {
+            props,
+            element: element === "element" && isBlock ? "section" : element,
+            description: ts.displayPartsToString(checker.getSymbolAtLocation(node.name)?.getDocumentationComment(checker) ?? []),
+        };
     }
     return result;
 }

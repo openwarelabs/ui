@@ -1,0 +1,101 @@
+.ow-hero05,
+.ow-hero05 *,
+.ow-hero05 *::before,
+.ow-hero05 *::after {
+    box-sizing: border-box;
+}
+
+.ow-hero05 {
+    background: var(--ow-paper);
+    padding: 128px 32px 88px;
+    color: var(--ow-text);
+}
+
+.ow-hero05__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+/* The headline on the left, the lead and the buttons on the right, sharing a baseline at the bottom. */
+
+.ow-hero05__top {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: end;
+    gap: 64px;
+}
+
+.ow-hero05__heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.ow-hero05__title {
+    margin-top: 24px;
+}
+
+.ow-hero05__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ow-space-lg);
+    margin-top: 28px;
+}
+
+/* The first proof: who already uses it. */
+
+.ow-hero05__proof {
+    margin-top: 104px;
+    border-top: 1px solid var(--ow-border);
+    padding-top: 36px;
+}
+
+.ow-hero05__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px 40px;
+    margin: 28px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Each logo sits on its own, as tall as it is, so a row of them lines up on its centres. */
+.ow-hero05__logo {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 1024px) {
+    .ow-hero05 {
+        padding-top: 104px;
+    }
+    .ow-hero05__top {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+    }
+    .ow-hero05__list {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        justify-items: start;
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-hero05 {
+        padding: 72px var(--ow-page-gutter) 64px;
+    }
+    .ow-hero05__actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .ow-hero05__proof {
+        margin-top: 64px;
+        padding-top: 28px;
+    }
+    .ow-hero05__list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 28px 16px;
+    }
+}

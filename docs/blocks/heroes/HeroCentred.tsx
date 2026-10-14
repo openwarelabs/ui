@@ -1,4 +1,5 @@
-import { Avatar, Badge, Button, Chip, Stat, Text } from "@openwarelabs/ui";
+import { Hero01 } from "@openwarelabs/blocks";
+import { Avatar, Badge, Stat } from "@openwarelabs/ui";
 import { ArrowRight, FolderKanban, Gauge, Inbox, Rocket, Settings } from "lucide-react";
 
 import "./HeroCentred.css";
@@ -69,31 +70,14 @@ function ProductShot() {
 
 export function HeroCentred() {
     return (
-        <section className="hero-centred" aria-labelledby="hero-centred-title">
-            <div className="hero-centred__inner">
-                <Chip>New: agents that open their own pull requests</Chip>
-                <Text variant="hero" align="center" id="hero-centred-title" className="hero-centred__title">
-                    The workspace for shipping software
-                </Text>
-                <Text variant="lead" align="center" className="hero-centred__lead">
-                    Plan the work, hand the routine parts to agents, review every change and ship it. One place for your team, from the first idea to the
-                    deploy.
-                </Text>
-                <div className="hero-centred__actions">
-                    <Button variant="primary" shape="pill" size="lg" endIcon={<ArrowRight size={16} />}>
-                        Start for free
-                    </Button>
-                    <Button shape="pill" size="lg">
-                        Book a demo
-                    </Button>
-                </div>
-                <Text variant="caption" as="p" className="hero-centred__note">
-                    Free for teams of up to five. No card needed.
-                </Text>
-            </div>
-            <div className="hero-centred__visual">
-                <ProductShot />
-            </div>
-        </section>
+        <Hero01
+            eyebrow="New: agents that open their own pull requests"
+            title="The workspace for shipping software"
+            description="Plan the work, hand the routine parts to agents, review every change and ship it. One place for your team, from the first idea to the deploy."
+            primaryAction={{ label: "Start for free", href: "#start", endIcon: <ArrowRight size={16} /> }}
+            secondaryAction={{ label: "Book a demo", href: "#demo" }}
+            note="Free for teams of up to five. No card needed."
+            visual={<ProductShot />}
+        />
     );
 }

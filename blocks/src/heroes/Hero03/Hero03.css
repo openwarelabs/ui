@@ -1,0 +1,126 @@
+.ow-hero03,
+.ow-hero03 *,
+.ow-hero03 *::before,
+.ow-hero03 *::after {
+    box-sizing: border-box;
+}
+
+.ow-hero03 {
+    overflow: hidden;
+    background: var(--ow-paper);
+    padding: 120px var(--ow-page-gutter) 112px;
+    color: var(--ow-text);
+}
+
+.ow-hero03__inner {
+    display: flex;
+    max-width: 760px;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.ow-hero03__title {
+    margin-top: 24px;
+}
+
+.ow-hero03__lead {
+    margin-top: 22px;
+}
+
+/* The form: a pill-shaped field and its button on one line. */
+
+.ow-hero03__form {
+    width: 100%;
+    max-width: 480px;
+    margin-top: 36px;
+}
+
+.ow-hero03__row {
+    display: flex;
+    gap: var(--ow-space-sm);
+}
+
+.ow-hero03 .ow-hero03__input {
+    height: 46px;
+    flex: 1;
+    border-radius: var(--ow-radius-pill);
+    padding-left: 18px;
+    box-shadow: var(--ow-shadow-control);
+    font-size: 15px;
+}
+
+.ow-hero03__error {
+    margin: 10px 0 0 18px;
+    text-align: left;
+}
+
+.ow-hero03__note {
+    margin-top: 14px;
+}
+
+/* What's left in place of the form once someone has joined. */
+
+.ow-hero03__done {
+    display: flex;
+    width: 100%;
+    max-width: 480px;
+    align-items: center;
+    gap: 12px;
+    margin-top: 36px;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-card);
+    background: var(--ow-surface);
+    padding: 14px 14px 14px 16px;
+    text-align: left;
+    animation: ow-hero03-in var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+.ow-hero03__done-icon {
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--ow-success-surface);
+    color: var(--ow-success-text);
+}
+
+.ow-hero03__done-text {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+    gap: 2px;
+}
+
+.ow-hero03__done-detail {
+    overflow-wrap: anywhere;
+}
+
+@keyframes ow-hero03-in {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-hero03 {
+        padding: 72px var(--ow-page-gutter) 80px;
+    }
+    .ow-hero03__row {
+        flex-direction: column;
+    }
+    .ow-hero03 .ow-hero03__input {
+        flex: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-hero03__done {
+        animation: none;
+    }
+}
