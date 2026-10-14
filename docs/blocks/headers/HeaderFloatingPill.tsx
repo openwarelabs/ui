@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-
-import { Badge, Button, Chip, Link, Popover, SiteHeader, Text } from "@openwarelabs/ui";
-import { Menu as MenuIcon } from "lucide-react";
+import { Header01 } from "@openwarelabs/blocks";
+import { Badge, Chip, Text } from "@openwarelabs/ui";
 
 import "./HeaderFloatingPill.css";
 
@@ -49,85 +47,15 @@ const entries = [
     },
 ] as const;
 
-function Brand() {
-    return (
-        <Link href="#" variant="standalone" className="header-floating-pill__brand">
-            <span className="header-floating-pill__mark" aria-hidden="true" />
-            Acme
-        </Link>
-    );
-}
-
 export function HeaderFloatingPill() {
-    const [menuOpen, setMenuOpen] = useState(false);
-
-    // The menu button only shows on phones; close its menu if the window grows past them.
-    useEffect(() => {
-        const wide = window.matchMedia("(min-width: 761px)");
-        const onChange = () => wide.matches && setMenuOpen(false);
-        wide.addEventListener("change", onChange);
-        return () => wide.removeEventListener("change", onChange);
-    }, []);
-
     return (
         <div className="header-floating-pill">
-            <div className="header-floating-pill__bar">
-                <SiteHeader
-                    brand={<Brand />}
-                    nav={links.map((link) => (
-                        <Link key={link.label} href={link.href} variant="standalone" aria-current={link.current ? "page" : undefined}>
-                            {link.label}
-                        </Link>
-                    ))}
-                    actions={
-                        <>
-                            <Link href="#sign-in" variant="standalone" className="header-floating-pill__sign-in">
-                                Sign in
-                            </Link>
-                            <Button variant="primary" shape="pill" size="sm">
-                                Start for free
-                            </Button>
-                            <span className="header-floating-pill__phone-menu">
-                                <Popover
-                                    aria-label="Menu"
-                                    placement="bottom-end"
-                                    width={240}
-                                    open={menuOpen}
-                                    onOpenChange={setMenuOpen}
-                                    trigger={
-                                        <Button variant="ghost" shape="pill" size="sm" iconOnly aria-label="Menu">
-                                            <MenuIcon size={16} />
-                                        </Button>
-                                    }
-                                >
-                                    <nav className="header-floating-pill__menu" aria-label="Main">
-                                        {links.map((link) => (
-                                            <Link
-                                                key={link.label}
-                                                href={link.href}
-                                                variant="standalone"
-                                                className="header-floating-pill__menu-link"
-                                                aria-current={link.current ? "page" : undefined}
-                                                onClick={() => setMenuOpen(false)}
-                                            >
-                                                {link.label}
-                                            </Link>
-                                        ))}
-                                        <Link
-                                            href="#sign-in"
-                                            variant="standalone"
-                                            className="header-floating-pill__menu-link header-floating-pill__menu-link--sign-in"
-                                            onClick={() => setMenuOpen(false)}
-                                        >
-                                            Sign in
-                                        </Link>
-                                    </nav>
-                                </Popover>
-                            </span>
-                        </>
-                    }
-                />
-            </div>
+            <Header01
+                brand={{ name: "Acme", href: "#", logo: <span className="header-floating-pill__mark" aria-hidden="true" /> }}
+                links={links}
+                secondaryLink={{ label: "Sign in", href: "#sign-in" }}
+                primaryAction={{ label: "Start for free", href: "#start" }}
+            />
 
             {/* Your page */}
             <main className="header-floating-pill__page">

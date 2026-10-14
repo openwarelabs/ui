@@ -1,19 +1,28 @@
-import { Button, buttonClassName } from "@openwarelabs/ui";
+import type { MouseEvent } from "react";
+
+import { Button, buttonClassName, cx } from "@openwarelabs/ui";
 
 import type { BlockActionButtonProps, BlockActionsProps } from "@blocks/shared/shared.types";
 
 /** One action as a large pill: a link styled as a button when it has an href, a button otherwise. */
-export function BlockActionButton({ action, variant }: BlockActionButtonProps) {
+export function BlockActionButton({ action, variant, size = "lg", className, onAfterClick, fullWidth = false }: BlockActionButtonProps) {
     const { label, href, onClick, startIcon, endIcon, target, "aria-label": ariaLabel } = action;
+    const click =
+        onClick || onAfterClick
+            ? (event: MouseEvent<HTMLElement>) => {
+                  onClick?.(event);
+                  onAfterClick?.();
+              }
+            : undefined;
     if (href !== undefined) {
         return (
             <a
-                className={buttonClassName({ variant, size: "lg", shape: "pill" })}
+                className={cx(buttonClassName({ variant, size, shape: "pill" }), fullWidth && "ow-button--full", className)}
                 href={href}
                 target={target}
                 rel={target === "_blank" ? "noopener noreferrer" : undefined}
                 aria-label={ariaLabel}
-                onClick={onClick}
+                onClick={click}
             >
                 {startIcon ? <span className="ow-button__icon">{startIcon}</span> : null}
                 {label}
@@ -22,7 +31,17 @@ export function BlockActionButton({ action, variant }: BlockActionButtonProps) {
         );
     }
     return (
-        <Button variant={variant} shape="pill" size="lg" startIcon={startIcon} endIcon={endIcon} aria-label={ariaLabel} onClick={onClick}>
+        <Button
+            variant={variant}
+            shape="pill"
+            size={size}
+            startIcon={startIcon}
+            endIcon={endIcon}
+            aria-label={ariaLabel}
+            onClick={click}
+            fullWidth={fullWidth}
+            className={className}
+        >
             {label}
         </Button>
     );

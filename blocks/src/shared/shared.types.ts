@@ -23,13 +23,41 @@ export interface BlockAction {
 
 /** A plain text link. */
 export interface BlockLink {
+    /** The link's words. */
+    label: ReactNode;
+    /** Where it goes. */
+    href: string;
+}
+
+/** A link in a site's navigation. */
+export interface HeaderLink {
     label: ReactNode;
     href: string;
+    /** The page you're on: marked for screen readers (aria-current) and drawn as current. */
+    current?: boolean;
+}
+
+/** The product's name and logo, as a link home. */
+export interface BlockBrand {
+    /** The name beside the logo, or the wordmark. */
+    name: ReactNode;
+    /** Where it goes, usually "/". */
+    href: string;
+    /** A mark before the name: an `<img>` or an inline SVG about 20px square. */
+    logo?: ReactNode;
 }
 
 export interface BlockActionButtonProps {
     action: BlockAction;
-    variant: "primary" | "secondary";
+    variant: "primary" | "secondary" | "ghost";
+    /** lg for heroes and calls to action, sm for headers.
+     * @default "lg" */
+    size?: "sm" | "md" | "lg";
+    className?: string;
+    /** Runs after the action's own onClick, such as closing a menu. */
+    onAfterClick?(): void;
+    /** Stretches it to its container's width. */
+    fullWidth?: boolean;
 }
 
 export interface BlockActionsProps {
@@ -40,4 +68,9 @@ export interface BlockActionsProps {
 
 export interface BlockIconProps {
     size?: number;
+}
+
+export interface BlockBrandLinkProps {
+    brand: BlockBrand;
+    className: string;
 }

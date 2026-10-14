@@ -10,45 +10,6 @@
     color: var(--ow-text);
 }
 
-.header-centred-logo__bar {
-    border-bottom: 1px solid var(--ow-border);
-}
-
-/* Three columns, the outer two equal, so the logo sits in the true centre whatever is either side. */
-.header-centred-logo__inner {
-    display: grid;
-    max-width: var(--ow-page-max);
-    height: 76px;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    align-items: center;
-    gap: 24px;
-    margin: 0 auto;
-    padding: 0 32px;
-}
-
-.header-centred-logo__nav {
-    display: flex;
-    align-items: center;
-    gap: 26px;
-}
-
-/* The wordmark keeps the logo's own lettering, larger here as the bar's centrepiece, and no link colour on hover. */
-.header-centred-logo__brand,
-.header-centred-logo__brand:hover {
-    color: var(--ow-text);
-}
-
-.header-centred-logo__brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    border-radius: var(--ow-radius-md);
-    font-size: 19px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.025em;
-    text-decoration: none;
-}
-
 .header-centred-logo__mark {
     width: 22px;
     height: 22px;
@@ -58,39 +19,8 @@
     box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
 }
 
-.header-centred-logo__end {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 26px;
-}
-
-/* Nav links as in SiteHeader: soft text that darkens on hover and on the current page, never underlined. */
-.header-centred-logo__link {
-    color: var(--ow-text-soft);
-    text-decoration: none;
-    white-space: nowrap;
-}
-
-.header-centred-logo__link:hover,
-.header-centred-logo__link[aria-current="page"] {
-    color: var(--ow-text);
-}
-
-/* A hairline between the links and the account actions. */
-.header-centred-logo__actions {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    border-left: 1px solid var(--ow-border);
-    padding-left: 26px;
-}
-
-.header-centred-logo__phone-only {
-    display: none;
-}
-
 /* Your page */
+
 .header-centred-logo__page {
     display: flex;
     max-width: 760px;
@@ -108,66 +38,9 @@
     margin-top: 20px;
 }
 
-@media (max-width: 1024px) {
-    .header-centred-logo__inner {
-        padding: 0 24px;
-    }
-    .header-centred-logo__nav,
-    .header-centred-logo__end {
-        gap: 20px;
-    }
-    .header-centred-logo__actions {
-        gap: 16px;
-        border-left: 0;
-        padding-left: 0;
-    }
-}
-
-/* Tablets and phones: sign in, the logo and the button on one line; the links on a second line, which scrolls
-   sideways when it runs out of room. */
-@media (max-width: 900px) {
-    .header-centred-logo__bar {
-        padding-bottom: 6px;
-    }
-    .header-centred-logo__inner {
-        height: 60px;
-        gap: 12px;
-    }
-    .header-centred-logo__nav,
-    .header-centred-logo__actions .header-centred-logo__link {
-        display: none;
-    }
-    .header-centred-logo__brand {
-        font-size: 17px;
-    }
-    .header-centred-logo__phone-only {
-        display: block;
-    }
-    .header-centred-logo__inner > .header-centred-logo__phone-only {
-        justify-self: start;
-    }
-    .header-centred-logo__phone-nav {
-        scrollbar-width: none;
-    }
-    .header-centred-logo__phone-links {
-        display: flex;
-        width: max-content;
-        gap: 22px;
-        margin: 0 auto;
-        padding: 8px 24px 10px;
-        list-style: none;
-    }
-}
-
 @media (max-width: 760px) {
-    .header-centred-logo__inner {
-        padding: 0 var(--ow-page-gutter);
-    }
-    .header-centred-logo__phone-links {
-        padding-right: var(--ow-page-gutter);
-        padding-left: var(--ow-page-gutter);
-    }
     .header-centred-logo__page {
         padding: 64px var(--ow-page-gutter) 80px;
+    
     }
 }

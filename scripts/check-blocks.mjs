@@ -24,12 +24,16 @@ const kebab = (name) =>
 // The list: each category's slug, and each block's id and whether it has a fixed height.
 const list = fs.readFileSync(listFile, "utf8");
 const expected = new Map();
+const componentHeights = new Map();
 let category = null;
 for (const line of list.split("\n")) {
     const slug = /^\s+slug: "([^"]+)",/.exec(line);
     if (slug) category = slug[1];
     const block = /\{ id: "([^"]+)",.*?(height: (\d+))?\s*\},?\s*$/.exec(line);
     if (block && category) expected.set(`${category}/${block[1]}`, { fixedHeight: Boolean(block[3]) });
+    // A block that's a component in @openwarelabs/blocks: its styles may use viewport units when its preview does.
+    const component = /component: "([^"]+)"/.exec(line);
+    if (block && component) componentHeights.set(component[1], Boolean(block[3]));
 }
 
 /** Splits a selector list on its top-level commas, leaving those inside :is(), :where() and the like alone. */
@@ -211,7 +215,7 @@ if (fs.existsSync(packageDir)) {
                 ts.createSourceFile(tsxPath, fs.readFileSync(tsxPath, "utf8"), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX),
             ))
                 problem(`blocks/src/${path.dirname(file)}/${name}.tsx`, `line ${line}: <${tag}> by hand; use ${componentFor[tag]}`);
-        checkStyles(id, path.join(packageDir, file), `ow-${kebab(name)}`, false);
+        checkStyles(id, path.join(packageDir, file), `ow-${kebab(name)}`, componentHeights.get(name) ?? false);
         components += 1;
     }
 }

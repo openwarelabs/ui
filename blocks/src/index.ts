@@ -13,4 +13,15 @@ export type { Hero05Logo, Hero05Props } from "./heroes/Hero05/Hero05.types";
 export { Hero06 } from "./heroes/Hero06/Hero06";
 export type { Hero06Platform, Hero06PlatformId, Hero06Props } from "./heroes/Hero06/Hero06.types";
 
-export type { BlockAction, BlockLink } from "./shared/shared.types";
+export { Header01 } from "./headers/Header01/Header01";
+export type { Header01Labels, Header01Props } from "./headers/Header01/Header01.types";
+export { Header02 } from "./headers/Header02/Header02";
+export type { Header02Feature, Header02Labels, Header02Menu, Header02MenuItem, Header02Panel, Header02Props } from "./headers/Header02/Header02.types";
+export { Header03 } from "./headers/Header03/Header03";
+export type { Header03Labels, Header03Props } from "./headers/Header03/Header03.types";
+export { Header04 } from "./headers/Header04/Header04";
+export type { Header04Announcement, Header04Labels, Header04Props } from "./headers/Header04/Header04.types";
+export { Header05 } from "./headers/Header05/Header05";
+export type { Header05Labels, Header05Props } from "./headers/Header05/Header05.types";
+
+export type { BlockAction, BlockBrand, BlockLink, HeaderLink } from "./shared/shared.types";
