@@ -1,0 +1,150 @@
+.ow-footer01,
+.ow-footer01 *,
+.ow-footer01 *::before,
+.ow-footer01 *::after {
+    box-sizing: border-box;
+}
+
+.ow-footer01 {
+    border-top: 1px solid var(--ow-border);
+    background: var(--ow-paper);
+    padding: 72px 32px 32px;
+    color: var(--ow-text);
+}
+
+.ow-footer01__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+.ow-footer01__top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) repeat(4, minmax(0, 1fr));
+    gap: 40px 32px;
+    padding-bottom: 56px;
+}
+
+.ow-footer01__brand {
+    display: flex;
+    max-width: 300px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+/* The logo is a link home that stays the logo: ink, with no underline on hover. */
+
+.ow-footer01__logo.ow-link,
+.ow-footer01__logo.ow-link:hover {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--ow-radius-md);
+    color: var(--ow-text);
+    text-decoration: none;
+}
+
+.ow-footer01__logo.ow-link:focus-visible {
+    outline-offset: 4px;
+}
+
+.ow-footer01__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ow-footer01__status-dot {
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--ow-success-solid);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--ow-success-solid) 20%, transparent);
+}
+
+.ow-footer01__heading {
+    margin-bottom: 16px;
+}
+
+.ow-footer01__links {
+    display: grid;
+    gap: 11px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Footer links sit back: muted and in the regular weight, ink on hover. */
+
+.ow-footer01__links .ow-link {
+    color: var(--ow-text-muted);
+    font-weight: var(--ow-weight-regular);
+}
+
+.ow-footer01__links .ow-link:hover {
+    color: var(--ow-text);
+}
+
+/* A small brass pill rather than a Badge, which is too tall to sit in a line of links. */
+
+.ow-footer01__new {
+    margin-left: 8px;
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-brass-soft);
+    padding: 2px 7px;
+    color: var(--ow-brass-deep);
+    vertical-align: 1px;
+}
+
+.ow-footer01__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 24px;
+    padding-top: 24px;
+}
+
+.ow-footer01__legal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 20px;
+}
+
+.ow-footer01__theme {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (max-width: 1024px) {
+    .ow-footer01__top {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    
+    }
+    .ow-footer01__brand {
+        max-width: 420px;
+        grid-column: 1 / -1;
+    
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-footer01 {
+        padding: 56px var(--ow-page-gutter) 28px;
+    
+    }
+    .ow-footer01__top {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 36px 24px;
+        padding-bottom: 40px;
+    
+    }
+    .ow-footer01__bottom {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    
+    }
+}

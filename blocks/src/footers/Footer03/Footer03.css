@@ -1,0 +1,207 @@
+.ow-footer03,
+.ow-footer03 *,
+.ow-footer03 *::before,
+.ow-footer03 *::after {
+    box-sizing: border-box;
+}
+
+.ow-footer03 {
+    border-top: 1px solid var(--ow-border);
+    background: var(--ow-paper);
+    padding: 56px 32px 32px;
+    color: var(--ow-text);
+}
+
+.ow-footer03__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+/* The sign-up, on a card of its own above the links. */
+
+.ow-footer03__signup {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
+    align-items: center;
+    gap: 24px 64px;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-card);
+    background: var(--ow-surface);
+    padding: 36px 40px;
+}
+
+.ow-footer03__intro {
+    max-width: 480px;
+    margin-top: 8px;
+}
+
+.ow-footer03__row {
+    display: flex;
+    gap: 8px;
+}
+
+.ow-footer03__email.ow-input-group {
+    min-width: 0;
+    flex: 1;
+    border-radius: var(--ow-radius-pill);
+    padding-left: 14px;
+}
+
+.ow-footer03__note {
+    margin: 10px 0 0 16px;
+}
+
+.ow-footer03__done {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    border: 1px solid var(--ow-success-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-success-surface);
+    padding: 14px 16px;
+}
+
+.ow-footer03__done > svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--ow-success-text);
+}
+
+.ow-footer03__done-text {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+    gap: 2px;
+}
+
+.ow-footer03__done-detail {
+    overflow-wrap: anywhere;
+}
+
+.ow-footer03__done .ow-button {
+    flex-shrink: 0;
+    margin: -4px -6px -4px 0;
+}
+
+.ow-footer03__links {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) repeat(4, minmax(0, 1fr));
+    gap: 36px 32px;
+    padding: 56px 0;
+}
+
+.ow-footer03__brand {
+    display: grid;
+    align-content: start;
+    justify-items: start;
+    gap: 14px;
+}
+
+.ow-footer03__line {
+    max-width: 240px;
+}
+
+/* The logo is a link home that stays the logo: ink, with no underline on hover. */
+
+.ow-footer03__logo.ow-link,
+.ow-footer03__logo.ow-link:hover {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--ow-radius-md);
+    color: var(--ow-text);
+    text-decoration: none;
+}
+
+.ow-footer03__logo.ow-link:focus-visible {
+    outline-offset: 4px;
+}
+
+.ow-footer03__heading {
+    margin-bottom: 16px;
+}
+
+.ow-footer03__list {
+    display: grid;
+    gap: 11px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Footer links sit back: muted and in the regular weight, ink on hover. */
+
+.ow-footer03__list .ow-link {
+    color: var(--ow-text-muted);
+    font-weight: var(--ow-weight-regular);
+}
+
+.ow-footer03__list .ow-link:hover {
+    color: var(--ow-text);
+}
+
+.ow-footer03__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    padding-top: 24px;
+}
+
+.ow-footer03__legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+@media (max-width: 1024px) {
+    .ow-footer03__signup {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 32px;
+    
+    }
+    .ow-footer03__links {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    
+    }
+    .ow-footer03__brand {
+        grid-column: 1 / -1;
+    
+    }
+    .ow-footer03__line {
+        max-width: 420px;
+    
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-footer03 {
+        padding: 40px var(--ow-page-gutter) 28px;
+    
+    }
+    .ow-footer03__signup {
+        padding: 24px 20px;
+    
+    }
+    .ow-footer03__row {
+        flex-direction: column;
+    
+    }
+    .ow-footer03__email.ow-input-group {
+        flex: none;
+    
+    }
+    .ow-footer03__note {
+        margin-left: 4px;
+    
+    }
+    .ow-footer03__links {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 44px 0 40px;
+    
+    }
+}

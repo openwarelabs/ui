@@ -1,4 +1,4 @@
-import { Link, Text } from "@openwarelabs/ui";
+import { Footer02 } from "@openwarelabs/blocks";
 
 import "./FooterSimple.css";
 
@@ -6,26 +6,10 @@ const links = ["Product", "Pricing", "Changelog", "Docs", "Blog", "Careers", "Pr
 
 export function FooterSimple() {
     return (
-        <footer className="footer-simple">
-            <div className="footer-simple__inner">
-                <Link href="#" className="footer-simple__logo" aria-label="Acme home">
-                    <span className="footer-simple__mark" />
-                </Link>
-                <nav aria-label="Footer">
-                    <ul className="footer-simple__links">
-                        {links.map((link) => (
-                            <li key={link}>
-                                <Link href="#" variant="standalone">
-                                    {link}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
-                <Text variant="caption" as="p">
-                    © 2026 Acme Ltd. All rights reserved.
-                </Text>
-            </div>
-        </footer>
+        <Footer02
+            brand={{ name: "Acme", href: "#", logo: <span className="footer-simple__mark" /> }}
+            links={links.map((label) => ({ label, href: "#" }))}
+            legal="© 2026 Acme Ltd. All rights reserved."
+        />
     );
 }
