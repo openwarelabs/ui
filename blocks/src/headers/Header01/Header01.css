@@ -1,0 +1,126 @@
+.ow-header01,
+.ow-header01 *,
+.ow-header01 *::before,
+.ow-header01 *::after {
+    box-sizing: border-box;
+}
+
+/* The pill stays 14px from the top as the page scrolls beneath it. Only the pill itself takes the pointer. */
+
+.ow-header01 {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    padding: 14px 24px 0;
+    pointer-events: none;
+}
+
+.ow-header01 .ow-site-header {
+    display: grid;
+    max-width: 1040px;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    margin: 0 auto;
+    pointer-events: auto;
+}
+
+.ow-header01 .ow-site-header__actions {
+    justify-self: end;
+}
+
+.ow-header01 .ow-site-header__nav a[aria-current="page"] {
+    color: var(--ow-text);
+}
+
+/* The wordmark takes SiteHeader's brand lettering, not the link's weight or its hover colour. */
+
+.ow-header01__brand,
+.ow-header01__brand:hover {
+    color: inherit;
+}
+
+.ow-header01__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    border-radius: var(--ow-radius-md);
+    font-weight: inherit;
+}
+
+/* Sign in looks like the nav links beside it: soft text that darkens on hover, never underlined. */
+
+.ow-header01__sign-in {
+    margin-right: 6px;
+    color: var(--ow-text-soft);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.ow-header01__sign-in:hover {
+    color: var(--ow-text);
+}
+
+.ow-header01__phone-menu {
+    display: none;
+}
+
+.ow-header01__menu {
+    display: grid;
+    gap: 2px;
+    margin: -6px;
+}
+
+/* Menu rows: a soft ground on hover instead of the link's underline. */
+
+.ow-header01__menu-link {
+    border-radius: var(--ow-radius-lg);
+    padding: 9px 10px;
+    text-decoration: none;
+    transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-header01__menu-link:hover {
+    background: var(--ow-surface-muted);
+    color: var(--ow-text);
+}
+
+.ow-header01__menu-link[aria-current="page"] {
+    background: var(--ow-surface-muted);
+}
+
+.ow-header01__menu-link--sign-in {
+    margin-top: 6px;
+    border-top: 1px solid var(--ow-border);
+    border-radius: 0 0 var(--ow-radius-lg) var(--ow-radius-lg);
+    padding-top: 13px;
+}
+
+@media (max-width: 1024px) {
+    .ow-header01 .ow-site-header {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+    
+    }
+    .ow-header01 .ow-site-header__nav {
+        justify-self: center;
+    
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-header01 {
+        padding: 10px var(--ow-page-gutter) 0;
+    
+    }
+    .ow-header01 .ow-site-header {
+        grid-template-columns: minmax(0, 1fr) auto;
+        padding-left: 16px;
+    
+    }
+    .ow-header01__sign-in {
+        display: none;
+    
+    }
+    .ow-header01__phone-menu {
+        display: inline-flex;
+    
+    }
+}

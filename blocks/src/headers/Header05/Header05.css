@@ -1,0 +1,199 @@
+.ow-header05,
+.ow-header05 *,
+.ow-header05 *::before,
+.ow-header05 *::after {
+    box-sizing: border-box;
+}
+
+.ow-header05 {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-bottom: 1px solid var(--ow-border);
+    background: var(--ow-paper);
+}
+
+.ow-header05__inner {
+    display: flex;
+    max-width: var(--ow-page-max);
+    height: 64px;
+    align-items: center;
+    gap: 36px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+/* The wordmark keeps the logo's own lettering, as SiteHeader's brand does, and no link colour on hover. */
+
+.ow-header05__brand,
+.ow-header05__brand:hover {
+    color: var(--ow-text);
+}
+
+.ow-header05__brand {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 9px;
+    border-radius: var(--ow-radius-md);
+    font-size: 16px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+}
+
+.ow-header05__nav {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 26px;
+}
+
+/* Nav links as in SiteHeader: soft text that darkens on hover and on the current page, never underlined. */
+
+.ow-header05__link {
+    color: var(--ow-text-soft);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.ow-header05__link:hover,
+.ow-header05__link[aria-current="page"] {
+    color: var(--ow-text);
+}
+
+.ow-header05__actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-left: auto;
+}
+
+.ow-header05__open {
+    display: none;
+}
+
+/* The drawer: the main links large, the rest smaller, the two account actions pinned at the bottom. */
+
+.ow-header05__drawer .ow-drawer__body {
+    padding-top: 6px;
+}
+
+.ow-header05__drawer .ow-drawer__footer > * {
+    flex: 1;
+}
+
+.ow-header05__drawer-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-header05__drawer-list li + li {
+    border-top: 1px solid var(--ow-border);
+}
+
+/* The main links are large for a thumb (17px, above the 14px of the bar); the chevron moves on hover instead of an underline. */
+
+.ow-header05__drawer-link,
+.ow-header05__drawer-link:hover {
+    color: var(--ow-text);
+}
+
+.ow-header05__drawer-link {
+    display: flex;
+    min-height: 54px;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--ow-radius-md);
+    font-size: 17px;
+    text-decoration: none;
+}
+
+.ow-header05__drawer-link svg {
+    margin-left: auto;
+    color: var(--ow-icon);
+    transition: transform var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-header05__drawer-link:hover svg {
+    transform: translateX(2px);
+}
+
+/* A brass dot beside the page you're on. */
+
+.ow-header05__current {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ow-brass);
+}
+
+.ow-header05__more {
+    margin-top: 20px;
+    border-top: 1px solid var(--ow-border);
+    padding-top: 18px;
+}
+
+.ow-header05__more-label {
+    margin-bottom: 6px;
+}
+
+.ow-header05__more-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-header05__more-link {
+    display: flex;
+    min-height: 40px;
+    align-items: center;
+    border-radius: var(--ow-radius-md);
+    color: var(--ow-text-soft);
+    text-decoration: none;
+}
+
+.ow-header05__more-link:hover {
+    color: var(--ow-text);
+}
+
+/* Tablets and phones: the links fold into the drawer. */
+
+@media (max-width: 1024px) {
+    .ow-header05__inner {
+        padding: 0 16px 0 24px;
+    
+    }
+    .ow-header05__nav,
+    .ow-header05__actions .ow-header05__link {
+        display: none;
+    
+    }
+    .ow-header05__actions {
+        gap: 6px;
+    
+    }
+    .ow-header05__open {
+        display: inline-flex;
+    
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-header05__inner {
+        height: 58px;
+        padding: 0 12px 0 var(--ow-page-gutter);
+    
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-header05__drawer-link svg {
+        transition: none;
+    
+    }
+}

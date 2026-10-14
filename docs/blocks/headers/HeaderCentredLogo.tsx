@@ -1,4 +1,5 @@
-import { Button, Chip, Link, ScrollShadow, Text } from "@openwarelabs/ui";
+import { Header03 } from "@openwarelabs/blocks";
+import { Chip, Text } from "@openwarelabs/ui";
 
 import "./HeaderCentredLogo.css";
 
@@ -13,63 +14,17 @@ const end = [
     { label: "Docs", href: "#docs" },
 ];
 
-function NavLink({ link }: { link: { label: string; href: string; current?: boolean } }) {
-    return (
-        <Link href={link.href} variant="standalone" className="header-centred-logo__link" aria-current={link.current ? "page" : undefined}>
-            {link.label}
-        </Link>
-    );
-}
-
 export function HeaderCentredLogo() {
     return (
         <div className="header-centred-logo">
-            <header className="header-centred-logo__bar">
-                <div className="header-centred-logo__inner">
-                    <nav className="header-centred-logo__nav" aria-label="Product">
-                        {start.map((link) => (
-                            <NavLink key={link.label} link={link} />
-                        ))}
-                    </nav>
-                    <Link href="#sign-in" variant="standalone" className="header-centred-logo__link header-centred-logo__phone-only">
-                        Sign in
-                    </Link>
-
-                    <Link href="#" variant="standalone" className="header-centred-logo__brand">
-                        <span className="header-centred-logo__mark" aria-hidden="true" />
-                        Acme
-                    </Link>
-
-                    <div className="header-centred-logo__end">
-                        <nav className="header-centred-logo__nav" aria-label="Resources">
-                            {end.map((link) => (
-                                <NavLink key={link.label} link={link} />
-                            ))}
-                        </nav>
-                        <div className="header-centred-logo__actions">
-                            <Link href="#sign-in" variant="standalone" className="header-centred-logo__link">
-                                Sign in
-                            </Link>
-                            <Button variant="primary" shape="pill" size="sm">
-                                Start for free
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Tablets and phones: every link on a line of its own, scrolling sideways when it runs out of room. */}
-                <ScrollShadow orientation="horizontal" size={24} className="header-centred-logo__phone-only header-centred-logo__phone-nav">
-                    <nav aria-label="Main">
-                        <ul className="header-centred-logo__phone-links">
-                            {[...start, ...end].map((link) => (
-                                <li key={link.label}>
-                                    <NavLink link={link} />
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
-                </ScrollShadow>
-            </header>
+            <Header03
+                brand={{ name: "Acme", href: "#", logo: <span className="header-centred-logo__mark" aria-hidden="true" /> }}
+                start={start}
+                end={end}
+                secondaryLink={{ label: "Sign in", href: "#sign-in" }}
+                primaryAction={{ label: "Start for free", href: "#start" }}
+                labels={{ start: "Product", end: "Resources" }}
+            />
 
             {/* Your page */}
             <main className="header-centred-logo__page">

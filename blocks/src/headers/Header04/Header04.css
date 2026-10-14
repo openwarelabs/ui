@@ -1,0 +1,235 @@
+.ow-header04,
+.ow-header04 *,
+.ow-header04 *::before,
+.ow-header04 *::after {
+    box-sizing: border-box;
+}
+
+/* The slim line: midnight in both themes. Closing it folds it away, then hides it from keyboards and readers. */
+
+.ow-header04__notice {
+    display: grid;
+    grid-template-rows: 1fr;
+    background: var(--ow-brand-700);
+    color: var(--ow-on-primary);
+    transition:
+        grid-template-rows var(--ow-duration-slow) var(--ow-ease-standard),
+        visibility 0s;
+}
+
+.ow-header04__notice[data-closed] {
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition:
+        grid-template-rows var(--ow-duration-slow) var(--ow-ease-standard),
+        visibility 0s linear var(--ow-duration-slow);
+}
+
+.ow-header04__clip {
+    min-height: 0;
+    overflow: hidden;
+}
+
+.ow-header04__notice-inner {
+    display: grid;
+    max-width: var(--ow-page-max);
+    min-height: 40px;
+    grid-template-columns: 24px minmax(0, 1fr) 24px;
+    align-items: center;
+    gap: 12px;
+    margin: 0 auto;
+    padding: 6px 24px;
+}
+
+.ow-header04__message {
+    grid-column: 2;
+    text-align: center;
+}
+
+.ow-header04__dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background: var(--ow-brass);
+    vertical-align: 2px;
+}
+
+.ow-header04__message strong {
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.ow-header04__detail {
+    color: color-mix(in srgb, var(--ow-on-primary) 78%, transparent);
+}
+
+/* A link on the midnight line: white, with a faint underline that firms up on hover. */
+
+.ow-header04__link {
+    margin-left: 10px;
+    color: var(--ow-on-primary);
+    font-weight: var(--ow-weight-control);
+    text-decoration-color: color-mix(in srgb, var(--ow-on-primary) 40%, transparent);
+    white-space: nowrap;
+}
+
+.ow-header04__link svg {
+    margin-left: 4px;
+    vertical-align: -2px;
+}
+
+.ow-header04__link:hover {
+    color: var(--ow-on-primary);
+    text-decoration-color: var(--ow-on-primary);
+}
+
+.ow-header04__link:focus-visible,
+.ow-header04__notice .ow-close-button:focus-visible {
+    outline: 2px solid var(--ow-on-primary);
+    outline-offset: 2px;
+}
+
+.ow-header04__notice .ow-close-button {
+    grid-column: 3;
+    color: color-mix(in srgb, var(--ow-on-primary) 72%, transparent);
+}
+
+.ow-header04__notice .ow-close-button:hover {
+    background: color-mix(in srgb, var(--ow-on-primary) 14%, transparent);
+    color: var(--ow-on-primary);
+}
+
+/* The header under it. */
+
+.ow-header04__header {
+    border-bottom: 1px solid var(--ow-border);
+}
+
+.ow-header04__inner {
+    display: grid;
+    max-width: var(--ow-page-max);
+    height: 64px;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 24px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+/* The wordmark keeps the logo's own lettering, as SiteHeader's brand does, and no link colour on hover. */
+
+.ow-header04__brand,
+.ow-header04__brand:hover {
+    color: var(--ow-text);
+}
+
+.ow-header04__brand {
+    display: inline-flex;
+    align-items: center;
+    justify-self: start;
+    gap: 9px;
+    border-radius: var(--ow-radius-md);
+    font-size: 16px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+}
+
+.ow-header04__nav {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+}
+
+/* Nav links as in SiteHeader: soft text that darkens on hover, never underlined. */
+
+.ow-header04__link-plain {
+    color: var(--ow-text-soft);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.ow-header04__link-plain:hover {
+    color: var(--ow-text);
+}
+
+.ow-header04__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+}
+
+.ow-header04__phone-menu,
+.ow-header04__link-narrow {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .ow-header04__inner {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        gap: 16px;
+        padding: 0 24px;
+    
+    }
+    .ow-header04__nav {
+        justify-self: center;
+        gap: 20px;
+    
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-header04__notice-inner {
+        grid-template-columns: minmax(0, 1fr) 24px;
+        padding: 8px 10px 8px var(--ow-page-gutter);
+    
+    }
+    .ow-header04__message {
+        grid-column: 1;
+        text-align: left;
+    
+    }
+    .ow-header04__notice .ow-close-button {
+        grid-column: 2;
+    
+    }
+    .ow-header04__detail,
+    .ow-header04__link-wide {
+        display: none;
+    
+    }
+    .ow-header04__link-narrow {
+        display: inline;
+    
+    }
+    .ow-header04__inner {
+        height: 60px;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px;
+        padding: 0 12px 0 var(--ow-page-gutter);
+    
+    }
+    .ow-header04__nav,
+    .ow-header04__actions .ow-header04__link-plain {
+        display: none;
+    
+    }
+    .ow-header04__actions {
+        gap: 4px;
+    
+    }
+    .ow-header04__phone-menu {
+        display: inline-flex;
+    
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-header04__notice,
+    .ow-header04__notice[data-closed] {
+        transition: none;
+    
+    }
+}

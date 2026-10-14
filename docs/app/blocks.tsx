@@ -93,11 +93,11 @@ export const blockCategories: BlockCategory[] = [
         uses: ["SiteHeader", "Button", "Menu", "Drawer"],
         component: "SiteHeader",
         variants: [
-            { id: "HeaderFloatingPill", name: "Floating pill", description: "Commandr's header: a blurred pill that floats above the page and follows it down.", height: 440 },
-            { id: "HeaderFullWidth", name: "Full-width bar", description: "A bar across the top with menus that open on product and resources.", height: 460 },
-            { id: "HeaderCentredLogo", name: "Centred logo", description: "The logo in the middle with links either side, for a brand-led site." },
-            { id: "HeaderAnnouncement", name: "With an announcement", description: "A slim line above the header for a launch or an update, with a link and a close button." },
-            { id: "HeaderPhoneMenu", name: "Phone menu", description: "Links folded into a drawer behind a menu button on narrow screens.", height: 560 },
+            { id: "HeaderFloatingPill", component: "Header01", name: "Floating pill", description: "Commandr's header: a blurred pill that floats above the page and follows it down.", height: 440 },
+            { id: "HeaderFullWidth", component: "Header02", name: "Full-width bar", description: "A bar across the top with menus that open on product and resources.", height: 460 },
+            { id: "HeaderCentredLogo", component: "Header03", name: "Centred logo", description: "The logo in the middle with links either side, for a brand-led site." },
+            { id: "HeaderAnnouncement", component: "Header04", name: "With an announcement", description: "A slim line above the header for a launch or an update, with a link and a close button." },
+            { id: "HeaderPhoneMenu", component: "Header05", name: "Phone menu", description: "Links folded into a drawer behind a menu button on narrow screens.", height: 560 },
         ],
     },
     {

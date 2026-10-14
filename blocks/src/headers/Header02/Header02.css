@@ -1,0 +1,275 @@
+.ow-header02,
+.ow-header02 *,
+.ow-header02 *::before,
+.ow-header02 *::after {
+    box-sizing: border-box;
+}
+
+.ow-header02 {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-bottom: 1px solid var(--ow-border);
+    background: var(--ow-surface);
+}
+
+.ow-header02__inner {
+    display: flex;
+    max-width: var(--ow-page-max);
+    height: 64px;
+    align-items: center;
+    gap: 28px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+/* The wordmark keeps the logo's own lettering, as SiteHeader's brand does, and no link colour on hover. */
+
+.ow-header02__brand,
+.ow-header02__brand:hover {
+    color: var(--ow-text);
+}
+
+.ow-header02__brand {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 9px;
+    border-radius: var(--ow-radius-md);
+    font-size: 16px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+}
+
+.ow-header02__nav {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    align-items: center;
+    gap: 2px;
+}
+
+/* Links and menu triggers are ghost pill buttons with one look: quieter than an action, in soft text at the nav's
+   weight rather than a button's, with a plain ground on hover and while open. */
+
+.ow-header02__item {
+    gap: 4px;
+    padding: 0 12px;
+    color: var(--ow-text-soft);
+    font-weight: var(--ow-weight-control);
+}
+
+.ow-header02__item:hover:not(:disabled),
+.ow-header02__item[aria-expanded="true"] {
+    border-color: transparent;
+    background: var(--ow-hover);
+    color: var(--ow-text);
+}
+
+.ow-header02__item svg {
+    color: var(--ow-icon);
+    transition: transform var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-header02__item[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+}
+
+.ow-header02__actions {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 6px;
+}
+
+.ow-header02__toggle {
+    display: none;
+}
+
+/* The product menu: four areas of the product and the latest news. */
+
+.ow-header02 .ow-header02__popover {
+    padding: 8px;
+}
+
+.ow-header02__product {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 216px;
+    gap: 8px;
+}
+
+.ow-header02__features {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* The product's areas are tiles: a soft ground on hover instead of the link's underline. */
+
+.ow-header02__feature,
+.ow-header02__feature:hover {
+    color: var(--ow-text);
+}
+
+.ow-header02__feature {
+    display: flex;
+    height: 100%;
+    align-items: flex-start;
+    gap: 12px;
+    border-radius: var(--ow-radius-lg);
+    padding: 12px;
+    text-decoration: none;
+    transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-header02__feature:hover {
+    background: var(--ow-surface-muted);
+}
+
+.ow-header02__feature-icon {
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-tile);
+    background: var(--ow-surface);
+    color: var(--ow-primary-text);
+    box-shadow: var(--ow-shadow-control);
+}
+
+.ow-header02__feature-text {
+    display: grid;
+    gap: 4px;
+}
+
+.ow-header02__news,
+.ow-header02__news:hover {
+    color: var(--ow-text);
+}
+
+.ow-header02__news {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-lg);
+    background: var(--ow-surface-muted);
+    padding: 14px;
+    text-decoration: none;
+    transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-header02__news:hover {
+    border-color: var(--ow-border-strong);
+}
+
+.ow-header02__news-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: auto;
+}
+
+/* Phones: the panel under the bar. */
+
+.ow-header02__panel {
+    display: grid;
+    max-height: calc(100dvh - 57px);
+    overflow-y: auto;
+    border-top: 1px solid var(--ow-border);
+    padding: 6px var(--ow-page-gutter) 20px;
+    animation: ow-header02-panel-in var(--ow-duration-base) var(--ow-ease-emphasized);
+}
+
+.ow-header02__panel[hidden] {
+    display: none;
+}
+
+.ow-header02__panel-label {
+    margin: 16px 0 4px;
+}
+
+.ow-header02__panel-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-header02__panel-list--columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 16px;
+}
+
+.ow-header02__panel-list--ruled {
+    margin: 14px 0 18px;
+    border-top: 1px solid var(--ow-border);
+    padding-top: 6px;
+}
+
+.ow-header02__panel-link {
+    display: flex;
+    min-height: 42px;
+    align-items: center;
+    gap: 12px;
+    border-radius: var(--ow-radius-md);
+}
+
+.ow-header02__panel-link svg {
+    color: var(--ow-primary-text);
+}
+
+@keyframes ow-header02-panel-in {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+}
+
+@media (max-width: 1024px) {
+    .ow-header02__inner {
+        gap: 16px;
+        padding: 0 24px;
+    
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-header02__inner {
+        height: 56px;
+        padding: 0 12px 0 var(--ow-page-gutter);
+    
+    }
+    .ow-header02__nav,
+    .ow-header02__sign-in {
+        display: none;
+    
+    }
+    .ow-header02__actions {
+        margin-left: auto;
+    
+    }
+    .ow-header02__toggle {
+        display: inline-flex;
+    
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-header02__panel {
+        animation: none;
+    
+    }
+    .ow-header02__item svg {
+        transition: none;
+    
+    }
+}

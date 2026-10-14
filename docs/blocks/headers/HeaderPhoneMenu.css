@@ -11,42 +11,6 @@
     color: var(--ow-text);
 }
 
-.header-phone-menu__bar {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    border-bottom: 1px solid var(--ow-border);
-    background: var(--ow-paper);
-}
-
-.header-phone-menu__inner {
-    display: flex;
-    max-width: var(--ow-page-max);
-    height: 64px;
-    align-items: center;
-    gap: 36px;
-    margin: 0 auto;
-    padding: 0 32px;
-}
-
-/* The wordmark keeps the logo's own lettering, as SiteHeader's brand does, and no link colour on hover. */
-.header-phone-menu__brand,
-.header-phone-menu__brand:hover {
-    color: var(--ow-text);
-}
-
-.header-phone-menu__brand {
-    display: inline-flex;
-    flex-shrink: 0;
-    align-items: center;
-    gap: 9px;
-    border-radius: var(--ow-radius-md);
-    font-size: 16px;
-    font-weight: var(--ow-weight-emphasis);
-    letter-spacing: -0.02em;
-    text-decoration: none;
-}
-
 .header-phone-menu__mark {
     width: 22px;
     height: 22px;
@@ -56,122 +20,8 @@
     box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
 }
 
-.header-phone-menu__nav {
-    display: flex;
-    flex: 1;
-    align-items: center;
-    gap: 26px;
-}
-
-/* Nav links as in SiteHeader: soft text that darkens on hover and on the current page, never underlined. */
-.header-phone-menu__link {
-    color: var(--ow-text-soft);
-    text-decoration: none;
-    white-space: nowrap;
-}
-
-.header-phone-menu__link:hover,
-.header-phone-menu__link[aria-current="page"] {
-    color: var(--ow-text);
-}
-
-.header-phone-menu__actions {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    margin-left: auto;
-}
-
-.header-phone-menu__open {
-    display: none;
-}
-
-/* The drawer: the main links large, the rest smaller, the two account actions pinned at the bottom. */
-.header-phone-menu__drawer .ow-drawer__body {
-    padding-top: 6px;
-}
-
-.header-phone-menu__drawer .ow-drawer__footer > * {
-    flex: 1;
-}
-
-.header-phone-menu__drawer-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.header-phone-menu__drawer-list li + li {
-    border-top: 1px solid var(--ow-border);
-}
-
-/* The main links are large for a thumb (17px, above the 14px of the bar); the chevron moves on hover instead of an underline. */
-.header-phone-menu__drawer-link,
-.header-phone-menu__drawer-link:hover {
-    color: var(--ow-text);
-}
-
-.header-phone-menu__drawer-link {
-    display: flex;
-    min-height: 54px;
-    align-items: center;
-    gap: 10px;
-    border-radius: var(--ow-radius-md);
-    font-size: 17px;
-    text-decoration: none;
-}
-
-.header-phone-menu__drawer-link svg {
-    margin-left: auto;
-    color: var(--ow-icon);
-    transition: transform var(--ow-duration-base) var(--ow-ease-standard);
-}
-
-.header-phone-menu__drawer-link:hover svg {
-    transform: translateX(2px);
-}
-
-/* A brass dot beside the page you're on. */
-.header-phone-menu__current {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--ow-brass);
-}
-
-.header-phone-menu__more {
-    margin-top: 20px;
-    border-top: 1px solid var(--ow-border);
-    padding-top: 18px;
-}
-
-.header-phone-menu__more-label {
-    margin-bottom: 6px;
-}
-
-.header-phone-menu__more-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 16px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.header-phone-menu__more-link {
-    display: flex;
-    min-height: 40px;
-    align-items: center;
-    border-radius: var(--ow-radius-md);
-    color: var(--ow-text-soft);
-    text-decoration: none;
-}
-
-.header-phone-menu__more-link:hover {
-    color: var(--ow-text);
-}
-
 /* Your page */
+
 .header-phone-menu__page {
     display: flex;
     max-width: var(--ow-page-max);
@@ -190,39 +40,17 @@
     margin-top: 20px;
 }
 
-/* Tablets and phones: the links fold into the drawer. */
 @media (max-width: 1024px) {
     .header-phone-menu__page {
         padding-right: 24px;
         padding-left: 24px;
-    }
-    .header-phone-menu__inner {
-        padding: 0 16px 0 24px;
-    }
-    .header-phone-menu__nav,
-    .header-phone-menu__actions .header-phone-menu__link {
-        display: none;
-    }
-    .header-phone-menu__actions {
-        gap: 6px;
-    }
-    .header-phone-menu__open {
-        display: inline-flex;
+    
     }
 }
 
 @media (max-width: 760px) {
-    .header-phone-menu__inner {
-        height: 58px;
-        padding: 0 12px 0 var(--ow-page-gutter);
-    }
     .header-phone-menu__page {
         padding: 64px var(--ow-page-gutter) 88px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .header-phone-menu__drawer-link svg {
-        transition: none;
+    
     }
 }

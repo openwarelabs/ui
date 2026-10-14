@@ -37,3 +37,24 @@ export const DownloadIcon = icon(
         <path d="m7 10 5 5 5-5" />
     </>,
 );
+export const MenuIcon = icon(
+    <>
+        <path d="M4 5h16" />
+        <path d="M4 12h16" />
+        <path d="M4 19h16" />
+    </>,
+);
+export const XIcon = icon(
+    <>
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+    </>,
+);
+export const ChevronDownIcon = icon(<path d="m6 9 6 6 6-6" />);
+export const ChevronRightIcon = icon(<path d="m9 18 6-6-6-6" />);
+export const ArrowRightIcon = icon(
+    <>
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+    </>,
+);

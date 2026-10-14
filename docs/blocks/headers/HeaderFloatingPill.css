@@ -11,45 +11,6 @@
     color: var(--ow-text);
 }
 
-/* The pill stays 14px from the top as the page scrolls beneath it. Only the pill itself takes the pointer. */
-.header-floating-pill__bar {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    padding: 14px 24px 0;
-    pointer-events: none;
-}
-
-.header-floating-pill .ow-site-header {
-    display: grid;
-    max-width: 1040px;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    margin: 0 auto;
-    pointer-events: auto;
-}
-
-.header-floating-pill .ow-site-header__actions {
-    justify-self: end;
-}
-
-.header-floating-pill .ow-site-header__nav a[aria-current="page"] {
-    color: var(--ow-text);
-}
-
-/* The wordmark takes SiteHeader's brand lettering, not the link's weight or its hover colour. */
-.header-floating-pill__brand,
-.header-floating-pill__brand:hover {
-    color: inherit;
-}
-
-.header-floating-pill__brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    border-radius: var(--ow-radius-md);
-    font-weight: inherit;
-}
-
 .header-floating-pill__mark {
     width: 22px;
     height: 22px;
@@ -59,53 +20,8 @@
     box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
 }
 
-/* Sign in looks like the nav links beside it: soft text that darkens on hover, never underlined. */
-.header-floating-pill__sign-in {
-    margin-right: 6px;
-    color: var(--ow-text-soft);
-    text-decoration: none;
-    white-space: nowrap;
-}
-
-.header-floating-pill__sign-in:hover {
-    color: var(--ow-text);
-}
-
-.header-floating-pill__phone-menu {
-    display: none;
-}
-
-.header-floating-pill__menu {
-    display: grid;
-    gap: 2px;
-    margin: -6px;
-}
-
-/* Menu rows: a soft ground on hover instead of the link's underline. */
-.header-floating-pill__menu-link {
-    border-radius: var(--ow-radius-lg);
-    padding: 9px 10px;
-    text-decoration: none;
-    transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
-}
-
-.header-floating-pill__menu-link:hover {
-    background: var(--ow-surface-muted);
-    color: var(--ow-text);
-}
-
-.header-floating-pill__menu-link[aria-current="page"] {
-    background: var(--ow-surface-muted);
-}
-
-.header-floating-pill__menu-link--sign-in {
-    margin-top: 6px;
-    border-top: 1px solid var(--ow-border);
-    border-radius: 0 0 var(--ow-radius-lg) var(--ow-radius-lg);
-    padding-top: 13px;
-}
-
 /* Your page: a changelog. */
+
 .header-floating-pill__page {
     max-width: 760px;
     margin: 0 auto;
@@ -159,38 +75,19 @@
     margin-top: 8px;
 }
 
-@media (max-width: 1024px) {
-    .header-floating-pill .ow-site-header {
-        grid-template-columns: auto minmax(0, 1fr) auto;
-    }
-    .header-floating-pill .ow-site-header__nav {
-        justify-self: center;
-    }
-}
-
 @media (max-width: 760px) {
-    .header-floating-pill__bar {
-        padding: 10px var(--ow-page-gutter) 0;
-    }
-    .header-floating-pill .ow-site-header {
-        grid-template-columns: minmax(0, 1fr) auto;
-        padding-left: 16px;
-    }
-    .header-floating-pill__sign-in {
-        display: none;
-    }
-    .header-floating-pill__phone-menu {
-        display: inline-flex;
-    }
     .header-floating-pill__page {
         padding: 56px var(--ow-page-gutter) 88px;
+    
     }
     .header-floating-pill__entries {
         margin-top: 44px;
+    
     }
     .header-floating-pill__entry {
         grid-template-columns: minmax(0, 1fr);
         gap: 10px;
         padding: 26px 0;
+    
     }
 }
