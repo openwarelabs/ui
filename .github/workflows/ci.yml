@@ -19,10 +19,12 @@ jobs:
           cache: npm
       - run: npm ci # also builds dist/, through the prepare script
       - run: npm run typecheck
+      - run: npm run lint # React's hooks rules; eslint-suppressions.json holds the old problems
       - run: npm run contrast
       - run: npm run blocks:check
       - run: npm run blocks:build
       - run: npm run size # what an app pays for each package, and for one piece of it alone (size-limits.json)
+      - run: npm run smoke # packs both packages, installs them in a new app and uses them as published
       - run: npm run mcp:build
       - run: npm run docs:build
 
