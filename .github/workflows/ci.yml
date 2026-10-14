@@ -1,5 +1,5 @@
 # Checks every pull request and every push to main: the library, the blocks package, the MCP server and the docs. "Checks" and "Cleaner" are required to merge into main
-# (scripts/setup-github.sh sets that up), alongside "PR title" from pr-title.yml.
+# (scripts/setup-github.sh sets that up), alongside "PR title" from pr-title.yml and "Visual" from visual.yml.
 name: CI
 
 on:

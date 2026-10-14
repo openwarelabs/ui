@@ -1,0 +1,74 @@
+# Visual regression check on every pull request: builds the docs from the pull request and from the branch it
+# goes into, renders every block (desktop and phone width) and every component example in light and dark from
+# both, and compares them pixel by pixel (scripts/visual.mjs). "Visual" is required to merge into main
+# (scripts/setup-github.sh sets that up).
+#
+# When the pages are meant to look different, look over the report (the "visual-report" artifact of the run, and
+# the summary on the run's page) and add the "visual change" label to the pull request: the check runs again and
+# passes, still listing what changed.
+name: Visual
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+concurrency:
+  group: visual-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  visual:
+    name: Visual
+    # It runs again whenever a label is added or removed, not just "visual change": a skipped run would count as
+    # passing, so skipping the others would let any label through.
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Build the docs from the pull request
+        run: |
+          npm ci
+          npm run blocks:build
+          npm run docs:build
+          mv docs-dist "$RUNNER_TEMP/head"
+
+      # Each side with its own dependencies, so a pull request that updates one is compared fairly.
+      - name: Build the docs from ${{ github.base_ref }}
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/base-tree" "${{ github.event.pull_request.base.sha }}"
+          cd "$RUNNER_TEMP/base-tree"
+          npm ci
+          if [ -f blocks/package.json ]; then npm run blocks:build; fi
+          npm run docs:build
+          mv docs-dist "$RUNNER_TEMP/base"
+
+      - name: Cache the browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      - run: npx playwright install --with-deps chromium
+
+      - name: Compare
+        run: >
+          node scripts/visual.mjs --base "$RUNNER_TEMP/base" --head "$RUNNER_TEMP/head" --out visual-report
+          ${{ contains(github.event.pull_request.labels.*.name, 'visual change') && '--allow' || '' }}
+
+      - name: Upload the report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-report
+          path: visual-report
+          if-no-files-found: ignore
+          retention-days: 14
