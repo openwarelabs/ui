@@ -79,6 +79,10 @@ if gh api "repos/$repo/pages" --silent 2>/dev/null; then
 else
   gh api --method POST "repos/$repo/pages" --silent -f build_type=workflow
 fi
+# Pages' environment lets only main deploy; the Docs workflow deploys from release tags, so they're allowed too.
+if ! gh api "repos/$repo/environments/github-pages/deployment-branch-policies" --jq '.branch_policies[].name' 2>/dev/null | grep -qx 'v\*\.\*\.\*'; then
+  gh api --method POST "repos/$repo/environments/github-pages/deployment-branch-policies" --silent -f name='v*.*.*' -f type=tag
+fi
 
 echo "The visual change label..."
 gh label create "visual change" --repo "$repo" --force --color FBCA04 \
