@@ -1,6 +1,10 @@
 import { Badge, CodeBlock, Kbd, Link, Stack } from "@openwarelabs/ui";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
+import { props as allProps } from "docs:props";
+
+import { componentMarkdown, componentPrompt } from "./ai";
+import { CopyForAI } from "./CopyForAI";
 import { blockComponentId, componentDocs, hrefOf, kebab, listedComponents, slugify } from "./content";
 import { Example } from "./Example";
 import { DocPage, Section, type TocItem } from "./Page";
@@ -16,6 +20,12 @@ export function importSnippet(names: string[]) {
         `<span style="color:#FF7B72">import</span><span style="color:#E6EDF3"> { ${names.join(", ")} } </span>` +
         `<span style="color:#FF7B72">from</span><span style="color:#A5D6FF"> "@openwarelabs/ui"</span><span style="color:#E6EDF3">;</span>`;
     return { code, html };
+}
+
+/** "Copy for AI" for a component: its whole reference, with every example's code and its props. */
+function CopyComponent({ doc }: { doc: ComponentDoc }) {
+    const input = { meta: doc.meta, examples: doc.examples, props: allProps };
+    return <CopyForAI what={doc.meta.title} prompt={() => componentPrompt(input)} markdown={() => componentMarkdown(input)} />;
 }
 
 /** Writes "Shift + PageUp" with each key in a Kbd. */
@@ -65,6 +75,7 @@ export function ComponentPage({ doc }: { doc: ComponentDoc }) {
                     <Link href={`${repository}/blob/main/src/${meta.source}`} external variant="muted">
                         Source
                     </Link>
+                    <CopyComponent doc={doc} />
                 </Stack>
             }
             toc={toc}
@@ -194,6 +205,7 @@ export function ComponentReference({ doc }: { doc: ComponentDoc }) {
                     <Link href={`${repository}/blob/main/src/${meta.source}`} external variant="muted">
                         Source
                     </Link>
+                    <CopyComponent doc={doc} />
                 </Stack>
                 <CodeBlock code={snippet.code} html={snippet.html} />
                 {examples.map((example) => (

@@ -69,6 +69,19 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 
 Hooks for your own components: `useControllableState`, `useFloating` (top-layer positioning that flips), `usePresence` (keeps a layer mounted while it animates out), `useDismiss`, `useModalDialog`, `useMenuKeyboard`. Every prop is typed and described, so your editor explains it on hover.
 
+## Use with AI
+
+The MCP server, `@openwarelabs/ui-mcp`, gives Claude Code, Codex, Cursor and other AI tools the setup, every component's examples and props, every block's code and the tokens, so they build with the real components:
+
+```sh
+claude mcp add openware-ui -- npx -y @openwarelabs/ui-mcp   # Claude Code
+codex mcp add openware-ui -- npx -y @openwarelabs/ui-mcp    # Codex
+```
+
+Cursor and most other clients take `{ "mcpServers": { "openware-ui": { "command": "npx", "args": ["-y", "@openwarelabs/ui-mcp"] } } }`. [mcp/README.md](mcp/README.md) has every tool and client.
+
+In the docs, every component and block has a **Copy for AI** button: a prompt with its whole reference (examples and props, or a block's two files) to paste into any AI tool. The built docs also have `llms.txt`, `llms-full.txt` and a Markdown copy of every page under `ai/`. `npm run mcp:build` rebuilds the server from the docs.
+
 ## Tokens
 
 Every colour, space, radius, shadow and weight is a CSS variable named `--ow-…` (`var(--ow-surface)`, `var(--ow-radius-container)`), and every text style is a class (`ow-type-section-title`, `ow-type-lead`). `tokens/tokens.json` is the single source; `npm run tokens` regenerates the CSS and `npm run contrast` checks every text and focus pair in both themes.

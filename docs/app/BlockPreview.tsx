@@ -3,6 +3,9 @@ import { useEffect, useId, useRef, useState, type KeyboardEvent, type PointerEve
 import { buttonClassName, CodeBlock, SegmentedControl, Spinner, Tooltip } from "@openwarelabs/ui";
 import { ArrowUpRight, Code2, Eye, Monitor, Smartphone, Tablet } from "lucide-react";
 
+import { blockMarkdown, blockPrompt, type AiBlockInput } from "./ai";
+import { CopyForAI } from "./CopyForAI";
+
 type View = "preview" | "code";
 type Viewport = "desktop" | "tablet" | "phone";
 
@@ -104,7 +107,20 @@ function BlockCode({ id }: { id: string }) {
  * edge, or its code. The frame follows the docs' theme and
  * colour, and grows to fit the block unless the block fills the window, when it gets a fixed `height`.
  */
-export function BlockPreview({ id, name, height }: { id: string; name: string; height?: number }) {
+export function BlockPreview({
+    id,
+    name,
+    height,
+    description,
+    category,
+}: {
+    id: string;
+    name: string;
+    height?: number;
+    /** For "Copy for AI". */
+    description: string;
+    category: AiBlockInput["category"];
+}) {
     const [view, setView] = useState<View>("preview");
     // A preset width, or any width dragged to with the handle (null is the stage's full width).
     const [width, setWidth] = useState<number | null>(null);
@@ -167,6 +183,8 @@ export function BlockPreview({ id, name, height }: { id: string; name: string; h
         return () => window.removeEventListener("message", onMessage);
     }, [fits]);
 
+    const aiInput = async (): Promise<AiBlockInput> => ({ id, name, description, category, files: await loadCode(id) });
+
     const src = `./frame.html?block=${id}${fits ? "&fit=content" : ""}`;
     const frameHeight = fits ? (contentHeight ?? 320) : height;
 
@@ -203,6 +221,12 @@ export function BlockPreview({ id, name, height }: { id: string; name: string; h
                             ]}
                         />
                     ) : null}
+                    <CopyForAI
+                        what={name}
+                        prompt={async () => blockPrompt(await aiInput())}
+                        markdown={async () => blockMarkdown(await aiInput())}
+                        onPrepare={() => void loadCode(id).catch(() => undefined)}
+                    />
                     <Tooltip label="Open in a new tab">
                         <a
                             className={buttonClassName({ variant: "ghost", size: "sm", iconOnly: true })}

@@ -1,7 +1,7 @@
 import { useEffect, useId, useState, type ReactNode } from "react";
 
 import { Kbd, Text } from "@openwarelabs/ui";
-import { BookOpen, Clock, LayoutGrid, Package, Palette, Ruler, Search, SunMoon, Type, type LucideIcon } from "lucide-react";
+import { BookOpen, Clock, LayoutGrid, Package, Palette, Ruler, Search, Sparkles, SunMoon, Type, type LucideIcon } from "lucide-react";
 
 import { blockCategories, blockGroups, blockVariantCount } from "./blocks";
 import { guides, hrefOf, listedComponents, type Route } from "./content";
@@ -238,6 +238,7 @@ const guideIcons: Record<(typeof guides)[number]["slug"], LucideIcon> = {
     colours: Palette,
     typography: Type,
     tokens: Ruler,
+    ai: Sparkles,
 };
 
 function GuidesSidebar({ route, onNavigate, onSearch }: SidebarProps) {

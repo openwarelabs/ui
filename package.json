@@ -49,7 +49,9 @@
     "contrast": "node scripts/check-contrast.mjs",
     "blocks:check": "node scripts/check-blocks.mjs",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run typecheck"
+    "prepublishOnly": "npm run typecheck",
+    "mcp:build": "node scripts/build-mcp.mjs && tsc -p mcp/tsconfig.json",
+    "mcp:inspect": "npx -y @modelcontextprotocol/inspector node mcp/dist/server.mjs"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -62,6 +64,7 @@
     "sonner": "^2.0.8"
   },
   "devDependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "culori": "^4.0.1",
@@ -70,7 +73,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "shiki": "^4.4.3",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "zod": "^4.6.7"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,38 @@
+{
+  "name": "@openwarelabs/ui-mcp",
+  "version": "0.5.0",
+  "description": "An MCP server for Openware UI: gives Claude Code, Codex, Cursor and other AI tools the setup, every component's examples and props, every block's code, and the design tokens.",
+  "license": "MIT",
+  "author": "Alexander Silver",
+  "homepage": "https://github.com/openwarelabs/ui/tree/main/mcp#readme",
+  "bugs": {
+    "url": "https://github.com/openwarelabs/ui/issues"
+  },
+  "type": "module",
+  "bin": {
+    "openware-ui-mcp": "dist/server.mjs"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openwarelabs/ui",
+    "directory": "mcp"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "react",
+    "components",
+    "design-system",
+    "openware-ui"
+  ]
+}

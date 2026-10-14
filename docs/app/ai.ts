@@ -1,0 +1,211 @@
+/*
+ * Openware UI for AI tools: the Markdown that the docs' "Copy for AI" buttons copy, that llms.txt links to, and
+ * that the MCP server (@openwarelabs/ui-mcp) answers with. Plain functions of plain data, so the docs in the
+ * browser and the build scripts in Node share one source.
+ */
+import type { DocMeta, PropsDoc, TokensFile } from "./types";
+
+export const packageName = "@openwarelabs/ui";
+export const mcpPackage = "@openwarelabs/ui-mcp";
+export const mcpName = "openware-ui";
+
+/** How to add the MCP server to each tool. */
+export const mcpSetup = {
+    claudeCode: `claude mcp add ${mcpName} -- npx -y ${mcpPackage}`,
+    codex: `codex mcp add ${mcpName} -- npx -y ${mcpPackage}`,
+    codexToml: `[mcp_servers.${mcpName}]\ncommand = "npx"\nargs = ["-y", "${mcpPackage}"]\n`,
+    /** Cursor (.cursor/mcp.json), Claude Desktop, Windsurf and most other clients. */
+    json: `${JSON.stringify({ mcpServers: { [mcpName]: { command: "npx", args: ["-y", mcpPackage] } } }, null, 2)}\n`,
+    /** VS Code (.vscode/mcp.json). */
+    vscode: `${JSON.stringify({ servers: { [mcpName]: { type: "stdio", command: "npx", args: ["-y", mcpPackage] } } }, null, 2)}\n`,
+    /** Cursor's one-click install link. */
+    cursorLink: () =>
+        `cursor://anysphere.cursor-deeplink/mcp/install?name=${mcpName}&config=${encodeURIComponent(btoa(JSON.stringify({ command: "npx", args: ["-y", mcpPackage] })))}`,
+};
+
+const fence = (code: string, lang = "tsx") => {
+    const body = code.replace(/\n+$/, "");
+    const ticks = body.includes("```") ? "````" : "```";
+    return `${ticks}${lang}\n${body}\n${ticks}`;
+};
+
+/** A Markdown table cell: one line, with pipes escaped. */
+const cell = (text: string | undefined) => (text ?? "").replace(/\s*\n\s*/g, " ").replace(/\|/g, "\\|").trim();
+
+const join = (parts: Array<string | false | null | undefined>) => `${parts.filter(Boolean).join("\n\n").trim()}\n`;
+
+/** What every AI tool should know before it writes Openware code. */
+export function setupMarkdown(version?: string) {
+    return join([
+        `# Openware UI${version ? ` ${version}` : ""}`,
+        `React components and design tokens on npm as \`${packageName}\`: a midnight brand colour, a small brass accent, cool slate surfaces, tactile buttons and Inter, in light and dark themes, with a brand colour you can swap.`,
+        "## Install",
+        fence(`npm install ${packageName} lucide-react`, "sh"),
+        `React 18 or 19 is a peer dependency. \`lucide-react\` is for icons; the library's examples and blocks use it.`,
+        "## Set up once",
+        "Import two stylesheets once, where the app starts. Every component's styles are in styles.css: never import CSS per component.",
+        fence(`import "${packageName}/fonts.css";   // Inter and Geist Mono, self-hosted\nimport "${packageName}/styles.css";  // tokens + components`),
+        "Put the theme on `<html>` and `ow-app` on `<body>` for the font, text size, colours and the canvas:",
+        fence(`<html data-theme="light">   <!-- "light", "dark" or "system" -->\n  <body class="ow-app">`, "html"),
+        "Put one `<Toaster />` near the root, then call `toast()` from anywhere.",
+        fence(`import { Button, Field, Input, Toaster, toast } from "${packageName}";\n\n<Field label="Project name" hint="Letters, numbers and dashes.">\n    <Input placeholder="recipe-app" />\n</Field>\n<Button variant="primary" onClick={() => toast.success("Saved")}>Save</Button>\n<Toaster />`),
+        "## Writing code with it",
+        [
+            `- Everything is a named export from \`${packageName}\`. Use the library's component whenever one exists instead of writing your own: \`Text\` for every heading and paragraph, \`Button\`, \`Link\`, \`Field\` with \`Input\`, \`Select\` and the other inputs, \`Card\`, \`Badge\`, \`Dialog\`, \`Menu\`, \`Table\` and so on.`,
+            "- Lay out with `Stack` (`direction`, `gap`, `align`, `justify`, `wrap`) or your own CSS; don't restyle the components' insides.",
+            "- In your own CSS, use the tokens: every colour, space, radius, shadow, weight and timing is a CSS variable named `--ow-…` (`var(--ow-surface)`, `var(--ow-text-muted)`, `var(--ow-space-lg)`, `var(--ow-radius-container)`). Never hard-code hex or rgb colours, so the code follows the theme and the brand colour.",
+            "- Text styles are classes too (`ow-type-section-title`, `ow-type-lead`), but prefer `<Text variant=\"…\">`.",
+            `- Tailwind v4: \`@import "${packageName}/tailwind.css";\` after \`@import "tailwindcss";\` gives \`bg-surface\`, \`text-text-muted\`, \`rounded-container\`, \`p-lg\` and the rest.`,
+            `- Rebrand with \`applyBrand("#0d9488")\` (or a preset from \`brandPresets\`); the primary button, focus ring and tints follow in both themes.`,
+        ].join("\n"),
+        "## Rules",
+        [
+            "- One primary button per view. Everything else is secondary or ghost.",
+            "- Borders before shadows: cards are `--ow-surface` with a 1px `--ow-border`. Shadows are for things that float or press.",
+            "- Brass stays small: dots, a star, a pointer. Never a button.",
+            "- Sentence case for every label. Name the action on the button (\"Delete project\"), never \"OK\".",
+            "- Icons are Lucide (`lucide-react`), 16px, 2px stroke. Icon-only buttons need an `aria-label`.",
+        ].join("\n"),
+    ]);
+}
+
+export interface AiExample {
+    title: string;
+    description: string;
+    code: string;
+}
+
+export interface AiComponentInput {
+    meta: DocMeta;
+    examples: AiExample[];
+    /** Every props interface, by name, as the docs read them. */
+    props: Record<string, PropsDoc>;
+}
+
+/** The props interfaces a component's page documents. */
+export const propsOf = ({ meta, props }: Pick<AiComponentInput, "meta" | "props">) =>
+    (meta.props ?? [`${meta.title}Props`]).filter((name) => Boolean(props[name]?.props.length));
+
+/** A component's whole reference: what it is, its import, every example's code, keyboard, notes and props. */
+export function componentMarkdown({ meta, examples, props }: AiComponentInput) {
+    const imports = meta.imports ?? [meta.title];
+    return join([
+        `# ${meta.title}`,
+        meta.description,
+        `Part of Openware UI (\`${packageName}\`), in the ${meta.category} group. Source: \`src/${meta.source}\`.`,
+        "## Import",
+        fence(`import { ${imports.join(", ")} } from "${packageName}";`),
+        examples.length ? "## Examples" : null,
+        ...examples.map((example) => join([`### ${example.title}`, example.description, fence(example.code)]).trimEnd()),
+        meta.keyboard?.length ? `## Keyboard\n\n| Key | What it does |\n| --- | --- |\n${meta.keyboard.map(([keys, action]) => `| ${cell(keys)} | ${cell(action)} |`).join("\n")}` : null,
+        meta.notes?.length ? `## Notes\n\n${meta.notes.map((note) => `- ${note}`).join("\n")}` : null,
+        propsOf({ meta, props }).length ? "## API reference" : null,
+        ...propsOf({ meta, props }).map((name) => {
+            const doc = props[name]!;
+            const rows = doc.props.map(
+                (prop) => `| \`${prop.name}\`${prop.required ? " (required)" : ""} | \`${cell(prop.type)}\` | ${prop.default ? `\`${cell(prop.default)}\`` : ""} | ${cell(prop.description)} |`,
+            );
+            return join([
+                `### ${name}`,
+                doc.description,
+                doc.element ? `Also takes every \`<${doc.element}>\` attribute.` : null,
+                `| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n${rows.join("\n")}`,
+            ]).trimEnd();
+        }),
+        meta.related?.length ? `## Related\n\n${meta.related.join(", ")}` : null,
+    ]);
+}
+
+/** A ready-to-paste instruction for an AI tool, with the component's reference under it. */
+export function componentPrompt(input: AiComponentInput) {
+    const { meta } = input;
+    return join([
+        `Use the ${meta.title} component from Openware UI (\`${packageName}\`) in my project. Import it from the package rather than writing your own, and follow its examples, notes and props below. If the package isn't set up in this project yet, install it and import its styles once: \`import "${packageName}/fonts.css"; import "${packageName}/styles.css";\`, with \`data-theme\` on <html> and \`class="ow-app"\` on <body>.`,
+        "---",
+        componentMarkdown(input),
+    ]);
+}
+
+export interface AiBlockFile {
+    name: string;
+    language: string;
+    code: string;
+}
+
+export interface AiBlockInput {
+    /** "<category slug>/<Name>". */
+    id: string;
+    name: string;
+    description: string;
+    category: { title: string; uses: string[] };
+    files: AiBlockFile[];
+}
+
+/** A block's reference: what it is, what it's made from, and both its files. */
+export function blockMarkdown({ id, name, description, category, files }: AiBlockInput) {
+    const component = id.split("/").pop()!;
+    return join([
+        `# ${name} (${category.title})`,
+        description,
+        `A block from Openware UI: a whole page section built from \`${packageName}\` components, to copy into a project and change. It's two files, \`${component}.tsx\` (exporting \`${component}\`) and \`${component}.css\`, and imports only \`react\`, \`${packageName}\`, \`lucide-react\` and its own stylesheet. Its CSS is scoped under its own class and uses the \`--ow-…\` tokens, so it follows the theme and brand colour.`,
+        category.uses.length ? `Made from: ${category.uses.map((use) => `\`${use}\``).join(", ")}.` : null,
+        ...files.map((file) => `## ${file.name}\n\n${fence(file.code, file.language)}`),
+    ]);
+}
+
+/** A ready-to-paste instruction to add a block, with its files under it. */
+export function blockPrompt(input: AiBlockInput) {
+    const component = input.id.split("/").pop()!;
+    return join([
+        `Add the "${input.name}" block from Openware UI to my project. Create \`${component}.tsx\` and \`${component}.css\` from the files below, next to my other components, keep the stylesheet import, and then replace the sample content with mine. Keep using the \`${packageName}\` components it's made from. If the package isn't set up yet: \`npm install ${packageName} lucide-react\`, import \`${packageName}/fonts.css\` and \`${packageName}/styles.css\` once, and put \`data-theme="light"\` on <html> and \`class="ow-app"\` on <body>.`,
+        "---",
+        blockMarkdown(input),
+    ]);
+}
+
+export const tokenGroups = ["color", "type", "spacing", "radius", "shadow", "timing", "weight"] as const;
+export type TokenGroup = (typeof tokenGroups)[number];
+
+/** The design tokens of one group, or all of them, as Markdown tables. */
+export function tokensMarkdown(tokens: TokensFile, group?: TokenGroup) {
+    const groups = group ? [group] : tokenGroups;
+    const sections = groups.map((name) => {
+        if (name === "type") {
+            const families = Object.entries(tokens.type.families).map(([key, value]) => `- \`${key}\`: ${value}`).join("\n");
+            const styles = tokens.type.groups.map((typeGroup) =>
+                join([
+                    `### ${typeGroup.name}`,
+                    typeGroup.note,
+                    `| Class | Size | Line height | Weight | Use |\n| --- | --- | --- | --- | --- |\n${typeGroup.styles
+                        .map((style) => `| \`${style.name}\` | ${style.fontSize} | ${style.lineHeight} | ${style.fontWeight} | ${cell(style.usage)} |`)
+                        .join("\n")}`,
+                ]).trimEnd(),
+            );
+            return join([
+                "## Type",
+                "Use `<Text variant=\"…\">` (the variant is the class name without `ow-type-`), or the class itself.",
+                families,
+                ...styles,
+            ]).trimEnd();
+        }
+        if (name === "color") {
+            const themes = tokens.color.themes.map((theme) => theme.id);
+            const value = (entry: TokensFile["color"]["tokens"][number]) =>
+                typeof entry.value === "string" ? `\`${entry.value}\`` : themes.map((theme) => `${theme}: \`${(entry.value as Record<string, string>)[theme] ?? ""}\``).join(", ");
+            return join([
+                "## Colour",
+                "Use them as `var(--<name>)`. Themed values change with `data-theme`.",
+                `| Token | Value | Use |\n| --- | --- | --- |\n${tokens.color.tokens.map((entry) => `| \`--${entry.name}\` | ${value(entry)} | ${cell(entry.usage)} |`).join("\n")}`,
+            ]).trimEnd();
+        }
+        const list = tokens[name].tokens;
+        const title = { spacing: "Spacing", radius: "Corners", shadow: "Shadows", timing: "Motion", weight: "Weights" }[name];
+        return join([
+            `## ${title}`,
+            `| Token | Value | Use |\n| --- | --- | --- |\n${list
+                .map((entry) => `| \`--${entry.name}\` | ${typeof entry.value === "string" ? `\`${cell(entry.value)}\`` : cell(JSON.stringify(entry.value))} | ${cell(entry.usage)} |`)
+                .join("\n")}`,
+        ]).trimEnd();
+    });
+    return join(["# Openware UI tokens", ...sections]);
+}

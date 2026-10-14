@@ -3,3 +3,4 @@ dist
 docs/build
 docs-dist
 .tmp
+mcp/build

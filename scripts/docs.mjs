@@ -15,16 +15,14 @@
 import fs from "node:fs";
 import path from "node:path";
 import * as esbuild from "esbuild";
-import ts from "typescript";
 import { createHighlighter } from "shiki";
 
 import { buildTokens } from "./build-tokens.mjs";
 import { cssOrder, readStyles, root } from "./css.mjs";
+import { blocksDir, docs, examplesDir, readBlocks, readExamples, readProps } from "./docs-data.mjs";
+import { writeAiFiles } from "./ai-data.mjs";
 
 const mode = process.argv[2] ?? "dev";
-const docs = path.join(root, "docs");
-const examplesDir = path.join(docs, "examples");
-const blocksDir = path.join(docs, "blocks");
 
 const highlighter = await createHighlighter({ themes: ["github-dark-default"], langs: ["tsx", "ts", "bash", "css", "json", "html"] });
 
@@ -36,110 +34,15 @@ function highlight(code, lang) {
 
 const langOf = (file) => ({ ".tsx": "tsx", ".ts": "ts", ".sh": "bash", ".css": "css", ".json": "json", ".html": "html" })[path.extname(file)] ?? "tsx";
 
-/** "WithIcons" → "With icons". */
-const titleOf = (name) =>
-    name
-        .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-        .replace(/([A-Z])([A-Z][a-z])/g, "$1 $2")
-        .replace(/ ([A-Z])(?=[a-z]| |$)/g, (m) => m.toLowerCase())
-        .replace(/^./, (c) => c.toUpperCase());
-
-/** Reads an example file: its imports, and each exported function's own code with only the imports it uses. */
-function readExamples(file) {
-    const text = fs.readFileSync(file, "utf8");
-    const source = ts.createSourceFile(file, text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
-    const imports = [];
-    const examples = [];
-    // Top-level helpers (sample data, small components, types) that examples use; shown with the examples that need them.
-    const helpers = [];
-    for (const statement of source.statements) {
-        if (ts.isImportDeclaration(statement)) {
-            const from = statement.moduleSpecifier.text;
-            if (from.startsWith(".")) continue; // docs-only helpers stay out of the shown code
-            const clause = statement.importClause;
-            const names = [];
-            if (clause?.namedBindings && ts.isNamedImports(clause.namedBindings)) {
-                for (const element of clause.namedBindings.elements) names.push({ local: element.name.text, text: element.getText(source), type: element.isTypeOnly || clause.isTypeOnly });
-            }
-            if (clause?.name) names.push({ local: clause.name.text, text: clause.name.text, default: true });
-            imports.push({ from, names });
-        }
-        const exported = statement.modifiers?.some((m) => m.kind === ts.SyntaxKind.ExportKeyword);
-        if (!exported && (ts.isVariableStatement(statement) || ts.isFunctionDeclaration(statement) || ts.isInterfaceDeclaration(statement) || ts.isTypeAliasDeclaration(statement))) {
-            const names = ts.isVariableStatement(statement)
-                ? statement.declarationList.declarations.map((d) => d.name.getText(source))
-                : [statement.name?.text].filter(Boolean);
-            helpers.push({ names, text: text.slice(statement.getStart(source, false), statement.end) });
-        }
-        if (ts.isFunctionDeclaration(statement) && statement.name && exported) {
-            const name = statement.name.text;
-            const jsDoc = ts.getJSDocCommentsAndTags(statement).find(ts.isJSDoc);
-            const description = jsDoc ? ts.getTextOfJSDocComment(jsDoc.comment) ?? "" : "";
-            const body = text.slice(statement.getStart(source, false), statement.end);
-            examples.push({ name, title: titleOf(name), description, body });
-        }
-    }
-    return examples.map((example) => {
-        // The helpers this example uses, and the helpers those use, in file order.
-        const needed = new Set();
-        let scope = example.body;
-        for (let grew = true; grew; ) {
-            grew = false;
-            for (const helper of helpers) {
-                if (!needed.has(helper) && helper.names.some((name) => new RegExp(`\\b${name}\\b`).test(scope))) {
-                    needed.add(helper);
-                    scope += `\n${helper.text}`;
-                    grew = true;
-                }
-            }
-        }
-        const helperText = helpers.filter((helper) => needed.has(helper)).map((helper) => helper.text).join("\n\n");
-        const fullBody = helperText ? `${helperText}\n\n${example.body}` : example.body;
-        const used = (identifier) => new RegExp(`\\b${identifier}\\b`).test(fullBody);
-        const lines = imports
-            .map(({ from, names }) => {
-                const kept = names.filter((n) => used(n.local));
-                if (!kept.length) return null;
-                const fallback = kept.find((n) => n.default);
-                const named = kept.filter((n) => !n.default).map((n) => n.text);
-                const parts = [fallback?.text, named.length ? `{ ${named.join(", ")} }` : null].filter(Boolean).join(", ");
-                return `import ${parts} from "${from}";`;
-            })
-            .filter(Boolean);
-        const code = `${lines.join("\n")}${lines.length ? "\n\n" : ""}${fullBody}\n`;
-        return { name: example.name, title: example.title, description: example.description, code, html: highlight(code, "tsx") };
-    });
-}
-
 function examplesModule() {
     const files = fs.readdirSync(examplesDir).filter((file) => file.endsWith(".tsx")).sort();
-    const parts = files.map((file, index) => ({ file, index, slug: path.basename(file, ".tsx"), examples: readExamples(path.join(examplesDir, file)) }));
+    const parts = files.map((file, index) => ({ file, index, slug: path.basename(file, ".tsx"), examples: readExamples(path.join(examplesDir, file), highlight) }));
     return [
         ...parts.map(({ file, index }) => `import * as m${index} from ${JSON.stringify(path.join(examplesDir, file))};`),
         `export const pages = [`,
         ...parts.map(({ slug, index, examples }) => `  { slug: ${JSON.stringify(slug)}, module: m${index}, examples: ${JSON.stringify(examples)} },`),
         `];`,
     ].join("\n");
-}
-
-// Blocks: one folder per category, one <Name>.tsx (exporting the function <Name>) and <Name>.css per block.
-function readBlocks() {
-    if (!fs.existsSync(blocksDir)) return [];
-    return fs
-        .readdirSync(blocksDir, { withFileTypes: true })
-        .filter((entry) => entry.isDirectory())
-        .flatMap((dir) =>
-            fs
-                .readdirSync(path.join(blocksDir, dir.name))
-                .filter((file) => file.endsWith(".tsx"))
-                .sort()
-                .map((file) => {
-                    const name = path.basename(file, ".tsx");
-                    const css = path.join(blocksDir, dir.name, `${name}.css`);
-                    return { id: `${dir.name}/${name}`, name, tsx: path.join(blocksDir, dir.name, file), css: fs.existsSync(css) ? css : null };
-                }),
-        )
-        .sort((a, b) => a.id.localeCompare(b.id));
 }
 
 const blockWatch = () => {
@@ -184,73 +87,8 @@ function writeBlockCode(outdir) {
     }
 }
 
-// Props, from the source of truth: the exported interfaces in src/.
-const elementNames = { HTMLButtonElement: "button", HTMLInputElement: "input", HTMLTextAreaElement: "textarea", HTMLAnchorElement: "a", HTMLDivElement: "div", HTMLSpanElement: "span", HTMLElement: "element" };
-
 function propsModule() {
-    const program = ts.createProgram([path.join(root, "src/index.ts")], { jsx: ts.JsxEmit.ReactJSX, strict: true, skipLibCheck: true, moduleResolution: ts.ModuleResolutionKind.Bundler, module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2020 });
-    const checker = program.getTypeChecker();
-    const srcDir = path.join(root, "src") + path.sep;
-    const interfaces = new Map();
-    for (const file of program.getSourceFiles()) {
-        if (!file.fileName.startsWith(srcDir.split(path.sep).join("/")) && !file.fileName.startsWith(srcDir)) continue;
-        ts.forEachChild(file, (node) => {
-            if (ts.isInterfaceDeclaration(node) && node.modifiers?.some((m) => m.kind === ts.SyntaxKind.ExportKeyword)) interfaces.set(node.name.text, node);
-        });
-    }
-
-    /** Which HTML element's attributes an interface also takes, following `extends` through our own interfaces. */
-    function elementOf(node, seen = new Set()) {
-        for (const clause of node.heritageClauses ?? []) {
-            for (const type of clause.types) {
-                const text = type.getText();
-                const match = /HTMLAttributes<(\w+)>/.exec(text);
-                if (match) return elementNames[match[1]] ?? "element";
-                for (const [name, other] of interfaces) {
-                    if (!seen.has(name) && new RegExp(`\\b${name}\\b`).test(text)) {
-                        seen.add(name);
-                        const found = elementOf(other, seen);
-                        if (found) return found;
-                    }
-                }
-            }
-        }
-        return undefined;
-    }
-
-    const result = {};
-    for (const [name, node] of interfaces) {
-        const type = checker.getTypeAtLocation(node.name);
-        const props = [];
-        for (const symbol of checker.getPropertiesOfType(type)) {
-            const declaration = symbol.declarations?.[0];
-            if (!declaration) continue;
-            const fileName = path.normalize(declaration.getSourceFile().fileName);
-            if (!fileName.startsWith(srcDir)) continue;
-            const tags = symbol.getJsDocTags(checker);
-            if (tags.some((tag) => tag.name === "internal")) continue;
-            const defaultTag = tags.find((tag) => tag.name === "default");
-            const propType = checker.getTypeOfSymbolAtLocation(symbol, declaration);
-            const flags = ts.TypeFormatFlags.NoTruncation | ts.TypeFormatFlags.UseSingleQuotesForStringLiteralType;
-            let typeText = checker.typeToString(propType, declaration, flags);
-            // A named union of literals ("ButtonVariant") reads better spelled out: 'primary' | 'secondary' | …
-            const members = propType.isUnion() ? propType.types.filter((t) => !(t.flags & ts.TypeFlags.Undefined)) : [];
-            if (members.length > 1 && members.every((t) => t.isLiteral() || t.flags & ts.TypeFlags.BooleanLiteral)) {
-                const names = members.map((t) => checker.typeToString(t, declaration, flags));
-                typeText = names.includes("true") && names.includes("false") ? [...names.filter((n) => n !== "true" && n !== "false"), "boolean"].join(" | ") : names.join(" | ");
-            }
-            typeText = typeText.replace(/ \| undefined$/, "").replace(/^undefined \| /, "");
-            props.push({
-                name: symbol.name,
-                type: typeText,
-                required: !(symbol.flags & ts.SymbolFlags.Optional),
-                default: defaultTag ? ts.displayPartsToString(defaultTag.text).trim() : undefined,
-                description: ts.displayPartsToString(symbol.getDocumentationComment(checker)).trim(),
-            });
-        }
-        result[name] = { props, element: elementOf(node), description: ts.displayPartsToString(checker.getSymbolAtLocation(node.name)?.getDocumentationComment(checker) ?? []) };
-    }
-    return `export const props = ${JSON.stringify(result)};`;
+    return `export const props = ${JSON.stringify(readProps())};`;
 }
 
 const watchFiles = () => [path.join(root, "tokens/tokens.json"), ...cssOrder.map((file) => path.join(root, "src", file))];
@@ -323,6 +161,8 @@ if (mode === "build") {
     await esbuild.build(options);
     fs.copyFileSync(path.join(docs, "index.html"), path.join(root, "docs-dist/index.html"));
     fs.copyFileSync(path.join(docs, "frame.html"), path.join(root, "docs-dist/frame.html"));
+    // llms.txt, llms-full.txt and a Markdown copy of every page under ai/, for AI tools to read.
+    await writeAiFiles(path.join(root, "docs-dist"));
     console.log("Docs written to docs-dist/. Open docs-dist/index.html through any static server.");
 } else {
     const context = await esbuild.context(options);

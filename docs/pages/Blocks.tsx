@@ -107,7 +107,7 @@ export function BlockCategoryPage({ category }: { category: BlockCategory }) {
                 return (
                     <Section key={variant.id} id={slugify(variant.name)} title={variant.name} description={variant.description}>
                         {built.has(id) ? (
-                            <BlockPreview id={id} name={variant.name} height={variant.height} />
+                            <BlockPreview id={id} name={variant.name} height={variant.height} description={variant.description} category={category} />
                         ) : (
                             <figure className="docs-block-preview">
                                 <span className="docs-block-preview__badge">Not built yet</span>
