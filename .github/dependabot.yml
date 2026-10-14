@@ -14,6 +14,11 @@ updates:
       prefix: chore
       include: scope
     groups:
+      # React and React DOM have to move together (each wants the other at the same version), so their updates,
+      # majors included, come as one pull request, with their types.
+      react:
+        patterns: [react, react-dom, "@types/react", "@types/react-dom"]
+        update-types: [major, minor, patch]
       minor-and-patch:
         update-types: [minor, patch]
 

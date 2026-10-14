@@ -1,0 +1,43 @@
+# Publishes the docs to GitHub Pages, https://openwarelabs.github.io/ui/, when `npm run release` pushes its tag
+# (v1.2.3), so the site always matches the packages on npm. Run it by hand from the Actions tab to republish
+# without a release. scripts/setup-github.sh switches Pages on, with GitHub Actions as its source.
+name: Docs
+
+on:
+  push:
+    tags: ["v*.*.*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time; a newer release waits for the one before rather than cancelling it.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  docs:
+    name: Docs
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci # also builds dist/, through the prepare script
+      - run: npm run blocks:build
+      - run: npm run docs:build
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs-dist
+      - id: deploy
+        uses: actions/deploy-pages@v4

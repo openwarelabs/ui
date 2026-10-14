@@ -32,7 +32,9 @@ jobs:
   # .types.ts files and path aliases instead of ../ imports. The rest of the repo catches up as it's touched.
   cleaner:
     name: Cleaner
-    if: github.event_name == 'pull_request'
+    # Not on Dependabot's pull requests: they only update dependencies, which Checks verifies. (A skipped job counts as
+    # passing for a required check, so they can still merge.)
+    if: github.event_name == 'pull_request' && github.event.pull_request.user.login != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7

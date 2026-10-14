@@ -2,6 +2,8 @@
 
 Whole page sections built from [Openware UI](https://github.com/openwarelabs/ui) (`@openwarelabs/ui`), as React components that take their content as props. Drop one in, pass your words, actions and screenshots, and it follows the theme, the brand colour and every screen width.
 
+See every block live, at every width, with its props: [openwarelabs.github.io/ui/#/blocks](https://openwarelabs.github.io/ui/#/blocks).
+
 ```sh
 npm install @openwarelabs/ui @openwarelabs/blocks
 ```
