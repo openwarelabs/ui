@@ -1,0 +1,86 @@
+# Publishes a release when `npm run release` pushes its tag (v1.2.3): checks everything again, then publishes
+# @openwarelabs/ui and @openwarelabs/ui-mcp to npm with trusted publishing (no npm token, with provenance), and
+# makes the GitHub release from the changelog. Safe to re-run: anything already published is skipped.
+name: Release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: write # the GitHub release
+  id-token: write # npm trusted publishing
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      # Trusted publishing needs npm 11.5.1 or later.
+      - run: npm install -g npm@11
+
+      - name: Check the tag matches the versions
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          ui=$(node -p "require('./package.json').version")
+          mcp=$(node -p "require('./mcp/package.json').version")
+          if [ "$tag" != "$ui" ] || [ "$tag" != "$mcp" ]; then
+            echo "::error::The tag is $GITHUB_REF_NAME, but package.json says $ui and mcp/package.json says $mcp."
+            exit 1
+          fi
+          echo "VERSION=$tag" >> "$GITHUB_ENV"
+
+      - run: npm ci # also builds dist/, through the prepare script
+      - run: npm run typecheck
+      - run: npm run contrast
+      - run: npm run blocks:check
+      - run: npm run mcp:build
+
+      - name: Publish @openwarelabs/ui
+        run: |
+          if npm view "@openwarelabs/ui@$VERSION" version > /dev/null 2>&1; then
+            echo "@openwarelabs/ui@$VERSION is already on npm."
+          else
+            npm publish --ignore-scripts
+          fi
+
+      - name: Publish @openwarelabs/ui-mcp
+        working-directory: mcp
+        run: |
+          if npm view "@openwarelabs/ui-mcp@$VERSION" version > /dev/null 2>&1; then
+            echo "@openwarelabs/ui-mcp@$VERSION is already on npm."
+          else
+            npm publish
+          fi
+
+      - name: Make the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # This version's section of the changelog, without its heading.
+          awk -v v="$VERSION" '
+            $0 ~ "^## " v " " { found = 1; next }
+            found && /^## / { exit }
+            found { print }
+          ' CHANGELOG.md > notes.md
+          [ -s notes.md ] || echo "Release $VERSION." > notes.md
+          cat >> notes.md <<NOTES
+
+          **npm:** [@openwarelabs/ui@$VERSION](https://www.npmjs.com/package/@openwarelabs/ui/v/$VERSION) · [@openwarelabs/ui-mcp@$VERSION](https://www.npmjs.com/package/@openwarelabs/ui-mcp/v/$VERSION)
+          NOTES
+          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
+            gh release edit "$GITHUB_REF_NAME" --notes-file notes.md
+          else
+            gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes-file notes.md --verify-tag
+          fi

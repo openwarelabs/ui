@@ -104,6 +104,18 @@ The docs' header has a colour picker that does this live, and the Theming page s
 
 **No bundler?** `dist/openware-ui.iife.js` sets `window.OpenwareUI`, reading React from `window.React`. A CDN serves it straight from npm: `https://cdn.jsdelivr.net/npm/@openwarelabs/ui/dist/openware-ui.iife.js`, with `dist/styles.css` beside it.
 
+## Releasing
+
+```sh
+npm run release              # works out the version, checks, tags and pushes
+npm run release -- --dry-run # shows the version and the notes, changes nothing
+npm run release -- minor     # forces patch, minor, major or an exact version
+```
+
+The version comes from the commit subjects since the last release, written as [Conventional Commits](https://www.conventionalcommits.org): `feat:` makes a minor release, `fix:` and `perf:` a patch, and `feat!:` or a `BREAKING CHANGE:` line a major one (a minor one before 1.0). `chore:`, `docs:`, `refactor:`, `test:`, `ci:`, `build:` and `style:` don't release on their own. The command checks that `main` is clean and up to date, runs every check and build, bumps both packages, writes `CHANGELOG.md`, commits, tags `vX.Y.Z` and pushes.
+
+The tag starts `.github/workflows/release.yml`, which runs the checks again, publishes `@openwarelabs/ui` and `@openwarelabs/ui-mcp` to npm with trusted publishing (no token, with provenance), and makes the GitHub release from the changelog. CI checks every pull request's commit subjects against the convention; `npm run commits:check` does the same locally.
+
 ## Rules worth keeping
 
 - One primary button per view. Everything else is secondary or ghost.

@@ -1,0 +1,29 @@
+# Checks every push to main and every pull request: types, contrast, blocks, the build and the MCP server, and
+# that commit subjects follow the convention `npm run release` reads (feat:, fix:, chore: and so on).
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run contrast
+      - run: npm run blocks:check
+      - run: npm run mcp:build
+      - run: npm run docs:build
+      - name: Check commit messages
+        if: github.event_name == 'pull_request'
+        run: node scripts/check-commits.mjs "${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
