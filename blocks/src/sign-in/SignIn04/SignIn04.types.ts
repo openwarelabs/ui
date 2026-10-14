@@ -55,3 +55,7 @@ export interface SignIn04Props extends Omit<HTMLAttributes<HTMLElement>, "title"
     /** Words that aren't content (the fields' labels, the buttons, the messages), in English unless you pass your own. */
     labels?: SignIn04Labels;
 }
+
+export type SignIn04Mode = "app" | "backup";
+
+export type SignIn04Status = "idle" | "checking" | "wrong" | "done";

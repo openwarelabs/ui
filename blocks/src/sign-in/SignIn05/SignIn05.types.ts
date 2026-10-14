@@ -85,3 +85,5 @@ export interface SignIn05Props extends Omit<HTMLAttributes<HTMLElement>, "title"
     /** Words that aren't content (the fields' labels, the buttons, the messages), in English unless you pass your own. */
     labels?: SignIn05Labels;
 }
+
+export type SignIn05Step = "email" | "password" | "done";

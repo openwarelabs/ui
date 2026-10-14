@@ -2,14 +2,9 @@ import { useId, useState, type FormEvent } from "react";
 
 import { Button, cx, Field, Input, Separator, Text } from "@openwarelabs/ui";
 
-import type { SignIn02Props } from "./SignIn02.types";
+import type { SignIn02Errors, SignIn02Props } from "./SignIn02.types";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-interface Errors {
-    email?: string;
-    password?: string;
-}
 
 /** Signing up: the form on one side of the window, a midnight plate with the product and a quote on the other. */
 export function SignIn02({
@@ -33,7 +28,7 @@ export function SignIn02({
     const id = useId();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [errors, setErrors] = useState<Errors>({});
+    const [errors, setErrors] = useState<SignIn02Errors>({});
     // The provider's id, or "" for the form, while it's working.
     const [busy, setBusy] = useState<string | null>(null);
 
@@ -51,7 +46,7 @@ export function SignIn02({
     async function submit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         const address = email.trim();
-        const found: Errors = {};
+        const found: SignIn02Errors = {};
         if (!address) found.email = labels.emailEmpty ?? "Enter your work email.";
         else if (!emailPattern.test(address)) found.email = labels.emailInvalid ?? "That doesn't look like an email address.";
         if (password.length < passwordMinLength) {

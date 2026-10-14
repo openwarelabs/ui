@@ -3,9 +3,7 @@ import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { Button, Card, cx, Field, Input, Link, Text, VisuallyHidden } from "@openwarelabs/ui";
 
 import { ArrowLeftIcon, CheckIcon, CircleCheckIcon, EyeIcon, EyeOffIcon, KeyRoundIcon } from "@blocks/shared/icons";
-import type { SignIn05Props, SignIn05Rule } from "./SignIn05.types";
-
-type Step = "email" | "password" | "done";
+import type { SignIn05Props, SignIn05Rule, SignIn05Step } from "./SignIn05.types";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -38,7 +36,7 @@ export function SignIn05({
     ...props
 }: SignIn05Props) {
     const id = useId();
-    const [step, setStep] = useState<Step>("email");
+    const [step, setStep] = useState<SignIn05Step>("email");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [shown, setShown] = useState(false);
@@ -61,7 +59,7 @@ export function SignIn05({
     }, [step, emailId, passwordId, doneTitleId]);
 
     /** Runs the callback with the button spinning, then moves on, or shows why it couldn't. */
-    async function run(work: (() => void | Promise<void>) | undefined, next: Step, field: string) {
+    async function run(work: (() => void | Promise<void>) | undefined, next: SignIn05Step, field: string) {
         setBusy(true);
         try {
             await work?.();

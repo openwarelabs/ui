@@ -75,3 +75,8 @@ export interface SignIn02Props extends Omit<HTMLAttributes<HTMLElement>, "title"
     /** Words that aren't content (the fields' labels, the button, the messages), in English unless you pass your own. */
     labels?: SignIn02Labels;
 }
+
+export interface SignIn02Errors {
+    email?: string;
+    password?: string;
+}

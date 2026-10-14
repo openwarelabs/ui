@@ -3,20 +3,17 @@ import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { Button, Card, Checkbox, cx, Field, Input, InputOTP, Spinner, Text } from "@openwarelabs/ui";
 
 import { CircleCheckIcon, KeyRoundIcon, ShieldCheckIcon } from "@blocks/shared/icons";
-import type { SignIn04Props } from "./SignIn04.types";
-
-type Mode = "app" | "backup";
-type Status = "idle" | "checking" | "wrong" | "done";
+import type { SignIn04Mode, SignIn04Props, SignIn04Status } from "./SignIn04.types";
 
 /** Six boxes for the code from an authenticator app, checked as the last digit goes in, with a backup code as the way round. */
 export function SignIn04({ title, description, onVerify, footer, labels = {}, className, ...props }: SignIn04Props) {
     const backupId = useId();
-    const [mode, setMode] = useState<Mode>("app");
+    const [mode, setMode] = useState<SignIn04Mode>("app");
     const [code, setCode] = useState("");
     const [backup, setBackup] = useState("");
     const [backupError, setBackupError] = useState("");
     const [trust, setTrust] = useState(false);
-    const [status, setStatus] = useState<Status>("idle");
+    const [status, setStatus] = useState<SignIn04Status>("idle");
     const otpRef = useRef<HTMLDivElement>(null);
     const shownMode = useRef(mode);
 

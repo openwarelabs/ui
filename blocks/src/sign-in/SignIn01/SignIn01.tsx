@@ -2,14 +2,9 @@ import { useId, useState, type FormEvent } from "react";
 
 import { Button, Card, cx, Field, Input, Link, Separator, Text } from "@openwarelabs/ui";
 
-import type { SignIn01Props } from "./SignIn01.types";
+import type { SignIn01Errors, SignIn01Props } from "./SignIn01.types";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-interface Errors {
-    email?: string;
-    password?: string;
-}
 
 /** One card in the middle of the window: the mark and heading above it, other accounts and the email form on it. */
 export function SignIn01({
@@ -28,7 +23,7 @@ export function SignIn01({
     const id = useId();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [errors, setErrors] = useState<Errors>({});
+    const [errors, setErrors] = useState<SignIn01Errors>({});
     // The provider's id, or "" for the form, while it's working.
     const [busy, setBusy] = useState<string | null>(null);
 
@@ -46,7 +41,7 @@ export function SignIn01({
     async function submit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         const address = email.trim();
-        const found: Errors = {};
+        const found: SignIn01Errors = {};
         if (!address) found.email = labels.emailEmpty ?? "Enter the email address you signed up with.";
         else if (!emailPattern.test(address)) found.email = labels.emailInvalid ?? "That doesn't look like an email address.";
         if (!password) found.password = labels.passwordEmpty ?? "Enter your password.";
