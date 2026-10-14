@@ -2,6 +2,15 @@
 
 Every release of @openwarelabs/ui and @openwarelabs/ui-mcp. `npm run release` writes it from the commits.
 
+## 0.8.0 (2026-10-14)
+
+### Features
+
+- **blocks:** add Footer01 to Footer04 (#6) ([23df25e](https://github.com/openwarelabs/ui/commit/23df25e2c5f550de2fc767ad02778d12e1426822))
+- **blocks:** add Features01 to Features05 (#5) ([329ef87](https://github.com/openwarelabs/ui/commit/329ef878a87f08ab2085b5c8658264d3007c4967))
+- **blocks:** add Pricing01 to Pricing05 (#4) ([ad61515](https://github.com/openwarelabs/ui/commit/ad61515fb0caa3b407232d6aa8b665cba1e53681))
+- **blocks:** add Header01 to Header05 (#3) ([963b199](https://github.com/openwarelabs/ui/commit/963b199041b6d212b194611bc8761fa2ee8fec25))
+
 ## 0.7.0 (2026-10-14)
 
 ### Features
