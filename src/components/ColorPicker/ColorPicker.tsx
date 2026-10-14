@@ -1,48 +1,13 @@
 import { forwardRef, useCallback, useEffect, useId, useRef, useState, type CSSProperties, type ForwardedRef } from "react";
 import { HexAlphaColorPicker, HexColorInput, HexColorPicker } from "react-colorful";
 
-import { useControllableState } from "../../hooks/useControllableState";
-import { manualPopover, useDismiss, useFloating, type Placement } from "../../hooks/useFloating";
-import { usePresence } from "../../hooks/usePresence";
-import { ChevronDownIcon, PipetteIcon } from "../../icons";
-import { cx } from "../../utils/cx";
-
-/** What a swatch is: a colour, or a colour with a name to read out. */
-export type ColorSwatchOption = string | { color: string; name: string };
-
-export interface ColorPickerProps {
-    /** A hex colour: "#0d9488", or "#0d9488cc" with alpha. */
-    value?: string;
-    /** @default "#312c7e" */
-    defaultValue?: string;
-    /** Called with a lowercase hex colour as the person drags, types or picks. */
-    onChange?(color: string): void;
-    /** Adds an opacity slider; colours come back as #rrggbbaa.
-     * @default false */
-    alpha?: boolean;
-    /** Ready-made colours as swatches under the picker. */
-    swatches?: ColorSwatchOption[];
-    /** The hex field under the picker.
-     * @default true */
-    showInput?: boolean;
-    /** A button that picks a colour from anywhere on the screen, where the browser can (Chrome and Edge).
-     * @default true */
-    eyeDropper?: boolean;
-    /** Names the picker for screen readers.
-     * @default "Colour" */
-    "aria-label"?: string;
-    className?: string;
-}
-
-interface EyeDropperResult {
-    sRGBHex: string;
-}
-
-declare global {
-    interface Window {
-        EyeDropper?: new () => { open(): Promise<EyeDropperResult> };
-    }
-}
+import { useControllableState } from "@/hooks/useControllableState";
+import { manualPopover, useDismiss, useFloating, type Placement } from "@/hooks/useFloating";
+import { usePresence } from "@/hooks/usePresence";
+import { ChevronDownIcon, PipetteIcon } from "@/icons";
+import { cx } from "@/utils/cx";
+import type { ColorFieldProps, ColorPickerProps, ColorSwatchOption, EyeDropperResult } from "./ColorPicker.types";
+export type { ColorFieldProps, ColorPickerProps, ColorSwatchOption } from "./ColorPicker.types";
 
 const swatchColor = (swatch: ColorSwatchOption) => (typeof swatch === "string" ? swatch : swatch.color);
 const swatchName = (swatch: ColorSwatchOption) => (typeof swatch === "string" ? swatch : swatch.name);
@@ -139,22 +104,6 @@ export function ColorPicker({
     );
 }
 
-export interface ColorFieldProps extends Omit<ColorPickerProps, "className" | "aria-label"> {
-    /** @default "md" */
-    size?: "sm" | "md";
-    /** @default false */
-    isInvalid?: boolean;
-    disabled?: boolean;
-    /** Where the picker opens; it flips when there's no room.
-     * @default "bottom-start" */
-    placement?: Placement;
-    id?: string;
-    "aria-label"?: string;
-    "aria-labelledby"?: string;
-    "aria-describedby"?: string;
-    className?: string;
-}
-
 function assignRef<T>(ref: ForwardedRef<T>, value: T | null) {
     if (typeof ref === "function") ref(value);
     else if (ref) ref.current = value;
@@ -212,9 +161,10 @@ export const ColorField = forwardRef<HTMLButtonElement, ColorFieldProps>(functio
                 aria-haspopup="dialog"
                 aria-expanded={isOpen}
                 aria-controls={isOpen ? panelId : undefined}
-                aria-label={ariaLabel}
-                aria-labelledby={ariaLabelledBy}
-                aria-describedby={[`${panelId}-value`, ariaDescribedBy].filter(Boolean).join(" ")}
+                // Named by its label, then the value it shows: the name holds the visible text, as voice control needs.
+                aria-label={ariaLabel && !ariaLabelledBy ? `${ariaLabel}, ${color.toUpperCase()}` : undefined}
+                aria-labelledby={ariaLabelledBy ? `${ariaLabelledBy} ${panelId}-value` : undefined}
+                aria-describedby={ariaDescribedBy}
                 aria-invalid={isInvalid || undefined}
                 disabled={disabled}
                 className={cx(

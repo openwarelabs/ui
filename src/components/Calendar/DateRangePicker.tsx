@@ -1,48 +1,15 @@
 import { forwardRef, useCallback, useEffect, useId, useRef, useState, type ForwardedRef, type KeyboardEvent } from "react";
 
-import { useControllableState } from "../../hooks/useControllableState";
-import { manualPopover, useDismiss, useFloating } from "../../hooks/useFloating";
-import { usePresence } from "../../hooks/usePresence";
-import { CalendarIcon, CheckIcon } from "../../icons";
-import { cx } from "../../utils/cx";
-import { CloseButton } from "../Button/ButtonGroup";
+import { useControllableState } from "@/hooks/useControllableState";
+import { manualPopover, useDismiss, useFloating } from "@/hooks/useFloating";
+import { usePresence } from "@/hooks/usePresence";
+import { CalendarIcon, CheckIcon } from "@/icons";
+import { cx } from "@/utils/cx";
+import { CloseButton } from "@/components/Button/ButtonGroup";
 import { formatDateRange } from "./dates";
 import { RangeCalendar, type DateRange, type RangeCalendarProps } from "./RangeCalendar";
-
-/** A named range to pick in one go, such as "Last 7 days". */
-export interface DateRangePreset {
-    /** What the list shows, in sentence case. */
-    label: string;
-    range: DateRange;
-}
-
-export interface DateRangePickerProps extends Omit<RangeCalendarProps, "autoFocus" | "className" | "visibleMonths"> {
-    /** Ranges to pick in one go, listed beside the calendar: "Last 7 days", "This month". */
-    presets?: DateRangePreset[];
-    /** How many months the calendar shows side by side. Phones always get one.
-     * @default 2 */
-    visibleMonths?: 1 | 2;
-    /** Shown when no range is chosen.
-     * @default "Pick dates" */
-    placeholder?: string;
-    /** How each date is written in the field; dates the two ends share are written once, as in "3 – 9 Oct 2026".
-     * @default { dateStyle: "medium" } */
-    formatOptions?: Intl.DateTimeFormatOptions;
-    /** md is 40px tall, sm 32px.
-     * @default "md" */
-    size?: "sm" | "md";
-    /** @default false */
-    isInvalid?: boolean;
-    /** @default false */
-    disabled?: boolean;
-    /** For the field's button, so a label can point at it. */
-    id?: string;
-    "aria-label"?: string;
-    "aria-labelledby"?: string;
-    "aria-describedby"?: string;
-    /** Classes for the field, e.g. a width. */
-    className?: string;
-}
+import type { DateRangePickerProps, DateRangePreset } from "./DateRangePicker.types";
+export type { DateRangePickerProps, DateRangePreset } from "./DateRangePicker.types";
 
 // Two months and the presets need about 740px; below this, the calendar shows one month.
 const twoMonthsQuery = "(min-width: 768px)";
@@ -139,10 +106,10 @@ export const DateRangePicker = forwardRef<HTMLButtonElement, DateRangePickerProp
                     aria-haspopup="dialog"
                     aria-expanded={isOpen}
                     aria-controls={isOpen ? panelId : undefined}
-                    aria-label={ariaLabel}
-                    aria-labelledby={ariaLabelledBy}
-                    // A label names the button; the chosen range is read as its description.
-                    aria-describedby={[`${panelId}-value`, ariaDescribedBy].filter(Boolean).join(" ")}
+                    // Named by its label, then the value it shows: the name holds the visible text, as voice control needs.
+                    aria-label={ariaLabel && !ariaLabelledBy ? `${ariaLabel}, ${label}` : undefined}
+                    aria-labelledby={ariaLabelledBy ? `${ariaLabelledBy} ${panelId}-value` : undefined}
+                    aria-describedby={ariaDescribedBy}
                     aria-invalid={isInvalid || undefined}
                     disabled={disabled}
                     className={cx("ow-select", "ow-date-range-picker__trigger", `ow-select--${size}`, {

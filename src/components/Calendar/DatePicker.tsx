@@ -1,31 +1,14 @@
 import { forwardRef, useCallback, useId, useRef, useState, type ForwardedRef } from "react";
 
-import { useControllableState } from "../../hooks/useControllableState";
-import { manualPopover, useDismiss, useFloating } from "../../hooks/useFloating";
-import { usePresence } from "../../hooks/usePresence";
-import { CalendarIcon } from "../../icons";
-import { cx } from "../../utils/cx";
+import { useControllableState } from "@/hooks/useControllableState";
+import { manualPopover, useDismiss, useFloating } from "@/hooks/useFloating";
+import { usePresence } from "@/hooks/usePresence";
+import { CalendarIcon } from "@/icons";
+import { cx } from "@/utils/cx";
 import { Calendar, type CalendarProps } from "./Calendar";
 import { formatDate, type ISODate } from "./dates";
-
-export interface DatePickerProps extends Omit<CalendarProps, "autoFocus" | "className"> {
-    /** Shown when no date is chosen.
-     * @default "Pick a date" */
-    placeholder?: string;
-    /** How the chosen date is written in the field.
-     * @default { dateStyle: "medium" } */
-    formatOptions?: Intl.DateTimeFormatOptions;
-    /** @default "md" */
-    size?: "sm" | "md";
-    /** @default false */
-    isInvalid?: boolean;
-    disabled?: boolean;
-    id?: string;
-    "aria-label"?: string;
-    "aria-labelledby"?: string;
-    "aria-describedby"?: string;
-    className?: string;
-}
+import type { DatePickerProps } from "./DatePicker.types";
+export type { DatePickerProps } from "./DatePicker.types";
 
 function assignRef<T>(ref: ForwardedRef<T>, value: T | null) {
     if (typeof ref === "function") ref(value);
@@ -81,10 +64,10 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(functio
                 aria-haspopup="dialog"
                 aria-expanded={isOpen}
                 aria-controls={isOpen ? panelId : undefined}
-                aria-label={ariaLabel}
-                aria-labelledby={ariaLabelledBy}
-                // A label names the button; the chosen date is read as its description.
-                aria-describedby={[`${panelId}-value`, ariaDescribedBy].filter(Boolean).join(" ")}
+                // Named by its label, then the value it shows: the name holds the visible text, as voice control needs.
+                aria-label={ariaLabel && !ariaLabelledBy ? `${ariaLabel}, ${label}` : undefined}
+                aria-labelledby={ariaLabelledBy ? `${ariaLabelledBy} ${panelId}-value` : undefined}
+                aria-describedby={ariaDescribedBy}
                 aria-invalid={isInvalid || undefined}
                 disabled={disabled}
                 className={cx(

@@ -46,7 +46,13 @@ function Files({ files, open, onToggle, labels }: { files: Chat03File[]; open: s
                             <DiffCount added={file.added} removed={file.removed} labels={labels} />
                         </Button>
                         {expanded ? (
-                            <Text as="pre" variant="code" className="ow-chat03__diff" aria-label={labels.diff?.(file.path) ?? `Changes to ${file.path}`}>
+                            <Text
+                                as="pre"
+                                variant="code"
+                                className="ow-chat03__diff"
+                                tabIndex={0}
+                                aria-label={labels.diff?.(file.path) ?? `Changes to ${file.path}`}
+                            >
                                 {file.diff.map((line, index) => {
                                     const kind = line.startsWith("@@") ? "hunk" : line[0] === "+" ? "add" : line[0] === "-" ? "remove" : "context";
                                     const sign = kind === "add" ? "+" : kind === "remove" ? "−" : "";
