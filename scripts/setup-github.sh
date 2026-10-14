@@ -5,6 +5,8 @@
 #   - main takes changes only through pull requests, which need the Checks, Cleaner, PR title, Visual and Accessibility checks to pass.
 #     Repository admins can bypass it, so `npm run release` can push its version commit and tag.
 #   - main can't be force-pushed or deleted.
+#   - GitHub Pages, built by the Docs workflow on each release, at https://openwarelabs.github.io/ui/, which is
+#     also the repository's website link.
 #   - The "visual change" label, which lets a pull request through the Visual check when it's meant to change how
 #     things look.
 set -euo pipefail
@@ -20,7 +22,8 @@ gh api --method PATCH "repos/$repo" --silent \
   -f squash_merge_commit_message=PR_BODY \
   -F delete_branch_on_merge=true \
   -F allow_auto_merge=true \
-  -F allow_update_branch=true
+  -F allow_update_branch=true \
+  -f homepage="https://${repo%%/*}.github.io/${repo#*/}/"
 
 ruleset=$(cat <<'JSON'
 {
@@ -68,6 +71,13 @@ if [ -n "$existing" ]; then
 else
   echo "Creating the main ruleset..."
   echo "$ruleset" | gh api --method POST "repos/$repo/rulesets" --input - --silent
+fi
+
+echo "GitHub Pages, from the Docs workflow..."
+if gh api "repos/$repo/pages" --silent 2>/dev/null; then
+  gh api --method PUT "repos/$repo/pages" --silent -f build_type=workflow
+else
+  gh api --method POST "repos/$repo/pages" --silent -f build_type=workflow
 fi
 
 echo "The visual change label..."

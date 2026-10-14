@@ -4,7 +4,7 @@
   "description": "Openware UI blocks: whole page sections (heroes and more) as React components that take their content as props.",
   "license": "MIT",
   "author": "Alexander Silver",
-  "homepage": "https://github.com/openwarelabs/ui/tree/main/blocks#readme",
+  "homepage": "https://openwarelabs.github.io/ui/#/blocks",
   "bugs": {
     "url": "https://github.com/openwarelabs/ui/issues"
   },

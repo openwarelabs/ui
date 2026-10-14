@@ -1,6 +1,6 @@
 # Openware UI MCP server
 
-An [MCP](https://modelcontextprotocol.io) server for [Openware UI](https://github.com/openwarelabs/ui) (`@openwarelabs/ui`). It gives AI coding tools the library's setup, every component's examples and props, every block's code, and the design tokens, so they build with the real components instead of guessing at look-alikes.
+An [MCP](https://modelcontextprotocol.io) server for [Openware UI](https://github.com/openwarelabs/ui) (`@openwarelabs/ui`). It gives AI coding tools the library's setup, every component's examples and props, every block's code, and the design tokens, so they build with the real components instead of guessing at look-alikes. The same content is in the [docs](https://openwarelabs.github.io/ui/), for people.
 
 Everything is bundled in: it runs offline, needs nothing but Node 18 or later, and answers for the release it matches.
 

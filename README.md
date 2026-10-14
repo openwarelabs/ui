@@ -2,7 +2,11 @@
 
 React components and design tokens with a quiet, tactile look: a midnight brand colour, a brass accent kept small, cool slate surfaces, buttons that press in, and Inter. Light and dark themes, and a brand colour you can swap.
 
+**Docs: [openwarelabs.github.io/ui](https://openwarelabs.github.io/ui/)**: every component with live examples and props, every block, the tokens and the guides. It's published from each release, so it matches the packages on npm.
+
 ## Docs
+
+To run them from the repository:
 
 ```sh
 npm install         # installs and builds dist/

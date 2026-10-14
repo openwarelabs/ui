@@ -4,7 +4,7 @@
   "description": "An MCP server for Openware UI: gives Claude Code, Codex, Cursor and other AI tools the setup, every component's examples and props, every block's code, and the design tokens.",
   "license": "MIT",
   "author": "Alexander Silver",
-  "homepage": "https://github.com/openwarelabs/ui/tree/main/mcp#readme",
+  "homepage": "https://openwarelabs.github.io/ui/",
   "bugs": {
     "url": "https://github.com/openwarelabs/ui/issues"
   },

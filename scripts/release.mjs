@@ -14,6 +14,7 @@
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
+import { styleText } from "node:util";
 
 import { root } from "./css.mjs";
 
@@ -22,25 +23,51 @@ const args = process.argv.slice(2);
 const dryRun = args.includes("--dry-run");
 const forced = args.find((arg) => !arg.startsWith("--"));
 
+// The terminal output. Colours come from Node itself (no dependency) and switch off by themselves when the output
+// isn't a terminal or NO_COLOR is set.
+const paint = (style, text) => styleText(style, String(text));
+const bold = (text) => paint("bold", text);
+const dim = (text) => paint("dim", text);
+const say = (text = "") => console.log(text);
+const done = (text) => say(`  ${paint("green", "✓")} ${text}`);
+const live = process.stdout.isTTY;
+
 const git = (...command) => execFileSync("git", command, { cwd: root, encoding: "utf8" }).trim();
-const run = (command, commandArgs) => execFileSync(command, commandArgs, { cwd: root, stdio: "inherit" });
-const fail = (message) => {
-    console.error(`\n✗ ${message}\n`);
+const fail = (message, hint) => {
+    console.error(`\n  ${paint(["bold", "red"], "✗")} ${bold(message)}${hint ? `\n    ${dim(hint)}` : ""}\n`);
     process.exit(1);
 };
+/** One step as one line: its name while it runs, then a tick and how long it took. Its output shows only if it fails. */
+function step(label, command, commandArgs) {
+    const started = Date.now();
+    if (live) process.stdout.write(`  ${dim("•")} ${label}${dim("…")}`);
+    try {
+        execFileSync(command, commandArgs, { cwd: root, stdio: ["ignore", "pipe", "pipe"], encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+    } catch (error) {
+        if (live) process.stdout.write("\r\x1b[2K");
+        console.error(`  ${paint("red", "✗")} ${label}\n`);
+        console.error([error.stdout, error.stderr].filter(Boolean).join("\n").trim().replace(/^/gm, "    "));
+        fail(`${label} failed, so nothing was released.`, "Fix it, commit, and run npm run release again.");
+    }
+    if (live) process.stdout.write("\r\x1b[2K");
+    done(`${label} ${dim(`${((Date.now() - started) / 1000).toFixed(1)}s`)}`);
+}
 
 const readJson = (file) => JSON.parse(fs.readFileSync(path.join(root, file), "utf8"));
 const writeJson = (file, value) => fs.writeFileSync(path.join(root, file), `${JSON.stringify(value, null, 2)}\n`);
 
 // 1. The tree is clean, on main, and has everything origin has.
 if (!dryRun) {
-    if (git("status", "--porcelain")) fail("There are uncommitted changes. Commit or stash them first.");
+    say(`\n  ${bold("Openware UI release")}\n`);
+    if (git("status", "--porcelain")) fail("There are uncommitted changes.", "Commit or stash them first.");
     const branch = git("rev-parse", "--abbrev-ref", "HEAD");
-    if (branch !== "main") fail(`Releases go out from main, and this is ${branch}.`);
+    if (branch !== "main") fail(`Releases go out from main, and this is ${branch}.`, "git checkout main && git pull");
     git("fetch", "--quiet", "--tags", "origin");
     const [behind, ahead] = git("rev-list", "--left-right", "--count", "origin/main...HEAD").split(/\s+/).map(Number);
-    if (behind > 0) fail(`main is ${behind} commit${behind === 1 ? "" : "s"} behind origin/main. Pull first.`);
-    if (ahead > 0) console.log(`main has ${ahead} unpushed commit${ahead === 1 ? "" : "s"}; the release pushes them too.`);
+    if (behind > 0) fail(`main is ${behind} commit${behind === 1 ? "" : "s"} behind origin/main.`, "git pull");
+    done(
+        `On main, clean, and up to date with origin${ahead > 0 ? dim(` (${ahead} unpushed commit${ahead === 1 ? "" : "s"}, which the release pushes too)`) : ""}`,
+    );
 }
 
 // 2. The last release: the newest v* tag, or before the first tag, the newest "Release x.y.z" commit.
@@ -48,7 +75,9 @@ const current = readJson("package.json").version;
 const tags = git("tag", "--list", "v*", "--sort=-v:refname").split("\n").filter(Boolean);
 let base = tags[0];
 if (!base) {
-    const releaseCommit = git("log", "--format=%H %s").split("\n").find((line) => /^\w+ (chore\(release\): |Release )v?\d+\.\d+\.\d+/.test(line));
+    const releaseCommit = git("log", "--format=%H %s")
+        .split("\n")
+        .find((line) => /^\w+ (chore\(release\): |Release )v?\d+\.\d+\.\d+/.test(line));
     base = releaseCommit?.split(" ")[0];
 }
 const range = base ? `${base}..HEAD` : "HEAD";
@@ -76,6 +105,7 @@ const commits = raw
     .filter((commit) => !/^(chore\(release\)|Release v?\d)/.test(commit.subject));
 
 if (!commits.length) fail(`Nothing has changed since ${since}.`);
+if (dryRun) say(`\n  ${bold("Openware UI release")} ${dim("(dry run: nothing changes)")}`);
 
 // 4. The next version.
 const [major, minor, patch] = current.split(".").map(Number);
@@ -93,12 +123,17 @@ if (forced) {
 } else if (level) {
     next = bumps[level];
 } else {
-    const listed = commits.map((commit) => `  ${commit.hash.slice(0, 7)} ${commit.subject}`).join("\n");
+    const listed = commits.map((commit) => `    ${dim(commit.hash.slice(0, 7))} ${commit.subject}`).join("\n");
     fail(
-        `None of the ${commits.length} commits since ${since} is a feat, fix, perf or breaking change, so there's nothing to release:\n${listed}\n\n  To release anyway: npm run release -- patch (or minor, major)`,
+        `None of the ${commits.length} commits since ${since} is a feat, fix, perf or breaking change, so there's nothing to release:\n${listed}`,
+        "To release anyway: npm run release -- patch (or minor, major)",
     );
 }
-const order = (version) => version.split(".").map(Number).reduce((sum, part) => sum * 10000 + part, 0);
+const order = (version) =>
+    version
+        .split(".")
+        .map(Number)
+        .reduce((sum, part) => sum * 10000 + part, 0);
 if (order(next) <= order(current)) fail(`${next} isn't after the current version, ${current}.`);
 
 // 5. The release notes.
@@ -120,23 +155,34 @@ const notes = groups
     .join("\n\n");
 const section = `## ${next} (${today})\n\n${notes || "Maintenance only."}\n`;
 
-const reason = forced ? `forced: ${forced}` : `${level}, from the commits`;
-console.log(`\nRelease ${current} → ${next} (${reason}), ${commits.length} commit${commits.length === 1 ? "" : "s"} since ${since}:\n\n${section}`);
+const reason = forced ? `forced: ${forced}` : `a ${level} release, from the commits`;
+say(
+    `\n  ${dim(current)} ${paint("cyan", "→")} ${paint(["bold", "green"], next)}  ${dim(`${reason}; ${commits.length} commit${commits.length === 1 ? "" : "s"} since ${since}`)}\n`,
+);
+// The notes as the changelog will have them, readable in the terminal: headings in colour, hashes dimmed.
+const tones = { "Breaking changes": "red", Features: "green", Fixes: "yellow", Performance: "magenta", "Other changes": "blue" };
+for (const [title, list] of groups.filter(([, list]) => list.length)) {
+    say(`  ${paint(["bold", tones[title]], title)}`);
+    for (const commit of list)
+        say(`    ${dim("•")} ${commit.scope ? `${bold(`${commit.scope}:`)} ` : ""}${commit.description} ${dim(commit.hash.slice(0, 7))}`);
+    say();
+}
 if (dryRun) {
-    console.log("Dry run: nothing was changed.");
+    say(`  ${dim("Dry run: nothing was changed. Run npm run release to release it.")}\n`);
     process.exit(0);
 }
 
 // 6. Everything the release workflow checks, here first, so a bad release never gets a tag.
-console.log("Checking…");
-run("npm", ["run", "typecheck"]);
-run("npm", ["run", "contrast"]);
-run("npm", ["run", "blocks:check"]);
-run("npm", ["run", "build"]);
-run("npm", ["run", "blocks:build"]);
+say(`  ${bold("Checking")}`);
+step("Types", "npm", ["run", "typecheck"]);
+step("Contrast", "npm", ["run", "contrast"]);
+step("Blocks", "npm", ["run", "blocks:check"]);
+step("Library build", "npm", ["run", "build"]);
+step("Blocks build", "npm", ["run", "blocks:build"]);
 
 // 7. The new version everywhere: the library, its lockfile, and the MCP server, which matches it.
-run("npm", ["version", next, "--no-git-tag-version", "--allow-same-version"]);
+say(`\n  ${bold(`Releasing ${next}`)}`);
+step("Version in package.json and the lockfile", "npm", ["version", next, "--no-git-tag-version", "--allow-same-version"]);
 const mcp = readJson("mcp/package.json");
 mcp.version = next;
 writeJson("mcp/package.json", mcp);
@@ -145,18 +191,23 @@ const blocks = readJson("blocks/package.json");
 blocks.version = next;
 blocks.peerDependencies["@openwarelabs/ui"] = `^${next}`;
 writeJson("blocks/package.json", blocks);
-run("npm", ["run", "mcp:build"]);
+done("Version in the blocks and the MCP server");
+step("MCP server build", "npm", ["run", "mcp:build"]);
 
 const changelogPath = path.join(root, "CHANGELOG.md");
 const heading = "# Changelog\n\nEvery release of @openwarelabs/ui and @openwarelabs/ui-mcp. `npm run release` writes it from the commits.\n\n";
 const previous = fs.existsSync(changelogPath) ? fs.readFileSync(changelogPath, "utf8").replace(/^# Changelog[\s\S]*?(?=^## )/m, "") : "";
 fs.writeFileSync(changelogPath, `${heading}${section}\n${previous}`.replace(/\n{3,}/g, "\n\n"));
+done("CHANGELOG.md");
 
 // 8. Commit, tag and push, all at once so main and the tag can't disagree.
 const tag = `v${next}`;
 git("add", "package.json", "package-lock.json", "mcp/package.json", "blocks/package.json", "CHANGELOG.md");
 git("commit", "--quiet", "-m", `chore(release): ${next}`);
 git("tag", "-a", tag, "-m", `Release ${next}`);
+done(`Committed and tagged ${tag}`);
 git("push", "--atomic", "origin", "main", tag);
+done("Pushed main and the tag");
 
-console.log(`\n✓ Pushed ${tag}. GitHub Actions now publishes it to npm and makes the GitHub release:\n  ${repository}/actions\n`);
+say(`\n  ${paint(["bold", "green"], `✓ ${tag} is on its way.`)} GitHub Actions now publishes it to npm, makes the GitHub release`);
+say(`    and puts the docs online: ${paint("cyan", `${repository}/actions`)}\n`);
