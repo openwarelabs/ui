@@ -732,8 +732,9 @@ body {
     opacity: 1;
 }
 
+/* The docs' own text. Not inside an example's preview, which shows the components as they look in an app. */
 .docs-text,
-.docs-article p:not([class]),
+.docs-article p:not([class]):not(.docs-example__preview *),
 .docs-list {
     max-width: 680px;
     color: var(--ow-text-soft);
@@ -750,7 +751,7 @@ body {
     margin-top: calc(var(--ow-space-2xs) * -1);
 }
 
-.docs-article :where(p, li, .docs-keyboard td) > code,
+.docs-article :where(p, li, .docs-keyboard td):not(.docs-example__preview *) > code,
 .docs-lead code,
 .docs-props__extra code {
     border-radius: var(--ow-radius-code);
@@ -761,14 +762,14 @@ body {
     font-size: 0.88em;
 }
 
-.docs-article a:not([class]) {
+.docs-article a:not([class]):not(.docs-example__preview *) {
     color: var(--ow-text);
     text-decoration: underline;
     text-decoration-color: var(--ow-border-strong);
     text-underline-offset: 3px;
 }
 
-.docs-article a:not([class]):hover {
+.docs-article a:not([class]):not(.docs-example__preview *):hover {
     color: var(--ow-brass-deep);
     text-decoration-color: var(--ow-brass-deep);
 }

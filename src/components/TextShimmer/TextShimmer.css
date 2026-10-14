@@ -1,0 +1,48 @@
+/* TextShimmer: muted text with a band of full-strength text sweeping across it. */
+.ow-shimmer {
+    color: var(--ow-text-muted);
+}
+
+.ow-shimmer--active {
+    /* The band is the text colour; either side is the muted colour, so the words stay readable throughout. */
+    background-image: linear-gradient(
+        90deg,
+        var(--ow-text-muted) 0%,
+        var(--ow-text-muted) 40%,
+        var(--ow-text) 50%,
+        var(--ow-text-muted) 60%,
+        var(--ow-text-muted) 100%
+    );
+    background-size: 250% 100%;
+    background-position: 100% 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: ow-shimmer var(--ow-shimmer-duration, 2s) linear infinite;
+}
+
+@keyframes ow-shimmer {
+    from {
+        background-position: 100% 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-shimmer--active {
+        background: none;
+        color: var(--ow-text-muted);
+        animation: none;
+    }
+}
+
+/* Windows high-contrast and forced colours: plain text. */
+@media (forced-colors: active) {
+    .ow-shimmer--active {
+        background: none;
+        color: CanvasText;
+        animation: none;
+    }
+}

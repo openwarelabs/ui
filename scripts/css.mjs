@@ -67,6 +67,14 @@ export const cssOrder = [
     "components/NavList/NavList.css",
     "components/Layout/Layout.css",
     "components/Marketing/Marketing.css",
+    "components/Prose/Prose.css",
+    "components/TextShimmer/TextShimmer.css",
+    "components/PromptInput/PromptInput.css",
+    "components/PromptInput/PromptSuggestion.css",
+    "components/Chat/Chat.css",
+    "components/ChatTool/ChatTool.css",
+    "components/ChainOfThought/ChainOfThought.css",
+    "components/ChatSource/ChatSource.css",
 ];
 
 /** Every component stylesheet must be listed, so a new one can't be left out of the build by accident. */

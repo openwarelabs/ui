@@ -9,8 +9,6 @@
 .chat-prompt-box {
     background: var(--ow-canvas);
     padding: 72px 32px 80px;
-    color: var(--ow-text);
-    font-size: 14px;
 }
 
 .chat-prompt-box__inner {
@@ -23,106 +21,40 @@
     margin: 8px auto 0;
 }
 
-.chat-prompt-box__box {
-    display: grid;
-    gap: var(--ow-space-md);
-    margin-top: 28px;
-    border: 1px solid var(--ow-border-strong);
-    border-radius: var(--ow-radius-panel);
-    background: var(--ow-surface);
-    padding: 14px 12px 10px;
-    box-shadow: var(--ow-shadow-control);
-    transition:
-        border-color var(--ow-duration-base) var(--ow-ease-standard),
-        box-shadow var(--ow-duration-base) var(--ow-ease-standard);
-}
-
-.chat-prompt-box__box:focus-within {
-    border-color: var(--ow-focus-border);
-    box-shadow: var(--ow-shadow-focus);
-}
-
-.chat-prompt-box__attachments {
-    padding: 0 4px;
-}
-
 .chat-prompt-box__input {
-    width: 100%;
-    min-height: 48px;
-    padding: 0 6px;
-    color: var(--ow-text);
-    font: inherit;
-    font-size: 15px;
-    line-height: 1.55;
+    margin-top: 28px;
 }
 
-.chat-prompt-box__toolbar {
-    display: flex;
-    align-items: center;
-    gap: var(--ow-space-2xs);
-}
-
-.chat-prompt-box__file-input {
-    display: none;
-}
-
-.chat-prompt-box__model.ow-button {
+.chat-prompt-box__picker.ow-button {
     gap: 6px;
     color: var(--ow-text-soft);
-    font-weight: var(--ow-weight-emphasis);
 }
 
-.chat-prompt-box__model-option {
+.chat-prompt-box__option {
     display: grid;
     gap: 4px;
     padding: 2px 0;
 }
 
-.chat-prompt-box__check-space {
+/* Keeps the unticked options' labels in line with the ticked one's. */
+.chat-prompt-box__tick-space {
     display: block;
     width: 15px;
 }
 
-.chat-prompt-box__hint {
-    margin-left: auto;
-    padding-right: 6px;
-}
-
 .chat-prompt-box__suggestions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--ow-space-sm);
     margin-top: 20px;
-}
-
-/* Suggestions stay quiet beside the prompt box: regular weight rather than a button's heavy label. */
-.chat-prompt-box__suggestion.ow-button {
-    font-weight: var(--ow-weight-regular);
-}
-
-.chat-prompt-box__suggestion svg {
-    color: var(--ow-icon);
 }
 
 @media (max-width: 760px) {
     .chat-prompt-box {
         padding: 48px var(--ow-page-gutter) 56px;
     }
-    .chat-prompt-box__box {
+    .chat-prompt-box__input {
         margin-top: 24px;
     }
-    .chat-prompt-box__hint {
+    /* The pickers drop their icons, so the toolbar keeps to one row. */
+    .chat-prompt-box__picker > .ow-button__icon:first-child {
         display: none;
-    }
-    .chat-prompt-box__send {
-        margin-left: auto;
-    }
-    .chat-prompt-box__suggestions {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    .chat-prompt-box__suggestion.ow-button {
-        justify-content: flex-start;
     }
 }

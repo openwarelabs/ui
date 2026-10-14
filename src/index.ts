@@ -148,6 +148,35 @@ export type { StackProps, SeparatorProps, ScrollShadowProps, SpaceToken } from "
 export { Chip, SectionHeading, SiteHeader, DotGrid } from "./components/Marketing/Marketing";
 export type { SectionHeadingProps, SiteHeaderProps, DotGridProps } from "./components/Marketing/Marketing";
 
+// AI
+export { Prose } from "./components/Prose/Prose";
+export type { ProseProps } from "./components/Prose/Prose";
+export { TextShimmer } from "./components/TextShimmer/TextShimmer";
+export type { TextShimmerProps } from "./components/TextShimmer/TextShimmer";
+export { PromptInput } from "./components/PromptInput/PromptInput";
+export type { PromptInputProps, PromptAttachment } from "./components/PromptInput/PromptInput";
+export { PromptSuggestion, PromptSuggestions } from "./components/PromptInput/PromptSuggestion";
+export type { PromptSuggestionProps, PromptSuggestionsProps } from "./components/PromptInput/PromptSuggestion";
+export { ChatConversation } from "./components/Chat/ChatConversation";
+export type { ChatConversationProps, ChatConversationHandle } from "./components/Chat/ChatConversation";
+export { ChatMessage, ChatMessageActions, ChatAgentAvatar } from "./components/Chat/ChatMessage";
+export type {
+    ChatMessageProps,
+    ChatMessageActionsProps,
+    ChatAgentAvatarProps,
+    ChatMessageFrom,
+    ChatMessageStatus,
+    ChatRating,
+} from "./components/Chat/ChatMessage";
+export { ChatLoader } from "./components/Chat/ChatLoader";
+export type { ChatLoaderProps } from "./components/Chat/ChatLoader";
+export { ChatTool } from "./components/ChatTool/ChatTool";
+export type { ChatToolProps, ChatToolStatus } from "./components/ChatTool/ChatTool";
+export { ChainOfThought } from "./components/ChainOfThought/ChainOfThought";
+export type { ChainOfThoughtProps, ChainOfThoughtStep, ChainOfThoughtStatus } from "./components/ChainOfThought/ChainOfThought";
+export { ChatSource, ChatSources } from "./components/ChatSource/ChatSource";
+export type { ChatSourceProps, ChatSourcesProps, ChatSourceItem } from "./components/ChatSource/ChatSource";
+
 // Hooks and helpers
 export { ColorField, ColorPicker } from "./components/ColorPicker/ColorPicker";
 export type { ColorFieldProps, ColorPickerProps, ColorSwatchOption } from "./components/ColorPicker/ColorPicker";

@@ -5,15 +5,13 @@
     box-sizing: border-box;
 }
 
-/* Fills its frame: a header, the conversation scrolling in the middle, the reply box pinned below. */
+/* Fills its frame: a header, then the conversation, which scrolls and keeps the reply box docked below it. */
 .chat-thread {
     display: flex;
     height: 100dvh;
     flex-direction: column;
     background: var(--ow-canvas);
     padding: 8px;
-    color: var(--ow-text);
-    font-size: 14px;
 }
 
 .chat-thread__panel {
@@ -37,29 +35,11 @@
     padding: 10px 12px 10px 20px;
 }
 
-.chat-thread__bot {
-    display: inline-flex;
-    width: 28px;
-    height: 28px;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--ow-primary-border);
-    border-radius: 50%;
-    background: var(--ow-primary-subtle);
-    color: var(--ow-primary-text);
-}
-
-.chat-thread__header .chat-thread__bot {
-    width: 32px;
-    height: 32px;
-}
-
 .chat-thread__heading {
     display: grid;
     min-width: 0;
     flex: 1;
-    gap: 1px;
+    gap: 2px;
 }
 
 .chat-thread__context {
@@ -77,82 +57,6 @@
     flex-shrink: 0;
     border-radius: 50%;
     background: var(--ow-success-solid);
-}
-
-.chat-thread__scroll {
-    min-height: 0;
-    flex: 1;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-}
-
-.chat-thread__messages {
-    display: flex;
-    max-width: 760px;
-    flex-direction: column;
-    gap: 28px;
-    margin: 0 auto;
-    padding: 28px 24px 32px;
-    list-style: none;
-}
-
-.chat-thread__day {
-    display: flex;
-    align-items: center;
-    gap: var(--ow-space-lg);
-}
-
-.chat-thread__day::before,
-.chat-thread__day::after {
-    content: "";
-    height: 1px;
-    flex: 1;
-    background: var(--ow-border);
-}
-
-.chat-thread__message {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--ow-space-lg);
-}
-
-/* The person's messages sit on the right in a bubble; the agent's answers run the full width. */
-.chat-thread__message--person {
-    flex-direction: row-reverse;
-}
-
-.chat-thread__content {
-    display: grid;
-    min-width: 0;
-    flex: 1;
-    gap: 6px;
-}
-
-.chat-thread__message--person .chat-thread__content {
-    max-width: min(520px, 82%);
-    flex: 0 1 auto;
-    justify-items: end;
-}
-
-.chat-thread__meta {
-    display: flex;
-    align-items: baseline;
-    gap: var(--ow-space-sm);
-}
-
-/* The person's own words, kept as typed: their line breaks stay, and a long link breaks rather than overflowing. */
-.chat-thread__bubble {
-    border: 1px solid var(--ow-border);
-    border-radius: 16px 4px 16px 16px;
-    background: var(--ow-surface-muted);
-    padding: 10px 14px;
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-}
-
-.chat-thread__answer {
-    display: grid;
-    gap: var(--ow-space-lg);
 }
 
 /* The pull request the agent opened: one link, laid out as a card rather than underlined text. */
@@ -188,73 +92,6 @@
     gap: 2px;
 }
 
-/* Diff counts in mono at caption size: the code style is 14px, louder than the line around it. */
-.chat-thread__diff {
-    font-size: 12px;
-}
-
-.chat-thread__thinking {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--ow-space-sm);
-}
-
-.chat-thread__enter {
-    animation: chat-thread-enter var(--ow-duration-slow) var(--ow-ease-emphasized);
-}
-
-@keyframes chat-thread-enter {
-    from {
-        opacity: 0;
-        transform: translateY(6px);
-    }
-}
-
-/* The reply box, pinned to the bottom of the panel. */
-.chat-thread__composer {
-    flex-shrink: 0;
-    padding: 0 24px 20px;
-}
-
-.chat-thread__box {
-    display: grid;
-    max-width: 712px;
-    gap: var(--ow-space-sm);
-    margin: 0 auto;
-    border: 1px solid var(--ow-border-strong);
-    border-radius: var(--ow-radius-container);
-    background: var(--ow-surface);
-    padding: 12px 12px 10px 14px;
-    box-shadow: var(--ow-shadow-control);
-    transition:
-        border-color var(--ow-duration-base) var(--ow-ease-standard),
-        box-shadow var(--ow-duration-base) var(--ow-ease-standard);
-}
-
-.chat-thread__box:focus-within {
-    border-color: var(--ow-focus-border);
-    box-shadow: var(--ow-shadow-focus);
-}
-
-.chat-thread__input {
-    width: 100%;
-    min-height: 24px;
-    color: var(--ow-text);
-    font: inherit;
-    line-height: 1.5;
-}
-
-.chat-thread__toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: var(--ow-space-sm);
-}
-
-.chat-thread__hint {
-    margin-right: auto;
-}
-
 @media (max-width: 760px) {
     .chat-thread {
         padding: 0;
@@ -266,26 +103,10 @@
     .chat-thread__header {
         padding: 8px 8px 8px 16px;
     }
-    .chat-thread__messages {
-        gap: 24px;
-        padding: 20px 16px 24px;
-    }
-    .chat-thread__message {
-        gap: var(--ow-space-md);
-    }
-    .chat-thread__message--person .chat-thread__content {
-        max-width: 86%;
-    }
-    .chat-thread__composer {
-        padding: 0 12px 12px;
-    }
-    .chat-thread__hint {
-        display: none;
-    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .chat-thread__enter {
-        animation: none;
+    .chat-thread__pr.ow-link {
+        transition: none;
     }
 }

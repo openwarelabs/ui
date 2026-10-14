@@ -1,0 +1,136 @@
+/* PromptSuggestion: a secondary pill at regular weight, or a card with a muted second line. */
+.ow-prompt-suggestion--pill.ow-button {
+    max-width: 100%;
+    gap: var(--ow-space-sm);
+    font-weight: var(--ow-weight-regular);
+}
+
+.ow-prompt-suggestion__label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ow-prompt-suggestion__icon {
+    display: inline-flex;
+    flex: none;
+    color: var(--ow-icon);
+    transition: color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-prompt-suggestion:hover:not(:disabled) .ow-prompt-suggestion__icon {
+    color: var(--ow-primary-text);
+}
+
+.ow-prompt-suggestion:disabled .ow-prompt-suggestion__icon {
+    color: var(--ow-text-disabled);
+}
+
+/* Card: the secondary button's material, left-aligned, with the icon beside the title. */
+.ow-prompt-suggestion--card {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    align-items: flex-start;
+    gap: var(--ow-space-md);
+    margin: 0;
+    border: 1px solid var(--ow-border-strong);
+    border-radius: var(--ow-radius-container);
+    background-color: var(--ow-control);
+    background-image: linear-gradient(to bottom, var(--ow-control), var(--ow-control-shade));
+    padding: var(--ow-space-lg) var(--ow-space-xl);
+    color: var(--ow-text);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: var(--ow-shadow-button-secondary);
+    transition-property: transform, border-color, background-color, box-shadow;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-prompt-suggestion--card:hover:not(:disabled) {
+    border-color: var(--ow-border-hover);
+    background-image: linear-gradient(to bottom, var(--ow-control), var(--ow-control-shade-hover));
+}
+
+.ow-prompt-suggestion--card:active:not(:disabled) {
+    box-shadow: var(--ow-shadow-pressed-secondary);
+    transform: translateY(1px);
+}
+
+.ow-prompt-suggestion--card:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-prompt-suggestion--card:disabled {
+    border-style: dashed;
+    background: transparent;
+    box-shadow: none;
+    color: var(--ow-text-disabled);
+    cursor: not-allowed;
+}
+
+/* The icon sits on the title's first line (20px). */
+.ow-prompt-suggestion--card .ow-prompt-suggestion__icon {
+    height: 20px;
+    align-items: center;
+}
+
+.ow-prompt-suggestion__text {
+    display: grid;
+    min-width: 0;
+    gap: 2px;
+}
+
+.ow-prompt-suggestion__title {
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 20px;
+    text-wrap: pretty;
+}
+
+.ow-prompt-suggestion__description {
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    line-height: 18px;
+    text-wrap: pretty;
+}
+
+.ow-prompt-suggestion--card:disabled .ow-prompt-suggestion__description {
+    color: var(--ow-text-disabled);
+}
+
+/* PromptSuggestions: pills that wrap, or cards in columns of at least 200px, up to --ow-suggestion-columns. */
+.ow-prompt-suggestions--wrap {
+    display: flex;
+    min-width: 0;
+    flex-wrap: wrap;
+    gap: var(--ow-space-sm);
+}
+
+.ow-prompt-suggestions--center {
+    justify-content: center;
+}
+
+.ow-prompt-suggestions--grid {
+    display: grid;
+    min-width: 0;
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(min(100%, max(200px, calc((100% - (var(--ow-suggestion-columns, 2) - 1) * var(--ow-space-md)) / var(--ow-suggestion-columns, 2)))), 1fr)
+    );
+    gap: var(--ow-space-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-prompt-suggestion--card,
+    .ow-prompt-suggestion__icon {
+        transition: none;
+    }
+
+    .ow-prompt-suggestion--card:active:not(:disabled) {
+        transform: none;
+    }
+}

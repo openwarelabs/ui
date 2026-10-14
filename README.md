@@ -50,11 +50,11 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 
 ## Components
 
-83 components, each with a page in the docs.
+93 components, each with a page in the docs.
 
 | Group | Components |
 | --- | --- |
-| Typography | `Text` (each style on the Typography page as a variant: hero to caption, code and kbd; tones, `truncate`, `as`), `Link`, `Kbd`, `Code`, `CodeBlock`, `Snippet` |
+| Typography | `Text` (each style on the Typography page as a variant: hero to caption, code and kbd; tones, `truncate`, `as`), `Link`, `Kbd`, `Code`, `CodeBlock`, `Snippet`, `Prose` (styles rendered Markdown or HTML, at chat or article size) |
 | Actions | `Button` (primary, secondary, ghost, danger; sm, md, lg; `loading`; `shape="pill"`), `buttonClassName()` for links, `ButtonGroup`, `CloseButton`, `CopyButton`, `ToggleButton`, `SegmentedControl`, `ToggleButtonGroup` (one or several on), `Toolbar` + `ToolbarSeparator` (arrow keys across its controls) |
 | Inputs | `Form` (the browser's checks, your own and the server's errors, under each field; `useFormStatus`), `Field`, `Fieldset`, `Input` (start and end content), `Textarea` (`autoGrow`), `NumberField`, `SearchField`, `InputOTP`, `ColorField`, `DateField` and `TimeField` (typed in segments, in the locale's order) |
 | Choices | `Checkbox`, `CheckboxGroup`, `RadioGroup` (plain or cards), `Switch`, `Select`, `Combobox`, `Slider` (one value or a range), `ChoiceCard`, `ListBox` (one or many, on the page) |
@@ -63,6 +63,7 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 | Overlays | `Dialog`, `ConfirmDialog`, `Drawer`, `Popover`, `Menu` + `MenuItem`, `CommandPalette` |
 | Navigation | `Tabs`, `Accordion`, `Disclosure`, `Breadcrumbs`, `Pagination`, `Steps`, `NavList` + `NavItem` |
 | Data display | `Table` (sorting, selection), `Stat`, `FileTree`, `EmptyState`, `Tag`, `ColorSwatch`, `Avatar`, `AvatarGroup`, `User` |
+| AI | `PromptInput` (attachments, stop while streaming) + `PromptSuggestion`, `ChatConversation` (follows the newest message, jump to latest), `ChatMessage` + `ChatMessageActions`, `ChatLoader`, `ChatTool` (a tool call with its status, input, output and approval), `ChainOfThought`, `ChatSource` + `ChatSources`, `TextShimmer` |
 | Layout | `Card`, `SettingsRow`, `Stack`, `Separator`, `ScrollShadow`, `VisuallyHidden` |
 | Marketing | `SiteHeader`, `SectionHeading`, `Chip`, `DotGrid` |
 

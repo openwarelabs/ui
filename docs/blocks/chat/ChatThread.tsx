@@ -1,17 +1,43 @@
-import { useEffect, useLayoutEffect, useRef, useState, type FormEvent, type KeyboardEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
-import { Avatar, Badge, Button, Code, CodeBlock, Kbd, Link, Menu, MenuItem, Spinner, Text, Textarea } from "@openwarelabs/ui";
-import { ArrowUp, Bot, Ellipsis, GitPullRequest, History, SquarePen } from "lucide-react";
+import {
+    Avatar,
+    Badge,
+    Button,
+    ChatAgentAvatar,
+    ChatConversation,
+    ChatLoader,
+    ChatMessage,
+    ChatMessageActions,
+    Code,
+    CodeBlock,
+    EmptyState,
+    Kbd,
+    Link,
+    Menu,
+    MenuItem,
+    MenuLabel,
+    MenuSeparator,
+    PromptInput,
+    PromptSuggestion,
+    PromptSuggestions,
+    Prose,
+    Text,
+    type ChatConversationHandle,
+} from "@openwarelabs/ui";
+import { Bot, Bug, Ellipsis, FlaskConical, GitPullRequest, History, ScrollText, SquarePen } from "lucide-react";
 
 import "./ChatThread.css";
 
 interface Message {
-    id: number;
-    from: "person" | "agent";
-    time: string;
-    body: ReactNode;
-    /** Sent or received since the page opened, so it fades in. */
-    live?: boolean;
+    id: string;
+    from: "user" | "assistant";
+    time: Date | string;
+    /** The words as plain text: what Copy copies, what Edit puts back in the box, and what a streaming reply shows. */
+    text: string;
+    /** How it shows, when that's more than the text: code, a pull request. */
+    body?: ReactNode;
+    status?: "streaming" | "done";
 }
 
 const fix = `export function formatInvoiceDate(issuedAt: Date, customer: Customer) {
@@ -23,17 +49,18 @@ const fix = `export function formatInvoiceDate(issuedAt: Date, customer: Custome
 
 const conversation: Message[] = [
     {
-        id: 1,
-        from: "person",
-        time: "14:02",
-        body: "Customers in Ireland are getting invoices dated the day before. Can you find where we format the date?",
+        id: "1",
+        from: "user",
+        time: "2026-10-14T14:02:00",
+        text: "Customers in Ireland are getting invoices dated the day before. Can you find where we format the date?",
     },
     {
-        id: 2,
-        from: "agent",
-        time: "14:02",
+        id: "2",
+        from: "assistant",
+        time: "2026-10-14T14:02:00",
+        text: `Found it. formatInvoiceDate formats in the server's time zone, UTC, so an invoice issued at 00:30 in Dublin in summer shows the day before. Passing the customer's time zone fixes it:\n\n${fix}\n\nI've added a test for a customer in Europe/Dublin at 23:30 UTC, and it passes. Shall I open a pull request?`,
         body: (
-            <>
+            <Prose size="sm">
                 <Text variant="copy" tone="default">
                     Found it. <Code>formatInvoiceDate</Code> formats in the server's time zone, UTC, so an invoice issued at 00:30 in Dublin in summer shows the
                     day before. Passing the customer's time zone fixes it:
@@ -42,21 +69,22 @@ const conversation: Message[] = [
                 <Text variant="copy" tone="default">
                     I've added a test for a customer in Europe/Dublin at 23:30 UTC, and it passes. Shall I open a pull request?
                 </Text>
-            </>
+            </Prose>
         ),
     },
     {
-        id: 3,
-        from: "person",
-        time: "14:04",
-        body: "Yes, open it against main and ask Tomás to review.",
+        id: "3",
+        from: "user",
+        time: "2026-10-14T14:04:00",
+        text: "Yes, open it against main and ask Tomás to review.",
     },
     {
-        id: 4,
-        from: "agent",
-        time: "14:05",
+        id: "4",
+        from: "assistant",
+        time: "2026-10-14T14:05:00",
+        text: "Done. It's ready for Tomás Reyes, and I'll fix anything he asks for on the same branch. #482 Fix invoice dates in the EU.",
         body: (
-            <>
+            <Prose size="sm">
                 <Text variant="copy" tone="default">
                     Done. It's ready for Tomás Reyes, and I'll fix anything he asks for on the same branch.
                 </Text>
@@ -67,10 +95,10 @@ const conversation: Message[] = [
                             #482 Fix invoice dates in the EU
                         </Text>
                         <Text variant="caption">
-                            <Text variant="code" tone="success" className="chat-thread__diff">
+                            <Text as="span" variant="caption" tone="success">
                                 +42
                             </Text>{" "}
-                            <Text variant="code" tone="danger" className="chat-thread__diff">
+                            <Text as="span" variant="caption" tone="danger">
                                 −8
                             </Text>{" "}
                             · 2 files · billing-api
@@ -80,7 +108,7 @@ const conversation: Message[] = [
                         In review
                     </Badge>
                 </Link>
-            </>
+            </Prose>
         ),
     },
 ];
@@ -88,72 +116,84 @@ const conversation: Message[] = [
 /** Stands in for the model: what it says back to anything new. */
 const reply = "On it. I'll look into that in billing-api and add it to #482 if it's related. You'll get a notification when it's ready for review.";
 
-const timeNow = () => new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+const ideas = [
+    { label: "Why did the checkout test fail?", icon: <Bug size={16} /> },
+    { label: "Write tests for invoice dates", icon: <FlaskConical size={16} /> },
+    { label: "Summarise this week's merges", icon: <ScrollText size={16} /> },
+];
 
-function AgentAvatar() {
-    return (
-        <span className="chat-thread__bot" aria-hidden="true">
-            <Bot size={16} />
-        </span>
-    );
-}
+let nextId = 0;
+const newId = () => `new-${(nextId += 1)}`;
 
 export function ChatThread() {
+    const [title, setTitle] = useState("Invoice dates in Ireland");
     const [messages, setMessages] = useState(conversation);
     const [draft, setDraft] = useState("");
     const [thinking, setThinking] = useState(false);
-    const scroller = useRef<HTMLDivElement>(null);
+    const view = useRef<ChatConversationHandle>(null);
+    const input = useRef<HTMLTextAreaElement>(null);
     const timer = useRef(0);
-    const firstRender = useRef(true);
     useEffect(() => () => window.clearTimeout(timer.current), []);
 
-    // Keep the newest message in view: jump there on load, glide there after that.
-    useLayoutEffect(() => {
-        const element = scroller.current;
-        if (!element) return;
-        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        element.scrollTo({ top: element.scrollHeight, behavior: firstRender.current || reduce ? "auto" : "smooth" });
-        firstRender.current = false;
-    }, [messages, thinking]);
+    const last = messages[messages.length - 1];
+    const streaming = last?.status === "streaming";
 
-    const send = (event: FormEvent | KeyboardEvent) => {
-        event.preventDefault();
-        const text = draft.trim();
-        if (!text || thinking) return;
-        setMessages((list) => [...list, { id: Date.now(), from: "person", time: timeNow(), body: text, live: true }]);
+    // Stands in for the model: the reply arrives a word at a time.
+    useEffect(() => {
+        if (!streaming) return;
+        const step = window.setTimeout(() => {
+            const text = reply.slice(0, reply.indexOf(" ", last.text.length + 1) + 1 || reply.length);
+            setMessages((list) => [...list.slice(0, -1), { ...last, text, status: text === reply ? "done" : "streaming" }]);
+        }, 45);
+        return () => window.clearTimeout(step);
+    }, [last, streaming]);
+
+    const send = (text: string) => {
+        setMessages((list) => [...list, { id: newId(), from: "user", time: new Date(), text }]);
         setDraft("");
         setThinking(true);
+        view.current?.scrollToBottom();
         timer.current = window.setTimeout(() => {
             setThinking(false);
-            const body = (
-                <Text variant="copy" tone="default">
-                    {reply}
-                </Text>
-            );
-            setMessages((list) => [...list, { id: Date.now(), from: "agent", time: timeNow(), body, live: true }]);
-        }, 1600);
+            setMessages((list) => [...list, { id: newId(), from: "assistant", time: new Date(), text: "", status: "streaming" }]);
+        }, 1400);
     };
 
-    // Enter sends; Shift+Enter starts a new line.
-    const onKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) send(event);
+    // Stop keeps what has arrived so far.
+    const stop = () => {
+        window.clearTimeout(timer.current);
+        setThinking(false);
+        setMessages((list) => list.map((message) => (message.status === "streaming" ? { ...message, status: "done" } : message)));
+    };
+
+    const edit = (text: string) => {
+        setDraft(text);
+        input.current?.focus();
+    };
+
+    const open = (chat: "earlier" | "new") => {
+        stop();
+        setDraft("");
+        setTitle(chat === "new" ? "New chat" : "Invoice dates in Ireland");
+        setMessages(chat === "new" ? [] : conversation);
+        if (chat === "new") input.current?.focus();
     };
 
     return (
         <div className="chat-thread">
             <div className="chat-thread__panel">
                 <header className="chat-thread__header">
-                    <AgentAvatar />
+                    <ChatAgentAvatar size="lg" />
                     <div className="chat-thread__heading">
-                        <Text variant="card-title" as="h1" truncate>
-                            Invoice dates in Ireland
+                        <Text variant="card-title" as="h1" truncate id="chat-thread-title">
+                            {title}
                         </Text>
                         <Text variant="caption" className="chat-thread__context">
                             <span className="chat-thread__context-dot" aria-hidden="true" />
                             Acme agent · billing-api · main
                         </Text>
                     </div>
-                    <Button variant="ghost" size="sm" iconOnly aria-label="New chat">
+                    <Button variant="ghost" size="sm" iconOnly aria-label="New chat" onClick={() => open("new")}>
                         <SquarePen size={16} />
                     </Button>
                     <Menu
@@ -165,80 +205,89 @@ export function ChatThread() {
                             </Button>
                         }
                     >
-                        <MenuItem icon={<History size={15} />}>Earlier chats</MenuItem>
+                        <MenuLabel>Earlier chats</MenuLabel>
+                        <MenuItem icon={<History size={15} />} onSelect={() => open("earlier")}>
+                            Invoice dates in Ireland
+                        </MenuItem>
+                        <MenuSeparator />
                         <MenuItem icon={<GitPullRequest size={15} />}>Open #482</MenuItem>
                     </Menu>
                 </header>
 
-                <div ref={scroller} className="chat-thread__scroll" role="log" aria-label="Conversation" aria-live="polite">
-                    <ol className="chat-thread__messages">
-                        <Text as="li" variant="caption" className="chat-thread__day" aria-hidden="true">
-                            Today
-                        </Text>
-                        {messages.map((message) => (
-                            <li
-                                key={message.id}
-                                className={`chat-thread__message chat-thread__message--${message.from}${message.live ? " chat-thread__enter" : ""}`}
-                            >
-                                {message.from === "agent" ? <AgentAvatar /> : <Avatar name="Maya Chen" />}
-                                <div className="chat-thread__content">
-                                    <div className="chat-thread__meta">
-                                        <Text variant="label">{message.from === "agent" ? "Acme agent" : "Maya Chen"}</Text>
-                                        <Text variant="caption">
-                                            <time>{message.time}</time>
-                                        </Text>
-                                    </div>
-                                    {message.from === "agent" ? (
-                                        <div className="chat-thread__answer">{message.body}</div>
-                                    ) : (
-                                        <Text as="div" variant="copy" tone="default" className="chat-thread__bubble">
-                                            {message.body}
-                                        </Text>
-                                    )}
-                                </div>
-                            </li>
-                        ))}
-                        {thinking ? (
-                            <li className="chat-thread__message chat-thread__message--agent chat-thread__enter">
-                                <AgentAvatar />
-                                <div className="chat-thread__content">
-                                    <div className="chat-thread__meta">
-                                        <Text variant="label">Acme agent</Text>
-                                    </div>
-                                    <Text as="span" tone="muted" className="chat-thread__thinking">
-                                        <Spinner size="sm" label="" />
-                                        Thinking…
-                                    </Text>
-                                </div>
-                            </li>
-                        ) : null}
-                    </ol>
-                </div>
-
-                <form className="chat-thread__composer" onSubmit={send}>
-                    <div className="chat-thread__box">
-                        <Textarea
-                            className="chat-thread__input"
-                            bare
-                            autoGrow
-                            autoGrowMaxHeight={140}
-                            rows={1}
+                <ChatConversation
+                    ref={view}
+                    aria-labelledby="chat-thread-title"
+                    empty={
+                        <EmptyState
+                            icon={<Bot size={20} />}
+                            title="Ask the Acme agent"
+                            description="It can read billing-api, run its tests and open pull requests for your review."
+                            actions={
+                                <PromptSuggestions align="center" aria-label="Ideas to start from">
+                                    {ideas.map((idea) => (
+                                        <PromptSuggestion key={idea.label} icon={idea.icon} onClick={() => edit(idea.label)}>
+                                            {idea.label}
+                                        </PromptSuggestion>
+                                    ))}
+                                </PromptSuggestions>
+                            }
+                        />
+                    }
+                    footer={
+                        <PromptInput
+                            ref={input}
                             value={draft}
+                            onChange={setDraft}
+                            onSubmit={send}
+                            isStreaming={thinking || streaming}
+                            onStop={stop}
                             placeholder="Reply to the agent…"
                             aria-label="Reply to the agent"
-                            onChange={(event) => setDraft(event.target.value)}
-                            onKeyDown={onKeyDown}
+                            hint={
+                                <>
+                                    <Kbd>Enter</Kbd> to send, <Kbd>Shift</Kbd> + <Kbd>Enter</Kbd> for a new line
+                                </>
+                            }
                         />
-                        <div className="chat-thread__toolbar">
-                            <Text variant="caption" className="chat-thread__hint">
-                                <Kbd>Enter</Kbd> to send, <Kbd>Shift</Kbd> + <Kbd>Enter</Kbd> for a new line
-                            </Text>
-                            <Button type="submit" variant="primary" size="sm" iconOnly aria-label="Send" disabled={!draft.trim() || thinking}>
-                                <ArrowUp size={16} />
-                            </Button>
-                        </div>
-                    </div>
-                </form>
+                    }
+                >
+                    {messages.length ? <ChatMessage from="system">Today</ChatMessage> : null}
+                    {messages.map((message) =>
+                        message.from === "user" ? (
+                            <ChatMessage
+                                key={message.id}
+                                from="user"
+                                name="Maya Chen"
+                                avatar={<Avatar name="Maya Chen" />}
+                                time={message.time}
+                                locale="en-GB"
+                                actions={<ChatMessageActions copyText={message.text} onEdit={() => edit(message.text)} />}
+                            >
+                                {message.text}
+                            </ChatMessage>
+                        ) : (
+                            <ChatMessage
+                                key={message.id}
+                                from="assistant"
+                                name="Acme agent"
+                                time={message.time}
+                                locale="en-GB"
+                                status={message.status}
+                                showActions={message === last ? "always" : "hover"}
+                                actions={<ChatMessageActions copyText={message.text} onRate={() => undefined} />}
+                            >
+                                {message.body ?? (
+                                    <Prose size="sm">
+                                        <Text variant="copy" tone="default">
+                                            {message.text}
+                                        </Text>
+                                    </Prose>
+                                )}
+                            </ChatMessage>
+                        ),
+                    )}
+                    {thinking ? <ChatLoader name="Acme agent" label="Thinking…" /> : null}
+                </ChatConversation>
             </div>
         </div>
     );

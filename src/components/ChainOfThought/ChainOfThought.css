@@ -1,0 +1,124 @@
+/* ChainOfThought: a "Thinking…" toggle over the agent's reasoning and its steps on a thin line. The toggle, the status
+   marks and the collapsing panel come from ChatTool.css. */
+.ow-chain-of-thought {
+    display: grid;
+    min-width: 0;
+    justify-items: start;
+    color: var(--ow-text);
+    font-family: var(--ow-font-sans);
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.ow-chain-of-thought > .ow-chat-collapse {
+    justify-self: stretch;
+}
+
+.ow-chain-of-thought__static,
+.ow-chain-of-thought__static:hover {
+    color: var(--ow-text-soft);
+    cursor: default;
+}
+
+.ow-chain-of-thought__failed {
+    color: var(--ow-danger-text);
+}
+
+.ow-chain-of-thought__body {
+    display: grid;
+    gap: var(--ow-space-md);
+    padding: var(--ow-space-xs) 0 var(--ow-space-2xs);
+}
+
+/* The reasoning, lined up with the toggle's words, with a line down from its chevron. */
+.ow-chain-of-thought__reasoning {
+    position: relative;
+    min-width: 0;
+    padding-left: 30px;
+    color: var(--ow-text-muted);
+    line-height: 1.55;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+    text-wrap: pretty;
+}
+
+.ow-chain-of-thought__reasoning::before {
+    content: "";
+    position: absolute;
+    top: var(--ow-space-2xs);
+    bottom: var(--ow-space-2xs);
+    left: 9.5px;
+    width: 1px;
+    background: var(--ow-border);
+}
+
+.ow-chain-of-thought__reasoning p {
+    margin: 0 0 var(--ow-space-sm);
+}
+
+.ow-chain-of-thought__reasoning > :last-child {
+    margin-bottom: 0;
+}
+
+.ow-chain-of-thought__steps {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-chain-of-thought__step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr);
+    column-gap: var(--ow-space-md);
+    padding-bottom: var(--ow-space-lg);
+}
+
+.ow-chain-of-thought__step:last-child {
+    padding-bottom: 0;
+}
+
+/* The line from each mark down to the next, with a little air at both ends; green behind the steps that are done. */
+.ow-chain-of-thought__step:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    top: 22px;
+    bottom: 2px;
+    left: 9.5px;
+    width: 1px;
+    background: var(--ow-border);
+}
+
+.ow-chain-of-thought__step[data-status="success"]:not(:last-child)::before {
+    background: color-mix(in srgb, var(--ow-success-solid) 40%, var(--ow-border));
+}
+
+.ow-chain-of-thought__step-body {
+    display: grid;
+    min-width: 0;
+    align-content: start;
+    gap: var(--ow-space-2xs);
+}
+
+.ow-chain-of-thought__step-title {
+    min-width: 0;
+    font-weight: var(--ow-weight-control);
+    line-height: 20px;
+    overflow-wrap: anywhere;
+}
+
+.ow-chain-of-thought__step[data-status="pending"] .ow-chain-of-thought__step-title {
+    color: var(--ow-text-muted);
+}
+
+.ow-chain-of-thought__detail {
+    min-width: 0;
+    color: var(--ow-text-muted);
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+}
+
+.ow-chain-of-thought__detail .ow-code {
+    font-size: 12px;
+}

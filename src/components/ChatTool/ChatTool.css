@@ -1,0 +1,416 @@
+/* ChatTool: one tool call on a row that opens to its input and output. Also the pieces ChainOfThought and ChatSources
+   share: the status mark, the plain disclosure toggle and the collapsing panel. */
+
+/* The status mark: a 20px circle, tinted by status. */
+.ow-chat-status {
+    position: relative;
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--ow-text-muted);
+}
+
+.ow-chat-status__glyph {
+    display: inline-flex;
+}
+
+.ow-chat-status--success {
+    background: var(--ow-success-surface);
+    color: var(--ow-success-text);
+    box-shadow: inset 0 0 0 1px var(--ow-success-border);
+}
+
+.ow-chat-status--error {
+    background: var(--ow-danger-surface);
+    color: var(--ow-danger-text);
+    box-shadow: inset 0 0 0 1px var(--ow-danger-border);
+}
+
+.ow-chat-status--approval {
+    background: var(--ow-warning-surface);
+    color: var(--ow-warning-text);
+    box-shadow: inset 0 0 0 1px var(--ow-warning-border);
+}
+
+/* Not started: a hollow ring. Called off: the ring with a slash across it. */
+.ow-chat-status--pending,
+.ow-chat-status--cancelled {
+    box-shadow: inset 0 0 0 1.5px var(--ow-border-strong);
+}
+
+/* A step's own icon, at the size of the check it stands in for. */
+.ow-chat-status--icon .ow-chat-status__glyph > svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* The mark settles in when a status lands. */
+.ow-chat-status--success .ow-chat-status__glyph,
+.ow-chat-status--error .ow-chat-status__glyph,
+.ow-chat-status--approval .ow-chat-status__glyph,
+.ow-chat-status--cancelled .ow-chat-status__glyph {
+    animation: ow-chat-status-in var(--ow-duration-slow) var(--ow-ease-spring);
+}
+
+@keyframes ow-chat-status-in {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
+/* A plain disclosure toggle ("Thought for 12 s", "3 sources"): a chevron in a 20px column, so whatever opens below
+   lines up with the label. */
+.ow-chat-toggle {
+    display: inline-flex;
+    max-width: 100%;
+    min-height: 28px;
+    align-items: center;
+    gap: var(--ow-space-md);
+    margin: 0;
+    border: 0;
+    border-radius: var(--ow-radius-md);
+    background: transparent;
+    padding: var(--ow-space-2xs) var(--ow-space-xs) var(--ow-space-2xs) 0;
+    color: var(--ow-text-soft);
+    font: inherit;
+    font-family: var(--ow-font-sans);
+    font-size: 14px;
+    font-weight: var(--ow-weight-control);
+    line-height: 20px;
+    text-align: left;
+    cursor: pointer;
+    transition: color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-chat-toggle:hover {
+    color: var(--ow-text);
+}
+
+.ow-chat-toggle:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-chat-toggle__chevron {
+    display: inline-flex;
+    width: 20px;
+    flex-shrink: 0;
+    justify-content: center;
+    color: var(--ow-icon);
+    transition:
+        transform var(--ow-duration-slow) var(--ow-ease-emphasized),
+        color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-chat-toggle:hover .ow-chat-toggle__chevron {
+    color: var(--ow-text-muted);
+}
+
+.ow-chat-toggle[aria-expanded="true"] .ow-chat-toggle__chevron {
+    transform: rotate(90deg);
+}
+
+.ow-chat-toggle__text {
+    display: flex;
+    min-width: 0;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: var(--ow-space-xs);
+}
+
+.ow-chat-toggle__meta {
+    color: var(--ow-text-muted);
+    font-weight: var(--ow-weight-regular);
+    font-variant-numeric: tabular-nums;
+}
+
+/* A panel that animates its height with a 0fr → 1fr grid row. Its content's height can change while it's open
+   (streaming text) without animating. */
+.ow-chat-collapse {
+    display: grid;
+    min-width: 0;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition:
+        grid-template-rows var(--ow-duration-base) var(--ow-ease-standard),
+        visibility 0s linear var(--ow-duration-base);
+}
+
+.ow-chat-collapse[data-open="true"] {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition:
+        grid-template-rows var(--ow-duration-panel) var(--ow-ease-emphasized),
+        visibility 0s;
+}
+
+.ow-chat-collapse__clip {
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.ow-chat-collapse__clip > * {
+    opacity: 0;
+    transition: opacity var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.ow-chat-collapse[data-open="true"] > .ow-chat-collapse__clip > * {
+    opacity: 1;
+    transition: opacity var(--ow-duration-slow) var(--ow-ease-standard) 60ms;
+}
+
+/* Room past the edges for the focus rings of links and cards inside. */
+.ow-chat-collapse--bleed {
+    margin-inline: calc(-1 * var(--ow-space-2xs));
+}
+
+.ow-chat-collapse--bleed > .ow-chat-collapse__clip {
+    padding-inline: var(--ow-space-2xs);
+}
+
+/* The tool call: a bordered card whose header row is the disclosure button. */
+.ow-chat-tool {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    color: var(--ow-text);
+    font-family: var(--ow-font-sans);
+    font-size: 14px;
+    line-height: 1.45;
+    transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-chat-tool:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-chat-tool[data-status="approval"] {
+    border-color: var(--ow-warning-border);
+}
+
+.ow-chat-tool[data-status="error"] {
+    border-color: var(--ow-danger-border);
+}
+
+.ow-chat-tool__header {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    gap: var(--ow-space-md);
+    margin: 0;
+    border: 0;
+    background: transparent;
+    padding: var(--ow-space-md) var(--ow-space-lg);
+    color: inherit;
+    font: inherit;
+    text-align: left;
+}
+
+.ow-chat-tool__header--button {
+    cursor: pointer;
+    transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-chat-tool__header--button:hover {
+    background: var(--ow-surface-muted);
+}
+
+.ow-chat-tool__header--button:focus-visible {
+    border-radius: calc(var(--ow-radius-container) - 1px);
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
+
+.ow-chat-tool__icon {
+    display: inline-flex;
+    height: 20px;
+    flex-shrink: 0;
+    align-items: center;
+    color: var(--ow-text-muted);
+}
+
+.ow-chat-tool__icon > svg {
+    width: 15px;
+    height: 15px;
+}
+
+/* The title and tool name, then the result; the result drops to a second line when there's no room beside them. */
+.ow-chat-tool__main {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 var(--ow-space-lg);
+}
+
+.ow-chat-tool__heading {
+    display: flex;
+    min-width: 0;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 var(--ow-space-sm);
+}
+
+.ow-chat-tool__title {
+    min-width: 0;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 20px;
+    overflow-wrap: anywhere;
+}
+
+.ow-chat-tool[data-status="pending"] .ow-chat-tool__title,
+.ow-chat-tool[data-status="cancelled"] .ow-chat-tool__title {
+    color: var(--ow-text-muted);
+}
+
+.ow-chat-tool__name.ow-code {
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.ow-chat-tool__meta {
+    display: inline-flex;
+    min-width: 0;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 var(--ow-space-xs);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    line-height: 20px;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-chat-tool[data-status="error"] .ow-chat-tool__summary {
+    color: var(--ow-danger-text);
+}
+
+.ow-chat-tool[data-status="approval"] .ow-chat-tool__summary {
+    color: var(--ow-warning-text);
+}
+
+.ow-chat-tool__duration {
+    white-space: nowrap;
+}
+
+.ow-chat-tool__chevron {
+    display: inline-flex;
+    height: 20px;
+    flex-shrink: 0;
+    align-items: center;
+    color: var(--ow-icon);
+    transition: transform var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+.ow-chat-tool[data-open="true"] .ow-chat-tool__chevron {
+    transform: rotate(90deg);
+}
+
+/* Input, output and error, lined up with the title (12px padding + the 20px mark + a 10px gap). */
+.ow-chat-tool__details {
+    display: grid;
+    gap: var(--ow-space-lg);
+    padding: var(--ow-space-2xs) var(--ow-space-lg) var(--ow-space-lg) 42px;
+}
+
+.ow-chat-tool__section {
+    display: grid;
+    min-width: 0;
+    gap: var(--ow-space-xs);
+}
+
+.ow-chat-tool__label {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.35;
+}
+
+.ow-chat-tool__output {
+    min-width: 0;
+    color: var(--ow-text-soft);
+}
+
+.ow-chat-tool__error {
+    min-width: 0;
+    border: 1px solid var(--ow-danger-border);
+    border-radius: var(--ow-radius-form);
+    background: var(--ow-danger-surface);
+    padding: var(--ow-space-sm) var(--ow-space-lg);
+    color: var(--ow-danger-text);
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* Waiting for the person: what it wants to do, and Approve and Deny. */
+.ow-chat-tool__approval {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-md) var(--ow-space-lg);
+    border-top: 1px solid var(--ow-warning-border);
+    background: var(--ow-warning-surface);
+    padding: var(--ow-space-md) var(--ow-space-lg) var(--ow-space-md) 42px;
+    animation: ow-fade-up var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+.ow-chat-tool__request {
+    min-width: 0;
+    flex: 1 1 220px;
+    margin: 0;
+    color: var(--ow-text);
+    font-size: 14px;
+    font-weight: var(--ow-weight-control);
+    line-height: 1.45;
+}
+
+.ow-chat-tool__request .ow-code {
+    font-size: 12px;
+}
+
+.ow-chat-tool__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ow-space-sm);
+}
+
+@media (max-width: 480px) {
+    .ow-chat-tool__details,
+    .ow-chat-tool__approval {
+        padding-left: var(--ow-space-lg);
+    }
+}
+
+/* Forced colours drop the tints and inset rings, so the marks get a plain outline. */
+@media (forced-colors: active) {
+    .ow-chat-status:not(.ow-chat-status--running) {
+        border: 1px solid CanvasText;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-chat-status__glyph,
+    .ow-chat-tool__approval {
+        animation: none !important;
+    }
+    .ow-chat-collapse,
+    .ow-chat-collapse[data-open="true"],
+    .ow-chat-collapse__clip > *,
+    .ow-chat-toggle__chevron,
+    .ow-chat-tool__chevron {
+        transition: none !important;
+    }
+}

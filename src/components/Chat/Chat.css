@@ -1,0 +1,506 @@
+/* Chat: the conversation's scrolling column, its messages and the loader. */
+
+/* ChatConversation: fills its parent and scrolls; the messages sit in a reading column in the middle, with the footer
+   (a prompt box) docked under them in the same column. */
+.ow-chat-conversation {
+    --ow-chat-gutter: var(--ow-space-4xl);
+    --ow-chat-column: 720px;
+    display: flex;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    flex: 1 1 auto;
+    flex-direction: column;
+}
+
+/* The scrolling part, which the empty state and Jump to latest sit over. */
+.ow-chat-conversation__viewport {
+    position: relative;
+    display: flex;
+    min-height: 0;
+    flex: 1;
+    flex-direction: column;
+}
+
+.ow-chat-conversation__scroll {
+    min-height: 0;
+    flex: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    outline: 0;
+}
+
+.ow-chat-conversation__scroll:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
+
+.ow-chat-conversation__content {
+    display: flex;
+    max-width: calc(var(--ow-chat-column) + 2 * var(--ow-chat-gutter));
+    flex-direction: column;
+    gap: var(--ow-space-6xl);
+    margin: 0 auto;
+    padding: var(--ow-space-6xl) var(--ow-chat-gutter) var(--ow-space-7xl);
+}
+
+/* What shows while there are no messages, over the (empty) log so the log is there for the first one. */
+.ow-chat-conversation__empty {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    overflow-y: auto;
+    place-items: center;
+    padding: var(--ow-space-6xl) var(--ow-chat-gutter);
+}
+
+.ow-chat-conversation__empty-inner {
+    width: 100%;
+    max-width: var(--ow-chat-column);
+}
+
+/* The footer: lined up with the messages, with the gutter below it. */
+.ow-chat-conversation__footer {
+    flex-shrink: 0;
+    padding: 0 var(--ow-chat-gutter) var(--ow-chat-gutter);
+}
+
+.ow-chat-conversation__footer-inner {
+    max-width: var(--ow-chat-column);
+    margin: 0 auto;
+}
+
+.ow-chat-conversation--full {
+    --ow-chat-column: none;
+}
+
+.ow-chat-conversation--full .ow-chat-conversation__content {
+    max-width: none;
+}
+
+/* "Jump to latest": floats at the bottom in the middle once the reader scrolls up. */
+.ow-chat-conversation__jump {
+    position: absolute;
+    right: 0;
+    bottom: var(--ow-space-2xl);
+    left: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    animation: ow-chat-rise var(--ow-duration-base) var(--ow-ease-emphasized);
+}
+
+.ow-chat-conversation__jump[data-state="closed"] {
+    animation: ow-chat-sink var(--ow-duration-exit) var(--ow-ease-exit) forwards;
+}
+
+.ow-chat-conversation__jump > .ow-button {
+    pointer-events: auto;
+    box-shadow: var(--ow-shadow-button-secondary), var(--ow-shadow-menu);
+}
+
+.ow-chat-conversation__count {
+    display: inline-flex;
+    height: 20px;
+    align-items: center;
+    margin-right: calc(-1 * var(--ow-space-xs));
+    border: 1px solid var(--ow-primary-border);
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-primary-subtle);
+    padding: 0 var(--ow-space-xs);
+    color: var(--ow-primary-text);
+    font-size: 12px;
+    font-weight: var(--ow-weight-strong);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ChatMessage. */
+.ow-chat-message {
+    min-width: 0;
+    color: var(--ow-text);
+    font-family: var(--ow-font-sans);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.ow-chat-message--user,
+.ow-chat-message--assistant {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--ow-space-lg);
+}
+
+/* The person's message sits on the right: its avatar, when there is one, on the far side. */
+.ow-chat-message--user {
+    flex-direction: row-reverse;
+}
+
+.ow-chat-message__avatar {
+    display: flex;
+    flex-shrink: 0;
+}
+
+/* ChatAgentAvatar: the bot on a tinted circle, at Avatar's sizes. */
+.ow-chat-avatar {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-primary-border);
+    border-radius: 50%;
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.ow-chat-avatar--sm {
+    width: 24px;
+    height: 24px;
+}
+
+.ow-chat-avatar--lg {
+    width: 36px;
+    height: 36px;
+}
+
+.ow-chat-message__main {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+    align-content: start;
+    gap: var(--ow-space-xs);
+}
+
+/* Beside a 28px avatar, the header (or the first line) sits level with its middle. */
+.ow-chat-message__avatar + .ow-chat-message__main {
+    padding-top: var(--ow-space-2xs);
+}
+
+.ow-chat-message--user .ow-chat-message__main {
+    max-width: 80%;
+    flex: 0 1 auto;
+    justify-items: end;
+}
+
+.ow-chat-message__header {
+    display: flex;
+    min-width: 0;
+    align-items: baseline;
+    gap: var(--ow-space-sm);
+    line-height: 1.4;
+}
+
+.ow-chat-message__name {
+    min-width: 0;
+    overflow: hidden;
+    font-weight: var(--ow-weight-emphasis);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ow-chat-message__time {
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* The body holds the content and, while it streams, the caret placed after its last character. */
+.ow-chat-message__body {
+    position: relative;
+    min-width: 0;
+}
+
+.ow-chat-message--streaming .ow-chat-message__body {
+    min-height: 1.55em;
+}
+
+.ow-chat-message__content {
+    min-width: 0;
+    overflow-wrap: break-word;
+}
+
+/* Blocks in a message (paragraphs, code, a card) sit 12px apart; text, Code and Kbd flow inline as written. */
+.ow-chat-message__content > :is(p, div, pre, ul, ol, dl, blockquote, table, figure, details, section, h1, h2, h3, h4, h5, h6, hr, a):not(:first-child) {
+    margin-top: var(--ow-space-lg);
+}
+
+/* The person's own words in a bubble, kept as typed: line breaks stay, and a long link breaks rather than overflowing. */
+.ow-chat-message--user .ow-chat-message__content {
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel) var(--ow-radius-sm) var(--ow-radius-panel) var(--ow-radius-panel);
+    background: var(--ow-surface-muted);
+    padding: var(--ow-space-md) var(--ow-space-xl);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.ow-chat-message__caret {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 1.2em;
+    border-radius: 1px;
+    background: currentColor;
+    pointer-events: none;
+    transform: translateY(0.18em);
+    animation: ow-chat-caret 1s var(--ow-ease-standard) infinite;
+}
+
+/* A system line: muted, in the middle, between hairlines. */
+.ow-chat-message--system {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-lg);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    line-height: 1.35;
+    text-align: center;
+}
+
+.ow-chat-message--system::before,
+.ow-chat-message--system::after {
+    content: "";
+    height: 1px;
+    min-width: var(--ow-space-2xl);
+    flex: 1;
+    background: var(--ow-border);
+}
+
+.ow-chat-message__system-text {
+    max-width: 80%;
+    text-wrap: balance;
+}
+
+/* What went wrong, with Retry beside it. */
+.ow-chat-message__error {
+    display: flex;
+    max-width: 100%;
+    align-items: center;
+    justify-self: start;
+    gap: var(--ow-space-sm);
+    border: 1px solid var(--ow-danger-border);
+    border-radius: var(--ow-radius-form);
+    background: var(--ow-danger-surface);
+    padding: var(--ow-space-xs) var(--ow-space-lg);
+    color: var(--ow-danger-text);
+    line-height: 1.4;
+}
+
+.ow-chat-message__error--retry {
+    padding: var(--ow-space-2xs) var(--ow-space-2xs) var(--ow-space-2xs) var(--ow-space-lg);
+}
+
+.ow-chat-message--user .ow-chat-message__error {
+    justify-self: end;
+}
+
+.ow-chat-message__error-icon {
+    flex-shrink: 0;
+    color: var(--ow-danger-solid);
+}
+
+.ow-chat-message__error-text {
+    min-width: 0;
+    flex: 1;
+}
+
+.ow-chat-message__error > .ow-button {
+    margin-left: var(--ow-space-xs);
+}
+
+/* Actions: under the message, the first icon level with the text's edge. Hidden (but reachable) until the message
+   is hovered or holds focus; always shown where there's no hover. The buttons' padding hangs into the space around
+   them, so the row adds its icons' height to the message rather than a whole 32px button. */
+.ow-chat-message__actions {
+    justify-self: start;
+    margin: calc(-1 * var(--ow-space-2xs)) 0 calc(-1 * var(--ow-space-lg)) calc(-1 * var(--ow-space-sm));
+    opacity: 0;
+    transition: opacity var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.ow-chat-message--user .ow-chat-message__actions {
+    justify-self: end;
+    margin-right: calc(-1 * var(--ow-space-sm));
+    margin-left: 0;
+}
+
+.ow-chat-message:hover .ow-chat-message__actions,
+.ow-chat-message:focus-within .ow-chat-message__actions,
+.ow-chat-message--actions-always .ow-chat-message__actions {
+    opacity: 1;
+}
+
+@media (hover: none) {
+    .ow-chat-message__actions {
+        opacity: 1;
+    }
+}
+
+/* ChatMessageActions. */
+.ow-chat-actions__copy-icon {
+    display: inline-grid;
+}
+
+.ow-chat-actions__copy-icon > svg {
+    grid-area: 1 / 1;
+    transition:
+        opacity var(--ow-duration-base) var(--ow-ease-standard),
+        transform var(--ow-duration-slow) var(--ow-ease-spring);
+}
+
+.ow-chat-actions__copy-icon > svg:last-child,
+.ow-chat-actions__copy--copied .ow-chat-actions__copy-icon > svg:first-child {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+.ow-chat-actions__copy--copied .ow-chat-actions__copy-icon > svg:last-child {
+    color: var(--ow-success-text);
+    opacity: 1;
+    transform: none;
+}
+
+/* A pressed rating fills its thumb lightly, as well as taking the pressed tint. */
+.ow-chat-actions__rate[aria-pressed="true"] svg {
+    fill: currentColor;
+    fill-opacity: 0.22;
+}
+
+/* ChatLoader. */
+.ow-chat-loader__line {
+    display: flex;
+    min-height: 1.55em;
+    align-items: center;
+}
+
+.ow-chat-loader--inline {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.ow-chat-loader__dots {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ow-space-2xs);
+}
+
+.ow-chat-loader__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ow-text-muted);
+    opacity: 0.35;
+    animation: ow-chat-dot 1.2s var(--ow-ease-standard) infinite;
+}
+
+.ow-chat-loader__dot:nth-child(2) {
+    animation-delay: 160ms;
+}
+
+.ow-chat-loader__dot:nth-child(3) {
+    animation-delay: 320ms;
+}
+
+/* Arrivals: once a conversation is showing, a person's message and a system line rise in; the agent's answer fades in
+   beside an avatar that stays put, so a loader turning into the answer doesn't blink. */
+.ow-chat-message--enter.ow-chat-message--user,
+.ow-chat-message--enter.ow-chat-message--system,
+.ow-chat-loader--enter {
+    animation: ow-chat-rise var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+.ow-chat-message--enter.ow-chat-message--assistant > .ow-chat-message__main {
+    animation: ow-chat-fade var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+@keyframes ow-chat-rise {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+}
+
+@keyframes ow-chat-sink {
+    to {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+}
+
+@keyframes ow-chat-fade {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes ow-chat-caret {
+    0%,
+    100% {
+        opacity: 0.9;
+    }
+    50% {
+        opacity: 0.15;
+    }
+}
+
+@keyframes ow-chat-dot {
+    0%,
+    60%,
+    100% {
+        opacity: 0.35;
+        transform: scale(0.8);
+    }
+    30% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-chat-conversation {
+        --ow-chat-gutter: var(--ow-space-2xl);
+    }
+    .ow-chat-conversation__content {
+        gap: var(--ow-space-5xl);
+    }
+    .ow-chat-message--user,
+    .ow-chat-message--assistant {
+        gap: var(--ow-space-md);
+    }
+    .ow-chat-message--user .ow-chat-message__main {
+        max-width: 88%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-chat-conversation__jump,
+    .ow-chat-message--enter.ow-chat-message--user,
+    .ow-chat-message--enter.ow-chat-message--system,
+    .ow-chat-message--enter.ow-chat-message--assistant > .ow-chat-message__main,
+    .ow-chat-loader--enter,
+    .ow-chat-message__caret {
+        animation: none;
+    }
+    .ow-chat-loader__dot {
+        opacity: 0.6;
+        animation: none;
+    }
+    .ow-chat-message__actions,
+    .ow-chat-actions__copy-icon > svg {
+        transition: none;
+    }
+}
+
+/* Forced colours drop backgrounds: draw the caret and the dots in the text colour. */
+@media (forced-colors: active) {
+    .ow-chat-message__caret,
+    .ow-chat-loader__dot {
+        forced-color-adjust: none;
+        background: CanvasText;
+    }
+}

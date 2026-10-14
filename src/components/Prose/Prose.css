@@ -1,0 +1,627 @@
+/* Prose: the plain elements of rendered Markdown, a CMS body or an agent's answer, in Openware's type and colours.
+   Every element rule ends in the same :not(): it skips Openware components and everything inside them, so a CodeBlock,
+   a Table or a Code in the text keeps its own look. That :not() also gives the rules enough weight that a page's own
+   element styles (a reset, `article p`) don't leak in. */
+.ow-prose {
+    min-width: 0;
+    color: var(--ow-text);
+    overflow-wrap: break-word;
+}
+
+/* md: articles and docs, on the prose style (16.5px, 1.7), about 68 characters a line. */
+.ow-prose--md {
+    --ow-prose-flow: var(--ow-space-4xl);
+    --ow-prose-block: var(--ow-space-7xl);
+    --ow-prose-heading: 40px;
+    --ow-prose-heading-gap: var(--ow-space-xl);
+    --ow-prose-subheading: var(--ow-space-7xl);
+    --ow-prose-subheading-gap: var(--ow-space-sm);
+    --ow-prose-rule: 40px;
+    --ow-prose-item: var(--ow-space-xs);
+    --ow-prose-indent: var(--ow-space-6xl);
+    --ow-prose-marker-gap: var(--ow-space-2xs);
+    --ow-prose-quote: var(--ow-space-3xl);
+    --ow-prose-code: 14px;
+    --ow-prose-key: 13px;
+    --ow-prose-pre-y: var(--ow-space-2xl);
+    --ow-prose-pre-x: var(--ow-space-3xl);
+    --ow-prose-cell-y: var(--ow-space-md);
+    --ow-prose-cell-x: var(--ow-space-xl);
+    --ow-prose-caption: 14px;
+    --ow-prose-caption-gap: var(--ow-space-md);
+    --ow-prose-check: 16px;
+    --ow-prose-check-gap: var(--ow-space-sm);
+    --ow-prose-details-x: var(--ow-space-2xl);
+    --ow-prose-details-y: var(--ow-space-lg);
+    --ow-prose-details-end: var(--ow-space-2xl);
+    max-width: 68ch;
+    color: var(--ow-text-soft);
+}
+
+/* sm: chat answers and comments, on 14px interface text with a tight rhythm. */
+.ow-prose--sm {
+    --ow-prose-flow: var(--ow-space-lg);
+    --ow-prose-block: var(--ow-space-xl);
+    --ow-prose-heading: var(--ow-space-4xl);
+    --ow-prose-heading-gap: var(--ow-space-xs);
+    --ow-prose-subheading: var(--ow-space-2xl);
+    --ow-prose-subheading-gap: var(--ow-space-2xs);
+    --ow-prose-rule: var(--ow-space-3xl);
+    --ow-prose-item: var(--ow-space-2xs);
+    --ow-prose-indent: var(--ow-space-5xl);
+    --ow-prose-marker-gap: 2px;
+    --ow-prose-quote: var(--ow-space-lg);
+    --ow-prose-code: 13px;
+    --ow-prose-key: 12px;
+    --ow-prose-pre-y: var(--ow-space-xl);
+    --ow-prose-pre-x: var(--ow-space-lg);
+    --ow-prose-cell-y: var(--ow-space-sm);
+    --ow-prose-cell-x: var(--ow-space-lg);
+    --ow-prose-caption: 12px;
+    --ow-prose-caption-gap: var(--ow-space-sm);
+    --ow-prose-check: 14px;
+    --ow-prose-check-gap: var(--ow-space-xs);
+    --ow-prose-details-x: var(--ow-space-lg);
+    --ow-prose-details-y: var(--ow-space-md);
+    --ow-prose-details-end: var(--ow-space-lg);
+}
+
+.ow-prose--full {
+    max-width: none;
+}
+
+/* Vertical rhythm: paragraphs and lists, then the larger blocks, with more room above a heading than below it. */
+.ow-prose :where(p):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    max-width: none;
+    margin-block: var(--ow-prose-flow);
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    text-wrap: pretty;
+}
+
+.ow-prose :where(h1, h2, h3, h4, h5, h6):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    color: var(--ow-text);
+    text-wrap: balance;
+}
+
+.ow-prose :where(h1, h2):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    margin-block: var(--ow-prose-heading) var(--ow-prose-heading-gap);
+}
+
+.ow-prose :where(h3, h4, h5, h6):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    margin-block: var(--ow-prose-subheading) var(--ow-prose-subheading-gap);
+}
+
+/* md headings come from the type scale: h1 is the section title as phones set it, light and tight; h2 is heading. */
+.ow-prose--md :where(h1):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+}
+
+.ow-prose--md :where(h2):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    font-size: 24px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+.ow-prose--md :where(h3):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    font-size: 18px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.ow-prose--md :where(h4, h5, h6):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    font-size: 1em;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.5;
+}
+
+/* sm headings stay modest, in the app's heavy weights: a dialog title, then smaller and lighter. */
+.ow-prose--sm :where(h1):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    font-size: 16px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.3;
+}
+
+.ow-prose--sm :where(h2):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    font-size: 15px;
+    font-weight: var(--ow-weight-title);
+    line-height: 1.35;
+}
+
+.ow-prose--sm :where(h3):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    font-size: 14px;
+    font-weight: var(--ow-weight-label);
+    line-height: 1.45;
+}
+
+.ow-prose--sm :where(h4, h5, h6):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.45;
+}
+
+/* Inline text. */
+.ow-prose :where(a):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    border-radius: 2px;
+    color: var(--ow-text);
+    text-decoration-line: underline;
+    text-decoration-color: var(--ow-border-strong);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition-property: color, text-decoration-color;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-prose :where(a):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *):hover {
+    color: var(--ow-brass-deep);
+    text-decoration-color: var(--ow-brass-deep);
+}
+
+.ow-prose :where(a):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *):focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-prose :where(strong, b):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+}
+
+/* Inter ships upright only here, so emphasis lets the browser slant it. */
+.ow-prose :where(em, i, cite):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    font-style: italic;
+    font-synthesis: style;
+}
+
+.ow-prose :where(code):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    border-radius: var(--ow-radius-code);
+    background: var(--ow-code-ground);
+    padding: 2px 4px;
+    color: var(--ow-text);
+    font-family: var(--ow-font-mono);
+    font-size: 0.88em;
+    font-variant-ligatures: none;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+.ow-prose :where(kbd):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 1.85em;
+    border: 1px solid var(--ow-border-strong);
+    border-bottom-width: 2px;
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-key-ground);
+    padding: 0 var(--ow-space-xs);
+    color: var(--ow-text-soft);
+    font-family: var(--ow-font-mono);
+    font-size: var(--ow-prose-key);
+    font-weight: var(--ow-weight-control);
+    line-height: 1.6;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* <kbd><kbd>⌘</kbd><kbd>K</kbd></kbd> is one shortcut: only the inner keys are drawn. */
+.ow-prose :where(kbd:has(kbd)):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    min-width: 0;
+    border: 0;
+    background: none;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+}
+
+.ow-prose :where(mark):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    border-radius: var(--ow-radius-sm);
+    background: var(--ow-brass-soft);
+    padding: 0 2px;
+    color: var(--ow-text);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+/* Raised and lowered text that doesn't open up the line it sits in. */
+.ow-prose :where(sub, sup):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    position: relative;
+    font-size: 0.75em;
+    line-height: 0;
+    vertical-align: baseline;
+}
+
+.ow-prose :where(sup):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    top: -0.5em;
+}
+
+.ow-prose :where(sub):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    bottom: -0.25em;
+}
+
+/* Lists: muted markers hanging in the indent; nested lists sit as close as their items. */
+.ow-prose :where(ul, ol):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    margin-block: var(--ow-prose-flow);
+    padding-inline-start: var(--ow-prose-indent);
+}
+
+.ow-prose :where(ul):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    list-style-type: disc;
+}
+
+.ow-prose :where(ol):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    list-style-type: decimal;
+}
+
+.ow-prose :where(ul ul):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    list-style-type: circle;
+}
+
+.ow-prose :where(ul ul ul):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    list-style-type: square;
+}
+
+.ow-prose :where(li ul, li ol):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    margin-block: var(--ow-prose-item);
+}
+
+.ow-prose :where(li):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    margin-block: var(--ow-prose-item);
+    padding-inline-start: var(--ow-prose-marker-gap);
+}
+
+.ow-prose :where(li):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *)::marker {
+    color: var(--ow-text-muted);
+}
+
+.ow-prose :where(ol > li):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *)::marker {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Task lists (GitHub Markdown's - [ ] and - [x]): the checkbox takes the bullet's place and the text lines up with
+   the other items'. */
+.ow-prose
+    :where(li:has(> input[type="checkbox"]:first-child, > p:first-child > input[type="checkbox"]:first-child)):not(
+        [class^="ow-"],
+        [class*=" ow-"],
+        .ow-prose [class^="ow-"] *,
+        .ow-prose [class*=" ow-"] *
+    ) {
+    list-style-type: none;
+}
+
+.ow-prose :where(input[type="checkbox"]):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    box-sizing: border-box;
+    width: var(--ow-prose-check);
+    height: var(--ow-prose-check);
+    margin: 0 var(--ow-prose-check-gap) 0 0;
+    appearance: none;
+    border: 1px solid var(--ow-border-strong);
+    border-radius: var(--ow-radius-sm);
+    background: var(--ow-surface);
+    box-shadow: var(--ow-shadow-control);
+    vertical-align: -0.15em;
+    cursor: pointer;
+    transition-property: border-color, background-color;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+/* Markdown puts a space after the box; the gap allows for it (a space is 0.28em in Inter), so a wrapped line lines up
+   with the first. */
+.ow-prose
+    :where(li > input[type="checkbox"]:first-child, li > p:first-child > input[type="checkbox"]:first-child):not(
+        [class^="ow-"],
+        [class*=" ow-"],
+        .ow-prose [class^="ow-"] *,
+        .ow-prose [class*=" ow-"] *
+    ) {
+    margin-inline: calc(-1 * (var(--ow-prose-check) + var(--ow-prose-check-gap))) calc(var(--ow-prose-check-gap) - 0.28em);
+}
+
+/* The tick is white, like Checkbox's, on the primary fill in both themes. */
+.ow-prose :where(input[type="checkbox"]:checked):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    border-color: var(--ow-primary-active);
+    background-color: var(--ow-primary);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' \
+        stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: calc(var(--ow-prose-check) - 4px);
+}
+
+.ow-prose
+    :where(input[type="checkbox"]:hover:not(:disabled, :checked)):not(
+        [class^="ow-"],
+        [class*=" ow-"],
+        .ow-prose [class^="ow-"] *,
+        .ow-prose [class*=" ow-"] *
+    ) {
+    border-color: var(--ow-border-hover);
+}
+
+.ow-prose :where(input[type="checkbox"]):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *):focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+/* Rendered Markdown disables its checkboxes: they report a state rather than wait for a click, so they keep their
+   colours and only lose the pointer. */
+.ow-prose :where(input[type="checkbox"]:disabled):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    cursor: default;
+}
+
+.ow-prose :where(blockquote):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    margin-block: var(--ow-prose-block);
+    margin-inline: 0;
+    border-inline-start: 2px solid var(--ow-border-strong);
+    padding-inline-start: var(--ow-prose-quote);
+    color: var(--ow-text-muted);
+}
+
+/* Code blocks: the CodeBlock's dark ground in both themes, scrolling sideways rather than wrapping. */
+.ow-prose :where(pre):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    box-sizing: border-box;
+    margin-block: var(--ow-prose-block);
+    overflow-x: auto;
+    border: 1px solid var(--ow-code-block-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-code-block);
+    padding: var(--ow-prose-pre-y) var(--ow-prose-pre-x);
+    color: var(--ow-on-code-block);
+    font-family: var(--ow-font-mono);
+    font-size: var(--ow-prose-code);
+    font-variant-ligatures: none;
+    line-height: 1.7;
+    tab-size: 4;
+    white-space: pre;
+    overflow-wrap: normal;
+    color-scheme: dark;
+}
+
+.ow-prose :where(pre):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *):focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-prose :where(pre code):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    border-radius: 0;
+    background: none;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+}
+
+.ow-prose :where(hr):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    height: 0;
+    margin-block: var(--ow-prose-rule);
+    border: 0;
+    border-top: 1px solid var(--ow-border);
+}
+
+/* Tables: Table's look, a bordered card with a quiet header and hairlines between rows. As a block it scrolls
+   sideways when it's wider than the text, and is as wide as its content otherwise. */
+.ow-prose :where(table):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    box-sizing: border-box;
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    margin-block: var(--ow-prose-block);
+    overflow-x: auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--ow-surface);
+    color: var(--ow-text);
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.45;
+}
+
+.ow-prose :where(table):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *):focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-prose :where(caption):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    padding: var(--ow-space-lg) var(--ow-prose-cell-x) var(--ow-space-sm);
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+    text-align: start;
+}
+
+.ow-prose :where(th, td):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    border-bottom: 1px solid var(--ow-border);
+    padding: var(--ow-prose-cell-y) var(--ow-prose-cell-x);
+    text-align: start;
+    vertical-align: top;
+}
+
+.ow-prose :where(thead th):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    background: var(--ow-surface-muted);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.35;
+    white-space: nowrap;
+    vertical-align: bottom;
+}
+
+.ow-prose :where(tbody th):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.ow-prose :where(tbody tr:last-child > *):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    border-bottom: 0;
+}
+
+/* Markdown sets column alignment with align="…"; the start alignment above would otherwise win over it. */
+.ow-prose :where(th[align="center"], td[align="center"]):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    text-align: center;
+}
+
+.ow-prose :where(th[align="right"], td[align="right"]):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    text-align: right;
+}
+
+.ow-prose :where(img, video):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    max-width: 100%;
+    height: auto;
+}
+
+.ow-prose > :where(img, video):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *),
+.ow-prose :where(figure > img, figure > video):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    display: block;
+    border-radius: var(--ow-radius-container);
+}
+
+.ow-prose > :where(img, video):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    margin-block: var(--ow-prose-block);
+}
+
+.ow-prose :where(figure):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    margin-block: var(--ow-prose-block);
+    margin-inline: 0;
+}
+
+.ow-prose :where(figure > *):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    margin-block: 0;
+}
+
+.ow-prose :where(figcaption):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    margin-top: var(--ow-prose-caption-gap);
+    color: var(--ow-text-muted);
+    font-size: var(--ow-prose-caption);
+    line-height: 1.5;
+    text-wrap: pretty;
+}
+
+/* details: Disclosure's look, a bordered card with a chevron that turns as it opens. The content lines up with the
+   summary's text. */
+.ow-prose :where(details):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    --ow-prose-details-indent: calc(var(--ow-prose-details-x) + 16px + var(--ow-space-sm));
+    box-sizing: border-box;
+    margin-block: var(--ow-prose-block);
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding-inline: var(--ow-prose-details-indent) var(--ow-prose-details-x);
+}
+
+.ow-prose :where(details[open]):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    padding-bottom: var(--ow-prose-details-end);
+}
+
+.ow-prose :where(summary):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    display: block;
+    margin-inline: calc(-1 * var(--ow-prose-details-indent)) calc(-1 * var(--ow-prose-details-x));
+    padding-block: var(--ow-prose-details-y);
+    padding-inline: var(--ow-prose-details-indent) var(--ow-prose-details-x);
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+    list-style: none;
+    cursor: pointer;
+}
+
+.ow-prose :where(summary):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *)::-webkit-details-marker {
+    display: none;
+}
+
+/* The chevron hangs in the indent on the first line, so a summary that wraps keeps its text aligned. */
+.ow-prose :where(summary):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *)::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-inline: calc(-16px - var(--ow-space-sm)) var(--ow-space-sm);
+    --ow-prose-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' \
+        stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E");
+    background: var(--ow-text-muted);
+    vertical-align: -0.2em;
+    -webkit-mask: var(--ow-prose-chevron) center / 16px no-repeat;
+    mask: var(--ow-prose-chevron) center / 16px no-repeat;
+    transition: transform var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+.ow-prose :where(summary):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *):hover::before {
+    background: var(--ow-text);
+}
+
+.ow-prose :where(summary:dir(rtl)):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *)::before {
+    transform: scaleX(-1);
+}
+
+.ow-prose :where(details[open] > summary):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *)::before {
+    transform: rotate(90deg);
+}
+
+.ow-prose :where(summary):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *):focus-visible {
+    border-radius: var(--ow-radius-form);
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -4px;
+}
+
+/* While an answer streams in (aria-busy on it or around it), lines break as they fill rather than evening out, so words
+   already shown don't hop to another line as more arrive. */
+.ow-prose:is([aria-busy="true"], [aria-busy="true"] *)
+    :where(p, h1, h2, h3, h4, h5, h6, figcaption):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    text-wrap: wrap;
+}
+
+/* Openware components placed straight in the text get the block spacing; Text gets a paragraph's. */
+.ow-prose > :where([class^="ow-"], [class*=" ow-"]) {
+    margin-block: var(--ow-prose-block);
+}
+
+.ow-prose > :where(.ow-text) {
+    margin-block: var(--ow-prose-flow);
+}
+
+/* Nothing adds space at the edges, so the text sits flush in a message bubble or a card; the same goes inside quotes,
+   list items, cells, figures and details. */
+.ow-prose > :where([class^="ow-"], [class*=" ow-"]):first-child,
+.ow-prose > :first-child:not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *),
+.ow-prose :where(blockquote, li, th, td, figure) > :first-child:not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *),
+.ow-prose :where(details > summary) + *:not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    margin-top: 0;
+}
+
+.ow-prose > :where([class^="ow-"], [class*=" ow-"]):last-child,
+.ow-prose > :last-child:not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *),
+.ow-prose
+    :where(blockquote, li, th, td, figure, details)
+    > :last-child:not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+    margin-bottom: 0;
+}
+
+/* The heading size on phones, as Text sets it. */
+@media (max-width: 760px) {
+    .ow-prose--md :where(h2):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+        font-size: 21px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-prose :where(a, input):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *),
+    .ow-prose :where(summary):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *)::before {
+        transition: none;
+    }
+}
+
+/* High contrast: the system draws the checkboxes, and the chevron takes the text colour. */
+@media (forced-colors: active) {
+    .ow-prose :where(input[type="checkbox"]):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *) {
+        appearance: auto;
+    }
+    .ow-prose :where(summary):not([class^="ow-"], [class*=" ow-"], .ow-prose [class^="ow-"] *, .ow-prose [class*=" ow-"] *)::before {
+        background: CanvasText;
+        forced-color-adjust: none;
+    }
+}

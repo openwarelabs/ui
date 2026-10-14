@@ -1,0 +1,350 @@
+/* PromptInput: a surface card holding the attachments, the text and a toolbar; the field's border and halo show focus. */
+.ow-prompt-input {
+    --ow-prompt-line: 24px;
+    --ow-prompt-pad: 0px;
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    gap: var(--ow-space-sm);
+    color: var(--ow-text);
+    font-family: var(--ow-font-sans);
+    font-size: 14px;
+}
+
+.ow-prompt-input--sm {
+    --ow-prompt-line: 20px;
+    gap: var(--ow-space-xs);
+}
+
+.ow-prompt-input__box {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    min-inline-size: 0;
+    gap: var(--ow-space-md);
+    margin: 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: var(--ow-space-lg) var(--ow-space-md) var(--ow-space-md);
+    box-shadow: var(--ow-shadow-control);
+    cursor: text;
+    transition-property: border-color, box-shadow, opacity;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-prompt-input--sm .ow-prompt-input__box {
+    gap: var(--ow-space-sm);
+    padding: var(--ow-space-sm) var(--ow-space-xs) var(--ow-space-xs);
+}
+
+.ow-prompt-input__box:hover {
+    border-color: var(--ow-border-strong);
+}
+
+.ow-prompt-input__box:focus-within {
+    border-color: var(--ow-focus-border);
+    box-shadow: var(--ow-shadow-focus);
+}
+
+.ow-prompt-input--invalid .ow-prompt-input__box {
+    border-color: var(--ow-danger-line);
+}
+
+.ow-prompt-input--invalid .ow-prompt-input__box:focus-within {
+    border-color: var(--ow-danger-solid);
+    box-shadow: var(--ow-shadow-focus-danger);
+}
+
+.ow-prompt-input--disabled .ow-prompt-input__box {
+    border-color: var(--ow-border);
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: 0.62;
+}
+
+/* Inline: with nothing in the toolbar but the send button, the button sits at the end of the text. */
+.ow-prompt-input--inline .ow-prompt-input__box {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    column-gap: var(--ow-space-sm);
+    padding: var(--ow-space-sm) var(--ow-space-sm) var(--ow-space-sm) var(--ow-space-md);
+}
+
+.ow-prompt-input--inline .ow-prompt-input__attachments {
+    grid-column: 1 / -1;
+}
+
+/* The count stands above the send button, so the text keeps its width. */
+.ow-prompt-input--inline .ow-prompt-input__end {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--ow-space-2xs);
+}
+
+/* The text, centred on the 32px button while it's one line. */
+.ow-prompt-input--inline {
+    --ow-prompt-pad: var(--ow-space-2xs);
+}
+
+.ow-prompt-input--sm.ow-prompt-input--inline {
+    --ow-prompt-pad: var(--ow-space-xs);
+}
+
+.ow-prompt-input--sm.ow-prompt-input--inline .ow-prompt-input__box {
+    padding: var(--ow-space-xs) var(--ow-space-xs) var(--ow-space-xs) var(--ow-space-sm);
+}
+
+/* The text: borderless, with its own line height so the rows are exact. */
+.ow-prompt-input__textarea.ow-textarea {
+    min-height: calc(var(--ow-prompt-line) * var(--ow-prompt-min-rows, 1) + 2 * var(--ow-prompt-pad));
+    padding: var(--ow-prompt-pad) var(--ow-space-sm);
+    color: var(--ow-text);
+    font-size: 15px;
+    line-height: var(--ow-prompt-line);
+    cursor: text;
+}
+
+.ow-prompt-input--sm .ow-prompt-input__textarea.ow-textarea {
+    padding-inline: var(--ow-space-xs);
+    font-size: 14px;
+}
+
+.ow-prompt-input__textarea.ow-textarea:disabled {
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+/* Attachments: chips with a thumbnail or an icon, the name and size, and a remove button. */
+.ow-prompt-input__attachments {
+    display: flex;
+    min-width: 0;
+    flex-wrap: wrap;
+    gap: var(--ow-space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    cursor: default;
+}
+
+.ow-prompt-input__attachment {
+    display: flex;
+    min-width: 0;
+    max-width: min(100%, 240px);
+    align-items: center;
+    gap: var(--ow-space-sm);
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-lg);
+    background: var(--ow-surface-muted);
+    padding: var(--ow-space-2xs);
+}
+
+.ow-prompt-input__thumb {
+    position: relative;
+    display: inline-flex;
+    width: 36px;
+    height: 36px;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-surface);
+    color: var(--ow-text-muted);
+}
+
+.ow-prompt-input__thumb img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ow-prompt-input__file {
+    display: grid;
+    min-width: 0;
+    gap: 2px;
+    padding-right: var(--ow-space-2xs);
+}
+
+.ow-prompt-input__file-name {
+    display: flex;
+    min-width: 0;
+    color: var(--ow-text);
+    font-size: 13px;
+    font-weight: var(--ow-weight-control);
+    line-height: 16px;
+    white-space: nowrap;
+}
+
+.ow-prompt-input__file-base {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ow-prompt-input__file-size {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    line-height: 16px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.ow-prompt-input__remove {
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    flex: none;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border: 0;
+    border-radius: var(--ow-radius-md);
+    background: transparent;
+    padding: 0;
+    color: var(--ow-text-muted);
+    cursor: pointer;
+    transition-property: color, background-color;
+    transition-duration: var(--ow-duration-fast);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-prompt-input__remove:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--ow-text) 8%, transparent);
+    color: var(--ow-text);
+}
+
+.ow-prompt-input__remove:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 0;
+}
+
+.ow-prompt-input__remove:disabled {
+    cursor: not-allowed;
+}
+
+.ow-prompt-input--sm .ow-prompt-input__thumb {
+    width: 28px;
+    height: 28px;
+}
+
+.ow-prompt-input--sm .ow-prompt-input__file-name {
+    font-size: 12px;
+}
+
+.ow-prompt-input--sm .ow-prompt-input__file-size {
+    font-size: 11px;
+    line-height: 14px;
+}
+
+.ow-prompt-input--sm .ow-prompt-input__remove {
+    width: 20px;
+    height: 20px;
+}
+
+/* The toolbar: the paperclip and start actions on the left; the count, end actions and send on the right. When the start
+   actions wrap in a narrow box, send stays on the last row, under the end of the text. */
+.ow-prompt-input__toolbar {
+    display: flex;
+    min-width: 0;
+    align-items: flex-end;
+    gap: var(--ow-space-sm);
+    cursor: default;
+}
+
+.ow-prompt-input__start,
+.ow-prompt-input__end {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: var(--ow-space-2xs);
+}
+
+.ow-prompt-input__start {
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.ow-prompt-input__end {
+    flex: none;
+    margin-left: auto;
+    gap: var(--ow-space-sm);
+}
+
+.ow-prompt-input__counter {
+    padding: 0 var(--ow-space-2xs);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.ow-prompt-input__counter--full {
+    color: var(--ow-warning-text);
+    font-weight: var(--ow-weight-emphasis);
+}
+
+/* The send and Stop button keeps its square while the icon inside changes. */
+.ow-prompt-input__action.ow-button {
+    flex: none;
+}
+
+/* While files are dragged over it, the box turns primary and says what a drop does. */
+.ow-prompt-input__drop {
+    position: absolute;
+    z-index: 1;
+    inset: -1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ow-space-sm);
+    border: 1.5px dashed var(--ow-primary-text);
+    border-radius: inherit;
+    /* The tint over the surface, since primary-subtle is see-through in dark. */
+    background-color: var(--ow-surface);
+    background-image: linear-gradient(var(--ow-primary-subtle), var(--ow-primary-subtle));
+    color: var(--ow-primary-text);
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+    pointer-events: none;
+    animation: ow-prompt-input-drop-in var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+@keyframes ow-prompt-input-drop-in {
+    from {
+        opacity: 0;
+    }
+}
+
+/* The line under the box: a hint, or a message about a file that couldn't be attached. */
+.ow-prompt-input__hint {
+    padding: 0 var(--ow-space-md);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    line-height: 18px;
+    text-wrap: pretty;
+}
+
+.ow-prompt-input--sm .ow-prompt-input__hint {
+    padding: 0 var(--ow-space-sm);
+}
+
+.ow-prompt-input__hint--notice {
+    color: var(--ow-danger-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-prompt-input__box,
+    .ow-prompt-input__remove {
+        transition: none;
+    }
+
+    .ow-prompt-input__drop {
+        animation: none;
+    }
+}

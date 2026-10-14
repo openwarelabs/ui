@@ -14,7 +14,7 @@ export type SectionName = "docs" | "components" | "blocks";
 export const sectionOf = (route: Route): SectionName =>
     route.kind === "blocks" || route.kind === "block-category" ? "blocks" : route.kind === "components" || route.kind === "component" ? "components" : "docs";
 
-/** Names longer than this ("ToggleButtonGroup") don't fit half the sidebar, so they take a whole row. */
+/** Names longer than this ("ToggleButtonGroup") don't fit half the sidebar, so they take a whole row; a new dot counts as two letters. */
 const longName = 16;
 
 /** "0.3.1" → "0.3": patch releases don't make a component old. */
@@ -166,7 +166,7 @@ function ComponentsSidebar({ route, onNavigate, onSearch }: SidebarProps) {
                                 current={isCurrent(doc)}
                                 onNavigate={onNavigate}
                                 title={doc.meta.title}
-                                wide={doc.meta.title.length > longName}
+                                wide={doc.meta.title.length + (isNew(doc) ? 2 : 0) > longName}
                             >
                                 {doc.meta.title}
                                 {isNew(doc) ? <NewDot /> : null}

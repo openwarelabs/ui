@@ -1,9 +1,11 @@
-import { useRef, useState, type ChangeEvent, type FormEvent, type KeyboardEvent } from "react";
+import { useRef, useState, type ReactNode } from "react";
 
-import { Button, Kbd, Menu, MenuItem, MenuLabel, Tag, TagGroup, Text, Textarea, toast } from "@openwarelabs/ui";
-import { ArrowUp, Check, ChevronDown, FileCode2, FileImage, FileText, Lightbulb, Paperclip, Sparkles } from "lucide-react";
+import { Button, Kbd, Menu, MenuItem, MenuLabel, PromptInput, PromptSuggestion, PromptSuggestions, Text, toast, type PromptAttachment } from "@openwarelabs/ui";
+import { BookOpen, Bug, Check, ChevronDown, FlaskConical, FolderGit2, Sparkles } from "lucide-react";
 
 import "./ChatPromptBox.css";
+
+const projects = ["marketing-site", "billing-api", "mobile-app", "docs", "design-system"];
 
 const models = [
     { id: "quick", label: "Quick", description: "Small fixes and questions" },
@@ -11,49 +13,68 @@ const models = [
     { id: "thorough", label: "Thorough", description: "Large changes across many files" },
 ];
 
-const suggestions = ["Write tests for invoice dates", "Update the API reference", "Why did mobile-app fail?"];
+const suggestions = [
+    { label: "Write tests for invoice dates", icon: <FlaskConical size={16} /> },
+    { label: "Update the API reference", icon: <BookOpen size={16} /> },
+    { label: "Why did mobile-app fail?", icon: <Bug size={16} /> },
+];
 
-function iconFor(name: string) {
-    if (/\.(png|jpe?g|gif|webp|svg)$/i.test(name)) return <FileImage size={14} />;
-    if (/\.(ts|tsx|js|jsx|py|go|rs|swift|css|json)$/i.test(name)) return <FileCode2 size={14} />;
-    return <FileText size={14} />;
+const attached: PromptAttachment[] = [
+    { id: "format", name: "format.ts", type: "text/typescript", size: 2_140 },
+    { id: "invoice", name: "invoice-0412.pdf", type: "application/pdf", size: 184_320 },
+];
+
+/** A ghost button in the toolbar that opens a menu of choices, the chosen one ticked. */
+function Picker({ label, icon, value, children }: { label: string; icon: ReactNode; value: string; children: ReactNode }) {
+    return (
+        <Menu
+            label={label}
+            above
+            width={260}
+            trigger={
+                <Button
+                    className="chat-prompt-box__picker"
+                    variant="ghost"
+                    size="sm"
+                    startIcon={icon}
+                    endIcon={<ChevronDown size={14} />}
+                    aria-label={`${label}: ${value}`}
+                >
+                    {value}
+                </Button>
+            }
+        >
+            <MenuLabel>{label}</MenuLabel>
+            {children}
+        </Menu>
+    );
 }
 
 export function ChatPromptBox() {
     const [text, setText] = useState("");
-    const [files, setFiles] = useState(["format.ts", "invoice-0412.pdf"]);
+    const [files, setFiles] = useState(attached);
+    const [project, setProject] = useState("billing-api");
     const [model, setModel] = useState("balanced");
     const input = useRef<HTMLTextAreaElement>(null);
-    const picker = useRef<HTMLInputElement>(null);
 
     const chosen = models.find((option) => option.id === model)!;
-    const ready = text.trim().length > 0;
 
-    const send = (event: FormEvent | KeyboardEvent) => {
-        event.preventDefault();
-        if (!ready) return;
-        const attached = files.length ? ` and ${files.length} attached file${files.length === 1 ? "" : "s"}` : "";
-        toast.success("Task sent to the agent", { description: `It's planning the work now, using the ${chosen.label} model${attached}.` });
+    const send = (task: string, attachments: PromptAttachment[]) => {
+        const extra = attachments.length ? ` and ${attachments.length} attached file${attachments.length === 1 ? "" : "s"}` : "";
+        toast.success("Task sent to the agent", { description: `It's planning the work in ${project} now, using the ${chosen.label} model${extra}.` });
         setText("");
         setFiles([]);
     };
 
-    // Enter sends; Shift+Enter starts a new line.
-    const onKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) send(event);
-    };
+    const attach = (picked: File[]) =>
+        setFiles((current) => [
+            ...current,
+            ...picked
+                .filter((file) => !current.some((other) => other.name === file.name))
+                .map((file) => ({ id: `${file.name}-${file.lastModified}`, name: file.name, type: file.type, size: file.size })),
+        ]);
 
-    const addFiles = (event: ChangeEvent<HTMLInputElement>) => {
-        const picked = [...(event.target.files ?? [])].map((file) => file.name);
-        setFiles((current) => [...current, ...picked.filter((name) => !current.includes(name))]);
-        event.target.value = "";
-        input.current?.focus();
-    };
-
-    const pickSuggestion = (suggestion: string) => {
-        setText(suggestion);
-        input.current?.focus();
-    };
+    const tick = (on: boolean) => (on ? <Check size={15} /> : <span className="chat-prompt-box__tick-space" />);
 
     return (
         <section className="chat-prompt-box" aria-labelledby="chat-prompt-box-title">
@@ -65,94 +86,73 @@ export function ChatPromptBox() {
                     Describe the task in plain words. The agent plans it first, and asks before it pushes anything.
                 </Text>
 
-                <form className="chat-prompt-box__box" onSubmit={send}>
-                    {files.length ? (
-                        <TagGroup className="chat-prompt-box__attachments" label="Attached files">
-                            {files.map((name) => (
-                                <Tag key={name} size="sm" icon={iconFor(name)} onRemove={() => setFiles((current) => current.filter((file) => file !== name))}>
-                                    {name}
-                                </Tag>
-                            ))}
-                        </TagGroup>
-                    ) : null}
+                <PromptInput
+                    ref={input}
+                    className="chat-prompt-box__input"
+                    value={text}
+                    onChange={setText}
+                    onSubmit={send}
+                    minRows={2}
+                    maxRows={10}
+                    placeholder="Fix the invoice dates for customers outside the UTC time zone…"
+                    aria-label="Task for the agent"
+                    attachments={files}
+                    onAttach={attach}
+                    onRemoveAttachment={(id) => setFiles((current) => current.filter((file) => file.id !== id))}
+                    startActions={
+                        <>
+                            <Picker label="Project" icon={<FolderGit2 size={14} />} value={project}>
+                                {projects.map((option) => (
+                                    <MenuItem
+                                        key={option}
+                                        role="menuitemradio"
+                                        aria-checked={option === project}
+                                        icon={tick(option === project)}
+                                        onSelect={() => setProject(option)}
+                                    >
+                                        {option}
+                                    </MenuItem>
+                                ))}
+                            </Picker>
+                            <Picker label="Model" icon={<Sparkles size={14} />} value={chosen.label}>
+                                {models.map((option) => (
+                                    <MenuItem
+                                        key={option.id}
+                                        role="menuitemradio"
+                                        aria-checked={option.id === model}
+                                        icon={tick(option.id === model)}
+                                        onSelect={() => setModel(option.id)}
+                                    >
+                                        <span className="chat-prompt-box__option">
+                                            {option.label}
+                                            <Text variant="caption">{option.description}</Text>
+                                        </span>
+                                    </MenuItem>
+                                ))}
+                            </Picker>
+                        </>
+                    }
+                    hint={
+                        <>
+                            <Kbd>Enter</Kbd> to send, <Kbd>Shift</Kbd> + <Kbd>Enter</Kbd> for a new line. Drop or paste files to attach them.
+                        </>
+                    }
+                />
 
-                    <Textarea
-                        ref={input}
-                        className="chat-prompt-box__input"
-                        bare
-                        autoGrow
-                        autoGrowMaxHeight={240}
-                        rows={2}
-                        value={text}
-                        placeholder="Fix the invoice dates for customers outside the UTC time zone…"
-                        aria-label="Task for the agent"
-                        onChange={(event) => setText(event.target.value)}
-                        onKeyDown={onKeyDown}
-                    />
-
-                    <div className="chat-prompt-box__toolbar">
-                        <Button variant="ghost" size="sm" iconOnly aria-label="Attach files" onClick={() => picker.current?.click()}>
-                            <Paperclip size={16} />
-                        </Button>
-                        <input ref={picker} className="chat-prompt-box__file-input" type="file" multiple tabIndex={-1} aria-hidden="true" onChange={addFiles} />
-
-                        <Menu
-                            label="Model"
-                            above
-                            width={260}
-                            trigger={
-                                <Button
-                                    className="chat-prompt-box__model"
-                                    variant="ghost"
-                                    size="sm"
-                                    startIcon={<Sparkles size={14} />}
-                                    endIcon={<ChevronDown size={14} />}
-                                    aria-label={`Model: ${chosen.label}`}
-                                >
-                                    {chosen.label}
-                                </Button>
-                            }
-                        >
-                            <MenuLabel>Model</MenuLabel>
-                            {models.map((option) => (
-                                <MenuItem
-                                    key={option.id}
-                                    role="menuitemradio"
-                                    aria-checked={option.id === model}
-                                    icon={option.id === model ? <Check size={15} /> : <span className="chat-prompt-box__check-space" />}
-                                    onSelect={() => setModel(option.id)}
-                                >
-                                    <span className="chat-prompt-box__model-option">
-                                        {option.label}
-                                        <Text variant="caption">{option.description}</Text>
-                                    </span>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-
-                        <Text variant="caption" className="chat-prompt-box__hint">
-                            <Kbd>Shift</Kbd> + <Kbd>Enter</Kbd> for a new line
-                        </Text>
-                        <Button className="chat-prompt-box__send" type="submit" variant="primary" size="sm" iconOnly aria-label="Send" disabled={!ready}>
-                            <ArrowUp size={16} />
-                        </Button>
-                    </div>
-                </form>
-
-                <div className="chat-prompt-box__suggestions" role="group" aria-label="Ideas to start from">
+                <PromptSuggestions className="chat-prompt-box__suggestions" align="center" aria-label="Ideas to start from">
                     {suggestions.map((suggestion) => (
-                        <Button
-                            key={suggestion}
-                            size="sm"
-                            shape="pill"
-                            startIcon={<Lightbulb size={14} />}
-                            className="chat-prompt-box__suggestion"
-                            onClick={() => pickSuggestion(suggestion)}
+                        <PromptSuggestion
+                            key={suggestion.label}
+                            icon={suggestion.icon}
+                            onClick={() => {
+                                setText(suggestion.label);
+                                input.current?.focus();
+                            }}
                         >
-                            {suggestion}
-                        </Button>
+                            {suggestion.label}
+                        </PromptSuggestion>
                     ))}
-                </div>
+                </PromptSuggestions>
             </div>
         </section>
     );

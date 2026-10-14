@@ -1,11 +1,26 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
-import { Badge, Button, Code, Link, Spinner, Text, VisuallyHidden, type BadgeVariant, type TextTone } from "@openwarelabs/ui";
-import { Bot, Check, ChevronRight, CircleStop, Hand, RotateCcw, ShieldCheck, Square, X } from "lucide-react";
+import {
+    Badge,
+    Button,
+    ChainOfThought,
+    ChatAgentAvatar,
+    ChatSource,
+    ChatSources,
+    ChatTool,
+    Code,
+    Link,
+    Prose,
+    Text,
+    VisuallyHidden,
+    type BadgeVariant,
+    type ChatSourceItem,
+    type ChatToolStatus,
+} from "@openwarelabs/ui";
+import { ChevronRight, CircleStop, FileCode2, FilePenLine, FlaskConical, GitPullRequest, LifeBuoy, RotateCcw, UserRoundCheck } from "lucide-react";
 
 import "./ChatAgentRun.css";
 
-type Status = "done" | "running" | "failed" | "waiting" | "approval" | "stopped";
 type RunState = "running" | "stopped" | "done";
 
 interface FileChange {
@@ -66,6 +81,44 @@ const pdfFix: FileChange[] = [
     },
 ];
 
+/** What the agent read before it changed anything, cited in its reasoning and its summary. */
+const sources: Array<ChatSourceItem & { id: string }> = [
+    {
+        id: "ticket",
+        index: 1,
+        title: "Our July invoice is dated 14 July",
+        source: "Support ticket 1093 · Halcyon · 15 July",
+        snippet: "We were billed just after midnight on 15 July, but the invoice says 14 July. Our accountant needs the right date.",
+        href: "#",
+        icon: <LifeBuoy size={15} />,
+    },
+    {
+        id: "format",
+        index: 2,
+        title: "formatInvoiceDate",
+        source: "src/invoices/format.ts · lines 9–15",
+        snippet:
+            'export function formatInvoiceDate(issuedAt: Date) {\n    return new Intl.DateTimeFormat("en-GB", {\n        dateStyle: "long",\n        timeZone: "UTC",\n    }).format(issuedAt);\n}',
+        href: "#",
+        icon: <FileCode2 size={15} />,
+    },
+    {
+        id: "pdf",
+        index: 3,
+        title: "renderInvoicePdf",
+        source: "src/invoices/pdf.ts · lines 24–38",
+        snippet: "// Its own formatter, also in UTC\nconst issued = formatDate(invoice.issuedAt);",
+        href: "#",
+        icon: <FileCode2 size={15} />,
+    },
+];
+
+/** The inline citation for a source, by its number. */
+const cite = (index: number) => {
+    const { id, ...item } = sources.find((source) => source.index === index)!;
+    return <ChatSource {...item} snippetFormat={id === "ticket" ? "text" : "code"} />;
+};
+
 /**
  * How far the run has got after the steps that are already done:
  * 0 the tests are running again, 1 it waits for approval to push, 2 it pushes, 3 it asks for a review, 4 it's finished.
@@ -74,30 +127,23 @@ type Stage = 0 | 1 | 2 | 3 | 4;
 
 const formatElapsed = (seconds: number) => `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
 
-/** A path, a branch or a diff count: mono, at the size of the line it sits in. */
-function Mono({ children, tone, label }: { children: ReactNode; tone?: TextTone; label?: string }) {
+/** Lines added and removed, in green and red, with words for screen readers. */
+function DiffCount({ added, removed }: { added: number; removed: number }) {
     return (
-        <Text variant="code" tone={tone} aria-label={label} className="chat-agent-run__mono">
-            {children}
-        </Text>
+        <>
+            <Text as="span" variant="caption" tone="success">
+                <span aria-hidden="true">+{added}</span>
+                <VisuallyHidden>{added} lines added,</VisuallyHidden>
+            </Text>{" "}
+            <Text as="span" variant="caption" tone="danger">
+                <span aria-hidden="true">−{removed}</span>
+                <VisuallyHidden>{removed} removed</VisuallyHidden>
+            </Text>
+        </>
     );
 }
 
-/** The colour of a step's status line: the ones that need a look stand out. */
-const statusTone: Partial<Record<Status, TextTone>> = { running: "primary", failed: "danger", approval: "warning" };
-
-function Marker({ status }: { status: Status }) {
-    return (
-        <span className={`chat-agent-run__marker chat-agent-run__marker--${status}`} aria-hidden="true">
-            {status === "done" ? <Check size={13} strokeWidth={3} /> : null}
-            {status === "failed" ? <X size={13} strokeWidth={3} /> : null}
-            {status === "approval" ? <Hand size={12} strokeWidth={2.5} /> : null}
-            {status === "stopped" ? <Square size={9} fill="currentColor" strokeWidth={0} /> : null}
-            {status === "running" ? <Spinner size="sm" label="" /> : null}
-        </span>
-    );
-}
-
+/** The files a step changed, each opening to its diff. */
 function Files({ files, open, onToggle }: { files: FileChange[]; open: string[]; onToggle: (path: string) => void }) {
     return (
         <ul className="chat-agent-run__files" aria-label="Files changed">
@@ -114,15 +160,10 @@ function Files({ files, open, onToggle }: { files: FileChange[]; open: string[];
                             startIcon={<ChevronRight className="chat-agent-run__chevron" size={14} />}
                             onClick={() => onToggle(file.path)}
                         >
-                            <Text variant="code" tone="default" truncate className="chat-agent-run__mono chat-agent-run__path">
+                            <Text variant="code" tone="default" truncate className="chat-agent-run__path">
                                 {file.path}
                             </Text>
-                            <Mono tone="success" label={`${file.added} lines added`}>
-                                +{file.added}
-                            </Mono>
-                            <Mono tone="danger" label={`${file.removed} lines removed`}>
-                                −{file.removed}
-                            </Mono>
+                            <DiffCount added={file.added} removed={file.removed} />
                         </Button>
                         {expanded ? (
                             <Text as="pre" variant="code" className="chat-agent-run__diff" aria-label={`Changes to ${file.path}`}>
@@ -148,10 +189,9 @@ function Files({ files, open, onToggle }: { files: FileChange[]; open: string[];
 export function ChatAgentRun() {
     const [stage, setStage] = useState<Stage>(0);
     const [run, setRun] = useState<RunState>("running");
+    const [denied, setDenied] = useState(false);
     const [elapsed, setElapsed] = useState(134);
     const [open, setOpen] = useState<string[]>(["src/invoices/format.ts"]);
-    const control = useRef<HTMLButtonElement>(null);
-    const decided = useRef(false);
 
     const waitingForPerson = run === "running" && stage === 1;
 
@@ -174,128 +214,28 @@ export function ChatAgentRun() {
         return () => window.clearInterval(timer);
     }, [run, waitingForPerson]);
 
-    // Approving or refusing removes the buttons; keep the keyboard on the run's own Stop or Run again.
-    useEffect(() => {
-        if (decided.current) control.current?.focus();
-        decided.current = false;
-    }, [stage, run]);
-    const decide = (approve: boolean) => {
-        decided.current = true;
-        if (approve) setStage(2);
-        else setRun("stopped");
-    };
-
     const toggleFile = (path: string) => setOpen((paths) => (paths.includes(path) ? paths.filter((other) => other !== path) : [...paths, path]));
+    const deny = () => {
+        setDenied(true);
+        setRun("stopped");
+    };
     const restart = () => {
         setStage(0);
         setRun("running");
+        setDenied(false);
         setElapsed(134);
     };
 
-    /** The status of a step that runs at these stages; a stopped run stops the step it was on. */
-    const statusFor = (first: Stage, last: Stage = first): Status => {
-        if (stage < first) return "waiting";
-        if (stage > last) return "done";
-        if (run === "stopped") return "stopped";
+    /** The status of a call that runs at these stages; stopping the run cancels the call it was on. */
+    const statusFor = (first: Stage, last: Stage = first): ChatToolStatus => {
+        if (stage < first) return "pending";
+        if (stage > last) return "success";
+        if (run === "stopped") return "cancelled";
         return stage === 1 ? "approval" : "running";
     };
-    const pushStatus = statusFor(1, 2);
-
-    const steps: Array<{ title: string; status: Status; time?: string; content?: ReactNode }> = [
-        {
-            title: "Read the issue and make a plan",
-            status: "done",
-            time: "6 s",
-            content: <Text variant="copy">Format invoice dates in the customer's time zone, not the server's, and cover it with tests.</Text>,
-        },
-        {
-            title: "Find where invoice dates are formatted",
-            status: "done",
-            time: "11 s",
-            content: (
-                <Text variant="copy">
-                    <Code>formatInvoiceDate</Code> in src/invoices/format.ts, used by the web invoice and the PDF.
-                </Text>
-            ),
-        },
-        { title: "Edit 3 files", status: "done", time: "38 s", content: <Files files={edits} open={open} onToggle={toggleFile} /> },
-        {
-            title: "Run the tests",
-            status: "failed",
-            time: "Failed after 24 s",
-            content: (
-                <Text as="p" variant="code" tone="danger" className="chat-agent-run__mono chat-agent-run__error">
-                    1 of 86 failed: pdf › prints the issue date in the customer's time zone. Expected “15 July 2026”, got “14 July 2026”.
-                </Text>
-            ),
-        },
-        {
-            title: "Fix the PDF invoice",
-            status: "done",
-            time: "19 s",
-            content: (
-                <>
-                    <Text variant="copy">
-                        The PDF had its own date formatter. It uses <Code>formatInvoiceDate</Code> now.
-                    </Text>
-                    <Files files={pdfFix} open={open} onToggle={toggleFile} />
-                </>
-            ),
-        },
-        {
-            title: "Run the tests again",
-            status: statusFor(0),
-            time: stage > 0 ? "86 of 86 passed · 31 s" : undefined,
-        },
-        {
-            title: "Push the branch and open a pull request",
-            status: pushStatus,
-            time: stage > 2 ? "4 s" : undefined,
-            content:
-                pushStatus === "approval" ? (
-                    <div className="chat-agent-run__approval chat-agent-run__enter">
-                        <Text variant="copy" tone="soft">
-                            The agent wants to push{" "}
-                            <Text as="strong" variant="label" tone="default">
-                                fix/invoice-dates
-                            </Text>{" "}
-                            to GitHub and open a pull request against{" "}
-                            <Text as="strong" variant="label" tone="default">
-                                main
-                            </Text>
-                            . 4 files, <Mono tone="success">+9</Mono> <Mono tone="danger">−3</Mono>. Nothing reaches main until someone merges it.
-                        </Text>
-                        <div className="chat-agent-run__approval-actions">
-                            <Button variant="primary" size="sm" startIcon={<ShieldCheck size={16} />} onClick={() => decide(true)}>
-                                Approve and push
-                            </Button>
-                            <Button size="sm" onClick={() => decide(false)}>
-                                Don't push
-                            </Button>
-                        </div>
-                    </div>
-                ) : stage > 2 ? (
-                    <Text variant="copy">
-                        Opened <Link href="#">#482 Fix invoice dates in the EU</Link>.
-                    </Text>
-                ) : pushStatus === "stopped" ? (
-                    <Text variant="copy">Nothing was pushed. The changes stay with this run if you want to come back to them.</Text>
-                ) : null,
-        },
-        {
-            title: "Ask Tomás Reyes to review",
-            status: statusFor(3),
-            time: stage > 3 ? "Requested" : undefined,
-        },
-    ];
-
-    const statusText = (status: Status, time?: string) => {
-        if (status === "running") return "Running…";
-        if (status === "approval") return "Needs you";
-        if (status === "stopped") return "Stopped";
-        if (status === "waiting") return run === "running" ? "Waiting" : "Not run";
-        return time;
-    };
+    const retest = statusFor(0);
+    const push = statusFor(1, 2);
+    const review = statusFor(3);
 
     const badge: { label: string; tone: BadgeVariant } =
         run === "done"
@@ -306,13 +246,118 @@ export function ChatAgentRun() {
                 ? { label: "Needs approval", tone: "warning" }
                 : { label: "Running", tone: "active" };
 
+    const steps: Array<{ id: string; content: ReactNode }> = [
+        {
+            id: "edit",
+            content: (
+                <ChatTool
+                    title="Format invoice dates in the customer's time zone"
+                    name="edit_files"
+                    icon={<FilePenLine size={15} />}
+                    status="success"
+                    summary={<DiffCount added={8} removed={2} />}
+                    duration={38_000}
+                    defaultExpanded
+                    output={<Files files={edits} open={open} onToggle={toggleFile} />}
+                />
+            ),
+        },
+        {
+            id: "test",
+            content: (
+                <ChatTool
+                    title="Run the tests"
+                    name="run_tests"
+                    icon={<FlaskConical size={15} />}
+                    status="error"
+                    summary="1 of 86 failed"
+                    duration={24_000}
+                    input="npm test -- invoices"
+                    error={"pdf › prints the issue date in the customer's time zone\nExpected “15 July 2026”, got “14 July 2026”."}
+                />
+            ),
+        },
+        {
+            id: "note",
+            content: (
+                <Text variant="copy" className="chat-agent-run__note">
+                    The PDF invoice has its own date formatter {cite(3)}, so the fix didn't reach it. Switching it to <Code>formatInvoiceDate</Code>.
+                </Text>
+            ),
+        },
+        {
+            id: "pdf",
+            content: (
+                <ChatTool
+                    title="Fix the PDF invoice"
+                    name="edit_files"
+                    icon={<FilePenLine size={15} />}
+                    status="success"
+                    summary={<DiffCount added={1} removed={1} />}
+                    duration={19_000}
+                    output={<Files files={pdfFix} open={open} onToggle={toggleFile} />}
+                />
+            ),
+        },
+        {
+            id: "retest",
+            content: (
+                <ChatTool
+                    title="Run the tests again"
+                    name="run_tests"
+                    icon={<FlaskConical size={15} />}
+                    status={retest}
+                    summary={retest === "success" ? "86 tests passed" : retest === "cancelled" ? "Stopped" : undefined}
+                    duration={retest === "success" ? 31_000 : undefined}
+                    input="npm test -- invoices"
+                />
+            ),
+        },
+        {
+            id: "push",
+            content: (
+                <ChatTool
+                    title="Push the branch and open a pull request"
+                    name="create_pull_request"
+                    icon={<GitPullRequest size={15} />}
+                    status={push}
+                    summary={
+                        push === "success" ? "Opened pull request #482" : push === "cancelled" ? (denied ? "Denied, nothing was pushed" : "Stopped") : undefined
+                    }
+                    duration={push === "success" ? 4_000 : undefined}
+                    approvalMessage={
+                        <>
+                            Wants to push <Code>fix/invoice-dates</Code> to GitHub and open a pull request against <Code>main</Code>. Nothing reaches main until
+                            someone merges it.
+                        </>
+                    }
+                    approveLabel="Approve and push"
+                    denyLabel="Don't push"
+                    onApprove={() => setStage(2)}
+                    onDeny={deny}
+                />
+            ),
+        },
+        {
+            id: "review",
+            content: (
+                <ChatTool
+                    title="Ask Tomás Reyes to review"
+                    name="request_review"
+                    icon={<UserRoundCheck size={15} />}
+                    status={review}
+                    summary={review === "success" ? "Requested" : review === "cancelled" ? "Stopped" : undefined}
+                    duration={review === "success" ? 1_200 : undefined}
+                />
+            ),
+        },
+    ];
+
     return (
         <section className="chat-agent-run" aria-labelledby="chat-agent-run-title">
             <div className="chat-agent-run__panel">
                 <header className="chat-agent-run__header">
-                    <span className="chat-agent-run__bot" aria-hidden="true">
-                        <Bot size={18} />
-                    </span>
+                    <ChatAgentAvatar size="lg" />
                     <div className="chat-agent-run__heading">
                         <Text variant="card-title" as="h2" id="chat-agent-run-title">
                             Fix invoice dates in the EU
@@ -322,7 +367,7 @@ export function ChatAgentRun() {
                             <span className="chat-agent-run__meta-sep" aria-hidden="true">
                                 /
                             </span>
-                            <Mono>fix/invoice-dates</Mono>
+                            <Code>fix/invoice-dates</Code>
                             <span className="chat-agent-run__meta-sep chat-agent-run__meta-sep--dot" aria-hidden="true">
                                 ·
                             </span>
@@ -338,35 +383,71 @@ export function ChatAgentRun() {
                             {formatElapsed(elapsed)}
                         </Text>
                         {run === "running" ? (
-                            <Button ref={control} size="sm" startIcon={<CircleStop size={16} />} onClick={() => setRun("stopped")}>
+                            <Button size="sm" startIcon={<CircleStop size={16} />} onClick={() => setRun("stopped")}>
                                 Stop
                             </Button>
                         ) : (
-                            <Button ref={control} size="sm" startIcon={<RotateCcw size={16} />} onClick={restart}>
+                            <Button size="sm" startIcon={<RotateCcw size={16} />} onClick={restart}>
                                 Run again
                             </Button>
                         )}
                     </div>
                 </header>
 
-                <ol className="chat-agent-run__steps" aria-label="Steps">
-                    {steps.map((step) => (
-                        <li key={step.title} className="chat-agent-run__step" data-status={step.status}>
-                            <Marker status={step.status} />
-                            <div className="chat-agent-run__body">
-                                <div className="chat-agent-run__row">
-                                    <Text variant="label" tone={step.status === "waiting" || step.status === "stopped" ? "muted" : undefined}>
-                                        {step.title}
-                                    </Text>
-                                    <Text variant="caption" tone={statusTone[step.status]} className="chat-agent-run__status">
-                                        {statusText(step.status, step.time)}
-                                    </Text>
-                                </div>
-                                {step.content}
-                            </div>
-                        </li>
-                    ))}
-                </ol>
+                <div className="chat-agent-run__body">
+                    <ChainOfThought
+                        duration={17_400}
+                        defaultExpanded
+                        steps={[
+                            {
+                                id: "ticket",
+                                title: "Read support ticket 1093",
+                                status: "success",
+                                detail: <>Halcyon's July invoice is dated 14 July; they were billed at 00:30 on 15 July, Dublin time {cite(1)}.</>,
+                            },
+                            {
+                                id: "find",
+                                title: "Find where invoice dates are formatted",
+                                status: "success",
+                                detail: (
+                                    <>
+                                        <Code>formatInvoiceDate</Code> in src/invoices/format.ts, in UTC {cite(2)}.
+                                    </>
+                                ),
+                            },
+                            {
+                                id: "plan",
+                                title: "Plan the fix",
+                                status: "success",
+                                detail: "Format invoice dates in the customer's time zone, not the server's, and cover it with tests.",
+                            },
+                        ]}
+                    >
+                        An invoice dated the day before, only for customers east of UTC, points at a time zone: the date is probably formatted on the server, in
+                        UTC.
+                    </ChainOfThought>
+
+                    <ChatSources sources={sources} />
+
+                    <ol className="chat-agent-run__steps" aria-label="Steps">
+                        {steps.map((step) => (
+                            <li key={step.id}>{step.content}</li>
+                        ))}
+                    </ol>
+
+                    {run === "done" ? (
+                        <Prose size="sm" className="chat-agent-run__summary">
+                            <Text variant="copy" tone="default">
+                                Opened <Link href="#">#482 Fix invoice dates in the EU</Link> and asked Tomás Reyes to review it. Invoices are now dated in the
+                                customer's time zone, on the web {cite(2)} and in the PDF {cite(3)}, and all 86 tests pass.
+                            </Text>
+                        </Prose>
+                    ) : run === "stopped" ? (
+                        <Text variant="copy" className="chat-agent-run__summary">
+                            Nothing was pushed. The changes stay with this run if you want to come back to them.
+                        </Text>
+                    ) : null}
+                </div>
             </div>
         </section>
     );
