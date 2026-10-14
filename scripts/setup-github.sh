@@ -8,7 +8,7 @@ set -euo pipefail
 
 repo="${1:-openwarelabs/ui}"
 
-echo "Merge settings for $repo…"
+echo "Merge settings for ${repo}..."
 gh api --method PATCH "repos/$repo" --silent \
   -F allow_squash_merge=true \
   -F allow_merge_commit=false \
@@ -52,12 +52,17 @@ ruleset=$(cat <<'JSON'
 JSON
 )
 
-existing=$(gh api "repos/$repo/rulesets" --jq '.[] | select(.name == "main") | .id' || true)
+if ! rulesets=$(gh api "repos/$repo/rulesets" 2>&1); then
+  echo "Couldn't read the rulesets: $rulesets" >&2
+  echo "Rulesets need a public repository, or GitHub Team for a private one in an organization." >&2
+  exit 1
+fi
+existing=$(gh api "repos/$repo/rulesets" --jq '.[] | select(.name == "main") | .id')
 if [ -n "$existing" ]; then
-  echo "Updating the main ruleset ($existing)…"
+  echo "Updating the main ruleset (${existing})..."
   echo "$ruleset" | gh api --method PUT "repos/$repo/rulesets/$existing" --input - --silent
 else
-  echo "Creating the main ruleset…"
+  echo "Creating the main ruleset..."
   echo "$ruleset" | gh api --method POST "repos/$repo/rulesets" --input - --silent
 fi
 
