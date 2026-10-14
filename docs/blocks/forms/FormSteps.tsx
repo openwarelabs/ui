@@ -1,7 +1,7 @@
-import { useEffect, useId, useRef, useState, type FormEvent } from "react";
+import { useId, useState } from "react";
 
-import { Button, Checkbox, CheckboxGroup, Field, Input, Radio, RadioGroup, Select, Steps, Text, Textarea, toast } from "@openwarelabs/ui";
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { Form03 } from "@openwarelabs/blocks";
+import { Checkbox, CheckboxGroup, Field, Input, Radio, RadioGroup, Select, Textarea, toast } from "@openwarelabs/ui";
 
 import "./FormSteps.css";
 
@@ -89,80 +89,37 @@ export function FormSteps() {
     const [step, setStep] = useState(0);
     const [values, setValues] = useState<Values>(emptyValues);
     const [errors, setErrors] = useState<Errors>({});
-    const [saving, setSaving] = useState(false);
-    const shownStep = useRef(step);
 
     const fieldId = (name: string) => `${id}-${name}`;
     const emails = parseEmails(values.emails);
-    const last = steps.length - 1;
-
-    // After moving between steps, put focus on the new step's heading so it's read out. Not on first load.
-    useEffect(() => {
-        if (shownStep.current === step) return;
-        shownStep.current = step;
-        document.getElementById(fieldId("step"))?.focus();
-    }, [step]);
 
     function update<K extends keyof Values>(key: K, value: Values[K]) {
         setValues((current) => ({ ...current, [key]: value }));
         if (key in errors) setErrors((current) => ({ ...current, [key]: undefined }));
     }
 
-    function goTo(next: number) {
-        setErrors({});
-        setStep(next);
-    }
-
-    function submit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault();
+    /** Checks the step's fields, says what's wrong and puts focus on the first one. */
+    function validate() {
         const found = validateStep(step, values);
         setErrors(found);
         const first = (["name", "identifier", "emails", "projects"] as const).find((key) => found[key]);
-        if (first) {
-            document.getElementById(fieldId(first))?.focus();
-            return;
-        }
-        if (step < last) {
-            goTo(step + 1);
-            return;
-        }
-        setSaving(true);
-        window.setTimeout(() => {
-            setSaving(false);
-            toast.success(`${values.name.trim()} team created`, {
-                description: `Invites went to ${emails.length} ${emails.length === 1 ? "person" : "people"}.`,
-            });
-            setValues(emptyValues);
-            goTo(0);
-        }, 900);
+        if (first) document.getElementById(fieldId(first))?.focus();
+        return !first;
     }
 
     const role = roles.find((option) => option.value === values.role);
     const agentMode = agentModes.find((option) => option.value === values.agents);
 
     return (
-        <div className="form-steps">
-            <form className="form-steps__card" noValidate onSubmit={submit} aria-labelledby={fieldId("title")}>
-                <header className="form-steps__header">
-                    <Text variant="heading" as="h1" id={fieldId("title")}>
-                        Create a team
-                    </Text>
-                    <Text variant="copy" className="form-steps__lead">
-                        A team shares projects, a review queue and its own agents.
-                    </Text>
-                    <Steps items={steps} current={step} orientation="horizontal" label="Progress" className="form-steps__progress" />
-                </header>
-
-                <div className="form-steps__body">
-                    <Text variant="card-title" as="h2" id={fieldId("step")} tabIndex={-1} className="form-steps__step-title">
-                        <Text variant="caption">
-                            Step {step + 1} of {steps.length}
-                        </Text>
-                        {steps[step]?.heading}
-                    </Text>
-
-                    {step === 0 ? (
-                        <div className="form-steps__fields">
+        <Form03
+            title="Create a team"
+            description="A team shares projects, a review queue and its own agents."
+            steps={[
+                {
+                    ...steps[0]!,
+                    validate,
+                    content: (
+                        <>
                             <Field label="Team name" error={errors.name}>
                                 <Input
                                     id={fieldId("name")}
@@ -197,11 +154,14 @@ export function FormSteps() {
                                     />
                                 </Field>
                             </div>
-                        </div>
-                    ) : null}
-
-                    {step === 1 ? (
-                        <div className="form-steps__fields">
+                        </>
+                    ),
+                },
+                {
+                    ...steps[1]!,
+                    validate,
+                    content: (
+                        <>
                             <Field
                                 label="Email addresses"
                                 hint={
@@ -227,11 +187,14 @@ export function FormSteps() {
                                     options={roles.map(({ value, label }) => ({ value, label }))}
                                 />
                             </Field>
-                        </div>
-                    ) : null}
-
-                    {step === 2 ? (
-                        <div className="form-steps__fields">
+                        </>
+                    ),
+                },
+                {
+                    ...steps[2]!,
+                    validate,
+                    content: (
+                        <>
                             <CheckboxGroup
                                 label="Projects"
                                 description="The team sees these in its sidebar and gets their reviews."
@@ -257,60 +220,32 @@ export function FormSteps() {
                                     </Radio>
                                 ))}
                             </RadioGroup>
-                        </div>
-                    ) : null}
-
-                    {step === 3 ? (
-                        <dl className="form-steps__review">
-                            {[
-                                { label: "Team", value: `${values.name.trim()} · ${values.identifier} · led by ${values.lead}`, step: 0 },
-                                { label: "People", value: `${emails.join(", ")} as ${role?.label.toLowerCase()}s`, step: 1 },
-                                { label: "Projects", value: values.projects.join(", "), step: 2 },
-                                { label: "Agents", value: agentMode?.label, step: 2 },
-                            ].map((row) => (
-                                <div key={row.label} className="form-steps__review-row">
-                                    <Text as="dt" variant="caption" className="form-steps__review-label">
-                                        {row.label}
-                                    </Text>
-                                    <Text as="dd" className="form-steps__review-value">
-                                        {row.value}
-                                    </Text>
-                                    <dd className="form-steps__review-edit">
-                                        <Button
-                                            type="button"
-                                            size="sm"
-                                            variant="ghost"
-                                            onClick={() => goTo(row.step)}
-                                            aria-label={`Edit ${row.label.toLowerCase()}`}
-                                        >
-                                            Edit
-                                        </Button>
-                                    </dd>
-                                </div>
-                            ))}
-                        </dl>
-                    ) : null}
-                </div>
-
-                <div className="form-steps__footer">
-                    {step > 0 ? (
-                        <Button type="button" startIcon={<ArrowLeft size={16} />} onClick={() => goTo(step - 1)} disabled={saving}>
-                            Back
-                        </Button>
-                    ) : (
-                        <span />
-                    )}
-                    {step < last ? (
-                        <Button type="submit" variant="primary" endIcon={<ArrowRight size={16} />}>
-                            Continue
-                        </Button>
-                    ) : (
-                        <Button type="submit" variant="primary" startIcon={<Check size={16} />} loading={saving}>
-                            Create team and invite {emails.length}
-                        </Button>
-                    )}
-                </div>
-            </form>
-        </div>
+                        </>
+                    ),
+                },
+                {
+                    ...steps[3]!,
+                    review: [
+                        { label: "Team", value: `${values.name.trim()} · ${values.identifier} · led by ${values.lead}`, step: 0 },
+                        { label: "People", value: `${emails.join(", ")} as ${role?.label.toLowerCase()}s`, step: 1 },
+                        { label: "Projects", value: values.projects.join(", "), step: 2 },
+                        { label: "Agents", value: agentMode?.label, step: 2 },
+                    ],
+                },
+            ]}
+            submitLabel={<>Create team and invite {emails.length}</>}
+            onSubmit={async () => {
+                await new Promise((resolve) => window.setTimeout(resolve, 900));
+                toast.success(`${values.name.trim()} team created`, {
+                    description: `Invites went to ${emails.length} ${emails.length === 1 ? "person" : "people"}.`,
+                });
+                setValues(emptyValues);
+            }}
+            onStepChange={(next) => {
+                // An error goes when the step changes; it comes back, if it must, on the next Continue.
+                setErrors({});
+                setStep(next);
+            }}
+        />
     );
 }

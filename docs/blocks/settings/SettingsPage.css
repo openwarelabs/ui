@@ -1,86 +1,4 @@
-/* The settings dialog's sections as a page: the list of sections on the left, the chosen one's cards of rows beside it. */
-.settings-page,
-.settings-page *,
-.settings-page *::before,
-.settings-page *::after {
-    box-sizing: border-box;
-}
-
-.settings-page {
-    background: var(--ow-canvas);
-    padding: 48px 32px 72px;
-    color: var(--ow-text);
-}
-
-.settings-page__inner {
-    max-width: 1040px;
-    margin: 0 auto;
-}
-
-.settings-page__header {
-    margin-bottom: 32px;
-}
-
-.settings-page__lead {
-    margin-top: 6px;
-}
-
-.settings-page__layout {
-    display: grid;
-    grid-template-columns: 220px minmax(0, 1fr);
-    align-items: start;
-    gap: 48px;
-}
-
-.settings-page__nav--side {
-    margin-left: -8px;
-}
-
-.settings-page__nav--top {
-    display: none;
-}
-
-.settings-page__section {
-    display: grid;
-    gap: var(--ow-space-7xl);
-    min-width: 0;
-}
-
-.settings-page__section-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--ow-space-2xl);
-    border-bottom: 1px solid var(--ow-border);
-    padding-bottom: 20px;
-}
-
-.settings-page__section-text {
-    margin-top: 4px;
-}
-
-.settings-page__saved {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--ow-space-2xs);
-    padding-top: 4px;
-    opacity: 0;
-    transition: opacity var(--ow-duration-slow) var(--ow-ease-standard);
-}
-
-.settings-page__saved[data-visible] {
-    opacity: 1;
-}
-
-.settings-page__group {
-    display: grid;
-    gap: var(--ow-space-md);
-}
-
-.settings-page__card {
-    padding: 2px 20px;
-}
-
+/* The rows' controls, in the sample's sections. */
 .settings-page__select {
     width: 208px;
 }
@@ -98,49 +16,9 @@
     gap: var(--ow-space-sm);
 }
 
-@media (max-width: 1024px) {
-    .settings-page__layout {
-        grid-template-columns: 188px minmax(0, 1fr);
-        gap: 32px;
-    }
-}
-
 @media (max-width: 760px) {
-    .settings-page {
-        padding: 28px var(--ow-page-gutter) 48px;
-    }
-    .settings-page__header {
-        margin-bottom: 20px;
-    }
-    .settings-page__layout {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 24px;
-    }
-    .settings-page__nav--side {
-        display: none;
-    }
-    .settings-page__nav--top {
-        display: flex;
-        margin: 0 calc(var(--ow-page-gutter) * -1);
-        padding: 2px var(--ow-page-gutter);
-        scrollbar-width: none;
-    }
-    .settings-page__card {
-        padding: 2px 16px;
-    }
-    /* Switches stay beside their label; other controls take a line of their own. */
-    .settings-page .ow-settings-row__control:not(:has(.ow-switch)) {
-        flex: 1 1 100%;
-        justify-content: flex-start;
-    }
     .settings-page__select,
     .settings-page__input {
         width: 100%;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .settings-page__saved {
-        transition: none;
     }
 }

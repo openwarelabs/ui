@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
-import { Avatar, Badge, Button, Dialog, Link, NavItem, NavList, Text, VisuallyHidden, type BadgeVariant } from "@openwarelabs/ui";
+import { Onboarding03 } from "@openwarelabs/blocks";
+import { Avatar, Badge, Button, NavItem, NavList, Text, VisuallyHidden, type BadgeVariant } from "@openwarelabs/ui";
 import { Bot, GitPullRequest, ListChecks, Rocket, Sparkles } from "lucide-react";
 
 import "./OnboardingWelcome.css";
@@ -15,17 +16,17 @@ const reviews: Array<{ title: string; project: string; who: string; status: stri
 
 const changes = [
     {
-        icon: GitPullRequest,
+        icon: <GitPullRequest size={15} />,
         title: "Agents open their own pull requests",
         description: "Hand over an issue; get back a branch and passing tests.",
     },
     {
-        icon: ListChecks,
+        icon: <ListChecks size={15} />,
         title: "One place for reviews",
         description: "Everything waiting on you, from people and agents.",
     },
     {
-        icon: Rocket,
+        icon: <Rocket size={15} />,
         title: "A preview for every branch",
         description: "Click through each change before you merge it.",
     },
@@ -66,19 +67,6 @@ function PullRequestShot() {
 export function OnboardingWelcome() {
     const [open, setOpen] = useState(true);
     const [seen, setSeen] = useState(false);
-    const continueButton = useRef<HTMLButtonElement>(null);
-
-    // The dialog focuses its first link as it opens; start on the button that carries on instead.
-    useEffect(() => {
-        if (!open) return;
-        const frame = requestAnimationFrame(() => continueButton.current?.focus());
-        return () => cancelAnimationFrame(frame);
-    }, [open]);
-
-    const close = () => {
-        setOpen(false);
-        setSeen(true);
-    };
 
     return (
         <div className="onboarding-welcome">
@@ -135,49 +123,20 @@ export function OnboardingWelcome() {
                 </ul>
             </main>
 
-            <Dialog
+            {/* Opens as the page loads; "What's new" in the bar opens it again. */}
+            <Onboarding03
                 open={open}
-                onClose={close}
-                width={480}
-                className="onboarding-welcome__dialog"
-                title={
-                    <>
-                        <Text variant="caption" className="onboarding-welcome__eyebrow">
-                            <span className="onboarding-welcome__eyebrow-dot" aria-hidden="true" />
-                            October update
-                        </Text>
-                        What's new in Acme
-                    </>
-                }
+                onOpenChange={(next) => {
+                    setOpen(next);
+                    if (!next) setSeen(true);
+                }}
+                eyebrow="October update"
+                title="What's new in Acme"
                 description="Three changes from this month, and a few smaller fixes."
-                actions={
-                    <>
-                        <Link href="#" variant="muted">
-                            Read the changelog
-                        </Link>
-                        <Button ref={continueButton} variant="primary" onClick={close}>
-                            Continue
-                        </Button>
-                    </>
-                }
-            >
-                <PullRequestShot />
-                <ul className="onboarding-welcome__changes">
-                    {changes.map((change) => (
-                        <li key={change.title} className="onboarding-welcome__change">
-                            <span className="onboarding-welcome__change-icon" aria-hidden="true">
-                                <change.icon size={15} />
-                            </span>
-                            <span className="onboarding-welcome__change-text">
-                                <Text variant="label">{change.title}</Text>
-                                <Text variant="copy" as="span">
-                                    {change.description}
-                                </Text>
-                            </span>
-                        </li>
-                    ))}
-                </ul>
-            </Dialog>
+                visual={<PullRequestShot />}
+                changes={changes}
+                link={{ label: "Read the changelog", href: "#" }}
+            />
         </div>
     );
 }

@@ -351,9 +351,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "form",
         uses: ["Field", "Fieldset", "Input", "Select", "Textarea", "Checkbox", "Button", "Steps"],
         variants: [
-            { id: "FormSingle", name: "Single column", description: "Fields stacked under their labels, one action at the end." },
-            { id: "FormSections", name: "Sections with descriptions", description: "Each section's title and purpose on the left, its fields on the right." },
-            { id: "FormSteps", name: "Multi-step", description: "A longer form split into steps, with progress at the top.", sketch: "steps" },
+            { id: "FormSingle", component: "Form01", name: "Single column", description: "Fields stacked under their labels, one action at the end." },
+            { id: "FormSections", component: "Form02", name: "Sections with descriptions", description: "Each section's title and purpose on the left, its fields on the right." },
+            { id: "FormSteps", component: "Form03", name: "Multi-step", description: "A longer form split into steps, with progress at the top.", sketch: "steps" },
         ],
     },
     {
@@ -364,11 +364,11 @@ export const blockCategories: BlockCategory[] = [
         sketch: "settings",
         uses: ["Dialog", "NavList", "SettingsRow", "Card", "Switch", "Select", "ConfirmDialog"],
         variants: [
-            { id: "SettingsDialog", name: "Settings dialog", description: "Commandr's: sections down the left of a dialog, rows of settings on an inset panel.", height: 680 },
-            { id: "SettingsPage", name: "Settings page", description: "The same sections as a full page, for web apps." },
-            { id: "SettingsApiKeys", name: "API keys", description: "Keys in a table, each with a copy button, the date it was last used and a way to revoke it.", height: 600 },
-            { id: "SettingsMembers", name: "Members and roles", description: "People with their role and a menu to change it or remove them." },
-            { id: "SettingsDanger", name: "Danger zone", description: "Deleting the account or a project, with a confirmation that names what goes.", height: 560 },
+            { id: "SettingsDialog", component: "Settings01", name: "Settings dialog", description: "Commandr's: sections down the left of a dialog, rows of settings on an inset panel.", height: 680 },
+            { id: "SettingsPage", component: "Settings02", name: "Settings page", description: "The same sections as a full page, for web apps." },
+            { id: "SettingsApiKeys", component: "Settings03", name: "API keys", description: "Keys in a table, each with a copy button, the date it was last used and a way to revoke it.", height: 600 },
+            { id: "SettingsMembers", component: "Settings04", name: "Members and roles", description: "People with their role and a menu to change it or remove them." },
+            { id: "SettingsDanger", component: "Settings05", name: "Danger zone", description: "Deleting the account or a project, with a confirmation that names what goes.", height: 560 },
         ],
     },
     {
@@ -379,11 +379,11 @@ export const blockCategories: BlockCategory[] = [
         sketch: "auth",
         uses: ["Card", "Field", "Input", "Button", "Separator", "InputOTP", "Link"],
         variants: [
-            { id: "SignInCard", name: "Sign-in card", description: "Email and password on a card, with GitHub and Google above them.", height: 720 },
-            { id: "SignInSplit", name: "Split with a picture", description: "The form on one side, the product or a quote on the other.", sketch: "auth-split", height: 720 },
-            { id: "SignInMagicLink", name: "Magic link", description: "An email field, then a page saying where the link went.", height: 600 },
-            { id: "SignInTwoFactor", name: "Two-factor code", description: "Six boxes for the code from an authenticator app.", height: 600 },
-            { id: "SignInReset", name: "Reset password", description: "Ask for the email, then a new password with what it needs.", height: 640 },
+            { id: "SignInCard", component: "SignIn01", name: "Sign-in card", description: "Email and password on a card, with GitHub and Google above them.", height: 720 },
+            { id: "SignInSplit", component: "SignIn02", name: "Split with a picture", description: "The form on one side, the product or a quote on the other.", sketch: "auth-split", height: 720 },
+            { id: "SignInMagicLink", component: "SignIn03", name: "Magic link", description: "An email field, then a page saying where the link went.", height: 600 },
+            { id: "SignInTwoFactor", component: "SignIn04", name: "Two-factor code", description: "Six boxes for the code from an authenticator app.", height: 600 },
+            { id: "SignInReset", component: "SignIn05", name: "Reset password", description: "Ask for the email, then a new password with what it needs.", height: 640 },
         ],
     },
     {
@@ -394,9 +394,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "onboarding",
         uses: ["Steps", "ChoiceCard", "Button", "ProgressBar", "Dialog"],
         variants: [
-            { id: "OnboardingChecklist", name: "Checklist", description: "Commandr's first-run steps, with the current one open and its action beside it." },
-            { id: "OnboardingChoice", name: "Choose how to start", description: "Two or three ChoiceCards: from scratch, from a template, or import." },
-            { id: "OnboardingWelcome", name: "Welcome dialog", description: "A short dialog for what's new, with one button to carry on.", height: 560 },
+            { id: "OnboardingChecklist", component: "Onboarding01", name: "Checklist", description: "Commandr's first-run steps, with the current one open and its action beside it." },
+            { id: "OnboardingChoice", component: "Onboarding02", name: "Choose how to start", description: "Two or three ChoiceCards: from scratch, from a template, or import." },
+            { id: "OnboardingWelcome", component: "Onboarding03", name: "Welcome dialog", description: "A short dialog for what's new, with one button to carry on.", height: 560 },
         ],
     },
     {

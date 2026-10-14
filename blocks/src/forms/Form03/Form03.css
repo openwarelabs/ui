@@ -1,0 +1,130 @@
+/* A card with the title and progress at the top, one step's fields in the middle, Back and Continue at the bottom. */
+.ow-form03,
+.ow-form03 *,
+.ow-form03 *::before,
+.ow-form03 *::after {
+    box-sizing: border-box;
+}
+
+.ow-form03 {
+    background: var(--ow-canvas);
+    padding: 56px 32px 72px;
+    color: var(--ow-text);
+}
+
+.ow-form03__card {
+    max-width: 640px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+}
+
+.ow-form03__header {
+    border-bottom: 1px solid var(--ow-border);
+    padding: 28px 28px 24px;
+}
+
+.ow-form03__lead {
+    margin-top: 6px;
+}
+
+.ow-form03__progress {
+    margin-top: 26px;
+}
+
+.ow-form03__body {
+    padding: 28px 28px 32px;
+}
+
+.ow-form03__step-title {
+    display: grid;
+    gap: 4px;
+    margin-bottom: 22px;
+}
+
+.ow-form03__step-title:focus {
+    outline: none;
+}
+
+.ow-form03__step-title:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 4px;
+    border-radius: var(--ow-radius-sm);
+}
+
+.ow-form03__fields {
+    display: grid;
+    gap: var(--ow-space-6xl);
+}
+
+.ow-form03__review {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+}
+
+.ow-form03__review-row {
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--ow-space-2xl);
+    padding: 10px 10px 10px 16px;
+}
+
+.ow-form03__review-row + .ow-form03__review-row {
+    border-top: 1px solid var(--ow-border);
+}
+
+.ow-form03__review-value {
+    overflow-wrap: anywhere;
+}
+
+.ow-form03__review-edit {
+    margin: 0;
+}
+
+.ow-form03__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-lg);
+    border-top: 1px solid var(--ow-border);
+    background: var(--ow-surface-muted);
+    padding: 14px 28px;
+}
+
+@media (max-width: 760px) {
+    .ow-form03 {
+        padding: 24px var(--ow-page-gutter) 40px;
+    }
+    .ow-form03__header {
+        padding: 22px 18px 20px;
+    }
+    .ow-form03__progress {
+        margin-top: 20px;
+    }
+    .ow-form03__body {
+        padding: 22px 18px 26px;
+    }
+    .ow-form03__review-row {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 2px var(--ow-space-lg);
+    }
+    .ow-form03__review-label {
+        grid-column: 1;
+    }
+    .ow-form03__review-value {
+        grid-row: 2;
+        grid-column: 1;
+    }
+    .ow-form03__review-edit {
+        grid-row: 1 / span 2;
+        grid-column: 2;
+    }
+    .ow-form03__footer {
+        padding: 14px 18px;
+    }
+}

@@ -1,0 +1,125 @@
+/* The settings dialog's sections as a page: the list of sections on the left, the chosen one's cards of rows beside it. */
+.ow-settings02,
+.ow-settings02 *,
+.ow-settings02 *::before,
+.ow-settings02 *::after {
+    box-sizing: border-box;
+}
+
+.ow-settings02 {
+    background: var(--ow-canvas);
+    padding: 48px 32px 72px;
+    color: var(--ow-text);
+}
+
+.ow-settings02__inner {
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+.ow-settings02__header {
+    margin-bottom: 32px;
+}
+
+.ow-settings02__lead {
+    margin-top: 6px;
+}
+
+.ow-settings02__layout {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    align-items: start;
+    gap: 48px;
+}
+
+.ow-settings02__nav--side {
+    margin-left: -8px;
+}
+
+.ow-settings02__nav--top {
+    display: none;
+}
+
+.ow-settings02__section {
+    display: grid;
+    gap: var(--ow-space-7xl);
+    min-width: 0;
+}
+
+.ow-settings02__section-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+    border-bottom: 1px solid var(--ow-border);
+    padding-bottom: 20px;
+}
+
+.ow-settings02__section-text {
+    margin-top: 4px;
+}
+
+.ow-settings02__saved {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ow-space-2xs);
+    padding-top: 4px;
+    opacity: 0;
+    transition: opacity var(--ow-duration-slow) var(--ow-ease-standard);
+}
+
+.ow-settings02__saved[data-visible] {
+    opacity: 1;
+}
+
+.ow-settings02__group {
+    display: grid;
+    gap: var(--ow-space-md);
+}
+
+.ow-settings02__card {
+    padding: 2px 20px;
+}
+
+@media (max-width: 1024px) {
+    .ow-settings02__layout {
+        grid-template-columns: 188px minmax(0, 1fr);
+        gap: 32px;
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-settings02 {
+        padding: 28px var(--ow-page-gutter) 48px;
+    }
+    .ow-settings02__header {
+        margin-bottom: 20px;
+    }
+    .ow-settings02__layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+    }
+    .ow-settings02__nav--side {
+        display: none;
+    }
+    .ow-settings02__nav--top {
+        display: flex;
+        margin: 0 calc(var(--ow-page-gutter) * -1);
+        padding: 2px var(--ow-page-gutter);
+        scrollbar-width: none;
+    }
+    .ow-settings02__card {
+        padding: 2px 16px;
+    }
+    /* Switches stay beside their label; other controls take a line of their own. */
+    .ow-settings02 .ow-settings-row__control:not(:has(.ow-switch)) {
+        flex: 1 1 100%;
+        justify-content: flex-start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-settings02__saved {
+        transition: none;
+    }
+}

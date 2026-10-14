@@ -1,29 +1,4 @@
-/* The window's canvas with one card in the middle: the mark and title above it, the way to sign up below. */
-.sign-in-card,
-.sign-in-card *,
-.sign-in-card *::before,
-.sign-in-card *::after {
-    box-sizing: border-box;
-}
-
-.sign-in-card {
-    display: grid;
-    min-height: 100dvh;
-    place-items: center;
-    background: var(--ow-canvas);
-    padding: 40px var(--ow-page-gutter);
-    color: var(--ow-text);
-}
-
-.sign-in-card__inner {
-    display: flex;
-    width: 100%;
-    max-width: 400px;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
+/* The sample's mark above the title, and Google's stand-in letter. */
 .sign-in-card__mark {
     width: 40px;
     height: 40px;
@@ -32,26 +7,6 @@
     box-shadow:
         inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent),
         var(--ow-shadow-control);
-}
-
-.sign-in-card__title {
-    margin-top: 20px;
-}
-
-.sign-in-card__lead {
-    margin-top: 6px;
-}
-
-.sign-in-card__card {
-    width: 100%;
-    margin-top: 28px;
-    padding: 24px;
-    text-align: left;
-}
-
-.sign-in-card__providers {
-    display: grid;
-    gap: var(--ow-space-sm);
 }
 
 /* A plain letter for Google: a stand-in for the provider's mark, which brand rules say not to redraw. */
@@ -63,33 +18,4 @@
     font-size: 15px;
     font-weight: var(--ow-weight-heavy);
     line-height: 1;
-}
-
-.sign-in-card__form {
-    display: grid;
-    gap: var(--ow-space-4xl);
-}
-
-.sign-in-card__password {
-    position: relative;
-}
-
-.sign-in-card__forgot {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-.sign-in-card__switch {
-    margin-top: 22px;
-}
-
-@media (max-width: 760px) {
-    .sign-in-card {
-        align-items: start;
-        padding-top: 48px;
-    }
-    .sign-in-card__card {
-        padding: 20px;
-    }
 }

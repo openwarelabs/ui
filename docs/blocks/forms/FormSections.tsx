@@ -1,6 +1,7 @@
-import { useId, useState, type FormEvent, type ReactNode } from "react";
+import { useId, useState } from "react";
 
-import { Button, Card, Checkbox, Field, Input, NumberField, Radio, RadioGroup, Select, Text, toast } from "@openwarelabs/ui";
+import { Form02 } from "@openwarelabs/blocks";
+import { Checkbox, Field, Input, NumberField, Radio, RadioGroup, Select, toast } from "@openwarelabs/ui";
 
 import "./FormSections.css";
 
@@ -68,25 +69,6 @@ function validate(values: Values): Errors {
     return errors;
 }
 
-/** One section: its title and purpose on the left, its fields on a card on the right. */
-function Section({ id, title, description, children }: { id: string; title: string; description: ReactNode; children: ReactNode }) {
-    return (
-        <section className="form-sections__section" aria-labelledby={id}>
-            <div className="form-sections__intro">
-                <Text variant="card-title" as="h2" id={id}>
-                    {title}
-                </Text>
-                <Text variant="copy" className="form-sections__section-text">
-                    {description}
-                </Text>
-            </div>
-            <Card padding="none" className="form-sections__card">
-                {children}
-            </Card>
-        </section>
-    );
-}
-
 export function FormSections() {
     const id = useId();
     const [values, setValues] = useState<Values>(saved);
@@ -107,8 +89,7 @@ export function FormSections() {
         setErrors({});
     }
 
-    function submit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault();
+    function submit() {
         const found = validate(values);
         setErrors(found);
         const first = fieldOrder.find((key) => found[key]);
@@ -127,111 +108,102 @@ export function FormSections() {
     }
 
     return (
-        <div className="form-sections">
-            <form className="form-sections__inner" noValidate onSubmit={submit} aria-labelledby={fieldId("title")}>
-                <header className="form-sections__header">
-                    <Text variant="heading" as="h1" id={fieldId("title")}>
-                        Workspace
-                    </Text>
-                    <Text variant="copy" className="form-sections__lead">
-                        What everyone in {lastSaved.name} sees, where the invoices go, and how far agents can go on their own.
-                    </Text>
-                </header>
-
-                <Section id={fieldId("general")} title="General" description="How the workspace appears to your team, in emails and in every link to it.">
-                    <div className="form-sections__fields">
-                        <Field label="Workspace name" error={errors.name}>
-                            <Input
-                                id={fieldId("name")}
-                                value={values.name}
-                                onChange={(event) => update("name", event.target.value)}
-                                autoComplete="organization"
-                            />
-                        </Field>
-                        <Field label="Workspace address" hint="Changing it breaks links people have saved." error={errors.slug}>
-                            <Input
-                                id={fieldId("slug")}
-                                value={values.slug}
-                                onChange={(event) => update("slug", event.target.value.toLowerCase())}
-                                startContent="app.example.com/"
-                                autoComplete="off"
-                                spellCheck={false}
-                            />
-                        </Field>
-                        <Field label="Time zone" hint="Deploy windows and the morning digest follow it.">
-                            <Select value={values.timeZone} onChange={(value) => update("timeZone", value)} options={timeZones} />
-                        </Field>
-                    </div>
-                </Section>
-
-                <Section id={fieldId("billing")} title="Billing" description="Who gets the invoices, and what's printed on them. Only admins see this.">
-                    <div className="form-sections__fields">
-                        <Field label="Billing email" hint="Invoices and payment receipts go here, not to you." error={errors.billingEmail}>
-                            <Input
-                                id={fieldId("billingEmail")}
-                                type="email"
-                                value={values.billingEmail}
-                                onChange={(event) => update("billingEmail", event.target.value)}
-                                autoComplete="email"
-                            />
-                        </Field>
-                        <Field label="Legal name" error={errors.legalName}>
-                            <Input id={fieldId("legalName")} value={values.legalName} onChange={(event) => update("legalName", event.target.value)} />
-                        </Field>
-                        <div className="form-sections__pair">
-                            <Field label="Country">
-                                <Select value={values.country} onChange={(value) => update("country", value)} options={countries} />
-                            </Field>
-                            <Field label="VAT number" hint="Printed on every invoice." error={errors.vat}>
+        <Form02
+            title="Workspace"
+            description={<>What everyone in {lastSaved.name} sees, where the invoices go, and how far agents can go on their own.</>}
+            sections={[
+                {
+                    title: "General",
+                    description: "How the workspace appears to your team, in emails and in every link to it.",
+                    content: (
+                        <>
+                            <Field label="Workspace name" error={errors.name}>
                                 <Input
-                                    id={fieldId("vat")}
-                                    value={values.vat}
-                                    onChange={(event) => update("vat", event.target.value)}
+                                    id={fieldId("name")}
+                                    value={values.name}
+                                    onChange={(event) => update("name", event.target.value)}
+                                    autoComplete="organization"
+                                />
+                            </Field>
+                            <Field label="Workspace address" hint="Changing it breaks links people have saved." error={errors.slug}>
+                                <Input
+                                    id={fieldId("slug")}
+                                    value={values.slug}
+                                    onChange={(event) => update("slug", event.target.value.toLowerCase())}
+                                    startContent="app.example.com/"
                                     autoComplete="off"
                                     spellCheck={false}
                                 />
                             </Field>
-                        </div>
-                    </div>
-                </Section>
-
-                <Section
-                    id={fieldId("agents")}
-                    title="Agents"
-                    description="Defaults for agent runs in every project. A project can tighten them, never loosen them."
-                >
-                    <div className="form-sections__fields">
-                        <RadioGroup label="Who can start a run" value={values.whoCanRun} onChange={(value) => update("whoCanRun", value)}>
-                            <Radio value="members" description="Guests can watch runs but not start them.">
-                                Members and admins
-                            </Radio>
-                            <Radio value="admins">Admins only</Radio>
-                        </RadioGroup>
-                        <Field label="Runs a day" hint="Past the limit, runs wait until midnight in your time zone. Leave it empty for no limit.">
-                            <NumberField value={values.runLimit} onChange={(value) => update("runLimit", value)} min={0} max={1000} step={10} />
-                        </Field>
-                        <Checkbox
-                            checked={values.reviewBeforeMerge}
-                            onChange={(event) => update("reviewBeforeMerge", event.target.checked)}
-                            description="An agent can't merge its own pull request, even when every check passes."
-                        >
-                            Ask a person to review before merging
-                        </Checkbox>
-                    </div>
-                </Section>
-
-                <div className="form-sections__actions">
-                    <Text variant="caption" as="p" className="form-sections__status" aria-live="polite">
-                        {dirty ? "You have unsaved changes." : "Everything is saved."}
-                    </Text>
-                    <Button type="button" disabled={!dirty || saving} onClick={discard}>
-                        Discard
-                    </Button>
-                    <Button type="submit" variant="primary" disabled={!dirty} loading={saving}>
-                        Save changes
-                    </Button>
-                </div>
-            </form>
-        </div>
+                            <Field label="Time zone" hint="Deploy windows and the morning digest follow it.">
+                                <Select value={values.timeZone} onChange={(value) => update("timeZone", value)} options={timeZones} />
+                            </Field>
+                        </>
+                    ),
+                },
+                {
+                    title: "Billing",
+                    description: "Who gets the invoices, and what's printed on them. Only admins see this.",
+                    content: (
+                        <>
+                            <Field label="Billing email" hint="Invoices and payment receipts go here, not to you." error={errors.billingEmail}>
+                                <Input
+                                    id={fieldId("billingEmail")}
+                                    type="email"
+                                    value={values.billingEmail}
+                                    onChange={(event) => update("billingEmail", event.target.value)}
+                                    autoComplete="email"
+                                />
+                            </Field>
+                            <Field label="Legal name" error={errors.legalName}>
+                                <Input id={fieldId("legalName")} value={values.legalName} onChange={(event) => update("legalName", event.target.value)} />
+                            </Field>
+                            <div className="form-sections__pair">
+                                <Field label="Country">
+                                    <Select value={values.country} onChange={(value) => update("country", value)} options={countries} />
+                                </Field>
+                                <Field label="VAT number" hint="Printed on every invoice." error={errors.vat}>
+                                    <Input
+                                        id={fieldId("vat")}
+                                        value={values.vat}
+                                        onChange={(event) => update("vat", event.target.value)}
+                                        autoComplete="off"
+                                        spellCheck={false}
+                                    />
+                                </Field>
+                            </div>
+                        </>
+                    ),
+                },
+                {
+                    title: "Agents",
+                    description: "Defaults for agent runs in every project. A project can tighten them, never loosen them.",
+                    content: (
+                        <>
+                            <RadioGroup label="Who can start a run" value={values.whoCanRun} onChange={(value) => update("whoCanRun", value)}>
+                                <Radio value="members" description="Guests can watch runs but not start them.">
+                                    Members and admins
+                                </Radio>
+                                <Radio value="admins">Admins only</Radio>
+                            </RadioGroup>
+                            <Field label="Runs a day" hint="Past the limit, runs wait until midnight in your time zone. Leave it empty for no limit.">
+                                <NumberField value={values.runLimit} onChange={(value) => update("runLimit", value)} min={0} max={1000} step={10} />
+                            </Field>
+                            <Checkbox
+                                checked={values.reviewBeforeMerge}
+                                onChange={(event) => update("reviewBeforeMerge", event.target.checked)}
+                                description="An agent can't merge its own pull request, even when every check passes."
+                            >
+                                Ask a person to review before merging
+                            </Checkbox>
+                        </>
+                    ),
+                },
+            ]}
+            dirty={dirty}
+            onSubmit={submit}
+            onDiscard={discard}
+            submitting={saving}
+        />
     );
 }

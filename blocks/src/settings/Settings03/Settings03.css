@@ -1,23 +1,23 @@
 /* A settings section: a heading with the one action, then the keys in a table. */
-.settings-api-keys,
-.settings-api-keys *,
-.settings-api-keys *::before,
-.settings-api-keys *::after {
+.ow-settings03,
+.ow-settings03 *,
+.ow-settings03 *::before,
+.ow-settings03 *::after {
     box-sizing: border-box;
 }
 
-.settings-api-keys {
+.ow-settings03 {
     background: var(--ow-canvas);
     padding: 48px 32px 56px;
     color: var(--ow-text);
 }
 
-.settings-api-keys__inner {
+.ow-settings03__inner {
     max-width: 960px;
     margin: 0 auto;
 }
 
-.settings-api-keys__header {
+.ow-settings03__header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -25,78 +25,78 @@
     margin-bottom: 24px;
 }
 
-.settings-api-keys__text {
+.ow-settings03__text {
     max-width: 520px;
     margin-top: 4px;
 }
 
-.settings-api-keys__name {
+.ow-settings03__name {
     display: grid;
     gap: 1px;
     padding: 4px 0;
 }
 
-.settings-api-keys__meta-phone,
-.settings-api-keys__key-phone {
+.ow-settings03__meta-phone,
+.ow-settings03__key-phone {
     display: none;
 }
 
-.settings-api-keys__key {
+.ow-settings03__key {
     display: inline-flex;
     max-width: 100%;
     align-items: center;
     gap: var(--ow-space-2xs);
 }
 
-.settings-api-keys__secret {
+.ow-settings03__secret {
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.settings-api-keys__note {
+.ow-settings03__note {
     margin-top: 14px;
 }
 
 /* The dialog. */
-.settings-api-keys__form {
+.ow-settings03__form {
     display: grid;
     gap: var(--ow-space-4xl);
 }
 
-.settings-api-keys__created {
+.ow-settings03__created {
     display: grid;
     gap: var(--ow-space-sm);
 }
 
 @media (max-width: 1024px) {
-    .settings-api-keys__table th:nth-child(3),
-    .settings-api-keys__table td:nth-child(3) {
+    .ow-settings03__table th:nth-child(3),
+    .ow-settings03__table td:nth-child(3) {
         display: none;
     }
 }
 
 /* On phones the last-used date and the key fold into the name's cell. */
 @media (max-width: 760px) {
-    .settings-api-keys {
+    .ow-settings03 {
         padding: 28px var(--ow-page-gutter) 40px;
     }
-    .settings-api-keys__header {
+    .ow-settings03__header {
         flex-direction: column;
         gap: var(--ow-space-2xl);
     }
-    .settings-api-keys__table th:nth-child(4),
-    .settings-api-keys__table td:nth-child(4),
-    .settings-api-keys__table th:nth-child(2),
-    .settings-api-keys__table td:nth-child(2) {
+    .ow-settings03__table th:nth-child(4),
+    .ow-settings03__table td:nth-child(4),
+    .ow-settings03__table th:nth-child(2),
+    .ow-settings03__table td:nth-child(2) {
         display: none;
     }
-    .settings-api-keys__meta-wide {
+    .ow-settings03__meta-wide {
         display: none;
     }
-    .settings-api-keys__meta-phone {
+    .ow-settings03__meta-phone {
         display: inline;
     }
-    .settings-api-keys__key-phone {
+    .ow-settings03__key-phone {
         display: flex;
         min-width: 0;
         margin-top: 4px;

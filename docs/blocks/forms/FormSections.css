@@ -1,54 +1,4 @@
-/* Sections down the page: each one's title and purpose on the left, its fields on a card on the right. */
-.form-sections,
-.form-sections *,
-.form-sections *::before,
-.form-sections *::after {
-    box-sizing: border-box;
-}
-
-.form-sections {
-    background: var(--ow-canvas);
-    padding: 48px 32px 64px;
-    color: var(--ow-text);
-}
-
-.form-sections__inner {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.form-sections__header {
-    padding-bottom: 32px;
-}
-
-.form-sections__lead {
-    max-width: 640px;
-    margin-top: 6px;
-}
-
-.form-sections__section {
-    display: grid;
-    grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
-    gap: 48px;
-    border-top: 1px solid var(--ow-border);
-    padding: 32px 0;
-}
-
-.form-sections__intro {
-    padding-top: 4px;
-}
-
-.form-sections__section-text {
-    margin-top: 6px;
-}
-
-.form-sections__fields {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--ow-space-5xl);
-    padding: 24px;
-}
-
+/* Two of the sample's fields side by side. */
 .form-sections__pair {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -56,56 +6,9 @@
     gap: var(--ow-space-2xl);
 }
 
-.form-sections__actions {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: var(--ow-space-sm);
-    border-top: 1px solid var(--ow-border);
-    padding-top: 24px;
-}
-
-.form-sections__status {
-    margin-right: auto;
-}
-
-@media (max-width: 1024px) {
-    .form-sections__section {
-        grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
-        gap: 32px;
-    }
-}
-
 @media (max-width: 760px) {
-    .form-sections {
-        padding: 28px var(--ow-page-gutter) 40px;
-    }
-    .form-sections__header {
-        padding-bottom: 24px;
-    }
-    .form-sections__section {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 14px;
-        padding: 24px 0 28px;
-    }
-    .form-sections__intro {
-        padding-top: 0;
-    }
-    .form-sections__fields {
-        padding: 18px;
-    }
     .form-sections__pair {
         grid-template-columns: minmax(0, 1fr);
         gap: var(--ow-space-5xl);
-    }
-    .form-sections__status {
-        flex-basis: 100%;
-        margin-bottom: 4px;
-    }
-    .form-sections__actions {
-        flex-wrap: wrap;
-    }
-    .form-sections__actions > button {
-        flex: 1;
     }
 }

@@ -1,37 +1,37 @@
 /* A settings section: invite at the top of the card, then the people and the invites still waiting. */
-.settings-members,
-.settings-members *,
-.settings-members *::before,
-.settings-members *::after {
+.ow-settings04,
+.ow-settings04 *,
+.ow-settings04 *::before,
+.ow-settings04 *::after {
     box-sizing: border-box;
 }
 
-.settings-members {
+.ow-settings04 {
     background: var(--ow-canvas);
     padding: 48px 32px 56px;
     color: var(--ow-text);
 }
 
-.settings-members__inner {
+.ow-settings04__inner {
     max-width: 880px;
     margin: 0 auto;
 }
 
-.settings-members__header {
+.ow-settings04__header {
     margin-bottom: 24px;
 }
 
-.settings-members__text {
+.ow-settings04__text {
     max-width: 640px;
     margin-top: 4px;
 }
 
-.settings-members__card {
+.ow-settings04__card {
     overflow: hidden;
 }
 
 /* The invite: the email field, its role and the button on one line, the hint and any error under the field. */
-.settings-members__invite {
+.ow-settings04__invite {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 150px auto;
     align-items: start;
@@ -42,12 +42,12 @@
 }
 
 /* Line the role and the button up with the field, below its label. */
-.settings-members__invite-role,
-.settings-members__invite-send {
+.ow-settings04__invite-role,
+.ow-settings04__invite-send {
     margin-top: 28px;
 }
 
-.settings-members__list-title {
+.ow-settings04__list-title {
     display: flex;
     align-items: center;
     gap: var(--ow-space-sm);
@@ -55,17 +55,17 @@
 }
 
 /* A count, so its figures line up as it changes. */
-.settings-members__count {
+.ow-settings04__count {
     font-variant-numeric: tabular-nums;
 }
 
-.settings-members__list {
+.ow-settings04__list {
     margin: 0;
     padding: 0 20px 8px;
     list-style: none;
 }
 
-.settings-members__row {
+.ow-settings04__row {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -73,24 +73,24 @@
     padding: 10px 0;
 }
 
-.settings-members__row + .settings-members__row {
+.ow-settings04__row + .ow-settings04__row {
     border-top: 1px solid var(--ow-border);
 }
 
-.settings-members__person {
+.ow-settings04__person {
     display: flex;
     min-width: 0;
     align-items: center;
     gap: var(--ow-space-lg);
 }
 
-.settings-members__person-text {
+.ow-settings04__person-text {
     display: grid;
     min-width: 0;
     gap: 1px;
 }
 
-.settings-members__name {
+.ow-settings04__name {
     display: flex;
     min-width: 0;
     align-items: center;
@@ -99,7 +99,7 @@
     white-space: nowrap;
 }
 
-.settings-members__invite-icon {
+.ow-settings04__invite-icon {
     display: inline-flex;
     width: 28px;
     height: 28px;
@@ -111,53 +111,53 @@
     color: var(--ow-icon);
 }
 
-.settings-members__controls {
+.ow-settings04__controls {
     display: flex;
     flex-shrink: 0;
     align-items: center;
     gap: var(--ow-space-xs);
 }
 
-.settings-members__role {
+.ow-settings04__role {
     width: 118px;
 }
 
-.settings-members__owner {
+.ow-settings04__owner {
     width: 118px;
     padding-left: 11px;
 }
 
-.settings-members__menu-spacer {
+.ow-settings04__menu-spacer {
     width: 32px;
 }
 
 @media (max-width: 760px) {
-    .settings-members {
+    .ow-settings04 {
         padding: 28px var(--ow-page-gutter) 40px;
     }
-    .settings-members__invite {
+    .ow-settings04__invite {
         grid-template-columns: minmax(0, 1fr) auto;
         padding: 16px;
     }
-    .settings-members__invite > .ow-field {
+    .ow-settings04__invite > .ow-field {
         grid-column: 1 / -1;
     }
-    .settings-members__invite-role,
-    .settings-members__invite-send {
+    .ow-settings04__invite-role,
+    .ow-settings04__invite-send {
         margin-top: 0;
     }
-    .settings-members__list-title {
+    .ow-settings04__list-title {
         padding: 16px 16px 4px;
     }
-    .settings-members__list {
+    .ow-settings04__list {
         padding: 0 16px 6px;
     }
-    .settings-members__row {
+    .ow-settings04__row {
         flex-wrap: wrap;
         gap: var(--ow-space-sm);
     }
     /* The role drops under the person, lined up with their name. */
-    .settings-members__controls {
+    .ow-settings04__controls {
         width: 100%;
         justify-content: space-between;
         padding-left: 40px;

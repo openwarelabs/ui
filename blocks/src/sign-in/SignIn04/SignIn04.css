@@ -1,12 +1,12 @@
 /* One card on the canvas: what to open, six boxes for the code, and a way out to a backup code. */
-.sign-in-two-factor,
-.sign-in-two-factor *,
-.sign-in-two-factor *::before,
-.sign-in-two-factor *::after {
+.ow-sign-in04,
+.ow-sign-in04 *,
+.ow-sign-in04 *::before,
+.ow-sign-in04 *::after {
     box-sizing: border-box;
 }
 
-.sign-in-two-factor {
+.ow-sign-in04 {
     display: grid;
     min-height: 100dvh;
     place-items: center;
@@ -15,29 +15,29 @@
     color: var(--ow-text);
 }
 
-.sign-in-two-factor__inner {
+.ow-sign-in04__inner {
     width: 100%;
     max-width: 408px;
 }
 
-.sign-in-two-factor__card {
+.ow-sign-in04__card {
     padding: 28px 28px 22px;
 }
 
-.sign-in-two-factor__form,
-.sign-in-two-factor__done {
+.ow-sign-in04__form,
+.ow-sign-in04__done {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
 
-.sign-in-two-factor__done {
+.ow-sign-in04__done {
     gap: 0;
     padding: 12px 0 18px;
 }
 
-.sign-in-two-factor__icon {
+.ow-sign-in04__icon {
     display: inline-flex;
     width: 44px;
     height: 44px;
@@ -48,26 +48,26 @@
     color: var(--ow-primary-text);
 }
 
-.sign-in-two-factor__icon--done {
+.ow-sign-in04__icon--done {
     background: var(--ow-success-surface);
     color: var(--ow-success-text);
 }
 
-.sign-in-two-factor__title {
+.ow-sign-in04__title {
     margin-top: 16px;
 }
 
 /* Centred under the icon, so its lines balance rather than leave a broken word on a short last line. */
-.sign-in-two-factor__lead {
+.ow-sign-in04__lead {
     margin-top: 6px;
     text-wrap: balance;
 }
 
-.sign-in-two-factor__done .ow-spinner {
+.ow-sign-in04__done .ow-spinner {
     margin-top: 18px;
 }
 
-.sign-in-two-factor__code {
+.ow-sign-in04__code {
     display: grid;
     justify-items: center;
     gap: 12px;
@@ -75,13 +75,13 @@
 }
 
 /* Roomier boxes than the default, for the one thing on the page. */
-.sign-in-two-factor .ow-otp__input {
+.ow-sign-in04 .ow-otp__input {
     width: 46px;
     height: 54px;
     font-size: 22px;
 }
 
-.sign-in-two-factor__message {
+.ow-sign-in04__message {
     display: inline-flex;
     min-height: 20px;
     align-items: center;
@@ -89,51 +89,51 @@
     text-wrap: balance;
 }
 
-.sign-in-two-factor__backup {
+.ow-sign-in04__backup {
     width: 100%;
     margin-top: 24px;
     text-align: left;
 }
 
-.sign-in-two-factor__backup-input {
+.ow-sign-in04__backup-input {
     font-family: var(--ow-font-mono);
     letter-spacing: 0.06em;
 }
 
-.sign-in-two-factor__trust {
+.ow-sign-in04__trust {
     align-self: flex-start;
     margin-top: 22px;
     text-align: left;
 }
 
-.sign-in-two-factor__form > .ow-button {
+.ow-sign-in04__form > .ow-button {
     margin-top: 18px;
 }
 
 /* It switches the form rather than going anywhere, so it's a quiet button, not a link. */
-.sign-in-two-factor__form > .sign-in-two-factor__switch {
+.ow-sign-in04__form > .ow-sign-in04__switch {
     margin-top: 10px;
 }
 
-.sign-in-two-factor__foot {
+.ow-sign-in04__foot {
     margin-top: 20px;
 }
 
 @media (max-width: 760px) {
-    .sign-in-two-factor {
+    .ow-sign-in04 {
         align-items: start;
         padding-top: 28px;
     }
-    .sign-in-two-factor__card {
+    .ow-sign-in04__card {
         padding: 24px 18px 20px;
     }
-    .sign-in-two-factor .ow-otp {
+    .ow-sign-in04 .ow-otp {
         gap: 6px;
     }
-    .sign-in-two-factor .ow-otp__slot {
+    .ow-sign-in04 .ow-otp__slot {
         gap: 6px;
     }
-    .sign-in-two-factor .ow-otp__input {
+    .ow-sign-in04 .ow-otp__input {
         width: 40px;
         height: 50px;
         font-size: 20px;

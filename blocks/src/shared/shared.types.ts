@@ -93,3 +93,13 @@ export interface FooterColumnsProps {
     /** For a link's badge. */
     badgeClassName?: string;
 }
+
+/** A way in with another account, such as GitHub or Google, as a button above the email form. */
+export interface SignInProvider {
+    /** Passed back to `onProviderSelect`: "github", "google". */
+    id: string;
+    /** The button's words: "Continue with GitHub". */
+    label: ReactNode;
+    /** A 16px mark before them. */
+    icon?: ReactNode;
+}

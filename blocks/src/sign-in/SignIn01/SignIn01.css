@@ -1,0 +1,74 @@
+/* The window's canvas with one card in the middle: the mark and title above it, the way to sign up below. */
+.ow-sign-in01,
+.ow-sign-in01 *,
+.ow-sign-in01 *::before,
+.ow-sign-in01 *::after {
+    box-sizing: border-box;
+}
+
+.ow-sign-in01 {
+    display: grid;
+    min-height: 100dvh;
+    place-items: center;
+    background: var(--ow-canvas);
+    padding: 40px var(--ow-page-gutter);
+    color: var(--ow-text);
+}
+
+.ow-sign-in01__inner {
+    display: flex;
+    width: 100%;
+    max-width: 400px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.ow-sign-in01__title {
+    margin-top: 20px;
+}
+
+.ow-sign-in01__lead {
+    margin-top: 6px;
+}
+
+.ow-sign-in01__card {
+    width: 100%;
+    margin-top: 28px;
+    padding: 24px;
+    text-align: left;
+}
+
+.ow-sign-in01__providers {
+    display: grid;
+    gap: var(--ow-space-sm);
+}
+
+.ow-sign-in01__form {
+    display: grid;
+    gap: var(--ow-space-4xl);
+}
+
+.ow-sign-in01__password {
+    position: relative;
+}
+
+.ow-sign-in01__forgot {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.ow-sign-in01__switch {
+    margin-top: 22px;
+}
+
+@media (max-width: 760px) {
+    .ow-sign-in01 {
+        align-items: start;
+        padding-top: 48px;
+    }
+    .ow-sign-in01__card {
+        padding: 20px;
+    }
+}
