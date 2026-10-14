@@ -7,6 +7,7 @@ import path from "node:path";
 import { build } from "esbuild";
 
 import { readBlockStyles, root } from "./css.mjs";
+import { pureCalls } from "./pure-calls.mjs";
 
 const blocks = path.join(root, "blocks");
 const dist = path.join(blocks, "dist");
@@ -23,6 +24,7 @@ const shared = {
     tsconfig: path.join(blocks, "tsconfig.json"),
     logLevel: "warning",
     sourcemap: true,
+    plugins: [pureCalls],
 };
 await build({ ...shared, format: "esm", outfile: path.join(dist, "index.js") });
 await build({ ...shared, format: "cjs", outfile: path.join(dist, "index.cjs") });

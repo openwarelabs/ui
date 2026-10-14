@@ -2,7 +2,7 @@
 # One-time GitHub setup for openwarelabs/ui, with the GitHub CLI (gh auth login first). Safe to run again.
 #   - Pull requests are squash-merged only, with the PR title as the commit subject; branches are deleted after.
 #     Auto-merge is on, so `gh pr merge --squash --auto` merges once the checks pass.
-#   - main takes changes only through pull requests, which need the Checks, Cleaner, PR title and Visual checks to pass.
+#   - main takes changes only through pull requests, which need the Checks, Cleaner, PR title, Visual and Accessibility checks to pass.
 #     Repository admins can bypass it, so `npm run release` can push its version commit and tag.
 #   - main can't be force-pushed or deleted.
 #   - The "visual change" label, which lets a pull request through the Visual check when it's meant to change how
@@ -48,7 +48,7 @@ ruleset=$(cat <<'JSON'
       "parameters": {
         "strict_required_status_checks_policy": false,
         "do_not_enforce_on_create": false,
-        "required_status_checks": [{ "context": "Checks" }, { "context": "Cleaner" }, { "context": "PR title" }, { "context": "Visual" }]
+        "required_status_checks": [{ "context": "Checks" }, { "context": "Cleaner" }, { "context": "PR title" }, { "context": "Visual" }, { "context": "Accessibility" }]
       }
     }
   ]

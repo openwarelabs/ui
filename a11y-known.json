@@ -1,0 +1,86 @@
+[
+    {
+        "kind": "block",
+        "id": "app-shells/ShellTopBar",
+        "rule": "label-content-name-mismatch",
+        "count": 1
+    },
+    {
+        "kind": "block",
+        "id": "chat/ChatAgentRun",
+        "rule": "scrollable-region-focusable",
+        "count": 1
+    },
+    {
+        "kind": "block",
+        "id": "features/FeaturesBento",
+        "rule": "nested-interactive",
+        "count": 1
+    },
+    {
+        "kind": "block",
+        "id": "features/FeaturesChecklist",
+        "rule": "nested-interactive",
+        "count": 1
+    },
+    {
+        "kind": "block",
+        "id": "notifications/NotificationsInbox",
+        "rule": "label-content-name-mismatch",
+        "count": 6
+    },
+    {
+        "kind": "block",
+        "id": "pricing/PricingUsage",
+        "rule": "color-contrast",
+        "count": 2
+    },
+    {
+        "kind": "block",
+        "id": "testimonials/TestimonialLogo",
+        "rule": "color-contrast",
+        "count": 3
+    },
+    {
+        "kind": "component",
+        "id": "color-field",
+        "rule": "label-content-name-mismatch",
+        "count": 3
+    },
+    {
+        "kind": "component",
+        "id": "date-picker",
+        "rule": "label-content-name-mismatch",
+        "count": 2
+    },
+    {
+        "kind": "component",
+        "id": "list-box",
+        "rule": "aria-required-children",
+        "count": 1
+    },
+    {
+        "kind": "component",
+        "id": "prose",
+        "rule": "label",
+        "count": 3
+    },
+    {
+        "kind": "component",
+        "id": "prose",
+        "rule": "scrollable-region-focusable",
+        "count": 1
+    },
+    {
+        "kind": "component",
+        "id": "slider",
+        "rule": "target-size",
+        "count": 2
+    },
+    {
+        "kind": "component",
+        "id": "time-field",
+        "rule": "target-size",
+        "count": 15
+    }
+]

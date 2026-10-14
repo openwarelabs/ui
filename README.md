@@ -125,12 +125,13 @@ The docs' header has a colour picker that does this live, and the Theming page s
 
 `main` takes changes only through pull requests, squash-merged, so each one lands as a single commit named after the PR. The PR title follows [Conventional Commits](https://www.conventionalcommits.org) because `npm run release` reads it: `feat: add a date range picker`, `fix(Menu): close on Escape`, `feat!: rename Stack's gap sizes`. Put `BREAKING CHANGE: …` in the PR description for a breaking change.
 
-Four checks have to pass to merge:
+Five checks have to pass to merge:
 
-- **Checks**: types, contrast, blocks, the library, the MCP server and the docs.
+- **Checks**: types, contrast, blocks, the library, the MCP server and the docs, and the bundle size: what an app pays, minified and gzipped, for each package and for one piece of it imported alone, against the limits in `size-limits.json` (`npm run size` after a build). Raise a limit in the PR that needs it, so the growth is seen in review.
 - **PR title**: the title follows the convention (`npm run commits:check -- --title "feat: …"` locally).
 - **Cleaner**: [openwarelabs/cleaner](https://github.com/openwarelabs/cleaner) on the `.ts` and `.tsx` files the PR changes. Types go in a `<name>.types.ts` beside the component, and imports from another folder use the aliases instead of `../`: `@/…` for `src/` (in the library and the docs), `@docs/…` for `docs/` (`?highlight` imports too) and `@build/…` in `mcp/`. Files that haven't been touched yet don't follow it; they catch up as they change.
 - **Visual**: every block (desktop and phone width) and every component example, in light and dark, rendered from the PR and from `main` and compared pixel by pixel. If something looks different, the run's summary lists it and the `visual-report` artifact shows each one before, after and with the changed pixels marked. When the change is meant, add the **visual change** label and the check passes. `npm run visual` runs the same comparison locally against `main` (`-- --filter Hero` for a few).
+- **Accessibility**: axe over every block (desktop and phone width) and every component example, in light and dark, against WCAG 2.2 A and AA. The run's summary lists each problem with the element and how to fix it. `a11y-known.json` lists the problems there already were, which don't fail it; fixing one means lowering its count. `npm run a11y` runs it locally (`-- --filter Hero` for a few).
 
 `scripts/setup-github.sh` sets this up on GitHub (squash merges only, the PR title as the commit, the ruleset for `main`, the visual change label). Repository admins can bypass the ruleset, which `npm run release` uses to push its version commit and tag.
 
