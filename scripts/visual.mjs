@@ -166,7 +166,19 @@ async function capture(browser, url, label, list) {
                         const section = await preview.evaluate((element) => element.closest("section[id]")?.id ?? "example");
                         const count = seen.get(section) ?? 0;
                         seen.set(section, count + 1);
-                        await preview.scrollIntoViewIfNeeded();
+                        // Alone at the top: everything before it is hidden, so an example that only moved (because
+                        // something above it on the page grew by a fraction of a pixel) doesn't come out a hair different.
+                        await preview.evaluate((element) => {
+                            for (const [hidden, display] of window.__visualHidden ?? []) hidden.style.display = display;
+                            window.__visualHidden = [];
+                            for (let node = element; node && node !== document.body; node = node.parentElement) {
+                                for (let sibling = node.previousElementSibling; sibling; sibling = sibling.previousElementSibling) {
+                                    window.__visualHidden.push([sibling, sibling.style.display]);
+                                    sibling.style.display = "none";
+                                }
+                            }
+                            window.scrollTo(0, 0);
+                        });
                         const key = `components/${job.id}/${section}${count ? `-${count + 1}` : ""}/${job.variant.name}`;
                         shots.set(key, await preview.screenshot({ animations: "disabled", caret: "hide" }));
                     }
