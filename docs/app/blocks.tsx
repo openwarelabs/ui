@@ -220,9 +220,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "cta",
         uses: ["Button", "SectionHeading", "DotGrid"],
         variants: [
-            { id: "CtaBanner", name: "Banner", description: "A wide panel with a headline and a button." },
-            { id: "CtaBrand", name: "On the brand colour", description: "The same panel in the brand colour, with white text." },
-            { id: "CtaSplit", name: "Split with an image", description: "Words and a button beside a screenshot." },
+            { id: "CtaBanner", component: "Cta01", name: "Banner", description: "A wide panel with a headline and a button." },
+            { id: "CtaBrand", component: "Cta02", name: "On the brand colour", description: "The same panel in the brand colour, with white text." },
+            { id: "CtaSplit", component: "Cta03", name: "Split with an image", description: "Words and a button beside a screenshot." },
         ],
     },
     {

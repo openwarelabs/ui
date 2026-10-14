@@ -5,50 +5,9 @@
     box-sizing: border-box;
 }
 
-.cta-split {
-    overflow: hidden;
-    background: var(--ow-paper);
-    padding: var(--ow-section-y) 32px;
-    color: var(--ow-text);
-}
-
-.cta-split__inner {
-    display: grid;
-    max-width: var(--ow-page-max);
-    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-    align-items: center;
-    gap: 72px;
-    margin: 0 auto;
-}
-
-.cta-split__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--ow-space-lg);
-    margin-top: 32px;
-}
-
-.cta-split__points {
-    display: grid;
-    gap: 10px;
-    margin: 32px 0 0;
-    padding: 0;
-    list-style: none;
-}
-
-.cta-split__points li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.cta-split__points svg {
-    flex-shrink: 0;
-    color: var(--ow-primary-text);
-}
-
 /* The product: a pull request an agent opened, on a dot-grid ground, with the deploy that followed. */
-.cta-split .cta-split__visual {
+
+.cta-split__visual.ow-dot-grid {
     position: relative;
     border: 1px solid var(--ow-border);
     border-radius: var(--ow-radius-card);
@@ -226,11 +185,13 @@
 }
 
 /* Drawn, not pressable: the vignette holds nothing focusable. */
+
 .cta-split__fake-button {
     pointer-events: none;
 }
 
 /* Placed against the dot grid's content box, so it overlaps the pull request's lower edge and the frame. */
+
 .cta-split__deploy {
     position: absolute;
     bottom: -46px;
@@ -271,51 +232,51 @@
 }
 
 @media (max-width: 1024px) {
-    .cta-split__inner {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 56px;
-    }
-    .cta-split .cta-split__visual {
+    .cta-split__visual.ow-dot-grid {
         max-width: 640px;
+    
     }
     .cta-split__deploy {
         left: -20px;
+    
     }
 }
 
 @media (max-width: 760px) {
-    .cta-split {
-        padding: 72px var(--ow-page-gutter);
-    }
-    .cta-split__actions {
-        flex-direction: column;
-    }
-    .cta-split .cta-split__visual {
+    .cta-split__visual.ow-dot-grid {
         padding: 24px 14px 70px;
+    
     }
     .cta-split__pr-head {
         grid-template-columns: auto minmax(0, 1fr);
         padding: 16px 14px 14px;
+    
     }
     .cta-split__pr-head .ow-badge,
     .cta-split__pr-by {
         display: none;
+    
     }
     .cta-split__check {
         padding: 7px 14px;
+    
     }
     .cta-split__diff {
         margin: 0 14px;
+    
     }
     .cta-split__pr-foot {
         padding: 12px 14px;
+    
     }
     .cta-split__fake-button {
         display: none;
+    
     }
     .cta-split__deploy {
         right: 6px;
         bottom: -56px;
         left: 6px;
+    
     }
 }

@@ -1,11 +1,11 @@
-.cta-brand,
-.cta-brand *,
-.cta-brand *::before,
-.cta-brand *::after {
+.ow-cta02,
+.ow-cta02 *,
+.ow-cta02 *::before,
+.ow-cta02 *::after {
     box-sizing: border-box;
 }
 
-.cta-brand {
+.ow-cta02 {
     background: var(--ow-paper);
     padding: var(--ow-section-y) 32px;
 }
@@ -13,7 +13,8 @@
 /* The plate: the brand's deep steps, in both themes, with its own faint dots. The brand scale is built so
    white text holds its contrast on 600 and darker, whatever colour the brand is. Text has no tone for that
    white, so the text on the plate takes its colour here. */
-.cta-brand .cta-brand__plate {
+
+.ow-cta02 .ow-cta02__plate {
     --ow-dot: color-mix(in srgb, var(--ow-on-primary) 13%, transparent);
     max-width: var(--ow-page-max);
     margin: 0 auto;
@@ -24,7 +25,7 @@
     color: var(--ow-on-primary);
 }
 
-.cta-brand__content {
+.ow-cta02__content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,7 +33,7 @@
     text-align: center;
 }
 
-.cta-brand .cta-brand__eyebrow {
+.ow-cta02 .ow-cta02__eyebrow {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -43,7 +44,7 @@
     color: color-mix(in srgb, var(--ow-on-primary) 88%, transparent);
 }
 
-.cta-brand__eyebrow::before {
+.ow-cta02__eyebrow::before {
     content: "";
     width: 6px;
     height: 6px;
@@ -51,18 +52,18 @@
     background: var(--ow-brass);
 }
 
-.cta-brand .cta-brand__title {
+.ow-cta02 .ow-cta02__title {
     max-width: 760px;
     margin-top: 24px;
     color: var(--ow-on-primary);
 }
 
-.cta-brand .cta-brand__lead {
+.ow-cta02 .ow-cta02__lead {
     margin-top: 20px;
     color: color-mix(in srgb, var(--ow-on-primary) 78%, transparent);
 }
 
-.cta-brand__actions {
+.ow-cta02__actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -72,7 +73,8 @@
 }
 
 /* The one main action, as a light pill on the plate: a primary button would vanish into the brand colour. */
-.cta-brand .cta-brand__action {
+
+.ow-cta02 .ow-cta02__action {
     border-color: transparent;
     background-color: var(--ow-on-primary);
     background-image: linear-gradient(to bottom, var(--ow-on-primary), color-mix(in srgb, var(--ow-brand-50) 70%, var(--ow-on-primary)));
@@ -82,20 +84,21 @@
         0 6px 16px -6px color-mix(in srgb, var(--ow-brand-950) 60%, transparent);
 }
 
-.cta-brand .cta-brand__action:hover:not(:disabled) {
+.ow-cta02 .ow-cta02__action:hover:not(:disabled) {
     border-color: transparent;
     background-image: linear-gradient(to bottom, var(--ow-on-primary), var(--ow-brand-100));
 }
 
-.cta-brand .cta-brand__action:focus-visible,
-.cta-brand .cta-brand__link:focus-visible {
+.ow-cta02 .ow-cta02__action:focus-visible,
+.ow-cta02 .ow-cta02__link:focus-visible {
     outline: 2px solid var(--ow-on-primary);
     outline-offset: 3px;
 }
 
 /* A Link in the plate's white, with no underline: the arrow moves instead. */
-.cta-brand .cta-brand__link,
-.cta-brand .cta-brand__link:hover {
+
+.ow-cta02 .ow-cta02__link,
+.ow-cta02 .ow-cta02__link:hover {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -104,15 +107,15 @@
     text-decoration: none;
 }
 
-.cta-brand__link svg {
+.ow-cta02__link svg {
     transition: transform var(--ow-duration-base) var(--ow-ease-standard);
 }
 
-.cta-brand__link:hover svg {
+.ow-cta02__link:hover svg {
     transform: translateX(2px);
 }
 
-.cta-brand__facts {
+.ow-cta02__facts {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -123,38 +126,45 @@
     list-style: none;
 }
 
-.cta-brand__facts li {
+.ow-cta02__facts li {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .cta-brand__link svg {
+    .ow-cta02__link svg {
         transition: none;
+    
     }
 }
 
 @media (max-width: 760px) {
-    .cta-brand {
+    .ow-cta02 {
         padding: 72px var(--ow-page-gutter);
+    
     }
-    .cta-brand .cta-brand__plate {
+    .ow-cta02 .ow-cta02__plate {
         border-radius: var(--ow-radius-card);
+    
     }
-    .cta-brand__content {
+    .ow-cta02__content {
         padding: 56px 22px 52px;
+    
     }
-    .cta-brand__actions {
+    .ow-cta02__actions {
         width: 100%;
         flex-direction: column;
+    
     }
-    .cta-brand .cta-brand__action {
+    .ow-cta02 .ow-cta02__action {
         width: 100%;
+    
     }
-    .cta-brand__facts {
+    .ow-cta02__facts {
         flex-direction: column;
         align-items: center;
         margin-top: 36px;
+    
     }
 }

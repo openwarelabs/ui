@@ -55,4 +55,11 @@ export type { Footer03Labels, Footer03Newsletter, Footer03Props } from "./footer
 export { Footer04 } from "./footers/Footer04/Footer04";
 export type { Footer04Props } from "./footers/Footer04/Footer04.types";
 
+export { Cta01 } from "./calls-to-action/Cta01/Cta01";
+export type { Cta01Props } from "./calls-to-action/Cta01/Cta01.types";
+export { Cta02 } from "./calls-to-action/Cta02/Cta02";
+export type { Cta02Props } from "./calls-to-action/Cta02/Cta02.types";
+export { Cta03 } from "./calls-to-action/Cta03/Cta03";
+export type { Cta03Props } from "./calls-to-action/Cta03/Cta03.types";
+
 export type { BlockAction, BlockBrand, BlockLink, FooterColumn, HeaderLink } from "./shared/shared.types";

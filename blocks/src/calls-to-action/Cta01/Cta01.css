@@ -1,18 +1,19 @@
-.cta-banner,
-.cta-banner *,
-.cta-banner *::before,
-.cta-banner *::after {
+.ow-cta01,
+.ow-cta01 *,
+.ow-cta01 *::before,
+.ow-cta01 *::after {
     box-sizing: border-box;
 }
 
-.cta-banner {
+.ow-cta01 {
     background: var(--ow-paper);
     padding: var(--ow-section-y) 32px;
     color: var(--ow-text);
 }
 
 /* The panel is the library's dot grid, on a surface rather than the paper, fading out toward its edges. */
-.cta-banner .cta-banner__panel {
+
+.ow-cta01 .ow-cta01__panel {
     max-width: var(--ow-page-max);
     margin: 0 auto;
     overflow: hidden;
@@ -21,7 +22,7 @@
     background: var(--ow-surface);
 }
 
-.cta-banner__content {
+.ow-cta01__content {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -29,15 +30,15 @@
     padding: 64px 64px 60px;
 }
 
-.cta-banner__text {
+.ow-cta01__text {
     max-width: 620px;
 }
 
-.cta-banner__lead {
+.ow-cta01__lead {
     margin-top: 16px;
 }
 
-.cta-banner__side {
+.ow-cta01__side {
     display: flex;
     flex-shrink: 0;
     flex-direction: column;
@@ -45,49 +46,56 @@
     gap: 14px;
 }
 
-.cta-banner__actions {
+.ow-cta01__actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--ow-space-lg);
 }
 
-.cta-banner__note {
+.ow-cta01__note {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.cta-banner__note svg {
+.ow-cta01__note svg {
     color: var(--ow-icon);
 }
 
 @media (max-width: 1024px) {
-    .cta-banner__content {
+    .ow-cta01__content {
         flex-direction: column;
         align-items: flex-start;
         padding: 56px 48px;
+    
     }
-    .cta-banner__side {
+    .ow-cta01__side {
         align-items: flex-start;
+    
     }
 }
 
 @media (max-width: 760px) {
-    .cta-banner {
+    .ow-cta01 {
         padding: 72px var(--ow-page-gutter);
+    
     }
-    .cta-banner .cta-banner__panel {
+    .ow-cta01 .ow-cta01__panel {
         border-radius: var(--ow-radius-card);
+    
     }
-    .cta-banner__content {
+    .ow-cta01__content {
         gap: 32px;
         padding: 40px 22px;
+    
     }
-    .cta-banner__side,
-    .cta-banner__actions {
+    .ow-cta01__side,
+    .ow-cta01__actions {
         width: 100%;
+    
     }
-    .cta-banner__actions {
+    .ow-cta01__actions {
         flex-direction: column;
+    
     }
 }
