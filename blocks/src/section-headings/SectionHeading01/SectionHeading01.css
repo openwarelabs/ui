@@ -1,0 +1,27 @@
+.ow-section-heading01,
+.ow-section-heading01 *,
+.ow-section-heading01 *::before,
+.ow-section-heading01 *::after {
+    box-sizing: border-box;
+}
+
+.ow-section-heading01 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+}
+
+.ow-section-heading01__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+/* Keeps the intro centred under the title as one block, at a readable width. */
+.ow-section-heading01 .ow-section-heading__intro {
+    margin-inline: auto;
+}
+
+@media (max-width: 760px) {
+    .ow-section-heading01 {
+        padding: 72px var(--ow-page-gutter);
+    }
+}

@@ -1,0 +1,73 @@
+.ow-testimonial01,
+.ow-testimonial01 *,
+.ow-testimonial01 *::before,
+.ow-testimonial01 *::after {
+    box-sizing: border-box;
+}
+
+.ow-testimonial01 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.ow-testimonial01__figure {
+    display: flex;
+    max-width: 920px;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Lucide's quote mark is a closing one; turned over, it opens the quote. */
+.ow-testimonial01__mark {
+    color: var(--ow-brass);
+    fill: var(--ow-brass);
+    transform: rotate(180deg);
+}
+
+.ow-testimonial01__quote {
+    margin: 28px 0 0;
+}
+
+/* Five lines of quote at a title's size: more leading than a one-line title needs. */
+.ow-testimonial01__text {
+    line-height: 1.25;
+}
+
+.ow-testimonial01__caption {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.ow-testimonial01__caption .ow-user {
+    text-align: left;
+}
+
+.ow-testimonial01__caption .ow-user__name {
+    font-size: 15px;
+}
+
+.ow-testimonial01__caption .ow-user__description {
+    font-size: 13px;
+}
+
+.ow-testimonial01__sample.ow-badge {
+    font-weight: var(--ow-weight-control);
+}
+
+@media (max-width: 760px) {
+    .ow-testimonial01 {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .ow-testimonial01__quote {
+        margin-top: 20px;
+    }
+    .ow-testimonial01__caption {
+        margin-top: 32px;
+    }
+}

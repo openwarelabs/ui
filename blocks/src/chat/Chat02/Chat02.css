@@ -1,0 +1,60 @@
+.ow-chat02,
+.ow-chat02 *,
+.ow-chat02 *::before,
+.ow-chat02 *::after {
+    box-sizing: border-box;
+}
+
+/* A new-task page: a question, the box to answer it in, and a few ideas to start from. */
+.ow-chat02 {
+    background: var(--ow-canvas);
+    padding: 72px 32px 80px;
+}
+
+.ow-chat02__inner {
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.ow-chat02__lead {
+    max-width: 480px;
+    margin: 8px auto 0;
+}
+
+.ow-chat02__input {
+    margin-top: 28px;
+}
+
+.ow-chat02__picker.ow-button {
+    gap: 6px;
+    color: var(--ow-text-soft);
+}
+
+.ow-chat02__option {
+    display: grid;
+    gap: 4px;
+    padding: 2px 0;
+}
+
+/* Keeps the unticked options' labels in line with the ticked one's. */
+.ow-chat02__tick-space {
+    display: block;
+    width: 15px;
+}
+
+.ow-chat02__suggestions {
+    margin-top: 20px;
+}
+
+@media (max-width: 760px) {
+    .ow-chat02 {
+        padding: 48px var(--ow-page-gutter) 56px;
+    }
+    .ow-chat02__input {
+        margin-top: 24px;
+    }
+    /* The pickers drop their icons, so the toolbar keeps to one row. */
+    .ow-chat02__picker > .ow-button__icon:first-child {
+        display: none;
+    }
+}

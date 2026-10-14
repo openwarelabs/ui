@@ -5,127 +5,15 @@
     box-sizing: border-box;
 }
 
-.blog-grid {
-    background: var(--ow-paper);
-    padding: var(--ow-section-y) 32px;
-    color: var(--ow-text);
-}
-
-.blog-grid__inner {
-    max-width: var(--ow-page-max);
-    margin: 0 auto;
-}
-
-.blog-grid__header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 28px 40px;
-}
-
-.blog-grid__filter {
-    max-width: 100%;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-
-.blog-grid__posts {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 24px;
-    margin: 56px 0 0;
-    padding: 0;
-    list-style: none;
-}
-
-.blog-grid__post.ow-card {
-    position: relative;
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    border-radius: var(--ow-radius-card);
-    padding: 6px;
-    transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
-}
-
-.blog-grid__post.ow-card:hover {
-    border-color: var(--ow-border-strong);
-}
-
-.blog-grid__post.ow-card:has(.blog-grid__link:focus-visible) {
-    outline: 2px solid var(--ow-focus-ring);
-    outline-offset: 2px;
-}
-
-.blog-grid__body {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    padding: 18px 16px 14px;
-}
-
-.blog-grid__meta {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.blog-grid__post-title {
-    margin-top: 14px;
-}
-
-/* The title's link covers the whole card, so anywhere on it opens the post. It keeps the title's weight and ink: the
-   card's border answers the hover, and its outline the focus. */
-.blog-grid__link.ow-link,
-.blog-grid__link.ow-link:hover,
-.blog-grid__link.ow-link:focus-visible {
-    color: inherit;
-    font-weight: inherit;
-    text-decoration: none;
-    outline: none;
-}
-
-.blog-grid__link::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-}
-
-.blog-grid__excerpt {
-    margin: 8px 0 22px;
-}
-
-.blog-grid__byline {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-top: auto;
-    border-top: 1px solid var(--ow-border);
-    padding-top: 14px;
-}
-
-.blog-grid__read {
-    flex-shrink: 0;
-}
-
-.blog-grid__footer {
-    display: flex;
-    justify-content: center;
-    margin-top: 48px;
-}
-
-/* Covers: drawn from the brand scale on a dot grid. Night covers stay midnight in both themes; day covers are a
-   wash of the brand over the surface, so they follow the theme. Shapes are sized in cqw, so they scale with the card. */
+/* Covers: drawn from the brand scale on a dot grid, filling the 16:10 frame the post gives them. Night covers stay
+   midnight in both themes; day covers are a wash of the brand over the surface, so they follow the theme. Shapes are
+   sized in cqw, so they scale with the card. */
 .blog-grid__cover {
     --blog-grid-ink: var(--ow-primary-text);
     --blog-grid-dot: color-mix(in srgb, var(--ow-primary-text) 18%, transparent);
-    position: relative;
+    position: absolute;
+    inset: 0;
     overflow: hidden;
-    aspect-ratio: 16 / 10;
-    flex-shrink: 0;
     border-radius: var(--ow-radius-container);
     background: color-mix(in srgb, var(--ow-primary) 7%, var(--ow-surface));
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ow-primary-text) 10%, transparent);
@@ -453,27 +341,4 @@
 .blog-grid__one .blog-grid__brass {
     top: 3.6cqw;
     right: 3.6cqw;
-}
-
-@media (max-width: 1024px) {
-    .blog-grid__posts {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (max-width: 760px) {
-    .blog-grid {
-        padding: 72px var(--ow-page-gutter);
-    }
-    .blog-grid__posts {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 16px;
-        margin-top: 36px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .blog-grid__post.ow-card {
-        transition: none;
-    }
 }

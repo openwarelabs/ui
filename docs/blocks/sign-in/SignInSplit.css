@@ -1,105 +1,10 @@
-/* The form on the left on its own surface; on the right, a midnight plate with the product and a sample quote. */
-.sign-in-split,
-.sign-in-split *,
-.sign-in-split *::before,
-.sign-in-split *::after {
-    box-sizing: border-box;
-}
-
-.sign-in-split {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    min-height: 100dvh;
-    background: var(--ow-surface);
-    color: var(--ow-text);
-}
-
-/* The form's side: the brand at the top, the form in the middle, the way to sign in at the bottom. */
-.sign-in-split__form-side {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    padding: 28px 40px;
-}
-
-.sign-in-split__brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
+/* The sample's mark beside the name. */
 .sign-in-split__mark {
     width: 24px;
     height: 24px;
     border-radius: 7px;
     background: linear-gradient(180deg, var(--ow-brand-500), var(--ow-brand-700));
     box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
-}
-
-.sign-in-split__form-wrap {
-    width: 100%;
-    max-width: 360px;
-    margin: auto;
-}
-
-.sign-in-split__lead {
-    margin-top: 6px;
-}
-
-.sign-in-split__provider {
-    margin-top: 28px;
-}
-
-.sign-in-split__form {
-    display: grid;
-    gap: var(--ow-space-4xl);
-}
-
-.sign-in-split__terms {
-    margin-top: 16px;
-    text-wrap: balance;
-}
-
-/* The plate: inset from the window's edge, midnight in both themes. */
-.sign-in-split__plate {
-    display: flex;
-    min-width: 0;
-    margin: 10px;
-    overflow: hidden;
-    border-radius: var(--ow-radius-section);
-    background: linear-gradient(180deg, var(--ow-brand-700), var(--ow-brand-900));
-    color: var(--ow-on-primary);
-}
-
-.sign-in-split__plate-inner {
-    display: flex;
-    width: 100%;
-    max-width: 520px;
-    flex-direction: column;
-    justify-content: center;
-    gap: 28px;
-    margin: 0 auto;
-    padding: 40px 44px;
-}
-
-/* On the midnight plate the plate's softened white stands in for the caption's muted grey, which no tone gives. */
-.sign-in-split__plate .sign-in-split__eyebrow {
-    display: flex;
-    align-items: center;
-    gap: var(--ow-space-sm);
-    color: color-mix(in srgb, var(--ow-on-primary) 72%, transparent);
-}
-
-.sign-in-split__brass {
-    width: 6px;
-    height: 6px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: var(--ow-brass);
-}
-
-.sign-in-split__headline {
-    margin-top: -14px;
 }
 
 /* The drawn product: a review card, with a deploy notice tucked under its corner. */
@@ -266,60 +171,9 @@
     color: var(--ow-text-muted);
 }
 
-.sign-in-split__quote {
-    margin: 4px 0 0;
-}
-
-.sign-in-split__quote-text {
-    text-wrap: pretty;
-}
-
-.sign-in-split__plate .sign-in-split__quote-by {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--ow-space-sm);
-    margin-top: 10px;
-    color: color-mix(in srgb, var(--ow-on-primary) 68%, transparent);
-}
-
-/* The sample label, outlined in the plate's own white: a Badge would sit on a light ground. */
-.sign-in-split__sample {
-    border: 1px solid color-mix(in srgb, var(--ow-on-primary) 28%, transparent);
-    border-radius: var(--ow-radius-pill);
-    padding: 1px 8px;
-}
-
 @media (max-width: 1024px) {
-    .sign-in-split__form-side {
-        padding: 24px 28px;
-    }
-    .sign-in-split__plate-inner {
-        padding: 32px 28px;
-    }
     .sign-in-split__deploy {
         width: 78%;
         margin-right: -6px;
-    }
-}
-
-@media (max-width: 760px) {
-    .sign-in-split {
-        grid-template-columns: minmax(0, 1fr);
-    }
-    .sign-in-split__form-side {
-        gap: 28px;
-        padding: 20px var(--ow-page-gutter) 28px;
-    }
-    .sign-in-split__form-wrap {
-        margin: 8px 0 0;
-        max-width: none;
-    }
-    .sign-in-split__plate {
-        margin: 0 8px 8px;
-    }
-    .sign-in-split__plate-inner {
-        gap: 24px;
-        padding: 28px 20px;
     }
 }

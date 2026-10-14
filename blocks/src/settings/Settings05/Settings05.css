@@ -1,0 +1,78 @@
+/* The last section of a project's settings: actions that are hard or impossible to take back, on a card edged in red. */
+.ow-settings05,
+.ow-settings05 *,
+.ow-settings05 *::before,
+.ow-settings05 *::after {
+    box-sizing: border-box;
+}
+
+.ow-settings05 {
+    background: var(--ow-canvas);
+    padding: 48px 32px 56px;
+    color: var(--ow-text);
+}
+
+.ow-settings05__inner {
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+.ow-settings05__header {
+    margin-bottom: 20px;
+}
+
+.ow-settings05__text {
+    margin-top: 4px;
+}
+
+.ow-settings05__card {
+    border-color: var(--ow-danger-border);
+    padding: 2px 20px;
+}
+
+/* The last row, the one that can't be undone, sits on a faint wash of red. */
+.ow-settings05__card .ow-settings-row:last-child {
+    margin: 0 -20px -2px;
+    border-radius: 0 0 calc(var(--ow-radius-container) - 1px) calc(var(--ow-radius-container) - 1px);
+    background: var(--ow-danger-surface);
+    padding: 14px 20px 16px;
+}
+
+.ow-settings05__gone {
+    padding: 36px 20px;
+}
+
+/* The confirmation. */
+.ow-settings05__contents {
+    display: grid;
+    gap: 6px;
+    margin: -4px 0 4px;
+    padding: 0 0 0 18px;
+}
+
+/* Counts, so their figures line up down the list. */
+.ow-settings05__count {
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-settings05__confirm {
+    font-family: var(--ow-font-mono);
+    font-size: 13px;
+}
+
+@media (max-width: 760px) {
+    .ow-settings05 {
+        padding: 28px var(--ow-page-gutter) 40px;
+    }
+    .ow-settings05__card {
+        padding: 2px 16px;
+    }
+    .ow-settings05__card .ow-settings-row:last-child {
+        margin: 0 -16px -2px;
+        padding: 14px 16px 16px;
+    }
+    .ow-settings05__card .ow-settings-row__control {
+        flex: 1 1 100%;
+        justify-content: flex-start;
+    }
+}

@@ -1,0 +1,68 @@
+/* A short dialog over the page: what's new, and one button to carry on. */
+.ow-onboarding03,
+.ow-onboarding03 *,
+.ow-onboarding03 *::before,
+.ow-onboarding03 *::after {
+    box-sizing: border-box;
+}
+
+/* The dialog sits over the page, so the wrapper takes no room of its own. */
+.ow-onboarding03 {
+    display: contents;
+}
+
+/* The dialog. */
+.ow-onboarding03__dialog .ow-dialog__body {
+    gap: var(--ow-space-4xl);
+}
+
+.ow-onboarding03__dialog .ow-dialog__actions {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ow-onboarding03__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ow-space-sm);
+}
+
+.ow-onboarding03__eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ow-brass);
+}
+
+.ow-onboarding03__changes {
+    display: grid;
+    gap: var(--ow-space-xl);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-onboarding03__change {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--ow-space-lg);
+}
+
+.ow-onboarding03__change-icon {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-primary-border);
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.ow-onboarding03__change-text {
+    display: grid;
+    gap: 1px;
+    padding-top: 1px;
+}

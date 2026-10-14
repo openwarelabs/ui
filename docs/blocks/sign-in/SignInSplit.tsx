@@ -1,14 +1,8 @@
-import { useId, useState, type FormEvent } from "react";
-
-import { Avatar, AvatarGroup, Badge, Button, Field, Input, Link, Separator, Text, toast } from "@openwarelabs/ui";
+import { SignIn02 } from "@openwarelabs/blocks";
+import { Avatar, AvatarGroup, Badge, Link, toast } from "@openwarelabs/ui";
 import { Bot, Check, GitBranch, GitPullRequest } from "lucide-react";
 
 import "./SignInSplit.css";
-
-interface Errors {
-    email?: string;
-    password?: string;
-}
 
 const checks = ["Tests", "Types", "Preview"];
 
@@ -65,138 +59,51 @@ function ReviewVignette() {
     );
 }
 
+// Stands in for the real thing, which sends the browser to GitHub (or the form to your server) and back.
+const wait = (ms: number) => new Promise((resolve) => window.setTimeout(resolve, ms));
+
 export function SignInSplit() {
-    const id = useId();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [errors, setErrors] = useState<Errors>({});
-    const [busy, setBusy] = useState<"github" | "email" | null>(null);
-
-    const fieldId = (name: string) => `${id}-${name}`;
-
-    function submit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        const found: Errors = {};
-        if (!email.trim()) found.email = "Enter your work email.";
-        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) found.email = "That doesn't look like an email address.";
-        if (password.length < 12) found.password = password ? `Add ${12 - password.length} more characters.` : "Choose a password.";
-        setErrors(found);
-        if (found.email || found.password) {
-            document.getElementById(fieldId(found.email ? "email" : "password"))?.focus();
-            return;
-        }
-        setBusy("email");
-        window.setTimeout(() => {
-            setBusy(null);
-            toast.success("Account created", { description: `We sent a link to ${email.trim()} to confirm it's yours.` });
-        }, 900);
-    }
-
     return (
-        <main className="sign-in-split">
-            <div className="sign-in-split__form-side">
-                <Text variant="card-title" as="span" className="sign-in-split__brand">
-                    <span className="sign-in-split__mark" aria-hidden="true" />
-                    Acme
-                </Text>
-
-                <div className="sign-in-split__form-wrap">
-                    <Text variant="heading" as="h1">
-                        Create your account
-                    </Text>
-                    <Text variant="copy" className="sign-in-split__lead">
-                        Free for teams of up to five. No card needed.
-                    </Text>
-
-                    <Button
-                        fullWidth
-                        startIcon={<GitBranch size={16} />}
-                        loading={busy === "github"}
-                        disabled={busy === "email"}
-                        className="sign-in-split__provider"
-                        onClick={() => {
-                            // The real thing sends the browser to GitHub and back; here it waits a moment instead.
-                            setBusy("github");
-                            window.setTimeout(() => {
-                                setBusy(null);
-                                toast.success("Signed up with GitHub");
-                            }, 1200);
-                        }}
-                    >
-                        Sign up with GitHub
-                    </Button>
-
-                    <Separator label="or" spacing="3xl" />
-
-                    <form className="sign-in-split__form" noValidate onSubmit={submit}>
-                        <Field label="Work email" error={errors.email}>
-                            <Input
-                                id={fieldId("email")}
-                                type="email"
-                                value={email}
-                                onChange={(event) => {
-                                    setEmail(event.target.value);
-                                    setErrors((current) => ({ ...current, email: undefined }));
-                                }}
-                                placeholder="maya@example.com"
-                                autoComplete="email"
-                            />
-                        </Field>
-                        <Field label="Password" hint={errors.password ? undefined : "At least 12 characters."} error={errors.password}>
-                            <Input
-                                id={fieldId("password")}
-                                type="password"
-                                value={password}
-                                onChange={(event) => {
-                                    setPassword(event.target.value);
-                                    setErrors((current) => ({ ...current, password: undefined }));
-                                }}
-                                autoComplete="new-password"
-                            />
-                        </Field>
-                        <Button type="submit" variant="primary" fullWidth loading={busy === "email"} disabled={busy === "github"}>
-                            Create account
-                        </Button>
-                    </form>
-
-                    <Text variant="caption" as="p" align="center" className="sign-in-split__terms">
-                        By creating an account you agree to the{" "}
-                        <Link href="#" variant="muted">
-                            terms
-                        </Link>{" "}
-                        and the{" "}
-                        <Link href="#" variant="muted">
-                            privacy policy
-                        </Link>
-                        .
-                    </Text>
-                </div>
-
-                <Text variant="copy" align="center">
+        <SignIn02
+            brand={{ name: "Acme", logo: <span className="sign-in-split__mark" aria-hidden="true" /> }}
+            title="Create your account"
+            description="Free for teams of up to five. No card needed."
+            providers={[{ id: "github", label: "Sign up with GitHub", icon: <GitBranch size={16} /> }]}
+            onProviderSelect={async () => {
+                await wait(1200);
+                toast.success("Signed up with GitHub");
+            }}
+            onSubmit={async ({ email }) => {
+                await wait(900);
+                toast.success("Account created", { description: `We sent a link to ${email} to confirm it's yours.` });
+            }}
+            terms={
+                <>
+                    By creating an account you agree to the{" "}
+                    <Link href="#" variant="muted">
+                        terms
+                    </Link>{" "}
+                    and the{" "}
+                    <Link href="#" variant="muted">
+                        privacy policy
+                    </Link>
+                    .
+                </>
+            }
+            footer={
+                <>
                     Already have an account? <Link href="#">Sign in</Link>
-                </Text>
-            </div>
-
-            <aside className="sign-in-split__plate" aria-label="About Acme">
-                <div className="sign-in-split__plate-inner">
-                    <Text variant="caption" as="p" className="sign-in-split__eyebrow">
-                        <span className="sign-in-split__brass" aria-hidden="true" />
-                        Agents that open their own pull requests
-                    </Text>
-                    <Text variant="heading" as="p" className="sign-in-split__headline">
-                        Hand the routine work to agents. Review every change before it ships.
-                    </Text>
-                    <ReviewVignette />
-                    <figure className="sign-in-split__quote">
-                        <Text variant="body" as="blockquote" className="sign-in-split__quote-text">
-                            “We give the dull fixes to agents now, and spend our reviews on the parts that need us.”
-                        </Text>
-                        <Text variant="caption" as="figcaption" className="sign-in-split__quote-by">
-                            Lena Fischer, Head of Platform at Halcyon <span className="sign-in-split__sample">Sample quote</span>
-                        </Text>
-                    </figure>
-                </div>
-            </aside>
-        </main>
+                </>
+            }
+            labels={{ plate: "About Acme" }}
+            eyebrow="Agents that open their own pull requests"
+            headline="Hand the routine work to agents. Review every change before it ships."
+            visual={<ReviewVignette />}
+            quote={{
+                text: "“We give the dull fixes to agents now, and spend our reviews on the parts that need us.”",
+                author: "Lena Fischer, Head of Platform at Halcyon",
+                badge: "Sample quote",
+            }}
+        />
     );
 }

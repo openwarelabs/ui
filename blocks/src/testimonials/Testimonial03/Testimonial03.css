@@ -1,0 +1,188 @@
+.ow-testimonial03,
+.ow-testimonial03 *,
+.ow-testimonial03 *::before,
+.ow-testimonial03 *::after {
+    box-sizing: border-box;
+}
+
+.ow-testimonial03 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.ow-testimonial03__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+/* The logos are the tabs: muted until chosen, with the underline under the one showing. */
+.ow-testimonial03__tabs {
+    gap: 0;
+    margin-top: 48px;
+}
+
+.ow-testimonial03__tabs .ow-tabs__list {
+    justify-content: center;
+    gap: 48px;
+}
+
+.ow-testimonial03__tabs .ow-testimonial03__tab {
+    height: 56px;
+    padding: 0 4px;
+}
+
+.ow-testimonial03__tab > * {
+    opacity: 0.6;
+    transition: opacity var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-testimonial03__tab:hover > *,
+.ow-testimonial03__tab[aria-selected="true"] > * {
+    opacity: 1;
+}
+
+.ow-testimonial03__panel {
+    margin-top: 40px;
+}
+
+.ow-testimonial03__card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    overflow: hidden;
+    margin: 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-card);
+    background: var(--ow-surface);
+}
+
+.ow-testimonial03__body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 48px 48px 44px;
+}
+
+/* Lucide's quote mark is a closing one; turned over, it opens the quote. */
+.ow-testimonial03__mark {
+    color: var(--ow-brass);
+    fill: var(--ow-brass);
+    transform: rotate(180deg);
+}
+
+.ow-testimonial03__quote {
+    flex: 1;
+    margin: 20px 0 0;
+}
+
+/* A quote of several lines wraps as running text, using the column's width, not balanced like a title. */
+.ow-testimonial03__text {
+    text-wrap: pretty;
+}
+
+.ow-testimonial03__person {
+    margin-top: 36px;
+}
+
+.ow-testimonial03__company {
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--ow-border);
+    background: var(--ow-surface-muted);
+    padding: 48px 32px 40px;
+}
+
+.ow-testimonial03__about {
+    margin-top: 16px;
+}
+
+.ow-testimonial03__facts {
+    display: grid;
+    margin: auto 0 0;
+    padding-top: 32px;
+}
+
+.ow-testimonial03__fact {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    border-top: 1px solid var(--ow-border);
+    padding: 12px 0;
+}
+
+.ow-testimonial03__note {
+    margin-top: 20px;
+}
+
+@media (max-width: 1024px) {
+    .ow-testimonial03__tabs .ow-tabs__list {
+        gap: 32px;
+    }
+    .ow-testimonial03__card {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .ow-testimonial03__company {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+        grid-template-rows: auto 1fr;
+        align-items: start;
+        column-gap: 32px;
+        border-top: 1px solid var(--ow-border);
+        border-left: 0;
+        padding: 32px 48px;
+    }
+    .ow-testimonial03__about {
+        grid-column: 1;
+        margin-top: 12px;
+    }
+    .ow-testimonial03__facts {
+        grid-row: 1 / span 2;
+        grid-column: 2;
+        margin: 0;
+        padding: 0;
+    }
+    .ow-testimonial03__fact:first-child {
+        border-top: 0;
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-testimonial03 {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .ow-testimonial03__tabs {
+        margin-top: 32px;
+    }
+    .ow-testimonial03__tabs .ow-tabs__list {
+        justify-content: space-between;
+        gap: 0;
+    }
+    .ow-testimonial03__tabs .ow-testimonial03__tab {
+        flex: 1;
+        justify-content: center;
+    }
+    .ow-testimonial03__panel {
+        margin-top: 28px;
+    }
+    .ow-testimonial03__body {
+        padding: 28px 22px 26px;
+    }
+    .ow-testimonial03__person {
+        margin-top: 28px;
+    }
+    .ow-testimonial03__company {
+        display: flex;
+        align-items: stretch;
+        padding: 24px 22px;
+    }
+    .ow-testimonial03__facts {
+        margin-top: 0;
+        padding-top: 20px;
+    }
+    .ow-testimonial03__fact:first-child {
+        border-top: 1px solid var(--ow-border);
+        padding-top: 12px;
+    }
+}

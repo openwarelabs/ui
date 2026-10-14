@@ -1,64 +1,4 @@
-/* A card with the title and progress at the top, one step's fields in the middle, Back and Continue at the bottom. */
-.form-steps,
-.form-steps *,
-.form-steps *::before,
-.form-steps *::after {
-    box-sizing: border-box;
-}
-
-.form-steps {
-    background: var(--ow-canvas);
-    padding: 56px 32px 72px;
-    color: var(--ow-text);
-}
-
-.form-steps__card {
-    max-width: 640px;
-    margin: 0 auto;
-    overflow: hidden;
-    border: 1px solid var(--ow-border);
-    border-radius: var(--ow-radius-container);
-    background: var(--ow-surface);
-}
-
-.form-steps__header {
-    border-bottom: 1px solid var(--ow-border);
-    padding: 28px 28px 24px;
-}
-
-.form-steps__lead {
-    margin-top: 6px;
-}
-
-.form-steps__progress {
-    margin-top: 26px;
-}
-
-.form-steps__body {
-    padding: 28px 28px 32px;
-}
-
-.form-steps__step-title {
-    display: grid;
-    gap: 4px;
-    margin-bottom: 22px;
-}
-
-.form-steps__step-title:focus {
-    outline: none;
-}
-
-.form-steps__step-title:focus-visible {
-    outline: 2px solid var(--ow-focus-ring);
-    outline-offset: 4px;
-    border-radius: var(--ow-radius-sm);
-}
-
-.form-steps__fields {
-    display: grid;
-    gap: var(--ow-space-6xl);
-}
-
+/* Two of the sample's fields side by side. */
 .form-steps__pair {
     display: grid;
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
@@ -66,76 +6,9 @@
     gap: var(--ow-space-2xl);
 }
 
-.form-steps__review {
-    margin: 0;
-    overflow: hidden;
-    border: 1px solid var(--ow-border);
-    border-radius: var(--ow-radius-container);
-}
-
-.form-steps__review-row {
-    display: grid;
-    grid-template-columns: 96px minmax(0, 1fr) auto;
-    align-items: center;
-    gap: var(--ow-space-2xl);
-    padding: 10px 10px 10px 16px;
-}
-
-.form-steps__review-row + .form-steps__review-row {
-    border-top: 1px solid var(--ow-border);
-}
-
-.form-steps__review-value {
-    overflow-wrap: anywhere;
-}
-
-.form-steps__review-edit {
-    margin: 0;
-}
-
-.form-steps__footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--ow-space-lg);
-    border-top: 1px solid var(--ow-border);
-    background: var(--ow-surface-muted);
-    padding: 14px 28px;
-}
-
 @media (max-width: 760px) {
-    .form-steps {
-        padding: 24px var(--ow-page-gutter) 40px;
-    }
-    .form-steps__header {
-        padding: 22px 18px 20px;
-    }
-    .form-steps__progress {
-        margin-top: 20px;
-    }
-    .form-steps__body {
-        padding: 22px 18px 26px;
-    }
     .form-steps__pair {
         grid-template-columns: minmax(0, 1fr);
         gap: var(--ow-space-6xl);
-    }
-    .form-steps__review-row {
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: 2px var(--ow-space-lg);
-    }
-    .form-steps__review-label {
-        grid-column: 1;
-    }
-    .form-steps__review-value {
-        grid-row: 2;
-        grid-column: 1;
-    }
-    .form-steps__review-edit {
-        grid-row: 1 / span 2;
-        grid-column: 2;
-    }
-    .form-steps__footer {
-        padding: 14px 18px;
     }
 }

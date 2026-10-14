@@ -1,44 +1,6 @@
-import { useEffect, useState, type ReactElement } from "react";
-
-import {
-    Avatar,
-    Badge,
-    Button,
-    CommandPalette,
-    Drawer,
-    Menu,
-    MenuItem,
-    MenuLabel,
-    MenuSeparator,
-    NavItem,
-    NavList,
-    Table,
-    Text,
-    Tooltip,
-    User,
-    type BadgeVariant,
-    type Command,
-    type TableColumn,
-} from "@openwarelabs/ui";
-import {
-    Bot,
-    Check,
-    ChevronRight,
-    ChevronsUpDown,
-    FolderKanban,
-    Gauge,
-    Inbox,
-    LogOut,
-    Menu as MenuIcon,
-    PanelLeftClose,
-    PanelLeftOpen,
-    Plus,
-    Rocket,
-    Search,
-    Settings,
-    Sparkles,
-    User as UserIcon,
-} from "lucide-react";
+import { Shell04 } from "@openwarelabs/blocks";
+import { Badge, Button, Table, Text, User, type BadgeVariant, type TableColumn } from "@openwarelabs/ui";
+import { Bot, FolderKanban, Gauge, Inbox, LogOut, Rocket, Settings, Sparkles, User as UserIcon } from "lucide-react";
 
 import "./ShellCollapsible.css";
 
@@ -180,244 +142,64 @@ const columns: Array<TableColumn<Run>> = [
     },
 ];
 
-/** Names an item in a tooltip while the sidebar shows only its icon. */
-function Tip({ show, label, children }: { show: boolean; label: string; children: ReactElement }) {
-    return show ? (
-        <Tooltip label={label} placement="right">
-            {children}
-        </Tooltip>
-    ) : (
-        children
-    );
-}
-
-/** Everything in the sidebar; the same list goes in the drawer on phones, always unfolded there. */
-function Navigation({
-    active,
-    collapsed,
-    onNavigate,
-    onSearch,
-}: {
-    active: string;
-    collapsed: boolean;
-    onNavigate: (id: string) => void;
-    onSearch: () => void;
-}) {
-    return (
-        <div className="shell-collapsible__nav">
-            <Tip show={collapsed} label="Acme">
-                <Menu
-                    label="Workspaces"
-                    width={232}
-                    trigger={
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            fullWidth
-                            className="shell-collapsible__workspace"
-                            endIcon={<ChevronsUpDown size={15} className="shell-collapsible__fade" />}
-                        >
-                            <span className="shell-collapsible__mark" aria-hidden="true" />
-                            <Text as="span" variant="card-title" tone="default" className="shell-collapsible__workspace-name shell-collapsible__fade">
-                                Acme
-                            </Text>
-                        </Button>
-                    }
-                >
-                    <MenuLabel>Workspaces</MenuLabel>
-                    <MenuItem icon={<Check size={15} />}>Acme</MenuItem>
-                    <MenuItem icon={<span className="shell-collapsible__menu-spacer" />}>Personal</MenuItem>
-                    <MenuSeparator />
-                    <MenuItem icon={<Plus size={15} />}>New workspace</MenuItem>
-                </Menu>
-            </Tip>
-
-            <Tip show={collapsed} label="Search">
-                <Button size="sm" fullWidth className="shell-collapsible__search" startIcon={<Search size={15} />} shortcut="⌘K" onClick={onSearch}>
-                    <Text as="span" tone="muted" className="shell-collapsible__search-text shell-collapsible__fade">
-                        Search
-                    </Text>
-                </Button>
-            </Tip>
-
-            <NavList label="Workspace">
-                {sections.map(({ id, label, icon: Icon, count, unread }) => (
-                    <Tip key={id} show={collapsed} label={count ? `${label} (${count})` : label}>
-                        <NavItem
-                            icon={
-                                <span className="shell-collapsible__icon">
-                                    <Icon size={15} />
-                                    {unread ? <span className="shell-collapsible__unread" aria-hidden="true" /> : null}
-                                </span>
-                            }
-                            active={active === id}
-                            end={count}
-                            onClick={() => onNavigate(id)}
-                        >
-                            {label}
-                        </NavItem>
-                    </Tip>
-                ))}
-            </NavList>
-
-            <NavList label="Projects" heading="Projects">
-                {projects.map((project) => (
-                    <Tip key={project.id} show={collapsed} label={project.id}>
-                        <NavItem
-                            icon={<span className="shell-collapsible__dot" style={{ background: project.color }} />}
-                            active={active === project.id}
-                            onClick={() => onNavigate(project.id)}
-                        >
-                            {project.id}
-                        </NavItem>
-                    </Tip>
-                ))}
-            </NavList>
-
-            <div className="shell-collapsible__account">
-                <Tip show={collapsed} label="Maya Chen">
-                    <Menu
-                        label="Account"
-                        above
-                        width={232}
-                        trigger={
-                            <Button
-                                variant="ghost"
-                                fullWidth
-                                className="shell-collapsible__user"
-                                endIcon={<ChevronsUpDown size={15} className="shell-collapsible__fade" />}
-                            >
-                                <Avatar name="Maya Chen" size="sm" />
-                                <span className="shell-collapsible__user-text shell-collapsible__fade">
-                                    <Text as="span" variant="label" tone="default" truncate>
-                                        Maya Chen
-                                    </Text>
-                                    <Text variant="caption" truncate>
-                                        maya@example.com
-                                    </Text>
-                                </span>
-                            </Button>
-                        }
-                    >
-                        <MenuItem icon={<UserIcon size={15} />}>Profile</MenuItem>
-                        <MenuItem icon={<Settings size={15} />} onSelect={() => onNavigate("settings")}>
-                            Settings
-                        </MenuItem>
-                        <MenuSeparator />
-                        <MenuItem icon={<LogOut size={15} />}>Sign out</MenuItem>
-                    </Menu>
-                </Tip>
-            </div>
-        </div>
-    );
-}
-
 export function ShellCollapsible() {
-    const [active, setActive] = useState("agents");
-    // Folded on tablets to start with, open on desktops; nothing is remembered between visits.
-    const [collapsed, setCollapsed] = useState(() => window.matchMedia("(max-width: 1023px)").matches);
-    const [navOpen, setNavOpen] = useState(false);
-    const [searchOpen, setSearchOpen] = useState(false);
-
-    // ⌘K or Ctrl+K opens search from anywhere.
-    useEffect(() => {
-        const onKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "k" && (event.metaKey || event.ctrlKey)) {
-                event.preventDefault();
-                setSearchOpen(true);
-            }
-        };
-        window.addEventListener("keydown", onKeyDown);
-        return () => window.removeEventListener("keydown", onKeyDown);
-    }, []);
-
-    const navigate = (id: string) => {
-        setActive(id);
-        setNavOpen(false);
-    };
-
-    const commands: Command[] = [
-        ...sections.map(({ id, label, icon: Icon }) => ({ id, title: label, group: "Go to", icon: <Icon />, run: () => navigate(id) })),
-        ...projects.map((project) => ({ id: project.id, title: project.id, group: "Projects", icon: <FolderKanban />, run: () => navigate(project.id) })),
-        { id: "start-run", title: "Start an agent run", group: "Actions", icon: <Sparkles />, run: () => navigate("agents") },
-    ];
-
     return (
-        <div className={`shell-collapsible${collapsed ? " shell-collapsible--collapsed" : ""}`}>
-            <aside id="shell-collapsible-sidebar" className="shell-collapsible__aside" aria-label="Main navigation">
-                <Navigation active={active} collapsed={collapsed} onNavigate={navigate} onSearch={() => setSearchOpen(true)} />
-            </aside>
-
-            <div className="shell-collapsible__body">
-                <header className="shell-collapsible__topbar">
-                    <Button variant="ghost" iconOnly aria-label="Open navigation" onClick={() => setNavOpen(true)}>
-                        <MenuIcon size={18} />
-                    </Button>
-                    <Text as="span" variant="card-title" className="shell-collapsible__topbar-brand">
-                        <span className="shell-collapsible__mark" aria-hidden="true" />
-                        Acme
+        <Shell04
+            workspace="Acme"
+            logo={<span className="shell-collapsible__mark" aria-hidden="true" />}
+            workspaces={[{ name: "Acme", current: true }, { name: "Personal" }]}
+            navigation={[
+                {
+                    label: "Workspace",
+                    items: sections.map(({ id, label, icon: Icon, count, unread }) => ({ id, label, icon: <Icon size={15} />, count, unread })),
+                },
+                {
+                    label: "Projects",
+                    heading: "Projects",
+                    items: projects.map((project) => ({
+                        id: project.id,
+                        label: project.id,
+                        icon: <span className="shell-collapsible__dot" style={{ background: project.color }} />,
+                    })),
+                },
+            ]}
+            defaultCurrent="agents"
+            account={{ name: "Maya Chen", email: "maya@example.com" }}
+            accountMenu={[
+                { label: "Profile", icon: <UserIcon size={15} /> },
+                { label: "Settings", icon: <Settings size={15} />, page: "settings" },
+                { label: "Sign out", icon: <LogOut size={15} />, separatorBefore: true },
+            ]}
+            commands={[
+                ...sections.map(({ id, label, icon: Icon }) => ({ id, title: label, group: "Go to", icon: <Icon />, page: id })),
+                ...projects.map((project) => ({ id: project.id, title: project.id, group: "Projects", icon: <FolderKanban />, page: project.id })),
+                { id: "start-run", title: "Start an agent run", group: "Actions", icon: <Sparkles />, page: "agents" },
+            ]}
+            breadcrumbs={["Agents", "Runs"]}
+            labels={{ searchPlaceholder: "Search projects and pages…" }}
+        >
+            <div className="shell-collapsible__page-header">
+                <div>
+                    <Text as="h1" variant="heading">
+                        Agent runs
                     </Text>
-                    <Button variant="ghost" iconOnly aria-label="Search" onClick={() => setSearchOpen(true)}>
-                        <Search size={18} />
-                    </Button>
-                </header>
-
-                <main className="shell-collapsible__panel">
-                    <div className="shell-collapsible__toolbar">
-                        <Tooltip label={collapsed ? "Expand sidebar" : "Collapse sidebar"} placement="bottom">
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                iconOnly
-                                aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-                                aria-expanded={!collapsed}
-                                aria-controls="shell-collapsible-sidebar"
-                                onClick={() => setCollapsed((current) => !current)}
-                            >
-                                {collapsed ? <PanelLeftOpen size={16} /> : <PanelLeftClose size={16} />}
-                            </Button>
-                        </Tooltip>
-                        <span className="shell-collapsible__toolbar-divider" aria-hidden="true" />
-                        <Text as="span" tone="muted" className="shell-collapsible__crumbs">
-                            Agents
-                            <ChevronRight size={14} aria-hidden="true" />
-                            <Text as="span" variant="label" tone="default">
-                                Runs
-                            </Text>
-                        </Text>
-                    </div>
-
-                    <div className="shell-collapsible__page">
-                        <div className="shell-collapsible__page-header">
-                            <div>
-                                <Text as="h1" variant="heading">
-                                    Agent runs
-                                </Text>
-                                <Text variant="copy" className="shell-collapsible__subtitle">
-                                    Routine work your agents picked up, and where each run stands.
-                                </Text>
-                            </div>
-                            <Button variant="primary" startIcon={<Sparkles size={16} />}>
-                                Start a run
-                            </Button>
-                        </div>
-
-                        <Table
-                            className="shell-collapsible__table"
-                            caption="Agent runs"
-                            hideCaption
-                            columns={columns}
-                            rows={runs}
-                            defaultSort={{ key: "started", direction: "ascending" }}
-                        />
-                    </div>
-                </main>
+                    <Text variant="copy" className="shell-collapsible__subtitle">
+                        Routine work your agents picked up, and where each run stands.
+                    </Text>
+                </div>
+                <Button variant="primary" startIcon={<Sparkles size={16} />}>
+                    Start a run
+                </Button>
             </div>
 
-            <Drawer open={navOpen} onClose={() => setNavOpen(false)} side="left" size={300} title="Menu">
-                <Navigation active={active} collapsed={false} onNavigate={navigate} onSearch={() => setSearchOpen(true)} />
-            </Drawer>
-            <CommandPalette open={searchOpen} onClose={() => setSearchOpen(false)} commands={commands} placeholder="Search projects and pages…" />
-        </div>
+            <Table
+                className="shell-collapsible__table"
+                caption="Agent runs"
+                hideCaption
+                columns={columns}
+                rows={runs}
+                defaultSort={{ key: "started", direction: "ascending" }}
+            />
+        </Shell04>
     );
 }

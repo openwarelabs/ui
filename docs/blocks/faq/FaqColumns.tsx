@@ -1,7 +1,4 @@
-import { Accordion, AccordionItem, Link, SectionHeading, Text } from "@openwarelabs/ui";
-import { ArrowRight } from "lucide-react";
-
-import "./FaqColumns.css";
+import { Faq02 } from "@openwarelabs/blocks";
 
 const questions = [
     {
@@ -38,40 +35,15 @@ const questions = [
 
 export function FaqColumns() {
     return (
-        <section className="faq-columns" aria-labelledby="faq-columns-title">
-            <div className="faq-columns__inner">
-                <div className="faq-columns__intro">
-                    <SectionHeading
-                        eyebrow="FAQ"
-                        title={<span id="faq-columns-title">Questions, answered</span>}
-                        intro="What teams usually ask before they move their work to Acme. If yours isn't here, the people who build Acme answer within a working day."
-                    />
-                    <ul className="faq-columns__links">
-                        <li>
-                            <Link href="#" variant="standalone">
-                                Contact support
-                                <ArrowRight size={14} aria-hidden="true" />
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="#" variant="standalone">
-                                Read the docs
-                                <ArrowRight size={14} aria-hidden="true" />
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
-
-                <Accordion className="faq-columns__list" type="multiple" defaultValue={["trial"]}>
-                    {questions.map((item) => (
-                        <AccordionItem key={item.id} value={item.id} title={item.question}>
-                            <Text variant="copy" className="faq-columns__answer">
-                                {item.answer}
-                            </Text>
-                        </AccordionItem>
-                    ))}
-                </Accordion>
-            </div>
-        </section>
+        <Faq02
+            eyebrow="FAQ"
+            title="Questions, answered"
+            description="What teams usually ask before they move their work to Acme. If yours isn't here, the people who build Acme answer within a working day."
+            links={[
+                { label: "Contact support", href: "#support" },
+                { label: "Read the docs", href: "#docs" },
+            ]}
+            questions={questions}
+        />
     );
 }

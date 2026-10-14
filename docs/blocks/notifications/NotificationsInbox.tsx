@@ -1,23 +1,10 @@
-import { useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 
-import { Avatar, Badge, Button, Link, NavItem, NavList, Popover, ScrollShadow, Tab, TabList, TabPanel, Tabs, Text, type BadgeVariant } from "@openwarelabs/ui";
-import { Bell, Bot, CheckCheck, Rocket, Settings } from "lucide-react";
+import { Notifications01, type Notifications01Item } from "@openwarelabs/blocks";
+import { Avatar, Badge, NavItem, NavList, Text, type BadgeVariant } from "@openwarelabs/ui";
+import { Bot, Rocket } from "lucide-react";
 
 import "./NotificationsInbox.css";
-
-interface Notification {
-    id: string;
-    /** A person's name, or "agent" / "deploy" for the ones Acme sends itself. */
-    from: string;
-    what: ReactNode;
-    /** Read out in place of `what`, which mixes plain text and bold names. */
-    summary: string;
-    quote?: string;
-    where: string;
-    when: string;
-    mention?: boolean;
-    unread?: boolean;
-}
 
 /** A name or a title inside a notification, in the text colour against the muted line. */
 const Strong = ({ children }: { children: ReactNode }) => (
@@ -26,11 +13,11 @@ const Strong = ({ children }: { children: ReactNode }) => (
     </Text>
 );
 
-const initial: Notification[] = [
+const notifications: Notifications01Item[] = [
     {
         id: "n1",
         from: "Clara Novak",
-        what: (
+        message: (
             <>
                 <Strong>Clara Novak</Strong> mentioned you in <Strong>Fix invoice dates in the EU</Strong>
             </>
@@ -44,8 +31,8 @@ const initial: Notification[] = [
     },
     {
         id: "n2",
-        from: "agent",
-        what: (
+        icon: <Bot size={15} />,
+        message: (
             <>
                 <Strong>Agent</Strong> opened <Strong>#482 Add VAT to EU invoices</Strong> for your review
             </>
@@ -57,8 +44,9 @@ const initial: Notification[] = [
     },
     {
         id: "n3",
-        from: "deploy",
-        what: (
+        icon: <Rocket size={14} />,
+        tone: "danger",
+        message: (
             <>
                 <Strong>Deploy failed</Strong> on <Strong>main</Strong>: tests failed in checkout.spec.ts
             </>
@@ -71,7 +59,7 @@ const initial: Notification[] = [
     {
         id: "n4",
         from: "Tomás Reyes",
-        what: (
+        message: (
             <>
                 <Strong>Tomás Reyes</Strong> approved <Strong>Pricing page copy</Strong>
             </>
@@ -83,7 +71,7 @@ const initial: Notification[] = [
     {
         id: "n5",
         from: "Jonas Berg",
-        what: (
+        message: (
             <>
                 <Strong>Jonas Berg</Strong> mentioned you in <Strong>Release 2.4</Strong>
             </>
@@ -97,7 +85,7 @@ const initial: Notification[] = [
     {
         id: "n6",
         from: "Aiko Tanaka",
-        what: (
+        message: (
             <>
                 <Strong>Aiko Tanaka</Strong> added Sam Okafor to <Strong>design-system</Strong>
             </>
@@ -116,84 +104,7 @@ const deploys: Array<{ project: string; branch: string; status: string; tone: Ba
     { project: "design-system", branch: "feat/focus-rings", status: "Live", tone: "success" },
 ];
 
-function Sender({ from }: { from: string }) {
-    if (from === "agent") {
-        return (
-            <span className="notifications-inbox__agent" aria-hidden="true">
-                <Bot size={15} />
-            </span>
-        );
-    }
-    if (from === "deploy") {
-        return (
-            <span className="notifications-inbox__agent notifications-inbox__agent--danger" aria-hidden="true">
-                <Rocket size={14} />
-            </span>
-        );
-    }
-    return <Avatar name={from} size="md" />;
-}
-
-function NotificationList({ items, onOpen }: { items: Notification[]; onOpen: (id: string) => void }) {
-    if (!items.length) {
-        return (
-            <Text tone="muted" align="center" className="notifications-inbox__empty">
-                Nothing here yet.
-            </Text>
-        );
-    }
-    return (
-        <ScrollShadow maxSize={320}>
-            <ul className="notifications-inbox__list">
-                {items.map((item) => (
-                    <li key={item.id}>
-                        {/* Each one opens the thing it's about; opening it marks it read. */}
-                        <Link
-                            href="#"
-                            variant="standalone"
-                            className="notifications-inbox__item"
-                            aria-label={`${item.unread ? "Unread: " : ""}${item.summary}, ${item.where}, ${item.when}`}
-                            onClick={(event) => {
-                                event.preventDefault();
-                                onOpen(item.id);
-                            }}
-                        >
-                            <Sender from={item.from} />
-                            <span className="notifications-inbox__text">
-                                <Text as="span" tone="muted">
-                                    {item.what}
-                                </Text>
-                                {item.quote ? (
-                                    <Text variant="caption" tone="soft" className="notifications-inbox__quote">
-                                        {item.quote}
-                                    </Text>
-                                ) : null}
-                                <Text variant="caption">
-                                    {item.where} · {item.when}
-                                </Text>
-                            </span>
-                            {item.unread ? <span className="notifications-inbox__unread" /> : null}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
-        </ScrollShadow>
-    );
-}
-
 export function NotificationsInbox() {
-    const [items, setItems] = useState(initial);
-    const [tab, setTab] = useState("all");
-    // Open on load for the preview without pulling focus into it; once someone opens it, focus moves in.
-    const [focusOnOpen, setFocusOnOpen] = useState(false);
-
-    const unread = items.filter((item) => item.unread).length;
-    const mentions = items.filter((item) => item.mention);
-    const unreadMentions = mentions.filter((item) => item.unread).length;
-
-    const open = (id: string) => setItems((list) => list.map((item) => (item.id === id ? { ...item, unread: false } : item)));
-    const markAllRead = () => setItems((list) => list.map((item) => ({ ...item, unread: false })));
-
     return (
         <div className="notifications-inbox">
             <header className="notifications-inbox__bar">
@@ -209,75 +120,7 @@ export function NotificationsInbox() {
                     ))}
                 </NavList>
 
-                <Popover
-                    defaultOpen
-                    autoFocus={focusOnOpen}
-                    onOpenChange={(open) => open || setFocusOnOpen(true)}
-                    placement="bottom-end"
-                    width="min(400px, calc(100vw - 16px))"
-                    aria-label="Notifications"
-                    className="notifications-inbox__popover"
-                    trigger={
-                        <Button
-                            className="notifications-inbox__bell"
-                            variant="ghost"
-                            iconOnly
-                            aria-label={unread ? `Notifications, ${unread} unread` : "Notifications"}
-                        >
-                            <Bell size={18} />
-                            {unread ? (
-                                <Badge className="notifications-inbox__count" size="sm" variant="active" aria-hidden="true">
-                                    {unread}
-                                </Badge>
-                            ) : null}
-                        </Button>
-                    }
-                >
-                    <div className="notifications-inbox__head">
-                        <Text variant="card-title" as="h2">
-                            Notifications
-                        </Text>
-                        <Button variant="ghost" size="sm" startIcon={<CheckCheck size={16} />} disabled={!unread} onClick={markAllRead}>
-                            Mark all as read
-                        </Button>
-                    </div>
-
-                    <Tabs className="notifications-inbox__tabs" variant="line" value={tab} onValueChange={setTab}>
-                        <TabList aria-label="Show">
-                            <Tab value="all">
-                                All
-                                {unread ? (
-                                    <Badge size="sm" className="notifications-inbox__tab-count">
-                                        {unread}
-                                    </Badge>
-                                ) : null}
-                            </Tab>
-                            <Tab value="mentions">
-                                Mentions
-                                {unreadMentions ? (
-                                    <Badge size="sm" className="notifications-inbox__tab-count">
-                                        {unreadMentions}
-                                    </Badge>
-                                ) : null}
-                            </Tab>
-                        </TabList>
-                        <TabPanel value="all">
-                            <NotificationList items={items} onOpen={open} />
-                        </TabPanel>
-                        <TabPanel value="mentions">
-                            <NotificationList items={mentions} onOpen={open} />
-                        </TabPanel>
-                    </Tabs>
-
-                    <div className="notifications-inbox__foot">
-                        <Link href="#" variant="standalone">
-                            View all notifications
-                        </Link>
-                        <Button variant="ghost" size="sm" iconOnly aria-label="Notification settings">
-                            <Settings size={16} />
-                        </Button>
-                    </div>
-                </Popover>
+                <Notifications01 notifications={notifications} viewAllHref="#" defaultOpen />
                 <Avatar className="notifications-inbox__me" name="Maya Chen" size="sm" label="Maya Chen" />
             </header>
 

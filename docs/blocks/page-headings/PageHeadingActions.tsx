@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Avatar, Badge, Button, Menu, MenuItem, MenuSeparator, Text, copyText, toast, type BadgeVariant } from "@openwarelabs/ui";
-import { Archive, Copy, Ellipsis, Pause, Play, Receipt, RotateCcw, Rocket } from "lucide-react";
+import { PageHeading01 } from "@openwarelabs/blocks";
+import { Avatar, Badge, Text, copyText, toast, type BadgeVariant } from "@openwarelabs/ui";
+import { Archive, Copy, Pause, Play, Receipt, RotateCcw, Rocket } from "lucide-react";
 
 import "./PageHeadingActions.css";
 
@@ -90,144 +91,104 @@ export function PageHeadingActions() {
     const paused = status === "Paused" || status === "Archived";
 
     return (
-        <div className="page-heading-actions">
-            <div className="page-heading-actions__panel">
-                <header className="page-heading-actions__header">
-                    <div className="page-heading-actions__identity">
-                        <span className="page-heading-actions__tile" aria-hidden="true">
-                            <Receipt size={20} />
-                        </span>
-                        <div>
-                            <div className="page-heading-actions__title-row">
-                                <Text as="h1" variant="heading">
-                                    billing-api
-                                </Text>
-                                <Badge variant={tone[status]}>{status}</Badge>
-                            </div>
-                            <Text variant="copy" className="page-heading-actions__lead">
-                                Invoices, payments and the EU tax rules behind them.
-                            </Text>
-                        </div>
-                    </div>
-
-                    <div className="page-heading-actions__actions">
-                        <Menu
-                            label="Project actions"
-                            align="end"
-                            trigger={
-                                <Button iconOnly aria-label="More actions">
-                                    <Ellipsis size={16} />
-                                </Button>
-                            }
-                        >
-                            <MenuItem
-                                icon={<Copy size={15} />}
-                                onSelect={async () => {
-                                    const copied = await copyText(projectId);
-                                    toast(copied ? `Copied ${projectId}` : "Couldn't copy the project ID");
-                                }}
-                            >
-                                Copy project ID
-                            </MenuItem>
-                            <MenuItem icon={<RotateCcw size={15} />} disabled={paused || busy || !previous} onSelect={rollBack}>
-                                Roll back to the previous deploy
-                            </MenuItem>
-                            {status === "Paused" ? (
-                                <MenuItem icon={<Play size={15} />} onSelect={() => setStatus("Live")}>
-                                    Resume deploys
-                                </MenuItem>
-                            ) : (
-                                <MenuItem icon={<Pause size={15} />} disabled={status === "Archived" || busy} onSelect={() => setStatus("Paused")}>
-                                    Pause deploys
-                                </MenuItem>
-                            )}
-                            <MenuSeparator />
-                            <MenuItem icon={<Archive size={15} />} destructive disabled={status === "Archived"} onSelect={archive}>
-                                Archive project
-                            </MenuItem>
-                        </Menu>
-                        <Button variant="primary" startIcon={<Rocket size={16} />} loading={busy} disabled={paused} onClick={deploy}>
-                            {status === "Building" ? "Deploying" : "Deploy"}
-                        </Button>
-                    </div>
-                </header>
-
-                <dl className="page-heading-actions__facts">
-                    <div className="page-heading-actions__fact">
-                        <Text as="dt" variant="caption">
-                            Production
-                        </Text>
-                        <Text as="dd" className="page-heading-actions__value">
+        <PageHeading01
+            icon={<Receipt size={20} />}
+            title="billing-api"
+            status={{ label: status, tone: tone[status] }}
+            description="Invoices, payments and the EU tax rules behind them."
+            labels={{ menu: "Project actions" }}
+            menu={[
+                {
+                    label: "Copy project ID",
+                    icon: <Copy size={15} />,
+                    onSelect: async () => {
+                        const copied = await copyText(projectId);
+                        toast(copied ? `Copied ${projectId}` : "Couldn't copy the project ID");
+                    },
+                },
+                { label: "Roll back to the previous deploy", icon: <RotateCcw size={15} />, disabled: paused || busy || !previous, onSelect: rollBack },
+                status === "Paused"
+                    ? { label: "Resume deploys", icon: <Play size={15} />, onSelect: () => setStatus("Live") }
+                    : { label: "Pause deploys", icon: <Pause size={15} />, disabled: status === "Archived" || busy, onSelect: () => setStatus("Paused") },
+                {
+                    label: "Archive project",
+                    icon: <Archive size={15} />,
+                    destructive: true,
+                    disabled: status === "Archived",
+                    onSelect: archive,
+                    separatorBefore: true,
+                },
+            ]}
+            primaryAction={{
+                label: status === "Building" ? "Deploying" : "Deploy",
+                icon: <Rocket size={16} />,
+                loading: busy,
+                disabled: paused,
+                onClick: deploy,
+            }}
+            facts={[
+                {
+                    label: "Production",
+                    value: (
+                        <>
                             <span className="page-heading-actions__live-dot" data-state={paused ? "paused" : "live"} aria-hidden="true" />
                             <span>billing.example.com</span>
+                        </>
+                    ),
+                },
+                {
+                    label: "Branch",
+                    value: (
+                        <Text as="span" variant="code">
+                            main
                         </Text>
-                    </div>
-                    <div className="page-heading-actions__fact">
-                        <Text as="dt" variant="caption">
-                            Branch
-                        </Text>
-                        <Text as="dd" className="page-heading-actions__value">
-                            <Text as="span" variant="code">
-                                main
-                            </Text>
-                        </Text>
-                    </div>
-                    <div className="page-heading-actions__fact">
-                        <Text as="dt" variant="caption">
-                            Region
-                        </Text>
-                        <Text as="dd" className="page-heading-actions__value">
-                            <span>Frankfurt, eu-central-1</span>
-                        </Text>
-                    </div>
-                    <div className="page-heading-actions__fact">
-                        <Text as="dt" variant="caption">
-                            Live deploy
-                        </Text>
-                        <Text as="dd" className="page-heading-actions__value">
-                            {live ? (
-                                <>
-                                    <Avatar name={live.who} size="sm" label={`By ${live.who}`} />
-                                    <span>
-                                        <Text as="span" variant="code">
-                                            {live.commit}
-                                        </Text>{" "}
-                                        · {live.when}
-                                    </span>
-                                </>
-                            ) : (
-                                <span>None</span>
-                            )}
-                        </Text>
-                    </div>
-                </dl>
-
-                <section className="page-heading-actions__recent" aria-labelledby="page-heading-actions-recent">
-                    <Text as="h2" variant="card-title" id="page-heading-actions-recent" className="page-heading-actions__recent-title">
-                        Recent deploys
-                    </Text>
-                    <ul className="page-heading-actions__deploys">
-                        {deploys.slice(0, 3).map((entry) => (
-                            <li key={entry.id} className="page-heading-actions__deploy">
-                                <span className="page-heading-actions__deploy-text">
-                                    <Text as="span" truncate>
-                                        {entry.message}
-                                    </Text>
-                                    <Text variant="caption" truncate>
-                                        <Text as="span" variant="code" className="page-heading-actions__commit">
-                                            {entry.commit}
-                                        </Text>{" "}
-                                        · {entry.who} · {entry.when}
-                                    </Text>
-                                </span>
-                                <Badge size="sm" variant={deployTone[entry.status]}>
-                                    {entry.status}
-                                </Badge>
-                            </li>
-                        ))}
-                    </ul>
-                </section>
-            </div>
-        </div>
+                    ),
+                },
+                { label: "Region", value: <span>Frankfurt, eu-central-1</span> },
+                {
+                    label: "Live deploy",
+                    value: live ? (
+                        <>
+                            <Avatar name={live.who} size="sm" label={`By ${live.who}`} />
+                            <span>
+                                <Text as="span" variant="code">
+                                    {live.commit}
+                                </Text>{" "}
+                                · {live.when}
+                            </span>
+                        </>
+                    ) : (
+                        <span>None</span>
+                    ),
+                },
+            ]}
+        >
+            {/* The page goes on under the heading. */}
+            <section className="page-heading-actions__recent" aria-labelledby="page-heading-actions-recent">
+                <Text as="h2" variant="card-title" id="page-heading-actions-recent" className="page-heading-actions__recent-title">
+                    Recent deploys
+                </Text>
+                <ul className="page-heading-actions__deploys">
+                    {deploys.slice(0, 3).map((entry) => (
+                        <li key={entry.id} className="page-heading-actions__deploy">
+                            <span className="page-heading-actions__deploy-text">
+                                <Text as="span" truncate>
+                                    {entry.message}
+                                </Text>
+                                <Text variant="caption" truncate>
+                                    <Text as="span" variant="code" className="page-heading-actions__commit">
+                                        {entry.commit}
+                                    </Text>{" "}
+                                    · {entry.who} · {entry.when}
+                                </Text>
+                            </span>
+                            <Badge size="sm" variant={deployTone[entry.status]}>
+                                {entry.status}
+                            </Badge>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+        </PageHeading01>
     );
 }

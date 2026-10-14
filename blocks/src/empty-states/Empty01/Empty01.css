@@ -1,0 +1,128 @@
+.ow-empty01,
+.ow-empty01 *,
+.ow-empty01 *::before,
+.ow-empty01 *::after {
+    box-sizing: border-box;
+}
+
+.ow-empty01 {
+    background: var(--ow-canvas);
+    padding: 24px;
+    color: var(--ow-text);
+    font-size: 14px;
+}
+
+.ow-empty01__panel {
+    max-width: 1080px;
+    margin: 0 auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+    padding: 28px 32px 32px;
+}
+
+.ow-empty01__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.ow-empty01__subtitle {
+    margin-top: 4px;
+}
+
+/* The empty area: what will be here, the one way to make it, and the other ways to start. */
+.ow-empty01__area {
+    margin-top: 28px;
+    border: 1.5px dashed var(--ow-border-strong);
+    border-radius: var(--ow-radius-container);
+    padding: 36px 32px 32px;
+}
+
+.ow-empty01__area .ow-empty {
+    padding-top: 8px;
+}
+
+.ow-empty01__ways {
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+.ow-empty01__choices {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.ow-empty01__list {
+    margin: 28px 0 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    padding: 0;
+    list-style: none;
+}
+
+.ow-empty01__row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+}
+
+.ow-empty01__row + .ow-empty01__row {
+    border-top: 1px solid var(--ow-border);
+}
+
+.ow-empty01__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--ow-primary);
+}
+
+.ow-empty01__name {
+    display: grid;
+    min-width: 0;
+    gap: 2px;
+}
+
+@media (max-width: 1024px) {
+    .ow-empty01__area {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-empty01 {
+        padding: 8px;
+    }
+    .ow-empty01__panel {
+        padding: 22px 16px 16px;
+    }
+    .ow-empty01__area {
+        margin-top: 22px;
+        padding: 24px 14px 14px;
+    }
+    .ow-empty01__when {
+        display: none;
+    }
+    .ow-empty01__choices {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+    }
+    /* On phones each way to start is a row: the icon beside its title. */
+    .ow-empty01__choices .ow-choice {
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        padding: 12px 14px;
+    }
+    .ow-empty01__row {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        padding: 12px 14px;
+    }
+}

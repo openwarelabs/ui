@@ -92,78 +92,7 @@
     gap: 2px;
 }
 
-/* The dialog: the canvas around, the sections down the left, the panel on the right. */
-.settings-dialog__dialog {
-    height: min(600px, calc(100dvh - 32px));
-    background: var(--ow-canvas);
-    padding: 8px;
-}
-
-.settings-dialog__dialog .ow-dialog__body {
-    height: 100%;
-    grid-template-columns: 200px minmax(0, 1fr);
-    grid-template-rows: auto auto minmax(0, 1fr) auto;
-    gap: 0 8px;
-}
-
-.settings-dialog__dialog .ow-dialog__header {
-    grid-column: 1;
-    grid-row: 1;
-    padding: 14px 10px 16px;
-}
-
-.settings-dialog__nav--side {
-    grid-column: 1;
-    grid-row: 2;
-    padding: 0 4px;
-}
-
-.settings-dialog__nav--top {
-    display: none;
-}
-
-.settings-dialog__saved {
-    grid-column: 1;
-    grid-row: 4;
-    padding: 0 12px 10px;
-}
-
-.settings-dialog__panel {
-    grid-column: 2;
-    grid-row: 1 / -1;
-    min-height: 0;
-    overflow-y: auto;
-    border: 1px solid var(--ow-border);
-    border-radius: var(--ow-radius-panel);
-    background: var(--ow-surface);
-}
-
-/* Sits over the panel's top-right corner, in the same grid cell. */
-.settings-dialog__close {
-    z-index: 1;
-    grid-column: 2;
-    grid-row: 1;
-    align-self: start;
-    justify-self: end;
-    margin: 12px 12px 0 0;
-}
-
-.settings-dialog__section {
-    padding: 24px 28px 20px;
-}
-
-.settings-dialog__section-title {
-    padding-right: 40px;
-}
-
-.settings-dialog__section-text {
-    margin-top: 4px;
-}
-
-.settings-dialog__rows {
-    margin-top: 12px;
-}
-
+/* The rows' controls, in the sample's sections. */
 .settings-dialog__select {
     width: 196px;
 }
@@ -195,49 +124,8 @@
 }
 
 @media (max-width: 760px) {
-    .settings-dialog__dialog {
-        height: calc(100dvh - 32px);
-    }
-    .settings-dialog__dialog .ow-dialog__body {
-        grid-template-columns: minmax(0, 1fr);
-        grid-template-rows: auto auto minmax(0, 1fr);
-        gap: 8px;
-    }
-    .settings-dialog__dialog .ow-dialog__header {
-        padding: 10px 10px 0;
-    }
-    .settings-dialog__nav--side,
-    .settings-dialog__saved {
-        display: none;
-    }
-    .settings-dialog__nav--top {
-        display: flex;
-        grid-column: 1;
-        grid-row: 2;
-        padding: 2px;
-        scrollbar-width: none;
-    }
-    .settings-dialog__panel {
-        grid-column: 1;
-        grid-row: 3;
-    }
-    .settings-dialog__close {
-        grid-column: 1;
-        margin: 6px 4px 0 0;
-    }
     .settings-dialog__project-detail {
         display: none;
-    }
-    .settings-dialog__section {
-        padding: 18px 16px 12px;
-    }
-    .settings-dialog__section-title {
-        padding-right: 0;
-    }
-    /* Switches stay beside their label; other controls take a line of their own. */
-    .settings-dialog .ow-settings-row__control:not(:has(.ow-switch)) {
-        flex: 1 1 100%;
-        justify-content: flex-start;
     }
     .settings-dialog__select,
     .settings-dialog__input {

@@ -1,0 +1,272 @@
+.ow-shell03,
+.ow-shell03 *,
+.ow-shell03 *::before,
+.ow-shell03 *::after {
+    box-sizing: border-box;
+}
+
+/* The list on the canvas; the open item and its inspector side by side on a raised panel. */
+.ow-shell03 {
+    display: grid;
+    grid-template-columns: 272px minmax(0, 1fr);
+    height: 100dvh;
+    background: var(--ow-canvas);
+    color: var(--ow-text);
+}
+
+/* The list */
+.ow-shell03__list {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    gap: var(--ow-space-lg);
+    padding: 10px 12px 12px;
+}
+
+/* Menus wrap their trigger in an inline span; let these triggers take the full width. */
+.ow-shell03__list .ow-menu {
+    display: block;
+}
+
+/* The workspace and account menus open from rows that span the list, their text lined up on the left. */
+.ow-shell03__workspace,
+.ow-shell03__user {
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 6px 8px;
+    text-align: left;
+}
+
+/* An open menu keeps its trigger lit, as on hover. */
+.ow-shell03__workspace[aria-expanded="true"],
+.ow-shell03__user[aria-expanded="true"] {
+    border-color: var(--ow-border);
+    background: var(--ow-surface-muted);
+}
+
+.ow-shell03__workspace-name {
+    flex: 1;
+}
+
+.ow-shell03__menu-spacer {
+    display: block;
+    width: 15px;
+}
+
+.ow-shell03__list-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--ow-space-sm);
+    padding-left: 8px;
+}
+
+.ow-shell03__list-count {
+    margin-left: 6px;
+}
+
+.ow-shell03__search .ow-input {
+    background: var(--ow-surface);
+}
+
+.ow-shell03__scroll {
+    min-height: 0;
+    flex: 1;
+    margin: 0 -4px;
+    padding: 0 4px;
+}
+
+.ow-shell03__projects {
+    display: grid;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Each project is a NavItem, a little roomier for its second line; the open one is raised on the surface. */
+.ow-shell03__project {
+    width: 100%;
+    gap: 10px;
+    padding: 8px 10px;
+}
+
+.ow-shell03__project-text {
+    display: grid;
+    min-width: 0;
+    gap: 1px;
+}
+
+.ow-shell03__project-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ow-shell03__no-match {
+    padding: 12px 10px;
+}
+
+.ow-shell03__user-text {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+}
+
+/* The panel: the item, and the inspector beside it */
+.ow-shell03__panel {
+    display: grid;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    overflow: hidden;
+    margin: 8px 8px 8px 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+}
+
+.ow-shell03[data-inspector="closed"] .ow-shell03__panel {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.ow-shell03[data-inspector="closed"] .ow-shell03__inspector {
+    display: none;
+}
+
+.ow-shell03__item,
+.ow-shell03__inspector {
+    min-height: 0;
+    overflow-y: auto;
+}
+
+/* The item pane's width depends on the panes beside it, so its figures answer to the pane, not the window. */
+.ow-shell03__item {
+    container-type: inline-size;
+}
+
+.ow-shell03__toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    height: 52px;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    border-bottom: 1px solid var(--ow-border);
+    background: var(--ow-surface);
+    padding: 0 12px 0 20px;
+}
+
+.ow-shell03__crumbs {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    align-items: center;
+    gap: 6px;
+}
+
+.ow-shell03__crumbs svg {
+    flex-shrink: 0;
+    color: var(--ow-icon);
+}
+
+.ow-shell03__back {
+    display: none;
+}
+
+.ow-shell03__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ow-space-7xl);
+    padding: 28px 28px 40px;
+}
+
+/* The inspector */
+.ow-shell03__inspector {
+    border-left: 1px solid var(--ow-border);
+}
+
+.ow-shell03__inspector-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    height: 52px;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-sm);
+    border-bottom: 1px solid var(--ow-border);
+    background: var(--ow-surface);
+    padding: 0 12px 0 20px;
+}
+
+.ow-shell03__inspector-title:focus {
+    outline: none;
+}
+
+.ow-shell03__inspector-back {
+    display: none;
+}
+
+.ow-shell03__inspector-body {
+    display: grid;
+    gap: var(--ow-space-4xl);
+    padding: 16px 20px 28px;
+}
+
+/* Tablets: the inspector takes the item's place when asked for. */
+@media (max-width: 1023px) {
+    .ow-shell03 {
+        grid-template-columns: 248px minmax(0, 1fr);
+    }
+    .ow-shell03__panel,
+    .ow-shell03[data-inspector="closed"] .ow-shell03__panel {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .ow-shell03__inspector,
+    .ow-shell03[data-inspector="closed"] .ow-shell03__inspector {
+        display: none;
+        border-left: 0;
+    }
+    .ow-shell03[data-view="inspector"] .ow-shell03__item {
+        display: none;
+    }
+    .ow-shell03[data-view="inspector"] .ow-shell03__inspector {
+        display: block;
+    }
+    .ow-shell03__inspector-back {
+        display: block;
+    }
+    .ow-shell03__inspector-close {
+        display: none;
+    }
+    .ow-shell03__inspector-header {
+        justify-content: flex-start;
+        padding-left: 8px;
+    }
+}
+
+/* Phones: one pane at a time, each with a way back. */
+@media (max-width: 759px) {
+    .ow-shell03 {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .ow-shell03[data-view="list"] .ow-shell03__panel,
+    .ow-shell03:not([data-view="list"]) .ow-shell03__list {
+        display: none;
+    }
+    .ow-shell03__panel {
+        margin: 8px;
+    }
+    .ow-shell03__toolbar {
+        padding-left: 8px;
+    }
+    .ow-shell03__back {
+        display: block;
+    }
+    .ow-shell03__crumbs {
+        visibility: hidden;
+    }
+    .ow-shell03__content {
+        padding: 22px 18px 32px;
+    }
+}

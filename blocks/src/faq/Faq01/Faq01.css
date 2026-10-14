@@ -1,0 +1,77 @@
+.ow-faq01,
+.ow-faq01 *,
+.ow-faq01 *::before,
+.ow-faq01 *::after {
+    box-sizing: border-box;
+}
+
+.ow-faq01 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.ow-faq01__inner {
+    display: flex;
+    max-width: 760px;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.ow-faq01__list {
+    width: 100%;
+    margin-top: 56px;
+    border-radius: var(--ow-radius-card);
+}
+
+/* Roomier rows than the app's accordion, with the question at reading size. */
+.ow-faq01__list .ow-disclosure__trigger {
+    gap: 12px;
+    padding: 20px 24px;
+}
+
+.ow-faq01__list .ow-disclosure__title {
+    font-size: 16px;
+    font-weight: var(--ow-weight-control);
+    line-height: 1.4;
+}
+
+.ow-faq01__list .ow-disclosure__content {
+    padding: 0 24px 22px 50px;
+}
+
+.ow-faq01__answer {
+    max-width: 640px;
+}
+
+.ow-faq01__more {
+    margin-top: 28px;
+    text-wrap: balance;
+}
+
+.ow-faq01__more .ow-link {
+    white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+    .ow-faq01 {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .ow-faq01__list {
+        margin-top: 40px;
+    }
+    .ow-faq01__list .ow-disclosure__trigger {
+        align-items: flex-start;
+        padding: 16px 16px;
+    }
+    .ow-faq01__list .ow-disclosure__chevron {
+        margin-top: 4px;
+    }
+    .ow-faq01__list .ow-disclosure__title {
+        font-size: 15px;
+    }
+    .ow-faq01__list .ow-disclosure__content {
+        padding: 0 16px 18px 42px;
+    }
+}

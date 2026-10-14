@@ -1,21 +1,7 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useState } from "react";
 
-import {
-    Badge,
-    Button,
-    CloseButton,
-    Dialog,
-    Input,
-    NavItem,
-    NavList,
-    NumberField,
-    SegmentedControl,
-    Select,
-    SettingsRow,
-    Switch,
-    Text,
-    toast,
-} from "@openwarelabs/ui";
+import { Settings01 } from "@openwarelabs/blocks";
+import { Badge, Button, Input, NavItem, NavList, NumberField, SegmentedControl, Select, SettingsRow, Switch, Text, toast } from "@openwarelabs/ui";
 import { Bell, Bot, FolderKanban, Gauge, Inbox, Monitor, Moon, Palette, Rocket, Settings, SlidersHorizontal, Sun, UserRound } from "lucide-react";
 
 import "./SettingsDialog.css";
@@ -363,74 +349,27 @@ function AppBehind({ onOpenSettings }: { onOpenSettings: () => void }) {
 }
 
 export function SettingsDialog() {
-    const headingId = useId();
-    const rootRef = useRef<HTMLDivElement>(null);
     const [open, setOpen] = useState(true);
-    const [section, setSection] = useState<SectionId>("general");
     const [prefs, setPrefs] = useState<Preferences>(defaults);
 
-    // On opening, start on the current section in whichever list is showing, rather than the first thing that takes focus.
-    useEffect(() => {
-        if (!open) return undefined;
-        const frame = requestAnimationFrame(() => {
-            const items = rootRef.current?.querySelectorAll<HTMLElement>(".settings-dialog__nav [aria-current='page']") ?? [];
-            [...items].find((item) => item.offsetParent !== null)?.focus({ preventScroll: true });
-        });
-        return () => cancelAnimationFrame(frame);
-    }, [open]);
-
-    // ⌘, or Ctrl+, opens settings, as in most desktop apps.
-    useEffect(() => {
-        const onKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "," && (event.metaKey || event.ctrlKey)) {
-                event.preventDefault();
-                setOpen(true);
-            }
-        };
-        window.addEventListener("keydown", onKeyDown);
-        return () => window.removeEventListener("keydown", onKeyDown);
-    }, []);
-
     const set = <K extends keyof Preferences>(key: K, value: Preferences[K]) => setPrefs((current) => ({ ...current, [key]: value }));
-    const current = sections.find((entry) => entry.id === section)!;
-
-    const navItems = sections.map(({ id, label, icon: Icon }) => (
-        <NavItem key={id} icon={<Icon size={15} />} active={section === id} onClick={() => setSection(id)}>
-            {label}
-        </NavItem>
-    ));
 
     return (
-        <div ref={rootRef} className="settings-dialog">
+        <div className="settings-dialog">
             <AppBehind onOpenSettings={() => setOpen(true)} />
 
-            <Dialog open={open} onClose={() => setOpen(false)} title="Settings" width={880} className="settings-dialog__dialog">
-                {/* Down the left on wider screens; a sideways strip on phones. */}
-                <NavList label="Settings sections" className="settings-dialog__nav settings-dialog__nav--side">
-                    {navItems}
-                </NavList>
-                <NavList label="Settings sections" orientation="horizontal" className="settings-dialog__nav settings-dialog__nav--top">
-                    {navItems}
-                </NavList>
-                <Text variant="caption" as="p" className="settings-dialog__saved">
-                    Changes save as you go.
-                </Text>
-
-                <CloseButton label="Close settings" className="settings-dialog__close" onClick={() => setOpen(false)} />
-                <div className="settings-dialog__panel">
-                    <section aria-labelledby={headingId} className="settings-dialog__section">
-                        <Text variant="dialog-title" as="h3" id={headingId} className="settings-dialog__section-title">
-                            {current.label}
-                        </Text>
-                        <Text variant="copy" className="settings-dialog__section-text">
-                            {current.description}
-                        </Text>
-                        <div className="settings-dialog__rows">
-                            <SectionRows section={section} prefs={prefs} set={set} />
-                        </div>
-                    </section>
-                </div>
-            </Dialog>
+            {/* Opens over the page as it loads, and again with the Settings buttons or ⌘, (Ctrl+,). */}
+            <Settings01
+                open={open}
+                onOpenChange={setOpen}
+                sections={sections.map(({ id, label, icon: Icon, description }) => ({
+                    id,
+                    label,
+                    icon: <Icon size={15} />,
+                    description,
+                    content: <SectionRows section={id} prefs={prefs} set={set} />,
+                }))}
+            />
         </div>
     );
 }

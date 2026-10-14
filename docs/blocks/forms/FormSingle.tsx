@@ -1,7 +1,8 @@
-import { useId, useState, type FormEvent } from "react";
+import { useId, useState } from "react";
 
-import { Button, Checkbox, Field, Input, Link, Radio, RadioGroup, Select, Text, Textarea, toast } from "@openwarelabs/ui";
-import { ArrowLeft, GitBranch } from "lucide-react";
+import { Form01 } from "@openwarelabs/blocks";
+import { Checkbox, Field, Input, Radio, RadioGroup, Select, Text, Textarea, toast } from "@openwarelabs/ui";
+import { GitBranch } from "lucide-react";
 
 import "./FormSingle.css";
 
@@ -61,8 +62,7 @@ export function FormSingle() {
         if (key in errors) setErrors((current) => ({ ...current, [key]: undefined }));
     }
 
-    function submit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault();
+    function submit() {
         const found = validate(values);
         setErrors(found);
         const first = fieldOrder.find((key) => found[key]);
@@ -79,104 +79,84 @@ export function FormSingle() {
     }
 
     return (
-        <div className="form-single">
-            <div className="form-single__inner">
-                <Link href="#" variant="standalone" className="form-single__back">
-                    <ArrowLeft size={15} aria-hidden="true" />
-                    Projects
-                </Link>
-                <header className="form-single__header">
-                    <Text variant="heading" as="h1" id={fieldId("title")}>
-                        New project
-                    </Text>
-                    <Text variant="copy" className="form-single__lead">
-                        A project deploys one repository. Its agents, reviews and deploys all live inside it.
-                    </Text>
-                </header>
+        <Form01
+            title="New project"
+            description="A project deploys one repository. Its agents, reviews and deploys all live inside it."
+            backLink={{ label: "Projects", href: "#" }}
+            submitLabel="Create project"
+            onSubmit={submit}
+            submitting={saving}
+            note="You can change all of this later in the project's settings."
+        >
+            <Field label="Project name" hint="Lowercase letters, numbers and dashes. It appears in every deploy URL." error={errors.name}>
+                <Input
+                    id={fieldId("name")}
+                    value={values.name}
+                    onChange={(event) => update("name", event.target.value)}
+                    placeholder="billing-worker"
+                    autoComplete="off"
+                    spellCheck={false}
+                />
+            </Field>
 
-                <form className="form-single__card" noValidate onSubmit={submit} aria-labelledby={fieldId("title")}>
-                    <div className="form-single__fields">
-                        <Field label="Project name" hint="Lowercase letters, numbers and dashes. It appears in every deploy URL." error={errors.name}>
-                            <Input
-                                id={fieldId("name")}
-                                value={values.name}
-                                onChange={(event) => update("name", event.target.value)}
-                                placeholder="billing-worker"
-                                autoComplete="off"
-                                spellCheck={false}
-                            />
-                        </Field>
+            <Field label="Repository" hint="Only repositories the Acme app can see on GitHub are listed." error={errors.repository}>
+                <Select
+                    id={fieldId("repository")}
+                    value={values.repository}
+                    onChange={(value) => update("repository", value)}
+                    options={repositories}
+                    placeholder="Choose a repository"
+                />
+            </Field>
 
-                        <Field label="Repository" hint="Only repositories the Acme app can see on GitHub are listed." error={errors.repository}>
-                            <Select
-                                id={fieldId("repository")}
-                                value={values.repository}
-                                onChange={(value) => update("repository", value)}
-                                options={repositories}
-                                placeholder="Choose a repository"
-                            />
-                        </Field>
+            <Field label="Production branch" hint="Pushes here deploy to production. Every other branch gets a preview." error={errors.branch}>
+                <Input
+                    id={fieldId("branch")}
+                    value={values.branch}
+                    onChange={(event) => update("branch", event.target.value)}
+                    startContent={<GitBranch size={16} />}
+                    autoComplete="off"
+                    spellCheck={false}
+                />
+            </Field>
 
-                        <Field label="Production branch" hint="Pushes here deploy to production. Every other branch gets a preview." error={errors.branch}>
-                            <Input
-                                id={fieldId("branch")}
-                                value={values.branch}
-                                onChange={(event) => update("branch", event.target.value)}
-                                startContent={<GitBranch size={16} />}
-                                autoComplete="off"
-                                spellCheck={false}
-                            />
-                        </Field>
-
-                        <Field
-                            label={
-                                <>
-                                    Description{" "}
-                                    <Text variant="caption" className="form-single__optional">
-                                        Optional
-                                    </Text>
-                                </>
-                            }
-                            hint={`Shown on the project's card, and given to agents as context. ${values.description.length} of ${descriptionLimit}.`}
-                            error={errors.description}
-                        >
-                            <Textarea
-                                id={fieldId("description")}
-                                value={values.description}
-                                onChange={(event) => update("description", event.target.value)}
-                                placeholder="Sends invoices and payment reminders for the billing API."
-                                rows={3}
-                            />
-                        </Field>
-
-                        <RadioGroup label="Who can see it" value={values.visibility} onChange={(value) => update("visibility", value)}>
-                            <Radio value="workspace" description="All 8 members of Acme can open it and review its changes.">
-                                Everyone in Acme
-                            </Radio>
-                            <Radio value="private" description="Admins still see it in billing and the audit log.">
-                                Only people you add
-                            </Radio>
-                        </RadioGroup>
-
-                        <Checkbox
-                            checked={values.agents}
-                            onChange={(event) => update("agents", event.target.checked)}
-                            description="They push branches and open pull requests. Nothing merges until a person approves it."
-                        >
-                            Let agents open pull requests
-                        </Checkbox>
-                    </div>
-
-                    <div className="form-single__footer">
-                        <Text variant="caption" as="p" className="form-single__note">
-                            You can change all of this later in the project's settings.
+            <Field
+                label={
+                    <>
+                        Description{" "}
+                        <Text variant="caption" className="form-single__optional">
+                            Optional
                         </Text>
-                        <Button type="submit" variant="primary" loading={saving}>
-                            Create project
-                        </Button>
-                    </div>
-                </form>
-            </div>
-        </div>
+                    </>
+                }
+                hint={`Shown on the project's card, and given to agents as context. ${values.description.length} of ${descriptionLimit}.`}
+                error={errors.description}
+            >
+                <Textarea
+                    id={fieldId("description")}
+                    value={values.description}
+                    onChange={(event) => update("description", event.target.value)}
+                    placeholder="Sends invoices and payment reminders for the billing API."
+                    rows={3}
+                />
+            </Field>
+
+            <RadioGroup label="Who can see it" value={values.visibility} onChange={(value) => update("visibility", value)}>
+                <Radio value="workspace" description="All 8 members of Acme can open it and review its changes.">
+                    Everyone in Acme
+                </Radio>
+                <Radio value="private" description="Admins still see it in billing and the audit log.">
+                    Only people you add
+                </Radio>
+            </RadioGroup>
+
+            <Checkbox
+                checked={values.agents}
+                onChange={(event) => update("agents", event.target.checked)}
+                description="They push branches and open pull requests. Nothing merges until a person approves it."
+            >
+                Let agents open pull requests
+            </Checkbox>
+        </Form01>
     );
 }

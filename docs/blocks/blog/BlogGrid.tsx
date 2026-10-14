@@ -1,94 +1,11 @@
-import { useState } from "react";
-
-import { Button, Card, Link, SectionHeading, SegmentedControl, Tag, Text, User } from "@openwarelabs/ui";
+import { Blog01, type Blog01Post } from "@openwarelabs/blocks";
 import { ArrowRight } from "lucide-react";
 
 import "./BlogGrid.css";
 
 type CoverKind = "orbit" | "diff" | "bars" | "horizon" | "glyph" | "tiles";
 
-const posts: Array<{
-    title: string;
-    excerpt: string;
-    category: string;
-    date: string;
-    iso: string;
-    read: string;
-    author: string;
-    role: string;
-    cover: CoverKind;
-}> = [
-    {
-        title: "Agents now open their own pull requests",
-        excerpt: "Hand an agent a task and it comes back with a branch, a passing build and a pull request your team reviews like any other.",
-        category: "Product",
-        date: "8 Oct 2026",
-        iso: "2026-10-08",
-        read: "4 min read",
-        author: "Maya Chen",
-        role: "Product lead",
-        cover: "orbit",
-    },
-    {
-        title: "How we cut median review time to 42 minutes",
-        excerpt: "Smaller changes, reviewers picked by the code they touch, and a queue that tells you what's waiting on you.",
-        category: "Engineering",
-        date: "30 Sep 2026",
-        iso: "2026-09-30",
-        read: "7 min read",
-        author: "Tomás Reyes",
-        role: "Staff engineer",
-        cover: "diff",
-    },
-    {
-        title: "Roll back any deploy in one click",
-        excerpt: "Every deploy keeps the last good build warm, so undoing a bad release takes seconds, not a fresh build.",
-        category: "Product",
-        date: "22 Sep 2026",
-        iso: "2026-09-22",
-        read: "3 min read",
-        author: "Clara Novak",
-        role: "Engineering manager",
-        cover: "bars",
-    },
-    {
-        title: "How Halcyon ships twice a day with a team of six",
-        excerpt: "Halcyon moved planning, reviews and deploys into Acme, and stopped losing Fridays to release day.",
-        category: "Customers",
-        date: "15 Sep 2026",
-        iso: "2026-09-15",
-        read: "6 min read",
-        author: "Jonas Berg",
-        role: "Customer success",
-        cover: "horizon",
-    },
-    {
-        title: "Writing tasks an agent can finish",
-        excerpt: "What 40,000 agent runs taught us about scope, context, and knowing when to hand the work back to a person.",
-        category: "Engineering",
-        date: "4 Sep 2026",
-        iso: "2026-09-04",
-        read: "5 min read",
-        author: "Aiko Tanaka",
-        role: "Machine learning engineer",
-        cover: "glyph",
-    },
-    {
-        title: "Quarry's move from three tools to one",
-        excerpt: "Tickets, code review and deploys used to live in three places. Quarry's platform team on folding them into one.",
-        category: "Customers",
-        date: "27 Aug 2026",
-        iso: "2026-08-27",
-        read: "5 min read",
-        author: "Lena Fischer",
-        role: "Solutions engineer",
-        cover: "tiles",
-    },
-];
-
-const filters = ["All", "Product", "Engineering", "Customers"];
-
-/** A post's cover, drawn with CSS from the brand scale. Swap it for an image: <img src="…" alt="" />. */
+/** A post's cover, drawn with CSS from the brand scale. In your own posts, pass an image: <img src="…" alt="" />. */
 function Cover({ kind }: { kind: CoverKind }) {
     return (
         <div className={`blog-grid__cover blog-grid__cover--${kind}`} aria-hidden="true">
@@ -168,65 +85,86 @@ function Cover({ kind }: { kind: CoverKind }) {
     );
 }
 
+const posts: Blog01Post[] = [
+    {
+        title: "Agents now open their own pull requests",
+        href: "#",
+        excerpt: "Hand an agent a task and it comes back with a branch, a passing build and a pull request your team reviews like any other.",
+        category: "Product",
+        date: "8 Oct 2026",
+        dateTime: "2026-10-08",
+        readingTime: "4 min read",
+        author: { name: "Maya Chen", jobTitle: "Product lead" },
+        cover: <Cover kind="orbit" />,
+    },
+    {
+        title: "How we cut median review time to 42 minutes",
+        href: "#",
+        excerpt: "Smaller changes, reviewers picked by the code they touch, and a queue that tells you what's waiting on you.",
+        category: "Engineering",
+        date: "30 Sep 2026",
+        dateTime: "2026-09-30",
+        readingTime: "7 min read",
+        author: { name: "Tomás Reyes", jobTitle: "Staff engineer" },
+        cover: <Cover kind="diff" />,
+    },
+    {
+        title: "Roll back any deploy in one click",
+        href: "#",
+        excerpt: "Every deploy keeps the last good build warm, so undoing a bad release takes seconds, not a fresh build.",
+        category: "Product",
+        date: "22 Sep 2026",
+        dateTime: "2026-09-22",
+        readingTime: "3 min read",
+        author: { name: "Clara Novak", jobTitle: "Engineering manager" },
+        cover: <Cover kind="bars" />,
+    },
+    {
+        title: "How Halcyon ships twice a day with a team of six",
+        href: "#",
+        excerpt: "Halcyon moved planning, reviews and deploys into Acme, and stopped losing Fridays to release day.",
+        category: "Customers",
+        date: "15 Sep 2026",
+        dateTime: "2026-09-15",
+        readingTime: "6 min read",
+        author: { name: "Jonas Berg", jobTitle: "Customer success" },
+        cover: <Cover kind="horizon" />,
+    },
+    {
+        title: "Writing tasks an agent can finish",
+        href: "#",
+        excerpt: "What 40,000 agent runs taught us about scope, context, and knowing when to hand the work back to a person.",
+        category: "Engineering",
+        date: "4 Sep 2026",
+        dateTime: "2026-09-04",
+        readingTime: "5 min read",
+        author: { name: "Aiko Tanaka", jobTitle: "Machine learning engineer" },
+        cover: <Cover kind="glyph" />,
+    },
+    {
+        title: "Quarry's move from three tools to one",
+        href: "#",
+        excerpt: "Tickets, code review and deploys used to live in three places. Quarry's platform team on folding them into one.",
+        category: "Customers",
+        date: "27 Aug 2026",
+        dateTime: "2026-08-27",
+        readingTime: "5 min read",
+        author: { name: "Lena Fischer", jobTitle: "Solutions engineer" },
+        cover: <Cover kind="tiles" />,
+    },
+];
+
+const categories = ["Product", "Engineering", "Customers"];
+
 export function BlogGrid() {
-    const [filter, setFilter] = useState("All");
-    const shown = posts.filter((post) => filter === "All" || post.category === filter);
-
     return (
-        <section className="blog-grid" aria-labelledby="blog-grid-title">
-            <div className="blog-grid__inner">
-                <div className="blog-grid__header">
-                    <SectionHeading
-                        eyebrow="Blog"
-                        title={<span id="blog-grid-title">Notes on shipping software</span>}
-                        intro="Product news, how we build Acme, and the teams who use it."
-                    />
-                    <div className="blog-grid__filter">
-                        <SegmentedControl
-                            aria-label="Show posts about"
-                            options={filters.map((value) => ({ value, label: value }))}
-                            value={filter}
-                            onChange={setFilter}
-                        />
-                    </div>
-                </div>
-
-                <ul className="blog-grid__posts">
-                    {shown.map((post) => (
-                        <li key={post.title}>
-                            <Card padding="none" className="blog-grid__post">
-                                <Cover kind={post.cover} />
-                                <div className="blog-grid__body">
-                                    <Text variant="caption" as="div" className="blog-grid__meta">
-                                        <Tag size="sm">{post.category}</Tag>
-                                        <time dateTime={post.iso}>{post.date}</time>
-                                    </Text>
-                                    <Text variant="heading" as="h3" className="blog-grid__post-title">
-                                        <Link href="#" variant="standalone" className="blog-grid__link">
-                                            {post.title}
-                                        </Link>
-                                    </Text>
-                                    <Text variant="copy" className="blog-grid__excerpt">
-                                        {post.excerpt}
-                                    </Text>
-                                    <div className="blog-grid__byline">
-                                        <User name={post.author} description={post.role} size="sm" />
-                                        <Text variant="caption" className="blog-grid__read">
-                                            {post.read}
-                                        </Text>
-                                    </div>
-                                </div>
-                            </Card>
-                        </li>
-                    ))}
-                </ul>
-
-                <div className="blog-grid__footer">
-                    <Button shape="pill" endIcon={<ArrowRight size={16} />}>
-                        Browse every post
-                    </Button>
-                </div>
-            </div>
-        </section>
+        <Blog01
+            eyebrow="Blog"
+            title="Notes on shipping software"
+            description="Product news, how we build Acme, and the teams who use it."
+            categories={categories}
+            posts={posts}
+            moreAction={{ label: "Browse every post", href: "#", endIcon: <ArrowRight size={16} /> }}
+        />
     );
 }

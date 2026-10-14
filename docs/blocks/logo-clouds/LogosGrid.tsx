@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 
-import { Link, SectionHeading, Text } from "@openwarelabs/ui";
-import { ArrowRight } from "lucide-react";
+import { Logos02 } from "@openwarelabs/blocks";
 
 import "./LogosGrid.css";
 
 // Invented companies, drawn as a simple shape and a name. Swap in your customers' logos (as SVGs, in one colour).
+// Each name is lettered as its logo, so its type lives in the CSS rather than in a Text style.
 const logos: Array<{ name: string; slug: string; glyph: ReactNode }> = [
     {
         name: "Halcyon",
@@ -65,36 +65,23 @@ const logos: Array<{ name: string; slug: string; glyph: ReactNode }> = [
 
 export function LogosGrid() {
     return (
-        <section className="logos-grid" aria-labelledby="logos-grid-title">
-            <div className="logos-grid__inner">
-                <SectionHeading
-                    align="center"
-                    eyebrow="Customers"
-                    title={<span id="logos-grid-title">From small studios to public companies</span>}
-                    intro="Teams of every size plan, review and ship their software on Acme. Each of these has a story about how."
-                />
-                <ul className="logos-grid__tiles">
-                    {logos.map((logo) => (
-                        <li key={logo.name}>
-                            <Link href={`#customers/${logo.slug}`} variant="standalone" className="logos-grid__tile">
-                                <span className="logos-grid__logo" data-name={logo.name}>
-                                    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        {logo.glyph}
-                                    </svg>
-                                    {logo.name}
-                                </span>
-                                <Text variant="caption" className="logos-grid__more">
-                                    Read the story
-                                    <ArrowRight size={13} aria-hidden="true" />
-                                </Text>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-                <Text variant="body" tone="muted" align="center" className="logos-grid__footer">
-                    <Link href="#customers">See all 40 customer stories</Link>
-                </Text>
-            </div>
-        </section>
+        <Logos02
+            eyebrow="Customers"
+            title="From small studios to public companies"
+            description="Teams of every size plan, review and ship their software on Acme. Each of these has a story about how."
+            logos={logos.map((logo) => ({
+                name: logo.name,
+                href: `#customers/${logo.slug}`,
+                logo: (
+                    <span className="logos-grid__logo" data-name={logo.name}>
+                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            {logo.glyph}
+                        </svg>
+                        {logo.name}
+                    </span>
+                ),
+            }))}
+            link={{ label: "See all 40 customer stories", href: "#customers" }}
+        />
     );
 }

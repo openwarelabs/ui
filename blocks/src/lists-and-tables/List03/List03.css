@@ -1,0 +1,146 @@
+.ow-list03,
+.ow-list03 *,
+.ow-list03 *::before,
+.ow-list03 *::after {
+    box-sizing: border-box;
+}
+
+/* Rows of a title, one line of detail and a status, with each row's actions in a menu at its end. */
+.ow-list03 {
+    background: var(--ow-canvas);
+    padding: 32px;
+    color: var(--ow-text);
+}
+
+.ow-list03__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 960px;
+    gap: var(--ow-space-4xl);
+    margin: 0 auto;
+}
+
+.ow-list03__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+}
+
+.ow-list03__lead {
+    max-width: 60ch;
+    margin-top: 4px;
+}
+
+.ow-list03__card {
+    overflow: hidden;
+}
+
+.ow-list03__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-list03__row {
+    display: grid;
+    grid-template-areas: "icon text status menu";
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 4px var(--ow-space-2xl);
+    padding: 14px 12px 14px 18px;
+    transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-list03__row + .ow-list03__row {
+    border-top: 1px solid var(--ow-border);
+}
+
+.ow-list03__row:hover {
+    background: var(--ow-surface-muted);
+}
+
+.ow-list03__row[data-inactive] .ow-list03__icon {
+    color: var(--ow-text-muted);
+}
+
+.ow-list03__icon {
+    display: flex;
+    width: 36px;
+    height: 36px;
+    grid-area: icon;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-tile);
+    background: var(--ow-surface-muted);
+    color: var(--ow-text-soft);
+}
+
+.ow-list03__text {
+    display: grid;
+    min-width: 0;
+    grid-area: text;
+    gap: 4px;
+}
+
+.ow-list03__name-row {
+    display: flex;
+    min-width: 0;
+    align-items: baseline;
+    gap: 10px;
+}
+
+/* The key's last characters in mono at 12px, a caption's size beside the name. */
+.ow-list03__key {
+    flex-shrink: 0;
+    font-size: 12px;
+}
+
+.ow-list03__detail {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ow-list03__status {
+    grid-area: status;
+    justify-self: end;
+}
+
+.ow-list03__menu {
+    grid-area: menu;
+}
+
+/* Phones: the status moves under the detail, and the detail may wrap. */
+@media (max-width: 759px) {
+    .ow-list03 {
+        padding: 24px var(--ow-page-gutter) 32px;
+    }
+    .ow-list03__header > .ow-button {
+        width: 100%;
+    }
+    .ow-list03__row {
+        grid-template-areas:
+            "icon text menu"
+            ". status menu";
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: start;
+        gap: 8px var(--ow-space-lg);
+        padding: 14px 8px 14px 14px;
+    }
+    .ow-list03__status {
+        justify-self: start;
+    }
+    .ow-list03__detail {
+        white-space: normal;
+    }
+    .ow-list03__menu {
+        align-self: center;
+    }
+    .ow-list03__name-row {
+        flex-wrap: wrap;
+        row-gap: 0;
+    }
+}

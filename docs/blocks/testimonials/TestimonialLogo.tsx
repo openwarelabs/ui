@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 
-import { SectionHeading, Tab, TabList, TabPanel, Tabs, Text, User } from "@openwarelabs/ui";
-import { Quote } from "lucide-react";
+import { Testimonial03 } from "@openwarelabs/blocks";
 
 import "./TestimonialLogo.css";
 
@@ -51,7 +50,7 @@ const stories = [
         ],
         quote: "We used to batch releases on Thursdays because review was the bottleneck. Now agents clear the routine changes overnight, and our engineers spend their mornings on the work only they can do.",
         name: "Owen Gallagher",
-        role: "Lead developer",
+        jobTitle: "Lead developer",
     },
     {
         company: "Quarry",
@@ -63,7 +62,7 @@ const stories = [
         ],
         quote: "Our auditors ask who approved every change to the ledger. With Acme the answer is one click away, whether a person or an agent made it.",
         name: "Daniel Osei",
-        role: "Staff engineer",
+        jobTitle: "Staff engineer",
     },
     {
         company: "Lumen",
@@ -75,7 +74,7 @@ const stories = [
         ],
         quote: "Every branch has a preview, so our designers review the real thing instead of a screenshot. Half our feedback now arrives before the pull request is even marked ready.",
         name: "Hana Sato",
-        role: "Product engineer",
+        jobTitle: "Product engineer",
     },
     {
         company: "Pinecrest",
@@ -87,66 +86,22 @@ const stories = [
         ],
         quote: "Required reviews apply to agents exactly as they do to people. That one setting is what got Acme through our security review.",
         name: "Felix Wagner",
-        role: "Head of platform",
+        jobTitle: "Head of platform",
     },
 ];
 
 export function TestimonialLogo() {
     return (
-        <section className="testimonial-logo" aria-labelledby="testimonial-logo-title">
-            <div className="testimonial-logo__inner">
-                <SectionHeading align="center" eyebrow="Customer stories" title={<span id="testimonial-logo-title">Why teams move to Acme</span>} />
-
-                <Tabs defaultValue="Halcyon" variant="line" className="testimonial-logo__tabs">
-                    <TabList aria-label="Customers">
-                        {stories.map((story) => (
-                            <Tab key={story.company} value={story.company} className="testimonial-logo__tab">
-                                <Wordmark name={story.company} />
-                            </Tab>
-                        ))}
-                    </TabList>
-
-                    {stories.map((story) => (
-                        <TabPanel key={story.company} value={story.company} className="testimonial-logo__panel">
-                            <figure className="testimonial-logo__card">
-                                <div className="testimonial-logo__body">
-                                    <Quote size={18} className="testimonial-logo__mark" aria-hidden="true" />
-                                    <blockquote className="testimonial-logo__quote">
-                                        <Text as="p" variant="heading" className="testimonial-logo__text">
-                                            {story.quote}
-                                        </Text>
-                                    </blockquote>
-                                    <figcaption className="testimonial-logo__person">
-                                        <User name={story.name} description={`${story.role}, ${story.company}`} size="lg" />
-                                    </figcaption>
-                                </div>
-                                <div className="testimonial-logo__company">
-                                    <Wordmark name={story.company} size="lg" />
-                                    <Text variant="copy" className="testimonial-logo__about">
-                                        {story.about}
-                                    </Text>
-                                    <dl className="testimonial-logo__facts">
-                                        {story.facts.map((fact) => (
-                                            <div key={fact.label} className="testimonial-logo__fact">
-                                                <Text as="dt" variant="body" tone="muted">
-                                                    {fact.label}
-                                                </Text>
-                                                <Text as="dd" variant="label" align="end">
-                                                    {fact.value}
-                                                </Text>
-                                            </div>
-                                        ))}
-                                    </dl>
-                                </div>
-                            </figure>
-                        </TabPanel>
-                    ))}
-                </Tabs>
-
-                <Text as="p" variant="caption" align="center" className="testimonial-logo__note">
-                    Sample quotes. The companies and people are invented.
-                </Text>
-            </div>
-        </section>
+        <Testimonial03
+            eyebrow="Customer stories"
+            title="Why teams move to Acme"
+            stories={stories.map((story) => ({
+                ...story,
+                jobTitle: `${story.jobTitle}, ${story.company}`,
+                logo: <Wordmark name={story.company} />,
+                largeLogo: <Wordmark name={story.company} size="lg" />,
+            }))}
+            note="Sample quotes. The companies and people are invented."
+        />
     );
 }

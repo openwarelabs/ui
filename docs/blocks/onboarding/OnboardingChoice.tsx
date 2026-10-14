@@ -1,33 +1,10 @@
-import { useEffect, useId, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 
-import { Badge, Button, ChoiceCard, Field, Input, Radio, RadioGroup, Steps, Text } from "@openwarelabs/ui";
-import { ArrowLeft, Check, FilePlus2, FolderGit2, GitBranch, LayoutTemplate, ShieldCheck } from "lucide-react";
+import { Onboarding02 } from "@openwarelabs/blocks";
+import { Button, Field, Input, Radio, RadioGroup, Text } from "@openwarelabs/ui";
+import { ArrowLeft, FilePlus2, FolderGit2, GitBranch, LayoutTemplate, ShieldCheck } from "lucide-react";
 
 import "./OnboardingChoice.css";
-
-type View = "choose" | "scratch" | "template" | "import" | "done";
-
-const choices = [
-    {
-        view: "scratch",
-        title: "Start from scratch",
-        description: "An empty project and a blank board. Add the code when you're ready.",
-        icon: FilePlus2,
-    },
-    {
-        view: "template",
-        title: "Use a template",
-        description: "A board, labels and agent rules set up for a site, an API or docs.",
-        icon: LayoutTemplate,
-    },
-    {
-        view: "import",
-        title: "Import from GitHub",
-        description: "A repository and its open issues, ready for agents to pick up.",
-        icon: GitBranch,
-        recommended: true,
-    },
-] as const;
 
 const templates = [
     { id: "marketing-site", title: "Marketing site", description: "Pages, a blog and a preview deploy for every branch." },
@@ -41,17 +18,6 @@ const repositories = [
     { name: "acme/mobile-app", meta: "Swift · 54 open issues · updated 3 days ago" },
     { name: "acme/docs", meta: "MDX · 12 open issues · updated last week" },
 ];
-
-const headings: Record<View, { title: string; lead: string }> = {
-    choose: {
-        title: "How do you want to start?",
-        lead: "A project holds the board, the code and the agents that work on it. Start one now; you can add more at any time.",
-    },
-    scratch: { title: "Name your project", lead: "It's also the name of the repository Acme creates for it." },
-    template: { title: "Pick a template", lead: "Each comes with a board, labels and rules for the agents. Change any of it later." },
-    import: { title: "Pick a repository", lead: "These are the repositories Acme can see in your GitHub organisation." },
-    done: { title: "", lead: "Next, invite the people you work with. Acme is free for teams of up to five." },
-};
 
 function ScratchForm({ onBack, onCreate }: { onBack: () => void; onCreate: (name: string) => void }) {
     const [name, setName] = useState("");
@@ -168,101 +134,51 @@ function ImportList({ onBack, onCreate }: { onBack: () => void; onCreate: (name:
 }
 
 export function OnboardingChoice() {
-    const [view, setView] = useState<View>("choose");
-    const [project, setProject] = useState("");
-    const titleId = useId();
-    const moved = useRef(false);
-
-    // Each view replaces the last, so move focus to its heading for screen readers and keyboards.
-    useEffect(() => {
-        if (moved.current) document.getElementById(titleId)?.focus();
-    }, [view, titleId]);
-
-    const go = (next: View) => {
-        moved.current = true;
-        setView(next);
-    };
-    const create = (name: string) => {
-        setProject(name);
-        go("done");
-    };
-    const back = () => go("choose");
-
-    const heading = headings[view];
-
     return (
-        <div className="onboarding-choice">
-            <header className="onboarding-choice__top">
-                <Text variant="card-title" as="span" className="onboarding-choice__brand">
-                    <span className="onboarding-choice__mark" aria-hidden="true" />
-                    Acme
-                </Text>
-                <Steps
-                    className="onboarding-choice__progress"
-                    orientation="horizontal"
-                    label="Setup"
-                    current={view === "done" ? 2 : 1}
-                    items={[{ title: "Workspace" }, { title: "Project" }, { title: "Team" }]}
-                />
-                <Button className="onboarding-choice__skip" variant="ghost" size="sm">
-                    Skip for now
-                </Button>
-            </header>
-
-            <main className="onboarding-choice__body">
-                {view === "done" ? (
-                    <span className="onboarding-choice__done-icon" aria-hidden="true">
-                        <Check size={22} />
-                    </span>
-                ) : null}
-                <Text variant="heading" as="h2" id={titleId} tabIndex={-1} className="onboarding-choice__title">
-                    {view === "done" ? `${project} is ready` : heading.title}
-                </Text>
-                <Text variant="copy" className="onboarding-choice__lead">
-                    {heading.lead}
-                </Text>
-
-                <div className="onboarding-choice__content">
-                    {view === "choose" ? (
-                        <>
-                            <div className="onboarding-choice__options">
-                                {choices.map((choice) => (
-                                    <div key={choice.view} className="onboarding-choice__option">
-                                        <ChoiceCard
-                                            icon={<choice.icon size={20} />}
-                                            title={choice.title}
-                                            description={choice.description}
-                                            recommended={"recommended" in choice}
-                                            aria-describedby={"recommended" in choice ? "onboarding-choice-recommended" : undefined}
-                                            onClick={() => go(choice.view)}
-                                        />
-                                        {"recommended" in choice ? (
-                                            <Badge id="onboarding-choice-recommended" className="onboarding-choice__recommended" size="sm" variant="active">
-                                                Recommended
-                                            </Badge>
-                                        ) : null}
-                                    </div>
-                                ))}
-                            </div>
-                            <Text variant="copy" className="onboarding-choice__note">
-                                <ShieldCheck size={16} aria-hidden="true" />
-                                Nothing changes in GitHub until you merge a pull request.
-                            </Text>
-                        </>
-                    ) : null}
-                    {view === "scratch" ? <ScratchForm onBack={back} onCreate={create} /> : null}
-                    {view === "template" ? <TemplateForm onBack={back} onCreate={create} /> : null}
-                    {view === "import" ? <ImportList onBack={back} onCreate={create} /> : null}
-                    {view === "done" ? (
-                        <div className="onboarding-choice__done-actions">
-                            <Button variant="primary">Invite your team</Button>
-                            <Button variant="ghost" onClick={back}>
-                                Start again
-                            </Button>
-                        </div>
-                    ) : null}
-                </div>
-            </main>
-        </div>
+        <Onboarding02
+            brand={{ name: "Acme", logo: <span className="onboarding-choice__mark" aria-hidden="true" /> }}
+            progress={{ steps: ["Workspace", "Project", "Team"], current: 1 }}
+            skip={{ label: "Skip for now" }}
+            title="How do you want to start?"
+            description="A project holds the board, the code and the agents that work on it. Start one now; you can add more at any time."
+            choices={[
+                {
+                    id: "scratch",
+                    title: "Start from scratch",
+                    description: "An empty project and a blank board. Add the code when you're ready.",
+                    icon: <FilePlus2 size={20} />,
+                    heading: "Name your project",
+                    lead: "It's also the name of the repository Acme creates for it.",
+                    render: ({ back, finish }) => <ScratchForm onBack={back} onCreate={finish} />,
+                },
+                {
+                    id: "template",
+                    title: "Use a template",
+                    description: "A board, labels and agent rules set up for a site, an API or docs.",
+                    icon: <LayoutTemplate size={20} />,
+                    heading: "Pick a template",
+                    lead: "Each comes with a board, labels and rules for the agents. Change any of it later.",
+                    render: ({ back, finish }) => <TemplateForm onBack={back} onCreate={finish} />,
+                },
+                {
+                    id: "import",
+                    title: "Import from GitHub",
+                    description: "A repository and its open issues, ready for agents to pick up.",
+                    icon: <GitBranch size={20} />,
+                    recommended: true,
+                    heading: "Pick a repository",
+                    lead: "These are the repositories Acme can see in your GitHub organisation.",
+                    render: ({ back, finish }) => <ImportList onBack={back} onCreate={finish} />,
+                },
+            ]}
+            note={
+                <>
+                    <ShieldCheck size={16} aria-hidden="true" />
+                    Nothing changes in GitHub until you merge a pull request.
+                </>
+            }
+            doneDescription="Next, invite the people you work with. Acme is free for teams of up to five."
+            doneAction={{ label: "Invite your team" }}
+        />
     );
 }

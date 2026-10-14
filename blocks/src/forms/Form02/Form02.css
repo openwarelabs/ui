@@ -1,0 +1,100 @@
+/* Sections down the page: each one's title and purpose on the left, its fields on a card on the right. */
+.ow-form02,
+.ow-form02 *,
+.ow-form02 *::before,
+.ow-form02 *::after {
+    box-sizing: border-box;
+}
+
+.ow-form02 {
+    background: var(--ow-canvas);
+    padding: 48px 32px 64px;
+    color: var(--ow-text);
+}
+
+.ow-form02__inner {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.ow-form02__header {
+    padding-bottom: 32px;
+}
+
+.ow-form02__lead {
+    max-width: 640px;
+    margin-top: 6px;
+}
+
+.ow-form02__section {
+    display: grid;
+    grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+    gap: 48px;
+    border-top: 1px solid var(--ow-border);
+    padding: 32px 0;
+}
+
+.ow-form02__intro {
+    padding-top: 4px;
+}
+
+.ow-form02__section-text {
+    margin-top: 6px;
+}
+
+.ow-form02__fields {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--ow-space-5xl);
+    padding: 24px;
+}
+
+.ow-form02__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--ow-space-sm);
+    border-top: 1px solid var(--ow-border);
+    padding-top: 24px;
+}
+
+.ow-form02__status {
+    margin-right: auto;
+}
+
+@media (max-width: 1024px) {
+    .ow-form02__section {
+        grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+        gap: 32px;
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-form02 {
+        padding: 28px var(--ow-page-gutter) 40px;
+    }
+    .ow-form02__header {
+        padding-bottom: 24px;
+    }
+    .ow-form02__section {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+        padding: 24px 0 28px;
+    }
+    .ow-form02__intro {
+        padding-top: 0;
+    }
+    .ow-form02__fields {
+        padding: 18px;
+    }
+    .ow-form02__status {
+        flex-basis: 100%;
+        margin-bottom: 4px;
+    }
+    .ow-form02__actions {
+        flex-wrap: wrap;
+    }
+    .ow-form02__actions > button {
+        flex: 1;
+    }
+}

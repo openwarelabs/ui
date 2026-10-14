@@ -1,0 +1,158 @@
+.ow-shell02,
+.ow-shell02 *,
+.ow-shell02 *::before,
+.ow-shell02 *::after {
+    box-sizing: border-box;
+}
+
+/* Navigation across the top on the canvas; the page on a raised panel under it. */
+.ow-shell02 {
+    display: flex;
+    min-height: 100dvh;
+    flex-direction: column;
+    background: var(--ow-canvas);
+    color: var(--ow-text);
+}
+
+.ow-shell02__header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    height: 56px;
+    align-items: center;
+    gap: var(--ow-space-2xl);
+    background: var(--ow-canvas);
+    padding: 0 12px 0 10px;
+}
+
+/* Menus wrap their trigger in an inline span; keep these in the bar's flex row. */
+.ow-shell02__header .ow-menu {
+    display: flex;
+}
+
+.ow-shell02__workspace,
+.ow-shell02__user {
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 6px 8px;
+    text-align: left;
+}
+
+/* An open menu keeps its trigger lit, as on hover. */
+.ow-shell02__workspace[aria-expanded="true"],
+.ow-shell02__user[aria-expanded="true"] {
+    border-color: var(--ow-border);
+    background: var(--ow-surface-muted);
+}
+
+.ow-shell02__menu-spacer {
+    display: block;
+    width: 15px;
+}
+
+/* A hairline between the workspace and the sections. */
+.ow-shell02__nav {
+    min-width: 0;
+    flex: 1;
+    border-left: 1px solid var(--ow-border-strong);
+    padding: 2px 0 2px var(--ow-space-2xl);
+}
+
+.ow-shell02__end {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--ow-space-lg);
+}
+
+.ow-shell02__search {
+    width: 220px;
+    justify-content: flex-start;
+}
+
+.ow-shell02__search-text {
+    flex: 1;
+    text-align: left;
+}
+
+.ow-shell02__search-icon,
+.ow-shell02__menu-button {
+    display: none;
+}
+
+.ow-shell02__panel {
+    flex: 1;
+    margin: 0 8px 8px;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+    padding: 36px 32px 48px;
+}
+
+/* With the navigation on top, the page sits in a centred column. */
+.ow-shell02__page {
+    display: flex;
+    max-width: 960px;
+    flex-direction: column;
+    gap: var(--ow-space-7xl);
+    margin: 0 auto;
+}
+
+/* The drawer on phones: the sections, then the account at the bottom. */
+.ow-shell02__drawer {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    gap: var(--ow-space-3xl);
+}
+
+.ow-shell02__drawer-account {
+    margin-top: auto;
+    border-top: 1px solid var(--ow-border);
+    padding-top: var(--ow-space-lg);
+}
+
+.ow-shell02__drawer-account .ow-menu {
+    display: block;
+}
+
+.ow-shell02__user-text {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+}
+
+@media (max-width: 1023px) {
+    .ow-shell02__search {
+        display: none;
+    }
+    .ow-shell02__search-icon {
+        display: inline-flex;
+    }
+    .ow-shell02__panel {
+        padding: 28px 24px 40px;
+    }
+}
+
+@media (max-width: 759px) {
+    .ow-shell02__header {
+        height: 52px;
+        gap: var(--ow-space-sm);
+        padding: 0 6px;
+    }
+    .ow-shell02__nav,
+    .ow-shell02__account {
+        display: none;
+    }
+    .ow-shell02__end {
+        gap: var(--ow-space-xs);
+        margin-left: auto;
+    }
+    .ow-shell02__menu-button {
+        display: flex;
+    }
+    .ow-shell02__panel {
+        padding: 22px 18px 32px;
+    }
+}

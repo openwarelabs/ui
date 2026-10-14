@@ -1,6 +1,5 @@
-import { Accordion, AccordionItem, Link, SectionHeading, Text } from "@openwarelabs/ui";
-
-import "./FaqAccordion.css";
+import { Faq01 } from "@openwarelabs/blocks";
+import { Link } from "@openwarelabs/ui";
 
 const questions = [
     {
@@ -37,30 +36,17 @@ const questions = [
 
 export function FaqAccordion() {
     return (
-        <section className="faq-accordion" aria-labelledby="faq-accordion-title">
-            <div className="faq-accordion__inner">
-                <SectionHeading
-                    align="center"
-                    eyebrow="FAQ"
-                    title={<span id="faq-accordion-title">Questions we hear before teams sign up</span>}
-                    intro="Short answers about agents, your data and billing."
-                />
-
-                <Accordion className="faq-accordion__list" defaultValue={["runs"]}>
-                    {questions.map((item) => (
-                        <AccordionItem key={item.id} value={item.id} title={item.question}>
-                            <Text variant="copy" className="faq-accordion__answer">
-                                {item.answer}
-                            </Text>
-                        </AccordionItem>
-                    ))}
-                </Accordion>
-
-                <Text variant="body" tone="muted" align="center" className="faq-accordion__more">
-                    Didn't find your question? <Link href="#">Read the docs</Link> or write to{" "}
+        <Faq01
+            eyebrow="FAQ"
+            title="Questions we hear before teams sign up"
+            description="Short answers about agents, your data and billing."
+            questions={questions}
+            note={
+                <>
+                    Didn't find your question? <Link href="#docs">Read the docs</Link> or write to{" "}
                     <Link href="mailto:support@example.com">support@example.com</Link>.
-                </Text>
-            </div>
-        </section>
+                </>
+            }
+        />
     );
 }

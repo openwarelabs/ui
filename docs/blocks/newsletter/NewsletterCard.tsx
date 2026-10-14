@@ -1,93 +1,28 @@
-import { useState, type FormEvent } from "react";
-
-import { Avatar, AvatarGroup, Button, Card, Field, Input, Link, Text, toast } from "@openwarelabs/ui";
-import { ArrowRight, Mail } from "lucide-react";
-
-import "./NewsletterCard.css";
-
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-function emailError(value: string) {
-    if (!value.trim()) return "Enter your email address.";
-    if (!emailPattern.test(value.trim())) return "Enter an email address like name@example.com.";
-    return undefined;
-}
-
-const authors = ["Clara Novak", "Jonas Berg", "Sam Okafor"];
+import { Newsletter02 } from "@openwarelabs/blocks";
+import { Text } from "@openwarelabs/ui";
+import { Mail } from "lucide-react";
 
 export function NewsletterCard() {
-    const [email, setEmail] = useState("");
-    const [error, setError] = useState<string>();
-    const [touched, setTouched] = useState(false);
-    const [sending, setSending] = useState(false);
-
-    const submit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        setTouched(true);
-        const problem = emailError(email);
-        setError(problem);
-        if (problem) return;
-        setSending(true);
-        // Stands in for the request to your mailing list.
-        window.setTimeout(() => {
-            setSending(false);
-            toast.success("Check your inbox", { description: `We've sent a link to ${email.trim()}. Open it to confirm, and the next post comes to you.` });
-            setEmail("");
-            setTouched(false);
-        }, 700);
-    };
-
     return (
-        <section className="newsletter-card" aria-labelledby="newsletter-card-title">
-            <Card padding="none" className="newsletter-card__card">
-                <div className="newsletter-card__body">
-                    <span className="newsletter-card__icon" aria-hidden="true">
-                        <Mail size={20} />
-                    </span>
-                    <Text as="h2" variant="heading" id="newsletter-card-title" className="newsletter-card__title">
-                        Get the next post by email
-                    </Text>
-                    <Text variant="copy" className="newsletter-card__lead">
-                        Field notes on shipping software with agents, from the people who build Acme. A new post every other Thursday, about a six-minute read.
-                    </Text>
-                    <form className="newsletter-card__form" aria-labelledby="newsletter-card-title" noValidate onSubmit={submit}>
-                        <Field label="Email address" error={error}>
-                            <Input
-                                type="email"
-                                autoComplete="email"
-                                placeholder="you@example.com"
-                                value={email}
-                                onChange={(event) => {
-                                    setEmail(event.target.value);
-                                    if (touched) setError(emailError(event.target.value));
-                                }}
-                            />
-                        </Field>
-                        <Button type="submit" variant="primary" shape="pill" loading={sending} className="newsletter-card__submit">
-                            Subscribe
-                        </Button>
-                    </form>
-                </div>
-                <div className="newsletter-card__foot">
-                    <div className="newsletter-card__authors">
-                        <AvatarGroup size="sm">
-                            {authors.map((name) => (
-                                <Avatar key={name} name={name} />
-                            ))}
-                        </AvatarGroup>
-                        <Text variant="body" tone="muted">
-                            <Text as="strong" variant="label" tone="soft">
-                                Clara, Jonas and Sam
-                            </Text>{" "}
-                            write it for 9,400 readers.
-                        </Text>
-                    </div>
-                    <Link href="#" variant="standalone" className="newsletter-card__past">
-                        Read past posts
-                        <ArrowRight size={14} aria-hidden="true" />
-                    </Link>
-                </div>
-            </Card>
-        </section>
+        <Newsletter02
+            icon={<Mail size={20} />}
+            title="Get the next post by email"
+            description="Field notes on shipping software with agents, from the people who build Acme. A new post every other Thursday, about a six-minute read."
+            submitLabel="Subscribe"
+            // Stands in for the request to your mailing list.
+            onSubmit={() => new Promise((resolve) => window.setTimeout(resolve, 700))}
+            successTitle="Check your inbox"
+            successDescription={(email) => `We've sent a link to ${email}. Open it to confirm, and the next post comes to you.`}
+            authors={["Clara Novak", "Jonas Berg", "Sam Okafor"]}
+            authorsNote={
+                <>
+                    <Text as="strong" variant="label" tone="soft">
+                        Clara, Jonas and Sam
+                    </Text>{" "}
+                    write it for 9,400 readers.
+                </>
+            }
+            archiveLink={{ label: "Read past posts", href: "#" }}
+        />
     );
 }

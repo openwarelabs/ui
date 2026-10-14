@@ -5,191 +5,6 @@
     box-sizing: border-box;
 }
 
-.blog-featured {
-    background: var(--ow-paper);
-    padding: var(--ow-section-y) 32px;
-    color: var(--ow-text);
-}
-
-.blog-featured__inner {
-    max-width: var(--ow-page-max);
-    margin: 0 auto;
-}
-
-.blog-featured__header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px 32px;
-}
-
-.blog-featured__all {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-/* The featured post: the cover on the left, the story on the right. */
-.blog-featured__lead.ow-card {
-    position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-    margin-top: 40px;
-    border-radius: var(--ow-radius-card);
-    padding: 8px;
-    transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
-}
-
-.blog-featured__lead.ow-card:hover,
-.blog-featured__item:hover .blog-featured__thumb {
-    border-color: var(--ow-border-strong);
-}
-
-.blog-featured__lead.ow-card:has(.blog-featured__link:focus-visible),
-.blog-featured__item:has(.blog-featured__link:focus-visible) {
-    outline: 2px solid var(--ow-focus-ring);
-    outline-offset: 4px;
-}
-
-.blog-featured__lead .blog-featured__cover {
-    height: 100%;
-    min-height: 360px;
-    aspect-ratio: auto;
-}
-
-.blog-featured__lead-body {
-    display: flex;
-    flex-direction: column;
-    padding: 32px 36px 28px 44px;
-}
-
-.blog-featured__meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-}
-
-.blog-featured__lead-title {
-    margin-top: 20px;
-}
-
-/* A title's link covers its whole post, so anywhere on it opens the post. It keeps the title's weight and ink: the
-   card's border answers the hover, and its outline the focus. */
-.blog-featured__link.ow-link,
-.blog-featured__link.ow-link:hover,
-.blog-featured__link.ow-link:focus-visible {
-    color: inherit;
-    font-weight: inherit;
-    text-decoration: none;
-    outline: none;
-}
-
-.blog-featured__link::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-}
-
-.blog-featured__excerpt {
-    margin-top: 16px;
-}
-
-.blog-featured__facts {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin: 28px 0 0;
-    border-top: 1px solid var(--ow-border);
-    border-bottom: 1px solid var(--ow-border);
-    padding: 0;
-}
-
-.blog-featured__fact {
-    display: grid;
-    gap: 2px;
-    padding: 16px 0;
-}
-
-.blog-featured__fact + .blog-featured__fact {
-    border-left: 1px solid var(--ow-border);
-    padding-left: 18px;
-}
-
-.blog-featured__fact dt {
-    order: 2;
-}
-
-/* Figures in tabular numerals, so the three line up. */
-.blog-featured__fact-value {
-    order: 1;
-    font-variant-numeric: tabular-nums;
-}
-
-.blog-featured__byline {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-top: auto;
-    padding-top: 28px;
-}
-
-.blog-featured__read {
-    flex-shrink: 0;
-}
-
-/* The next three posts: a small cover beside each title, hairlines between them. */
-.blog-featured__more {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin: 40px 0 0;
-    padding: 0;
-    list-style: none;
-}
-
-.blog-featured__more > li + li {
-    border-left: 1px solid var(--ow-border);
-}
-
-.blog-featured__item {
-    position: relative;
-    display: grid;
-    grid-template-columns: 128px minmax(0, 1fr);
-    align-items: start;
-    gap: 18px;
-    border-radius: var(--ow-radius-container);
-    padding: 4px 28px;
-}
-
-.blog-featured__more > li:first-child .blog-featured__item {
-    padding-left: 0;
-}
-
-.blog-featured__more > li:last-child .blog-featured__item {
-    padding-right: 0;
-}
-
-.blog-featured__thumb {
-    border: 1px solid transparent;
-    border-radius: var(--ow-radius-container);
-    transition: border-color var(--ow-duration-base) var(--ow-ease-standard);
-}
-
-/* Short titles in a narrow column: balanced, so none ends on a lone word. */
-.blog-featured__item-title {
-    margin-top: 8px;
-    text-wrap: balance;
-}
-
-.blog-featured__item-author {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 10px;
-}
-
 /* Covers: drawn from the brand scale on a dot grid. Night covers stay midnight in both themes; day covers are a
    wash of the brand over the surface, so they follow the theme. Shapes are sized in cqw, so they scale with the cover. */
 .blog-featured__cover {
@@ -215,7 +30,18 @@
     background-size: 14px 14px;
 }
 
-.blog-featured__thumb.blog-featured__cover::before {
+/* The fill cover fills its frame; the small one sits inside the hairline the post draws on hover, on a finer grid. */
+.blog-featured__cover--fill {
+    position: absolute;
+    inset: 0;
+    aspect-ratio: auto;
+}
+
+.blog-featured__cover--small {
+    border: 1px solid transparent;
+}
+
+.blog-featured__cover--small::before {
     background-size: 9px 9px;
 }
 
@@ -444,74 +270,4 @@
     top: -4.4cqw;
     left: 50%;
     transform: translateX(-50%);
-}
-
-@media (max-width: 1024px) {
-    .blog-featured__lead.ow-card {
-        grid-template-columns: minmax(0, 1fr);
-    }
-    .blog-featured__lead .blog-featured__cover {
-        min-height: 0;
-        aspect-ratio: 16 / 8;
-    }
-    .blog-featured__lead-body {
-        padding: 28px 24px 20px;
-    }
-    .blog-featured__more {
-        grid-template-columns: minmax(0, 1fr);
-    }
-    .blog-featured__more > li + li {
-        border-top: 1px solid var(--ow-border);
-        border-left: 0;
-    }
-    .blog-featured__more .blog-featured__item,
-    .blog-featured__more > li:first-child .blog-featured__item,
-    .blog-featured__more > li:last-child .blog-featured__item {
-        grid-template-columns: 160px minmax(0, 1fr);
-        align-items: center;
-        padding: 20px 0;
-    }
-}
-
-@media (max-width: 760px) {
-    .blog-featured {
-        padding: 72px var(--ow-page-gutter);
-    }
-    .blog-featured__lead.ow-card {
-        margin-top: 28px;
-        padding: 6px;
-    }
-    .blog-featured__lead .blog-featured__cover {
-        aspect-ratio: 16 / 10;
-    }
-    .blog-featured__lead-body {
-        padding: 22px 14px 14px;
-    }
-    .blog-featured__lead-title {
-        margin-top: 16px;
-    }
-    .blog-featured__fact + .blog-featured__fact {
-        padding-left: 12px;
-    }
-    .blog-featured__more {
-        margin-top: 24px;
-    }
-    .blog-featured__more .blog-featured__item,
-    .blog-featured__more > li:first-child .blog-featured__item,
-    .blog-featured__more > li:last-child .blog-featured__item {
-        grid-template-columns: 96px minmax(0, 1fr);
-        align-items: start;
-        gap: 14px;
-        padding: 18px 0;
-    }
-    .blog-featured__item-title {
-        margin-top: 4px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .blog-featured__lead.ow-card,
-    .blog-featured__thumb {
-        transition: none;
-    }
 }

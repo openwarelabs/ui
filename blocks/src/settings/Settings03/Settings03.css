@@ -1,0 +1,104 @@
+/* A settings section: a heading with the one action, then the keys in a table. */
+.ow-settings03,
+.ow-settings03 *,
+.ow-settings03 *::before,
+.ow-settings03 *::after {
+    box-sizing: border-box;
+}
+
+.ow-settings03 {
+    background: var(--ow-canvas);
+    padding: 48px 32px 56px;
+    color: var(--ow-text);
+}
+
+.ow-settings03__inner {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.ow-settings03__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--ow-space-4xl);
+    margin-bottom: 24px;
+}
+
+.ow-settings03__text {
+    max-width: 520px;
+    margin-top: 4px;
+}
+
+.ow-settings03__name {
+    display: grid;
+    gap: 1px;
+    padding: 4px 0;
+}
+
+.ow-settings03__meta-phone,
+.ow-settings03__key-phone {
+    display: none;
+}
+
+.ow-settings03__key {
+    display: inline-flex;
+    max-width: 100%;
+    align-items: center;
+    gap: var(--ow-space-2xs);
+}
+
+.ow-settings03__secret {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ow-settings03__note {
+    margin-top: 14px;
+}
+
+/* The dialog. */
+.ow-settings03__form {
+    display: grid;
+    gap: var(--ow-space-4xl);
+}
+
+.ow-settings03__created {
+    display: grid;
+    gap: var(--ow-space-sm);
+}
+
+@media (max-width: 1024px) {
+    .ow-settings03__table th:nth-child(3),
+    .ow-settings03__table td:nth-child(3) {
+        display: none;
+    }
+}
+
+/* On phones the last-used date and the key fold into the name's cell. */
+@media (max-width: 760px) {
+    .ow-settings03 {
+        padding: 28px var(--ow-page-gutter) 40px;
+    }
+    .ow-settings03__header {
+        flex-direction: column;
+        gap: var(--ow-space-2xl);
+    }
+    .ow-settings03__table th:nth-child(4),
+    .ow-settings03__table td:nth-child(4),
+    .ow-settings03__table th:nth-child(2),
+    .ow-settings03__table td:nth-child(2) {
+        display: none;
+    }
+    .ow-settings03__meta-wide {
+        display: none;
+    }
+    .ow-settings03__meta-phone {
+        display: inline;
+    }
+    .ow-settings03__key-phone {
+        display: flex;
+        min-width: 0;
+        margin-top: 4px;
+    }
+}

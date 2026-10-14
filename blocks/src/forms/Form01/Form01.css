@@ -1,0 +1,74 @@
+/* One column on the canvas: a back link, the page title, then the form on a card with its action in a footer. */
+.ow-form01,
+.ow-form01 *,
+.ow-form01 *::before,
+.ow-form01 *::after {
+    box-sizing: border-box;
+}
+
+.ow-form01 {
+    background: var(--ow-canvas);
+    padding: 48px 32px 72px;
+    color: var(--ow-text);
+}
+
+.ow-form01__inner {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.ow-form01__back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ow-space-xs);
+    color: var(--ow-text-muted);
+}
+
+.ow-form01__header {
+    margin: 20px 0 24px;
+}
+
+.ow-form01__lead {
+    margin-top: 6px;
+}
+
+.ow-form01__card {
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+}
+
+.ow-form01__fields {
+    display: grid;
+    gap: var(--ow-space-6xl);
+    padding: 28px 28px 32px;
+}
+
+.ow-form01__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+    border-top: 1px solid var(--ow-border);
+    background: var(--ow-surface-muted);
+    padding: 14px 28px;
+}
+
+@media (max-width: 760px) {
+    .ow-form01 {
+        padding: 28px var(--ow-page-gutter) 48px;
+    }
+    .ow-form01__fields {
+        padding: 22px 18px 26px;
+    }
+    .ow-form01__footer {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 16px 18px;
+    }
+    .ow-form01__note {
+        order: 1;
+        text-align: center;
+    }
+}

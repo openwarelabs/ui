@@ -1,0 +1,157 @@
+.ow-onboarding02,
+.ow-onboarding02 *,
+.ow-onboarding02 *::before,
+.ow-onboarding02 *::after {
+    box-sizing: border-box;
+}
+
+/* A setup screen on the canvas: the brand and progress along the top, the choice in the middle. */
+.ow-onboarding02 {
+    background: var(--ow-canvas);
+    padding: 0 32px 88px;
+    color: var(--ow-text);
+    font-size: 14px;
+}
+
+.ow-onboarding02__top {
+    display: grid;
+    max-width: 1040px;
+    grid-template-areas: "brand progress skip";
+    grid-template-columns: 1fr minmax(0, 340px) 1fr;
+    align-items: center;
+    gap: var(--ow-space-2xl);
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.ow-onboarding02__brand {
+    display: flex;
+    grid-area: brand;
+    align-items: center;
+    gap: 9px;
+}
+
+.ow-onboarding02__progress {
+    grid-area: progress;
+}
+
+.ow-onboarding02__skip {
+    grid-area: skip;
+    justify-self: end;
+}
+
+.ow-onboarding02__body {
+    display: flex;
+    max-width: 880px;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding-top: 72px;
+    text-align: center;
+}
+
+.ow-onboarding02__title:focus {
+    outline: none;
+}
+
+/* Centred under the title, so its lines balance rather than leave a short last line. */
+.ow-onboarding02__lead {
+    max-width: 520px;
+    margin-top: 12px;
+    text-wrap: balance;
+}
+
+.ow-onboarding02__content {
+    width: 100%;
+    margin-top: 40px;
+    text-align: left;
+}
+
+.ow-onboarding02__options {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--ow-space-lg);
+}
+
+/* The badge sits over the card's corner; clicks go through to the card. */
+.ow-onboarding02__option {
+    position: relative;
+    display: grid;
+}
+
+.ow-onboarding02__recommended {
+    position: absolute;
+    top: 24px;
+    right: 16px;
+    pointer-events: none;
+}
+
+.ow-onboarding02__note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ow-space-sm);
+    margin-top: 28px;
+    text-align: center;
+}
+
+.ow-onboarding02__note svg {
+    flex-shrink: 0;
+    color: var(--ow-icon);
+}
+
+.ow-onboarding02__done-icon {
+    display: inline-flex;
+    margin-bottom: 20px;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-success-border);
+    border-radius: 50%;
+    background: var(--ow-success-surface);
+    color: var(--ow-success-text);
+}
+
+.ow-onboarding02__done-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--ow-space-sm);
+}
+
+@media (max-width: 1024px) {
+    .ow-onboarding02__body {
+        padding-top: 56px;
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-onboarding02 {
+        padding: 0 var(--ow-page-gutter) 56px;
+    }
+    .ow-onboarding02__top {
+        grid-template-areas:
+            "brand skip"
+            "progress progress";
+        grid-template-columns: 1fr auto;
+        row-gap: 20px;
+        padding: 12px 0 0;
+    }
+    .ow-onboarding02__body {
+        padding-top: 40px;
+    }
+    .ow-onboarding02__content {
+        margin-top: 28px;
+    }
+    .ow-onboarding02__options {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .ow-onboarding02__note {
+        align-items: flex-start;
+        text-align: left;
+    }
+    .ow-onboarding02__note svg {
+        margin-top: 3px;
+    }
+}

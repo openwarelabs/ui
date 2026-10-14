@@ -1,0 +1,180 @@
+.ow-contact02,
+.ow-contact02 *,
+.ow-contact02 *::before,
+.ow-contact02 *::after {
+    box-sizing: border-box;
+}
+
+.ow-contact02 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.ow-contact02__inner {
+    display: flex;
+    max-width: var(--ow-page-max);
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.ow-contact02__grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 56px;
+}
+
+.ow-contact02__card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--ow-radius-card);
+}
+
+.ow-contact02__body {
+    flex: 1;
+    padding: 28px 28px 24px;
+}
+
+.ow-contact02__icon {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-tile);
+    background: var(--ow-surface-muted);
+    color: var(--ow-text-soft);
+}
+
+.ow-contact02__title {
+    margin-top: 20px;
+}
+
+.ow-contact02__text {
+    margin-top: 8px;
+}
+
+.ow-contact02__list {
+    display: grid;
+    margin: 20px 0 0;
+    border-top: 1px solid var(--ow-border);
+    padding: 0;
+    list-style: none;
+}
+
+.ow-contact02__list li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid var(--ow-border);
+    padding: 10px 0;
+}
+
+.ow-contact02__list a {
+    min-width: 0;
+}
+
+/* Times and counts in tabular numerals, so they line up down the list. */
+.ow-contact02__meta {
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-contact02__address {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 20px;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-form);
+    background: var(--ow-surface-muted);
+    padding: 4px 4px 4px 12px;
+}
+
+.ow-contact02__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 56px;
+    border-top: 1px solid var(--ow-border);
+    padding: 12px 28px;
+}
+
+.ow-contact02__foot-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.ow-contact02__members {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.ow-contact02__status {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 20px;
+    margin-top: 40px;
+}
+
+.ow-contact02__status > span:last-child {
+    text-wrap: balance;
+}
+
+.ow-contact02__state {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ow-contact02__state::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ow-success-solid);
+    box-shadow: 0 0 0 3px var(--ow-success-surface);
+}
+
+@media (max-width: 1024px) {
+    .ow-contact02__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ow-contact02__card:last-child {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-contact02 {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .ow-contact02__grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+        margin-top: 40px;
+    }
+    .ow-contact02__body {
+        padding: 22px 20px 20px;
+    }
+    .ow-contact02__foot {
+        padding: 10px 20px;
+    }
+    .ow-contact02__status {
+        flex-direction: column;
+        gap: 6px;
+    }
+}

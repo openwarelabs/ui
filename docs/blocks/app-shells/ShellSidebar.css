@@ -1,59 +1,3 @@
-/* Navigation down the left on the canvas; the page on a raised panel beside it. */
-.shell-sidebar,
-.shell-sidebar *,
-.shell-sidebar *::before,
-.shell-sidebar *::after {
-    box-sizing: border-box;
-}
-
-.shell-sidebar {
-    display: grid;
-    grid-template-columns: 248px minmax(0, 1fr);
-    min-height: 100dvh;
-    background: var(--ow-canvas);
-    color: var(--ow-text);
-}
-
-.shell-sidebar__aside {
-    position: sticky;
-    top: 0;
-    height: 100dvh;
-    overflow-y: auto;
-    padding: 10px 12px 12px;
-}
-
-.shell-sidebar__nav {
-    display: flex;
-    min-height: 100%;
-    flex-direction: column;
-    gap: var(--ow-space-3xl);
-}
-
-/* Menus wrap their trigger in an inline span; let these triggers take the full width. */
-.shell-sidebar__nav .ow-menu {
-    display: block;
-}
-
-/* The workspace and account menus open from rows that span the sidebar, their text lined up on the left. */
-.shell-sidebar__workspace,
-.shell-sidebar__user {
-    justify-content: flex-start;
-    gap: 10px;
-    padding: 6px 8px;
-    text-align: left;
-}
-
-/* An open menu keeps its trigger lit, as on hover. */
-.shell-sidebar__workspace[aria-expanded="true"],
-.shell-sidebar__user[aria-expanded="true"] {
-    border-color: var(--ow-border);
-    background: var(--ow-surface-muted);
-}
-
-.shell-sidebar__workspace-name {
-    flex: 1;
-}
-
 .shell-sidebar__mark {
     width: 22px;
     height: 22px;
@@ -63,70 +7,12 @@
     box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ow-on-primary) 25%, transparent);
 }
 
-.shell-sidebar__menu-spacer {
-    display: block;
-    width: 15px;
-}
-
-.shell-sidebar__search {
-    justify-content: flex-start;
-}
-
-.shell-sidebar__search-text {
-    flex: 1;
-    text-align: left;
-}
-
 .shell-sidebar__dot {
     display: block;
     width: 8px;
     height: 8px;
     margin: 0 3.5px;
     border-radius: 50%;
-}
-
-.shell-sidebar__account {
-    margin-top: auto;
-}
-
-.shell-sidebar__user-text {
-    display: grid;
-    min-width: 0;
-    flex: 1;
-}
-
-.shell-sidebar__body {
-    display: flex;
-    min-width: 0;
-    flex-direction: column;
-}
-
-/* On phones the sidebar folds into a drawer behind this bar. */
-.shell-sidebar__topbar {
-    display: none;
-    height: 52px;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 6px;
-}
-
-.shell-sidebar__topbar-brand {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-}
-
-.shell-sidebar__panel {
-    display: flex;
-    min-height: calc(100dvh - 16px);
-    flex: 1;
-    flex-direction: column;
-    gap: var(--ow-space-7xl);
-    margin: 8px 8px 8px 0;
-    border: 1px solid var(--ow-border);
-    border-radius: var(--ow-radius-panel);
-    background: var(--ow-surface);
-    padding: 28px 32px 40px;
 }
 
 .shell-sidebar__page-header {
@@ -174,21 +60,4 @@
     display: grid;
     min-width: 0;
     gap: 2px;
-}
-
-@media (max-width: 900px) {
-    .shell-sidebar {
-        grid-template-columns: minmax(0, 1fr);
-    }
-    .shell-sidebar__aside {
-        display: none;
-    }
-    .shell-sidebar__topbar {
-        display: flex;
-    }
-    .shell-sidebar__panel {
-        min-height: calc(100dvh - 60px);
-        margin: 0 8px 8px;
-        padding: 22px 18px 32px;
-    }
 }

@@ -5,65 +5,6 @@
     box-sizing: border-box;
 }
 
-.logos-marquee {
-    background: var(--ow-paper);
-    padding: var(--ow-section-y) 0;
-    color: var(--ow-text);
-}
-
-.logos-marquee__head {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: 0 32px;
-}
-
-/* The strip runs the full width, fading out at both ends. It can't be scrolled, so focus never shifts it. */
-.logos-marquee__viewport {
-    max-width: 1440px;
-    margin: 36px auto 0;
-    overflow: clip;
-    border-radius: var(--ow-radius-lg);
-    padding: 6px 0;
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent);
-    mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent);
-}
-
-.logos-marquee__viewport:focus-visible {
-    outline: 2px solid var(--ow-focus-ring);
-    outline-offset: -2px;
-}
-
-/* Two copies of the list side by side; moving the pair left by one copy's width starts the loop again unseen. */
-.logos-marquee__track {
-    display: flex;
-    width: max-content;
-    animation: logos-marquee-scroll 52s linear infinite;
-}
-
-.logos-marquee__viewport:hover .logos-marquee__track,
-.logos-marquee__viewport:focus-within .logos-marquee__track,
-.logos-marquee[data-paused] .logos-marquee__track {
-    animation-play-state: paused;
-}
-
-@keyframes logos-marquee-scroll {
-    to {
-        transform: translateX(-50%);
-    }
-}
-
-.logos-marquee__list {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    gap: 80px;
-    margin: 0;
-    padding: 0 40px;
-    list-style: none;
-}
-
 .logos-marquee__logo {
     display: inline-flex;
     align-items: center;
@@ -120,19 +61,6 @@
 }
 
 @media (max-width: 760px) {
-    .logos-marquee {
-        padding: 72px 0;
-    }
-    .logos-marquee__head {
-        padding: 0 var(--ow-page-gutter);
-    }
-    .logos-marquee__viewport {
-        margin-top: 28px;
-    }
-    .logos-marquee__list {
-        gap: 56px;
-        padding: 0 28px;
-    }
     .logos-marquee__logo {
         font-size: 18px;
     }
@@ -142,38 +70,5 @@
     }
     .logos-marquee__logo[data-name="Lumen"] {
         font-size: 20px;
-    }
-}
-
-/* With reduced motion it stands still: one copy, wrapped into rows, and no pause button. */
-@media (prefers-reduced-motion: reduce) {
-    .logos-marquee .logos-marquee__toggle,
-    .logos-marquee .logos-marquee__list--copy {
-        display: none;
-    }
-    .logos-marquee__viewport {
-        max-width: 1040px;
-        -webkit-mask-image: none;
-        mask-image: none;
-    }
-    .logos-marquee__track {
-        display: block;
-        width: auto;
-        animation: none;
-    }
-    .logos-marquee__list {
-        display: grid;
-        grid-template-columns: repeat(4, auto);
-        justify-content: space-evenly;
-        gap: 36px 56px;
-        padding: 0 32px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) and (max-width: 760px) {
-    .logos-marquee__list {
-        grid-template-columns: repeat(2, auto);
-        gap: 28px 32px;
-        padding: 0 var(--ow-page-gutter);
     }
 }

@@ -105,29 +105,6 @@
     gap: 2px;
 }
 
-/* The dialog. */
-.onboarding-welcome__dialog .ow-dialog__body {
-    gap: var(--ow-space-4xl);
-}
-
-.onboarding-welcome__dialog .ow-dialog__actions {
-    align-items: center;
-    justify-content: space-between;
-}
-
-.onboarding-welcome__eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--ow-space-sm);
-}
-
-.onboarding-welcome__eyebrow-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--ow-brass);
-}
-
 /* A pull request an agent opened, drawn small, on a quiet ground. */
 .onboarding-welcome__visual {
     border: 1px solid var(--ow-border);
@@ -212,39 +189,6 @@
 
 .onboarding-welcome__removed {
     color: var(--ow-danger-text);
-}
-
-.onboarding-welcome__changes {
-    display: grid;
-    gap: var(--ow-space-xl);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.onboarding-welcome__change {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--ow-space-lg);
-}
-
-.onboarding-welcome__change-icon {
-    display: inline-flex;
-    width: 28px;
-    height: 28px;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--ow-primary-border);
-    border-radius: var(--ow-radius-md);
-    background: var(--ow-primary-subtle);
-    color: var(--ow-primary-text);
-}
-
-.onboarding-welcome__change-text {
-    display: grid;
-    gap: 1px;
-    padding-top: 1px;
 }
 
 @media (max-width: 760px) {

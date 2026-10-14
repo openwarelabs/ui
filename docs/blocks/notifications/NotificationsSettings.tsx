@@ -1,28 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { Notifications03, type Notifications03Group, type Notifications03Value } from "@openwarelabs/blocks";
+import { Mail, Smartphone } from "lucide-react";
 
-import { Select, SettingsRow, Switch, Text, VisuallyHidden } from "@openwarelabs/ui";
-import { Check, Mail, Smartphone } from "lucide-react";
-
-import "./NotificationsSettings.css";
-
-type Channel = "email" | "push";
-
-interface Event {
-    id: string;
-    label: string;
-    description?: string;
-    /** Channels this event can't use at all. */
-    unavailable?: Channel[];
-}
-
-const channels: Array<{ id: Channel; label: string; icon: typeof Mail }> = [
-    { id: "email", label: "Email", icon: Mail },
-    { id: "push", label: "Push", icon: Smartphone },
+const channels = [
+    { id: "email", label: "Email", icon: <Mail size={15} aria-hidden="true" /> },
+    { id: "push", label: "Push", icon: <Smartphone size={15} aria-hidden="true" /> },
 ];
 
-const groups: Array<{ id: string; label: string; events: Event[] }> = [
+const groups: Notifications03Group[] = [
     {
-        id: "reviews",
         label: "Reviews",
         events: [
             { id: "review-requested", label: "Someone asks for your review", description: "From a person or an agent." },
@@ -31,7 +16,6 @@ const groups: Array<{ id: string; label: string; events: Event[] }> = [
         ],
     },
     {
-        id: "agents",
         label: "Agents",
         events: [
             { id: "agent-approval", label: "An agent needs your approval", description: "Before it pushes, deploys or goes over its budget." },
@@ -40,7 +24,6 @@ const groups: Array<{ id: string; label: string; events: Event[] }> = [
         ],
     },
     {
-        id: "deploys",
         label: "Deploys",
         events: [
             { id: "deploy-failed", label: "A deploy fails", description: "Only for projects you're a member of." },
@@ -48,7 +31,6 @@ const groups: Array<{ id: string; label: string; events: Event[] }> = [
         ],
     },
     {
-        id: "workspace",
         label: "Workspace",
         events: [
             { id: "member-joined", label: "Someone joins the workspace" },
@@ -57,7 +39,7 @@ const groups: Array<{ id: string; label: string; events: Event[] }> = [
     },
 ];
 
-const initial: Record<string, Channel[]> = {
+const initial: Notifications03Value = {
     "review-requested": ["email", "push"],
     "review-result": ["email"],
     mention: ["email", "push"],
@@ -70,155 +52,35 @@ const initial: Record<string, Channel[]> = {
     "weekly-summary": ["email"],
 };
 
-const digestOptions = [
-    { value: "instant", label: "As they happen" },
-    { value: "hourly", label: "Once an hour" },
-    { value: "daily", label: "Once a day, at 09:00" },
-];
-
 export function NotificationsSettings() {
-    const [settings, setSettings] = useState(initial);
-    const [digest, setDigest] = useState("instant");
-    const [quietHours, setQuietHours] = useState(true);
-    const [saved, setSaved] = useState(false);
-    const timer = useRef(0);
-    useEffect(() => () => window.clearTimeout(timer.current), []);
-
-    // Each change saves at once; say so for a moment.
-    const save = () => {
-        setSaved(true);
-        window.clearTimeout(timer.current);
-        timer.current = window.setTimeout(() => setSaved(false), 2000);
-    };
-
-    const toggle = (event: string, channel: Channel, on: boolean) => {
-        setSettings((current) => ({
-            ...current,
-            [event]: on ? [...current[event]!, channel] : current[event]!.filter((other) => other !== channel),
-        }));
-        save();
-    };
-
     return (
-        <section className="notifications-settings" aria-labelledby="notifications-settings-title">
-            <div className="notifications-settings__panel">
-                <div>
-                    <div className="notifications-settings__header">
-                        <Text variant="heading" as="h2" id="notifications-settings-title">
-                            Notifications
-                        </Text>
-                        <Text variant="caption" tone="success" className="notifications-settings__saved" role="status" data-hidden={saved ? undefined : ""}>
-                            {saved ? (
-                                <>
-                                    <Check size={15} aria-hidden="true" />
-                                    Saved
-                                </>
-                            ) : null}
-                        </Text>
-                    </div>
-                    <Text variant="copy" className="notifications-settings__subtitle">
-                        Choose what reaches you by email and on your phone. Everything still shows in your Acme inbox.
-                    </Text>
-                </div>
-
-                <div className="notifications-settings__card">
-                    <table className="notifications-settings__grid">
-                        <thead>
-                            <tr>
-                                <th scope="col" className="notifications-settings__corner">
-                                    <Text variant="caption">Event</Text>
-                                </th>
-                                {channels.map((channel) => (
-                                    <th key={channel.id} scope="col" className="notifications-settings__channel" id={`notifications-settings-${channel.id}`}>
-                                        <Text variant="label" tone="soft" className="notifications-settings__channel-label">
-                                            <channel.icon size={15} aria-hidden="true" />
-                                            {channel.label}
-                                        </Text>
-                                    </th>
-                                ))}
-                            </tr>
-                        </thead>
-                        {groups.map((group) => (
-                            <tbody key={group.id}>
-                                <tr className="notifications-settings__group">
-                                    <th scope="colgroup" colSpan={channels.length + 1}>
-                                        <Text variant="overline">{group.label}</Text>
-                                    </th>
-                                </tr>
-                                {group.events.map((event) => {
-                                    const on = settings[event.id]!;
-                                    const rowId = `notifications-settings-${event.id}`;
-                                    return (
-                                        <tr key={event.id}>
-                                            <th scope="row" className="notifications-settings__event">
-                                                <span className="notifications-settings__event-label">
-                                                    <Text as="span" id={rowId}>
-                                                        {event.label}
-                                                    </Text>
-                                                    {on.length === 0 ? <Text variant="caption">Muted</Text> : null}
-                                                </span>
-                                                {event.description ? (
-                                                    <Text variant="caption" className="notifications-settings__event-description">
-                                                        {event.description}
-                                                    </Text>
-                                                ) : null}
-                                            </th>
-                                            {channels.map((channel) => (
-                                                <td key={channel.id}>
-                                                    <span className="notifications-settings__cell">
-                                                        {event.unavailable?.includes(channel.id) ? (
-                                                            <span className="notifications-settings__unavailable">
-                                                                <span aria-hidden="true">–</span>
-                                                                <VisuallyHidden>Not sent by {channel.label.toLowerCase()}</VisuallyHidden>
-                                                            </span>
-                                                        ) : (
-                                                            <Switch
-                                                                checked={on.includes(channel.id)}
-                                                                onChange={(checked) => toggle(event.id, channel.id, checked)}
-                                                                aria-labelledby={`notifications-settings-${channel.id} ${rowId}`}
-                                                            />
-                                                        )}
-                                                    </span>
-                                                </td>
-                                            ))}
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        ))}
-                    </table>
-                </div>
-
-                <div>
-                    <Text variant="card-title" className="notifications-settings__section-title">
-                        Delivery
-                    </Text>
-                    <div className="notifications-settings__rows">
-                        <SettingsRow label="Send emails" description="Bundling sends fewer emails; anything that needs you still comes at once.">
-                            <Select
-                                aria-label="Send emails"
-                                size="sm"
-                                value={digest}
-                                options={digestOptions}
-                                onChange={(value) => {
-                                    setDigest(value);
-                                    save();
-                                }}
-                            />
-                        </SettingsRow>
-                        <SettingsRow label="Quiet hours" description="No push notifications from 19:00 to 08:00 or at weekends, except for failed deploys.">
-                            <Switch
-                                label="Quiet hours"
-                                checked={quietHours}
-                                onChange={(checked) => {
-                                    setQuietHours(checked);
-                                    save();
-                                }}
-                            />
-                        </SettingsRow>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <Notifications03
+            title="Notifications"
+            description="Choose what reaches you by email and on your phone. Everything still shows in your Acme inbox."
+            channels={channels}
+            groups={groups}
+            defaultValue={initial}
+            options={[
+                {
+                    kind: "select",
+                    id: "digest",
+                    label: "Send emails",
+                    description: "Bundling sends fewer emails; anything that needs you still comes at once.",
+                    options: [
+                        { value: "instant", label: "As they happen" },
+                        { value: "hourly", label: "Once an hour" },
+                        { value: "daily", label: "Once a day, at 09:00" },
+                    ],
+                    defaultValue: "instant",
+                },
+                {
+                    kind: "switch",
+                    id: "quiet-hours",
+                    label: "Quiet hours",
+                    description: "No push notifications from 19:00 to 08:00 or at weekends, except for failed deploys.",
+                    defaultValue: true,
+                },
+            ]}
+        />
     );
 }

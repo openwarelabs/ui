@@ -1,0 +1,128 @@
+/* Commandr's settings over the page: sections on the canvas, rows on an inset panel. */
+.ow-settings01,
+.ow-settings01 *,
+.ow-settings01 *::before,
+.ow-settings01 *::after {
+    box-sizing: border-box;
+}
+
+/* The dialog sits over the page, so the wrapper takes no room of its own. */
+.ow-settings01 {
+    display: contents;
+}
+
+/* The dialog: the canvas around, the sections down the left, the panel on the right. */
+.ow-settings01__dialog {
+    height: min(600px, calc(100dvh - 32px));
+    background: var(--ow-canvas);
+    padding: 8px;
+}
+
+.ow-settings01__dialog .ow-dialog__body {
+    height: 100%;
+    grid-template-columns: 200px minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    gap: 0 8px;
+}
+
+.ow-settings01__dialog .ow-dialog__header {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 14px 10px 16px;
+}
+
+.ow-settings01__nav--side {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 0 4px;
+}
+
+.ow-settings01__nav--top {
+    display: none;
+}
+
+.ow-settings01__saved {
+    grid-column: 1;
+    grid-row: 4;
+    padding: 0 12px 10px;
+}
+
+.ow-settings01__panel {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    min-height: 0;
+    overflow-y: auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+}
+
+/* Sits over the panel's top-right corner, in the same grid cell. */
+.ow-settings01__close {
+    z-index: 1;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    justify-self: end;
+    margin: 12px 12px 0 0;
+}
+
+.ow-settings01__section {
+    padding: 24px 28px 20px;
+}
+
+.ow-settings01__section-title {
+    padding-right: 40px;
+}
+
+.ow-settings01__section-text {
+    margin-top: 4px;
+}
+
+.ow-settings01__rows {
+    margin-top: 12px;
+}
+
+@media (max-width: 760px) {
+    .ow-settings01__dialog {
+        height: calc(100dvh - 32px);
+    }
+    .ow-settings01__dialog .ow-dialog__body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto minmax(0, 1fr);
+        gap: 8px;
+    }
+    .ow-settings01__dialog .ow-dialog__header {
+        padding: 10px 10px 0;
+    }
+    .ow-settings01__nav--side,
+    .ow-settings01__saved {
+        display: none;
+    }
+    .ow-settings01__nav--top {
+        display: flex;
+        grid-column: 1;
+        grid-row: 2;
+        padding: 2px;
+        scrollbar-width: none;
+    }
+    .ow-settings01__panel {
+        grid-column: 1;
+        grid-row: 3;
+    }
+    .ow-settings01__close {
+        grid-column: 1;
+        margin: 6px 4px 0 0;
+    }
+    .ow-settings01__section {
+        padding: 18px 16px 12px;
+    }
+    .ow-settings01__section-title {
+        padding-right: 0;
+    }
+    /* Switches stay beside their label; other controls take a line of their own. */
+    .ow-settings01 .ow-settings-row__control:not(:has(.ow-switch)) {
+        flex: 1 1 100%;
+        justify-content: flex-start;
+    }
+}

@@ -125,9 +125,9 @@ export const blockCategories: BlockCategory[] = [
         uses: ["SectionHeading", "Chip", "Button", "Link"],
         component: "SectionHeading",
         variants: [
-            { id: "SectionHeadingCentred", name: "Centred", description: "The label, the title and the intro centred over the section, for features and pricing." },
-            { id: "SectionHeadingWithLink", name: "With a link", description: "The heading on the left and a link to the rest on the right, for a preview of posts or releases." },
-            { id: "SectionHeadingSplit", name: "Split", description: "The title on the left; the intro and a button on the right, for a wide section." },
+            { id: "SectionHeadingCentred", component: "SectionHeading01", name: "Centred", description: "The label, the title and the intro centred over the section, for features and pricing." },
+            { id: "SectionHeadingWithLink", component: "SectionHeading02", name: "With a link", description: "The heading on the left and a link to the rest on the right, for a preview of posts or releases." },
+            { id: "SectionHeadingSplit", component: "SectionHeading03", name: "Split", description: "The title on the left; the intro and a button on the right, for a wide section." },
         ],
     },
     {
@@ -153,9 +153,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "logos",
         uses: ["SectionHeading"],
         variants: [
-            { id: "LogosRow", name: "Single row", description: "Five or six logos in one row under a small heading." },
-            { id: "LogosGrid", name: "Grid", description: "Logos in tiles, for a longer list." },
-            { id: "LogosMarquee", name: "Scrolling", description: "A slow, endless row that pauses on hover and stands still with reduced motion." },
+            { id: "LogosRow", component: "Logos01", name: "Single row", description: "Five or six logos in one row under a small heading." },
+            { id: "LogosGrid", component: "Logos02", name: "Grid", description: "Logos in tiles, for a longer list." },
+            { id: "LogosMarquee", component: "Logos03", name: "Scrolling", description: "A slow, endless row that pauses on hover and stands still with reduced motion." },
         ],
     },
     {
@@ -166,9 +166,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "stats",
         uses: ["Stat", "SectionHeading"],
         variants: [
-            { id: "StatsRow", name: "Row of numbers", description: "Three or four large numbers, each with a short label." },
-            { id: "StatsCards", name: "On cards", description: "Each number on its own card, with a trend line." },
-            { id: "StatsSplit", name: "Beside a heading", description: "A heading and a paragraph on the left, numbers on the right." },
+            { id: "StatsRow", component: "Stats01", name: "Row of numbers", description: "Three or four large numbers, each with a short label." },
+            { id: "StatsCards", component: "Stats02", name: "On cards", description: "Each number on its own card, with a trend line." },
+            { id: "StatsSplit", component: "Stats03", name: "Beside a heading", description: "A heading and a paragraph on the left, numbers on the right." },
         ],
     },
     {
@@ -179,9 +179,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "testimonials",
         uses: ["Card", "User", "Avatar"],
         variants: [
-            { id: "TestimonialSingle", name: "Single quote", description: "One large quote with the person under it." },
-            { id: "TestimonialGrid", name: "Grid of quotes", description: "Several short quotes in cards, in columns." },
-            { id: "TestimonialLogo", name: "With a company logo", description: "A quote, the person, and their company's logo." },
+            { id: "TestimonialSingle", component: "Testimonial01", name: "Single quote", description: "One large quote with the person under it." },
+            { id: "TestimonialGrid", component: "Testimonial02", name: "Grid of quotes", description: "Several short quotes in cards, in columns." },
+            { id: "TestimonialLogo", component: "Testimonial03", name: "With a company logo", description: "A quote, the person, and their company's logo." },
         ],
     },
     {
@@ -207,9 +207,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "faq",
         uses: ["Accordion", "SectionHeading", "Link"],
         variants: [
-            { id: "FaqAccordion", name: "Accordion", description: "Questions that open one at a time." },
-            { id: "FaqColumns", name: "Two columns", description: "A heading on the left, the questions on the right." },
-            { id: "FaqContact", name: "With a contact card", description: "The questions, and a card for anything they don't cover." },
+            { id: "FaqAccordion", component: "Faq01", name: "Accordion", description: "Questions that open one at a time." },
+            { id: "FaqColumns", component: "Faq02", name: "Two columns", description: "A heading on the left, the questions on the right." },
+            { id: "FaqContact", component: "Faq03", name: "With a contact card", description: "The questions, and a card for anything they don't cover." },
         ],
     },
     {
@@ -233,8 +233,8 @@ export const blockCategories: BlockCategory[] = [
         sketch: "newsletter",
         uses: ["Input", "Button", "Field"],
         variants: [
-            { id: "NewsletterInline", name: "Inline", description: "A heading, a field and a button in one row." },
-            { id: "NewsletterCard", name: "Card", description: "The same in a card, for the end of a post." },
+            { id: "NewsletterInline", component: "Newsletter01", name: "Inline", description: "A heading, a field and a button in one row." },
+            { id: "NewsletterCard", component: "Newsletter02", name: "Card", description: "The same in a card, for the end of a post." },
         ],
     },
     {
@@ -245,10 +245,10 @@ export const blockCategories: BlockCategory[] = [
         sketch: "blog",
         uses: ["Card", "Badge", "User", "Tag"],
         variants: [
-            { id: "BlogGrid", name: "Post grid", description: "Cards with an image, a title, a date and the author." },
-            { id: "BlogFeatured", name: "Featured post", description: "One large post on top, smaller ones below." },
-            { id: "Changelog", name: "Changelog", description: "Releases down a timeline, each with New, Improved and Fixed.", sketch: "list" },
-            { id: "BlogArticle", name: "Article", description: "A post's page: title, author, the text at a readable width, and an On this page list.", sketch: "list" },
+            { id: "BlogGrid", component: "Blog01", name: "Post grid", description: "Cards with an image, a title, a date and the author." },
+            { id: "BlogFeatured", component: "Blog02", name: "Featured post", description: "One large post on top, smaller ones below." },
+            { id: "Changelog", component: "Blog03", name: "Changelog", description: "Releases down a timeline, each with New, Improved and Fixed.", sketch: "list" },
+            { id: "BlogArticle", component: "Blog04", name: "Article", description: "A post's page: title, author, the text at a readable width, and an On this page list.", sketch: "list" },
         ],
     },
     {
@@ -259,8 +259,8 @@ export const blockCategories: BlockCategory[] = [
         sketch: "team",
         uses: ["Avatar", "Card"],
         variants: [
-            { id: "TeamGrid", name: "Avatar grid", description: "Faces, names and roles in a grid." },
-            { id: "TeamCards", name: "Cards", description: "A card each, with a line about what they do." },
+            { id: "TeamGrid", component: "Team01", name: "Avatar grid", description: "Faces, names and roles in a grid." },
+            { id: "TeamCards", component: "Team02", name: "Cards", description: "A card each, with a line about what they do." },
         ],
     },
     {
@@ -271,8 +271,8 @@ export const blockCategories: BlockCategory[] = [
         sketch: "contact",
         uses: ["Field", "Input", "Textarea", "Select", "Button", "Card"],
         variants: [
-            { id: "ContactForm", name: "Form with details", description: "A short form beside an email address and a reply time." },
-            { id: "ContactSupport", name: "Support options", description: "Cards for docs, community and email, before any form." },
+            { id: "ContactForm", component: "Contact01", name: "Form with details", description: "A short form beside an email address and a reply time." },
+            { id: "ContactSupport", component: "Contact02", name: "Support options", description: "Cards for docs, community and email, before any form." },
         ],
     },
     {
@@ -297,10 +297,10 @@ export const blockCategories: BlockCategory[] = [
         sketch: "shell",
         uses: ["NavList", "NavItem", "Avatar", "Menu", "CommandPalette", "Drawer", "ScrollShadow"],
         variants: [
-            { id: "ShellSidebar", name: "Sidebar", description: "Navigation down the left, the account at the bottom, the page on a raised panel.", height: 640 },
-            { id: "ShellTopBar", name: "Top bar", description: "Navigation across the top, for apps with a few sections.", sketch: "shell-topbar", height: 640 },
-            { id: "ShellThreePane", name: "Three panes", description: "A list, the item open beside it and an inspector on the right, like Commandr's projects.", sketch: "shell-three-pane", height: 640 },
-            { id: "ShellCollapsible", name: "Collapsible sidebar", description: "A sidebar that folds down to icons, and into a drawer on phones.", height: 640 },
+            { id: "ShellSidebar", component: "Shell01", name: "Sidebar", description: "Navigation down the left, the account at the bottom, the page on a raised panel.", height: 640 },
+            { id: "ShellTopBar", component: "Shell02", name: "Top bar", description: "Navigation across the top, for apps with a few sections.", sketch: "shell-topbar", height: 640 },
+            { id: "ShellThreePane", component: "Shell03", name: "Three panes", description: "A list, the item open beside it and an inspector on the right, like Commandr's projects.", sketch: "shell-three-pane", height: 640 },
+            { id: "ShellCollapsible", component: "Shell04", name: "Collapsible sidebar", description: "A sidebar that folds down to icons, and into a drawer on phones.", height: 640 },
         ],
     },
     {
@@ -311,9 +311,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "page-heading",
         uses: ["Breadcrumbs", "Button", "Tabs", "Badge", "SearchField"],
         variants: [
-            { id: "PageHeadingActions", name: "Title and actions", description: "The page's name with one primary action and a menu for the rest." },
-            { id: "PageHeadingTabs", name: "With breadcrumbs and tabs", description: "Where it sits above, and tabs for its views below." },
-            { id: "PageHeadingFilters", name: "With search and filters", description: "A search field and filter tags for the list under it." },
+            { id: "PageHeadingActions", component: "PageHeading01", name: "Title and actions", description: "The page's name with one primary action and a menu for the rest." },
+            { id: "PageHeadingTabs", component: "PageHeading02", name: "With breadcrumbs and tabs", description: "Where it sits above, and tabs for its views below." },
+            { id: "PageHeadingFilters", component: "PageHeading03", name: "With search and filters", description: "A search field and filter tags for the list under it." },
         ],
     },
     {
@@ -324,9 +324,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "dashboard",
         uses: ["Stat", "Card", "Table", "ProgressBar", "Badge"],
         variants: [
-            { id: "DashboardChart", name: "Stats and a chart", description: "A row of stats, then a chart across the page." },
-            { id: "DashboardActivity", name: "Activity", description: "Recent events in a feed beside the numbers." },
-            { id: "DashboardUsage", name: "Usage and billing", description: "Spend against a budget, by project, with the next invoice." },
+            { id: "DashboardChart", component: "Dashboard01", name: "Stats and a chart", description: "A row of stats, then a chart across the page." },
+            { id: "DashboardActivity", component: "Dashboard02", name: "Activity", description: "Recent events in a feed beside the numbers." },
+            { id: "DashboardUsage", component: "Dashboard03", name: "Usage and billing", description: "Spend against a budget, by project, with the next invoice." },
         ],
     },
     {
@@ -337,10 +337,10 @@ export const blockCategories: BlockCategory[] = [
         sketch: "table",
         uses: ["Table", "Pagination", "SearchField", "Tag", "Menu", "EmptyState", "Checkbox"],
         variants: [
-            { id: "TableToolbar", name: "Table with a toolbar", description: "Search, filters and a primary action above a sortable table." },
-            { id: "TableBulkActions", name: "Bulk actions", description: "Select rows and a bar appears with what you can do to all of them." },
-            { id: "ListStacked", name: "Stacked list", description: "Rows with a title, a line of detail and a status, for phones too.", sketch: "list" },
-            { id: "ListCards", name: "Grid of cards", description: "Projects or files as cards, with a menu on each." },
+            { id: "TableToolbar", component: "List01", name: "Table with a toolbar", description: "Search, filters and a primary action above a sortable table." },
+            { id: "TableBulkActions", component: "List02", name: "Bulk actions", description: "Select rows and a bar appears with what you can do to all of them." },
+            { id: "ListStacked", component: "List03", name: "Stacked list", description: "Rows with a title, a line of detail and a status, for phones too.", sketch: "list" },
+            { id: "ListCards", component: "List04", name: "Grid of cards", description: "Projects or files as cards, with a menu on each." },
         ],
     },
     {
@@ -351,9 +351,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "form",
         uses: ["Field", "Fieldset", "Input", "Select", "Textarea", "Checkbox", "Button", "Steps"],
         variants: [
-            { id: "FormSingle", name: "Single column", description: "Fields stacked under their labels, one action at the end." },
-            { id: "FormSections", name: "Sections with descriptions", description: "Each section's title and purpose on the left, its fields on the right." },
-            { id: "FormSteps", name: "Multi-step", description: "A longer form split into steps, with progress at the top.", sketch: "steps" },
+            { id: "FormSingle", component: "Form01", name: "Single column", description: "Fields stacked under their labels, one action at the end." },
+            { id: "FormSections", component: "Form02", name: "Sections with descriptions", description: "Each section's title and purpose on the left, its fields on the right." },
+            { id: "FormSteps", component: "Form03", name: "Multi-step", description: "A longer form split into steps, with progress at the top.", sketch: "steps" },
         ],
     },
     {
@@ -364,11 +364,11 @@ export const blockCategories: BlockCategory[] = [
         sketch: "settings",
         uses: ["Dialog", "NavList", "SettingsRow", "Card", "Switch", "Select", "ConfirmDialog"],
         variants: [
-            { id: "SettingsDialog", name: "Settings dialog", description: "Commandr's: sections down the left of a dialog, rows of settings on an inset panel.", height: 680 },
-            { id: "SettingsPage", name: "Settings page", description: "The same sections as a full page, for web apps." },
-            { id: "SettingsApiKeys", name: "API keys", description: "Keys in a table, each with a copy button, the date it was last used and a way to revoke it.", height: 600 },
-            { id: "SettingsMembers", name: "Members and roles", description: "People with their role and a menu to change it or remove them." },
-            { id: "SettingsDanger", name: "Danger zone", description: "Deleting the account or a project, with a confirmation that names what goes.", height: 560 },
+            { id: "SettingsDialog", component: "Settings01", name: "Settings dialog", description: "Commandr's: sections down the left of a dialog, rows of settings on an inset panel.", height: 680 },
+            { id: "SettingsPage", component: "Settings02", name: "Settings page", description: "The same sections as a full page, for web apps." },
+            { id: "SettingsApiKeys", component: "Settings03", name: "API keys", description: "Keys in a table, each with a copy button, the date it was last used and a way to revoke it.", height: 600 },
+            { id: "SettingsMembers", component: "Settings04", name: "Members and roles", description: "People with their role and a menu to change it or remove them." },
+            { id: "SettingsDanger", component: "Settings05", name: "Danger zone", description: "Deleting the account or a project, with a confirmation that names what goes.", height: 560 },
         ],
     },
     {
@@ -379,11 +379,11 @@ export const blockCategories: BlockCategory[] = [
         sketch: "auth",
         uses: ["Card", "Field", "Input", "Button", "Separator", "InputOTP", "Link"],
         variants: [
-            { id: "SignInCard", name: "Sign-in card", description: "Email and password on a card, with GitHub and Google above them.", height: 720 },
-            { id: "SignInSplit", name: "Split with a picture", description: "The form on one side, the product or a quote on the other.", sketch: "auth-split", height: 720 },
-            { id: "SignInMagicLink", name: "Magic link", description: "An email field, then a page saying where the link went.", height: 600 },
-            { id: "SignInTwoFactor", name: "Two-factor code", description: "Six boxes for the code from an authenticator app.", height: 600 },
-            { id: "SignInReset", name: "Reset password", description: "Ask for the email, then a new password with what it needs.", height: 640 },
+            { id: "SignInCard", component: "SignIn01", name: "Sign-in card", description: "Email and password on a card, with GitHub and Google above them.", height: 720 },
+            { id: "SignInSplit", component: "SignIn02", name: "Split with a picture", description: "The form on one side, the product or a quote on the other.", sketch: "auth-split", height: 720 },
+            { id: "SignInMagicLink", component: "SignIn03", name: "Magic link", description: "An email field, then a page saying where the link went.", height: 600 },
+            { id: "SignInTwoFactor", component: "SignIn04", name: "Two-factor code", description: "Six boxes for the code from an authenticator app.", height: 600 },
+            { id: "SignInReset", component: "SignIn05", name: "Reset password", description: "Ask for the email, then a new password with what it needs.", height: 640 },
         ],
     },
     {
@@ -394,9 +394,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "onboarding",
         uses: ["Steps", "ChoiceCard", "Button", "ProgressBar", "Dialog"],
         variants: [
-            { id: "OnboardingChecklist", name: "Checklist", description: "Commandr's first-run steps, with the current one open and its action beside it." },
-            { id: "OnboardingChoice", name: "Choose how to start", description: "Two or three ChoiceCards: from scratch, from a template, or import." },
-            { id: "OnboardingWelcome", name: "Welcome dialog", description: "A short dialog for what's new, with one button to carry on.", height: 560 },
+            { id: "OnboardingChecklist", component: "Onboarding01", name: "Checklist", description: "Commandr's first-run steps, with the current one open and its action beside it." },
+            { id: "OnboardingChoice", component: "Onboarding02", name: "Choose how to start", description: "Two or three ChoiceCards: from scratch, from a template, or import." },
+            { id: "OnboardingWelcome", component: "Onboarding03", name: "Welcome dialog", description: "A short dialog for what's new, with one button to carry on.", height: 560 },
         ],
     },
     {
@@ -407,9 +407,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "empty",
         uses: ["EmptyState", "Button", "ChoiceCard"],
         variants: [
-            { id: "EmptyFirstRun", name: "First run", description: "What will be here and the button that makes the first one." },
-            { id: "EmptyNoResults", name: "No results", description: "What was searched for and a way back." },
-            { id: "EmptyError", name: "Couldn't load", description: "What went wrong and a button to try again." },
+            { id: "EmptyFirstRun", component: "Empty01", name: "First run", description: "What will be here and the button that makes the first one." },
+            { id: "EmptyNoResults", component: "Empty02", name: "No results", description: "What was searched for and a way back." },
+            { id: "EmptyError", component: "Empty03", name: "Couldn't load", description: "What went wrong and a button to try again." },
         ],
     },
     {
@@ -420,9 +420,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "error",
         uses: ["Button", "Link", "DotGrid"],
         variants: [
-            { id: "ErrorNotFound", name: "Not found", description: "A 404 with a search field and links to the main places.", height: 600 },
-            { id: "ErrorServer", name: "Something went wrong", description: "A 500 with a button to try again and how to report it.", height: 600 },
-            { id: "ErrorMaintenance", name: "Down for maintenance", description: "When it'll be back, and where to follow the status.", height: 600 },
+            { id: "ErrorNotFound", component: "ErrorPage01", name: "Not found", description: "A 404 with a search field and links to the main places.", height: 600 },
+            { id: "ErrorServer", component: "ErrorPage02", name: "Something went wrong", description: "A 500 with a button to try again and how to report it.", height: 600 },
+            { id: "ErrorMaintenance", component: "ErrorPage03", name: "Down for maintenance", description: "When it'll be back, and where to follow the status.", height: 600 },
         ],
     },
     {
@@ -433,9 +433,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "notifications",
         uses: ["Popover", "Badge", "Avatar", "Tabs", "Switch"],
         variants: [
-            { id: "NotificationsInbox", name: "Inbox popover", description: "A bell with a count that opens the latest, with Mark all as read.", height: 560 },
-            { id: "NotificationsFeed", name: "Activity feed", description: "Events in order, each with who, what and when." },
-            { id: "NotificationsSettings", name: "Notification settings", description: "Which events reach email, push or nowhere, in a grid of switches." },
+            { id: "NotificationsInbox", component: "Notifications01", name: "Inbox popover", description: "A bell with a count that opens the latest, with Mark all as read.", height: 560 },
+            { id: "NotificationsFeed", component: "Notifications02", name: "Activity feed", description: "Events in order, each with who, what and when." },
+            { id: "NotificationsSettings", component: "Notifications03", name: "Notification settings", description: "Which events reach email, push or nowhere, in a grid of switches." },
         ],
     },
     {
@@ -446,9 +446,9 @@ export const blockCategories: BlockCategory[] = [
         sketch: "chat",
         uses: ["Textarea", "Button", "Avatar", "CodeBlock", "Steps", "Badge"],
         variants: [
-            { id: "ChatThread", name: "Chat thread", description: "Messages with avatars and times, code in blocks, and a box to reply.", height: 640 },
-            { id: "ChatPromptBox", name: "Prompt box", description: "A growing text box with attachments, a model menu and a send button." },
-            { id: "ChatAgentRun", name: "Agent run", description: "An agent's steps as they happen, each with its status and what it changed.", sketch: "list" },
+            { id: "ChatThread", component: "Chat01", name: "Chat thread", description: "Messages with avatars and times, code in blocks, and a box to reply.", height: 640 },
+            { id: "ChatPromptBox", component: "Chat02", name: "Prompt box", description: "A growing text box with attachments, a model menu and a send button." },
+            { id: "ChatAgentRun", component: "Chat03", name: "Agent run", description: "An agent's steps as they happen, each with its status and what it changed.", sketch: "list" },
         ],
     },
 ];

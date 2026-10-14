@@ -1,0 +1,165 @@
+/* A settings section: invite at the top of the card, then the people and the invites still waiting. */
+.ow-settings04,
+.ow-settings04 *,
+.ow-settings04 *::before,
+.ow-settings04 *::after {
+    box-sizing: border-box;
+}
+
+.ow-settings04 {
+    background: var(--ow-canvas);
+    padding: 48px 32px 56px;
+    color: var(--ow-text);
+}
+
+.ow-settings04__inner {
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+.ow-settings04__header {
+    margin-bottom: 24px;
+}
+
+.ow-settings04__text {
+    max-width: 640px;
+    margin-top: 4px;
+}
+
+.ow-settings04__card {
+    overflow: hidden;
+}
+
+/* The invite: the email field, its role and the button on one line, the hint and any error under the field. */
+.ow-settings04__invite {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 150px auto;
+    align-items: start;
+    gap: var(--ow-space-md);
+    border-bottom: 1px solid var(--ow-border);
+    background: var(--ow-surface-muted);
+    padding: 18px 20px 20px;
+}
+
+/* Line the role and the button up with the field, below its label. */
+.ow-settings04__invite-role,
+.ow-settings04__invite-send {
+    margin-top: 28px;
+}
+
+.ow-settings04__list-title {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    padding: 18px 20px 6px;
+}
+
+/* A count, so its figures line up as it changes. */
+.ow-settings04__count {
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-settings04__list {
+    margin: 0;
+    padding: 0 20px 8px;
+    list-style: none;
+}
+
+.ow-settings04__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+    padding: 10px 0;
+}
+
+.ow-settings04__row + .ow-settings04__row {
+    border-top: 1px solid var(--ow-border);
+}
+
+.ow-settings04__person {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: var(--ow-space-lg);
+}
+
+.ow-settings04__person-text {
+    display: grid;
+    min-width: 0;
+    gap: 1px;
+}
+
+.ow-settings04__name {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.ow-settings04__invite-icon {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed var(--ow-border-strong);
+    border-radius: 50%;
+    color: var(--ow-icon);
+}
+
+.ow-settings04__controls {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--ow-space-xs);
+}
+
+.ow-settings04__role {
+    width: 118px;
+}
+
+.ow-settings04__owner {
+    width: 118px;
+    padding-left: 11px;
+}
+
+.ow-settings04__menu-spacer {
+    width: 32px;
+}
+
+@media (max-width: 760px) {
+    .ow-settings04 {
+        padding: 28px var(--ow-page-gutter) 40px;
+    }
+    .ow-settings04__invite {
+        grid-template-columns: minmax(0, 1fr) auto;
+        padding: 16px;
+    }
+    .ow-settings04__invite > .ow-field {
+        grid-column: 1 / -1;
+    }
+    .ow-settings04__invite-role,
+    .ow-settings04__invite-send {
+        margin-top: 0;
+    }
+    .ow-settings04__list-title {
+        padding: 16px 16px 4px;
+    }
+    .ow-settings04__list {
+        padding: 0 16px 6px;
+    }
+    .ow-settings04__row {
+        flex-wrap: wrap;
+        gap: var(--ow-space-sm);
+    }
+    /* The role drops under the person, lined up with their name. */
+    .ow-settings04__controls {
+        width: 100%;
+        justify-content: space-between;
+        padding-left: 40px;
+    }
+}

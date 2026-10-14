@@ -1,0 +1,68 @@
+.ow-empty02,
+.ow-empty02 *,
+.ow-empty02 *::before,
+.ow-empty02 *::after {
+    box-sizing: border-box;
+}
+
+.ow-empty02 {
+    background: var(--ow-canvas);
+    padding: 24px;
+    color: var(--ow-text);
+    font-size: 14px;
+}
+
+.ow-empty02__panel {
+    max-width: 1080px;
+    margin: 0 auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+    padding: 28px 32px 32px;
+}
+
+.ow-empty02__subtitle {
+    margin-top: 4px;
+}
+
+.ow-empty02__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 12px;
+    margin-top: 24px;
+}
+
+.ow-empty02__search {
+    width: 280px;
+    max-width: 100%;
+}
+
+/* Counts, so the figures don't shift as they change. */
+.ow-empty02__count {
+    margin-left: auto;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-empty02__table {
+    margin-top: 16px;
+}
+
+.ow-empty02__table .ow-table__empty {
+    padding: 24px 16px 28px;
+}
+
+@media (max-width: 760px) {
+    .ow-empty02 {
+        padding: 8px;
+    }
+    .ow-empty02__panel {
+        padding: 22px 16px 16px;
+    }
+    .ow-empty02__search {
+        width: 100%;
+    }
+    .ow-empty02__count {
+        display: none;
+    }
+}

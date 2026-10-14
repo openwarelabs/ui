@@ -1,0 +1,76 @@
+.ow-stats02,
+.ow-stats02 *,
+.ow-stats02 *::before,
+.ow-stats02 *::after {
+    box-sizing: border-box;
+}
+
+.ow-stats02 {
+    background: var(--ow-paper);
+    padding: var(--ow-section-y) 32px;
+    color: var(--ow-text);
+}
+
+.ow-stats02__inner {
+    max-width: var(--ow-page-max);
+    margin: 0 auto;
+}
+
+.ow-stats02__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px 48px;
+}
+
+.ow-stats02__link {
+    margin-bottom: 4px;
+}
+
+.ow-stats02__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 56px;
+}
+
+/* Stat is sized for an app's overview; on a marketing page it gets more room around a bigger number. */
+.ow-stats02__stat.ow-stat {
+    gap: 12px;
+    border-radius: var(--ow-radius-card);
+    padding: 24px 24px 20px;
+}
+
+.ow-stats02__stat .ow-stat__row {
+    margin-top: 12px;
+}
+
+.ow-stats02__stat .ow-stat__description {
+    margin-top: 0;
+}
+
+.ow-stats02__stat .ow-stat__trend {
+    height: 56px;
+    margin-top: 16px;
+}
+
+@media (max-width: 1024px) {
+    .ow-stats02__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-stats02 {
+        padding: 72px var(--ow-page-gutter);
+    }
+    .ow-stats02__grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+        margin-top: 40px;
+    }
+    .ow-stats02__stat .ow-stat__trend {
+        height: 44px;
+    }
+}

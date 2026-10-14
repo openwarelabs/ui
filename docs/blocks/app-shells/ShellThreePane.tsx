@@ -1,26 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
-import {
-    Avatar,
-    AvatarGroup,
-    Badge,
-    Button,
-    Menu,
-    MenuItem,
-    MenuLabel,
-    MenuSeparator,
-    NavItem,
-    ScrollShadow,
-    SearchField,
-    SettingsRow,
-    Switch,
-    Text,
-    Tooltip,
-    User,
-    toast,
-    type BadgeVariant,
-} from "@openwarelabs/ui";
-import { Check, ChevronLeft, ChevronRight, ChevronsUpDown, LogOut, PanelRight, Plus, Rocket, Settings, User as UserIcon, X } from "lucide-react";
+import { Shell03 } from "@openwarelabs/blocks";
+import { Avatar, AvatarGroup, Badge, Button, SettingsRow, Switch, Text, User, toast, type BadgeVariant } from "@openwarelabs/ui";
+import { LogOut, Rocket, Settings, User as UserIcon } from "lucide-react";
 
 import "./ShellThreePane.css";
 
@@ -171,29 +153,10 @@ const projects: Project[] = [
     },
 ];
 
-/** On phones one pane shows at a time; under 1024px the inspector takes the item's place. */
-type View = "list" | "item" | "inspector";
-
-function useMediaQuery(query: string) {
-    const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
-    useEffect(() => {
-        const list = window.matchMedia(query);
-        const update = () => setMatches(list.matches);
-        update();
-        list.addEventListener("change", update);
-        return () => list.removeEventListener("change", update);
-    }, [query]);
-    return matches;
-}
-
 export function ShellThreePane() {
     const [selectedId, setSelectedId] = useState("billing-api");
-    const [view, setView] = useState<View>("list");
-    const [inspectorOpen, setInspectorOpen] = useState(true);
-    const [query, setQuery] = useState("");
     const [added, setAdded] = useState<Record<string, Deploy[]>>({});
     const [settings, setSettings] = useState<Record<string, { previews: boolean; agents: boolean }>>({});
-    const wide = useMediaQuery("(min-width: 1024px)");
 
     const project = projects.find((entry) => entry.id === selectedId)!;
     const deploys = [...(added[project.id] ?? []), ...project.deploys];
@@ -201,25 +164,6 @@ export function ShellThreePane() {
     const statusOf = (entry: Project) => (added[entry.id]?.[0] ?? entry.deploys[0]!).status;
     const own = settings[project.id] ?? { previews: true, agents: project.id !== "billing-api" };
     const setOwn = (change: Partial<typeof own>) => setSettings((current) => ({ ...current, [project.id]: { ...own, ...change } }));
-    const visible = projects.filter((entry) => entry.id.includes(query.trim().toLowerCase()));
-
-    // When a narrow screen swaps panes, take focus to the new pane's heading so keyboards and screen readers follow.
-    const itemRef = useRef<HTMLElement>(null);
-    const inspectorRef = useRef<HTMLElement>(null);
-    const listRef = useRef<HTMLDivElement>(null);
-    const moved = useRef(false);
-    useEffect(() => {
-        if (!moved.current) return;
-        if (view === "item") itemRef.current?.querySelector<HTMLElement>("h1")?.focus();
-        if (view === "inspector") inspectorRef.current?.querySelector<HTMLElement>("h2")?.focus();
-        if (view === "list") listRef.current?.querySelector<HTMLElement>('[aria-current="page"]')?.focus();
-    }, [view]);
-    const go = (next: View) => {
-        moved.current = true;
-        setView(next);
-    };
-
-    const showDetails = () => (wide ? setInspectorOpen((open) => !open) : go("inspector"));
 
     // A deploy builds for a few seconds, then goes live.
     const timers = useRef<number[]>([]);
@@ -242,307 +186,172 @@ export function ShellThreePane() {
     };
 
     return (
-        <div className="shell-three-pane" data-view={view} data-inspector={inspectorOpen ? "open" : "closed"}>
-            <div ref={listRef} className="shell-three-pane__list">
-                <Menu
-                    label="Workspaces"
-                    width={232}
-                    trigger={
-                        <Button variant="ghost" size="sm" fullWidth className="shell-three-pane__workspace" endIcon={<ChevronsUpDown size={15} />}>
-                            <span className="shell-three-pane__mark" aria-hidden="true" />
-                            <Text as="span" variant="card-title" tone="default" className="shell-three-pane__workspace-name">
-                                Acme
+        <Shell03
+            workspace="Acme"
+            logo={<span className="shell-three-pane__mark" aria-hidden="true" />}
+            workspaces={[{ name: "Acme", current: true }, { name: "Personal" }]}
+            listTitle="Projects"
+            newItem={{ label: "New project" }}
+            items={projects.map((entry) => {
+                const entryStatus = statusOf(entry);
+                return {
+                    id: entry.id,
+                    label: entry.id,
+                    icon: <span className="shell-three-pane__dot" style={{ background: entry.color }} aria-hidden="true" />,
+                    caption: (added[entry.id]?.[0] ?? entry.deploys[0]!).when,
+                    status: { label: entryStatus, tone: tone[entryStatus] },
+                };
+            })}
+            selected={selectedId}
+            onSelect={setSelectedId}
+            account={{ name: "Maya Chen", email: "maya@example.com" }}
+            accountMenu={[
+                { label: "Profile", icon: <UserIcon size={15} /> },
+                { label: "Settings", icon: <Settings size={15} /> },
+                { label: "Sign out", icon: <LogOut size={15} />, separatorBefore: true },
+            ]}
+            labels={{ filter: "Filter projects", noMatch: (query) => <>No projects match “{query}”.</> }}
+            inspector={
+                <>
+                    <dl className="shell-three-pane__details">
+                        <div className="shell-three-pane__detail">
+                            <Text as="dt" tone="muted">
+                                Owner
                             </Text>
-                        </Button>
-                    }
-                >
-                    <MenuLabel>Workspaces</MenuLabel>
-                    <MenuItem icon={<Check size={15} />}>Acme</MenuItem>
-                    <MenuItem icon={<span className="shell-three-pane__menu-spacer" />}>Personal</MenuItem>
-                    <MenuSeparator />
-                    <MenuItem icon={<Plus size={15} />}>New workspace</MenuItem>
-                </Menu>
+                            <dd>
+                                <User name={project.owner} size="sm" />
+                            </dd>
+                        </div>
+                        <div className="shell-three-pane__detail">
+                            <Text as="dt" tone="muted">
+                                Members
+                            </Text>
+                            <dd>
+                                <AvatarGroup size="sm" max={4} label={`${project.members.length} people on ${project.id}`}>
+                                    {project.members.map((name) => (
+                                        <Avatar key={name} name={name} label={name} />
+                                    ))}
+                                </AvatarGroup>
+                            </dd>
+                        </div>
+                        <div className="shell-three-pane__detail">
+                            <Text as="dt" tone="muted">
+                                Repository
+                            </Text>
+                            <Text as="dd" variant="code" truncate className="shell-three-pane__mono">
+                                {project.repo}
+                            </Text>
+                        </div>
+                        <div className="shell-three-pane__detail">
+                            <Text as="dt" tone="muted">
+                                Production
+                            </Text>
+                            <Text as="dd" variant="code" truncate className="shell-three-pane__mono">
+                                {project.branch}
+                            </Text>
+                        </div>
+                        <div className="shell-three-pane__detail">
+                            <Text as="dt" tone="muted">
+                                Region
+                            </Text>
+                            <Text as="dd" truncate>
+                                {project.region}
+                            </Text>
+                        </div>
+                        <div className="shell-three-pane__detail">
+                            <Text as="dt" tone="muted">
+                                Runtime
+                            </Text>
+                            <Text as="dd" truncate>
+                                {project.runtime}
+                            </Text>
+                        </div>
+                        <div className="shell-three-pane__detail">
+                            <Text as="dt" tone="muted">
+                                Created
+                            </Text>
+                            <Text as="dd" truncate>
+                                {project.created}
+                            </Text>
+                        </div>
+                    </dl>
 
-                <div className="shell-three-pane__list-heading">
-                    <Text variant="label">
-                        Projects
-                        <Text as="span" tone="muted" className="shell-three-pane__list-count">
-                            {projects.length}
+                    <div className="shell-three-pane__settings">
+                        <Text as="h3" variant="caption" className="shell-three-pane__settings-title">
+                            Settings
                         </Text>
+                        <SettingsRow label="Preview deploys" description="Build every pull request on its own address.">
+                            <Switch checked={own.previews} onChange={(previews) => setOwn({ previews })} label="Preview deploys" />
+                        </SettingsRow>
+                        <SettingsRow label="Agent pull requests" description="Let agents open pull requests here.">
+                            <Switch checked={own.agents} onChange={(agents) => setOwn({ agents })} label="Agent pull requests" />
+                        </SettingsRow>
+                    </div>
+                </>
+            }
+        >
+            <div className="shell-three-pane__header">
+                <div>
+                    <div className="shell-three-pane__title-row">
+                        <Text as="h1" variant="heading" tabIndex={-1} className="shell-three-pane__title">
+                            {project.id}
+                        </Text>
+                        <Badge variant={tone[status]}>{status}</Badge>
+                    </div>
+                    <Text variant="copy" className="shell-three-pane__description">
+                        {project.description}
                     </Text>
-                    <Tooltip label="New project">
-                        <Button variant="ghost" size="sm" iconOnly aria-label="New project">
-                            <Plus size={16} />
-                        </Button>
-                    </Tooltip>
                 </div>
+                <Button variant="primary" startIcon={<Rocket size={16} />} onClick={deploy}>
+                    Deploy
+                </Button>
+            </div>
 
-                <SearchField
-                    size="sm"
-                    className="shell-three-pane__search"
-                    placeholder="Filter projects"
-                    aria-label="Filter projects"
-                    value={query}
-                    onChange={setQuery}
-                />
+            <dl className="shell-three-pane__figures">
+                {project.figures.map(([label, value]) => (
+                    <div key={label} className="shell-three-pane__figure">
+                        <Text as="dt" variant="caption">
+                            {label}
+                        </Text>
+                        <Text as="dd" variant="heading" className="shell-three-pane__figure-value">
+                            {value}
+                        </Text>
+                    </div>
+                ))}
+            </dl>
 
-                <ScrollShadow className="shell-three-pane__scroll">
-                    <nav aria-label="Projects">
-                        {visible.length ? (
-                            <ul className="shell-three-pane__projects">
-                                {visible.map((entry) => {
-                                    const entryStatus = statusOf(entry);
-                                    return (
-                                        <li key={entry.id}>
-                                            <NavItem
-                                                className="shell-three-pane__project"
-                                                icon={<span className="shell-three-pane__dot" style={{ background: entry.color }} aria-hidden="true" />}
-                                                active={entry.id === selectedId}
-                                                end={
-                                                    <Badge size="sm" variant={tone[entryStatus]}>
-                                                        {entryStatus}
-                                                    </Badge>
-                                                }
-                                                onClick={() => {
-                                                    setSelectedId(entry.id);
-                                                    go("item");
-                                                }}
-                                            >
-                                                {/* The name takes the item's own type, which turns heavier on the open project. */}
-                                                <span className="shell-three-pane__project-text">
-                                                    <span className="shell-three-pane__project-name">{entry.id}</span>
-                                                    <Text variant="caption" truncate>
-                                                        {(added[entry.id]?.[0] ?? entry.deploys[0]!).when}
-                                                    </Text>
-                                                </span>
-                                            </NavItem>
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                        ) : (
-                            <Text variant="copy" className="shell-three-pane__no-match">
-                                No projects match “{query.trim()}”.
-                            </Text>
-                        )}
-                    </nav>
-                </ScrollShadow>
-
-                <Menu
-                    label="Account"
-                    above
-                    width={232}
-                    trigger={
-                        <Button variant="ghost" fullWidth className="shell-three-pane__user" endIcon={<ChevronsUpDown size={15} />}>
-                            <Avatar name="Maya Chen" size="sm" />
-                            <span className="shell-three-pane__user-text">
-                                <Text as="span" variant="label" tone="default" truncate>
-                                    Maya Chen
+            <section aria-labelledby="shell-three-pane-deploys">
+                <Text as="h2" variant="card-title" id="shell-three-pane-deploys" className="shell-three-pane__section-title">
+                    Recent deploys
+                </Text>
+                <ul className="shell-three-pane__deploys">
+                    {deploys.map((entry, index) => (
+                        <li key={`${entry.message}-${index}`} className="shell-three-pane__deploy">
+                            <span className="shell-three-pane__deploy-text">
+                                <Text as="span" truncate>
+                                    {entry.message}
                                 </Text>
                                 <Text variant="caption" truncate>
-                                    maya@example.com
+                                    <Text as="span" variant="code" className="shell-three-pane__mono">
+                                        {entry.branch}
+                                    </Text>{" "}
+                                    · {entry.who} · {entry.when}
                                 </Text>
                             </span>
-                        </Button>
-                    }
-                >
-                    <MenuItem icon={<UserIcon size={15} />}>Profile</MenuItem>
-                    <MenuItem icon={<Settings size={15} />}>Settings</MenuItem>
-                    <MenuSeparator />
-                    <MenuItem icon={<LogOut size={15} />}>Sign out</MenuItem>
-                </Menu>
-            </div>
-
-            <div className="shell-three-pane__panel">
-                <main ref={itemRef} className="shell-three-pane__item">
-                    <div className="shell-three-pane__toolbar">
-                        <span className="shell-three-pane__back">
-                            <Button variant="ghost" size="sm" startIcon={<ChevronLeft size={16} />} onClick={() => go("list")}>
-                                Projects
-                            </Button>
-                        </span>
-                        <Text as="span" tone="muted" className="shell-three-pane__crumbs" aria-hidden="true">
-                            Projects
-                            <ChevronRight size={14} />
-                            <Text as="span" variant="label" tone="default" truncate>
-                                {project.id}
-                            </Text>
-                        </Text>
-                        <Tooltip label={wide && inspectorOpen ? "Hide details" : "Show details"}>
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                iconOnly
-                                aria-label={wide && inspectorOpen ? "Hide details" : "Show details"}
-                                aria-expanded={wide ? inspectorOpen : undefined}
-                                onClick={showDetails}
-                            >
-                                <PanelRight size={16} />
-                            </Button>
-                        </Tooltip>
-                    </div>
-
-                    <div className="shell-three-pane__content">
-                        <div className="shell-three-pane__header">
-                            <div>
-                                <div className="shell-three-pane__title-row">
-                                    <Text as="h1" variant="heading" tabIndex={-1} className="shell-three-pane__title">
-                                        {project.id}
+                            <span className="shell-three-pane__deploy-end">
+                                {entry.duration ? (
+                                    <Text variant="caption" className="shell-three-pane__duration">
+                                        {entry.duration}
                                     </Text>
-                                    <Badge variant={tone[status]}>{status}</Badge>
-                                </div>
-                                <Text variant="copy" className="shell-three-pane__description">
-                                    {project.description}
-                                </Text>
-                            </div>
-                            <Button variant="primary" startIcon={<Rocket size={16} />} onClick={deploy}>
-                                Deploy
-                            </Button>
-                        </div>
-
-                        <dl className="shell-three-pane__figures">
-                            {project.figures.map(([label, value]) => (
-                                <div key={label} className="shell-three-pane__figure">
-                                    <Text as="dt" variant="caption">
-                                        {label}
-                                    </Text>
-                                    <Text as="dd" variant="heading" className="shell-three-pane__figure-value">
-                                        {value}
-                                    </Text>
-                                </div>
-                            ))}
-                        </dl>
-
-                        <section aria-labelledby="shell-three-pane-deploys">
-                            <Text as="h2" variant="card-title" id="shell-three-pane-deploys" className="shell-three-pane__section-title">
-                                Recent deploys
-                            </Text>
-                            <ul className="shell-three-pane__deploys">
-                                {deploys.map((entry, index) => (
-                                    <li key={`${entry.message}-${index}`} className="shell-three-pane__deploy">
-                                        <span className="shell-three-pane__deploy-text">
-                                            <Text as="span" truncate>
-                                                {entry.message}
-                                            </Text>
-                                            <Text variant="caption" truncate>
-                                                <Text as="span" variant="code" className="shell-three-pane__mono">
-                                                    {entry.branch}
-                                                </Text>{" "}
-                                                · {entry.who} · {entry.when}
-                                            </Text>
-                                        </span>
-                                        <span className="shell-three-pane__deploy-end">
-                                            {entry.duration ? (
-                                                <Text variant="caption" className="shell-three-pane__duration">
-                                                    {entry.duration}
-                                                </Text>
-                                            ) : null}
-                                            <Badge size="sm" variant={tone[entry.status]}>
-                                                {entry.status}
-                                            </Badge>
-                                        </span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </section>
-                    </div>
-                </main>
-
-                <aside ref={inspectorRef} className="shell-three-pane__inspector" aria-labelledby="shell-three-pane-details">
-                    <div className="shell-three-pane__inspector-header">
-                        <span className="shell-three-pane__inspector-back">
-                            <Button variant="ghost" size="sm" iconOnly aria-label={`Back to ${project.id}`} onClick={() => go("item")}>
-                                <ChevronLeft size={16} />
-                            </Button>
-                        </span>
-                        <Text as="h2" variant="card-title" id="shell-three-pane-details" tabIndex={-1} className="shell-three-pane__inspector-title">
-                            Details
-                        </Text>
-                        <span className="shell-three-pane__inspector-close">
-                            <Button variant="ghost" size="sm" iconOnly aria-label="Hide details" onClick={() => setInspectorOpen(false)}>
-                                <X size={16} />
-                            </Button>
-                        </span>
-                    </div>
-
-                    <div className="shell-three-pane__inspector-body">
-                        <dl className="shell-three-pane__details">
-                            <div className="shell-three-pane__detail">
-                                <Text as="dt" tone="muted">
-                                    Owner
-                                </Text>
-                                <dd>
-                                    <User name={project.owner} size="sm" />
-                                </dd>
-                            </div>
-                            <div className="shell-three-pane__detail">
-                                <Text as="dt" tone="muted">
-                                    Members
-                                </Text>
-                                <dd>
-                                    <AvatarGroup size="sm" max={4} label={`${project.members.length} people on ${project.id}`}>
-                                        {project.members.map((name) => (
-                                            <Avatar key={name} name={name} label={name} />
-                                        ))}
-                                    </AvatarGroup>
-                                </dd>
-                            </div>
-                            <div className="shell-three-pane__detail">
-                                <Text as="dt" tone="muted">
-                                    Repository
-                                </Text>
-                                <Text as="dd" variant="code" truncate className="shell-three-pane__mono">
-                                    {project.repo}
-                                </Text>
-                            </div>
-                            <div className="shell-three-pane__detail">
-                                <Text as="dt" tone="muted">
-                                    Production
-                                </Text>
-                                <Text as="dd" variant="code" truncate className="shell-three-pane__mono">
-                                    {project.branch}
-                                </Text>
-                            </div>
-                            <div className="shell-three-pane__detail">
-                                <Text as="dt" tone="muted">
-                                    Region
-                                </Text>
-                                <Text as="dd" truncate>
-                                    {project.region}
-                                </Text>
-                            </div>
-                            <div className="shell-three-pane__detail">
-                                <Text as="dt" tone="muted">
-                                    Runtime
-                                </Text>
-                                <Text as="dd" truncate>
-                                    {project.runtime}
-                                </Text>
-                            </div>
-                            <div className="shell-three-pane__detail">
-                                <Text as="dt" tone="muted">
-                                    Created
-                                </Text>
-                                <Text as="dd" truncate>
-                                    {project.created}
-                                </Text>
-                            </div>
-                        </dl>
-
-                        <div className="shell-three-pane__settings">
-                            <Text as="h3" variant="caption" className="shell-three-pane__settings-title">
-                                Settings
-                            </Text>
-                            <SettingsRow label="Preview deploys" description="Build every pull request on its own address.">
-                                <Switch checked={own.previews} onChange={(previews) => setOwn({ previews })} label="Preview deploys" />
-                            </SettingsRow>
-                            <SettingsRow label="Agent pull requests" description="Let agents open pull requests here.">
-                                <Switch checked={own.agents} onChange={(agents) => setOwn({ agents })} label="Agent pull requests" />
-                            </SettingsRow>
-                        </div>
-                    </div>
-                </aside>
-            </div>
-        </div>
+                                ) : null}
+                                <Badge size="sm" variant={tone[entry.status]}>
+                                    {entry.status}
+                                </Badge>
+                            </span>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+        </Shell03>
     );
 }

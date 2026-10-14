@@ -1,0 +1,137 @@
+.ow-error-page02,
+.ow-error-page02 *,
+.ow-error-page02 *::before,
+.ow-error-page02 *::after {
+    box-sizing: border-box;
+}
+
+.ow-error-page02 {
+    display: flex;
+    min-height: 100dvh;
+    flex-direction: column;
+    background: var(--ow-canvas);
+    color: var(--ow-text);
+}
+
+.ow-error-page02__bar {
+    display: flex;
+    height: 60px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+}
+
+/* The logo is a link, but keeps its own colour on hover: no underline, no brass. */
+.ow-error-page02__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    border-radius: var(--ow-radius-md);
+    text-decoration-line: none;
+}
+
+.ow-error-page02__logo:hover {
+    color: var(--ow-text);
+}
+
+.ow-error-page02__status-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ow-error-page02__status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ow-warning-solid);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--ow-warning-solid) 22%, transparent);
+}
+
+.ow-error-page02__main {
+    display: grid;
+    width: 100%;
+    max-width: 1040px;
+    flex: 1;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+    align-items: center;
+    gap: 64px;
+    margin: 0 auto;
+    padding: 0 32px 60px;
+}
+
+.ow-error-page02__title {
+    margin-top: 18px;
+}
+
+.ow-error-page02__text {
+    max-width: 460px;
+    margin-top: 12px;
+}
+
+.ow-error-page02__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 26px;
+}
+
+/* How to report it: the error ID to copy, and where to send it. */
+.ow-error-page02__report {
+    max-width: 460px;
+    margin-top: 32px;
+    border-top: 1px solid var(--ow-border);
+    padding-top: 22px;
+}
+
+.ow-error-page02__report-text {
+    margin-top: 4px;
+}
+
+.ow-error-page02__id {
+    display: flex;
+    height: 40px;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-form);
+    background: var(--ow-surface);
+    padding: 0 6px 0 12px;
+}
+
+.ow-error-page02__id-value {
+    min-width: 0;
+    flex: 1;
+}
+
+@media (max-width: 1024px) {
+    .ow-error-page02__main {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
+        gap: 40px;
+    }
+}
+
+@media (max-width: 880px) {
+    .ow-error-page02__main {
+        max-width: 560px;
+        grid-template-columns: minmax(0, 1fr);
+    }
+    /* The drawn picture beside the words goes once they stack. */
+    .ow-error-page02__visual {
+        display: none;
+    }
+}
+
+@media (max-width: 760px) {
+    .ow-error-page02__bar {
+        padding: 0 var(--ow-page-gutter);
+    }
+    .ow-error-page02__main {
+        padding: 12px var(--ow-page-gutter) 40px;
+    }
+    .ow-error-page02__actions .ow-button {
+        flex: 1;
+    }
+}

@@ -1,0 +1,136 @@
+/* One raised panel inset from the window, as in the app: a slim bar at the top and a short column in the middle. */
+.ow-sign-in03,
+.ow-sign-in03 *,
+.ow-sign-in03 *::before,
+.ow-sign-in03 *::after {
+    box-sizing: border-box;
+}
+
+.ow-sign-in03 {
+    display: flex;
+    min-height: 100dvh;
+    background: var(--ow-canvas);
+    padding: 8px;
+    color: var(--ow-text);
+}
+
+.ow-sign-in03__panel {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+}
+
+.ow-sign-in03__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-2xl);
+    padding: 18px 24px;
+}
+
+.ow-sign-in03__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ow-sign-in03__body {
+    display: grid;
+    flex: 1;
+    place-items: center;
+    padding: 24px var(--ow-page-gutter) 72px;
+}
+
+.ow-sign-in03__content {
+    display: flex;
+    width: 100%;
+    max-width: 360px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    animation: ow-sign-in03-in var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+@keyframes ow-sign-in03-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+}
+
+.ow-sign-in03__icon {
+    display: inline-flex;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: 14px;
+    background: var(--ow-surface-muted);
+    color: var(--ow-primary-text);
+    box-shadow: var(--ow-shadow-control);
+}
+
+.ow-sign-in03__icon--sent {
+    border-color: var(--ow-success-border);
+    background: var(--ow-success-surface);
+    color: var(--ow-success-text);
+}
+
+.ow-sign-in03__title {
+    margin-top: 20px;
+}
+
+.ow-sign-in03__title:focus {
+    outline: none;
+}
+
+.ow-sign-in03__lead {
+    margin-top: 8px;
+}
+
+/* The address on a line of its own, so it's easy to check. */
+.ow-sign-in03__email {
+    display: block;
+    margin: 2px 0 4px;
+    overflow-wrap: anywhere;
+}
+
+.ow-sign-in03__fields,
+.ow-sign-in03__actions {
+    display: grid;
+    width: 100%;
+    gap: var(--ow-space-lg);
+    margin-top: 28px;
+    text-align: left;
+}
+
+.ow-sign-in03__actions {
+    gap: var(--ow-space-xs);
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-sign-in03__note {
+    margin-top: 22px;
+    text-wrap: balance;
+}
+
+@media (max-width: 760px) {
+    .ow-sign-in03__bar {
+        padding: 14px 16px;
+    }
+    .ow-sign-in03__body {
+        align-items: start;
+        padding-top: 32px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-sign-in03__content {
+        animation: none;
+    }
+}

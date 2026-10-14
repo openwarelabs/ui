@@ -1,0 +1,141 @@
+/* One card on the canvas: what to open, six boxes for the code, and a way out to a backup code. */
+.ow-sign-in04,
+.ow-sign-in04 *,
+.ow-sign-in04 *::before,
+.ow-sign-in04 *::after {
+    box-sizing: border-box;
+}
+
+.ow-sign-in04 {
+    display: grid;
+    min-height: 100dvh;
+    place-items: center;
+    background: var(--ow-canvas);
+    padding: 32px var(--ow-page-gutter);
+    color: var(--ow-text);
+}
+
+.ow-sign-in04__inner {
+    width: 100%;
+    max-width: 408px;
+}
+
+.ow-sign-in04__card {
+    padding: 28px 28px 22px;
+}
+
+.ow-sign-in04__form,
+.ow-sign-in04__done {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.ow-sign-in04__done {
+    gap: 0;
+    padding: 12px 0 18px;
+}
+
+.ow-sign-in04__icon {
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.ow-sign-in04__icon--done {
+    background: var(--ow-success-surface);
+    color: var(--ow-success-text);
+}
+
+.ow-sign-in04__title {
+    margin-top: 16px;
+}
+
+/* Centred under the icon, so its lines balance rather than leave a broken word on a short last line. */
+.ow-sign-in04__lead {
+    margin-top: 6px;
+    text-wrap: balance;
+}
+
+.ow-sign-in04__done .ow-spinner {
+    margin-top: 18px;
+}
+
+.ow-sign-in04__code {
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+/* Roomier boxes than the default, for the one thing on the page. */
+.ow-sign-in04 .ow-otp__input {
+    width: 46px;
+    height: 54px;
+    font-size: 22px;
+}
+
+.ow-sign-in04__message {
+    display: inline-flex;
+    min-height: 20px;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    text-wrap: balance;
+}
+
+.ow-sign-in04__backup {
+    width: 100%;
+    margin-top: 24px;
+    text-align: left;
+}
+
+.ow-sign-in04__backup-input {
+    font-family: var(--ow-font-mono);
+    letter-spacing: 0.06em;
+}
+
+.ow-sign-in04__trust {
+    align-self: flex-start;
+    margin-top: 22px;
+    text-align: left;
+}
+
+.ow-sign-in04__form > .ow-button {
+    margin-top: 18px;
+}
+
+/* It switches the form rather than going anywhere, so it's a quiet button, not a link. */
+.ow-sign-in04__form > .ow-sign-in04__switch {
+    margin-top: 10px;
+}
+
+.ow-sign-in04__foot {
+    margin-top: 20px;
+}
+
+@media (max-width: 760px) {
+    .ow-sign-in04 {
+        align-items: start;
+        padding-top: 28px;
+    }
+    .ow-sign-in04__card {
+        padding: 24px 18px 20px;
+    }
+    .ow-sign-in04 .ow-otp {
+        gap: 6px;
+    }
+    .ow-sign-in04 .ow-otp__slot {
+        gap: 6px;
+    }
+    .ow-sign-in04 .ow-otp__input {
+        width: 40px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
