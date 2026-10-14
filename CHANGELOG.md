@@ -2,6 +2,16 @@
 
 Every release of @openwarelabs/ui and @openwarelabs/ui-mcp. `npm run release` writes it from the commits.
 
+## 0.10.0 (2026-10-14)
+
+### Features
+
+- **blocks:** add the remaining 67 blocks as components (#9) ([62f14bc](https://github.com/openwarelabs/ui/commit/62f14bc431db4f565e97ab3eaa9ee0f0e0291bbb))
+
+### Fixes
+
+- let apps tree-shake unused components, and check accessibility and bundle size (#10) ([9dd2668](https://github.com/openwarelabs/ui/commit/9dd2668738a9b47a03bbbb5f74337ed955879aef))
+
 ## 0.9.0 (2026-10-14)
 
 ### Features
