@@ -24,4 +24,15 @@ export type { Header04Announcement, Header04Labels, Header04Props } from "./head
 export { Header05 } from "./headers/Header05/Header05";
 export type { Header05Labels, Header05Props } from "./headers/Header05/Header05.types";
 
+export { Pricing01 } from "./pricing/Pricing01/Pricing01";
+export type { Pricing01Plan, Pricing01Props } from "./pricing/Pricing01/Pricing01.types";
+export { Pricing02 } from "./pricing/Pricing02/Pricing02";
+export type { Pricing02Labels, Pricing02Period, Pricing02Plan, Pricing02Price, Pricing02Props } from "./pricing/Pricing02/Pricing02.types";
+export { Pricing03 } from "./pricing/Pricing03/Pricing03";
+export type { Pricing03Group, Pricing03Labels, Pricing03Plan, Pricing03Props, Pricing03Row, Pricing03Value } from "./pricing/Pricing03/Pricing03.types";
+export { Pricing04 } from "./pricing/Pricing04/Pricing04";
+export type { Pricing04Props } from "./pricing/Pricing04/Pricing04.types";
+export { Pricing05 } from "./pricing/Pricing05/Pricing05";
+export type { Pricing05Labels, Pricing05Props, Pricing05Tier } from "./pricing/Pricing05/Pricing05.types";
+
 export type { BlockAction, BlockBrand, BlockLink, HeaderLink } from "./shared/shared.types";

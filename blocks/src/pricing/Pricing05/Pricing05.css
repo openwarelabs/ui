@@ -1,17 +1,17 @@
-.pricing-usage,
-.pricing-usage *,
-.pricing-usage *::before,
-.pricing-usage *::after {
+.ow-pricing05,
+.ow-pricing05 *,
+.ow-pricing05 *::before,
+.ow-pricing05 *::after {
     box-sizing: border-box;
 }
 
-.pricing-usage {
+.ow-pricing05 {
     background: var(--ow-paper);
     padding: var(--ow-section-y) 32px;
     color: var(--ow-text);
 }
 
-.pricing-usage__inner {
+.ow-pricing05__inner {
     display: grid;
     max-width: var(--ow-page-max);
     grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
@@ -21,14 +21,14 @@
 }
 
 /* The price list: one row per band, the band the estimate lands in marked with a brass dot. */
-.pricing-usage__tiers {
+.ow-pricing05__tiers {
     margin: 40px 0 0;
     border-top: 1px solid var(--ow-border);
     padding: 0;
     list-style: none;
 }
 
-.pricing-usage__tier {
+.ow-pricing05__tier {
     display: grid;
     grid-template-columns: 14px minmax(0, 1fr) auto;
     align-items: baseline;
@@ -37,7 +37,7 @@
     padding: 16px 0;
 }
 
-.pricing-usage__tier-dot {
+.ow-pricing05__tier-dot {
     width: 6px;
     height: 6px;
     align-self: center;
@@ -46,43 +46,43 @@
     transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
 }
 
-.pricing-usage__tier[data-current] .pricing-usage__tier-dot {
+.ow-pricing05__tier[data-current] .ow-pricing05__tier-dot {
     background: var(--ow-brass);
 }
 
 /* Prices in a column: digits of one width. */
-.pricing-usage__tier-price {
+.ow-pricing05__tier-price {
     font-variant-numeric: tabular-nums;
 }
 
-.pricing-usage__tier-unit {
+.ow-pricing05__tier-unit {
     margin-left: 4px;
 }
 
-.pricing-usage__aside {
+.ow-pricing05__aside {
     margin-top: 20px;
 }
 
-.pricing-usage__card {
+.ow-pricing05__card {
     border-radius: var(--ow-radius-card);
     padding: 28px;
 }
 
-.pricing-usage__card-intro {
+.ow-pricing05__card-intro {
     margin-top: 6px;
 }
 
 /* The figure changes as the slider moves: digits of one width keep it from jittering. */
-.pricing-usage__runs {
+.ow-pricing05__runs {
     margin: 28px 0 16px;
     font-variant-numeric: tabular-nums;
 }
 
-.pricing-usage__runs-unit {
+.ow-pricing05__runs-unit {
     margin-left: 4px;
 }
 
-.pricing-usage__scale {
+.ow-pricing05__scale {
     display: flex;
     justify-content: space-between;
     margin: 8px 9px 0;
@@ -91,21 +91,21 @@
     font-variant-numeric: tabular-nums;
 }
 
-.pricing-usage__scale span {
+.ow-pricing05__scale span {
     width: 0;
     display: flex;
     justify-content: center;
     white-space: nowrap;
 }
 
-.pricing-usage__breakdown {
+.ow-pricing05__breakdown {
     display: grid;
     margin: 28px 0 0;
     border-top: 1px solid var(--ow-border);
     padding: 12px 0 0;
 }
 
-.pricing-usage__line {
+.ow-pricing05__line {
     display: flex;
     justify-content: space-between;
     gap: 16px;
@@ -114,11 +114,11 @@
 }
 
 /* Bands the estimate doesn't reach fade back; Text has no tone for disabled text. */
-.pricing-usage__line[data-idle] {
+.ow-pricing05__line[data-idle] {
     color: var(--ow-text-disabled);
 }
 
-.pricing-usage__total {
+.ow-pricing05__total {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -129,41 +129,41 @@
     padding-top: 18px;
 }
 
-.pricing-usage__total-note {
+.ow-pricing05__total-note {
     display: block;
     margin-top: 2px;
 }
 
 /* A price, not a title: no extra leading above the figure, and digits of one width as it changes. */
-.pricing-usage__total-amount {
+.ow-pricing05__total-amount {
     line-height: 1;
     font-variant-numeric: tabular-nums;
 }
 
-.pricing-usage__action {
+.ow-pricing05__action {
     margin-top: 24px;
 }
 
-.pricing-usage__fine {
+.ow-pricing05__fine {
     margin-top: 14px;
     text-wrap: balance;
 }
 
 @media (max-width: 1024px) {
-    .pricing-usage__inner {
+    .ow-pricing05__inner {
         grid-template-columns: minmax(0, 1fr);
         gap: 48px;
     }
 }
 
 @media (max-width: 760px) {
-    .pricing-usage {
+    .ow-pricing05 {
         padding: 72px var(--ow-page-gutter);
     }
-    .pricing-usage__tiers {
+    .ow-pricing05__tiers {
         margin-top: 32px;
     }
-    .pricing-usage__card {
+    .ow-pricing05__card {
         padding: 22px 18px;
     }
 }

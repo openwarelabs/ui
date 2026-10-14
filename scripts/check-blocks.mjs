@@ -25,6 +25,8 @@ const kebab = (name) =>
 const list = fs.readFileSync(listFile, "utf8");
 const expected = new Map();
 const componentHeights = new Map();
+// Blocks whose docs file is an example of their component, which may need no stylesheet of its own.
+const componentBlocks = new Set();
 let category = null;
 for (const line of list.split("\n")) {
     const slug = /^\s+slug: "([^"]+)",/.exec(line);
@@ -34,6 +36,7 @@ for (const line of list.split("\n")) {
     // A block that's a component in @openwarelabs/blocks: its styles may use viewport units when its preview does.
     const component = /component: "([^"]+)"/.exec(line);
     if (block && component) componentHeights.set(component[1], Boolean(block[3]));
+    if (block && component && category) componentBlocks.add(`${category}/${block[1]}`);
 }
 
 /** Splits a selector list on its top-level commas, leaving those inside :is(), :where() and the like alone. */
@@ -184,14 +187,15 @@ for (const [id, { fixedHeight }] of expected) {
     }
     if (exported.length !== 1 || exported[0] !== name)
         problem(id, `should export exactly one function, ${name}; it exports ${exported.join(", ") || "nothing"}`);
-    if (!tsx.includes(`import "./${name}.css";`)) problem(id, `should import "./${name}.css"`);
+    const isExample = componentBlocks.has(id);
+    if (!tsx.includes(`import "./${name}.css";`) && !(isExample && !fs.existsSync(cssPath))) problem(id, `should import "./${name}.css"`);
     for (const { tag, line } of rawElements(source)) problem(id, `line ${line}: <${tag}> by hand; use ${componentFor[tag]}`);
     if (/https?:\/\/(?!www\.w3\.org)/.test(tsx)) problem(id, "links to an outside address; use # for links and draw images with CSS or components");
     if (/lorem ipsum/i.test(tsx)) problem(id, "has placeholder Latin; write real copy");
 
     // Its styles.
     if (!fs.existsSync(cssPath)) {
-        problem(id, `has no ${name}.css`);
+        if (!isExample) problem(id, `has no ${name}.css`);
         continue;
     }
     checkStyles(id, cssPath, kebab(name), fixedHeight);
