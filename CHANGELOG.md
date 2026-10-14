@@ -2,6 +2,12 @@
 
 Every release of @openwarelabs/ui and @openwarelabs/ui-mcp. `npm run release` writes it from the commits.
 
+## 0.7.0 (2026-10-14)
+
+### Features
+
+- **blocks:** add @openwarelabs/blocks with Hero01 to Hero06 (#2) ([95f693b](https://github.com/openwarelabs/ui/commit/95f693b1779cf067c24d36dbf6a31e5b4c820a19))
+
 ## 0.6.0 (2026-10-14)
 
 ### Features
