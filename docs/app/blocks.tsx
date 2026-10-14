@@ -283,10 +283,10 @@ export const blockCategories: BlockCategory[] = [
         sketch: "footer",
         uses: ["Link", "Separator", "SegmentedControl", "Input"],
         variants: [
-            { id: "FooterColumns", name: "Columns of links", description: "The logo and a line, then three or four columns of links." },
-            { id: "FooterSimple", name: "Simple", description: "One line of links and the copyright, centred." },
-            { id: "FooterNewsletter", name: "With a newsletter field", description: "Columns of links and a sign-up field." },
-            { id: "FooterBrand", name: "Big brand mark", description: "The product's name set very large across the bottom." },
+            { id: "FooterColumns", component: "Footer01", name: "Columns of links", description: "The logo and a line, then three or four columns of links." },
+            { id: "FooterSimple", component: "Footer02", name: "Simple", description: "One line of links and the copyright, centred." },
+            { id: "FooterNewsletter", component: "Footer03", name: "With a newsletter field", description: "Columns of links and a sign-up field." },
+            { id: "FooterBrand", component: "Footer04", name: "Big brand mark", description: "The product's name set very large across the bottom." },
         ],
     },
     {

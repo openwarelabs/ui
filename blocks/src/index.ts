@@ -46,4 +46,13 @@ export type { Features04Labels, Features04Props, Features04Tab } from "./feature
 export { Features05 } from "./features/Features05/Features05";
 export type { Features05Props } from "./features/Features05/Features05.types";
 
-export type { BlockAction, BlockBrand, BlockLink, HeaderLink } from "./shared/shared.types";
+export { Footer01 } from "./footers/Footer01/Footer01";
+export type { Footer01Labels, Footer01Props } from "./footers/Footer01/Footer01.types";
+export { Footer02 } from "./footers/Footer02/Footer02";
+export type { Footer02Labels, Footer02Props } from "./footers/Footer02/Footer02.types";
+export { Footer03 } from "./footers/Footer03/Footer03";
+export type { Footer03Labels, Footer03Newsletter, Footer03Props } from "./footers/Footer03/Footer03.types";
+export { Footer04 } from "./footers/Footer04/Footer04";
+export type { Footer04Props } from "./footers/Footer04/Footer04.types";
+
+export type { BlockAction, BlockBrand, BlockLink, FooterColumn, HeaderLink } from "./shared/shared.types";

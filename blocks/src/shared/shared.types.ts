@@ -37,6 +37,14 @@ export interface HeaderLink {
     current?: boolean;
 }
 
+/** A column of links in a footer, under a heading. */
+export interface FooterColumn {
+    /** The column's heading. */
+    title: string;
+    /** Its links. A link's badge ("New") shows after it. */
+    links: Array<BlockLink & { badge?: ReactNode }>;
+}
+
 /** The product's name and logo, as a link home. */
 export interface BlockBrand {
     /** The name beside the logo, or the wordmark. */
@@ -75,4 +83,12 @@ export interface BlockIconProps {
 export interface BlockBrandLinkProps {
     brand: BlockBrand;
     className: string;
+}
+
+export interface FooterColumnsProps {
+    columns: FooterColumn[];
+    headingClassName: string;
+    listClassName: string;
+    /** For a link's badge. */
+    badgeClassName?: string;
 }

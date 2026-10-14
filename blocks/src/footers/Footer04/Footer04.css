@@ -1,11 +1,11 @@
-.footer-brand,
-.footer-brand *,
-.footer-brand *::before,
-.footer-brand *::after {
+.ow-footer04,
+.ow-footer04 *,
+.ow-footer04 *::before,
+.ow-footer04 *::after {
     box-sizing: border-box;
 }
 
-.footer-brand {
+.ow-footer04 {
     overflow: hidden;
     border-top: 1px solid var(--ow-border);
     background: var(--ow-paper);
@@ -13,37 +13,37 @@
     color: var(--ow-text);
 }
 
-.footer-brand__inner {
+.ow-footer04__inner {
     max-width: var(--ow-page-max);
     margin: 0 auto;
 }
 
-.footer-brand__top {
+.ow-footer04__top {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: start;
     gap: 48px 64px;
 }
 
-.footer-brand__pitch {
+.ow-footer04__pitch {
     max-width: 440px;
 }
 
-.footer-brand__pitch .ow-button {
+.ow-footer04__pitch .ow-button {
     margin-top: 28px;
 }
 
-.footer-brand__columns {
+.ow-footer04__columns {
     display: grid;
     grid-template-columns: repeat(3, minmax(140px, auto));
     gap: 32px 56px;
 }
 
-.footer-brand__heading {
+.ow-footer04__heading {
     margin-bottom: 16px;
 }
 
-.footer-brand__list {
+.ow-footer04__list {
     display: grid;
     gap: 11px;
     margin: 0;
@@ -52,16 +52,17 @@
 }
 
 /* Footer links sit back: muted and in the regular weight, ink on hover. */
-.footer-brand__list .ow-link {
+
+.ow-footer04__list .ow-link {
     color: var(--ow-text-muted);
     font-weight: var(--ow-weight-regular);
 }
 
-.footer-brand__list .ow-link:hover {
+.ow-footer04__list .ow-link:hover {
     color: var(--ow-text);
 }
 
-.footer-brand__legal {
+.ow-footer04__legal {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -70,7 +71,7 @@
     margin-top: 72px;
 }
 
-.footer-brand__legal-links {
+.ow-footer04__legal-links {
     display: flex;
     flex-wrap: wrap;
     gap: 6px 20px;
@@ -81,20 +82,21 @@
 
 /* The name across the bottom: sized to the width of the page (cqw), so it fits at every width, and cut off just
    above the baseline so it sits on the edge of the window. */
-.footer-brand__name {
+
+.ow-footer04__name {
     margin-top: 32px;
     container-type: inline-size;
     user-select: none;
 }
 
-.footer-brand__crop {
+.ow-footer04__crop {
     height: 25.6cqw;
     margin: 0 -3cqw;
     overflow: hidden;
     padding: 0 3cqw;
 }
 
-.footer-brand__crop span {
+.ow-footer04__crop span {
     display: block;
     margin-left: -2.8cqw;
     background: linear-gradient(180deg, var(--ow-primary-text) 15%, color-mix(in srgb, var(--ow-primary-text) 20%, transparent) 100%);
@@ -109,23 +111,28 @@
 }
 
 @media (max-width: 1024px) {
-    .footer-brand__top {
+    .ow-footer04__top {
         grid-template-columns: minmax(0, 1fr);
+    
     }
-    .footer-brand__columns {
+    .ow-footer04__columns {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+    
     }
 }
 
 @media (max-width: 760px) {
-    .footer-brand {
+    .ow-footer04 {
         padding: 56px var(--ow-page-gutter) 0;
+    
     }
-    .footer-brand__columns {
+    .ow-footer04__columns {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 32px 24px;
+    
     }
-    .footer-brand__legal {
+    .ow-footer04__legal {
         margin-top: 48px;
+    
     }
 }
