@@ -23,7 +23,7 @@ export const meta: DocMeta = {
         "With a name, the data URL is sent with a Form, and required stops it being sent unsigned. Only the drawing area takes touch-action: none, so the page still scrolls around it.",
     ],
     related: ["Field", "Form", "FileDropZone", "Input"],
-    since: "0.15.0",
+    since: "0.16.0",
 };
 
 /** In a Field, which names it. Sign with a mouse, a finger or a pen; Undo takes back the last stroke. */

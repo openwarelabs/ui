@@ -25,7 +25,7 @@ export const meta: DocMeta = {
         "The colours are the success and danger tokens, tinted on the code block, which is dark in both themes.",
     ],
     related: ["CodeBlock", "ChatTool", "FileTree"],
-    since: "0.15.0",
+    since: "0.16.0",
 };
 
 const before = `import { Button } from "@openwarelabs/ui";
