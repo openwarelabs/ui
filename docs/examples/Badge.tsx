@@ -45,13 +45,11 @@ export function WithIcons() {
     );
 }
 
-/** sm for tables and rows, lg for a headline status. */
+/** sm is the default, everywhere: in tables, rows and headings. md and lg are for a status that should stand out, such as a headline one. */
 export function Sizes() {
     return (
         <Stack direction="row" gap="sm" wrap align="center">
-            <Badge size="sm" variant="success">
-                Connected
-            </Badge>
+            <Badge variant="success">Connected</Badge>
             <Badge size="md">Medium</Badge>
             <Badge size="lg" variant="active">
                 Live
