@@ -1,0 +1,52 @@
+/* TagInput: a grouped field (Input.css) that wraps, with Tags (Tag.css) before the text box, over Select's listbox. */
+.ow-tag-input {
+    height: auto;
+    min-height: 40px;
+    flex-wrap: wrap;
+    gap: var(--ow-space-2xs);
+    padding: 5px var(--ow-space-sm) 5px 5px;
+    cursor: text;
+}
+
+.ow-tag-input.ow-input-group--sm {
+    min-height: 32px;
+    gap: var(--ow-space-2xs);
+    padding: var(--ow-space-2xs) var(--ow-space-xs) var(--ow-space-2xs) var(--ow-space-2xs);
+}
+
+.ow-tag-input.ow-input-group--disabled {
+    cursor: not-allowed;
+}
+
+/* The list is only for screen readers: its tags sit in the field's own row, beside the text box. */
+.ow-tag-input__tags {
+    display: contents;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* A tag whose ✕ has focus (after Backspace or the arrow keys) is the one Backspace removes. */
+.ow-tag-input .ow-tag:has(.ow-tag__remove:focus-visible) {
+    border-color: var(--ow-primary-border);
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.ow-tag-input__input {
+    width: auto;
+    min-width: 64px;
+    height: 28px;
+    flex: 1 1 64px;
+    /* With no tags, the text lines up with Input's. */
+    padding-left: 7px;
+}
+
+.ow-input-group--sm .ow-tag-input__input {
+    height: 22px;
+    padding-left: var(--ow-space-xs);
+}
+
+.ow-tag-input--filled .ow-tag-input__input {
+    padding-left: var(--ow-space-2xs);
+}

@@ -1,0 +1,78 @@
+/* Image: an <img> in a box that pulses while it loads and shows a fallback if it fails. With a ratio, the box is an
+   AspectRatio and the image fills it. */
+.ow-image {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+.ow-image.ow-aspect-ratio {
+    display: block;
+}
+
+.ow-image__img {
+    display: block;
+    max-width: 100%;
+    transition: opacity var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-image--cover .ow-image__img {
+    object-fit: cover;
+}
+
+.ow-image--contain .ow-image__img {
+    object-fit: contain;
+}
+
+.ow-image--radius-control {
+    border-radius: var(--ow-radius-form);
+}
+
+.ow-image--radius-container {
+    border-radius: var(--ow-radius-container);
+}
+
+/* Loading: the Skeleton's grey and pulse, with the image hidden until it's ready. */
+.ow-image--loading {
+    background: var(--ow-skeleton);
+    animation: ow-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.ow-image--loading .ow-image__img {
+    opacity: 0;
+}
+
+.ow-image__fallback {
+    display: flex;
+    box-sizing: border-box;
+    min-width: 64px;
+    max-width: 100%;
+    min-height: 64px;
+    align-items: center;
+    justify-content: center;
+}
+
+.ow-image__fallback--default {
+    background: var(--ow-skeleton-soft);
+    color: var(--ow-icon);
+}
+
+.ow-image-figure {
+    display: grid;
+    margin: 0;
+    gap: var(--ow-space-sm);
+    justify-items: start;
+}
+
+.ow-image-figure > .ow-aspect-ratio {
+    justify-self: stretch;
+}
+
+.ow-image-figure__caption {
+    color: var(--ow-text-muted);
+    font-family: var(--ow-font-sans);
+    font-size: 13px;
+    line-height: 1.4;
+}

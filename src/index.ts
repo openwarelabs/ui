@@ -36,6 +36,8 @@ export { Input } from "./components/Input/Input";
 export type { InputProps } from "./components/Input/Input";
 export { SearchField } from "./components/SearchField/SearchField";
 export type { SearchFieldProps } from "./components/SearchField/SearchField";
+export { PasswordInput, passwordStrength } from "./components/PasswordInput/PasswordInput";
+export type { PasswordInputProps, PasswordRequirement, PasswordStrength, PasswordStrengthScorer } from "./components/PasswordInput/PasswordInput";
 export { NumberField } from "./components/NumberField/NumberField";
 export type { NumberFieldProps } from "./components/NumberField/NumberField";
 export { InputOTP } from "./components/InputOTP/InputOTP";
@@ -52,6 +54,8 @@ export { ListBox } from "./components/ListBox/ListBox";
 export type { ListBoxProps, ListBoxModeProps, ListBoxOption, ListBoxGroup, ListBoxItem, ListBoxSelectionMode } from "./components/ListBox/ListBox";
 export { Combobox } from "./components/Combobox/Combobox";
 export type { ComboboxProps, ComboboxOption } from "./components/Combobox/Combobox";
+export { TagInput } from "./components/TagInput/TagInput";
+export type { TagInputProps, TagInputOption, TagInputRejectReason } from "./components/TagInput/TagInput";
 export { Checkbox, CheckboxGroup, Fieldset } from "./components/Checkbox/Checkbox";
 export type { CheckboxProps, CheckboxGroupProps, FieldsetProps } from "./components/Checkbox/Checkbox";
 export { RadioGroup, Radio } from "./components/RadioGroup/RadioGroup";
@@ -60,6 +64,8 @@ export { Switch } from "./components/Switch/Switch";
 export type { SwitchProps } from "./components/Switch/Switch";
 export { Slider } from "./components/Slider/Slider";
 export type { SliderProps } from "./components/Slider/Slider";
+export { Rating } from "./components/Rating/Rating";
+export type { RatingProps, RatingLabels } from "./components/Rating/Rating";
 export { FileDropZone } from "./components/FileDropZone/FileDropZone";
 export type { FileDropZoneProps } from "./components/FileDropZone/FileDropZone";
 
@@ -79,6 +85,8 @@ export type { ISODate } from "./components/Calendar/dates";
 // Feedback
 export { Alert } from "./components/Alert/Alert";
 export type { AlertProps, AlertVariant } from "./components/Alert/Alert";
+export { Banner } from "./components/Banner/Banner";
+export type { BannerProps, BannerTone } from "./components/Banner/Banner";
 export { Badge } from "./components/Badge/Badge";
 export type { BadgeProps, BadgeVariant } from "./components/Badge/Badge";
 export { ProgressBar, ProgressCircle } from "./components/Progress/Progress";
@@ -103,8 +111,12 @@ export { Popover } from "./components/Popover/Popover";
 export type { PopoverProps } from "./components/Popover/Popover";
 export { Tour, Coachmark } from "./components/Tour/Tour";
 export type { TourProps, TourStep, TourTarget, TourLabels, CoachmarkProps } from "./components/Tour/Tour";
+export { HoverCard } from "./components/HoverCard/HoverCard";
+export type { HoverCardProps } from "./components/HoverCard/HoverCard";
 export { Menu, MenuItem, MenuLabel, MenuSeparator } from "./components/Menu/Menu";
 export type { MenuProps, MenuItemProps } from "./components/Menu/Menu";
+export { ContextMenu } from "./components/ContextMenu/ContextMenu";
+export type { ContextMenuProps } from "./components/ContextMenu/ContextMenu";
 export { CommandPalette } from "./components/CommandPalette/CommandPalette";
 export type { Command, CommandPaletteProps } from "./components/CommandPalette/CommandPalette";
 export { filterCommands } from "./components/CommandPalette/filterCommands";
@@ -130,6 +142,10 @@ export { Table } from "./components/Table/Table";
 export type { TableProps, TableColumn, TableSort } from "./components/Table/Table";
 export { Stat } from "./components/Stat/Stat";
 export type { StatProps } from "./components/Stat/Stat";
+export { DescriptionList, DescriptionItem } from "./components/DescriptionList/DescriptionList";
+export type { DescriptionListProps, DescriptionItemProps, DescriptionListLayout } from "./components/DescriptionList/DescriptionList";
+export { Timeline, TimelineItem } from "./components/Timeline/Timeline";
+export type { TimelineProps, TimelineItemProps, TimelineTone } from "./components/Timeline/Timeline";
 export { LineChart, BarChart, DonutChart, Sparkline } from "./components/Chart/Chart";
 export type {
     BarChartProps,
@@ -152,7 +168,11 @@ export { Avatar } from "./components/Avatar/Avatar";
 export type { AvatarProps, AvatarSize } from "./components/Avatar/Avatar";
 export { AvatarGroup, User } from "./components/Avatar/AvatarGroup";
 export type { AvatarGroupProps, UserProps } from "./components/Avatar/AvatarGroup";
+export { Image } from "./components/Image/Image";
+export type { ImageProps, ImageFit, ImageRadius } from "./components/Image/Image";
 export { Kbd, Code } from "./components/Kbd/Kbd";
+export { Carousel, CarouselSlide } from "./components/Carousel/Carousel";
+export type { CarouselProps, CarouselSlideProps, CarouselLabels } from "./components/Carousel/Carousel";
 
 // Layout
 export { Card, SettingsRow } from "./components/Card/Card";
@@ -160,8 +180,12 @@ export type { CardProps, SettingsRowProps } from "./components/Card/Card";
 export { Stack, Separator, ScrollShadow, VisuallyHidden } from "./components/Layout/Layout";
 export { Container } from "./components/Container/Container";
 export type { ContainerProps, ContainerSize } from "./components/Container/Container";
+export { AspectRatio } from "./components/AspectRatio/AspectRatio";
+export type { AspectRatioProps } from "./components/AspectRatio/AspectRatio";
 export { Section } from "./components/Section/Section";
 export type { SectionProps } from "./components/Section/Section";
+export { Splitter, SplitterPanel, SplitterHandle } from "./components/Splitter/Splitter";
+export type { SplitterProps, SplitterPanelProps, SplitterHandleProps, SplitterDirection } from "./components/Splitter/Splitter";
 export type { StackProps, SeparatorProps, ScrollShadowProps, SpaceToken } from "./components/Layout/Layout";
 
 // Marketing
