@@ -1,0 +1,117 @@
+/* SortableList: rows (or chips, in a row) people put in order. The picked-up one lifts; the others slide aside. */
+.ow-sortable {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ow-space-xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-sortable--horizontal {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-block: var(--ow-space-2xs);
+}
+
+.ow-sortable__item {
+    position: relative;
+    display: flex;
+    flex: none;
+    min-height: 40px;
+    align-items: center;
+    gap: var(--ow-space-xs);
+    padding: var(--ow-space-xs) var(--ow-space-lg);
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-surface);
+    color: var(--ow-text);
+    font-size: 14px;
+    outline: none;
+}
+
+.ow-sortable--horizontal .ow-sortable__item {
+    min-height: 32px;
+    padding-block: var(--ow-space-2xs);
+}
+
+.ow-sortable__content {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Whatever picks it up: the row, or its grip. Touch drags it rather than scrolling the page. */
+.ow-sortable__item--row,
+.ow-sortable__handle {
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.ow-sortable__handle {
+    display: inline-flex;
+    width: 24px;
+    height: 28px;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    margin-inline-start: calc(var(--ow-space-xs) * -1);
+    padding: 0;
+    border: 0;
+    border-radius: var(--ow-radius-md);
+    background: none;
+    color: var(--ow-icon);
+}
+
+.ow-sortable__handle:hover {
+    background: var(--ow-hover);
+    color: var(--ow-text-muted);
+}
+
+.ow-sortable--horizontal .ow-sortable__grip {
+    rotate: 90deg;
+}
+
+.ow-sortable__item--row:focus-visible,
+.ow-sortable__handle:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 1px;
+}
+
+/* While one is picked up, the others slide to make room. */
+.ow-sortable--dragging .ow-sortable__item {
+    transition: transform var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-sortable .ow-sortable__item--dragging {
+    z-index: 1;
+    border-color: var(--ow-border-strong);
+    box-shadow: var(--ow-shadow-menu);
+    transition: none;
+}
+
+:root[data-ow-sortable-drag],
+:root[data-ow-sortable-drag] * {
+    cursor: grabbing !important;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.ow-sortable--disabled .ow-sortable__item {
+    background: var(--ow-surface-muted);
+    color: var(--ow-text-muted);
+    cursor: default;
+}
+
+.ow-sortable--disabled .ow-sortable__handle {
+    background: none;
+    color: var(--ow-text-disabled);
+    cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-sortable--dragging .ow-sortable__item {
+        transition: none;
+    }
+}
