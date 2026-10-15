@@ -1,0 +1,138 @@
+/* Tour and Coachmark: a popover-like card beside each step's target, over an optional spotlight that dims the
+   rest of the page. Both sit in the top layer, the spotlight first. */
+.ow-tour {
+    z-index: 60;
+    display: grid;
+    gap: var(--ow-space-md);
+    max-width: calc(100vw - 16px);
+    overflow: auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: var(--ow-space-xl) var(--ow-space-xl) var(--ow-space-lg);
+    color: var(--ow-text);
+    font-family: var(--ow-font-sans);
+    font-size: 14px;
+    line-height: 1.45;
+    box-shadow: var(--ow-shadow-menu);
+    outline: none;
+}
+
+/* A step without a target: in the middle of the window, where the browser puts a popover. */
+.ow-tour--centred {
+    position: fixed;
+    inset: 0;
+    height: fit-content;
+    max-height: calc(100dvh - 32px);
+    margin: auto;
+}
+
+.ow-tour > * {
+    min-width: 0;
+}
+
+.ow-tour__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--ow-space-sm);
+}
+
+.ow-tour__title {
+    padding-top: 2px;
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.3;
+}
+
+.ow-tour__header .ow-close-button {
+    flex-shrink: 0;
+    margin: -2px -4px 0 0;
+}
+
+.ow-tour__content {
+    color: var(--ow-text-muted);
+}
+
+.ow-tour__content > p {
+    margin: 0;
+}
+
+.ow-tour__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    margin-top: var(--ow-space-2xs);
+}
+
+.ow-tour__progress {
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-tour__actions {
+    display: flex;
+    gap: var(--ow-space-sm);
+    margin-left: auto;
+}
+
+/* The spotlight: the whole window, in the top layer under the card. It only dims: clicks go through to the page. */
+.ow-tour-spotlight {
+    position: fixed;
+    inset: 0;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: hidden;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    pointer-events: none;
+}
+
+.ow-tour-spotlight[data-state="open"] {
+    animation: ow-tour-fade-in var(--ow-duration-slow) var(--ow-ease-standard);
+}
+
+.ow-tour-spotlight[data-state="closed"] {
+    animation: ow-tour-fade-out var(--ow-duration-exit) var(--ow-ease-exit) forwards;
+}
+
+/* The hole over the target: a rounded box whose shadow covers everything else. */
+.ow-tour-spotlight__hole {
+    position: absolute;
+    border-radius: var(--ow-radius-tile);
+    box-shadow: 0 0 0 200vmax var(--ow-backdrop);
+}
+
+.ow-tour-spotlight__hole[data-moving] {
+    transition-duration: var(--ow-duration-panel);
+    transition-property: top, left, width, height;
+    transition-timing-function: var(--ow-ease-emphasized);
+}
+
+.ow-tour-spotlight__dim {
+    position: absolute;
+    inset: 0;
+    background: var(--ow-backdrop);
+}
+
+@keyframes ow-tour-fade-in {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes ow-tour-fade-out {
+    to {
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-tour-spotlight__hole[data-moving] {
+        transition: none;
+    }
+}
