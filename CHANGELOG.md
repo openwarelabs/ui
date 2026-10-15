@@ -2,6 +2,23 @@
 
 Every release of @openwarelabs/ui and @openwarelabs/ui-mcp. `npm run release` writes it from the commits.
 
+## 0.14.0 (2026-10-15)
+
+### Features
+
+- add Tour, steps that point at parts of the page to show people around (#40) ([913957f](https://github.com/openwarelabs/ui/commit/913957f593da56aafdb9baee98d8a3a2030daea2))
+- add PasswordInput, with a show/hide toggle and an optional strength meter (#39) ([c9508b2](https://github.com/openwarelabs/ui/commit/c9508b2de14898929981a62202400a1debbc4c2a))
+- add ContextMenu, a right-click menu that reuses Menu's items and keys (#38) ([de88546](https://github.com/openwarelabs/ui/commit/de88546e25dbeef5c5a8f016289c0ecc8c7c0827))
+- add TagInput, for several values typed or picked into one field (#37) ([7b56766](https://github.com/openwarelabs/ui/commit/7b567668f57cd50d5a6bccc2fe113b2acaa58d78))
+- add Rating, stars to pick a score or show one (#36) ([b4531b4](https://github.com/openwarelabs/ui/commit/b4531b43374270ec95f2ebbaf6dccf541b386765))
+- add Banner, a bar across the top for announcements and notices (#35) ([68ec167](https://github.com/openwarelabs/ui/commit/68ec16706c1c25cabd9871bf638c04eee3644b76))
+- add resizable panels, with handles you drag or move with the arrow keys (#34) ([08850f4](https://github.com/openwarelabs/ui/commit/08850f46367a3df7da9d39c0cfadc752c5807f6b))
+- add Carousel, slides that scroll and snap, with arrows, dots and keys (#33) ([c3c38c3](https://github.com/openwarelabs/ui/commit/c3c38c3480c6e2bb41cc2616367f98b848408903))
+- add DescriptionList, terms and their values for detail pages (#32) ([aa2060e](https://github.com/openwarelabs/ui/commit/aa2060ebcc5d79a3636a4caf967bd6211ac598f9))
+- add HoverCard, a preview that opens when the pointer rests on a link (#31) ([befc945](https://github.com/openwarelabs/ui/commit/befc94541c2a217d58bd4f3c1b33e89b95c48509))
+- add Timeline, events down a line, for activity feeds and history (#30) ([76319b3](https://github.com/openwarelabs/ui/commit/76319b3f2e319598dd76b7078a9b65d034e4673c))
+- add AspectRatio and Image, with a placeholder while it loads and a fallback if it fails (#29) ([dff1bd6](https://github.com/openwarelabs/ui/commit/dff1bd6843a0539f8fb4e055aa1c19182b382c69))
+
 ## 0.13.0 (2026-10-15)
 
 ### Features
