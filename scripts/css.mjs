@@ -75,6 +75,7 @@ export const cssOrder = [
     "components/Carousel/Carousel.css",
     "components/DescriptionList/DescriptionList.css",
     "components/Chart/Chart.css",
+    "components/ActivityHeatmap/ActivityHeatmap.css",
     "components/FileTree/FileTree.css",
     "components/TreeView/TreeView.css",
     "components/EmptyState/EmptyState.css",
