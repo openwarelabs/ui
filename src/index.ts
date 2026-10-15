@@ -150,6 +150,8 @@ export { DescriptionList, DescriptionItem } from "./components/DescriptionList/D
 export type { DescriptionListProps, DescriptionItemProps, DescriptionListLayout } from "./components/DescriptionList/DescriptionList";
 export { Timeline, TimelineItem } from "./components/Timeline/Timeline";
 export type { TimelineProps, TimelineItemProps, TimelineTone } from "./components/Timeline/Timeline";
+export { SortableList } from "./components/SortableList/SortableList";
+export type { SortableListProps, SortableListItemState, SortableListLabels } from "./components/SortableList/SortableList";
 export { LineChart, BarChart, DonutChart, Sparkline } from "./components/Chart/Chart";
 export type {
     BarChartProps,

@@ -69,6 +69,7 @@ export const cssOrder = [
     "components/Kbd/Kbd.css",
     "components/CodeBlock/CodeBlock.css",
     "components/Tag/Tag.css",
+    "components/SortableList/SortableList.css",
     "components/Table/Table.css",
     "components/Stat/Stat.css",
     "components/Carousel/Carousel.css",
