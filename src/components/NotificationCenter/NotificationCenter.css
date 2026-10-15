@@ -1,0 +1,215 @@
+/* NotificationCenter: a bell with a count, opening a popover inbox. NotificationList: the rows inside it. */
+.ow-notification-center {
+    display: inline-flex;
+}
+
+.ow-notification-center__bell {
+    position: relative;
+}
+
+/* The count sits on the bell's corner, cut out of whatever is behind it. */
+.ow-notification-center__count.ow-badge {
+    position: absolute;
+    top: 0;
+    inset-inline-end: -2px;
+    min-width: 18px;
+    min-height: 18px;
+    border: 2px solid var(--ow-surface);
+    background: var(--ow-primary);
+    padding: 0 4px;
+    color: var(--ow-on-primary);
+    font-size: 10.5px;
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+}
+
+/* Edge-to-edge rows, so the popover's own padding goes; only the list scrolls when the window is short. */
+.ow-notification-center__popover.ow-popover {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+}
+
+.ow-notification-center__head,
+.ow-notification-center__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-md);
+    padding: var(--ow-space-md) var(--ow-space-md) var(--ow-space-xs);
+    padding-inline-start: var(--ow-space-2xl);
+}
+
+.ow-notification-center__title {
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.ow-notification-center__tabs.ow-tabs {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    gap: 0;
+}
+
+.ow-notification-center__tabs .ow-tabs__list {
+    padding: 0 var(--ow-space-2xl);
+}
+
+.ow-notification-center__tab-count {
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-surface-muted);
+    padding: 1px 6px;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-notification-center__body {
+    min-height: 0;
+    max-height: min(420px, 60dvh);
+    overflow-y: auto;
+    padding: var(--ow-space-xs);
+    outline: none;
+}
+
+.ow-notification-center__body:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--ow-focus-ring);
+}
+
+.ow-notification-center__foot {
+    border-top: 1px solid var(--ow-border);
+    padding-block: var(--ow-space-md);
+}
+
+/* The list. */
+.ow-notification-list__heading {
+    margin: 0;
+    padding: var(--ow-space-lg) var(--ow-space-lg) var(--ow-space-xs);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-strong);
+}
+
+.ow-notification-list__items {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* One row: the whole of it opens the item, through the link stretched over it. */
+.ow-notification {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--ow-space-lg);
+    border-radius: var(--ow-radius-form);
+    padding-block: var(--ow-space-lg);
+    padding-inline: 22px var(--ow-space-md);
+    color: var(--ow-text-soft);
+    transition: background-color var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.ow-notification:hover {
+    background: var(--ow-hover);
+}
+
+.ow-notification__dot {
+    position: absolute;
+    top: 20px;
+    inset-inline-start: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ow-primary);
+}
+
+.ow-notification__media {
+    display: inline-flex;
+    flex-shrink: 0;
+}
+
+.ow-notification__icon {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ow-border);
+    border-radius: 50%;
+    background: var(--ow-surface-muted);
+    color: var(--ow-text-soft);
+}
+
+.ow-notification__body {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+    gap: var(--ow-space-md);
+}
+
+.ow-notification__main {
+    display: grid;
+    gap: 2px;
+    border: 0;
+    background: none;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    text-align: start;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.ow-notification__main::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+}
+
+.ow-notification__main:focus-visible::after {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
+
+.ow-notification--unread .ow-notification__title {
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-strong);
+}
+
+.ow-notification__description {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.ow-notification__time {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+}
+
+/* Actions and the ✕ sit above the stretched link, so they take their own clicks. */
+.ow-notification__actions,
+.ow-notification__dismiss {
+    position: relative;
+    z-index: 1;
+}
+
+.ow-notification__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ow-space-sm);
+}
+
+.ow-notification__dismiss {
+    flex-shrink: 0;
+    margin: -4px 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-notification {
+        transition: none;
+    }
+}
