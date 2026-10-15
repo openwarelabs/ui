@@ -4,73 +4,16 @@ import { useControllableState } from "../../hooks/useControllableState";
 import { ArrowDownIcon, ArrowUpIcon, ChevronsUpDownIcon } from "../../icons";
 import { cx } from "../../utils/cx";
 import { Checkbox } from "../Checkbox/Checkbox";
+import type { TableProps, TableSort } from "./Table.types";
 
-export interface TableColumn<Row> {
-    /** Unique; also the row field shown when there's no `render`. */
-    key: string;
-    header: ReactNode;
-    /** Numbers and amounts go at the end, so their digits line up.
-     * @default "start" */
-    align?: "start" | "center" | "end";
-    /** A CSS width, e.g. 120 or "30%". */
-    width?: number | string;
-    /** Lets the person sort by this column. */
-    sortable?: boolean;
-    /** What the cell shows. Defaults to the row's field named by `key`. */
-    render?(row: Row): ReactNode;
-    /** The value sorted by, when it isn't the field itself. */
-    sortValue?(row: Row): string | number;
-}
-
-export interface TableSort {
-    key: string;
-    direction: "ascending" | "descending";
-}
-
-export interface TableProps<Row> {
-    columns: Array<TableColumn<Row>>;
-    rows: Row[];
-    /** A field name or function giving each row a unique key.
-     * @default "id" */
-    rowKey?: keyof Row | ((row: Row) => Key);
-    /** Describes the table for screen readers; shown above it unless `hideCaption`. */
-    caption?: ReactNode;
-    /** @default false */
-    hideCaption?: boolean;
-    sort?: TableSort;
-    defaultSort?: TableSort;
-    onSortChange?(sort: TableSort): void;
-    /** Sort the rows yourself (e.g. on a server) and only show the arrows.
-     * @default false */
-    manualSort?: boolean;
-    /** Adds a checkbox column.
-     * @default "none" */
-    selectionMode?: "none" | "multiple";
-    selectedKeys?: Key[];
-    defaultSelectedKeys?: Key[];
-    onSelectionChange?(keys: Key[]): void;
-    /**
-     * Names a row for its checkbox, read out as "Select …": the person, the file, the project. Defaults to the
-     * first column's value when it's text or a number, else "row 3".
-     */
-    rowLabel?(row: Row): string;
-    /** Shown in place of the rows when there are none, such as an EmptyState. */
-    emptyContent?: ReactNode;
-    /** `compact` rows are 36px; `comfortable` 44px.
-     * @default "comfortable" */
-    density?: "compact" | "comfortable";
-    /** Keeps the header in view while the table scrolls; use with maxHeight. */
-    stickyHeader?: boolean;
-    maxHeight?: number | string;
-    className?: string;
-}
+export type { TableColumn, TableProps, TableSort } from "./Table.types";
 
 function compare(a: string | number, b: string | number) {
     if (typeof a === "number" && typeof b === "number") return a - b;
     return String(a).localeCompare(String(b), undefined, { numeric: true, sensitivity: "base" });
 }
 
-/** Rows of records with sortable columns and optional selection, in a bordered card. */
+/** Rows of records with sortable columns and optional selection: on a raised panel in a tray, or in a bordered card. */
 export function Table<Row extends object>({
     columns,
     rows,
@@ -87,6 +30,7 @@ export function Table<Row extends object>({
     onSelectionChange,
     rowLabel,
     emptyContent = "Nothing here yet.",
+    variant = "inset",
     density = "comfortable",
     stickyHeader = false,
     maxHeight,
@@ -126,7 +70,7 @@ export function Table<Row extends object>({
 
     return (
         <div
-            className={cx("ow-table-wrap", stickyHeader && "ow-table-wrap--sticky", className)}
+            className={cx("ow-table-wrap", `ow-table-wrap--${variant}`, stickyHeader && "ow-table-wrap--sticky", className)}
             style={maxHeight ? { maxHeight } : undefined}
             tabIndex={maxHeight ? 0 : undefined}
         >
