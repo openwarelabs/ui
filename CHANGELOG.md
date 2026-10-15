@@ -2,6 +2,16 @@
 
 Every release of @openwarelabs/ui and @openwarelabs/ui-mcp. `npm run release` writes it from the commits.
 
+## 0.15.0 (2026-10-15)
+
+### Features
+
+- add SortableList, a list people reorder by dragging or with the keyboard (#42) ([6849945](https://github.com/openwarelabs/ui/commit/6849945c5a40181da55a6953dae24397d0823acb))
+- add NavigationMenu, a site's top nav with dropdown panels and mega-menus (#43) ([5880d14](https://github.com/openwarelabs/ui/commit/5880d14e320e044f9f129b37b76bd3111305db38))
+- add TreeView, rows that open, select or check, with children loaded on demand (#44) ([bd2a16e](https://github.com/openwarelabs/ui/commit/bd2a16e330056b93fdd08c214c305e3f2eb844ed))
+- add VirtualList, a scrolling list that renders only the rows in view (#45) ([31e22c2](https://github.com/openwarelabs/ui/commit/31e22c2e971737016cc7e68f7b8fddcec074fc29))
+- add InlineEdit, text you click to edit where it is (#46) ([0fb6245](https://github.com/openwarelabs/ui/commit/0fb6245971f9cb4773d695a4e9f1ba5a842312e8))
+
 ## 0.14.1 (2026-10-15)
 
 Maintenance only.
