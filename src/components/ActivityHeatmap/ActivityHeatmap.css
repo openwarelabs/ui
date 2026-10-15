@@ -1,0 +1,105 @@
+/* ActivityHeatmap: a square per day, shaded from the empty track to one chart colour, so the shades follow the theme. */
+.ow-heatmap {
+    --ow-heatmap-cell: 12px;
+    display: grid;
+    min-width: 0;
+    gap: var(--ow-space-xs);
+    color: var(--ow-text-muted);
+    font-size: 11.5px;
+    line-height: 1;
+}
+
+/* It scrolls sideways inside itself on a narrow screen, never the page. */
+.ow-heatmap__scroll {
+    min-width: 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+}
+
+/* The spacing round the edge leaves room for the focus ring. */
+.ow-heatmap__grid {
+    border-collapse: separate;
+    border-spacing: max(3px, calc(var(--ow-heatmap-cell) / 4));
+}
+
+.ow-heatmap__grid th,
+.ow-heatmap__grid td {
+    padding: 0;
+}
+
+.ow-heatmap__grid th {
+    font-weight: var(--ow-weight-regular);
+    text-align: start;
+    white-space: nowrap;
+}
+
+/* A month's name starts over its first week and runs on over the next, without widening the columns. */
+.ow-heatmap__month {
+    position: relative;
+    height: 1.3em;
+}
+
+.ow-heatmap__month span {
+    position: absolute;
+    inset-inline-start: 0;
+    top: 0;
+}
+
+.ow-heatmap__grid .ow-heatmap__weekday {
+    padding-inline-end: 4px;
+    font-size: 11px;
+}
+
+.ow-heatmap__cell {
+    width: var(--ow-heatmap-cell);
+    height: var(--ow-heatmap-cell);
+    border-radius: 3px;
+}
+
+.ow-heatmap__day {
+    display: block;
+    width: var(--ow-heatmap-cell);
+    height: var(--ow-heatmap-cell);
+    border: 0;
+    border-radius: 3px;
+    background: color-mix(in oklab, var(--ow-heatmap-color) var(--ow-heatmap-mix, 0%), var(--ow-meter-track));
+    padding: 0;
+}
+
+button.ow-heatmap__day {
+    cursor: pointer;
+}
+
+.ow-heatmap__cell:hover > .ow-heatmap__day {
+    box-shadow: inset 0 0 0 1px var(--ow-text-muted);
+}
+
+.ow-heatmap [data-date]:focus {
+    outline: none;
+}
+
+.ow-heatmap [data-date]:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 1px;
+}
+
+.ow-heatmap__legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: calc(var(--ow-heatmap-cell) / 4);
+}
+
+.ow-heatmap__legend > :first-child {
+    margin-inline-start: 4px;
+}
+
+.ow-heatmap__legend > :last-child {
+    margin-inline-end: 4px;
+}
+
+@media (forced-colors: active) {
+    .ow-heatmap__day {
+        forced-color-adjust: none;
+    }
+}

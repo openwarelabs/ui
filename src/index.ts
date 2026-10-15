@@ -164,6 +164,8 @@ export type {
     LineChartProps,
     SparklineProps,
 } from "./components/Chart/Chart";
+export { ActivityHeatmap } from "./components/ActivityHeatmap/ActivityHeatmap";
+export type { ActivityHeatmapProps, ActivityHeatmapDay, ActivityHeatmapLabels } from "./components/ActivityHeatmap/ActivityHeatmap";
 export { FileTree } from "./components/FileTree/FileTree";
 export type { FileTreeProps, FileTreeNode } from "./components/FileTree/FileTree";
 export { TreeView } from "./components/TreeView/TreeView";

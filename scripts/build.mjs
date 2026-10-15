@@ -133,6 +133,7 @@ export const catalogue = [
     "BarChart",
     "DonutChart",
     "Sparkline",
+    "ActivityHeatmap",
     "Table",
     "Tag",
     "Timeline",
