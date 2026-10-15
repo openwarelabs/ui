@@ -2,6 +2,12 @@
 
 Every release of @openwarelabs/ui and @openwarelabs/ui-mcp. `npm run release` writes it from the commits.
 
+## 0.13.0 (2026-10-15)
+
+### Features
+
+- give Table an inset style, its rows on a raised panel inside a tinted tray (#28) ([d4896c1](https://github.com/openwarelabs/ui/commit/d4896c1153fee82e57f144acd9e7727fb9284655))
+
 ## 0.12.2 (2026-10-15)
 
 Maintenance only.
