@@ -1,0 +1,12 @@
+/* MentionInput: an Input or a Textarea, with Select's listbox (Select.css) under the trigger character. */
+.ow-mention-list {
+    width: max-content;
+    min-width: 224px;
+    max-width: min(360px, calc(100vw - 16px));
+}
+
+.ow-mention-list__empty {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-xs);
+}
