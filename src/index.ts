@@ -178,6 +178,8 @@ export { AvatarGroup, User } from "./components/Avatar/AvatarGroup";
 export type { AvatarGroupProps, UserProps } from "./components/Avatar/AvatarGroup";
 export { Image } from "./components/Image/Image";
 export type { ImageProps, ImageFit, ImageRadius } from "./components/Image/Image";
+export { MediaPlayer } from "./components/MediaPlayer/MediaPlayer";
+export type { MediaPlayerProps, MediaPlayerHandle, MediaPlayerLabels, MediaPlayerSource, MediaPlayerTrack } from "./components/MediaPlayer/MediaPlayer";
 export { Kbd, Code } from "./components/Kbd/Kbd";
 export { Carousel, CarouselSlide } from "./components/Carousel/Carousel";
 export type { CarouselProps, CarouselSlideProps, CarouselLabels } from "./components/Carousel/Carousel";

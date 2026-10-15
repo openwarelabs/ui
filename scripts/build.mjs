@@ -118,6 +118,7 @@ export const catalogue = [
     "Avatar",
     "AvatarGroup",
     "Carousel",
+    "MediaPlayer",
     "CodeBlock",
     "ColorSwatch",
     "EmptyState",
