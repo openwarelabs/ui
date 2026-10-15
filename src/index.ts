@@ -134,6 +134,8 @@ export { Steps } from "./components/Steps/Steps";
 export type { StepsProps, StepItem } from "./components/Steps/Steps";
 export { NavList, NavItem } from "./components/NavList/NavList";
 export type { NavListProps, NavItemProps } from "./components/NavList/NavList";
+export { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuGroup } from "./components/NavigationMenu/NavigationMenu";
+export type { NavigationMenuProps, NavigationMenuItemProps, NavigationMenuLinkProps, NavigationMenuGroupProps } from "./components/NavigationMenu/NavigationMenu";
 export { AppShell, SidebarHeader, SidebarContent, SidebarFooter, SidebarToggle, useAppShell } from "./components/AppShell/AppShell";
 export type { AppShellProps, AppShellState, SidebarSectionProps, SidebarToggleProps } from "./components/AppShell/AppShell";
 

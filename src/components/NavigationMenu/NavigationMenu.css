@@ -1,0 +1,140 @@
+/* NavigationMenu: a site's top links, with panels of links on Popover's surface. Rules are scoped under
+   .ow-navigation-menu so SiteHeader's `nav a` colours don't reach into the panels. */
+.ow-navigation-menu {
+    min-width: 0;
+    font-family: var(--ow-font-sans);
+}
+
+.ow-navigation-menu__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-2xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-navigation-menu .ow-navigation-menu__trigger {
+    display: inline-flex;
+    min-height: 32px;
+    align-items: center;
+    gap: var(--ow-space-3xs);
+    border: 0;
+    border-radius: var(--ow-radius-pill);
+    background: transparent;
+    padding: 0 var(--ow-space-sm);
+    color: var(--ow-text-soft);
+    font: inherit;
+    font-size: 14px;
+    font-weight: var(--ow-weight-control);
+    text-decoration: none;
+    cursor: pointer;
+    transition-property: color, background-color;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-navigation-menu .ow-navigation-menu__trigger:hover,
+.ow-navigation-menu__trigger[aria-expanded="true"] {
+    background: var(--ow-hover);
+    color: var(--ow-text);
+}
+
+.ow-navigation-menu__trigger[aria-current="page"],
+.ow-navigation-menu__trigger[data-active] {
+    color: var(--ow-text);
+}
+
+.ow-navigation-menu .ow-navigation-menu__trigger:focus-visible,
+.ow-navigation-menu .ow-navigation-menu__link:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
+
+.ow-navigation-menu__chevron {
+    color: var(--ow-text-muted);
+    transition: transform var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+[aria-expanded="true"] > .ow-navigation-menu__chevron {
+    transform: rotate(180deg);
+}
+
+.ow-navigation-menu__panel {
+    grid-template-columns: repeat(var(--ow-navigation-menu-columns), minmax(0, 15rem));
+    max-width: calc(100vw - 16px);
+    padding: var(--ow-space-sm);
+    gap: var(--ow-space-sm);
+}
+
+.ow-navigation-menu__panel--full {
+    grid-template-columns: repeat(var(--ow-navigation-menu-columns), minmax(0, 1fr));
+}
+
+.ow-navigation-menu__group {
+    display: grid;
+    align-content: start;
+    gap: var(--ow-space-3xs);
+}
+
+.ow-navigation-menu__group-title {
+    padding: var(--ow-space-xs) var(--ow-space-sm) var(--ow-space-2xs);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-label);
+}
+
+.ow-navigation-menu .ow-navigation-menu__link {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--ow-space-sm);
+    border-radius: var(--ow-radius-lg);
+    padding: var(--ow-space-sm);
+    color: var(--ow-text);
+    text-decoration: none;
+    transition: background-color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-navigation-menu .ow-navigation-menu__link:hover,
+.ow-navigation-menu__link[aria-current="page"] {
+    background: var(--ow-surface-muted);
+}
+
+.ow-navigation-menu__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+}
+
+.ow-navigation-menu__text {
+    display: grid;
+    min-width: 0;
+    gap: 2px;
+}
+
+.ow-navigation-menu__title {
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.3;
+}
+
+.ow-navigation-menu__description {
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.ow-navigation-menu .ow-navigation-menu__link--featured,
+.ow-navigation-menu .ow-navigation-menu__link--featured:hover {
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 9rem;
+    background: var(--ow-primary-subtle);
+    padding: var(--ow-space-lg);
+}
+
+@media (max-width: 640px) {
+    .ow-navigation-menu__panel {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
