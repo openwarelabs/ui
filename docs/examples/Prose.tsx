@@ -34,7 +34,7 @@ const testFix = `it("formats the due date in the customer's time zone", () => {
 /** An agent's answer at sm: 14px text, a tight rhythm, a list, inline code, a code block and a table. */
 export function AgentAnswer() {
     return (
-        <Prose size="sm" style={{ maxWidth: 620 }}>
+        <Prose size="sm" style={{ maxWidth: 620, marginInline: "auto" }}>
             <p>
                 The flaky test is <code>formats the due date</code> in <code>invoices.test.ts</code>
                 . It builds the date with <code>new Date()</code>, so it fails whenever the suite
@@ -216,7 +216,7 @@ const reviewers = `agents:
  * to CodeBlock. */
 export function WithComponents() {
     return (
-        <Prose size="sm" style={{ maxWidth: 620 }}>
+        <Prose size="sm" style={{ maxWidth: 620, marginInline: "auto" }}>
             <p>
                 Agents can ask for reviewers themselves. Add this to the project's config, or turn
                 it on in <Link href="#">project settings</Link>:

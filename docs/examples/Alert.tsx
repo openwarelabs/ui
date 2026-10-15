@@ -22,7 +22,7 @@ export const meta: DocMeta = {
 /** Five variants. Keep the title to a few words and put the detail underneath. */
 export function Variants() {
     return (
-        <Stack gap="md" style={{ width: 520, maxWidth: "100%" }}>
+        <Stack gap="md" style={{ width: 520, maxWidth: "100%", marginInline: "auto" }}>
             <Alert variant="info" title="A new model is available">
                 Claude Opus can now run the Architect agent.
             </Alert>

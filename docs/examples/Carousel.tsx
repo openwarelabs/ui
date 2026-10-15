@@ -47,7 +47,7 @@ const photos = [
 /** A gallery, one picture at a time, with its caption underneath. */
 export function Gallery() {
     return (
-        <Carousel label="Photos from the trip" style={{ width: "100%", maxWidth: 560 }}>
+        <Carousel label="Photos from the trip" style={{ width: "100%", maxWidth: 560, marginInline: "auto" }}>
             {photos.map((photo) => (
                 <CarouselSlide key={photo.title}>
                     <Stack gap="xs">

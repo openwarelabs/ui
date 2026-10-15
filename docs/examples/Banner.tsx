@@ -151,7 +151,7 @@ StickyAndContained.layout = { fill: true };
 /** On a narrow screen the message wraps and the action goes underneath. */
 export function Narrow() {
     return (
-        <div style={{ width: 360, maxWidth: "100%" }}>
+        <div style={{ width: 360, maxWidth: "100%", marginInline: "auto" }}>
             <Banner label="Launch" dismissible action={<Link href="#v2">Read the post</Link>}>
                 We've launched v2, with agents that open their own pull requests.
             </Banner>
