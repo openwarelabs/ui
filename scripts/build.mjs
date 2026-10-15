@@ -97,6 +97,7 @@ export const catalogue = [
     "Drawer",
     "Menu",
     "Popover",
+    "HoverCard",
     "Accordion",
     "Breadcrumbs",
     "Disclosure",
