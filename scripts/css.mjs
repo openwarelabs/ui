@@ -67,6 +67,7 @@ export const cssOrder = [
     "components/Timeline/Timeline.css",
     "components/ChoiceCard/ChoiceCard.css",
     "components/Avatar/Avatar.css",
+    "components/QRCode/QRCode.css",
     "components/Image/Image.css",
     "components/MediaPlayer/MediaPlayer.css",
     "components/Kbd/Kbd.css",
