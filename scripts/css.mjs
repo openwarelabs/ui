@@ -30,6 +30,7 @@ export const cssOrder = [
     "components/Switch/Switch.css",
     "components/Slider/Slider.css",
     "components/Rating/Rating.css",
+    "components/SignaturePad/SignaturePad.css",
     "components/NumberField/NumberField.css",
     "components/InputOTP/InputOTP.css",
     "components/FileDropZone/FileDropZone.css",

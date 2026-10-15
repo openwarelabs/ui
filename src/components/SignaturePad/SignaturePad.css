@@ -1,0 +1,91 @@
+/* SignaturePad: a field-like box to sign in, on a signing line, with its buttons underneath. */
+.ow-signature-pad {
+    position: relative;
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    gap: var(--ow-space-sm);
+}
+
+.ow-signature-pad__surface {
+    position: relative;
+    height: var(--ow-signature-pad-height, 160px);
+    overflow: hidden;
+    border: 1px solid var(--ow-border-strong);
+    border-radius: var(--ow-radius-form);
+    background: var(--ow-surface);
+    transition-property: border-color, box-shadow;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+/* The ink is this colour (a penColor replaces it); the script reads it from CSS, so it follows the theme. */
+.ow-signature-pad__canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: var(--ow-text);
+    cursor: crosshair;
+    touch-action: none;
+}
+
+.ow-signature-pad--typing .ow-signature-pad__canvas,
+.ow-signature-pad--readonly .ow-signature-pad__canvas,
+.ow-signature-pad--disabled .ow-signature-pad__canvas {
+    cursor: default;
+}
+
+.ow-signature-pad:not(.ow-signature-pad--typing, .ow-signature-pad--readonly, .ow-signature-pad--disabled) .ow-signature-pad__surface:hover {
+    border-color: var(--ow-border-hover);
+}
+
+.ow-signature-pad--drawing .ow-signature-pad__surface {
+    border-color: var(--ow-focus-border);
+    box-shadow: var(--ow-shadow-focus);
+}
+
+.ow-signature-pad--invalid .ow-signature-pad__surface {
+    border-color: var(--ow-danger-line);
+}
+
+/* At 72% of the height, where the script sets a typed name. */
+.ow-signature-pad__line {
+    position: absolute;
+    top: 72%;
+    inset-inline: var(--ow-space-2xl);
+    border-top: 1px dashed var(--ow-border-strong);
+    pointer-events: none;
+}
+
+.ow-signature-pad__prompt {
+    position: absolute;
+    bottom: calc(28% + var(--ow-space-xs));
+    inset-inline-start: var(--ow-space-2xl);
+    color: var(--ow-text-muted);
+    font-size: 14px;
+    line-height: 1.4;
+    pointer-events: none;
+}
+
+.ow-signature-pad__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-xs);
+}
+
+.ow-signature-pad__edit {
+    display: inline-flex;
+    gap: var(--ow-space-xs);
+    margin-inline-start: auto;
+}
+
+.ow-signature-pad--disabled .ow-signature-pad__surface {
+    opacity: 0.62;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-signature-pad__surface {
+        transition: none;
+    }
+}
