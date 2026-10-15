@@ -80,6 +80,7 @@ export function setupMarkdown(version?: string) {
         "## Writing code with it",
         [
             `- Everything is a named export from \`${packageName}\`. Use the library's component whenever one exists instead of writing your own: \`Text\` for every heading and paragraph, \`Button\`, \`Link\`, \`Field\` with \`Input\`, \`Select\` and the other inputs, \`Card\`, \`Badge\`, \`Dialog\`, \`Menu\`, \`Table\` and so on.`,
+            "- For charts, use `LineChart`, `BarChart` (`stacked`), `DonutChart` and `Sparkline`: pass `data` rows, `index` (the x key), `series` (`{ key, label }`) and a `label` saying what it shows. Their colours are `--ow-chart-1` to `--ow-chart-8`, in order. Don't add a charting library.",
             "- Give a page its width and side margins with `Container` (`size`: `page`, `narrow`, `wide`, `full`; `as=\"main\"`), and your own sections between blocks with `Section` (`tone`, `spacing`), so they line up with the blocks. Lay out inside with `Stack` (`direction`, `gap`, `align`, `justify`, `wrap`) or your own CSS; don't restyle the components' insides.",
             "- In your own CSS, use the tokens: every colour, space, radius, shadow, weight and timing is a CSS variable named `--ow-…` (`var(--ow-surface)`, `var(--ow-text-muted)`, `var(--ow-space-lg)`, `var(--ow-radius-container)`). Never hard-code hex or rgb colours, so the code follows the theme and the brand colour.",
             "- Text styles are classes too (`ow-type-section-title`, `ow-type-lead`), but prefer `<Text variant=\"…\">`.",

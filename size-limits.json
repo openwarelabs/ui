@@ -2,12 +2,17 @@
     {
         "name": "@openwarelabs/ui, everything",
         "code": "export * from \"@openwarelabs/ui\";",
-        "limit": "75 KB"
+        "limit": "82 KB"
     },
     {
         "name": "@openwarelabs/ui, only Button",
         "code": "export { Button } from \"@openwarelabs/ui\";",
         "limit": "7.5 KB"
+    },
+    {
+        "name": "@openwarelabs/ui, only LineChart",
+        "code": "export { LineChart } from \"@openwarelabs/ui\";",
+        "limit": "10 KB"
     },
     {
         "name": "@openwarelabs/ui/styles.css",
