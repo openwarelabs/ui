@@ -1,0 +1,139 @@
+/* Rating: a row of stars. Filled ones are brass (one of the few places it shows), empty ones a quiet grey. */
+.ow-rating {
+    --ow-rating-size: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    color: var(--ow-text-muted);
+    font-size: 14px;
+    line-height: 1.4;
+    vertical-align: middle;
+}
+
+.ow-rating--sm {
+    --ow-rating-size: 16px;
+    gap: var(--ow-space-xs);
+    font-size: 13px;
+}
+
+.ow-rating--lg {
+    --ow-rating-size: 24px;
+}
+
+.ow-rating__stars {
+    display: inline-flex;
+    border-radius: var(--ow-radius-md);
+}
+
+/* Each star is a 24px (or larger) box, so it's a big enough target to tap. */
+.ow-rating__star {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    min-height: 24px;
+    padding: 2px;
+}
+
+.ow-rating--readonly .ow-rating__star {
+    min-width: 0;
+    min-height: 0;
+    padding: 1px;
+}
+
+.ow-rating__icon {
+    display: block;
+    width: var(--ow-rating-size);
+    height: var(--ow-rating-size);
+    flex-shrink: 0;
+    fill: var(--ow-brass);
+    stroke: var(--ow-brass-deep);
+}
+
+.ow-rating__icon--empty {
+    fill: var(--ow-meter-track);
+    stroke: var(--ow-border-hover);
+}
+
+.ow-rating__glyph {
+    position: relative;
+    display: block;
+}
+
+/* The brass star on top, cut to the filled share of this one. */
+.ow-rating__fill {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: var(--ow-rating-fill);
+    overflow: hidden;
+    pointer-events: none;
+    transition: width var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+/* Each radio covers its star (or the start half of it, for a half point) and is drawn by the star. */
+.ow-rating__input {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: 100%;
+    margin: 0;
+    appearance: none;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.ow-rating__input--half {
+    z-index: 1;
+    width: 50%;
+}
+
+.ow-rating__input:disabled {
+    cursor: not-allowed;
+}
+
+.ow-rating__stars:has(:focus-visible) {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 0;
+}
+
+.ow-rating__star .ow-rating__glyph {
+    transition: transform var(--ow-duration-base) var(--ow-ease-spring);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .ow-rating__star:has(.ow-rating__input:hover:not(:disabled)) .ow-rating__glyph,
+    .ow-rating__star:has(.ow-rating__input:focus-visible) .ow-rating__glyph {
+        transform: scale(1.12);
+    }
+
+    .ow-rating__star:has(.ow-rating__input:active:not(:disabled)) .ow-rating__glyph {
+        transform: scale(0.92);
+    }
+}
+
+.ow-rating__stars[aria-invalid="true"] .ow-rating__icon--empty {
+    stroke: var(--ow-danger-text);
+}
+
+.ow-rating--disabled {
+    opacity: 0.55;
+}
+
+.ow-rating__value {
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-rating__value + .ow-rating__count {
+    margin-inline-start: calc(var(--ow-space-sm) * -0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-rating__fill,
+    .ow-rating__star .ow-rating__glyph {
+        transition: none;
+    }
+}

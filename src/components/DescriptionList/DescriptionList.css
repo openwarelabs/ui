@@ -1,0 +1,135 @@
+/* DescriptionList: terms and their values in a <dl>. Its own width decides the layout (a container query), so it
+   stacks in a narrow card or panel as well as on a phone. */
+.ow-description-list {
+    container: ow-description-list / inline-size;
+    display: grid;
+    margin: 0;
+    color: var(--ow-text);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.ow-description-item {
+    display: grid;
+    min-width: 0;
+    align-content: start;
+    gap: var(--ow-space-2xs);
+    padding-block: var(--ow-space-lg);
+}
+
+.ow-description-list--compact .ow-description-item {
+    padding-block: var(--ow-space-sm);
+}
+
+.ow-description-item__term {
+    color: var(--ow-text-muted);
+}
+
+.ow-description-item__value {
+    min-width: 0;
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.ow-description-item__value--action {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-lg);
+}
+
+.ow-description-item__content {
+    min-width: 0;
+    flex: 1;
+}
+
+.ow-description-item__action {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--ow-space-2xs);
+    margin-block: -4px;
+}
+
+/* Horizontal and vertical: one pair under another, without space past the first and last. */
+.ow-description-list:not(.ow-description-list--grid) > .ow-description-item:first-child {
+    padding-top: 0;
+}
+
+.ow-description-list:not(.ow-description-list--grid) > .ow-description-item:last-child {
+    padding-bottom: 0;
+}
+
+.ow-description-list--divided:not(.ow-description-list--grid) > .ow-description-item + .ow-description-item {
+    border-top: 1px solid var(--ow-border);
+}
+
+.ow-description-list--horizontal > .ow-description-item {
+    grid-template-columns: var(--ow-description-term-width, 160px) minmax(0, 1fr);
+    align-items: baseline;
+    column-gap: var(--ow-space-2xl);
+}
+
+/* Grid: the pairs in columns, term above value, with a smaller label. A column is at least 160px, so a grid with
+   less room has fewer columns; the items then read the list's width (the container) to keep their spans inside it. */
+.ow-description-list--grid {
+    --ow-description-gap: var(--ow-space-4xl);
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(max(160px, (100% - (var(--ow-description-columns) - 1) * var(--ow-description-gap)) / var(--ow-description-columns)), 1fr)
+    );
+    column-gap: var(--ow-description-gap);
+}
+
+.ow-description-list--cols-2 {
+    --ow-description-columns: 2;
+}
+
+.ow-description-list--cols-3 {
+    --ow-description-columns: 3;
+}
+
+.ow-description-list--cols-4 {
+    --ow-description-columns: 4;
+}
+
+.ow-description-list--grid .ow-description-item__term {
+    font-size: 12px;
+    font-weight: var(--ow-weight-control);
+}
+
+.ow-description-list--grid.ow-description-list--divided > .ow-description-item {
+    border-top: 1px solid var(--ow-border);
+}
+
+.ow-description-item--span-2 {
+    grid-column: span 2;
+}
+
+.ow-description-item--span-3 {
+    grid-column: span 3;
+}
+
+.ow-description-item--span-4,
+.ow-description-item--span-full,
+.ow-description-list--cols-2 > .ow-description-item--span-3 {
+    grid-column: 1 / -1;
+}
+
+@container ow-description-list (max-width: 519px) {
+    .ow-description-item--span-3 {
+        grid-column: 1 / -1;
+    }
+}
+
+@container ow-description-list (max-width: 419px) {
+    .ow-description-list--horizontal > .ow-description-item {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@container ow-description-list (max-width: 339px) {
+    .ow-description-item--span-2,
+    .ow-description-item--span-3 {
+        grid-column: auto;
+    }
+}
