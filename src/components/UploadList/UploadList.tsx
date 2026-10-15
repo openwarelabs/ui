@@ -6,15 +6,15 @@ import { CircleAlertIcon, CircleCheckIcon, FileIcon, XIcon } from "@/icons";
 import { cx } from "@/utils/cx";
 import type { UploadListItem, UploadListProps, UploadStatus } from "./UploadList.types";
 
-export {
-    type UploadContext,
-    type Uploader,
-    type UploadListItem,
-    type UploadListLabels,
-    type UploadListProps,
-    type UploadQueue,
-    type UploadStatus,
-    type UseUploadQueueOptions,
+export type {
+    UploadContext,
+    Uploader,
+    UploadListItem,
+    UploadListLabels,
+    UploadListProps,
+    UploadQueue,
+    UploadStatus,
+    UseUploadQueueOptions,
 } from "./UploadList.types";
 export { useUploadQueue } from "./useUploadQueue";
 
