@@ -136,6 +136,14 @@ export { Drawer } from "./components/Drawer/Drawer";
 export type { DrawerProps } from "./components/Drawer/Drawer";
 export { Popover } from "./components/Popover/Popover";
 export type { PopoverProps } from "./components/Popover/Popover";
+export { NotificationCenter, NotificationList } from "./components/NotificationCenter/NotificationCenter";
+export type {
+    NotificationCenterProps,
+    NotificationFilter,
+    NotificationItem,
+    NotificationLabels,
+    NotificationListProps,
+} from "./components/NotificationCenter/NotificationCenter";
 export { Tour, Coachmark } from "./components/Tour/Tour";
 export type { TourProps, TourStep, TourTarget, TourLabels, CoachmarkProps } from "./components/Tour/Tour";
 export { HoverCard } from "./components/HoverCard/HoverCard";
