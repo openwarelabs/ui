@@ -1,0 +1,126 @@
+/* TreeView: rows that open, select and check. FileTree's hairline guides, NavList's 14px text. */
+.ow-treeview,
+.ow-treeview__group {
+    display: grid;
+    gap: 1px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-treeview {
+    color: var(--ow-text);
+    font-size: 14px;
+}
+
+/* The guide runs under the parent's chevron. */
+.ow-treeview__group {
+    margin-inline-start: 14px;
+    border-inline-start: 1px solid var(--ow-border);
+    padding-inline-start: var(--ow-space-2xs);
+}
+
+.ow-treeview__item {
+    outline: none;
+}
+
+.ow-treeview__row {
+    display: flex;
+    min-height: 32px;
+    align-items: center;
+    gap: var(--ow-space-xs);
+    border-radius: var(--ow-radius-form);
+    padding-block: var(--ow-space-2xs);
+    padding-inline: var(--ow-space-2xs) var(--ow-space-sm);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.ow-treeview__row:hover {
+    background: var(--ow-surface-muted);
+}
+
+.ow-treeview__item:focus-visible > .ow-treeview__row {
+    box-shadow: 0 0 0 2px var(--ow-focus-ring);
+}
+
+.ow-treeview__row--selected,
+.ow-treeview__row--selected:hover {
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.ow-treeview__row--disabled,
+.ow-treeview__row--loading {
+    color: var(--ow-text-muted);
+    cursor: default;
+}
+
+.ow-treeview__toggle {
+    display: inline-flex;
+    width: 20px;
+    height: 24px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    color: var(--ow-text-muted);
+}
+
+.ow-treeview__toggle svg {
+    transition: transform var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-treeview__toggle:dir(rtl) svg {
+    transform: scaleX(-1);
+}
+
+[aria-expanded="true"] > .ow-treeview__row .ow-treeview__toggle svg {
+    transform: rotate(90deg);
+}
+
+.ow-treeview .ow-checkbox__input {
+    pointer-events: none;
+}
+
+.ow-treeview__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+}
+
+.ow-treeview__text {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+}
+
+.ow-treeview__label,
+.ow-treeview__description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ow-treeview__description,
+.ow-treeview__end {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+}
+
+.ow-treeview__end {
+    flex-shrink: 0;
+}
+
+.ow-treeview__row--selected :is(.ow-treeview__icon, .ow-treeview__description, .ow-treeview__end) {
+    color: inherit;
+}
+
+.ow-treeview__row--error {
+    color: var(--ow-danger-text);
+}
+
+.ow-treeview__retry {
+    font-weight: var(--ow-weight-emphasis);
+    text-decoration: underline;
+}
