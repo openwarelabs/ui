@@ -1,45 +1,12 @@
-import {
-    cloneElement,
-    createContext,
-    forwardRef,
-    isValidElement,
-    useContext,
-    useEffect,
-    useId,
-    useRef,
-    useState,
-    type ButtonHTMLAttributes,
-    type MouseEvent,
-    type ReactElement,
-    type ReactNode,
-} from "react";
+import { cloneElement, forwardRef, isValidElement, useContext, useEffect, useId, useRef, useState, type ButtonHTMLAttributes, type MouseEvent } from "react";
 
-import { manualPopover, useFloating } from "../../hooks/useFloating";
-import { useMenuKeyboard } from "../../hooks/useMenuKeyboard";
-import { usePresence } from "../../hooks/usePresence";
-import { cx } from "../../utils/cx";
-
-const MenuContext = createContext<{ close(): void } | null>(null);
-
-export interface MenuProps {
-    /** The button that opens it, usually a Button. Menu adds the click handler and the aria attributes. */
-    trigger: ReactElement;
-    /** MenuItem, MenuLabel and MenuSeparator. */
-    children: ReactNode;
-    /** Names the menu for screen readers. */
-    label: string;
-    /** Which edge of the trigger it lines up with.
-     * @default "start" */
-    align?: "start" | "end";
-    /** Prefers opening upward. Either way it flips when there's no room.
-     * @default false */
-    above?: boolean;
-    /** CSS width; default fits the items, at least 200px. */
-    width?: number | string;
-    /** Starts open, for documentation and tests. */
-    defaultOpen?: boolean;
-    className?: string;
-}
+import { manualPopover, useFloating } from "@/hooks/useFloating";
+import { useMenuKeyboard } from "@/hooks/useMenuKeyboard";
+import { usePresence } from "@/hooks/usePresence";
+import { cx } from "@/utils/cx";
+import { MenuContext } from "./Menu.context";
+import type { MenuItemProps, MenuLabelProps, MenuProps } from "./Menu.types";
+export type { MenuContextValue, MenuItemProps, MenuLabelProps, MenuProps } from "./Menu.types";
 
 /**
  * A dropdown menu of actions under a button. Opening it focuses the first item; the arrow keys, Home and End
@@ -118,18 +85,7 @@ export function Menu({ trigger, children, label, align = "start", above = false,
     );
 }
 
-export interface MenuItemProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onSelect"> {
-    /** A 15px lucide-react icon before the label. */
-    icon?: ReactNode;
-    /** Runs the action; the menu then closes. */
-    onSelect?(): void;
-    /** Red, for actions that delete or can't be undone. */
-    destructive?: boolean;
-    /** Shown on the right, e.g. "⌘,". Only a shortcut that actually works. */
-    shortcut?: string;
-}
-
-/** One action in a Menu. */
+/** One action in a Menu or a ContextMenu. */
 export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(function MenuItem(
     { icon, onSelect, destructive = false, shortcut, className, children, onClick, ...buttonProps },
     ref,
@@ -158,7 +114,7 @@ export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(function Me
 });
 
 /** A small uppercase heading for a group of items. */
-export function MenuLabel({ children }: { children: ReactNode }) {
+export function MenuLabel({ children }: MenuLabelProps) {
     return (
         <div className="ow-menu__group-label" role="presentation">
             {children}

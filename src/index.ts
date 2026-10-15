@@ -103,6 +103,8 @@ export { Popover } from "./components/Popover/Popover";
 export type { PopoverProps } from "./components/Popover/Popover";
 export { Menu, MenuItem, MenuLabel, MenuSeparator } from "./components/Menu/Menu";
 export type { MenuProps, MenuItemProps } from "./components/Menu/Menu";
+export { ContextMenu } from "./components/ContextMenu/ContextMenu";
+export type { ContextMenuProps } from "./components/ContextMenu/ContextMenu";
 export { CommandPalette } from "./components/CommandPalette/CommandPalette";
 export type { Command, CommandPaletteProps } from "./components/CommandPalette/CommandPalette";
 export { filterCommands } from "./components/CommandPalette/filterCommands";

@@ -50,6 +50,7 @@ export const cssOrder = [
     "components/ColorPicker/ColorSwatchPicker.css",
     "components/CommandPalette/CommandPalette.css",
     "components/Menu/Menu.css",
+    "components/ContextMenu/ContextMenu.css",
     "components/Accordion/Accordion.css",
     "components/Breadcrumbs/Breadcrumbs.css",
     "components/Pagination/Pagination.css",
