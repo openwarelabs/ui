@@ -12,7 +12,7 @@ import {
 } from "@openwarelabs/ui";
 import { Plus, Share2, Sparkles } from "lucide-react";
 
-import type { DocMeta } from "../app/types";
+import type { DocMeta } from "@docs/app/types";
 
 export const meta: DocMeta = {
     title: "Tour",
