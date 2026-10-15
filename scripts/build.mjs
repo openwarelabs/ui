@@ -84,6 +84,7 @@ export const catalogue = [
     "ColorPicker",
     "ColorField",
     "Alert",
+    "Banner",
     "Badge",
     "ProgressBar",
     "ProgressCircle",

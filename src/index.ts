@@ -79,6 +79,8 @@ export type { ISODate } from "./components/Calendar/dates";
 // Feedback
 export { Alert } from "./components/Alert/Alert";
 export type { AlertProps, AlertVariant } from "./components/Alert/Alert";
+export { Banner } from "./components/Banner/Banner";
+export type { BannerProps, BannerTone } from "./components/Banner/Banner";
 export { Badge } from "./components/Badge/Badge";
 export type { BadgeProps, BadgeVariant } from "./components/Badge/Badge";
 export { ProgressBar, ProgressCircle } from "./components/Progress/Progress";

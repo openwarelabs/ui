@@ -54,7 +54,7 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 
 ## Components
 
-93 components, each with a page in the docs.
+94 components, each with a page in the docs.
 
 | Group | Components |
 | --- | --- |
@@ -63,7 +63,7 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 | Inputs | `Form` (the browser's checks, your own and the server's errors, under each field; `useFormStatus`), `Field`, `Fieldset`, `Input` (start and end content), `Textarea` (`autoGrow`), `NumberField`, `SearchField`, `InputOTP`, `ColorField`, `DateField` and `TimeField` (typed in segments, in the locale's order) |
 | Choices | `Checkbox`, `CheckboxGroup`, `RadioGroup` (plain or cards), `Switch`, `Select`, `Combobox`, `Slider` (one value or a range), `ChoiceCard`, `ListBox` (one or many, on the page) |
 | Pickers | `Calendar`, `DatePicker`, `RangeCalendar`, `DateRangePicker` (with presets), `ColorPicker`, `ColorArea`, `ColorSlider`, `ColorSwatchPicker`, `FileDropZone` |
-| Feedback | `Alert`, `Badge`, `ProgressBar`, `ProgressCircle`, `Meter` (an amount in a range, toned by thresholds), `Spinner`, `Skeleton`, `SkeletonRows`, `Toaster` + `toast()` (sonner: stacked, swipeable, with actions and promises), `Tooltip` |
+| Feedback | `Alert`, `Banner` (an announcement bar across the top, dismissible and remembered), `Badge`, `ProgressBar`, `ProgressCircle`, `Meter` (an amount in a range, toned by thresholds), `Spinner`, `Skeleton`, `SkeletonRows`, `Toaster` + `toast()` (sonner: stacked, swipeable, with actions and promises), `Tooltip` |
 | Overlays | `Dialog`, `ConfirmDialog`, `Drawer`, `Popover`, `Menu` + `MenuItem`, `CommandPalette` |
 | Navigation | `Tabs`, `Accordion`, `Disclosure`, `Breadcrumbs`, `Pagination`, `Steps`, `NavList` + `NavItem` |
 | Data display | `Table` (sorting, selection), `Stat`, `FileTree`, `EmptyState`, `Tag`, `ColorSwatch`, `Avatar`, `AvatarGroup`, `User` |
