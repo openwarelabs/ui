@@ -61,12 +61,12 @@ if (!dryRun) {
     say(`\n  ${bold("Openware UI release")}\n`);
     if (git("status", "--porcelain")) fail("There are uncommitted changes.", "Commit or stash them first.");
     const branch = git("rev-parse", "--abbrev-ref", "HEAD");
-    if (branch !== "main") fail(`Releases go out from main, and this is ${branch}.`, "git checkout main && git pull");
+    if (branch !== "main") fail(`Releases go out from main, and this is ${branch}.`, "git checkout main");
     // Pull first, so a merged pull request is in the release without a separate git pull. Fast-forward only: if
     // main has commits of its own that origin doesn't, pulling would mean a merge, which is for a person to do.
     const before = git("rev-parse", "HEAD");
     try {
-        git("pull", "--ff-only", "--quiet", "--tags", "origin", "main");
+        execFileSync("git", ["pull", "--ff-only", "--quiet", "--tags", "origin", "main"], { cwd: root, stdio: "pipe" });
     } catch {
         fail("main and origin/main have both moved on, so pulling would need a merge.", "git pull --rebase, check the result, then npm run release again");
     }
