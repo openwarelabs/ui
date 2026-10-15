@@ -2,6 +2,21 @@
 
 Every release of @openwarelabs/ui and @openwarelabs/ui-mcp. `npm run release` writes it from the commits.
 
+## 0.16.0 (2026-10-15)
+
+### Features
+
+- add SignaturePad, a box to sign with a mouse, finger or pen (#55) ([11816c6](https://github.com/openwarelabs/ui/commit/11816c6ce5f58657f2e56f09bdc7ac99776c8319))
+- add NotificationCenter, a bell with an unread count that opens a popover inbox (#53) ([d1172e3](https://github.com/openwarelabs/ui/commit/d1172e3d7d610a7eb359366989ae2b4e74df30d2))
+- add TransferList, two lists with buttons to move items between them (#54) ([6312c70](https://github.com/openwarelabs/ui/commit/6312c70508a438e7d6ebd767ece54b4e06676b00))
+- add QRCode, a QR code drawn as one SVG path, with its own encoder (#56) ([c41cef2](https://github.com/openwarelabs/ui/commit/c41cef21d5d02035324b6fadfe333beaa05cc8f3))
+- add Markdown, a safe renderer for streaming answers (#47) ([eefab46](https://github.com/openwarelabs/ui/commit/eefab4658b40e4c4db8544691ff380f391dbc79f))
+- add MentionInput, @ mentions and / commands at the caret (#48) ([ee48bf8](https://github.com/openwarelabs/ui/commit/ee48bf8da217136cef3c99a893047c472453e06b))
+- add UploadList, the files being uploaded with their progress, retry and remove (#50) ([f700e02](https://github.com/openwarelabs/ui/commit/f700e02589b513590051c2559985df86db0b63de))
+- add MediaPlayer, audio and video with the library's own controls (#51) ([232b0e5](https://github.com/openwarelabs/ui/commit/232b0e5db7b577f45f7e48ccda43e9d92258555b))
+- add DiffViewer, code diffs unified or side by side (#49) ([3117cf6](https://github.com/openwarelabs/ui/commit/3117cf6fabbd3cbed0ecff1348c11b2f4f9f3971))
+- add ActivityHeatmap, a calendar of daily counts in shaded squares (#52) ([6711fce](https://github.com/openwarelabs/ui/commit/6711fce70737b3a618a506d7e572025e88073c60))
+
 ## 0.15.0 (2026-10-15)
 
 ### Features
