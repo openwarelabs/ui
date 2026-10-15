@@ -795,9 +795,10 @@ body {
     place-items: center;
 }
 
+/* Top-aligned, so a form or list that grows as you use it doesn't jump, but centred across like the rest. */
 .docs-example__preview--start {
     align-items: start;
-    justify-items: start;
+    justify-items: center;
 }
 
 .docs-example__preview--canvas {

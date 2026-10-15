@@ -180,7 +180,7 @@ export function States() {
         { value: "production", label: "Production" },
     ];
     return (
-        <Stack direction="row" gap="xl" wrap align="start">
+        <Stack direction="row" gap="xl" wrap align="start" justify="center">
             <div style={{ width: 200 }}>
                 <Field label="Deploy to" error="Choose where to deploy.">
                     <ListBox size="sm" options={environments} />

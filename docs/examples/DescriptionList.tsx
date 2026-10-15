@@ -134,7 +134,7 @@ export function Receipt() {
         ["VAT (21%)", "€11.76"],
     ];
     return (
-        <Card style={{ width: "100%", maxWidth: 480 }}>
+        <Card style={{ width: "100%", maxWidth: 480, marginInline: "auto" }}>
             <DescriptionList divided density="compact" termWidth="1fr" style={{ fontVariantNumeric: "tabular-nums" }}>
                 {lines.map(([term, value]) => (
                     <DescriptionItem key={term} term={term}>
