@@ -2,6 +2,10 @@
 
 Every release of @openwarelabs/ui and @openwarelabs/ui-mcp. `npm run release` writes it from the commits.
 
+## 0.12.2 (2026-10-15)
+
+Maintenance only.
+
 ## 0.12.1 (2026-10-15)
 
 Maintenance only.
