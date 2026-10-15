@@ -1,0 +1,28 @@
+/* AspectRatio: a box that keeps its shape, with whatever is inside filling it. The hidden overflow keeps the ratio
+   when the content is taller than the box would be. */
+.ow-aspect-ratio {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+}
+
+.ow-aspect-ratio > * {
+    position: absolute;
+    inset: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
+
+.ow-aspect-ratio > :is(img, video, iframe, embed, object, picture, canvas, svg) {
+    border: 0;
+    object-fit: cover;
+}
+
+.ow-aspect-ratio > picture > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
