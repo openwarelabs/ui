@@ -54,7 +54,7 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 
 ## Components
 
-94 components, each with a page in the docs.
+100 components, each with a page in the docs.
 
 | Group | Components |
 | --- | --- |
@@ -64,11 +64,11 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 | Choices | `Checkbox`, `CheckboxGroup`, `RadioGroup` (plain or cards), `Switch`, `Select`, `Combobox`, `Slider` (one value or a range), `ChoiceCard`, `ListBox` (one or many, on the page) |
 | Pickers | `Calendar`, `DatePicker`, `RangeCalendar`, `DateRangePicker` (with presets), `ColorPicker`, `ColorArea`, `ColorSlider`, `ColorSwatchPicker`, `FileDropZone` |
 | Feedback | `Alert`, `Badge`, `ProgressBar`, `ProgressCircle`, `Meter` (an amount in a range, toned by thresholds), `Spinner`, `Skeleton`, `SkeletonRows`, `Toaster` + `toast()` (sonner: stacked, swipeable, with actions and promises), `Tooltip` |
-| Overlays | `Dialog`, `ConfirmDialog`, `Drawer`, `Popover`, `Menu` + `MenuItem`, `CommandPalette` |
+| Overlays | `Dialog`, `ConfirmDialog`, `Drawer`, `Popover`, `HoverCard` (a preview when the pointer rests on a link), `Menu` + `MenuItem`, `CommandPalette` |
 | Navigation | `Tabs`, `Accordion`, `Disclosure`, `Breadcrumbs`, `Pagination`, `Steps`, `NavList` + `NavItem` |
-| Data display | `Table` (sorting, selection), `Stat`, `FileTree`, `EmptyState`, `Tag`, `ColorSwatch`, `Avatar`, `AvatarGroup`, `User` |
+| Data display | `Table` (sorting, selection), `Stat`, `FileTree`, `EmptyState`, `Tag`, `ColorSwatch`, `Avatar`, `AvatarGroup`, `User`, `Image` (a placeholder while it loads, a fallback if it fails, `ratio`, `caption`), `Timeline` + `TimelineItem`, `DescriptionList` + `DescriptionItem`, `Carousel` + `CarouselSlide` (scroll-snap, arrows, dots, autoplay) |
 | AI | `PromptInput` (attachments, stop while streaming) + `PromptSuggestion`, `ChatConversation` (follows the newest message, jump to latest), `ChatMessage` + `ChatMessageActions`, `ChatLoader`, `ChatTool` (a tool call with its status, input, output and approval), `ChainOfThought`, `ChatSource` + `ChatSources`, `TextShimmer` |
-| Layout | `Card`, `SettingsRow`, `Stack`, `Separator`, `ScrollShadow`, `VisuallyHidden`, `Splitter` + `SplitterPanel` + `SplitterHandle` (panels you resize by dragging or with the arrow keys, collapsible, remembered) |
+| Layout | `Card`, `SettingsRow`, `Stack`, `Separator`, `ScrollShadow`, `VisuallyHidden`, `AspectRatio`, `Splitter` + `SplitterPanel` + `SplitterHandle` (panels you resize by dragging or with the arrow keys, collapsible, remembered) |
 | Marketing | `SiteHeader`, `SectionHeading`, `Chip`, `DotGrid` |
 
 Hooks for your own components: `useControllableState`, `useFloating` (top-layer positioning that flips), `usePresence` (keeps a layer mounted while it animates out), `useDismiss`, `useModalDialog`, `useMenuKeyboard`. Every prop is typed and described, so your editor explains it on hover.
