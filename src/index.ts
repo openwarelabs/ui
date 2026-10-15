@@ -128,6 +128,18 @@ export { Table } from "./components/Table/Table";
 export type { TableProps, TableColumn, TableSort } from "./components/Table/Table";
 export { Stat } from "./components/Stat/Stat";
 export type { StatProps } from "./components/Stat/Stat";
+export { LineChart, BarChart, DonutChart, Sparkline } from "./components/Chart/Chart";
+export type {
+    BarChartProps,
+    CartesianChartProps,
+    ChartColor,
+    ChartRow,
+    ChartSeries,
+    DonutChartProps,
+    DonutChartSlice,
+    LineChartProps,
+    SparklineProps,
+} from "./components/Chart/Chart";
 export { FileTree } from "./components/FileTree/FileTree";
 export type { FileTreeProps, FileTreeNode } from "./components/FileTree/FileTree";
 export { EmptyState } from "./components/EmptyState/EmptyState";

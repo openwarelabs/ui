@@ -86,6 +86,16 @@
     --color-knob: var(--ow-knob);
     --color-meter-track: var(--ow-meter-track);
     --color-progress: var(--ow-progress);
+    --color-chart-1: var(--ow-chart-1);
+    --color-chart-2: var(--ow-chart-2);
+    --color-chart-3: var(--ow-chart-3);
+    --color-chart-4: var(--ow-chart-4);
+    --color-chart-5: var(--ow-chart-5);
+    --color-chart-6: var(--ow-chart-6);
+    --color-chart-7: var(--ow-chart-7);
+    --color-chart-8: var(--ow-chart-8);
+    --color-chart-grid: var(--ow-chart-grid);
+    --color-chart-axis: var(--ow-chart-axis);
     --color-code-block: var(--ow-code-block);
     --color-code-block-header: var(--ow-code-block-header);
     --color-code-block-border: var(--ow-code-block-border);
