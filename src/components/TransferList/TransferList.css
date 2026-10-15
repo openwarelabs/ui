@@ -1,0 +1,91 @@
+/* TransferList: two standalone ListBoxes (ListBox.css) with a column of Buttons between them. Its own width decides
+   the layout (a container query): side by side, or stacked with the buttons turned to point down and up. */
+.ow-transfer-list {
+    container: ow-transfer-list / inline-size;
+    color: var(--ow-text);
+    font-family: var(--ow-font-sans);
+}
+
+.ow-transfer-list__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: var(--ow-space-lg);
+}
+
+.ow-transfer-list__pane {
+    display: grid;
+    min-width: 0;
+    align-content: start;
+    gap: var(--ow-space-sm);
+}
+
+.ow-transfer-list__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--ow-space-sm);
+}
+
+.ow-transfer-list__label {
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.4;
+}
+
+.ow-transfer-list__count {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.ow-transfer-list .ow-transfer-list__list {
+    height: var(--ow-transfer-list-height);
+}
+
+.ow-transfer-list__actions {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    gap: var(--ow-space-xs);
+}
+
+.ow-transfer-list__icon {
+    display: flex;
+}
+
+/* The arrows point the way the items go, so they turn round right to left. */
+.ow-transfer-list__icon--back,
+.ow-transfer-list:dir(rtl) .ow-transfer-list__icon {
+    transform: scaleX(-1);
+}
+
+.ow-transfer-list:dir(rtl) .ow-transfer-list__icon--back {
+    transform: none;
+}
+
+.ow-transfer-list__order {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--ow-space-2xs);
+}
+
+@container ow-transfer-list (max-width: 519px) {
+    .ow-transfer-list__body {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ow-transfer-list__actions {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    /* Across becomes down: → turns to ↓ and ← to ↑, whichever way the text runs. */
+    .ow-transfer-list .ow-transfer-list__actions .ow-transfer-list__icon {
+        transform: rotate(90deg);
+    }
+
+    .ow-transfer-list .ow-transfer-list__actions .ow-transfer-list__icon--back {
+        transform: rotate(-90deg);
+    }
+}

@@ -54,6 +54,8 @@ export { Select } from "./components/Select/Select";
 export type { SelectProps, SelectOption, SelectGroup, SelectItem } from "./components/Select/Select";
 export { ListBox } from "./components/ListBox/ListBox";
 export type { ListBoxProps, ListBoxModeProps, ListBoxOption, ListBoxGroup, ListBoxItem, ListBoxSelectionMode } from "./components/ListBox/ListBox";
+export { TransferList } from "./components/TransferList/TransferList";
+export type { TransferListProps, TransferListOption } from "./components/TransferList/TransferList";
 export { Combobox } from "./components/Combobox/Combobox";
 export type { ComboboxProps, ComboboxOption } from "./components/Combobox/Combobox";
 export { TagInput } from "./components/TagInput/TagInput";
