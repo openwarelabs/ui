@@ -2,6 +2,12 @@
 
 Every release of @openwarelabs/ui and @openwarelabs/ui-mcp. `npm run release` writes it from the commits.
 
+## 0.11.1 (2026-10-15)
+
+### Fixes
+
+- make the range slider's handles big enough to tap (#22) ([cd2c51e](https://github.com/openwarelabs/ui/commit/cd2c51ed8da0a601b83d8681e0af8aa4b267d6de))
+
 ## 0.11.0 (2026-10-15)
 
 ### Features
