@@ -14,9 +14,6 @@ export type SectionName = "docs" | "components" | "blocks";
 export const sectionOf = (route: Route): SectionName =>
     route.kind === "blocks" || route.kind === "block-category" ? "blocks" : route.kind === "components" || route.kind === "component" ? "components" : "docs";
 
-/** Names longer than this ("ToggleButtonGroup") don't fit half the sidebar, so they take a whole row; a new dot counts as two letters. */
-const longName = 16;
-
 /** "0.3.1" → "0.3": patch releases don't make a component old. */
 const minor = (release: string) => release.split(".").slice(0, 2).join(".");
 
@@ -67,7 +64,7 @@ function SearchButton({ label, onSearch }: { label: string; onSearch: () => void
 }
 
 /** A group: its name in small capitals with a count, over its links. */
-function Group({ title, count, columns = 1, children }: { title: string; count?: number; columns?: 1 | 2; children: ReactNode }) {
+function Group({ title, count, children }: { title: string; count?: number; children: ReactNode }) {
     const id = useId();
     return (
         <div className="docs-side-group">
@@ -75,7 +72,7 @@ function Group({ title, count, columns = 1, children }: { title: string; count?:
                 {title}
                 {count !== undefined ? <span className="docs-side-heading__count">{count}</span> : null}
             </Text>
-            <ul className={columns === 2 ? "docs-side-list docs-side-list--two" : "docs-side-list"} aria-labelledby={id}>
+            <ul className="docs-side-list" aria-labelledby={id}>
                 {children}
             </ul>
         </div>
@@ -89,7 +86,6 @@ function SideLink({
     title,
     start,
     end,
-    wide = false,
     children,
 }: {
     href: string;
@@ -98,12 +94,10 @@ function SideLink({
     title?: string;
     start?: ReactNode;
     end?: ReactNode;
-    /** Takes both columns of a two-column list. */
-    wide?: boolean;
     children: ReactNode;
 }) {
     return (
-        <li className={wide ? "docs-side-list__wide" : undefined}>
+        <li>
             <a className="docs-side-link" href={href} aria-current={current ? "page" : undefined} onClick={onNavigate} title={title}>
                 {start}
                 <span className="docs-side-link__label">{children}</span>
@@ -158,7 +152,7 @@ function ComponentsSidebar({ route, onNavigate, onSearch }: SidebarProps) {
                 const docs = listedComponents.filter((doc) => doc.meta.category === category);
                 if (!docs.length) return null;
                 return (
-                    <Group key={category} title={category} count={docs.length} columns={2}>
+                    <Group key={category} title={category} count={docs.length}>
                         {docs.map((doc) => (
                             <SideLink
                                 key={doc.slug}
@@ -166,7 +160,6 @@ function ComponentsSidebar({ route, onNavigate, onSearch }: SidebarProps) {
                                 current={isCurrent(doc)}
                                 onNavigate={onNavigate}
                                 title={doc.meta.title}
-                                wide={doc.meta.title.length + (isNew(doc) ? 2 : 0) > longName}
                             >
                                 {doc.meta.title}
                                 {isNew(doc) ? <NewDot /> : null}

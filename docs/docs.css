@@ -302,16 +302,6 @@ body {
     list-style: none;
 }
 
-.docs-side-list--two {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    /* A long name takes a whole row; dense packing keeps the others from leaving a gap before it. */
-    grid-auto-flow: row dense;
-}
-
-.docs-side-list__wide {
-    grid-column: 1 / -1;
-}
-
 .docs-side-link {
     display: flex;
     min-height: 28px;
@@ -326,10 +316,6 @@ body {
     transition-property: color, background-color, box-shadow;
     transition-duration: var(--ow-duration-base);
     transition-timing-function: var(--ow-ease-standard);
-}
-
-.docs-side-list--two .docs-side-link {
-    gap: var(--ow-space-xs);
 }
 
 .docs-side-link:hover {
