@@ -1,0 +1,232 @@
+/* AppShell: a sidebar down the left and the page beside it. It measures its own width (a container query), so it
+   folds into a drawer under its breakpoint (900px by default) whether it fills the window or sits in a smaller frame. */
+
+.ow-app-shell {
+    --ow-app-shell-height: 100dvh;
+    --ow-sidebar-width: 248px;
+    --ow-sidebar-collapsed-width: 56px;
+    container: ow-app-shell / inline-size;
+    background: var(--ow-canvas);
+    color: var(--ow-text);
+}
+
+.ow-app-shell__frame {
+    display: grid;
+    grid-template-columns: var(--ow-sidebar-width) minmax(0, 1fr);
+    min-height: var(--ow-app-shell-height);
+    transition: grid-template-columns var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-app-shell--collapsed .ow-app-shell__frame {
+    grid-template-columns: var(--ow-sidebar-collapsed-width) minmax(0, 1fr);
+}
+
+.ow-app-shell__sidebar {
+    position: sticky;
+    top: 0;
+    box-sizing: border-box;
+    height: var(--ow-app-shell-height);
+    min-width: 0;
+    overflow: hidden;
+}
+
+.ow-app-shell--flat .ow-app-shell__sidebar {
+    border-right: 1px solid var(--ow-border);
+}
+
+/* The sidebar's three parts: the header and footer stay put, the content between them scrolls. */
+.ow-sidebar {
+    display: flex;
+    box-sizing: border-box;
+    height: 100%;
+    flex-direction: column;
+    gap: var(--ow-space-lg);
+    padding: 10px 12px 12px;
+}
+
+.ow-sidebar--drawer {
+    height: auto;
+    min-height: 100%;
+    padding: 0;
+}
+
+.ow-sidebar__header,
+.ow-sidebar__footer {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: var(--ow-space-sm);
+}
+
+.ow-sidebar__content {
+    display: flex;
+    min-height: 0;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--ow-space-3xl);
+    overflow-y: auto;
+    /* Room for the items' focus rings, which the scroll area would otherwise clip. */
+    margin-inline: -4px;
+    padding: 2px 4px;
+}
+
+.ow-sidebar--drawer .ow-sidebar__content {
+    overflow: visible;
+}
+
+.ow-sidebar__footer {
+    margin-top: auto;
+}
+
+.ow-sidebar__toggle {
+    align-self: flex-start;
+}
+
+/* Inside a NavList each tooltip wraps its item: let the item keep the full width. */
+.ow-sidebar .ow-nav > .ow-tooltip {
+    display: grid;
+}
+
+/* Folded: only the icons show; the labels stay for screen readers and come back as tooltips. */
+.ow-app-shell--collapsed .ow-app-shell__sidebar .ow-sidebar {
+    padding-inline: 8px;
+}
+
+.ow-app-shell--collapsed .ow-app-shell__sidebar .ow-nav__item {
+    justify-content: center;
+    padding-inline: 0;
+}
+
+.ow-app-shell--collapsed .ow-app-shell__sidebar .ow-nav__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.ow-app-shell--collapsed .ow-app-shell__sidebar .ow-nav__end {
+    display: none;
+}
+
+/* A group's heading becomes a short rule, so the groups still read as groups. */
+.ow-app-shell--collapsed .ow-app-shell__sidebar .ow-nav__heading {
+    height: 1px;
+    overflow: hidden;
+    margin: 4px 8px;
+    background: var(--ow-border);
+    padding: 0;
+    color: transparent;
+}
+
+.ow-app-shell--collapsed .ow-sidebar__toggle {
+    align-self: center;
+}
+
+.ow-app-shell__body {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+}
+
+.ow-app-shell__main {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+}
+
+.ow-app-shell--inset .ow-app-shell__main {
+    margin: 8px 8px 8px 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-panel);
+    background: var(--ow-surface);
+}
+
+.ow-app-shell--flat .ow-app-shell__body {
+    background: var(--ow-surface);
+}
+
+/* On narrow screens the sidebar folds into a drawer behind this bar. */
+.ow-app-shell__topbar {
+    display: none;
+    height: 52px;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    padding: 0 6px;
+}
+
+.ow-app-shell__topbar-start {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    align-items: center;
+    gap: 9px;
+}
+
+.ow-app-shell__topbar-end {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-2xs);
+}
+
+.ow-app-shell--flat .ow-app-shell__topbar {
+    border-bottom: 1px solid var(--ow-border);
+}
+
+/* Where the sidebar folds into the drawer: the breakpoint prop. */
+@container ow-app-shell (max-width: 559px) {
+    .ow-app-shell--sm .ow-app-shell__frame,
+    .ow-app-shell--sm.ow-app-shell--collapsed .ow-app-shell__frame {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .ow-app-shell--sm .ow-app-shell__sidebar {
+        display: none;
+    }
+    .ow-app-shell--sm .ow-app-shell__topbar {
+        display: flex;
+    }
+    .ow-app-shell--sm.ow-app-shell--inset .ow-app-shell__main {
+        margin: 0 8px 8px;
+    }
+}
+
+@container ow-app-shell (max-width: 899px) {
+    .ow-app-shell--md .ow-app-shell__frame,
+    .ow-app-shell--md.ow-app-shell--collapsed .ow-app-shell__frame {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .ow-app-shell--md .ow-app-shell__sidebar {
+        display: none;
+    }
+    .ow-app-shell--md .ow-app-shell__topbar {
+        display: flex;
+    }
+    .ow-app-shell--md.ow-app-shell--inset .ow-app-shell__main {
+        margin: 0 8px 8px;
+    }
+}
+
+@container ow-app-shell (max-width: 1199px) {
+    .ow-app-shell--lg .ow-app-shell__frame,
+    .ow-app-shell--lg.ow-app-shell--collapsed .ow-app-shell__frame {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .ow-app-shell--lg .ow-app-shell__sidebar {
+        display: none;
+    }
+    .ow-app-shell--lg .ow-app-shell__topbar {
+        display: flex;
+    }
+    .ow-app-shell--lg.ow-app-shell--inset .ow-app-shell__main {
+        margin: 0 8px 8px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-app-shell__frame {
+        transition: none;
+    }
+}

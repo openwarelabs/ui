@@ -181,3 +181,24 @@ export const EllipsisIcon = icon(
         <circle cx="5" cy="12" r="1" />
     </>,
 );
+export const MenuIcon = icon(
+    <>
+        <path d="M4 5h16" />
+        <path d="M4 12h16" />
+        <path d="M4 19h16" />
+    </>,
+);
+export const PanelLeftOpenIcon = icon(
+    <>
+        <rect width="18" height="18" x="3" y="3" rx="2" />
+        <path d="M9 3v18" />
+        <path d="m14 9 3 3-3 3" />
+    </>,
+);
+export const PanelLeftCloseIcon = icon(
+    <>
+        <rect width="18" height="18" x="3" y="3" rx="2" />
+        <path d="M9 3v18" />
+        <path d="m16 15-3-3 3-3" />
+    </>,
+);
