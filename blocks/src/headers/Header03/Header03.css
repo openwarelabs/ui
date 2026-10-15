@@ -36,6 +36,9 @@
 }
 
 .ow-header03__brand {
+    /* The name stays on one line beside the buttons, however narrow the screen. */
+    flex-shrink: 0;
+    white-space: nowrap;
     display: inline-flex;
     align-items: center;
     gap: 10px;

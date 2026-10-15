@@ -161,7 +161,7 @@ server.registerTool(
     "list_blocks",
     {
         title: "List blocks",
-        description: "The ready-made page sections (headers, heroes, features, pricing, app shells, settings, sign-in, dashboards, chat and more), each a .tsx and a .css file built from Openware components.",
+        description: "The ready-made page sections (headers, heroes, features, pricing, app shells, settings, sign-in, dashboards, chat and more), each a component in @openwarelabs/blocks that takes its content as props.",
         inputSchema: { category: z.string().optional().describe('Only this category, by slug or title, e.g. "heroes" or "Sign-in".') },
         annotations: { readOnlyHint: true },
     },
@@ -183,7 +183,7 @@ server.registerTool(
     "get_block",
     {
         title: "Get a block",
-        description: "A block's two files, .tsx and .css, ready to copy into a project, with what it's made from.",
+        description: "A block's reference: its component in @openwarelabs/blocks, every prop with its type, and an example of it in use.",
         inputSchema: { id: z.string().describe('The block\'s id from list_blocks, e.g. "heroes/HeroCentred", "HeroCentred", or its component, "Hero01".') },
         annotations: { readOnlyHint: true },
     },

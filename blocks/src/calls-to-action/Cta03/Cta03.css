@@ -47,6 +47,20 @@
     color: var(--ow-primary-text);
 }
 
+
+/* A screenshot passed as the picture (an <img>, <picture> or <video>) fills its place, keeps its proportions and
+   takes the card's corners. Drawn pictures are left as they are. */
+
+.ow-cta03__inner > img,
+.ow-cta03__inner > video,
+.ow-cta03__inner > picture > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-card);
+}
+
 @media (max-width: 1024px) {
     .ow-cta03__inner {
         grid-template-columns: minmax(0, 1fr);

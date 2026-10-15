@@ -120,6 +120,20 @@
     padding: 1px 8px;
 }
 
+
+/* A screenshot passed as the picture (an <img>, <picture> or <video>) fills its place, keeps its proportions and
+   takes the card's corners. Drawn pictures are left as they are. */
+
+.ow-sign-in02__plate-inner > img,
+.ow-sign-in02__plate-inner > video,
+.ow-sign-in02__plate-inner > picture > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-card);
+}
+
 @media (max-width: 1024px) {
     .ow-sign-in02__form-side {
         padding: 24px 28px;
