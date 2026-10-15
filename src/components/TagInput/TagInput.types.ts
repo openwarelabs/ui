@@ -11,6 +11,9 @@ export interface TagInputOption {
 }
 
 /** Why a value wasn't added: `validate` refused it, it's already there, it isn't one of the options, or the field is full. */
+/** An item in the suggestions: an option, or the one that adds what's typed. Internal. */
+export type TagInputItem = { option: TagInputOption } | { create: string };
+
 export type TagInputRejectReason = "invalid" | "duplicate" | "unknown" | "max";
 
 export interface TagInputProps {

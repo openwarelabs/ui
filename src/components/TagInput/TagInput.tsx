@@ -18,15 +18,12 @@ import { manualPopover, useDismiss, useFloating } from "@/hooks/useFloating";
 import { usePresence } from "@/hooks/usePresence";
 import { XIcon } from "@/icons";
 import { cx } from "@/utils/cx";
-import type { TagInputOption, TagInputProps, TagInputRejectReason } from "./TagInput.types";
+import type { TagInputItem, TagInputOption, TagInputProps, TagInputRejectReason } from "./TagInput.types";
 
 export type { TagInputOption, TagInputProps, TagInputRejectReason } from "./TagInput.types";
 
 const none: string[] = [];
 const escape = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-
-/** An item in the suggestions: an option, or the one that adds what's typed. */
-type Item = { option: TagInputOption } | { create: string };
 
 /**
  * Several values in one field: each shows as a removable tag before the text box. People type a value and press
@@ -80,10 +77,10 @@ export const TagInput = forwardRef<HTMLInputElement, TagInputProps>(function Tag
     const labelOf = (v: string) => options?.find((option) => option.value === v)?.label ?? v;
     const has = (list: string[], v: string) => list.some((item) => item.toLowerCase() === v.toLowerCase());
 
-    const items = useMemo<Item[]>(() => {
+    const items = useMemo<TagInputItem[]>(() => {
         if (!options) return [];
         const query = text.trim().toLowerCase();
-        const found: Item[] = options
+        const found: TagInputItem[] = options
             .filter(
                 (option) =>
                     (allowDuplicates || !values.includes(option.value)) &&
@@ -97,8 +94,8 @@ export const TagInput = forwardRef<HTMLInputElement, TagInputProps>(function Tag
         return found;
     }, [options, text, values, allowCustom, allowDuplicates]);
 
-    const enabled = (item: Item | undefined) => Boolean(item && ("create" in item || !item.option.disabled));
-    const firstEnabled = (list: Item[]) => list.findIndex(enabled);
+    const enabled = (item: TagInputItem | undefined) => Boolean(item && ("create" in item || !item.option.disabled));
+    const firstEnabled = (list: TagInputItem[]) => list.findIndex(enabled);
     const showList = suggests && isOpen && !disabled && !full;
 
     const { mounted, state } = usePresence(showList);
@@ -192,7 +189,7 @@ export const TagInput = forwardRef<HTMLInputElement, TagInputProps>(function Tag
         onInputChange?.(next);
     }
 
-    function choose(item: Item | undefined) {
+    function choose(item: TagInputItem | undefined) {
         if (!item || !enabled(item)) return;
         if ("create" in item) setTyped(addText(item.create));
         else {
