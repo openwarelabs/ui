@@ -39,7 +39,7 @@ export const meta: DocMeta = {
         "On a phone the popover spans the width of the screen, less 8px each side, and only the list scrolls.",
     ],
     related: ["Popover", "Badge", "EmptyState", "Tabs"],
-    since: "0.15.0",
+    since: "0.16.0",
 };
 
 const minutesAgo = (minutes: number) => new Date(Date.now() - minutes * 60_000);

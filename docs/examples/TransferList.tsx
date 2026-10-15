@@ -27,7 +27,7 @@ export const meta: DocMeta = {
         "Below 520px wide, the lists stack and the buttons turn to point down and up.",
     ],
     related: ["ListBox", "SearchField", "Form", "Table"],
-    since: "0.15.0",
+    since: "0.16.0",
 };
 
 const permissions = [

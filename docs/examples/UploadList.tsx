@@ -30,7 +30,7 @@ export const meta: DocMeta = {
         "Image files get a preview from an object URL, freed when they're removed.",
     ],
     related: ["FileDropZone", "ProgressBar", "ProgressCircle"],
-    since: "0.15.0",
+    since: "0.16.0",
 };
 
 /** Pretends to upload: a random speed, and about one file in four fails partway. */

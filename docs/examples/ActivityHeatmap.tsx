@@ -32,7 +32,7 @@ export const meta: DocMeta = {
         "With onDayClick each day is a button. The squares are small, so pair it with a larger way in where you can, such as a list of days.",
     ],
     related: ["BarChart", "Calendar", "Sparkline"],
-    since: "0.15.0",
+    since: "0.16.0",
 };
 
 const iso = (date: Date) =>

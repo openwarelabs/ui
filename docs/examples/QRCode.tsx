@@ -30,7 +30,7 @@ export const meta: DocMeta = {
         "encodeQR(text, { level, minVersion }) returns the modules as rows of booleans, if you'd rather draw them yourself.",
     ],
     related: ["Image", "Snippet", "CopyButton"],
-    since: "0.15.0",
+    since: "0.16.0",
 };
 
 /** A link to share. The label says where it leads. */
