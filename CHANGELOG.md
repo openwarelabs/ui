@@ -2,6 +2,13 @@
 
 Every release of @openwarelabs/ui and @openwarelabs/ui-mcp. `npm run release` writes it from the commits.
 
+## 0.12.0 (2026-10-15)
+
+### Features
+
+- add LineChart, BarChart, DonutChart and Sparkline, with a chart palette (#24) ([93fa28b](https://github.com/openwarelabs/ui/commit/93fa28b28919055e807264e5362d4e6d9fc1f7fc))
+- add AppShell, a sidebar and page frame that folds into a drawer on narrow screens (#23) ([d4c4a37](https://github.com/openwarelabs/ui/commit/d4c4a377bb65d95a0d86a70073b41674d98b704f))
+
 ## 0.11.1 (2026-10-15)
 
 ### Fixes
