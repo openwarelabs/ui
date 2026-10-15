@@ -54,7 +54,7 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 
 ## Components
 
-93 components, each with a page in the docs.
+94 components, each with a page in the docs.
 
 | Group | Components |
 | --- | --- |
@@ -68,7 +68,7 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 | Navigation | `Tabs`, `Accordion`, `Disclosure`, `Breadcrumbs`, `Pagination`, `Steps`, `NavList` + `NavItem` |
 | Data display | `Table` (sorting, selection), `Stat`, `FileTree`, `EmptyState`, `Tag`, `ColorSwatch`, `Avatar`, `AvatarGroup`, `User` |
 | AI | `PromptInput` (attachments, stop while streaming) + `PromptSuggestion`, `ChatConversation` (follows the newest message, jump to latest), `ChatMessage` + `ChatMessageActions`, `ChatLoader`, `ChatTool` (a tool call with its status, input, output and approval), `ChainOfThought`, `ChatSource` + `ChatSources`, `TextShimmer` |
-| Layout | `Card`, `SettingsRow`, `Stack`, `Separator`, `ScrollShadow`, `VisuallyHidden` |
+| Layout | `Card`, `SettingsRow`, `Stack`, `Separator`, `ScrollShadow`, `VisuallyHidden`, `Splitter` + `SplitterPanel` + `SplitterHandle` (panels you resize by dragging or with the arrow keys, collapsible, remembered) |
 | Marketing | `SiteHeader`, `SectionHeading`, `Chip`, `DotGrid` |
 
 Hooks for your own components: `useControllableState`, `useFloating` (top-layer positioning that flips), `usePresence` (keeps a layer mounted while it animates out), `useDismiss`, `useModalDialog`, `useMenuKeyboard`. Every prop is typed and described, so your editor explains it on hover.

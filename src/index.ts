@@ -160,6 +160,8 @@ export { Container } from "./components/Container/Container";
 export type { ContainerProps, ContainerSize } from "./components/Container/Container";
 export { Section } from "./components/Section/Section";
 export type { SectionProps } from "./components/Section/Section";
+export { Splitter, SplitterPanel, SplitterHandle } from "./components/Splitter/Splitter";
+export type { SplitterProps, SplitterPanelProps, SplitterHandleProps, SplitterDirection } from "./components/Splitter/Splitter";
 export type { StackProps, SeparatorProps, ScrollShadowProps, SpaceToken } from "./components/Layout/Layout";
 
 // Marketing

@@ -129,6 +129,7 @@ export const catalogue = [
     "Stack",
     "Container",
     "Section",
+    "Splitter",
     "VisuallyHidden",
     "Chip",
     "DotGrid",
