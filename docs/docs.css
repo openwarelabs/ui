@@ -2659,3 +2659,89 @@ a.docs-block-uses__item:focus-visible {
     gap: var(--ow-space-sm);
     margin-top: var(--ow-space-sm);
 }
+
+/* Releases: each version's date and summary, its new components as cards, then lists of the rest. */
+.docs-release__title {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ow-space-sm);
+}
+
+.docs-release__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-2xs) var(--ow-space-xs);
+    margin: 0 0 var(--ow-space-lg);
+    color: var(--ow-text-muted);
+    font-size: 14px;
+}
+
+.docs-release__group {
+    margin: var(--ow-space-lg) 0 var(--ow-space-sm);
+    color: var(--ow-text);
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.docs-release-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+    gap: var(--ow-space-sm);
+    margin: 0 0 var(--ow-space-lg);
+    padding: 0;
+    list-style: none;
+}
+
+.docs-release-card {
+    display: grid;
+    align-content: start;
+    gap: var(--ow-space-2xs);
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: var(--ow-space-md) var(--ow-space-lg);
+}
+
+.docs-release-card__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-xs);
+}
+
+.docs-release-card__name {
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+    text-decoration: none;
+}
+
+.docs-release-card__name:hover {
+    text-decoration: underline;
+}
+
+.docs-release-card__text {
+    color: var(--ow-text-soft);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.docs-release__list {
+    margin-bottom: var(--ow-space-lg);
+}
+
+.docs-release__refs {
+    display: inline-flex;
+    gap: var(--ow-space-xs);
+    color: var(--ow-text-muted);
+    font-size: 13px;
+}
+
+.docs-release__refs a {
+    color: inherit;
+}
+
+.docs-release__refs a:hover {
+    color: var(--ow-text);
+}

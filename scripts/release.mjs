@@ -17,8 +17,8 @@ import path from "node:path";
 import { styleText } from "node:util";
 
 import { root } from "./css.mjs";
+import { groups, notesFromCommits, parseChangelog, renderChangelog, repository, summaryOf } from "./release-notes.mjs";
 
-const repository = "https://github.com/openwarelabs/ui";
 const args = process.argv.slice(2);
 const dryRun = args.includes("--dry-run");
 const forced = args.find((arg) => !arg.startsWith("--"));
@@ -145,35 +145,29 @@ const order = (version) =>
         .reduce((sum, part) => sum * 10000 + part, 0);
 if (order(next) <= order(current)) fail(`${next} isn't after the current version, ${current}.`);
 
-// 5. The release notes.
-const link = (commit) => `([${commit.hash.slice(0, 7)}](${repository}/commit/${commit.hash}))`;
-const item = (commit) => `- ${commit.scope ? `**${commit.scope}:** ` : ""}${commit.description} ${link(commit)}`;
-const groups = [
-    ["Breaking changes", commits.filter((commit) => commit.breaking)],
-    ["Features", commits.filter((commit) => commit.type === "feat" && !commit.breaking)],
-    ["Fixes", commits.filter((commit) => commit.type === "fix" && !commit.breaking)],
-    ["Performance", commits.filter((commit) => commit.type === "perf" && !commit.breaking)],
-];
-// Commits that don't follow the convention still belong in the notes: they're real changes.
-const other = commits.filter((commit) => !commit.type);
-if (other.length) groups.push(["Other changes", other]);
+// 5. The release notes: new components, new blocks, improvements, fixes (scripts/release-notes.mjs has the template).
+// A commit that adds a component is one whose name has a docs page, so it can link to it.
+const isComponent = (name) => fs.existsSync(path.join(root, "docs/examples", `${name}.tsx`));
+const notes = notesFromCommits(commits, isComponent);
 const today = new Date().toISOString().slice(0, 10);
-const notes = groups
-    .filter(([, list]) => list.length)
-    .map(([title, list]) => `### ${title}\n\n${list.map(item).join("\n")}`)
-    .join("\n\n");
-const section = `## ${next} (${today})\n\n${notes || "Maintenance only."}\n`;
+const release = { version: next, date: today, notes };
 
 const reason = forced ? `forced: ${forced}` : `a ${level} release, from the commits`;
 say(
     `\n  ${dim(current)} ${paint("cyan", "→")} ${paint(["bold", "green"], next)}  ${dim(`${reason}; ${commits.length} commit${commits.length === 1 ? "" : "s"} since ${since}`)}\n`,
 );
 // The notes as the changelog will have them, readable in the terminal: headings in colour, hashes dimmed.
-const tones = { "Breaking changes": "red", Features: "green", Fixes: "yellow", Performance: "magenta", "Other changes": "blue" };
-for (const [title, list] of groups.filter(([, list]) => list.length)) {
-    say(`  ${paint(["bold", tones[title]], title)}`);
-    for (const commit of list)
-        say(`    ${dim("•")} ${commit.scope ? `${bold(`${commit.scope}:`)} ` : ""}${commit.description} ${dim(commit.hash.slice(0, 7))}`);
+const tones = { breaking: "red", components: "green", blocks: "green", improvements: "cyan", fixes: "yellow", performance: "magenta", other: "blue" };
+const summary = summaryOf(notes);
+if (summary) say(`  ${summary}\n`);
+for (const { key, title } of groups) {
+    const list = notes.filter((note) => note.group === key);
+    if (!list.length) continue;
+    say(`  ${paint(["bold", tones[key]], title)}`);
+    for (const note of list) {
+        const lead = note.components ? `${bold(note.components.join(" and "))}${note.text ? ": " : ""}` : note.scope ? `${bold(`${note.scope}:`)} ` : "";
+        say(`    ${dim("•")} ${lead}${note.text} ${dim([note.pr ? `#${note.pr}` : "", note.hash.slice(0, 7)].filter(Boolean).join(" "))}`);
+    }
     say();
 }
 if (dryRun) {
@@ -204,9 +198,9 @@ done("Version in the blocks and the MCP server");
 step("MCP server build", "npm", ["run", "mcp:build"]);
 
 const changelogPath = path.join(root, "CHANGELOG.md");
-const heading = "# Changelog\n\nEvery release of @openwarelabs/ui and @openwarelabs/ui-mcp. `npm run release` writes it from the commits.\n\n";
-const previous = fs.existsSync(changelogPath) ? fs.readFileSync(changelogPath, "utf8").replace(/^# Changelog[\s\S]*?(?=^## )/m, "") : "";
-fs.writeFileSync(changelogPath, `${heading}${section}\n${previous}`.replace(/\n{3,}/g, "\n\n"));
+// The earlier releases are read back and written again in the same template, so the file stays in one format.
+const previous = fs.existsSync(changelogPath) ? parseChangelog(fs.readFileSync(changelogPath, "utf8"), isComponent) : [];
+fs.writeFileSync(changelogPath, renderChangelog([release, ...previous]));
 done("CHANGELOG.md");
 
 // 8. Commit, tag and push, all at once so main and the tag can't disagree.

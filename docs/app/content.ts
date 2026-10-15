@@ -45,6 +45,7 @@ export const guides = [
     { slug: "typography", title: "Typography", description: "Inter and Geist Mono, and the type styles." },
     { slug: "tokens", title: "Spacing and shape", description: "Spacing, corners, shadows, weights and motion." },
     { slug: "ai", title: "AI and MCP", description: "Give Claude, Codex and Cursor the components: the MCP server and Copy for AI." },
+    { slug: "releases", title: "Releases", description: "What each version added and fixed: new components, improvements and fixes." },
 ] as const;
 
 export type Route =

@@ -17,6 +17,7 @@ import { Colours } from "../pages/Colours";
 import { Installation } from "../pages/Installation";
 import { AI } from "../pages/AI";
 import { Introduction } from "../pages/Introduction";
+import { Releases } from "../pages/Releases";
 import { Theming } from "../pages/Theming";
 import { Tokens } from "../pages/Tokens";
 import { Typography } from "../pages/Typography";
@@ -31,7 +32,7 @@ function Page({ route }: { route: Route }) {
     if (route.kind === "blocks") return <BlocksIndex />;
     if (route.kind === "block-category") return <BlockCategoryPage category={route.category} />;
     if (route.kind === "guide") {
-        const pages = { introduction: Introduction, installation: Installation, theming: Theming, colours: Colours, typography: Typography, tokens: Tokens, ai: AI };
+        const pages = { introduction: Introduction, installation: Installation, theming: Theming, colours: Colours, typography: Typography, tokens: Tokens, ai: AI, releases: Releases };
         const Guide = pages[route.slug];
         return <Guide />;
     }

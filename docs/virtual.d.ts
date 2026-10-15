@@ -36,3 +36,9 @@ declare module "docs:block-index" {
 }
 
 declare module "*.css";
+
+declare module "docs:releases" {
+    /** Every release in CHANGELOG.md, newest first. */
+    export const releases: import("./app/types").Release[];
+    export const repository: string;
+}
