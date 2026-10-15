@@ -1,12 +1,22 @@
 # Changelog
 
-Every release of @openwarelabs/ui and @openwarelabs/ui-mcp. `npm run release` writes it from the commits.
+Every release of @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp. `npm run release` writes it from the commits, and the docs' Releases page shows it.
+
+## 0.16.2 (2026-10-15)
+
+1 fix.
+
+### Fixes
+
+- **Badge:** use the small pill unless a size is asked for ([#60](https://github.com/openwarelabs/ui/pull/60), [cdf4ff7](https://github.com/openwarelabs/ui/commit/cdf4ff786d89e502767b962cdbb00bbc702193b8))
 
 ## 0.16.1 (2026-10-15)
 
+1 performance change.
+
 ### Performance
 
-- merge the ESM build's React imports into one statement per package (#58) ([cbd00db](https://github.com/openwarelabs/ui/commit/cbd00dbcc9c9a8fb48f4ee4c4ec929db9969090d))
+- merge the ESM build's React imports into one statement per package ([#58](https://github.com/openwarelabs/ui/pull/58), [cbd00db](https://github.com/openwarelabs/ui/commit/cbd00dbcc9c9a8fb48f4ee4c4ec929db9969090d))
 
 ## 0.16.0 (2026-10-15)
 
