@@ -1,0 +1,162 @@
+/* MediaPlayer: audio is a bar of controls; video is the picture, with the same bar floating over its foot. */
+.ow-media {
+    position: relative;
+    container-type: inline-size;
+    border-radius: var(--ow-radius-container);
+    color: var(--ow-text);
+    font-family: var(--ow-font-sans);
+}
+
+.ow-media:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-media--audio {
+    display: grid;
+    gap: var(--ow-space-2xs);
+    border: 1px solid var(--ow-border);
+    background: var(--ow-surface);
+    padding: var(--ow-space-xs);
+}
+
+.ow-media--audio .ow-media__element {
+    display: none;
+}
+
+.ow-media__title {
+    overflow: hidden;
+    padding: var(--ow-space-2xs) var(--ow-space-xs) 0;
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ow-media--video {
+    overflow: hidden;
+    background: var(--ow-gray-950);
+}
+
+/* Letterboxed, never cropped. */
+.ow-media__screen > .ow-media__element {
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.ow-media__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-2xs);
+    min-width: 0;
+}
+
+.ow-media--video .ow-media__controls {
+    position: absolute;
+    inset-inline: var(--ow-space-sm);
+    bottom: var(--ow-space-sm);
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-lg);
+    background: var(--ow-surface);
+    padding: var(--ow-space-2xs);
+    box-shadow: var(--ow-shadow-menu);
+    transition: opacity var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+/* Playing and left alone: the controls fade out (still reachable with Tab, which brings them back) and so does the pointer. */
+.ow-media--idle {
+    cursor: none;
+}
+
+.ow-media--idle .ow-media__controls {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Captions rise above the controls while they show (Chromium and Safari let the page move them). */
+.ow-media__element::-webkit-media-text-track-container {
+    transition: transform var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-media--video:not(.ow-media--idle) .ow-media__element::-webkit-media-text-track-container {
+    transform: translateY(-56px);
+}
+
+/* The timeline reads left to right in every language, as players do; the loaded part is a shade darker than the rest. */
+.ow-media__seek {
+    flex: 1;
+    min-width: 48px;
+    direction: ltr;
+}
+
+.ow-media__seek .ow-slider__track {
+    background: linear-gradient(to right, var(--ow-border-strong) var(--ow-media-buffered), var(--ow-meter-track) 0);
+}
+
+.ow-media__volume {
+    width: 72px;
+}
+
+.ow-media__time {
+    padding-inline: var(--ow-space-2xs);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.ow-media__rate {
+    min-width: 44px;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-media__controls [aria-pressed="true"],
+.ow-media__on {
+    background: var(--ow-surface-muted);
+    color: var(--ow-primary-text);
+}
+
+.ow-media__blank {
+    display: block;
+    width: 15px;
+    height: 15px;
+}
+
+.ow-media--fullscreen {
+    display: flex;
+    align-items: center;
+    border-radius: 0;
+}
+
+/* AspectRatio sets its ratio inline; full screen, the picture takes the whole screen instead. */
+.ow-media--fullscreen .ow-media__screen {
+    height: 100%;
+    aspect-ratio: auto !important;
+}
+
+@container (max-width: 440px) {
+    .ow-media__volume,
+    .ow-media__pip {
+        display: none;
+    }
+}
+
+/* On a phone the device's buttons set the volume; M still mutes. */
+@container (max-width: 360px) {
+    .ow-media--video .ow-media__mute {
+        display: none;
+    }
+}
+
+@container (max-width: 240px) {
+    .ow-media__time {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-media__controls,
+    .ow-media__element::-webkit-media-text-track-container {
+        transition: none !important;
+    }
+}
