@@ -34,7 +34,7 @@ export const meta: DocMeta = {
         "The clips on this page are made in the browser (a tune rendered to a WAV, a canvas recorded to a WebM), so the docs carry no media files. In your app, pass your files' URLs.",
     ],
     related: ["AspectRatio", "Slider", "Carousel"],
-    since: "0.15.0",
+    since: "0.16.0",
 };
 
 /** A podcast episode: artwork and details in a Card, with an audio player under them. */

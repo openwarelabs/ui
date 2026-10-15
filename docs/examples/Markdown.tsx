@@ -27,7 +27,7 @@ export const meta: DocMeta = {
         "Use headingOffset when the answer sits under a page's own h1 and h2, so its headings still read in order.",
     ],
     related: ["Prose", "CodeBlock", "ChatMessage", "ChatConversation"],
-    since: "0.15.0",
+    since: "0.16.0",
 };
 
 const releaseNotes = `# Agents now run your checks before review

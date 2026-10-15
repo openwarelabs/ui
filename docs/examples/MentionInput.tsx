@@ -50,7 +50,7 @@ export const meta: DocMeta = {
         "Give it a name and the text is submitted like any input. It takes the id, isInvalid and aria-describedby a Field gives it.",
     ],
     related: ["PromptInput", "Combobox", "TagInput", "Field"],
-    since: "0.15.0",
+    since: "0.16.0",
 };
 
 const people: MentionOption[] = [
