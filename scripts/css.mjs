@@ -66,6 +66,8 @@ export const cssOrder = [
     "components/Card/Card.css",
     "components/NavList/NavList.css",
     "components/Layout/Layout.css",
+    "components/Container/Container.css",
+    "components/Section/Section.css",
     "components/Marketing/Marketing.css",
     "components/Prose/Prose.css",
     "components/TextShimmer/TextShimmer.css",

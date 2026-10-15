@@ -1,0 +1,36 @@
+/* A band of the page: a block's vertical space and ground, full width. Its Container sets the width inside. */
+
+.ow-section {
+    box-sizing: border-box;
+    width: 100%;
+    color: var(--ow-text);
+}
+
+.ow-section--paper {
+    background: var(--ow-paper);
+}
+
+.ow-section--canvas {
+    background: var(--ow-canvas);
+}
+
+.ow-section--surface {
+    background: var(--ow-surface);
+}
+
+.ow-section--space-md {
+    padding-block: var(--ow-section-y);
+}
+
+.ow-section--space-sm {
+    padding-block: calc(var(--ow-section-y) / 2);
+}
+
+@media (max-width: 760px) {
+    .ow-section--space-md {
+        padding-block: 72px;
+    }
+    .ow-section--space-sm {
+        padding-block: 36px;
+    }
+}
