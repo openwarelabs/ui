@@ -122,6 +122,8 @@ export const catalogue = [
     "Separator",
     "SettingsRow",
     "Stack",
+    "Container",
+    "Section",
     "VisuallyHidden",
     "Chip",
     "DotGrid",

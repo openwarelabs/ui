@@ -268,7 +268,10 @@
     --ow-space-6xl: 26px;
     --ow-space-7xl: 28px;
     --ow-page-max: 1200px;
+    --ow-page-narrow: 720px;
+    --ow-page-wide: 1440px;
     --ow-page-gutter: 20px;
+    --ow-page-gutter-wide: 32px;
     --ow-header-height: 56px;
     --ow-section-y: 96px;
     --ow-radius-sm: 4px;

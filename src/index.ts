@@ -142,6 +142,10 @@ export { Kbd, Code } from "./components/Kbd/Kbd";
 export { Card, SettingsRow } from "./components/Card/Card";
 export type { CardProps, SettingsRowProps } from "./components/Card/Card";
 export { Stack, Separator, ScrollShadow, VisuallyHidden } from "./components/Layout/Layout";
+export { Container } from "./components/Container/Container";
+export type { ContainerProps, ContainerSize } from "./components/Container/Container";
+export { Section } from "./components/Section/Section";
+export type { SectionProps } from "./components/Section/Section";
 export type { StackProps, SeparatorProps, ScrollShadowProps, SpaceToken } from "./components/Layout/Layout";
 
 // Marketing
