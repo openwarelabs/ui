@@ -43,7 +43,7 @@ const pairs = [
     ["ow-primary-text", "ow-surface", text], ["ow-primary-text", "ow-primary-subtle", text], ["ow-text", "ow-primary-subtle", text],
     ["ow-focus-ring", "ow-surface", mark], ["ow-focus-ring", "ow-canvas", mark], ["ow-focus-ring", "ow-surface-muted", mark], ["ow-focus-ring", "ow-paper", mark],
     ["ow-focus-border", "ow-surface", mark],
-    ["ow-brass-deep", "ow-surface", text], ["ow-brass-deep", "ow-paper", text], ["ow-brass-deep", "ow-brass-soft", text],
+    ["ow-brass-deep", "ow-surface", text], ["ow-brass-deep", "ow-paper", text], ["ow-brass-deep", "ow-brass-soft", text], ["ow-brass-deep", "ow-canvas", mark],
     ["ow-danger-text", "ow-surface", text], ["ow-danger-text", "ow-danger-surface", text], ["ow-danger-text", "ow-danger-wash", mark],
     ["ow-success-text", "ow-surface", text], ["ow-success-text", "ow-success-surface", text],
     ["ow-warning-text", "ow-surface", text], ["ow-warning-text", "ow-warning-surface", text],
@@ -57,6 +57,7 @@ const pairs = [
     ["ow-primary-text", "ow-track", text], ["ow-danger-text", "ow-danger-surface", text],
     ["ow-success-text", "ow-meter-track", mark], ["ow-warning-text", "ow-meter-track", mark], ["ow-danger-text", "ow-meter-track", mark],
     ["ow-primary-text", "ow-primary-subtle", text], ["ow-warning-text", "ow-warning-surface", text],
+    ["ow-text", "ow-success-surface", text], ["ow-text", "ow-warning-surface", text], ["ow-text", "ow-danger-surface", text],
 ];
 
 // Pairs the source keeps below the line on purpose; listed so a change to them is noticed.
