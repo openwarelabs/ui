@@ -117,6 +117,7 @@ export const catalogue = [
     "Kbd",
     "Snippet",
     "Stat",
+    "DescriptionList",
     "LineChart",
     "BarChart",
     "DonutChart",
