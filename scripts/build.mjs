@@ -4,6 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { build } from "esbuild";
 import { readStyles } from "./css.mjs";
+import { mergeImports } from "./merge-imports.mjs";
 import { pureCalls } from "./pure-calls.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -22,6 +23,8 @@ const shared = {
 };
 
 await build({ ...shared, format: "esm", outfile: path.join(dist, "index.js"), external, sourcemap: true });
+const esm = path.join(dist, "index.js");
+fs.writeFileSync(esm, mergeImports(fs.readFileSync(esm, "utf8")));
 await build({ ...shared, format: "cjs", outfile: path.join(dist, "index.cjs"), external, sourcemap: true });
 
 // The script-tag build reads React from window.React, like the design system's previews.
