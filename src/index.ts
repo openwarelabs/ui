@@ -128,6 +128,8 @@ export { Table } from "./components/Table/Table";
 export type { TableProps, TableColumn, TableSort } from "./components/Table/Table";
 export { Stat } from "./components/Stat/Stat";
 export type { StatProps } from "./components/Stat/Stat";
+export { Timeline, TimelineItem } from "./components/Timeline/Timeline";
+export type { TimelineProps, TimelineItemProps, TimelineTone } from "./components/Timeline/Timeline";
 export { LineChart, BarChart, DonutChart, Sparkline } from "./components/Chart/Chart";
 export type {
     BarChartProps,

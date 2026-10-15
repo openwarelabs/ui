@@ -122,6 +122,7 @@ export const catalogue = [
     "Sparkline",
     "Table",
     "Tag",
+    "Timeline",
     "User",
     "Card",
     "ScrollShadow",
