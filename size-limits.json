@@ -2,7 +2,7 @@
     {
         "name": "@openwarelabs/ui, everything",
         "code": "export * from \"@openwarelabs/ui\";",
-        "limit": "89.5 KB"
+        "limit": "91 KB"
     },
     {
         "name": "@openwarelabs/ui, only Button",
@@ -17,7 +17,7 @@
     {
         "name": "@openwarelabs/ui/styles.css",
         "file": "dist/styles.css",
-        "limit": "45.5 KB"
+        "limit": "46 KB"
     },
     {
         "name": "@openwarelabs/blocks, everything",

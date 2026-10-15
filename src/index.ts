@@ -109,6 +109,8 @@ export { Drawer } from "./components/Drawer/Drawer";
 export type { DrawerProps } from "./components/Drawer/Drawer";
 export { Popover } from "./components/Popover/Popover";
 export type { PopoverProps } from "./components/Popover/Popover";
+export { Tour, Coachmark } from "./components/Tour/Tour";
+export type { TourProps, TourStep, TourTarget, TourLabels, CoachmarkProps } from "./components/Tour/Tour";
 export { HoverCard } from "./components/HoverCard/HoverCard";
 export type { HoverCardProps } from "./components/HoverCard/HoverCard";
 export { Menu, MenuItem, MenuLabel, MenuSeparator } from "./components/Menu/Menu";

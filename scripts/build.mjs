@@ -102,6 +102,7 @@ export const catalogue = [
     "Drawer",
     "Menu",
     "Popover",
+    "Tour",
     "HoverCard",
     "Accordion",
     "Breadcrumbs",

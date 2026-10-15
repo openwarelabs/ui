@@ -54,7 +54,7 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 
 ## Components
 
-105 components, each with a page in the docs.
+106 components, each with a page in the docs.
 
 | Group | Components |
 | --- | --- |
@@ -64,7 +64,7 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 | Choices | `Checkbox`, `CheckboxGroup`, `RadioGroup` (plain or cards), `Switch`, `Select`, `Combobox`, `Slider` (one value or a range), `Rating` (pick a score or show one), `ChoiceCard`, `ListBox` (one or many, on the page) |
 | Pickers | `Calendar`, `DatePicker`, `RangeCalendar`, `DateRangePicker` (with presets), `ColorPicker`, `ColorArea`, `ColorSlider`, `ColorSwatchPicker`, `FileDropZone` |
 | Feedback | `Alert`, `Badge`, `ProgressBar`, `ProgressCircle`, `Meter` (an amount in a range, toned by thresholds), `Spinner`, `Skeleton`, `SkeletonRows`, `Toaster` + `toast()` (sonner: stacked, swipeable, with actions and promises), `Tooltip`, `Banner` (an announcement bar across the top, dismissible and remembered) |
-| Overlays | `Dialog`, `ConfirmDialog`, `Drawer`, `Popover`, `HoverCard` (a preview when the pointer rests on a link), `Menu` + `MenuItem`, `CommandPalette`, `ContextMenu` (right-click, long press or Shift+F10, with the same items) |
+| Overlays | `Dialog`, `ConfirmDialog`, `Drawer`, `Popover`, `HoverCard` (a preview when the pointer rests on a link), `Menu` + `MenuItem`, `CommandPalette`, `ContextMenu` (right-click, long press or Shift+F10, with the same items), `Tour` (steps that point at parts of the page, with an optional spotlight) + `Coachmark` |
 | Navigation | `Tabs`, `Accordion`, `Disclosure`, `Breadcrumbs`, `Pagination`, `Steps`, `NavList` + `NavItem` |
 | Data display | `Table` (sorting, selection), `Stat`, `FileTree`, `EmptyState`, `Tag`, `ColorSwatch`, `Avatar`, `AvatarGroup`, `User`, `Image` (a placeholder while it loads, a fallback if it fails, `ratio`, `caption`), `Timeline` + `TimelineItem`, `DescriptionList` + `DescriptionItem`, `Carousel` + `CarouselSlide` (scroll-snap, arrows, dots, autoplay) |
 | AI | `PromptInput` (attachments, stop while streaming) + `PromptSuggestion`, `ChatConversation` (follows the newest message, jump to latest), `ChatMessage` + `ChatMessageActions`, `ChatLoader`, `ChatTool` (a tool call with its status, input, output and approval), `ChainOfThought`, `ChatSource` + `ChatSources`, `TextShimmer` |

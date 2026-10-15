@@ -44,6 +44,7 @@ export const cssOrder = [
     "components/Dialog/Dialog.css",
     "components/Drawer/Drawer.css",
     "components/Popover/Popover.css",
+    "components/Tour/Tour.css",
     "components/HoverCard/HoverCard.css",
     "components/Calendar/Calendar.css",
     "components/Calendar/DatePicker.css",
