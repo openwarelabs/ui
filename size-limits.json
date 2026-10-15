@@ -22,17 +22,13 @@
     {
         "name": "@openwarelabs/blocks, everything",
         "code": "export * from \"@openwarelabs/blocks\";",
-        "external": [
-            "@openwarelabs/ui"
-        ],
+        "external": ["@openwarelabs/ui"],
         "limit": "62 KB"
     },
     {
         "name": "@openwarelabs/blocks, only Hero01",
         "code": "export { Hero01 } from \"@openwarelabs/blocks\";",
-        "external": [
-            "@openwarelabs/ui"
-        ],
+        "external": ["@openwarelabs/ui"],
         "limit": "5.5 KB"
     },
     {
