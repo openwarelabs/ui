@@ -144,6 +144,7 @@ export const catalogue = [
     "Splitter",
     "AspectRatio",
     "VisuallyHidden",
+    "VirtualList",
     "Chip",
     "DotGrid",
     "SectionHeading",

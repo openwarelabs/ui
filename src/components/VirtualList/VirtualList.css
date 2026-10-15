@@ -1,0 +1,44 @@
+/* VirtualList: a scrolling list that renders only the rows in view, each placed by its offset from the top. */
+.ow-virtual-list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+.ow-virtual-list__scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    /* The list keeps its own place as rows are measured or added above; the browser's anchoring would double it. */
+    overflow-anchor: none;
+    border-radius: inherit;
+}
+
+.ow-virtual-list__scroll:focus-visible,
+.ow-virtual-list__item:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
+
+.ow-virtual-list__inner {
+    position: relative;
+    flex-shrink: 0;
+    width: 100%;
+}
+
+.ow-virtual-list__item {
+    position: absolute;
+    top: 0;
+    inset-inline: 0;
+    border-radius: var(--ow-radius-md);
+}
+
+.ow-virtual-list__footer {
+    display: flex;
+    justify-content: center;
+    padding: var(--ow-space-md);
+}
