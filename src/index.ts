@@ -17,6 +17,8 @@ export { ChoiceCard } from "./components/ChoiceCard/ChoiceCard";
 export type { ChoiceCardProps } from "./components/ChoiceCard/ChoiceCard";
 export { CopyButton, CodeBlock, Snippet } from "./components/CodeBlock/CodeBlock";
 export type { CopyButtonProps, CodeBlockProps, SnippetProps } from "./components/CodeBlock/CodeBlock";
+export { DiffViewer } from "./components/DiffViewer/DiffViewer";
+export type { DiffViewerProps, DiffViewerLabels } from "./components/DiffViewer/DiffViewer";
 export { ToggleButtonGroup } from "./components/ToggleButtonGroup/ToggleButtonGroup";
 export type {
     ToggleButtonGroupProps,

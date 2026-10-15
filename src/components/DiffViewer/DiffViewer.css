@@ -1,0 +1,151 @@
+/* DiffViewer: a code block's ground and header (it uses CodeBlock's classes), with a table of lines tinted from the
+   success and danger colours. The code block is dark in both themes, so the tints are too. */
+.ow-diff {
+    --ow-diff-add: var(--ow-success-solid);
+    --ow-diff-del: var(--ow-danger-solid);
+    display: grid;
+    min-width: 0;
+    gap: var(--ow-space-md);
+}
+
+.ow-diff__counts {
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+/* Signs and counts are lifted toward the text colour so they read on the tints. */
+.ow-diff__added,
+.ow-diff__add > .ow-diff__sign {
+    color: color-mix(in srgb, var(--ow-diff-add) 60%, var(--ow-on-code-block));
+}
+
+.ow-diff__removed,
+.ow-diff__del > .ow-diff__sign {
+    color: color-mix(in srgb, var(--ow-diff-del) 60%, var(--ow-on-code-block));
+}
+
+.ow-diff__scroll {
+    overflow: auto;
+}
+
+.ow-diff__scroll:focus-visible {
+    outline: 2px solid var(--ow-brand-300);
+    outline-offset: -2px;
+}
+
+.ow-diff__table {
+    min-width: 100%;
+    border-collapse: collapse;
+    font-family: var(--ow-font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    tab-size: 4;
+}
+
+.ow-diff__table--wrap {
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* Cells have no padding of their own; the classes below add it. */
+:where(.ow-diff__table td) {
+    padding: 0;
+    vertical-align: top;
+}
+
+.ow-diff__num-col {
+    width: calc(var(--ow-diff-digits) * 1ch + 20px);
+}
+
+.ow-diff__num {
+    padding-inline: 10px;
+    color: var(--ow-on-code-block-muted);
+    text-align: right;
+    user-select: none;
+}
+
+/* The sign hangs in the margin, so wrapped lines line up under the code. */
+.ow-diff__code {
+    padding: 0 var(--ow-space-lg) 0 calc(var(--ow-space-sm) + 2ch);
+    text-indent: -2ch;
+    white-space: pre;
+}
+
+.ow-diff__table--wrap .ow-diff__code {
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.ow-diff__code:focus {
+    outline: none;
+}
+
+.ow-diff__sign {
+    display: inline-block;
+    width: 2ch;
+    text-indent: 0;
+    user-select: none;
+}
+
+.ow-diff__add {
+    background: color-mix(in srgb, var(--ow-diff-add) 14%, transparent);
+}
+
+.ow-diff__del {
+    background: color-mix(in srgb, var(--ow-diff-del) 14%, transparent);
+}
+
+.ow-diff__word {
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--ow-diff-add) 34%, transparent);
+}
+
+.ow-diff__del .ow-diff__word {
+    background: color-mix(in srgb, var(--ow-diff-del) 34%, transparent);
+}
+
+.ow-diff__empty {
+    background: color-mix(in srgb, var(--ow-on-code-block) 3%, transparent);
+}
+
+.ow-diff__table--split .ow-diff__num:nth-child(3) {
+    border-left: 1px solid color-mix(in srgb, var(--ow-on-code-block) 8%, transparent);
+}
+
+.ow-diff__hunk > td,
+.ow-diff__gap > td {
+    background: color-mix(in srgb, var(--ow-on-code-block) 5%, transparent);
+    color: var(--ow-on-code-block-muted);
+}
+
+.ow-diff__hunk > td {
+    padding: 2px var(--ow-space-lg);
+    white-space: pre;
+}
+
+.ow-diff__expand {
+    display: flex;
+    width: 100%;
+    min-height: 28px;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    border: 0;
+    background: transparent;
+    padding: 0 var(--ow-space-lg);
+    color: inherit;
+    font: inherit;
+    font-family: var(--ow-font-sans);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.ow-diff__expand:hover {
+    background: color-mix(in srgb, var(--ow-on-code-block) 6%, transparent);
+    color: var(--ow-on-code-block);
+}
+
+.ow-diff__expand:focus-visible {
+    outline: 2px solid var(--ow-brand-300);
+    outline-offset: -2px;
+}
