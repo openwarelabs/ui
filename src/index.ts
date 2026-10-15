@@ -101,6 +101,8 @@ export { Drawer } from "./components/Drawer/Drawer";
 export type { DrawerProps } from "./components/Drawer/Drawer";
 export { Popover } from "./components/Popover/Popover";
 export type { PopoverProps } from "./components/Popover/Popover";
+export { HoverCard } from "./components/HoverCard/HoverCard";
+export type { HoverCardProps } from "./components/HoverCard/HoverCard";
 export { Menu, MenuItem, MenuLabel, MenuSeparator } from "./components/Menu/Menu";
 export type { MenuProps, MenuItemProps } from "./components/Menu/Menu";
 export { CommandPalette } from "./components/CommandPalette/CommandPalette";
@@ -130,6 +132,8 @@ export { Stat } from "./components/Stat/Stat";
 export type { StatProps } from "./components/Stat/Stat";
 export { DescriptionList, DescriptionItem } from "./components/DescriptionList/DescriptionList";
 export type { DescriptionListProps, DescriptionItemProps, DescriptionListLayout } from "./components/DescriptionList/DescriptionList";
+export { Timeline, TimelineItem } from "./components/Timeline/Timeline";
+export type { TimelineProps, TimelineItemProps, TimelineTone } from "./components/Timeline/Timeline";
 export { LineChart, BarChart, DonutChart, Sparkline } from "./components/Chart/Chart";
 export type {
     BarChartProps,
@@ -152,6 +156,8 @@ export { Avatar } from "./components/Avatar/Avatar";
 export type { AvatarProps, AvatarSize } from "./components/Avatar/Avatar";
 export { AvatarGroup, User } from "./components/Avatar/AvatarGroup";
 export type { AvatarGroupProps, UserProps } from "./components/Avatar/AvatarGroup";
+export { Image } from "./components/Image/Image";
+export type { ImageProps, ImageFit, ImageRadius } from "./components/Image/Image";
 export { Kbd, Code } from "./components/Kbd/Kbd";
 
 // Layout
@@ -160,6 +166,8 @@ export type { CardProps, SettingsRowProps } from "./components/Card/Card";
 export { Stack, Separator, ScrollShadow, VisuallyHidden } from "./components/Layout/Layout";
 export { Container } from "./components/Container/Container";
 export type { ContainerProps, ContainerSize } from "./components/Container/Container";
+export { AspectRatio } from "./components/AspectRatio/AspectRatio";
+export type { AspectRatioProps } from "./components/AspectRatio/AspectRatio";
 export { Section } from "./components/Section/Section";
 export type { SectionProps } from "./components/Section/Section";
 export type { StackProps, SeparatorProps, ScrollShadowProps, SpaceToken } from "./components/Layout/Layout";
