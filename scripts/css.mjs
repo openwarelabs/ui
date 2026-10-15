@@ -79,6 +79,7 @@ export const cssOrder = [
     "components/EmptyState/EmptyState.css",
     "components/Card/Card.css",
     "components/NavList/NavList.css",
+    "components/NavigationMenu/NavigationMenu.css",
     "components/AppShell/AppShell.css",
     "components/Layout/Layout.css",
     "components/Container/Container.css",
