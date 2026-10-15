@@ -70,6 +70,17 @@ export { Rating } from "./components/Rating/Rating";
 export type { RatingProps, RatingLabels } from "./components/Rating/Rating";
 export { FileDropZone } from "./components/FileDropZone/FileDropZone";
 export type { FileDropZoneProps } from "./components/FileDropZone/FileDropZone";
+export { UploadList, useUploadQueue } from "./components/UploadList/UploadList";
+export type {
+    UploadListProps,
+    UploadListItem,
+    UploadListLabels,
+    UploadStatus,
+    Uploader,
+    UploadContext,
+    UploadQueue,
+    UseUploadQueueOptions,
+} from "./components/UploadList/UploadList";
 
 // Dates
 export { Calendar } from "./components/Calendar/Calendar";
