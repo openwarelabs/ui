@@ -2,6 +2,16 @@
 
 Every release of @openwarelabs/ui and @openwarelabs/ui-mcp. `npm run release` writes it from the commits.
 
+## 0.11.0 (2026-10-15)
+
+### Features
+
+- add Container and Section, for page width and margins that line up with the blocks (#21) ([39a8bd3](https://github.com/openwarelabs/ui/commit/39a8bd3fdb261b2167522a0bb90e5595b3bbe320))
+
+### Fixes
+
+- **blocks:** fix what building Leak Report on Openware found (#20) ([d56530e](https://github.com/openwarelabs/ui/commit/d56530ee220fd2a86530049fe58e6d7a15206f5c))
+
 ## 0.10.1 (2026-10-14)
 
 ### Fixes
