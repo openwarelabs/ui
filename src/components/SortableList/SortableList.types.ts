@@ -60,3 +60,25 @@ export interface SortableListProps<Item> extends Omit<HTMLAttributes<HTMLOListEl
     /** The words it reads out, for other languages. */
     labels?: SortableListLabels;
 }
+
+/** Where the items were when the drag started, along the list's axis, in viewport pixels. Internal. */
+export interface SortableGeometry {
+    lo: number[];
+    hi: number[];
+    /** -1 when the list runs backwards on screen: a row in right-to-left text. */
+    dir: number;
+    /** How far the others move to make room: the picked-up item's size and the gap after it. */
+    step: number;
+    scroller: Element;
+    scroll: number;
+}
+
+/** A drag in progress, by pointer or keyboard. Internal. */
+export interface SortableDrag {
+    from: number;
+    to: number;
+    /** How far a dragged item has followed the pointer. */
+    offset: number;
+    keyboard: boolean;
+    geo: SortableGeometry;
+}

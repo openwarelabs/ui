@@ -11,7 +11,7 @@ import {
 
 import { useControllableState } from "@/hooks/useControllableState";
 import { cx } from "@/utils/cx";
-import type { SortableListProps } from "./SortableList.types";
+import type { SortableDrag, SortableGeometry, SortableListProps } from "./SortableList.types";
 
 export type { SortableListItemState, SortableListLabels, SortableListProps } from "./SortableList.types";
 
@@ -23,27 +23,6 @@ const defaultLabels = {
     instructions: "Press Space to pick up, the arrow keys to move, Space to drop, Escape to cancel.",
     handle: "Reorder",
 };
-
-/** Where the items were when the drag started, along the list's axis, in viewport pixels. */
-interface Geometry {
-    lo: number[];
-    hi: number[];
-    /** -1 when the list runs backwards on screen: a row in right-to-left text. */
-    dir: number;
-    /** How far the others move to make room: the picked-up item's size and the gap after it. */
-    step: number;
-    scroller: Element;
-    scroll: number;
-}
-
-interface Drag {
-    from: number;
-    to: number;
-    /** How far a dragged item has followed the pointer. */
-    offset: number;
-    keyboard: boolean;
-    geo: Geometry;
-}
 
 /** Rows that keep their own clicks: a pointer down on one doesn't start a drag. */
 const ownClicks = "a,button,input,select,textarea,label,[contenteditable],[tabindex]";
@@ -64,7 +43,7 @@ function scrollerOf(element: Element, horizontal: boolean): Element {
 }
 
 /** The place a dragged item centred at `center` would drop into. */
-function targetOf({ lo, hi, dir }: Geometry, from: number, center: number) {
+function targetOf({ lo, hi, dir }: SortableGeometry, from: number, center: number) {
     let to = from;
     lo.forEach((start, index) => {
         const past = (center - (start + hi[index]!) / 2) * dir;
@@ -75,7 +54,7 @@ function targetOf({ lo, hi, dir }: Geometry, from: number, center: number) {
 }
 
 /** How far item `index` moves while `drag` is under way. */
-function shiftOf(drag: Drag | null, index: number) {
+function shiftOf(drag: SortableDrag | null, index: number) {
     if (!drag) return 0;
     const { from, to, geo } = drag;
     if (index === from) {
@@ -121,18 +100,18 @@ export function SortableList<Item>({
     ...props
 }: SortableListProps<Item>) {
     const [current, setItems] = useControllableState(items, defaultItems);
-    const [drag, setDrag] = useState<Drag | null>(null);
+    const [drag, setDrag] = useState<SortableDrag | null>(null);
     const [message, setMessage] = useState("");
     const baseId = useId();
     const listRef = useRef<HTMLOListElement>(null);
-    const dragRef = useRef<Drag | null>(null);
+    const dragRef = useRef<SortableDrag | null>(null);
     const focusKey = useRef<Key | null>(null);
     const stopPointer = useRef<() => void>(undefined);
     const labels = { ...defaultLabels, ...labelsProp };
     const horizontal = orientation === "horizontal";
     const total = current.length;
 
-    const update = (next: Drag | null) => {
+    const update = (next: SortableDrag | null) => {
         dragRef.current = next;
         setDrag(next);
     };
@@ -146,7 +125,7 @@ export function SortableList<Item>({
     const say = (words: (item: string, position: number, total: number) => string, index: number, position: number) =>
         setMessage(words(nameOf(index), position + 1, total));
 
-    const measure = (from: number): Geometry => {
+    const measure = (from: number): SortableGeometry => {
         const list = listRef.current!;
         const rects = Array.from(list.children, (child) => child.getBoundingClientRect());
         const lo = rects.map((rect) => (horizontal ? rect.left : rect.top));
@@ -158,7 +137,7 @@ export function SortableList<Item>({
         return { lo, hi, dir: lo[last]! < lo[0]! ? -1 : 1, step: hi[from]! - lo[from]! + gap, scroller, scroll: scrollOf(scroller, horizontal) };
     };
 
-    const drop = ({ from, to }: Drag) => {
+    const drop = ({ from, to }: SortableDrag) => {
         say(labels.dropped, from, to);
         update(null);
         if (from === to) return;
@@ -169,7 +148,7 @@ export function SortableList<Item>({
         onReorder?.(next, { from, to });
     };
 
-    const cancel = (state: Drag) => {
+    const cancel = (state: SortableDrag) => {
         say(labels.cancelled, state.from, state.from);
         update(null);
     };
