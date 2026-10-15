@@ -172,6 +172,8 @@ export { EmptyState } from "./components/EmptyState/EmptyState";
 export type { EmptyStateProps } from "./components/EmptyState/EmptyState";
 export { Tag, TagGroup, ColorSwatch } from "./components/Tag/Tag";
 export type { TagProps, TagGroupProps, ColorSwatchProps } from "./components/Tag/Tag";
+export { QRCode, encodeQR, qrCodeToSVG, qrCodeToDataURL } from "./components/QRCode/QRCode";
+export type { QRCodeProps, QRLevel, QROptions, QRCodeDataURLOptions } from "./components/QRCode/QRCode";
 export { Avatar } from "./components/Avatar/Avatar";
 export type { AvatarProps, AvatarSize } from "./components/Avatar/Avatar";
 export { AvatarGroup, User } from "./components/Avatar/AvatarGroup";

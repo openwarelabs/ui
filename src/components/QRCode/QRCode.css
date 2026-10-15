@@ -1,0 +1,17 @@
+/* QRCode: near black on near white in both themes, since scanners need a light ground and strong contrast. */
+.ow-qr-code {
+    display: block;
+    flex: none;
+    max-width: 100%;
+    height: auto;
+    forced-color-adjust: none;
+    print-color-adjust: exact;
+}
+
+.ow-qr-code__ground {
+    fill: var(--ow-gray-50);
+}
+
+.ow-qr-code__modules {
+    fill: var(--ow-gray-950);
+}

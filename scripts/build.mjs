@@ -125,6 +125,7 @@ export const catalogue = [
     "TreeView",
     "Image",
     "Kbd",
+    "QRCode",
     "Snippet",
     "SortableList",
     "Stat",
