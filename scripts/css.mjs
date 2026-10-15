@@ -75,6 +75,7 @@ export const cssOrder = [
     "components/Layout/Layout.css",
     "components/Container/Container.css",
     "components/Section/Section.css",
+    "components/Splitter/Splitter.css",
     "components/AspectRatio/AspectRatio.css",
     "components/Marketing/Marketing.css",
     "components/Prose/Prose.css",

@@ -134,6 +134,7 @@ export const catalogue = [
     "Stack",
     "Container",
     "Section",
+    "Splitter",
     "AspectRatio",
     "VisuallyHidden",
     "Chip",

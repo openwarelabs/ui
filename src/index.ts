@@ -172,6 +172,8 @@ export { AspectRatio } from "./components/AspectRatio/AspectRatio";
 export type { AspectRatioProps } from "./components/AspectRatio/AspectRatio";
 export { Section } from "./components/Section/Section";
 export type { SectionProps } from "./components/Section/Section";
+export { Splitter, SplitterPanel, SplitterHandle } from "./components/Splitter/Splitter";
+export type { SplitterProps, SplitterPanelProps, SplitterHandleProps, SplitterDirection } from "./components/Splitter/Splitter";
 export type { StackProps, SeparatorProps, ScrollShadowProps, SpaceToken } from "./components/Layout/Layout";
 
 // Marketing
