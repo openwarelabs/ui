@@ -1,6 +1,8 @@
-import { forwardRef, type AnchorHTMLAttributes, type ButtonHTMLAttributes, type ReactNode, type Ref } from "react";
+import { forwardRef, useContext, type AnchorHTMLAttributes, type ButtonHTMLAttributes, type ReactNode, type Ref } from "react";
 
 import { cx } from "../../utils/cx";
+import { AppShellContext } from "../AppShell/AppShell.context";
+import { Tooltip } from "../Tooltip/Tooltip";
 
 export interface NavListProps {
     /** Names the navigation for screen readers, e.g. "Settings". */
@@ -36,11 +38,15 @@ export interface NavItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     end?: ReactNode;
 }
 
-/** One place in a NavList: a button, or a link when given an href. */
+/**
+ * One place in a NavList: a button, or a link when given an href. In a folded AppShell sidebar it shows only its
+ * icon, with its label as a tooltip (and still read out by screen readers).
+ */
 export const NavItem = forwardRef<HTMLElement, NavItemProps>(function NavItem(
     { icon, active = false, className, children, type = "button", href, end, ...buttonProps },
     ref,
 ) {
+    const collapsed = useContext(AppShellContext)?.collapsed ?? false;
     const content = (
         <>
             {icon ? <span className="ow-nav__icon">{icon}</span> : null}
@@ -52,8 +58,8 @@ export const NavItem = forwardRef<HTMLElement, NavItemProps>(function NavItem(
         "aria-current": active ? ("page" as const) : undefined,
         className: cx("ow-nav__item", active && "ow-nav__item--active", className),
     };
-    if (href !== undefined) {
-        return (
+    const item =
+        href !== undefined ? (
             <a
                 ref={ref as Ref<HTMLAnchorElement>}
                 href={href}
@@ -62,11 +68,16 @@ export const NavItem = forwardRef<HTMLElement, NavItemProps>(function NavItem(
             >
                 {content}
             </a>
+        ) : (
+            <button ref={ref as Ref<HTMLButtonElement>} type={type} {...shared} {...buttonProps}>
+                {content}
+            </button>
         );
-    }
-    return (
-        <button ref={ref as Ref<HTMLButtonElement>} type={type} {...shared} {...buttonProps}>
-            {content}
-        </button>
+    return collapsed ? (
+        <Tooltip label={children} placement="right">
+            {item}
+        </Tooltip>
+    ) : (
+        item
     );
 });

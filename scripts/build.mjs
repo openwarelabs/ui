@@ -102,6 +102,7 @@ export const catalogue = [
     "Disclosure",
     "Link",
     "NavList",
+    "AppShell",
     "Pagination",
     "Steps",
     "Tabs",

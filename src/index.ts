@@ -120,6 +120,8 @@ export { Steps } from "./components/Steps/Steps";
 export type { StepsProps, StepItem } from "./components/Steps/Steps";
 export { NavList, NavItem } from "./components/NavList/NavList";
 export type { NavListProps, NavItemProps } from "./components/NavList/NavList";
+export { AppShell, SidebarHeader, SidebarContent, SidebarFooter, SidebarToggle, useAppShell } from "./components/AppShell/AppShell";
+export type { AppShellProps, AppShellState, SidebarSectionProps, SidebarToggleProps } from "./components/AppShell/AppShell";
 
 // Data display
 export { Table } from "./components/Table/Table";
