@@ -1,6 +1,12 @@
 # Changelog
 
-Every release of @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp. `npm run release` writes it from the commits, and the docs' Releases page shows it.
+Every release of @openwarelabs/ui and @openwarelabs/ui-mcp. `npm run release` writes it from the commits.
+
+## 0.16.1 (2026-10-15)
+
+### Performance
+
+- merge the ESM build's React imports into one statement per package (#58) ([cbd00db](https://github.com/openwarelabs/ui/commit/cbd00dbcc9c9a8fb48f4ee4c4ec929db9969090d))
 
 ## 0.16.0 (2026-10-15)
 
