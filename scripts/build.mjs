@@ -121,6 +121,7 @@ export const catalogue = [
     "ColorSwatch",
     "EmptyState",
     "FileTree",
+    "TreeView",
     "Image",
     "Kbd",
     "Snippet",
