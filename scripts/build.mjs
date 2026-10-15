@@ -141,6 +141,7 @@ export const catalogue = [
     "ActivityHeatmap",
     "Table",
     "Tag",
+    "TransferList",
     "Timeline",
     "User",
     "Card",
