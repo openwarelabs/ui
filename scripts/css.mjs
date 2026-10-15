@@ -54,6 +54,7 @@ export const cssOrder = [
     "components/Breadcrumbs/Breadcrumbs.css",
     "components/Pagination/Pagination.css",
     "components/Steps/Steps.css",
+    "components/Timeline/Timeline.css",
     "components/ChoiceCard/ChoiceCard.css",
     "components/Avatar/Avatar.css",
     "components/Kbd/Kbd.css",

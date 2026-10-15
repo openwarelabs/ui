@@ -1,0 +1,216 @@
+/* Timeline: events down a 1px line. Each item draws the line above its marker (::before) and below it (::after), so
+   the line stops a few pixels short of every marker, whatever its size, and can turn dashed around a pending item. */
+.ow-timeline {
+    --ow-timeline-marker: 28px;
+    --ow-timeline-dot: 10px;
+    --ow-timeline-space: var(--ow-space-5xl);
+    --ow-timeline-line: var(--ow-border-strong);
+
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-timeline--compact {
+    --ow-timeline-marker: 24px;
+    --ow-timeline-dot: 8px;
+    --ow-timeline-space: var(--ow-space-xl);
+}
+
+.ow-timeline__item {
+    /* Half of what shows of the marker, plus the gap to the line. */
+    --ow-timeline-reach: calc(var(--ow-timeline-marker) / 2 + 4px);
+    --ow-timeline-pad: var(--ow-timeline-space);
+
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--ow-timeline-marker) minmax(0, 1fr);
+    column-gap: var(--ow-space-lg);
+    padding-top: var(--ow-timeline-pad);
+}
+
+.ow-timeline__item:first-child {
+    --ow-timeline-pad: 0px;
+}
+
+.ow-timeline__item--dot {
+    --ow-timeline-reach: calc(var(--ow-timeline-dot) / 2 + 4px);
+}
+
+.ow-timeline__item::before,
+.ow-timeline__item::after {
+    content: "";
+    position: absolute;
+    left: calc(var(--ow-timeline-marker) / 2 - 0.5px);
+    border-left: 1px solid var(--ow-timeline-line);
+}
+
+/* From the item's top edge down to just above its marker. */
+.ow-timeline__item:not(:first-child)::before {
+    top: 0;
+    height: max(0px, calc(var(--ow-timeline-pad) + var(--ow-timeline-marker) / 2 - var(--ow-timeline-reach)));
+}
+
+/* From just below the marker to the item's bottom edge, where the next item's line takes over. */
+.ow-timeline__item:not(:last-child)::after {
+    top: calc(var(--ow-timeline-pad) + var(--ow-timeline-marker) / 2 + var(--ow-timeline-reach));
+    bottom: 0;
+}
+
+/* The way to and from something that hasn't happened yet is dashed. */
+.ow-timeline__item--pending::before,
+.ow-timeline__item--pending::after,
+.ow-timeline__item:has(+ .ow-timeline__item--pending)::after {
+    border-left-style: dashed;
+}
+
+.ow-timeline__marker {
+    display: flex;
+    width: var(--ow-timeline-marker);
+    height: var(--ow-timeline-marker);
+    align-items: center;
+    justify-content: center;
+}
+
+.ow-timeline__dot {
+    width: var(--ow-timeline-dot);
+    height: var(--ow-timeline-dot);
+    box-sizing: border-box;
+    border: 2px solid var(--ow-timeline-solid, var(--ow-border-strong));
+    border-radius: 50%;
+    background: var(--ow-timeline-solid, var(--ow-border-strong));
+}
+
+.ow-timeline__item--icon .ow-timeline__marker {
+    box-sizing: border-box;
+    border: 1px solid var(--ow-timeline-border, var(--ow-border));
+    border-radius: 50%;
+    background: var(--ow-timeline-surface, var(--ow-surface-muted));
+    color: var(--ow-timeline-text, var(--ow-icon));
+}
+
+.ow-timeline__item--brand {
+    --ow-timeline-solid: var(--ow-primary);
+    --ow-timeline-border: var(--ow-primary-border);
+    --ow-timeline-surface: var(--ow-primary-subtle);
+    --ow-timeline-text: var(--ow-primary-text);
+}
+
+.ow-timeline__item--success {
+    --ow-timeline-solid: var(--ow-success-solid);
+    --ow-timeline-border: var(--ow-success-border);
+    --ow-timeline-surface: var(--ow-success-surface);
+    --ow-timeline-text: var(--ow-success-text);
+}
+
+.ow-timeline__item--warning {
+    --ow-timeline-solid: var(--ow-warning-solid);
+    --ow-timeline-border: var(--ow-warning-border);
+    --ow-timeline-surface: var(--ow-warning-surface);
+    --ow-timeline-text: var(--ow-warning-text);
+}
+
+.ow-timeline__item--danger {
+    --ow-timeline-solid: var(--ow-danger-solid);
+    --ow-timeline-border: var(--ow-danger-border);
+    --ow-timeline-surface: var(--ow-danger-surface);
+    --ow-timeline-text: var(--ow-danger-text);
+}
+
+/* Pending: a hollow marker, drawn with a dashed edge when it's an icon's circle. */
+.ow-timeline__item--pending .ow-timeline__dot {
+    background: transparent;
+}
+
+.ow-timeline__item--pending.ow-timeline__item--icon .ow-timeline__marker {
+    border-style: dashed;
+    border-color: var(--ow-border-strong);
+    background: transparent;
+    color: var(--ow-text-muted);
+}
+
+.ow-timeline__content {
+    display: grid;
+    min-width: 0;
+    align-content: start;
+    gap: var(--ow-space-xs);
+    /* Centres the first line (20px) on the marker. */
+    padding-top: calc((var(--ow-timeline-marker) - 20px) / 2);
+}
+
+.ow-timeline__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--ow-space-2xs) var(--ow-space-md);
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.ow-timeline__title {
+    min-width: 0;
+    flex: 1 1 auto;
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.ow-timeline__separator {
+    display: none;
+}
+
+.ow-timeline__time {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.ow-timeline__item--pending .ow-timeline__title {
+    color: var(--ow-text-muted);
+}
+
+.ow-timeline__body {
+    min-width: 0;
+    color: var(--ow-text-soft);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.ow-timeline__body > p {
+    margin: 0;
+}
+
+/* Compact: one sentence with the time after it, in the flow of the text. */
+.ow-timeline--compact .ow-timeline__header {
+    display: block;
+}
+
+.ow-timeline--compact .ow-timeline__title {
+    color: var(--ow-text-soft);
+    font-weight: var(--ow-weight-regular);
+}
+
+.ow-timeline--compact .ow-timeline__title :is(strong, b) {
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.ow-timeline--compact .ow-timeline__separator {
+    display: inline;
+    margin-inline: var(--ow-space-xs);
+    color: var(--ow-text-muted);
+}
+
+.ow-timeline--compact .ow-timeline__time {
+    font-size: 13px;
+}
+
+.ow-timeline--compact .ow-timeline__content {
+    gap: var(--ow-space-2xs);
+}
+
+.ow-timeline--compact .ow-timeline__body {
+    color: var(--ow-text-muted);
+    font-size: 13px;
+}
