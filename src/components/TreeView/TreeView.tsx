@@ -4,27 +4,9 @@ import { Spinner } from "@/components/Spinner/Spinner";
 import { useControllableState } from "@/hooks/useControllableState";
 import { CheckIcon, ChevronRightIcon, MinusIcon } from "@/icons";
 import { cx } from "@/utils/cx";
-import type { TreeItem, TreeViewProps } from "./TreeView.types";
+import type { TreeItem, TreeViewChecked, TreeViewProps, TreeViewRow } from "./TreeView.types";
 
 export type { TreeItem, TreeViewLabels, TreeViewProps, TreeViewSelectionMode } from "./TreeView.types";
-
-type Checked = boolean | "mixed";
-
-/** A visible row: an item, or the loading or error row under an item whose children are being fetched. */
-interface Row {
-    id: string;
-    item?: TreeItem;
-    status?: "loading" | "error";
-    parent?: Row;
-    /** Its place in the visible rows. */
-    index: number;
-    level: number;
-    pos: number;
-    size: number;
-    expandable: boolean;
-    open: boolean;
-    kids: Row[];
-}
 
 const defaultLabels = { loading: "Loading…", error: "Couldn't load.", retry: "Retry" };
 
@@ -71,12 +53,12 @@ export function TreeView({
 
     const { roots, rows } = useMemo(() => {
         const openSet = new Set(open);
-        const flat: Row[] = [];
-        const build = (list: TreeItem[], level: number, parent?: Row): Row[] =>
+        const flat: TreeViewRow[] = [];
+        const build = (list: TreeItem[], level: number, parent?: TreeViewRow): TreeViewRow[] =>
             list.map((item, index) => {
                 const kids = item.children ?? loaded.get(item.id);
                 const expandable = Boolean(kids ? kids.length : item.hasChildren && loadChildren);
-                const row: Row = {
+                const row: TreeViewRow = {
                     id: item.id,
                     item,
                     parent,
@@ -116,8 +98,8 @@ export function TreeView({
 
     /** Each loaded item's checkbox: a leaf's own state, a parent's from its children. Keys are in the tree's order. */
     function checkStates(set: Set<string>) {
-        const states = new Map<string, Checked>();
-        const walk = (item: TreeItem): Checked => {
+        const states = new Map<string, TreeViewChecked>();
+        const walk = (item: TreeItem): TreeViewChecked => {
             states.set(item.id, set.has(item.id));
             const kids = childrenOf(item);
             if (kids?.length) {
@@ -179,7 +161,7 @@ export function TreeView({
         if (!same(result, chosen)) setChosen(result);
     }
 
-    function toggleSelected(row: Row) {
+    function toggleSelected(row: TreeViewRow) {
         const item = row.item;
         if (!item || item.disabled || mode === "none") return;
         if (!multiple) return commit(new Set([item.id]));
@@ -197,7 +179,7 @@ export function TreeView({
     }
 
     /** Selects the rows from the anchor to `row`, on top of what was selected before the anchor was set. */
-    function extendTo(row: Row, from: Row) {
+    function extendTo(row: TreeViewRow, from: TreeViewRow) {
         anchor.current ??= { id: from.id, base: new Set(chosen) };
         const start = rows.findIndex((entry) => entry.id === anchor.current!.id);
         const end = row.index;
@@ -208,17 +190,17 @@ export function TreeView({
         commit(next);
     }
 
-    function focusRow(row: Row | undefined) {
+    function focusRow(row: TreeViewRow | undefined) {
         if (!row) return;
         setFocusId(row.id);
         refs.current.get(row.id)?.focus();
     }
 
-    function setRowOpen(row: Row, next: boolean) {
+    function setRowOpen(row: TreeViewRow, next: boolean) {
         if (row.expandable && row.open !== next) setOpen((previous) => (next ? [...previous, row.id] : previous.filter((id) => id !== row.id)));
     }
 
-    function activate(row: Row) {
+    function activate(row: TreeViewRow) {
         if (row.status) return row.status === "error" && load(row.parent!.item!);
         if (row.item!.disabled) return;
         if (onAction) onAction(row.item!);
@@ -246,7 +228,7 @@ export function TreeView({
         const rtl = getComputedStyle(event.currentTarget).direction === "rtl";
         const key = rtl ? ({ ArrowRight: "ArrowLeft", ArrowLeft: "ArrowRight" }[event.key] ?? event.key) : event.key;
         const extending = multiple && !checkboxes && event.shiftKey;
-        const move = (target: Row | undefined) => {
+        const move = (target: TreeViewRow | undefined) => {
             focusRow(target);
             if (!extending) anchor.current = null;
             else if (target) extendTo(target, row);
@@ -273,7 +255,7 @@ export function TreeView({
     const fallback = rows.find((row) => row.item && chosenSet.has(row.id)) ?? rows[0];
     const tabStop = rows.find((row) => row.id === focusId) ?? fallback;
 
-    function render(list: Row[]): ReactNode {
+    function render(list: TreeViewRow[]): ReactNode {
         return list.map((row) => {
             const { item, status } = row;
             const state = item && checked?.get(item.id);

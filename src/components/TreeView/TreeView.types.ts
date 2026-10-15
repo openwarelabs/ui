@@ -73,3 +73,22 @@ export interface TreeViewProps {
     labels?: TreeViewLabels;
     className?: string;
 }
+
+/** A row's checkbox: checked, not, or partly (some of the rows under it). Internal. */
+export type TreeViewChecked = boolean | "mixed";
+
+/** A visible row: an item, or the loading or error row under an item whose children are being fetched. Internal. */
+export interface TreeViewRow {
+    id: string;
+    item?: TreeItem;
+    status?: "loading" | "error";
+    parent?: TreeViewRow;
+    /** Its place in the visible rows. */
+    index: number;
+    level: number;
+    pos: number;
+    size: number;
+    expandable: boolean;
+    open: boolean;
+    kids: TreeViewRow[];
+}
