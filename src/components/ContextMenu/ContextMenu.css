@@ -1,0 +1,6 @@
+/* ContextMenu: the wrapper adds no box of its own; the panel is Menu's (.ow-menu__panel), opened at the pointer. */
+.ow-context-menu {
+    display: contents;
+    /* A long press opens the menu, not the browser's callout. */
+    -webkit-touch-callout: none;
+}

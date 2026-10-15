@@ -96,6 +96,7 @@ export const catalogue = [
     "Tooltip",
     "CommandPalette",
     "ConfirmDialog",
+    "ContextMenu",
     "Dialog",
     "Drawer",
     "Menu",
