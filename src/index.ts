@@ -66,6 +66,8 @@ export { Switch } from "./components/Switch/Switch";
 export type { SwitchProps } from "./components/Switch/Switch";
 export { Slider } from "./components/Slider/Slider";
 export type { SliderProps } from "./components/Slider/Slider";
+export { SignaturePad } from "./components/SignaturePad/SignaturePad";
+export type { SignaturePadHandle, SignaturePadLabels, SignaturePadProps } from "./components/SignaturePad/SignaturePad";
 export { Rating } from "./components/Rating/Rating";
 export type { RatingProps, RatingLabels } from "./components/Rating/Rating";
 export { FileDropZone } from "./components/FileDropZone/FileDropZone";
