@@ -153,6 +153,20 @@
     margin: 48px 0 0 224px;
 }
 
+
+/* A screenshot passed as the picture (an <img>, <picture> or <video>) fills its place, keeps its proportions and
+   takes the card's corners. Drawn pictures are left as they are. */
+
+.ow-blog03__body > img,
+.ow-blog03__body > video,
+.ow-blog03__body > picture > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-card);
+}
+
 @media (max-width: 760px) {
     .ow-blog03 {
         padding: 72px var(--ow-page-gutter);

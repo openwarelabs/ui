@@ -49,6 +49,20 @@
     mask-image: linear-gradient(to bottom, #000 70%, transparent);
 }
 
+
+/* A screenshot passed as the picture (an <img>, <picture> or <video>) fills its place, keeps its proportions and
+   takes the card's corners. Drawn pictures are left as they are. */
+
+.ow-hero01__visual > img,
+.ow-hero01__visual > video,
+.ow-hero01__visual > picture > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-card);
+}
+
 @media (max-width: 760px) {
     .ow-hero01 {
         padding-top: 72px;

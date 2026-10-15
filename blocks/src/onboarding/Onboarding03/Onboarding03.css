@@ -66,3 +66,16 @@
     gap: 1px;
     padding-top: 1px;
 }
+
+/* A screenshot passed as the picture (an <img>, <picture> or <video>) fills its place, keeps its proportions and
+   takes the card's corners. Drawn pictures are left as they are. */
+
+.ow-onboarding03__dialog .ow-dialog__body > img,
+.ow-onboarding03__dialog .ow-dialog__body > video,
+.ow-onboarding03__dialog .ow-dialog__body > picture > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-card);
+}

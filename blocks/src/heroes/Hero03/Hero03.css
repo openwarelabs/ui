@@ -107,6 +107,20 @@
     }
 }
 
+
+/* A screenshot passed as the picture (an <img>, <picture> or <video>) fills its place, keeps its proportions and
+   takes the card's corners. Drawn pictures are left as they are. */
+
+.ow-hero03__inner > img,
+.ow-hero03__inner > video,
+.ow-hero03__inner > picture > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-card);
+}
+
 @media (max-width: 760px) {
     .ow-hero03 {
         padding: 72px var(--ow-page-gutter) 80px;

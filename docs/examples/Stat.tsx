@@ -1,7 +1,7 @@
 import { Stat } from "@openwarelabs/ui";
 import { Clock, Coins, Zap } from "lucide-react";
 
-import type { DocMeta } from "../app/types";
+import type { DocMeta } from "@docs/app/types";
 
 export const meta: DocMeta = {
     title: "Stat",
@@ -10,6 +10,7 @@ export const meta: DocMeta = {
         "One number that matters, with what changed since last time and an optional trend line.",
     source: "components/Stat/Stat.tsx",
     notes: [
+        "Stat draws its own card (surface, border and corners), so put it straight in a grid: wrapped in a Card it gets two borders.",
         "The change reads out with its direction (“up 12%”), not just the arrow.",
         "The trend line is decoration and hidden from screen readers; say what it shows in the description if it matters.",
         'When a rising number is bad, as with costs, set changeTone="negative".',

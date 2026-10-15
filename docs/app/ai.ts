@@ -87,7 +87,7 @@ export function setupMarkdown(version?: string) {
             `- Rebrand with \`applyBrand("#0d9488")\` (or a preset from \`brandPresets\`); the primary button, focus ring and tints follow in both themes.`,
         ].join("\n"),
         "## Blocks",
-        `Whole page sections (heroes and, in time, every block in the docs) come as components in \`${blocksPackage}\`: \`npm install ${blocksPackage}\`, \`import "${blocksPackage}/styles.css";\` once after the library's styles, then \`<Hero01 title="…" description="…" primaryAction={{ label: "Start for free", href: "/signup" }} />\`. Content is props; use them rather than copying their code. Blocks without a component yet are code to copy.`,
+        `Every block in the docs, all 95 whole page sections (headers, heroes, pricing, app shells, settings, sign-in, dashboards, chat and the rest), comes as a component in \`${blocksPackage}\`: \`npm install ${blocksPackage}\`, \`import "${blocksPackage}/styles.css";\` once after the library's styles, then \`<Hero01 title="…" description="…" primaryAction={{ label: "Start for free", href: "/signup" }} />\`. Content is props; use them rather than copying their code. Each block's reference lists its props.`,
         "## Rules",
         [
             "- One primary button per view. Everything else is secondary or ghost.",
