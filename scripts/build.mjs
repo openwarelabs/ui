@@ -67,6 +67,7 @@ export const catalogue = [
     "Checkbox",
     "CheckboxGroup",
     "Combobox",
+    "UploadList",
     "Field",
     "Fieldset",
     "FileDropZone",

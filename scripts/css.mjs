@@ -31,6 +31,7 @@ export const cssOrder = [
     "components/NumberField/NumberField.css",
     "components/InputOTP/InputOTP.css",
     "components/FileDropZone/FileDropZone.css",
+    "components/UploadList/UploadList.css",
     "components/Field/Field.css",
     "components/Form/Form.css",
     "components/Badge/Badge.css",

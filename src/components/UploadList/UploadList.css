@@ -1,0 +1,190 @@
+/* UploadList: a row (or a tile) per file being uploaded, with its progress, status and buttons. */
+.ow-upload-list {
+    width: 100%;
+    min-width: 0;
+}
+
+.ow-upload-list__items {
+    display: grid;
+    gap: var(--ow-space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-radius: var(--ow-radius-container);
+}
+
+.ow-upload-list__items:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-upload-list__item {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: var(--ow-space-md);
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: var(--ow-space-sm);
+    padding-inline-start: var(--ow-space-md);
+}
+
+.ow-upload-list__item--error {
+    border-color: var(--ow-danger-line);
+}
+
+.ow-upload-list__thumb {
+    position: relative;
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-surface-muted);
+    color: var(--ow-text-muted);
+}
+
+.ow-upload-list__thumb img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ow-upload-list__body {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+    gap: 2px;
+}
+
+.ow-upload-list__name {
+    overflow: hidden;
+    color: var(--ow-text);
+    font-size: 14px;
+    font-weight: var(--ow-weight-emphasis);
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ow-upload-list__detail {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: var(--ow-space-xs);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    line-height: 1.35;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-upload-list__detail > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ow-upload-list__icon {
+    flex-shrink: 0;
+}
+
+.ow-upload-list__item--done .ow-upload-list__icon {
+    color: var(--ow-success-text);
+}
+
+.ow-upload-list__item--error .ow-upload-list__detail {
+    color: var(--ow-danger-text);
+}
+
+.ow-upload-list__progress {
+    margin-top: var(--ow-space-xs);
+}
+
+.ow-upload-list__actions {
+    display: flex;
+    flex-shrink: 0;
+    gap: var(--ow-space-2xs);
+}
+
+.ow-upload-list__actions:empty {
+    display: none;
+}
+
+/* Compact: one short line per file, its progress a hairline along the bottom. */
+.ow-upload-list--compact .ow-upload-list__items {
+    gap: var(--ow-space-xs);
+}
+
+.ow-upload-list--compact .ow-upload-list__item {
+    gap: var(--ow-space-sm);
+    padding-block: var(--ow-space-2xs);
+}
+
+.ow-upload-list--compact .ow-upload-list__thumb {
+    width: auto;
+    height: auto;
+    background: none;
+}
+
+.ow-upload-list--compact .ow-upload-list__body {
+    display: flex;
+    align-items: baseline;
+    gap: var(--ow-space-sm);
+}
+
+.ow-upload-list--compact .ow-upload-list__name {
+    min-width: 4em;
+    flex: 1 1 auto;
+    font-size: 13px;
+}
+
+.ow-upload-list--compact .ow-upload-list__progress {
+    position: absolute;
+    inset: auto var(--ow-space-md) 2px;
+    margin: 0;
+}
+
+/* Grid: a tile per file, the thumbnail on top and the buttons over its corner. */
+.ow-upload-list--grid .ow-upload-list__items {
+    grid-template-columns: repeat(auto-fill, minmax(144px, 1fr));
+    gap: var(--ow-space-md);
+}
+
+.ow-upload-list--grid .ow-upload-list__item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--ow-space-sm);
+    padding: var(--ow-space-xs) var(--ow-space-xs) var(--ow-space-sm);
+}
+
+.ow-upload-list--grid .ow-upload-list__thumb {
+    width: auto;
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: calc(var(--ow-radius-container) - 4px);
+}
+
+.ow-upload-list--grid .ow-upload-list__thumb svg {
+    width: 28px;
+    height: 28px;
+}
+
+.ow-upload-list--grid .ow-upload-list__body {
+    padding-inline: var(--ow-space-xs);
+}
+
+.ow-upload-list--grid .ow-upload-list__actions {
+    position: absolute;
+    inset-block-start: var(--ow-space-sm);
+    inset-inline-end: var(--ow-space-sm);
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-surface);
+    box-shadow: 0 0 0 1px var(--ow-border);
+}
