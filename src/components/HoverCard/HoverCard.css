@@ -1,0 +1,24 @@
+/* HoverCard: Popover's surface, opened by resting the pointer on (or tabbing to) its trigger. */
+.ow-hover-card-anchor {
+    display: inline-flex;
+}
+
+.ow-hover-card {
+    z-index: 60;
+    display: grid;
+    gap: var(--ow-space-md);
+    overflow: auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: var(--ow-space-lg);
+    color: var(--ow-text);
+    font-family: var(--ow-font-sans);
+    font-size: 14px;
+    line-height: 1.45;
+    box-shadow: var(--ow-shadow-menu);
+}
+
+.ow-hover-card > * {
+    min-width: 0;
+}

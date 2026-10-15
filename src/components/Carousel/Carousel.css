@@ -1,0 +1,142 @@
+/* Carousel: a row of slides on the browser's own scroll-snap, with round buttons on the edges and dots below. */
+.ow-carousel {
+    --ow-carousel-per-view: 1;
+    --ow-carousel-gap: var(--ow-space-md);
+    --ow-carousel-arrow: 32px;
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: var(--ow-space-md);
+}
+
+.ow-carousel__viewport {
+    position: relative;
+    container-type: inline-size;
+}
+
+.ow-carousel--arrows-outside .ow-carousel__viewport {
+    margin-inline: calc(var(--ow-carousel-arrow) + var(--ow-space-sm));
+}
+
+.ow-carousel__track {
+    --ow-carousel-slide: calc((100cqi - (var(--ow-carousel-per-view) - 1) * var(--ow-carousel-gap)) / var(--ow-carousel-per-view));
+    display: flex;
+    gap: var(--ow-carousel-gap);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    border-radius: var(--ow-radius-container);
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.ow-carousel__track::-webkit-scrollbar {
+    display: none;
+}
+
+.ow-carousel--center .ow-carousel__track {
+    padding-inline: calc((100cqi - var(--ow-carousel-slide)) / 2);
+}
+
+.ow-carousel__track:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-carousel__slide {
+    flex: 0 0 var(--ow-carousel-slide);
+    min-width: 0;
+    scroll-snap-align: start;
+}
+
+.ow-carousel--center .ow-carousel__slide {
+    scroll-snap-align: center;
+}
+
+.ow-carousel__arrow,
+.ow-carousel__play {
+    position: absolute;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+.ow-carousel__arrow {
+    top: 50%;
+    translate: 0 -50%;
+}
+
+.ow-carousel__arrow--previous {
+    left: var(--ow-space-sm);
+}
+
+.ow-carousel__arrow--next {
+    right: var(--ow-space-sm);
+}
+
+.ow-carousel--arrows-outside .ow-carousel__arrow--previous {
+    left: calc(-1 * (var(--ow-carousel-arrow) + var(--ow-space-sm)));
+}
+
+.ow-carousel--arrows-outside .ow-carousel__arrow--next {
+    right: calc(-1 * (var(--ow-carousel-arrow) + var(--ow-space-sm)));
+}
+
+/* On the slides, a button with nowhere to go gets out of the way. */
+.ow-carousel--arrows-overlay .ow-carousel__arrow:disabled {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ow-carousel__play {
+    right: var(--ow-space-sm);
+    bottom: var(--ow-space-sm);
+}
+
+.ow-carousel__dots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* A 24px target around a small dot; the current one stretches into a pill in the primary colour. */
+.ow-carousel__dot {
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border: 0;
+    border-radius: 999px;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.ow-carousel__dot::before {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--ow-text-muted);
+    content: "";
+    transition-property: width, background-color;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-carousel__dot:hover::before {
+    background: var(--ow-text-soft);
+}
+
+.ow-carousel__dot[aria-current="true"]::before {
+    width: 20px;
+    background: var(--ow-primary);
+}
+
+.ow-carousel__dot[aria-current="true"] {
+    width: 32px;
+}
+
+.ow-carousel__dot:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
