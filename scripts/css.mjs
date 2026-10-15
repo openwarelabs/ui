@@ -18,6 +18,7 @@ export const cssOrder = [
     "components/Input/Input.css",
     "components/DateField/DateField.css",
     "components/Textarea/Textarea.css",
+    "components/InlineEdit/InlineEdit.css",
     "components/Select/Select.css",
     "components/ListBox/ListBox.css",
     "components/Combobox/Combobox.css",

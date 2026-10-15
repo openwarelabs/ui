@@ -48,6 +48,8 @@ export { TimeField } from "./components/DateField/TimeField";
 export type { TimeFieldProps } from "./components/DateField/TimeField";
 export { Textarea } from "./components/Textarea/Textarea";
 export type { TextareaProps } from "./components/Textarea/Textarea";
+export { InlineEdit } from "./components/InlineEdit/InlineEdit";
+export type { InlineEditProps, InlineEditLabels } from "./components/InlineEdit/InlineEdit";
 export { Select } from "./components/Select/Select";
 export type { SelectProps, SelectOption, SelectGroup, SelectItem } from "./components/Select/Select";
 export { ListBox } from "./components/ListBox/ListBox";
