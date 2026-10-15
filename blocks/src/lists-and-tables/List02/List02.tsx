@@ -124,6 +124,7 @@ export function List02<Row extends object>({
                     )}
 
                     <Table
+                        variant="plain"
                         caption={caption}
                         hideCaption
                         columns={columns}

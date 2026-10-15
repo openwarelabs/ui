@@ -67,6 +67,7 @@ export function Dashboard02<Row extends object>({
                             </Text>
                         </div>
                         <Table
+                            variant="plain"
                             caption={table.caption}
                             hideCaption
                             density="compact"

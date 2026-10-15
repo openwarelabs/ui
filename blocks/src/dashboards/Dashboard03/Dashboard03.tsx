@@ -180,6 +180,7 @@ export function Dashboard03<Row extends object>({
                             {table.description ? <Text variant="caption">{table.description}</Text> : null}
                         </div>
                         <Table
+                            variant="plain"
                             caption={table.caption}
                             hideCaption
                             density="compact"

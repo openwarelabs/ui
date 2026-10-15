@@ -131,6 +131,7 @@ export function List01<Row extends object>({
                     </div>
 
                     <Table
+                        variant="plain"
                         caption={caption}
                         hideCaption
                         columns={columns}

@@ -20,6 +20,7 @@ export const meta: DocMeta = {
         "Sortable headers are buttons, and the sorted column has aria-sort.",
         "Give it a caption. Hide it with hideCaption when the heading above already says what the table is.",
         'Numbers line up on the right with tabular figures: set align="end" on their column.',
+        'By default the rows sit on a raised panel inside a tinted tray, with the header in the tray (variant="inset"). variant="plain" is a single bordered card with a shaded header row, for a table inside a card of its own.',
     ],
     related: ["Pagination", "EmptyState", "Stat"],
 };
@@ -112,6 +113,12 @@ export function Basic() {
     );
 }
 Basic.layout = { fill: true };
+
+/** variant="plain": one bordered card with a shaded header row. */
+export function Plain() {
+    return <Table caption="Recent runs" hideCaption variant="plain" columns={columns} rows={runs} />;
+}
+Plain.layout = { fill: true };
 
 /**
  * selectionMode="multiple" adds a checkbox to each row and one to select them all. Each box reads out as "Select" and
