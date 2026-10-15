@@ -70,6 +70,7 @@ export const catalogue = [
     "Field",
     "Fieldset",
     "FileDropZone",
+    "InlineEdit",
     "Input",
     "InputOTP",
     "NumberField",

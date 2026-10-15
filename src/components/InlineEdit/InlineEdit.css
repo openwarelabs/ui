@@ -1,0 +1,200 @@
+/* InlineEdit: text that turns into a text box where it is. The button and the box share their font, padding and border,
+   and pull back by them, so the text lines up with what's around it and doesn't move when the box opens. */
+.ow-inline-edit {
+    --ow-inline-edit-x: 0.375em;
+    --ow-inline-edit-y: 0.125em;
+    --ow-inline-edit-icon: clamp(12px, 0.75em, 20px);
+    display: inline-grid;
+    max-width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--ow-space-2xs);
+}
+
+.ow-inline-edit--multiline {
+    display: grid;
+}
+
+.ow-inline-edit__display,
+.ow-inline-edit__input,
+.ow-inline-edit__field::after {
+    box-sizing: border-box;
+    margin: 0;
+    border: 1px solid transparent;
+    border-radius: var(--ow-radius-sm);
+    padding: var(--ow-inline-edit-y) var(--ow-inline-edit-x);
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+}
+
+.ow-inline-edit__display,
+.ow-inline-edit__editor {
+    margin-inline: calc(-1px - var(--ow-inline-edit-x));
+}
+
+.ow-inline-edit__display {
+    position: relative;
+    display: inline-flex;
+    min-width: 0;
+    align-items: baseline;
+    gap: 0.3em;
+    background: transparent;
+    cursor: pointer;
+    text-align: start;
+}
+
+.ow-inline-edit--multiline .ow-inline-edit__display {
+    display: flex;
+}
+
+.ow-inline-edit__display:hover:not(:disabled) {
+    background: var(--ow-hover);
+}
+
+.ow-inline-edit__display:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-inline-edit__display:disabled {
+    cursor: not-allowed;
+    opacity: 0.62;
+}
+
+.ow-inline-edit__text {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.ow-inline-edit__text--empty {
+    color: var(--ow-text-muted);
+}
+
+/* The pencil shows on hover and focus; on touch screens, which can't hover, always. */
+.ow-inline-edit__icon {
+    width: var(--ow-inline-edit-icon);
+    height: var(--ow-inline-edit-icon);
+    flex: none;
+    align-self: center;
+    color: var(--ow-icon);
+    opacity: 0;
+}
+
+.ow-inline-edit__display:hover .ow-inline-edit__icon,
+.ow-inline-edit__display:focus-visible .ow-inline-edit__icon {
+    opacity: 1;
+}
+
+@media (hover: none) {
+    .ow-inline-edit__display:not(:disabled) .ow-inline-edit__icon {
+        opacity: 1;
+    }
+}
+
+.ow-inline-edit__editor {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: var(--ow-space-xs);
+}
+
+/* The box is as wide as a hidden copy of its text, plus the pencil's room, in the same grid cell. */
+.ow-inline-edit__field {
+    display: inline-grid;
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.ow-inline-edit__field::after {
+    overflow: hidden;
+    padding-inline-end: calc(var(--ow-inline-edit-x) + var(--ow-inline-edit-icon) + 0.3em);
+    content: attr(data-value) " ";
+    grid-area: 1 / 1;
+    visibility: hidden;
+    white-space: pre;
+}
+
+.ow-inline-edit__input {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    flex: 1;
+    grid-area: 1 / 1;
+    border-color: var(--ow-border-strong);
+    background: var(--ow-surface);
+    outline: 0;
+}
+
+.ow-inline-edit__input::placeholder {
+    color: var(--ow-text-muted);
+    opacity: 1;
+}
+
+.ow-inline-edit__input:focus {
+    border-color: var(--ow-focus-border);
+    box-shadow: var(--ow-shadow-focus);
+}
+
+.ow-inline-edit__input:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-inline-edit__input[aria-invalid="true"] {
+    border-color: var(--ow-danger-solid);
+}
+
+.ow-inline-edit__input[aria-invalid="true"]:focus {
+    box-shadow: var(--ow-shadow-focus-danger);
+}
+
+/* An auto-growing textarea is as tall as its scrollHeight, which leaves out the border, so it draws its border inside. */
+textarea.ow-inline-edit__input {
+    border: 0;
+    padding: calc(var(--ow-inline-edit-y) + 1px) calc(var(--ow-inline-edit-x) + 1px);
+    box-shadow: inset 0 0 0 1px var(--ow-border-strong);
+}
+
+textarea.ow-inline-edit__input:focus {
+    box-shadow:
+        inset 0 0 0 1px var(--ow-focus-border),
+        var(--ow-shadow-focus);
+}
+
+textarea.ow-inline-edit__input[aria-invalid="true"] {
+    box-shadow: inset 0 0 0 1px var(--ow-danger-solid);
+}
+
+textarea.ow-inline-edit__input[aria-invalid="true"]:focus {
+    box-shadow:
+        inset 0 0 0 1px var(--ow-danger-solid),
+        var(--ow-shadow-focus-danger);
+}
+
+.ow-inline-edit__actions {
+    display: inline-flex;
+    flex: none;
+    gap: var(--ow-space-2xs);
+}
+
+.ow-inline-edit__spinner {
+    flex: none;
+}
+
+.ow-inline-edit__error {
+    color: var(--ow-danger-text);
+    font: var(--ow-weight-regular) 14px / 1.4 var(--ow-font-sans);
+    letter-spacing: normal;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .ow-inline-edit__display,
+    .ow-inline-edit__icon,
+    .ow-inline-edit__input {
+        transition-property: background-color, border-color, box-shadow, opacity;
+        transition-duration: var(--ow-duration-fast);
+        transition-timing-function: var(--ow-ease-standard);
+    }
+}
