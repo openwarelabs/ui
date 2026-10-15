@@ -12,6 +12,7 @@
 // Blocks are previewed in an iframe (docs/frame.html, built from docs/frame.tsx) so their media queries answer
 // to the frame's width and nothing in the docs' own styles reaches them. Their code is too big to bundle, so each
 // block's files are written, highlighted, to build/blocks/<category>/<Name>.json and fetched when shown.
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import * as esbuild from "esbuild";
@@ -174,8 +175,16 @@ const options = {
 if (mode === "build") {
     fs.rmSync(path.join(root, "docs-dist"), { recursive: true, force: true });
     await esbuild.build(options);
-    fs.copyFileSync(path.join(docs, "index.html"), path.join(root, "docs-dist/index.html"));
-    fs.copyFileSync(path.join(docs, "frame.html"), path.join(root, "docs-dist/frame.html"));
+    // The pages ask for build/app.js and the rest with a hash of their contents (?v=…). The file names stay the same
+    // every release and GitHub Pages lets browsers keep them for ten minutes, so without it a visitor right after a
+    // release gets the old scripts, or a new page with old ones.
+    const versioned = (file) =>
+        fs.readFileSync(path.join(docs, file), "utf8").replace(/\.\/build\/([\w-]+\.(?:js|css))"/g, (match, name) => {
+            const hash = crypto.createHash("sha256").update(fs.readFileSync(path.join(outdir, name))).digest("hex").slice(0, 10);
+            return `./build/${name}?v=${hash}"`;
+        });
+    fs.writeFileSync(path.join(root, "docs-dist/index.html"), versioned("index.html"));
+    fs.writeFileSync(path.join(root, "docs-dist/frame.html"), versioned("frame.html"));
     // llms.txt, llms-full.txt and a Markdown copy of every page under ai/, for AI tools to read.
     await writeAiFiles(path.join(root, "docs-dist"));
     console.log("Docs written to docs-dist/. Open docs-dist/index.html through any static server.");
