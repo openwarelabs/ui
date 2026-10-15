@@ -1,0 +1,36 @@
+/* Markdown: Prose does the typography; this is only the caret that follows a streaming answer's last character. */
+.ow-markdown__caret {
+    display: inline-block;
+    width: 2px;
+    height: 1.15em;
+    margin-inline-start: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    vertical-align: -0.2em;
+    animation: ow-markdown-caret 1s var(--ow-ease-standard) infinite;
+}
+
+@keyframes ow-markdown-caret {
+    0%,
+    100% {
+        opacity: 0.9;
+    }
+    50% {
+        opacity: 0.15;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-markdown__caret {
+        opacity: 0.6;
+        animation: none;
+    }
+}
+
+/* Forced colours drop backgrounds: draw the caret in the text colour. */
+@media (forced-colors: active) {
+    .ow-markdown__caret {
+        forced-color-adjust: none;
+        background: CanvasText;
+    }
+}
