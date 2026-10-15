@@ -1,20 +1,11 @@
-import { forwardRef, useContext, type AnchorHTMLAttributes, type ButtonHTMLAttributes, type ReactNode, type Ref } from "react";
+import { forwardRef, useContext, type AnchorHTMLAttributes, type Ref } from "react";
 
 import { cx } from "../../utils/cx";
 import { AppShellContext } from "../AppShell/AppShell.context";
 import { Tooltip } from "../Tooltip/Tooltip";
+import type { NavItemProps, NavListProps } from "./NavList.types";
 
-export interface NavListProps {
-    /** Names the navigation for screen readers, e.g. "Settings". */
-    label: string;
-    /** A muted heading above the items (vertical only). */
-    heading?: ReactNode;
-    /** `vertical` for a sidebar; `horizontal` scrolls sideways, for narrow screens.
-     * @default "vertical" */
-    orientation?: "vertical" | "horizontal";
-    children: ReactNode;
-    className?: string;
-}
+export type { NavItemProps, NavListProps } from "./NavList.types";
 
 /** A list of places to go, the way a settings dialog's sidebar lists its sections. Place it on ow-canvas. */
 export function NavList({ label, heading, orientation = "vertical", children, className }: NavListProps) {
@@ -24,18 +15,6 @@ export function NavList({ label, heading, orientation = "vertical", children, cl
             {children}
         </nav>
     );
-}
-
-export interface NavItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    /** A 15px lucide-react icon. */
-    icon?: ReactNode;
-    /** The current section: raised on a surface, its icon in the primary colour.
-     * @default false */
-    active?: boolean;
-    /** Makes the item a link to this address instead of a button. */
-    href?: string;
-    /** Muted text at the right: a count, a badge. */
-    end?: ReactNode;
 }
 
 /**
@@ -60,12 +39,7 @@ export const NavItem = forwardRef<HTMLElement, NavItemProps>(function NavItem(
     };
     const item =
         href !== undefined ? (
-            <a
-                ref={ref as Ref<HTMLAnchorElement>}
-                href={href}
-                {...shared}
-                {...(buttonProps as AnchorHTMLAttributes<HTMLAnchorElement>)}
-            >
+            <a ref={ref as Ref<HTMLAnchorElement>} href={href} {...shared} {...(buttonProps as AnchorHTMLAttributes<HTMLAnchorElement>)}>
                 {content}
             </a>
         ) : (
