@@ -109,6 +109,7 @@ export const catalogue = [
     "Tabs",
     "Avatar",
     "AvatarGroup",
+    "Carousel",
     "CodeBlock",
     "ColorSwatch",
     "EmptyState",

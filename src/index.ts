@@ -159,6 +159,8 @@ export type { AvatarGroupProps, UserProps } from "./components/Avatar/AvatarGrou
 export { Image } from "./components/Image/Image";
 export type { ImageProps, ImageFit, ImageRadius } from "./components/Image/Image";
 export { Kbd, Code } from "./components/Kbd/Kbd";
+export { Carousel, CarouselSlide } from "./components/Carousel/Carousel";
+export type { CarouselProps, CarouselSlideProps, CarouselLabels } from "./components/Carousel/Carousel";
 
 // Layout
 export { Card, SettingsRow } from "./components/Card/Card";
