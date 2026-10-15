@@ -57,6 +57,7 @@ const pairs = [
     ["ow-primary-text", "ow-track", text], ["ow-danger-text", "ow-danger-surface", text],
     ["ow-success-text", "ow-meter-track", mark], ["ow-warning-text", "ow-meter-track", mark], ["ow-danger-text", "ow-meter-track", mark],
     ["ow-primary-text", "ow-primary-subtle", text], ["ow-warning-text", "ow-warning-surface", text],
+    ["ow-text", "ow-success-surface", text], ["ow-text", "ow-warning-surface", text], ["ow-text", "ow-danger-surface", text],
 ];
 
 // Pairs the source keeps below the line on purpose; listed so a change to them is noticed.
