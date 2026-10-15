@@ -1,0 +1,141 @@
+/* Splitter: panels with handles between them. A panel's flex-grow is its size in percent. */
+.ow-splitter {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.ow-splitter--vertical {
+    flex-direction: column;
+}
+
+.ow-splitter__panel {
+    flex: 0 1 0px;
+    min-width: 0;
+    min-height: 0;
+    overflow: auto;
+}
+
+.ow-splitter__panel[data-collapsed="hidden"] {
+    visibility: hidden;
+}
+
+/* The line is 1px; the area you can catch is 9px. */
+.ow-splitter__handle {
+    position: relative;
+    flex: none;
+    background: var(--ow-border);
+    outline: none;
+    touch-action: none;
+    transition: background-color var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.ow-splitter--horizontal > .ow-splitter__handle {
+    width: 1px;
+    cursor: col-resize;
+}
+
+.ow-splitter--vertical > .ow-splitter__handle {
+    height: 1px;
+    cursor: row-resize;
+}
+
+.ow-splitter__handle::before,
+.ow-splitter__handle::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+}
+
+.ow-splitter--horizontal > .ow-splitter__handle::before {
+    inset: 0 -4px;
+}
+
+.ow-splitter--vertical > .ow-splitter__handle::before {
+    inset: -4px 0;
+}
+
+/* The highlight: a 3px bar over the line. */
+.ow-splitter__handle::after {
+    inset: 0 -1px;
+    border-radius: var(--ow-radius-pill);
+    opacity: 0;
+    background: var(--ow-border-strong);
+    transition: opacity var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.ow-splitter--vertical > .ow-splitter__handle::after {
+    inset: -1px 0;
+}
+
+.ow-splitter__handle:hover::after {
+    opacity: 1;
+}
+
+.ow-splitter__handle[data-dragging]::after,
+.ow-splitter__handle:focus-visible::after {
+    opacity: 1;
+    background: var(--ow-focus-ring);
+}
+
+.ow-splitter__handle[aria-disabled] {
+    cursor: default;
+}
+
+.ow-splitter__handle[aria-disabled]::after {
+    display: none;
+}
+
+/* A grip in the middle of the line. */
+.ow-splitter__handle--grip::after {
+    inset: 50% auto auto 50%;
+    width: 6px;
+    height: 24px;
+    translate: -50% -50%;
+    opacity: 1;
+    border: 1px solid var(--ow-border-strong);
+    background: var(--ow-surface);
+    box-shadow: var(--ow-shadow-control);
+}
+
+.ow-splitter--vertical > .ow-splitter__handle--grip::after {
+    inset: 50% auto auto 50%;
+    width: 24px;
+    height: 6px;
+}
+
+.ow-splitter__handle--grip:hover::after {
+    background: var(--ow-surface-muted);
+}
+
+.ow-splitter__handle--grip[data-dragging]::after,
+.ow-splitter__handle--grip:focus-visible::after {
+    border-color: var(--ow-focus-ring);
+    background: var(--ow-surface);
+    box-shadow: 0 0 0 1px var(--ow-focus-ring);
+}
+
+/* While dragging, the cursor stays a resize one everywhere and nothing gets selected. */
+:root[data-ow-splitter-drag],
+:root[data-ow-splitter-drag] * {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+:root[data-ow-splitter-drag="horizontal"] * {
+    cursor: col-resize !important;
+}
+
+:root[data-ow-splitter-drag="vertical"] * {
+    cursor: row-resize !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-splitter__handle,
+    .ow-splitter__handle::after {
+        transition: none;
+    }
+}
