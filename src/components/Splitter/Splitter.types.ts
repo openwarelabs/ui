@@ -19,7 +19,7 @@ export interface SplitterProps extends Omit<HTMLAttributes<HTMLDivElement>, "chi
     autoSaveId?: string;
 }
 
-export interface SplitterPanelProps extends HTMLAttributes<HTMLDivElement> {
+export interface SplitterPanelProps extends Omit<HTMLAttributes<HTMLDivElement>, "onResize"> {
     children?: ReactNode;
     /** Its size at first, in percent of the splitter. Panels without one share what the others leave. */
     defaultSize?: number;
