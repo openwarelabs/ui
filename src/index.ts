@@ -234,6 +234,8 @@ export type { SectionHeadingProps, SiteHeaderProps, DotGridProps } from "./compo
 // AI
 export { Prose } from "./components/Prose/Prose";
 export type { ProseProps } from "./components/Prose/Prose";
+export { Markdown } from "./components/Markdown/Markdown";
+export type { MarkdownProps, MarkdownComponents, MarkdownCodeBlockProps, MarkdownTag } from "./components/Markdown/Markdown";
 export { TextShimmer } from "./components/TextShimmer/TextShimmer";
 export type { TextShimmerProps } from "./components/TextShimmer/TextShimmer";
 export { PromptInput } from "./components/PromptInput/PromptInput";

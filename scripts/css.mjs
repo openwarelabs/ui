@@ -95,6 +95,7 @@ export const cssOrder = [
     "components/AspectRatio/AspectRatio.css",
     "components/Marketing/Marketing.css",
     "components/Prose/Prose.css",
+    "components/Markdown/Markdown.css",
     "components/TextShimmer/TextShimmer.css",
     "components/PromptInput/PromptInput.css",
     "components/PromptInput/PromptSuggestion.css",
