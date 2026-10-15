@@ -34,6 +34,7 @@ export const cssOrder = [
     "components/Alert/Alert.css",
     "components/Progress/Progress.css",
     "components/Meter/Meter.css",
+    "components/PasswordInput/PasswordInput.css",
     "components/Tooltip/Tooltip.css",
     "components/Toast/Toast.css",
     "components/Skeleton/Skeleton.css",
