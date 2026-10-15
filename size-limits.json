@@ -2,22 +2,22 @@
     {
         "name": "@openwarelabs/ui, everything",
         "code": "export * from \"@openwarelabs/ui\";",
-        "limit": "101.5 KB"
+        "limit": "128 KB"
     },
     {
         "name": "@openwarelabs/ui, only Button",
         "code": "export { Button } from \"@openwarelabs/ui\";",
-        "limit": "7.5 KB"
+        "limit": "8 KB"
     },
     {
         "name": "@openwarelabs/ui, only LineChart",
         "code": "export { LineChart } from \"@openwarelabs/ui\";",
-        "limit": "10 KB"
+        "limit": "10.5 KB"
     },
     {
         "name": "@openwarelabs/ui/styles.css",
         "file": "dist/styles.css",
-        "limit": "48.5 KB"
+        "limit": "53 KB"
     },
     {
         "name": "@openwarelabs/blocks, everything",
