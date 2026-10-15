@@ -77,6 +77,7 @@ export const catalogue = [
     "SearchField",
     "Select",
     "Slider",
+    "Rating",
     "Switch",
     "Textarea",
     "Calendar",

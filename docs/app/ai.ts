@@ -92,6 +92,7 @@ export function setupMarkdown(version?: string) {
             "- For one record's details (a detail page, a settings summary, a receipt), use `DescriptionList` with a `DescriptionItem` (`term`, the value as children, an optional `action`) for each pair, not a Table or your own grid; `layout=\"grid\"` with `columns` for a summary at a glance.",
             "- For an activity feed, a changelog or a history, use `Timeline` with a `TimelineItem` per event (`title`, `time` with `dateTime`, `tone`, an `icon` or `avatar`, `pending`); `density=\"compact\"` for a feed. Don't draw your own line and dots.",
             "- For charts, use `LineChart`, `BarChart` (`stacked`), `DonutChart` and `Sparkline`: pass `data` rows, `index` (the x key), `series` (`{ key, label }`) and a `label` saying what it shows. Their colours are `--ow-chart-1` to `--ow-chart-8`, in order. Don't add a charting library.",
+            "- For stars, use `Rating`: to pick a score (`name` sends it with a form, `allowHalf`), or `readOnly` to show one, with `count` for the number of reviews. Don't draw your own.",
             `- Tailwind v4: \`@import "${packageName}/tailwind.css";\` after \`@import "tailwindcss";\` gives \`bg-surface\`, \`text-text-muted\`, \`rounded-container\`, \`p-lg\` and the rest.`,
             `- Rebrand with \`applyBrand("#0d9488")\` (or a preset from \`brandPresets\`); the primary button, focus ring and tints follow in both themes.`,
         ].join("\n"),

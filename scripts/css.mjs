@@ -25,6 +25,7 @@ export const cssOrder = [
     "components/RadioGroup/RadioGroup.css",
     "components/Switch/Switch.css",
     "components/Slider/Slider.css",
+    "components/Rating/Rating.css",
     "components/NumberField/NumberField.css",
     "components/InputOTP/InputOTP.css",
     "components/FileDropZone/FileDropZone.css",
