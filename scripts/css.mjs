@@ -21,6 +21,7 @@ export const cssOrder = [
     "components/Select/Select.css",
     "components/ListBox/ListBox.css",
     "components/Combobox/Combobox.css",
+    "components/TagInput/TagInput.css",
     "components/Checkbox/Checkbox.css",
     "components/RadioGroup/RadioGroup.css",
     "components/Switch/Switch.css",

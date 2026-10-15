@@ -79,6 +79,7 @@ export const catalogue = [
     "Slider",
     "Rating",
     "Switch",
+    "TagInput",
     "Textarea",
     "Calendar",
     "DatePicker",

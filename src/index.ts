@@ -52,6 +52,8 @@ export { ListBox } from "./components/ListBox/ListBox";
 export type { ListBoxProps, ListBoxModeProps, ListBoxOption, ListBoxGroup, ListBoxItem, ListBoxSelectionMode } from "./components/ListBox/ListBox";
 export { Combobox } from "./components/Combobox/Combobox";
 export type { ComboboxProps, ComboboxOption } from "./components/Combobox/Combobox";
+export { TagInput } from "./components/TagInput/TagInput";
+export type { TagInputProps, TagInputOption, TagInputRejectReason } from "./components/TagInput/TagInput";
 export { Checkbox, CheckboxGroup, Fieldset } from "./components/Checkbox/Checkbox";
 export type { CheckboxProps, CheckboxGroupProps, FieldsetProps } from "./components/Checkbox/Checkbox";
 export { RadioGroup, Radio } from "./components/RadioGroup/RadioGroup";
