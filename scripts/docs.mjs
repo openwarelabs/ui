@@ -7,6 +7,7 @@
 //   docs:styles       tokens.css, every component stylesheet and the blocks package's, read fresh on each rebuild
 //   docs:blocks       every block in docs/blocks/<category>/<Name>.tsx, for the frame that previews them
 //   docs:block-index  the ids of the blocks that exist, for the docs pages
+//   docs:releases     CHANGELOG.md, read into releases for the Releases page
 // and any import ending in ?highlight returns that file's text and highlighted HTML.
 //
 // Blocks are previewed in an iframe (docs/frame.html, built from docs/frame.tsx) so their media queries answer
@@ -22,6 +23,7 @@ import { buildTokens } from "./build-tokens.mjs";
 import { blockStylesheets, cssOrder, readBlockStyles, readStyles, root } from "./css.mjs";
 import { blocksDir, docs, examplesDir, readBlocks, readExamples, readProps } from "./docs-data.mjs";
 import { writeAiFiles } from "./ai-data.mjs";
+import { parseChangelog, repository } from "./release-notes.mjs";
 
 const mode = process.argv[2] ?? "dev";
 
@@ -148,6 +150,12 @@ const docsPlugin = {
             }
             if (args.path === "docs:block-index") {
                 return { contents: `export const builtBlocks = ${JSON.stringify(readBlocks().map((block) => block.id))};`, loader: "js", ...blockWatch() };
+            }
+            if (args.path === "docs:releases") {
+                const changelog = path.join(root, "CHANGELOG.md");
+                const isComponent = (name) => fs.existsSync(path.join(examplesDir, `${name}.tsx`));
+                const releases = parseChangelog(fs.readFileSync(changelog, "utf8"), isComponent);
+                return { contents: `export const releases = ${JSON.stringify(releases)};\nexport const repository = ${JSON.stringify(repository)};`, loader: "js", watchFiles: [changelog] };
             }
             if (args.path === "docs:tokens") {
                 return { contents: fs.readFileSync(path.join(root, "tokens/tokens.json"), "utf8"), loader: "json", watchFiles: [path.join(root, "tokens/tokens.json")] };

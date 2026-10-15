@@ -104,3 +104,23 @@ export interface TokensFile {
     timing: { tokens: TokenEntry[] };
     weight: { tokens: TokenEntry[] };
 }
+
+/** One line of a release's notes, as scripts/release-notes.mjs reads it from CHANGELOG.md. */
+export interface ReleaseNote {
+    group: "breaking" | "components" | "blocks" | "improvements" | "fixes" | "performance" | "other";
+    text: string;
+    /** The components a "New components" note adds. */
+    components?: string[];
+    scope?: string;
+    pr?: number;
+    hash?: string;
+}
+
+export interface Release {
+    version: string;
+    /** YYYY-MM-DD. */
+    date: string;
+    /** "10 new components and 1 fix.", or "" for a maintenance release. */
+    summary: string;
+    notes: ReleaseNote[];
+}
