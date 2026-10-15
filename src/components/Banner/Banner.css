@@ -1,0 +1,191 @@
+/* Banner: a bar across the top of the page. Each tone sets the ground, the rule under it and the icon's colour; on
+   narrow bars (its own width, a container query) the action moves under the message. */
+.ow-banner {
+    --ow-banner-ground: var(--ow-primary);
+    --ow-banner-rule: var(--ow-primary);
+    --ow-banner-icon: var(--ow-on-primary);
+    container: ow-banner / inline-size;
+    display: grid;
+    grid-template-rows: 1fr;
+    border-bottom: 1px solid var(--ow-banner-rule);
+    /* Over the surface, so a translucent dark-theme tint stays solid when the page scrolls under a sticky bar. */
+    background: linear-gradient(var(--ow-banner-ground), var(--ow-banner-ground)) var(--ow-surface);
+    color: var(--ow-text);
+    font-size: 14px;
+    line-height: 1.5;
+    transition-property: grid-template-rows, opacity;
+    transition-duration: var(--ow-duration-exit);
+    transition-timing-function: var(--ow-ease-exit);
+}
+
+.ow-banner--sticky {
+    position: sticky;
+    z-index: 10;
+    top: 0;
+}
+
+.ow-banner[data-state="closed"] {
+    grid-template-rows: 0fr;
+    opacity: 0;
+}
+
+.ow-banner__clip {
+    min-height: 0;
+}
+
+.ow-banner[data-state="closed"] .ow-banner__clip {
+    overflow: hidden;
+}
+
+.ow-banner__inner {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--ow-space-md);
+    padding: var(--ow-space-md) var(--ow-space-2xl);
+}
+
+/* Room on the left as wide as the ✕ on the right, so a centred message sits in the middle of the bar. */
+.ow-banner--center.ow-banner--dismissible .ow-banner__inner::before {
+    content: "";
+    width: 24px;
+    flex-shrink: 0;
+}
+
+.ow-banner__content {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    gap: var(--ow-space-sm);
+}
+
+.ow-banner--center .ow-banner__content {
+    justify-content: center;
+    text-align: center;
+}
+
+.ow-banner__icon {
+    display: inline-flex;
+    height: 21px;
+    flex-shrink: 0;
+    align-items: center;
+    color: var(--ow-banner-icon);
+}
+
+.ow-banner__text {
+    display: flex;
+    min-width: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: inherit;
+    gap: var(--ow-space-2xs) var(--ow-space-lg);
+}
+
+.ow-banner__message {
+    min-width: 0;
+}
+
+.ow-banner__message > p {
+    margin: 0;
+}
+
+/* A small button reaches into the bar's padding, so it doesn't push the message off the icon's line. */
+.ow-banner__action {
+    display: flex;
+    margin-block: -4px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    font-weight: var(--ow-weight-control);
+}
+
+.ow-banner .ow-link,
+.ow-banner .ow-link:hover {
+    color: inherit;
+}
+
+.ow-banner .ow-link:hover {
+    text-decoration-color: currentColor;
+}
+
+.ow-banner__close {
+    margin-block: -1px;
+}
+
+.ow-banner__close:hover:not(:disabled) {
+    background: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+@container ow-banner (max-width: 559px) {
+    .ow-banner .ow-banner__content {
+        justify-content: flex-start;
+        text-align: start;
+    }
+
+    .ow-banner .ow-banner__text {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ow-banner .ow-banner__action {
+        margin-block: 0;
+    }
+
+    .ow-banner .ow-banner__inner::before {
+        display: none;
+    }
+}
+
+/* Tones */
+
+.ow-banner--brand {
+    color: var(--ow-on-primary);
+}
+
+.ow-banner--brand .ow-link {
+    text-decoration-color: color-mix(in srgb, currentColor 55%, transparent);
+}
+
+.ow-banner--brand .ow-banner__close,
+.ow-banner--brand .ow-banner__close:hover:not(:disabled) {
+    color: var(--ow-on-primary);
+}
+
+.ow-banner--brand .ow-banner__inner :focus-visible {
+    outline-color: var(--ow-on-primary);
+}
+
+.ow-banner--neutral {
+    --ow-banner-ground: var(--ow-surface-muted);
+    --ow-banner-rule: var(--ow-border);
+    --ow-banner-icon: var(--ow-text-muted);
+}
+
+.ow-banner--info {
+    --ow-banner-ground: var(--ow-primary-subtle);
+    --ow-banner-rule: var(--ow-primary-border);
+    --ow-banner-icon: var(--ow-primary-text);
+}
+
+.ow-banner--success {
+    --ow-banner-ground: var(--ow-success-surface);
+    --ow-banner-rule: var(--ow-success-border);
+    --ow-banner-icon: var(--ow-success-text);
+}
+
+.ow-banner--warning {
+    --ow-banner-ground: var(--ow-warning-surface);
+    --ow-banner-rule: var(--ow-warning-border);
+    --ow-banner-icon: var(--ow-warning-text);
+}
+
+.ow-banner--danger {
+    --ow-banner-ground: var(--ow-danger-surface);
+    --ow-banner-rule: var(--ow-danger-border);
+    --ow-banner-icon: var(--ow-danger-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-banner {
+        transition: none;
+    }
+}

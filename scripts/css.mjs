@@ -32,6 +32,7 @@ export const cssOrder = [
     "components/Form/Form.css",
     "components/Badge/Badge.css",
     "components/Alert/Alert.css",
+    "components/Banner/Banner.css",
     "components/Progress/Progress.css",
     "components/Meter/Meter.css",
     "components/Tooltip/Tooltip.css",
