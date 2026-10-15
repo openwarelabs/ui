@@ -58,6 +58,16 @@ export { Combobox } from "./components/Combobox/Combobox";
 export type { ComboboxProps, ComboboxOption } from "./components/Combobox/Combobox";
 export { TagInput } from "./components/TagInput/TagInput";
 export type { TagInputProps, TagInputOption, TagInputRejectReason } from "./components/TagInput/TagInput";
+export { MentionInput, useMentions } from "./components/MentionInput/MentionInput";
+export type {
+    MentionInputProps,
+    MentionTrigger,
+    MentionOption,
+    Mention,
+    MentionLabels,
+    UseMentionsOptions,
+    UseMentionsResult,
+} from "./components/MentionInput/MentionInput";
 export { Checkbox, CheckboxGroup, Fieldset } from "./components/Checkbox/Checkbox";
 export type { CheckboxProps, CheckboxGroupProps, FieldsetProps } from "./components/Checkbox/Checkbox";
 export { RadioGroup, Radio } from "./components/RadioGroup/RadioGroup";
