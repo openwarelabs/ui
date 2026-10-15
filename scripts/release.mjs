@@ -1,5 +1,5 @@
-// `npm run release`: works out the next version from the commits since the last release, checks everything,
-// writes the changelog, then commits, tags and pushes. The tag starts .github/workflows/release.yml, which
+// `npm run release`: pulls main, works out the next version from the commits since the last release, checks
+// everything, writes the changelog, then commits, tags and pushes. The tag starts .github/workflows/release.yml, which
 // publishes @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp to npm and makes the GitHub release.
 //
 // The version follows the Conventional Commits in the subjects:
@@ -56,18 +56,27 @@ function step(label, command, commandArgs) {
 const readJson = (file) => JSON.parse(fs.readFileSync(path.join(root, file), "utf8"));
 const writeJson = (file, value) => fs.writeFileSync(path.join(root, file), `${JSON.stringify(value, null, 2)}\n`);
 
-// 1. The tree is clean, on main, and has everything origin has.
+// 1. The tree is clean and on main, and has everything origin has: it pulls it.
 if (!dryRun) {
     say(`\n  ${bold("Openware UI release")}\n`);
     if (git("status", "--porcelain")) fail("There are uncommitted changes.", "Commit or stash them first.");
     const branch = git("rev-parse", "--abbrev-ref", "HEAD");
     if (branch !== "main") fail(`Releases go out from main, and this is ${branch}.`, "git checkout main && git pull");
-    git("fetch", "--quiet", "--tags", "origin");
-    const [behind, ahead] = git("rev-list", "--left-right", "--count", "origin/main...HEAD").split(/\s+/).map(Number);
-    if (behind > 0) fail(`main is ${behind} commit${behind === 1 ? "" : "s"} behind origin/main.`, "git pull");
-    done(
-        `On main, clean, and up to date with origin${ahead > 0 ? dim(` (${ahead} unpushed commit${ahead === 1 ? "" : "s"}, which the release pushes too)`) : ""}`,
-    );
+    // Pull first, so a merged pull request is in the release without a separate git pull. Fast-forward only: if
+    // main has commits of its own that origin doesn't, pulling would mean a merge, which is for a person to do.
+    const before = git("rev-parse", "HEAD");
+    try {
+        git("pull", "--ff-only", "--quiet", "--tags", "origin", "main");
+    } catch {
+        fail("main and origin/main have both moved on, so pulling would need a merge.", "git pull --rebase, check the result, then npm run release again");
+    }
+    const pulled = Number(git("rev-list", "--count", `${before}..HEAD`));
+    const ahead = Number(git("rev-list", "--count", "origin/main..HEAD"));
+    const extras = [
+        pulled > 0 ? `pulled ${pulled} commit${pulled === 1 ? "" : "s"}` : "",
+        ahead > 0 ? `${ahead} unpushed commit${ahead === 1 ? "" : "s"}, which the release pushes too` : "",
+    ].filter(Boolean);
+    done(`On main, clean, and up to date with origin${extras.length ? dim(` (${extras.join("; ")})`) : ""}`);
 }
 
 // 2. The last release: the newest v* tag, or before the first tag, the newest "Release x.y.z" commit.
