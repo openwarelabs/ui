@@ -36,6 +36,8 @@ export { Input } from "./components/Input/Input";
 export type { InputProps } from "./components/Input/Input";
 export { SearchField } from "./components/SearchField/SearchField";
 export type { SearchFieldProps } from "./components/SearchField/SearchField";
+export { PasswordInput, passwordStrength } from "./components/PasswordInput/PasswordInput";
+export type { PasswordInputProps, PasswordRequirement, PasswordStrength, PasswordStrengthScorer } from "./components/PasswordInput/PasswordInput";
 export { NumberField } from "./components/NumberField/NumberField";
 export type { NumberFieldProps } from "./components/NumberField/NumberField";
 export { InputOTP } from "./components/InputOTP/InputOTP";

@@ -73,6 +73,7 @@ export const catalogue = [
     "Input",
     "InputOTP",
     "NumberField",
+    "PasswordInput",
     "RadioGroup",
     "SearchField",
     "Select",
