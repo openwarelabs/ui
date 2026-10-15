@@ -26,7 +26,8 @@
 
 .ow-slider__control {
     position: relative;
-    height: 20px;
+    /* 24px tall so each handle's input is a big enough target to tap (WCAG 2.2 target size). */
+    height: 24px;
 }
 
 /* The track runs between the thumb's centre at each end (9px in), so the fill meets the thumb exactly. */
@@ -72,12 +73,12 @@
 }
 
 .ow-slider__input::-webkit-slider-runnable-track {
-    height: 20px;
+    height: 24px;
     background: transparent;
 }
 
 .ow-slider__input::-moz-range-track {
-    height: 20px;
+    height: 24px;
     background: transparent;
 }
 
@@ -85,7 +86,7 @@
     box-sizing: border-box;
     width: 18px;
     height: 18px;
-    margin-top: 1px;
+    margin-top: 3px;
     appearance: none;
     border: 1px solid var(--ow-border-strong);
     border-radius: 50%;
