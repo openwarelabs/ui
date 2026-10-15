@@ -20,28 +20,17 @@ import { manualPopover, useDismiss, useFloating } from "@/hooks/useFloating";
 import { usePresence } from "@/hooks/usePresence";
 import { ChevronDownIcon } from "@/icons";
 import { cx } from "@/utils/cx";
-import type { NavigationMenuGroupProps, NavigationMenuItemProps, NavigationMenuLinkProps, NavigationMenuProps } from "./NavigationMenu.types";
+import type {
+    NavigationMenuContextValue,
+    NavigationMenuGroupProps,
+    NavigationMenuItemProps,
+    NavigationMenuLinkProps,
+    NavigationMenuProps,
+} from "./NavigationMenu.types";
 
 export type { NavigationMenuGroupProps, NavigationMenuItemProps, NavigationMenuLinkProps, NavigationMenuProps } from "./NavigationMenu.types";
 
-interface NavigationMenuContext {
-    value: string | null;
-    /** Opens an item (or closes with null); `hover` marks a panel that closes again when the pointer leaves. */
-    open(value: string | null, hover?: boolean): void;
-    /** Opens an item after the open delay, or closes after the close delay with null. */
-    soon(value: string | null): void;
-    /** Cancels a pending open or close. */
-    cancel(): void;
-    /** A click on a trigger: opens its panel, or closes it, but keeps a panel the pointer just opened by hovering. */
-    toggle(value: string): void;
-    rootRef: RefObject<HTMLElement | null>;
-    triggers: MutableRefObject<Map<string, HTMLElement>>;
-    /** The item whose panel should take focus once it opens (Down on its trigger). */
-    focusInto: MutableRefObject<string | null>;
-    panelWidth: "auto" | "full";
-}
-
-const Context = createContext<NavigationMenuContext | null>(null);
+const Context = createContext<NavigationMenuContextValue | null>(null);
 
 const mouse = (event: PointerEvent) => event.pointerType === "mouse";
 const isRtl = (element: Element) => getComputedStyle(element).direction === "rtl";
@@ -74,7 +63,7 @@ export function NavigationMenu({
     const byHover = useRef(false);
     useEffect(() => () => window.clearTimeout(timer.current), []);
 
-    const context = useMemo<NavigationMenuContext>(() => {
+    const context = useMemo<NavigationMenuContextValue>(() => {
         const cancel = () => window.clearTimeout(timer.current);
         const open = (next: string | null, hover = false) => {
             cancel();

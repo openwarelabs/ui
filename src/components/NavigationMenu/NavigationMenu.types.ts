@@ -1,4 +1,4 @@
-import type { AnchorHTMLAttributes, ReactNode } from "react";
+import type { AnchorHTMLAttributes, MutableRefObject, ReactNode, RefObject } from "react";
 
 export interface NavigationMenuProps {
     /** Names the navigation for screen readers, such as "Main". */
@@ -68,4 +68,22 @@ export interface NavigationMenuGroupProps {
     /** Its NavigationMenuLinks. */
     children: ReactNode;
     className?: string;
+}
+
+/** What a NavigationMenu shares with its items. Internal. */
+export interface NavigationMenuContextValue {
+    value: string | null;
+    /** Opens an item (or closes with null); `hover` marks a panel that closes again when the pointer leaves. */
+    open(value: string | null, hover?: boolean): void;
+    /** Opens an item after the open delay, or closes after the close delay with null. */
+    soon(value: string | null): void;
+    /** Cancels a pending open or close. */
+    cancel(): void;
+    /** A click on a trigger: opens its panel, or closes it, but keeps a panel the pointer just opened by hovering. */
+    toggle(value: string): void;
+    rootRef: RefObject<HTMLElement | null>;
+    triggers: MutableRefObject<Map<string, HTMLElement>>;
+    /** The item whose panel should take focus once it opens (Down on its trigger). */
+    focusInto: MutableRefObject<string | null>;
+    panelWidth: "auto" | "full";
 }
