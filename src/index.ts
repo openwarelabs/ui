@@ -128,6 +128,8 @@ export { Table } from "./components/Table/Table";
 export type { TableProps, TableColumn, TableSort } from "./components/Table/Table";
 export { Stat } from "./components/Stat/Stat";
 export type { StatProps } from "./components/Stat/Stat";
+export { DescriptionList, DescriptionItem } from "./components/DescriptionList/DescriptionList";
+export type { DescriptionListProps, DescriptionItemProps, DescriptionListLayout } from "./components/DescriptionList/DescriptionList";
 export { LineChart, BarChart, DonutChart, Sparkline } from "./components/Chart/Chart";
 export type {
     BarChartProps,

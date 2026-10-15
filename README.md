@@ -54,7 +54,7 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 
 ## Components
 
-93 components, each with a page in the docs.
+94 components, each with a page in the docs.
 
 | Group | Components |
 | --- | --- |
@@ -66,7 +66,7 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 | Feedback | `Alert`, `Badge`, `ProgressBar`, `ProgressCircle`, `Meter` (an amount in a range, toned by thresholds), `Spinner`, `Skeleton`, `SkeletonRows`, `Toaster` + `toast()` (sonner: stacked, swipeable, with actions and promises), `Tooltip` |
 | Overlays | `Dialog`, `ConfirmDialog`, `Drawer`, `Popover`, `Menu` + `MenuItem`, `CommandPalette` |
 | Navigation | `Tabs`, `Accordion`, `Disclosure`, `Breadcrumbs`, `Pagination`, `Steps`, `NavList` + `NavItem` |
-| Data display | `Table` (sorting, selection), `Stat`, `FileTree`, `EmptyState`, `Tag`, `ColorSwatch`, `Avatar`, `AvatarGroup`, `User` |
+| Data display | `Table` (sorting, selection), `Stat`, `DescriptionList` + `DescriptionItem`, `FileTree`, `EmptyState`, `Tag`, `ColorSwatch`, `Avatar`, `AvatarGroup`, `User` |
 | AI | `PromptInput` (attachments, stop while streaming) + `PromptSuggestion`, `ChatConversation` (follows the newest message, jump to latest), `ChatMessage` + `ChatMessageActions`, `ChatLoader`, `ChatTool` (a tool call with its status, input, output and approval), `ChainOfThought`, `ChatSource` + `ChatSources`, `TextShimmer` |
 | Layout | `Card`, `SettingsRow`, `Stack`, `Separator`, `ScrollShadow`, `VisuallyHidden` |
 | Marketing | `SiteHeader`, `SectionHeading`, `Chip`, `DotGrid` |

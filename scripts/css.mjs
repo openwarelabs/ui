@@ -61,6 +61,7 @@ export const cssOrder = [
     "components/Tag/Tag.css",
     "components/Table/Table.css",
     "components/Stat/Stat.css",
+    "components/DescriptionList/DescriptionList.css",
     "components/Chart/Chart.css",
     "components/FileTree/FileTree.css",
     "components/EmptyState/EmptyState.css",
