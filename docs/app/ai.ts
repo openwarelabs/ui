@@ -85,6 +85,7 @@ export function setupMarkdown(version?: string) {
             "- In your own CSS, use the tokens: every colour, space, radius, shadow, weight and timing is a CSS variable named `--ow-…` (`var(--ow-surface)`, `var(--ow-text-muted)`, `var(--ow-space-lg)`, `var(--ow-radius-container)`). Never hard-code hex or rgb colours, so the code follows the theme and the brand colour.",
             "- Text styles are classes too (`ow-type-section-title`, `ow-type-lead`), but prefer `<Text variant=\"…\">`.",
             "- For charts, use `LineChart`, `BarChart` (`stacked`), `DonutChart` and `Sparkline`: pass `data` rows, `index` (the x key), `series` (`{ key, label }`) and a `label` saying what it shows. Their colours are `--ow-chart-1` to `--ow-chart-8`, in order. Don't add a charting library.",
+            "- For stars, use `Rating`: to pick a score (`name` sends it with a form, `allowHalf`), or `readOnly` to show one, with `count` for the number of reviews. Don't draw your own.",
             `- Tailwind v4: \`@import "${packageName}/tailwind.css";\` after \`@import "tailwindcss";\` gives \`bg-surface\`, \`text-text-muted\`, \`rounded-container\`, \`p-lg\` and the rest.`,
             `- Rebrand with \`applyBrand("#0d9488")\` (or a preset from \`brandPresets\`); the primary button, focus ring and tints follow in both themes.`,
         ].join("\n"),
