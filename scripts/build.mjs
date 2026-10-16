@@ -180,7 +180,6 @@ export const catalogue = [
     "AspectRatio",
     "Affix",
     "Watermark",
-    "Watermark",
     "VisuallyHidden",
     "VirtualList",
     "LogViewer",
