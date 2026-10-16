@@ -2,6 +2,21 @@
 
 Every release of @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp. `npm run release` writes it from the commits, and the docs' Releases page shows it.
 
+## 0.19.0 (2026-10-16)
+
+5 new components.
+
+### New components
+
+- **[JsonViewer](https://openwarelabs.github.io/ui/#/components/json-viewer)**: a JSON document as a tree of rows to open, search and copy ([#78](https://github.com/openwarelabs/ui/pull/78), [515cf97](https://github.com/openwarelabs/ui/commit/515cf97dd439604c62dc707a4ba9c9826a505003))
+- **[Gantt](https://openwarelabs.github.io/ui/#/components/gantt)**: a timeline of tasks with groups, progress, dependencies and bars moved by pointer or keyboard ([#87](https://github.com/openwarelabs/ui/pull/87), [bb9bc3d](https://github.com/openwarelabs/ui/commit/bb9bc3d130b3a1428d4f94204aeb9986a1a45981))
+- **[Countdown](https://openwarelabs.github.io/ui/#/components/countdown)** and **[RelativeTime](https://openwarelabs.github.io/ui/#/components/relative-time)**: the time left until a moment and a moment as people say it ([#79](https://github.com/openwarelabs/ui/pull/79), [31dbd58](https://github.com/openwarelabs/ui/commit/31dbd58710ad28d82ac56edb18e3ad24ebf008df))
+- **[Lightbox](https://openwarelabs.github.io/ui/#/components/lightbox)**: a fullscreen zoomable viewer for one image or a gallery ([#75](https://github.com/openwarelabs/ui/pull/75), [2ac4985](https://github.com/openwarelabs/ui/commit/2ac4985ed73545579dda659034506e9d55bb309a))
+
+### Other changes
+
+- ask for a git worktree per branch in CLAUDE.md ([#90](https://github.com/openwarelabs/ui/pull/90), [648d8c5](https://github.com/openwarelabs/ui/commit/648d8c518ab0f247329c8f81c6b324d3c36bbc91))
+
 ## 0.18.0 (2026-10-16)
 
 11 new components and 1 fix.
