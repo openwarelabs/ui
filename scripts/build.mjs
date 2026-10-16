@@ -132,6 +132,7 @@ export const catalogue = [
     "EmptyState",
     "FileTree",
     "TreeView",
+    "JsonViewer",
     "Image",
     "Kbd",
     "QRCode",

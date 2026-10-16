@@ -209,6 +209,8 @@ export { FileTree } from "./components/FileTree/FileTree";
 export type { FileTreeProps, FileTreeNode } from "./components/FileTree/FileTree";
 export { TreeView } from "./components/TreeView/TreeView";
 export type { TreeViewProps, TreeItem, TreeViewLabels, TreeViewSelectionMode } from "./components/TreeView/TreeView";
+export { JsonViewer } from "./components/JsonViewer/JsonViewer";
+export type { JsonViewerProps, JsonViewerLabels, JsonValue, JsonPathSegment } from "./components/JsonViewer/JsonViewer";
 export { EmptyState } from "./components/EmptyState/EmptyState";
 export type { EmptyStateProps } from "./components/EmptyState/EmptyState";
 export { Tag, TagGroup, ColorSwatch } from "./components/Tag/Tag";
