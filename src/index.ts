@@ -88,6 +88,8 @@ export { Rating } from "./components/Rating/Rating";
 export type { RatingProps, RatingLabels } from "./components/Rating/Rating";
 export { FileDropZone } from "./components/FileDropZone/FileDropZone";
 export type { FileDropZoneProps } from "./components/FileDropZone/FileDropZone";
+export { ImageCropper } from "./components/ImageCropper/ImageCropper";
+export type { ImageCrop, ImageCropperHandle, ImageCropperLabels, ImageCropperOutput, ImageCropperProps } from "./components/ImageCropper/ImageCropper";
 export { UploadList, useUploadQueue } from "./components/UploadList/UploadList";
 export type {
     UploadListProps,

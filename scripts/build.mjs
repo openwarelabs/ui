@@ -74,6 +74,7 @@ export const catalogue = [
     "Field",
     "Fieldset",
     "FileDropZone",
+    "ImageCropper",
     "InlineEdit",
     "Input",
     "InputOTP",

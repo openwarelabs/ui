@@ -1,0 +1,99 @@
+/* ImageCropper: a fixed frame the picture moves and zooms under, with a zoom slider beneath it. */
+.ow-image-cropper {
+    display: grid;
+    gap: var(--ow-space-md);
+    width: var(--ow-image-cropper-width, 320px);
+    max-width: 100%;
+    min-width: 0;
+}
+
+/* With an aspect the height follows the width, so it stays in shape when the frame shrinks on a narrow screen. */
+.ow-image-cropper__frame {
+    position: relative;
+    width: 100%;
+    height: var(--ow-image-cropper-height, auto);
+    aspect-ratio: var(--ow-image-cropper-aspect, auto);
+    overflow: hidden;
+    border: 1px solid var(--ow-border-strong);
+    border-radius: var(--ow-radius-form);
+    background: var(--ow-surface-muted);
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    transition-property: border-color, box-shadow;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-image-cropper__frame:hover {
+    border-color: var(--ow-border-hover);
+}
+
+.ow-image-cropper__frame:focus-visible {
+    outline: none;
+    border-color: var(--ow-focus-border);
+    box-shadow: var(--ow-shadow-focus);
+}
+
+.ow-image-cropper--dragging .ow-image-cropper__frame {
+    cursor: grabbing;
+}
+
+/* The picture at its own size, placed by a transform from its top-left corner; nothing else sizes it. */
+.ow-image-cropper__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: none;
+    transform-origin: 0 0;
+    pointer-events: none;
+}
+
+/* Thirds, as pale lines over the picture. */
+.ow-image-cropper__grid {
+    --ow-image-cropper-line: color-mix(in srgb, var(--ow-gray-50) 70%, transparent);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(to right, var(--ow-image-cropper-line), var(--ow-image-cropper-line)),
+        linear-gradient(to right, var(--ow-image-cropper-line), var(--ow-image-cropper-line)),
+        linear-gradient(to bottom, var(--ow-image-cropper-line), var(--ow-image-cropper-line)),
+        linear-gradient(to bottom, var(--ow-image-cropper-line), var(--ow-image-cropper-line));
+    background-repeat: no-repeat;
+    background-size: 1px 100%, 1px 100%, 100% 1px, 100% 1px;
+    background-position: 33.333% 0, 66.667% 0, 0 33.333%, 0 66.667%;
+}
+
+/* A round window: the corners are shaded, as an Avatar will cut them off. */
+.ow-image-cropper__mask {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 0 100vmax color-mix(in srgb, var(--ow-gray-950) 50%, transparent);
+    pointer-events: none;
+}
+
+.ow-image-cropper__status {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: var(--ow-space-lg);
+    color: var(--ow-text-muted);
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.ow-image-cropper--disabled .ow-image-cropper__frame {
+    cursor: default;
+    opacity: 0.62;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-image-cropper__frame {
+        transition: none;
+    }
+}
