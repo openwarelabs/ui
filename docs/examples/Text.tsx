@@ -4,7 +4,7 @@ import type { DocMeta } from "@docs/app/types";
 
 export const meta: DocMeta = {
     title: "Text",
-    category: "Typography",
+    category: "Primitives",
     description:
         "Text in one of the styles on the Typography page, by the same names: a hero, a lead, a caption, an overline.",
     source: "components/Text/Text.tsx",

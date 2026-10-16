@@ -4,7 +4,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "Fieldset",
-    category: "Inputs",
+    category: "Primitives",
     description:
         "Groups related controls under a legend: an address, a pair of dates, a set of options.",
     source: "components/Checkbox/Checkbox.tsx",

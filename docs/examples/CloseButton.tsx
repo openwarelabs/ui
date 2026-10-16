@@ -4,7 +4,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "CloseButton",
-    category: "Actions",
+    category: "Primitives",
     description:
         "The ✕ in the corner of a dialog, drawer or panel: a quiet square that darkens on hover.",
     source: "components/Button/ButtonGroup.tsx",

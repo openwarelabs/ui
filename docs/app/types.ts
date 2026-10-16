@@ -1,6 +1,6 @@
 import type { ComponentType } from "react";
 
-export const categories = ["Typography", "Actions", "Inputs", "Choices", "Pickers", "Feedback", "Overlays", "Navigation", "Data display", "Layout", "AI", "Marketing"] as const;
+export const categories = ["Primitives", "Typography", "Actions", "Inputs", "Choices", "Pickers", "Feedback", "Overlays", "Navigation", "Data display", "Layout", "AI", "Marketing"] as const;
 
 export type Category = (typeof categories)[number];
 

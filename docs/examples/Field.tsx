@@ -6,7 +6,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "Field",
-    category: "Inputs",
+    category: "Primitives",
     description:
         "A label above a control, with a hint and an error below, wired together for screen readers.",
     source: "components/Field/Field.tsx",

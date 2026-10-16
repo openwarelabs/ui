@@ -7,7 +7,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "Button",
-    category: "Actions",
+    category: "Primitives",
     description:
         "A tactile button: a soft gradient, a light top edge and a shadow, pressed in by a pixel when clicked.",
     imports: ["Button", "buttonClassName"],
