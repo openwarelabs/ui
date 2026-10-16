@@ -2,6 +2,17 @@
 
 Every release of @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp. `npm run release` writes it from the commits, and the docs' Releases page shows it.
 
+## 0.20.0 (2026-10-16)
+
+4 new components.
+
+### New components
+
+- **[Watermark](https://openwarelabs.github.io/ui/#/components/watermark)**: text or a logo tiled over drafts and previews ([#86](https://github.com/openwarelabs/ui/pull/86), [c047818](https://github.com/openwarelabs/ui/commit/c047818f1d374f5589569655f13ca25c831c6617))
+- **[Callout](https://openwarelabs.github.io/ui/#/components/callout)**: a note set apart from the text in docs and articles ([#85](https://github.com/openwarelabs/ui/pull/85), [b37bfb0](https://github.com/openwarelabs/ui/commit/b37bfb0e8a73fd7faaa7c57e3ac2aeffbd1bedb9))
+- **[LogViewer](https://openwarelabs.github.io/ui/#/components/log-viewer)**: streaming terminal output with ANSI colours that follows its newest line ([#83](https://github.com/openwarelabs/ui/pull/83), [ae201ae](https://github.com/openwarelabs/ui/commit/ae201ae2b093870e0b6a3af6854689e255cacf2d))
+- **[CommentThread](https://openwarelabs.github.io/ui/#/components/comment-thread)**: comments nested by parentId with reply, edit, delete and reactions ([#82](https://github.com/openwarelabs/ui/pull/82), [563df49](https://github.com/openwarelabs/ui/commit/563df49139984d6ede4d5d7e66eac7d01e906ab5))
+
 ## 0.19.0 (2026-10-16)
 
 5 new components.
