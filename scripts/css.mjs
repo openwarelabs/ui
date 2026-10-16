@@ -96,6 +96,7 @@ export const cssOrder = [
     "components/ActivityHeatmap/ActivityHeatmap.css",
     "components/FileTree/FileTree.css",
     "components/TreeView/TreeView.css",
+    "components/JsonViewer/JsonViewer.css",
     "components/EmptyState/EmptyState.css",
     "components/Card/Card.css",
     "components/NavList/NavList.css",
