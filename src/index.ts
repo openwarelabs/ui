@@ -251,6 +251,8 @@ export { Section } from "./components/Section/Section";
 export type { SectionProps } from "./components/Section/Section";
 export { Splitter, SplitterPanel, SplitterHandle } from "./components/Splitter/Splitter";
 export type { SplitterProps, SplitterPanelProps, SplitterHandleProps, SplitterDirection } from "./components/Splitter/Splitter";
+export { Collapsible, CollapsibleTrigger, CollapsibleContent } from "./components/Collapsible/Collapsible";
+export type { CollapsibleProps, CollapsibleTriggerProps, CollapsibleContentProps, CollapsibleState } from "./components/Collapsible/Collapsible";
 export type { StackProps, SeparatorProps, ScrollShadowProps, SpaceToken } from "./components/Layout/Layout";
 export { ScrollArea } from "./components/ScrollArea/ScrollArea";
 export type { ScrollAreaProps, ScrollAreaOrientation, ScrollAreaType } from "./components/ScrollArea/ScrollArea";
