@@ -2,6 +2,12 @@
 
 Every release of @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp. `npm run release` writes it from the commits, and the docs' Releases page shows it.
 
+## 0.22.1 (2026-10-16)
+
+### Other changes
+
+- add a Primitives category for the basic controls ([#94](https://github.com/openwarelabs/ui/pull/94), [b021a51](https://github.com/openwarelabs/ui/commit/b021a512b02a89e5338e248cf72c9e7394f7553c))
+
 ## 0.22.0 (2026-10-16)
 
 3 new components.

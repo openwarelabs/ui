@@ -1,6 +1,6 @@
 {
   "name": "@openwarelabs/blocks",
-  "version": "0.22.0",
+  "version": "0.22.1",
   "description": "Openware UI blocks: whole page sections (heroes and more) as React components that take their content as props.",
   "license": "MIT",
   "author": "Alexander Silver",
@@ -34,7 +34,7 @@
     "README.md"
   ],
   "peerDependencies": {
-    "@openwarelabs/ui": "^0.22.0",
+    "@openwarelabs/ui": "^0.22.1",
     "react": ">=18",
     "react-dom": ">=18"
   },
