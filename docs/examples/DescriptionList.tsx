@@ -141,7 +141,7 @@ export function Receipt() {
                         <div style={{ textAlign: "end" }}>{value}</div>
                     </DescriptionItem>
                 ))}
-                <DescriptionItem term="Total" style={{ fontWeight: 600 }}>
+                <DescriptionItem term="Total" style={{ fontWeight: "var(--ow-weight-emphasis)" }}>
                     <div style={{ textAlign: "end" }}>€67.76</div>
                 </DescriptionItem>
             </DescriptionList>

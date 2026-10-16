@@ -76,7 +76,7 @@ function Logo() {
                 background: "var(--ow-primary)",
                 color: "var(--ow-on-primary)",
                 fontSize: 12,
-                fontWeight: 600,
+                fontWeight: "var(--ow-weight-emphasis)",
             }}
         >
             A

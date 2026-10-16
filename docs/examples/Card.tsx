@@ -21,7 +21,7 @@ export function Basic() {
         <Card style={{ width: 320, maxWidth: "100%" }}>
             <Stack gap="sm">
                 <Stack direction="row" justify="between" align="center">
-                    <strong style={{ fontWeight: 600 }}>recipe-app</strong>
+                    <strong style={{ fontWeight: "var(--ow-weight-emphasis)" }}>recipe-app</strong>
                     <Badge variant="success" size="sm">
                         Live
                     </Badge>

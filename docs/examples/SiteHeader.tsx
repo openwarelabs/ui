@@ -25,7 +25,7 @@ function Brand() {
                 gap: 8,
                 color: "inherit",
                 textDecoration: "none",
-                fontWeight: 600,
+                fontWeight: "var(--ow-weight-emphasis)",
             }}
         >
             <span

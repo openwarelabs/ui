@@ -104,7 +104,7 @@
     -webkit-background-clip: text;
     color: transparent;
     font-size: 40.3cqw;
-    font-weight: 600;
+    font-weight: var(--ow-weight-emphasis);
     line-height: 0.8;
     letter-spacing: -0.065em;
     white-space: nowrap;

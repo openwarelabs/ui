@@ -52,7 +52,7 @@ export function Directions() {
 export function Toolbar() {
     return (
         <Stack direction="row" justify="between" align="center" style={{ width: "100%" }}>
-            <strong style={{ fontWeight: 600 }}>12 runs</strong>
+            <strong style={{ fontWeight: "var(--ow-weight-emphasis)" }}>12 runs</strong>
             <Stack direction="row" gap="xs">
                 <Button size="sm">Export</Button>
                 <Button size="sm" variant="primary">
