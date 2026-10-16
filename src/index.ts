@@ -226,6 +226,8 @@ export type { MediaPlayerProps, MediaPlayerHandle, MediaPlayerLabels, MediaPlaye
 export { Kbd, Code } from "./components/Kbd/Kbd";
 export { Carousel, CarouselSlide } from "./components/Carousel/Carousel";
 export type { CarouselProps, CarouselSlideProps, CarouselLabels } from "./components/Carousel/Carousel";
+export { Lightbox } from "./components/Lightbox/Lightbox";
+export type { LightboxProps, LightboxImage, LightboxLabels } from "./components/Lightbox/Lightbox";
 
 // Layout
 export { Card, SettingsRow } from "./components/Card/Card";
