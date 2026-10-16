@@ -84,6 +84,7 @@ export const cssOrder = [
     "components/Tag/Tag.css",
     "components/SortableList/SortableList.css",
     "components/Kanban/Kanban.css",
+    "components/Gantt/Gantt.css",
     "components/Table/Table.css",
     "components/DataGrid/DataGrid.css",
     "components/Stat/Stat.css",
