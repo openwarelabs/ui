@@ -3,14 +3,14 @@ import { Link } from "@openwarelabs/ui";
 
 // Faces take one of three tones (brand, soft, ink), so a row of initials doesn't read as one shape repeated.
 const people: Team01Person[] = [
-    { name: "Maya Chen", jobTitle: "Co-founder and CEO", tone: "brand" },
-    { name: "Jonas Berg", jobTitle: "Co-founder and CTO", tone: "soft" },
-    { name: "Clara Novak", jobTitle: "Head of engineering", tone: "ink" },
-    { name: "Aiko Tanaka", jobTitle: "Product designer", tone: "soft" },
-    { name: "Tomás Reyes", jobTitle: "Product engineer", tone: "ink" },
-    { name: "Sam Okafor", jobTitle: "Agent infrastructure", tone: "brand" },
-    { name: "Lena Fischer", jobTitle: "Customer engineering", tone: "soft" },
-    { name: "Omar Haddad", jobTitle: "Design engineer", tone: "brand" },
+    { name: "Siobhan Murphy", jobTitle: "Co-founder and CEO", tone: "brand" },
+    { name: "Declan Walsh", jobTitle: "Co-founder and CTO", tone: "soft" },
+    { name: "Aoife O'Sullivan", jobTitle: "Head of engineering", tone: "ink" },
+    { name: "Niamh Byrne", jobTitle: "Product designer", tone: "soft" },
+    { name: "Ciarán Kelly", jobTitle: "Product engineer", tone: "ink" },
+    { name: "Seán McCarthy", jobTitle: "Agent infrastructure", tone: "brand" },
+    { name: "Róisín O'Brien", jobTitle: "Customer engineering", tone: "soft" },
+    { name: "Cillian Ryan", jobTitle: "Design engineer", tone: "brand" },
 ];
 
 export function TeamGrid() {

@@ -13,11 +13,11 @@ export function NewsletterCard() {
             onSubmit={() => new Promise((resolve) => window.setTimeout(resolve, 700))}
             successTitle="Check your inbox"
             successDescription={(email) => `We've sent a link to ${email}. Open it to confirm, and the next post comes to you.`}
-            authors={["Clara Novak", "Jonas Berg", "Sam Okafor"]}
+            authors={["Aoife O'Sullivan", "Declan Walsh", "Seán McCarthy"]}
             authorsNote={
                 <>
                     <Text as="strong" variant="label" tone="soft">
-                        Clara, Jonas and Sam
+                        Aoife, Declan and Seán
                     </Text>{" "}
                     write it for 9,400 readers.
                 </>

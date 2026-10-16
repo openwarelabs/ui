@@ -58,7 +58,7 @@ const pdfSource = {
 const pullRequestSource = {
     index: 3,
     title: "#482 Fix invoice dates in the EU",
-    source: "Pull request · billing-api · Maya Chen",
+    source: "Pull request · billing-api · Siobhan Murphy",
     href: `${repo}/pull/482`,
     external: true,
     icon: <GitPullRequest />,
@@ -100,10 +100,10 @@ export function ShortLabels() {
                 label="Ticket 1093"
                 icon={<LifeBuoy />}
                 title="Our July invoice is dated 14 July"
-                source="Support · Aoife Byrne, Dublin · 15 July"
+                source="Support · Niamh Byrne, Dublin · 15 July"
                 snippet="We were billed just after midnight on 15 July, but the invoice says 14 July. Our accountant needs the right date."
             />
-            , and the fix is waiting for Tomás Reyes to review it{" "}
+            , and the fix is waiting for Ciarán Kelly to review it{" "}
             <ChatSource
                 label="#482"
                 icon={<GitPullRequest />}

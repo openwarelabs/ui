@@ -40,9 +40,9 @@ const options: Contact02Option[] = [
         footNote: (
             <>
                 <AvatarGroup size="sm" max={3}>
-                    <Avatar name="Jonas Berg" />
-                    <Avatar name="Aiko Tanaka" />
-                    <Avatar name="Sam Okafor" />
+                    <Avatar name="Declan Walsh" />
+                    <Avatar name="Niamh Byrne" />
+                    <Avatar name="Seán McCarthy" />
                 </AvatarGroup>
                 4,200 members
             </>

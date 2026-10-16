@@ -55,10 +55,10 @@ const defaults: Preferences = {
 };
 
 const projects = [
-    { name: "marketing-site", detail: "Pricing page copy · Maya Chen", when: "4 min ago", status: "Live" },
+    { name: "marketing-site", detail: "Pricing page copy · Siobhan Murphy", when: "4 min ago", status: "Live" },
     { name: "billing-api", detail: "Fix invoice dates in the EU · agent", when: "26 min ago", status: "Building" },
-    { name: "mobile-app", detail: "Release 2.4 · Clara Novak", when: "2 h ago", status: "Live" },
-    { name: "docs", detail: "New API reference · Jonas Berg", when: "Yesterday", status: "Live" },
+    { name: "mobile-app", detail: "Release 2.4 · Aoife O'Sullivan", when: "2 h ago", status: "Live" },
+    { name: "docs", detail: "New API reference · Declan Walsh", when: "Yesterday", status: "Live" },
     { name: "design-system", detail: "Tokens for dark mode · agent", when: "2 days ago", status: "Failed" },
 ] as const;
 
@@ -242,10 +242,10 @@ function SectionRows({
         case "account":
             return (
                 <>
-                    <SettingsRow label="Email" description="maya@example.com">
+                    <SettingsRow label="Email" description="siobhan@example.com">
                         <Button
                             size="sm"
-                            onClick={() => toast("Check your inbox", { description: "We sent a link to maya@example.com to confirm the change." })}
+                            onClick={() => toast("Check your inbox", { description: "We sent a link to siobhan@example.com to confirm the change." })}
                         >
                             Change email
                         </Button>
@@ -253,7 +253,7 @@ function SectionRows({
                     <SettingsRow label="Password" description="Last changed in March.">
                         <Button
                             size="sm"
-                            onClick={() => toast("Check your inbox", { description: "We sent a link to maya@example.com to set a new password." })}
+                            onClick={() => toast("Check your inbox", { description: "We sent a link to siobhan@example.com to set a new password." })}
                         >
                             Change password
                         </Button>

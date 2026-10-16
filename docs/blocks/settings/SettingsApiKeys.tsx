@@ -7,18 +7,18 @@ const keys: Settings03Key[] = [
         name: "CI deploys",
         prefix: "acme_3f9a2c7d",
         access: "Read and write",
-        createdBy: "Maya Chen",
+        createdBy: "Siobhan Murphy",
         created: "12 Mar 2026",
         lastUsed: "2 hours ago",
     },
-    { id: "k2", name: "Status page", prefix: "acme_81be04c2", access: "Read only", createdBy: "Jonas Berg", created: "3 Jun 2026", lastUsed: "Yesterday" },
-    { id: "k3", name: "Release bot", prefix: "acme_c47d19ea", access: "Read and write", createdBy: "Clara Novak", created: "28 Aug 2026" },
+    { id: "k2", name: "Status page", prefix: "acme_81be04c2", access: "Read only", createdBy: "Declan Walsh", created: "3 Jun 2026", lastUsed: "Yesterday" },
+    { id: "k3", name: "Release bot", prefix: "acme_c47d19ea", access: "Read and write", createdBy: "Aoife O'Sullivan", created: "28 Aug 2026" },
     {
         id: "k4",
         name: "Quarterly export",
         prefix: "acme_0b6e55f1",
         access: "Read only",
-        createdBy: "Lena Fischer",
+        createdBy: "Róisín O'Brien",
         created: "2 Jan 2026",
         lastUsed: "3 months ago",
     },
@@ -55,7 +55,7 @@ export function SettingsApiKeys() {
             onCreateKey={({ name, access }) => {
                 const prefix = `acme_${randomText(8, "0123456789abcdef")}`;
                 const secret = randomText(32, "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789");
-                return { key: { id: prefix, name, prefix, access, createdBy: "Maya Chen", created: "Today" }, secret: `${prefix}_${secret}` };
+                return { key: { id: prefix, name, prefix, access, createdBy: "Siobhan Murphy", created: "Today" }, secret: `${prefix}_${secret}` };
             }}
             onRevokeKey={async (key) => {
                 await new Promise((resolve) => window.setTimeout(resolve, 700));

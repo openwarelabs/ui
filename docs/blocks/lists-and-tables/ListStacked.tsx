@@ -17,12 +17,12 @@ interface ApiKey {
 const tone: Record<Status, BadgeVariant> = { Active: "success", "Expires soon": "warning", Expired: "neutral", Revoked: "danger" };
 
 const keys: ApiKey[] = [
-    { id: "k1", name: "Production deploys", key: "acme_live_…3f9a", detail: "Made by Maya Chen on 2 September · Last used 4 min ago", status: "Active" },
-    { id: "k2", name: "GitHub Actions", key: "acme_live_…a81c", detail: "Made by Tomás Reyes on 14 August · Last used 26 min ago", status: "Active" },
-    { id: "k3", name: "Staging webhooks", key: "acme_test_…77d0", detail: "Made by Clara Novak on 20 April · Expires in 6 days", status: "Expires soon" },
-    { id: "k4", name: "Status page", key: "acme_live_…e204", detail: "Made by Jonas Berg on 3 January · Last used 3 weeks ago", status: "Active" },
-    { id: "k5", name: "Old CI runner", key: "acme_live_…19b6", detail: "Made by Omar Haddad on 11 November 2025 · Expired on 9 February", status: "Expired" },
-    { id: "k6", name: "Agent sandbox", key: "acme_test_…c5e8", detail: "Made by Aiko Tanaka on 1 October · Revoked by Maya Chen yesterday", status: "Revoked" },
+    { id: "k1", name: "Production deploys", key: "acme_live_…3f9a", detail: "Made by Siobhan Murphy on 2 September · Last used 4 min ago", status: "Active" },
+    { id: "k2", name: "GitHub Actions", key: "acme_live_…a81c", detail: "Made by Ciarán Kelly on 14 August · Last used 26 min ago", status: "Active" },
+    { id: "k3", name: "Staging webhooks", key: "acme_test_…77d0", detail: "Made by Aoife O'Sullivan on 20 April · Expires in 6 days", status: "Expires soon" },
+    { id: "k4", name: "Status page", key: "acme_live_…e204", detail: "Made by Declan Walsh on 3 January · Last used 3 weeks ago", status: "Active" },
+    { id: "k5", name: "Old CI runner", key: "acme_live_…19b6", detail: "Made by Cillian Ryan on 11 November 2025 · Expired on 9 February", status: "Expired" },
+    { id: "k6", name: "Agent sandbox", key: "acme_test_…c5e8", detail: "Made by Niamh Byrne on 1 October · Revoked by Siobhan Murphy yesterday", status: "Revoked" },
 ];
 
 const ending = () => Math.random().toString(16).slice(2, 6);

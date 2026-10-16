@@ -159,9 +159,9 @@ export function Picker() {
                         label: "People",
                         options: [
                             { value: "alex", label: "Alex Silver", icon: <User size={16} /> },
-                            { value: "clara", label: "Clara Novak", icon: <User size={16} /> },
-                            { value: "priya", label: "Priya Raman", icon: <User size={16} /> },
-                            { value: "sam", label: "Sam Okafor", icon: <User size={16} /> },
+                            { value: "aoife", label: "Aoife O'Sullivan", icon: <User size={16} /> },
+                            { value: "caoimhe", label: "Caoimhe Brennan", icon: <User size={16} /> },
+                            { value: "sean", label: "Seán McCarthy", icon: <User size={16} /> },
                         ],
                     },
                 ]}

@@ -37,10 +37,10 @@ export function FaqContact() {
             questions={questions}
             contact={{
                 title: "Still have a question?",
-                description: "Ask Lena, Omar or Aiko. They work on Acme every day and reply within a working day.",
+                description: "Ask Róisín, Cillian or Niamh. They work on Acme every day and reply within a working day.",
                 status: "Most replies come within two hours",
-                people: [{ name: "Lena Fischer" }, { name: "Omar Haddad" }, { name: "Aiko Tanaka" }],
-                peopleLabel: "Lena, Omar and Aiko from support",
+                people: [{ name: "Róisín O'Brien" }, { name: "Cillian Ryan" }, { name: "Niamh Byrne" }],
+                peopleLabel: "Róisín, Cillian and Niamh from support",
                 primaryAction: { label: "Email support", href: "mailto:support@example.com", startIcon: <Mail size={16} /> },
                 secondaryAction: { label: "Book a call", href: "#call", startIcon: <CalendarDays size={16} /> },
             }}

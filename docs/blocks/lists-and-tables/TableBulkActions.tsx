@@ -20,16 +20,16 @@ interface Person {
 }
 
 const people: Person[] = [
-    { id: "maya", name: "Maya Chen", email: "maya@example.com", role: "Owner", twoFactor: "On", minutesAgo: 0, lastActive: "Now" },
-    { id: "tomas", name: "Tomás Reyes", email: "tomas@example.com", role: "Admin", twoFactor: "On", minutesAgo: 12, lastActive: "12 min ago" },
-    { id: "clara", name: "Clara Novak", email: "clara@example.com", role: "Admin", twoFactor: "On", minutesAgo: 64, lastActive: "1 h ago" },
-    { id: "jonas", name: "Jonas Berg", email: "jonas@example.com", role: "Member", twoFactor: "Off", minutesAgo: 190, lastActive: "3 h ago" },
-    { id: "aiko", name: "Aiko Tanaka", email: "aiko@example.com", role: "Member", twoFactor: "On", minutesAgo: 1300, lastActive: "Yesterday" },
-    { id: "sam", name: "Sam Okafor", email: "sam@example.com", role: "Member", twoFactor: "Off", minutesAgo: 2900, lastActive: "2 days ago" },
-    { id: "lena", name: "Lena Fischer", email: "lena@example.com", role: "Member", twoFactor: "On", minutesAgo: 7300, lastActive: "5 days ago" },
-    { id: "omar", name: "Omar Haddad", email: "omar@example.com", role: "Guest", twoFactor: "Off", minutesAgo: 30200, lastActive: "3 weeks ago" },
-    { id: "ines", name: null, email: "ines@example.com", role: "Member", twoFactor: null, minutesAgo: 99998, lastActive: "Invited 2 days ago" },
-    { id: "kofi", name: null, email: "kofi@example.com", role: "Guest", twoFactor: null, minutesAgo: 99999, lastActive: "Invited 5 days ago" },
+    { id: "siobhan", name: "Siobhan Murphy", email: "siobhan@example.com", role: "Owner", twoFactor: "On", minutesAgo: 0, lastActive: "Now" },
+    { id: "ciaran", name: "Ciarán Kelly", email: "ciaran@example.com", role: "Admin", twoFactor: "On", minutesAgo: 12, lastActive: "12 min ago" },
+    { id: "aoife", name: "Aoife O'Sullivan", email: "aoife@example.com", role: "Admin", twoFactor: "On", minutesAgo: 64, lastActive: "1 h ago" },
+    { id: "declan", name: "Declan Walsh", email: "declan@example.com", role: "Member", twoFactor: "Off", minutesAgo: 190, lastActive: "3 h ago" },
+    { id: "niamh", name: "Niamh Byrne", email: "niamh@example.com", role: "Member", twoFactor: "On", minutesAgo: 1300, lastActive: "Yesterday" },
+    { id: "sean", name: "Seán McCarthy", email: "sean@example.com", role: "Member", twoFactor: "Off", minutesAgo: 2900, lastActive: "2 days ago" },
+    { id: "roisin", name: "Róisín O'Brien", email: "roisin@example.com", role: "Member", twoFactor: "On", minutesAgo: 7300, lastActive: "5 days ago" },
+    { id: "cillian", name: "Cillian Ryan", email: "cillian@example.com", role: "Guest", twoFactor: "Off", minutesAgo: 30200, lastActive: "3 weeks ago" },
+    { id: "orla", name: null, email: "orla@example.com", role: "Member", twoFactor: null, minutesAgo: 99998, lastActive: "Invited 2 days ago" },
+    { id: "tadhg", name: null, email: "tadhg@example.com", role: "Guest", twoFactor: null, minutesAgo: 99999, lastActive: "Invited 5 days ago" },
 ];
 
 const roleOrder: Record<Role, number> = { Owner: 0, Admin: 1, Member: 2, Guest: 3 };
@@ -102,12 +102,12 @@ const plural = (count: number, one: string, many = `${one}s`) => `${count} ${cou
 export function TableBulkActions() {
     const [rows, setRows] = useState(people);
     // Two people are selected to start with, so the bar shows; clear them to see the table on its own.
-    const [selected, setSelected] = useState<Key[]>(["jonas", "sam"]);
+    const [selected, setSelected] = useState<Key[]>(["declan", "sean"]);
 
     const chosen = rows.filter((person) => selected.includes(person.id));
     // The owner's role and membership can't be changed from here.
     const changeable = chosen.filter((person) => person.role !== "Owner");
-    const ownerNote = chosen.length > changeable.length ? "Maya Chen is the owner, so she stays as she is." : undefined;
+    const ownerNote = chosen.length > changeable.length ? "Siobhan Murphy is the owner, so she stays as she is." : undefined;
     const withoutTwoFactor = chosen.filter((person) => person.twoFactor === "Off");
 
     const setRole = (role: Role) => {

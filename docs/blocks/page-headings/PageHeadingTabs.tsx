@@ -14,7 +14,7 @@ interface Row {
     tone: BadgeVariant;
 }
 
-const members = ["Clara Novak", "Jonas Berg", "Aiko Tanaka", "Sam Okafor", "Maya Chen"];
+const members = ["Aoife O'Sullivan", "Declan Walsh", "Niamh Byrne", "Seán McCarthy", "Siobhan Murphy"];
 
 /** The views of the project that list things, each with a few rows to start the page. */
 const lists: Array<{ id: string; label: string; rows: Row[] }> = [
@@ -22,9 +22,9 @@ const lists: Array<{ id: string; label: string; rows: Row[] }> = [
         id: "deploys",
         label: "Deploys",
         rows: [
-            { title: "Update React Native to 0.76", mono: "agent/rn-076", meta: "Agent for Clara Novak · 1 h ago", status: "Building", tone: "active" },
-            { title: "Release 2.4", mono: "release/2.4", meta: "Clara Novak · 2 h ago", status: "Live", tone: "success" },
-            { title: "Dark mode for the settings screen", mono: "main", meta: "Jonas Berg · Yesterday", status: "Live", tone: "success" },
+            { title: "Update React Native to 0.76", mono: "agent/rn-076", meta: "Agent for Aoife O'Sullivan · 1 h ago", status: "Building", tone: "active" },
+            { title: "Release 2.4", mono: "release/2.4", meta: "Aoife O'Sullivan · 2 h ago", status: "Live", tone: "success" },
+            { title: "Dark mode for the settings screen", mono: "main", meta: "Declan Walsh · Yesterday", status: "Live", tone: "success" },
         ],
     },
     {
@@ -34,12 +34,12 @@ const lists: Array<{ id: string; label: string; rows: Row[] }> = [
             {
                 title: "Update React Native to 0.76",
                 mono: "#311",
-                meta: "Opened by an agent for Clara Novak · 412 lines",
+                meta: "Opened by an agent for Aoife O'Sullivan · 412 lines",
                 status: "Needs review",
                 tone: "warning",
             },
-            { title: "Haptics on pull to refresh", mono: "#309", meta: "Aiko Tanaka · 38 lines", status: "Changes requested", tone: "danger" },
-            { title: "Cache avatars between launches", mono: "#306", meta: "Sam Okafor · 96 lines", status: "Approved", tone: "success" },
+            { title: "Haptics on pull to refresh", mono: "#309", meta: "Niamh Byrne · 38 lines", status: "Changes requested", tone: "danger" },
+            { title: "Cache avatars between launches", mono: "#306", meta: "Seán McCarthy · 96 lines", status: "Approved", tone: "success" },
         ],
     },
     {
@@ -49,14 +49,14 @@ const lists: Array<{ id: string; label: string; rows: Row[] }> = [
             {
                 title: "Update React Native to 0.76",
                 mono: "agent/rn-076",
-                meta: "For Clara Novak · 23 min · 14 files",
+                meta: "For Aoife O'Sullivan · 23 min · 14 files",
                 status: "Needs review",
                 tone: "warning",
             },
             {
                 title: "Translate onboarding into Japanese",
                 mono: "agent/onboarding-ja",
-                meta: "For Aiko Tanaka · 9 min · 6 files",
+                meta: "For Niamh Byrne · 9 min · 6 files",
                 status: "Merged",
                 tone: "success",
             },

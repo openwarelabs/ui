@@ -57,10 +57,10 @@ function AgentRunShot() {
 }
 
 const reviews = [
-    { title: "Fix invoice dates in the EU", project: "billing-api", by: "Tomás Reyes", add: 42, remove: 8, status: "Checks passed", tone: "success" },
+    { title: "Fix invoice dates in the EU", project: "billing-api", by: "Ciarán Kelly", add: 42, remove: 8, status: "Checks passed", tone: "success" },
     { title: "Bump the Stripe SDK to v15", project: "billing-api", by: "Agent", add: 84, remove: 61, status: "Ready", tone: "success" },
-    { title: "Pricing page copy", project: "marketing-site", by: "Maya Chen", add: 12, remove: 9, status: "Preview building", tone: "active" },
-    { title: "Offline drafts on Android", project: "mobile-app", by: "Clara Novak", add: 318, remove: 40, status: "Changes asked", tone: "warning" },
+    { title: "Pricing page copy", project: "marketing-site", by: "Siobhan Murphy", add: 12, remove: 9, status: "Preview building", tone: "active" },
+    { title: "Offline drafts on Android", project: "mobile-app", by: "Aoife O'Sullivan", add: 318, remove: 40, status: "Changes asked", tone: "warning" },
 ] as const;
 
 /** The review queue: pull requests from people and agents, each with its size and state. */
@@ -84,7 +84,7 @@ function ReviewQueueShot() {
                         <span className="features-alternating__heading">
                             <span className="features-alternating__review-title">{review.title}</span>
                             <span className="features-alternating__meta">
-                                {review.project} · {review.by === "Agent" ? "Agent for Jonas Berg" : review.by}
+                                {review.project} · {review.by === "Agent" ? "Agent for Declan Walsh" : review.by}
                             </span>
                         </span>
                         <span className="features-alternating__diff features-alternating__diff--review">
@@ -104,7 +104,7 @@ const log = [
     { time: "12:04:11", text: "Build started on main at a3f9c21" },
     { time: "12:04:59", text: "Built 214 pages in 48s" },
     { time: "12:05:06", text: "212 checks passed" },
-    { time: "12:05:08", text: "Promoted to production by Maya Chen" },
+    { time: "12:05:08", text: "Promoted to production by Siobhan Murphy" },
 ];
 
 /** A deploy: what went out, its log, and the last good one to roll back to. */

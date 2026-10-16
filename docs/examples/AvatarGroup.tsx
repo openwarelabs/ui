@@ -9,19 +9,19 @@ export const meta: DocMeta = {
     source: "components/Avatar/AvatarGroup.tsx",
     imports: ["AvatarGroup", "Avatar"],
     notes: [
-        "The group reads out as one image: “Alex Silver, Clara Novak and 3 others”, or your label.",
+        "The group reads out as one image: “Alex Silver, Aoife O'Sullivan and 3 others”, or your label.",
     ],
     related: ["Avatar", "User"],
 };
 
 const team = [
     "Alex Silver",
-    "Clara Novak",
-    "Sam Okafor",
-    "Mia Chen",
-    "Jonas Berg",
-    "Ana Lima",
-    "Leo Park",
+    "Aoife O'Sullivan",
+    "Seán McCarthy",
+    "Orla MacNamara",
+    "Declan Walsh",
+    "Clodagh Nolan",
+    "Tadhg O'Donovan",
 ];
 
 /** Up to four, then a count. */

@@ -32,11 +32,11 @@ const recent: Notifications02Day[] = [
             {
                 id: "e1",
                 kind: "deploy",
-                by: "Maya Chen",
+                by: "Siobhan Murphy",
                 time: "14:32",
                 line: (
                     <>
-                        <Who>Maya Chen</Who> deployed <To>marketing-site</To> to production
+                        <Who>Siobhan Murphy</Who> deployed <To>marketing-site</To> to production
                     </>
                 ),
                 detail: (
@@ -64,18 +64,18 @@ const recent: Notifications02Day[] = [
                     <>
                         <Mono tone="success">+124</Mono>
                         <Mono tone="danger">−38</Mono>
-                        <span>6 files · asked Tomás Reyes to review</span>
+                        <span>6 files · asked Ciarán Kelly to review</span>
                     </>
                 ),
             },
             {
                 id: "e3",
                 kind: "review",
-                by: "Clara Novak",
+                by: "Aoife O'Sullivan",
                 time: "11:47",
                 line: (
                     <>
-                        <Who>Clara Novak</Who> commented on <To>Fix invoice dates in the EU</To>
+                        <Who>Aoife O'Sullivan</Who> commented on <To>Fix invoice dates in the EU</To>
                     </>
                 ),
                 detail: (
@@ -87,11 +87,11 @@ const recent: Notifications02Day[] = [
             {
                 id: "e4",
                 kind: "review",
-                by: "Tomás Reyes",
+                by: "Ciarán Kelly",
                 time: "09:20",
                 line: (
                     <>
-                        <Who>Tomás Reyes</Who> approved <To>#479 Pricing page copy</To>
+                        <Who>Ciarán Kelly</Who> approved <To>#479 Pricing page copy</To>
                     </>
                 ),
             },
@@ -118,36 +118,36 @@ const recent: Notifications02Day[] = [
                         <Badge size="sm" variant="danger">
                             Failed
                         </Badge>
-                        <span>Tests failed in checkout.spec.ts · started by Clara Novak</span>
+                        <span>Tests failed in checkout.spec.ts · started by Aoife O'Sullivan</span>
                     </>
                 ),
             },
             {
                 id: "e6",
                 kind: "team",
-                by: "Jonas Berg",
+                by: "Declan Walsh",
                 time: "16:44",
                 line: (
                     <>
-                        <Who>Jonas Berg</Who> created the project <To>design-system</To>
+                        <Who>Declan Walsh</Who> created the project <To>design-system</To>
                     </>
                 ),
             },
             {
                 id: "e7",
                 kind: "team",
-                by: "Aiko Tanaka",
+                by: "Niamh Byrne",
                 time: "10:02",
                 line: (
                     <>
-                        <Who>Aiko Tanaka</Who> invited Sam Okafor and Lena Fischer to Acme
+                        <Who>Niamh Byrne</Who> invited Seán McCarthy and Róisín O'Brien to Acme
                     </>
                 ),
                 detail: (
                     <>
-                        <AvatarGroup size="sm" label="Sam Okafor and Lena Fischer">
-                            <Avatar name="Sam Okafor" />
-                            <Avatar name="Lena Fischer" />
+                        <AvatarGroup size="sm" label="Seán McCarthy and Róisín O'Brien">
+                            <Avatar name="Seán McCarthy" />
+                            <Avatar name="Róisín O'Brien" />
                         </AvatarGroup>
                         <span>Both joined within the hour</span>
                     </>
@@ -186,11 +186,11 @@ const earlier: Notifications02Day[] = [
             {
                 id: "e9",
                 kind: "deploy",
-                by: "Omar Haddad",
+                by: "Cillian Ryan",
                 time: "15:12",
                 line: (
                     <>
-                        <Who>Omar Haddad</Who> deployed <To>billing-api</To> to production
+                        <Who>Cillian Ryan</Who> deployed <To>billing-api</To> to production
                     </>
                 ),
                 detail: (
@@ -213,11 +213,11 @@ const earlier: Notifications02Day[] = [
             {
                 id: "e10",
                 kind: "review",
-                by: "Maya Chen",
+                by: "Siobhan Murphy",
                 time: "16:05",
                 line: (
                     <>
-                        <Who>Maya Chen</Who> requested changes on <To>#471 Release 2.4</To>
+                        <Who>Siobhan Murphy</Who> requested changes on <To>#471 Release 2.4</To>
                     </>
                 ),
                 detail: (
@@ -229,11 +229,11 @@ const earlier: Notifications02Day[] = [
             {
                 id: "e11",
                 kind: "team",
-                by: "Omar Haddad",
+                by: "Cillian Ryan",
                 time: "11:20",
                 line: (
                     <>
-                        <Who>Omar Haddad</Who> created the API key <To>production-ci</To>
+                        <Who>Cillian Ryan</Who> created the API key <To>production-ci</To>
                     </>
                 ),
                 detail: <span>Expires in 90 days · deploys only</span>,

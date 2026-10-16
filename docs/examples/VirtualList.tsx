@@ -94,7 +94,7 @@ export function TenThousandRows() {
 TenThousandRows.layout = { fill: true };
 
 const words = "the build passed after we pinned the version and cleared the cache so the next deploy can go out this afternoon once review is done".split(" ");
-const people = ["Ada Lovelace", "Grace Hopper", "Alan Turing", "Katherine Johnson"];
+const people = ["Saoirse Doyle", "Gráinne O'Neill", "Eoin Fitzgerald", "Orla MacNamara"];
 
 /** Some made-up text of a length that varies from row to row, the same every time. */
 function sentence(index: number) {

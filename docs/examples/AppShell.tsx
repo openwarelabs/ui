@@ -115,14 +115,14 @@ function Account() {
             justify={collapsed ? "center" : "start"}
             style={{ paddingInline: collapsed ? 0 : 4 }}
         >
-            <Avatar name="Ada Lovelace" size="sm" />
+            <Avatar name="Saoirse Doyle" size="sm" />
             {collapsed ? null : (
                 <span style={{ display: "grid", minWidth: 0 }}>
                     <Text as="span" variant="label" truncate>
-                        Ada Lovelace
+                        Saoirse Doyle
                     </Text>
                     <Text variant="caption" truncate>
-                        ada@acme.dev
+                        saoirse@acme.dev
                     </Text>
                 </span>
             )}

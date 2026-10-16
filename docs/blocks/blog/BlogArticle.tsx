@@ -43,7 +43,7 @@ export function BlogArticle() {
             topic="Agents"
             title="Agents now open their own pull requests"
             description="Hand an agent a task and it comes back with a branch, a passing build and a pull request your team reviews like any other."
-            author={{ name: "Maya Chen", jobTitle: "Product lead" }}
+            author={{ name: "Siobhan Murphy", jobTitle: "Product lead" }}
             date="8 Oct 2026"
             dateTime="2026-10-08"
             readingTime="4 min read"

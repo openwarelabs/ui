@@ -13,7 +13,7 @@ const steps = [
     { title: "Review", description: "Check and create", heading: "Check and create" },
 ];
 
-const people = ["Maya Chen", "Tomás Reyes", "Clara Novak", "Jonas Berg", "Aiko Tanaka"];
+const people = ["Siobhan Murphy", "Ciarán Kelly", "Aoife O'Sullivan", "Declan Walsh", "Niamh Byrne"];
 
 const roles = [
     { value: "member", label: "Member", description: "Works in the team's projects and reviews changes." },
@@ -46,9 +46,9 @@ interface Values {
 
 type Errors = Partial<Record<"name" | "identifier" | "emails" | "projects", string>>;
 
-const emptyValues: Values = { name: "", identifier: "", lead: "Maya Chen", emails: "", role: "member", projects: [], agents: "pull-requests" };
+const emptyValues: Values = { name: "", identifier: "", lead: "Siobhan Murphy", emails: "", role: "member", projects: [], agents: "pull-requests" };
 
-/** "tomas@example.com, clara@example.com" → ["tomas@example.com", "clara@example.com"] */
+/** "ciaran@example.com, aoife@example.com" → ["ciaran@example.com", "aoife@example.com"] */
 function parseEmails(text: string) {
     return [
         ...new Set(
@@ -175,7 +175,7 @@ export function FormSteps() {
                                     id={fieldId("emails")}
                                     value={values.emails}
                                     onChange={(event) => update("emails", event.target.value)}
-                                    placeholder={"tomas@example.com, clara@example.com"}
+                                    placeholder={"ciaran@example.com, aoife@example.com"}
                                     rows={4}
                                     spellCheck={false}
                                 />

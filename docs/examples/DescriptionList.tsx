@@ -29,7 +29,7 @@ export function Horizontal() {
             <DescriptionList divided>
                 <DescriptionItem term="Project">recipe-app</DescriptionItem>
                 <DescriptionItem term="Owner">
-                    <User name="Maya Chen" description="maya@example.com" size="sm" />
+                    <User name="Siobhan Murphy" description="siobhan@example.com" size="sm" />
                 </DescriptionItem>
                 <DescriptionItem term="Status">
                     <Badge variant="success">Deployed</Badge>
@@ -59,7 +59,7 @@ export function WithActions() {
                         </Button>
                     }
                 >
-                    Maya Chen
+                    Siobhan Murphy
                 </DescriptionItem>
                 <DescriptionItem
                     term="Email"
@@ -69,7 +69,7 @@ export function WithActions() {
                         </Button>
                     }
                 >
-                    maya@example.com
+                    siobhan@example.com
                 </DescriptionItem>
                 <DescriptionItem term="API key" action={<CopyButton value="ow_live_7Hc2kQ9xP4" label="Copy API key" iconOnly />}>
                     <Code>ow_live_7Hc2…</Code>
@@ -94,7 +94,7 @@ export function Grid() {
                     <DescriptionItem term="Status">
                         <Badge variant="active">Shipped</Badge>
                     </DescriptionItem>
-                    <DescriptionItem term="Customer">Sam Okafor</DescriptionItem>
+                    <DescriptionItem term="Customer">Seán McCarthy</DescriptionItem>
                     <DescriptionItem term="Total">€148.20</DescriptionItem>
                     <DescriptionItem term="Tracking">
                         <Link href="#tracking">DHL 00340434</Link>

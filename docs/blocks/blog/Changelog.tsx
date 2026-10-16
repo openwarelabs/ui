@@ -36,7 +36,7 @@ function AgentPullRequest() {
                         <Bot size={13} />
                     </span>
                     <span>
-                        Agent run<span className="changelog__for"> for Tomás Reyes</span> · 6 min
+                        Agent run<span className="changelog__for"> for Ciarán Kelly</span> · 6 min
                     </span>
                     <span className="changelog__diffstat">
                         <span className="changelog__added">+42</span>
@@ -60,7 +60,7 @@ function Rollback() {
                 <div className="changelog__deploy">
                     <span className="changelog__deploy-name">
                         <strong>billing-api #418</strong>
-                        <span>fix/vat-rounding · Clara Novak · 2 min ago</span>
+                        <span>fix/vat-rounding · Aoife O'Sullivan · 2 min ago</span>
                     </span>
                     <Badge size="sm" variant="danger">
                         Failed

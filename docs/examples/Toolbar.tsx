@@ -181,11 +181,11 @@ const tasks: Task[] = [
     {
         id: "t2",
         title: "Add rate limits to the public API",
-        assignee: "Sam Okafor",
+        assignee: "Seán McCarthy",
         status: "In progress",
     },
     { id: "t3", title: "Remove the legacy export job", assignee: "Agent", status: "To do" },
-    { id: "t4", title: "Write the 0.4 release notes", assignee: "Clara Novak", status: "To do" },
+    { id: "t4", title: "Write the 0.4 release notes", assignee: "Aoife O'Sullivan", status: "To do" },
 ];
 
 const statusVariant = {
@@ -226,8 +226,8 @@ export function BulkActions() {
                         </Button>
                     }
                 >
-                    <MenuItem>Sam Okafor</MenuItem>
-                    <MenuItem>Clara Novak</MenuItem>
+                    <MenuItem>Seán McCarthy</MenuItem>
+                    <MenuItem>Aoife O'Sullivan</MenuItem>
                     <MenuItem icon={<Bot size={15} />}>An agent</MenuItem>
                 </Menu>
                 <Menu

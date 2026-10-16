@@ -43,12 +43,12 @@ export function Basic() {
 }
 
 const people = [
-    { value: "ana", label: "Ana Ferreira", description: "ana@acme.io" },
-    { value: "ben", label: "Ben Okafor", description: "ben@acme.io" },
-    { value: "chloe", label: "Chloé Martin", description: "chloe@acme.io" },
-    { value: "dara", label: "Dara Byrne", description: "dara@acme.io" },
-    { value: "emil", label: "Emil Lund", description: "emil@acme.io" },
-    { value: "farah", label: "Farah Haddad", description: "farah@acme.io", disabled: true },
+    { value: "aoife", label: "Aoife O'Sullivan", description: "aoife@acme.io" },
+    { value: "cillian", label: "Cillian Ryan", description: "cillian@acme.io" },
+    { value: "clodagh", label: "Clodagh Nolan", description: "clodagh@acme.io" },
+    { value: "declan", label: "Declan Walsh", description: "declan@acme.io" },
+    { value: "eoin", label: "Eoin Fitzgerald", description: "eoin@acme.io" },
+    { value: "fionn", label: "Fionn Gallagher", description: "fionn@acme.io", disabled: true },
 ];
 
 /** With options, it suggests values as you type and only takes those. Emails are matched too. */
@@ -56,7 +56,7 @@ export function Suggestions() {
     return (
         <div style={{ width: 380, maxWidth: "100%" }}>
             <Field label="Reviewers" hint="Up to three.">
-                <TagInput options={people} defaultValue={["ana"]} max={3} placeholder="Search people" />
+                <TagInput options={people} defaultValue={["aoife"]} max={3} placeholder="Search people" />
             </Field>
         </div>
     );

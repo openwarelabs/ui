@@ -11,7 +11,7 @@ export { useMentions } from "./useMentions";
 
 /**
  * A text field that suggests people after `@` and commands after `/` (or any trigger you give), at the caret.
- * Picking one puts it in the text as "@Ada Lovelace ", and `onMentionsChange` reports the mentions with their ids.
+ * Picking one puts it in the text as "@Saoirse Doyle ", and `onMentionsChange` reports the mentions with their ids.
  * One line by default; `multiline` makes it a Textarea that grows. For another text box, use `useMentions`.
  */
 export const MentionInput = forwardRef<HTMLTextAreaElement | HTMLInputElement, MentionInputProps>(function MentionInput(

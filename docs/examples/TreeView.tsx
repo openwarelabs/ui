@@ -135,24 +135,24 @@ export function Checkboxes() {
 Checkboxes.layout = { align: "start" as const };
 
 const people: Record<string, Array<[string, string]>> = {
-    ana: [
-        ["ben", "Ben Okafor"],
-        ["chloe", "Chloé Martin"],
+    aoife: [
+        ["cillian", "Cillian Ryan"],
+        ["clodagh", "Clodagh Nolan"],
     ],
-    ben: [
-        ["dara", "Dara Byrne"],
-        ["emil", "Emil Lund"],
-        ["farah", "Farah Haddad"],
+    cillian: [
+        ["declan", "Declan Walsh"],
+        ["eoin", "Eoin Fitzgerald"],
+        ["fionn", "Fionn Gallagher"],
     ],
-    chloe: [["gus", "Gus Novak"]],
+    clodagh: [["grainne", "Gráinne O'Neill"]],
 };
 const roles: Record<string, string> = {
-    ana: "CEO",
-    ben: "Head of Engineering",
-    chloe: "Head of Design",
+    aoife: "CEO",
+    cillian: "Head of Engineering",
+    clodagh: "Head of Design",
 };
 
-/** loadChildren fetches someone's reports the first time they open. Chloé's team fails once, to show the retry row. */
+/** loadChildren fetches someone's reports the first time they open. Clodagh's team fails once, to show the retry row. */
 export function LazyLoading() {
     const [failedOnce, setFailedOnce] = useState(false);
     const toItem = ([id, name]: [string, string]): TreeItem => ({
@@ -167,11 +167,11 @@ export function LazyLoading() {
             <TreeView
                 label="Organisation"
                 selectionMode="none"
-                items={[toItem(["ana", "Ana Ferreira"])]}
+                items={[toItem(["aoife", "Aoife O'Sullivan"])]}
                 loadChildren={(item) =>
                     new Promise((resolve, reject) =>
                         setTimeout(() => {
-                            if (item.id === "chloe" && !failedOnce) {
+                            if (item.id === "clodagh" && !failedOnce) {
                                 setFailedOnce(true);
                                 reject(new Error("Network"));
                             } else resolve((people[item.id] ?? []).map(toItem));

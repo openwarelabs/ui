@@ -64,11 +64,11 @@ export function Gallery() {
 Gallery.layout = { fill: true };
 
 const quotes = [
-    { name: "Priya Shah", role: "Design lead, Northwind", quote: "We replaced three home-made carousels with this one, and they finally all behave the same." },
-    { name: "Tom Becker", role: "Engineer, Lumen", quote: "Swiping feels right on a phone because it's just scrolling. Nothing to tune." },
-    { name: "Ana Lima", role: "Product manager, Kite", quote: "The pause button and the keys meant accessibility signed it off first time." },
-    { name: "Sam Okafor", role: "Founder, Tidy", quote: "Took ten minutes to put our customer quotes on the home page." },
-    { name: "Mei Chen", role: "Frontend developer, Orbit", quote: "It follows the theme and the brand colour without a single override." },
+    { name: "Caoimhe Brennan", role: "Design lead, Northwind", quote: "We replaced three home-made carousels with this one, and they finally all behave the same." },
+    { name: "Padraig Kavanagh", role: "Engineer, Lumen", quote: "Swiping feels right on a phone because it's just scrolling. Nothing to tune." },
+    { name: "Clodagh Nolan", role: "Product manager, Kite", quote: "The pause button and the keys meant accessibility signed it off first time." },
+    { name: "Seán McCarthy", role: "Founder, Tidy", quote: "Took ten minutes to put our customer quotes on the home page." },
+    { name: "Orla MacNamara", role: "Frontend developer, Orbit", quote: "It follows the theme and the brand colour without a single override." },
 ];
 
 /** Quotes, two in view at once, with the buttons outside the cards. */

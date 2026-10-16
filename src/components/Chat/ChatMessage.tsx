@@ -211,13 +211,13 @@ export type ChatMessageStatus = "streaming" | "done" | "error";
 
 export interface ChatMessageProps extends Omit<HTMLAttributes<HTMLElement>, "children"> {
     /** Who it's from. `user`: the person, in a bubble on the right. `assistant`: the agent, full width beside its
-     * avatar. `system`: a muted line in the middle, between hairlines, for things that happened ("Maya changed the
+     * avatar. `system`: a muted line in the middle, between hairlines, for things that happened ("Siobhan changed the
      * model to Claude Sonnet"). */
     from: ChatMessageFrom;
     /** The message. A person's plain text keeps its line breaks; give an agent's formatted answer as Prose, and put
      * paragraphs in Text so blocks sit 12px apart. */
     children?: ReactNode;
-    /** Shown above the message: "Acme agent", "Maya Chen". Left out, screen readers hear "You" or "Agent" instead. */
+    /** Shown above the message: "Acme agent", "Siobhan Murphy". Left out, screen readers hear "You" or "Agent" instead. */
     name?: ReactNode;
     /** The agent's bot tile by default; any node (an Avatar) in its place, or null for none. A person's message shows one
      * only when you give it. */

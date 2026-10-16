@@ -19,9 +19,9 @@ const projects = [
 ];
 
 const recent = [
-    { project: "marketing-site", what: "Pricing page copy", who: "Maya Chen", when: "4 min ago", status: "Live" },
-    { project: "billing-api", what: "Fix invoice dates in the EU", who: "Agent · Tomás Reyes", when: "26 min ago", status: "Building" },
-    { project: "mobile-app", what: "Release 2.4", who: "Clara Novak", when: "2 h ago", status: "Live" },
+    { project: "marketing-site", what: "Pricing page copy", who: "Siobhan Murphy", when: "4 min ago", status: "Live" },
+    { project: "billing-api", what: "Fix invoice dates in the EU", who: "Agent · Ciarán Kelly", when: "26 min ago", status: "Building" },
+    { project: "mobile-app", what: "Release 2.4", who: "Aoife O'Sullivan", when: "2 h ago", status: "Live" },
 ];
 
 export function ShellSidebar() {
@@ -46,7 +46,7 @@ export function ShellSidebar() {
                 },
             ]}
             defaultCurrent="overview"
-            account={{ name: "Maya Chen", email: "maya@example.com" }}
+            account={{ name: "Siobhan Murphy", email: "siobhan@example.com" }}
             accountMenu={[
                 { label: "Profile", icon: <User size={15} /> },
                 { label: "Settings", icon: <Settings size={15} />, page: "settings" },

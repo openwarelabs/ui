@@ -59,13 +59,13 @@ export interface TransferListProps {
         moveSelected?(count: number, to: string): string;
         /** The button that moves them all, with `showMoveAll`. @default (to) => `Move all to ${to}` */
         moveAll?(to: string): string;
-        /** Read out after a move. @default (names, to) => `Moved Ada and Grace to ${to}`, or `Moved 7 items to ${to}` past five */
+        /** Read out after a move. @default (names, to) => `Moved Siobhan and Aoife to ${to}`, or `Moved 7 items to ${to}` past five */
         moved?(names: string[], to: string): string;
         /** With `orderable`. @default "Move up" */
         moveUp?: string;
         /** With `orderable`. @default "Move down" */
         moveDown?: string;
-        /** Read out after reordering. @default (names, direction) => `Moved Ada up` */
+        /** Read out after reordering. @default (names, direction) => `Moved Siobhan up` */
         reordered?(names: string[], direction: "up" | "down"): string;
         /** Names a side's search box. @default (side) => `Search ${side}` */
         search?(side: string): string;

@@ -5,7 +5,7 @@ import type { SignInProvider } from "@blocks/shared/shared.types";
 export interface SignIn02Labels {
     /** @default "Work email" */
     email?: string;
-    /** @default "maya@example.com" */
+    /** @default "siobhan@example.com" */
     emailPlaceholder?: string;
     /** @default "Password" */
     password?: string;
@@ -38,7 +38,7 @@ export interface SignIn02Values {
 export interface SignIn02Quote {
     /** The words, with their quotation marks. */
     text: ReactNode;
-    /** Who said it: "Lena Fischer, Head of Platform at Halcyon". */
+    /** Who said it: "Róisín O'Brien, Head of Platform at Halcyon". */
     author: ReactNode;
     /** A small outlined label after the name, such as "Sample quote". */
     badge?: ReactNode;

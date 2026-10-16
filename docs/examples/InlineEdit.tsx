@@ -97,7 +97,7 @@ Multiline.layout = { align: "start" as const };
 
 /** onSave returns a Promise: the editor waits for it. Any name with "taken" in it fails, and the error shows under the box. */
 export function AsyncSave() {
-    const [handle, setHandle] = useState("ada");
+    const [handle, setHandle] = useState("siobhan");
     return (
         <InlineEdit
             label="Username"
@@ -152,7 +152,7 @@ export function InSettings() {
                 </SettingsRow>
             </Card>
             <DescriptionList divided>
-                <DescriptionItem term="Owner">Ada Lovelace</DescriptionItem>
+                <DescriptionItem term="Owner">Saoirse Doyle</DescriptionItem>
                 <DescriptionItem term="Workspace">
                     <InlineEdit
                         label="Workspace name"

@@ -25,7 +25,7 @@ export interface Faq03Contact {
     status?: ReactNode;
     /** The people who answer, as overlapping avatars on the left. */
     people?: Faq03Person[];
-    /** Names the avatars for screen readers: "Lena, Omar and Aiko from support". */
+    /** Names the avatars for screen readers: "Róisín, Cillian and Niamh from support". */
     peopleLabel?: string;
     /** The main way to get in touch, as a primary pill button. */
     primaryAction: BlockAction;

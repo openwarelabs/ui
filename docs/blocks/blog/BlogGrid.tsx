@@ -94,7 +94,7 @@ const posts: Blog01Post[] = [
         date: "8 Oct 2026",
         dateTime: "2026-10-08",
         readingTime: "4 min read",
-        author: { name: "Maya Chen", jobTitle: "Product lead" },
+        author: { name: "Siobhan Murphy", jobTitle: "Product lead" },
         cover: <Cover kind="orbit" />,
     },
     {
@@ -105,7 +105,7 @@ const posts: Blog01Post[] = [
         date: "30 Sep 2026",
         dateTime: "2026-09-30",
         readingTime: "7 min read",
-        author: { name: "Tomás Reyes", jobTitle: "Staff engineer" },
+        author: { name: "Ciarán Kelly", jobTitle: "Staff engineer" },
         cover: <Cover kind="diff" />,
     },
     {
@@ -116,7 +116,7 @@ const posts: Blog01Post[] = [
         date: "22 Sep 2026",
         dateTime: "2026-09-22",
         readingTime: "3 min read",
-        author: { name: "Clara Novak", jobTitle: "Engineering manager" },
+        author: { name: "Aoife O'Sullivan", jobTitle: "Engineering manager" },
         cover: <Cover kind="bars" />,
     },
     {
@@ -127,7 +127,7 @@ const posts: Blog01Post[] = [
         date: "15 Sep 2026",
         dateTime: "2026-09-15",
         readingTime: "6 min read",
-        author: { name: "Jonas Berg", jobTitle: "Customer success" },
+        author: { name: "Declan Walsh", jobTitle: "Customer success" },
         cover: <Cover kind="horizon" />,
     },
     {
@@ -138,7 +138,7 @@ const posts: Blog01Post[] = [
         date: "4 Sep 2026",
         dateTime: "2026-09-04",
         readingTime: "5 min read",
-        author: { name: "Aiko Tanaka", jobTitle: "Machine learning engineer" },
+        author: { name: "Niamh Byrne", jobTitle: "Machine learning engineer" },
         cover: <Cover kind="glyph" />,
     },
     {
@@ -149,7 +149,7 @@ const posts: Blog01Post[] = [
         date: "27 Aug 2026",
         dateTime: "2026-08-27",
         readingTime: "5 min read",
-        author: { name: "Lena Fischer", jobTitle: "Solutions engineer" },
+        author: { name: "Róisín O'Brien", jobTitle: "Solutions engineer" },
         cover: <Cover kind="tiles" />,
     },
 ];

@@ -100,7 +100,7 @@ export interface Contact01Props extends Omit<HTMLAttributes<HTMLElement>, "title
     onSubmit(values: Contact01Values): void | Promise<void>;
     /** A small line beside the button: "We use your details only to reply to you." */
     note?: ReactNode;
-    /** What replaces the form once it's sent, given what they sent: "Thanks, Maya". */
+    /** What replaces the form once it's sent, given what they sent: "Thanks, Siobhan". */
     successTitle(values: Contact01Values): ReactNode;
     /** A line under it, given what they sent. */
     successDescription?(values: Contact01Values): ReactNode;

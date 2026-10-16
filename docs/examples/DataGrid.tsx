@@ -41,8 +41,8 @@ interface Order {
     placed: string;
 }
 
-const first = ["Ada", "Grace", "Alan", "Barbara", "Donald", "Frances", "Katherine", "Linus", "Margaret", "Niklaus", "Radia", "Sofía", "Tim", "Zoë"];
-const last = ["Lovelace", "Hopper", "Turing", "Liskov", "Knuth", "Allen", "Johnson", "Torvalds", "Hamilton", "Wirth", "Perlman", "Núñez", "Berners-Lee"];
+const first = ["Siobhan", "Aoife", "Declan", "Niamh", "Cillian", "Saoirse", "Eoin", "Padraig", "Orla", "Fionn", "Caoimhe", "Tadhg", "Clodagh", "Connor"];
+const last = ["Murphy", "Kelly", "Walsh", "Byrne", "McCarthy", "Ryan", "Doyle", "Fitzgerald", "Kavanagh", "Brennan", "Nolan", "Duffy", "MacNamara"];
 const statuses: Array<Order["status"]> = ["Paid", "Paid", "Paid", "Pending", "Refunded", "Failed"];
 
 // The same 2,000 orders on every load: a small seeded generator rather than Math.random.

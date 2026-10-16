@@ -42,11 +42,11 @@ function ReviewVignette() {
                 <div className="sign-in-split__review-foot">
                     <span className="sign-in-split__agent">
                         <Bot size={14} />
-                        Opened by an agent for Tomás Reyes
+                        Opened by an agent for Ciarán Kelly
                     </span>
                     <AvatarGroup size="sm">
-                        <Avatar name="Clara Novak" />
-                        <Avatar name="Jonas Berg" />
+                        <Avatar name="Aoife O'Sullivan" />
+                        <Avatar name="Declan Walsh" />
                     </AvatarGroup>
                 </div>
             </div>
@@ -101,7 +101,7 @@ export function SignInSplit() {
             visual={<ReviewVignette />}
             quote={{
                 text: "“We give the dull fixes to agents now, and spend our reviews on the parts that need us.”",
-                author: "Lena Fischer, Head of Platform at Halcyon",
+                author: "Róisín O'Brien, Head of Platform at Halcyon",
                 badge: "Sample quote",
             }}
         />

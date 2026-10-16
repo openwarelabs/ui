@@ -91,7 +91,7 @@ const saved =
 export function ReadOnly() {
     return (
         <div style={{ width: 360, maxWidth: "100%" }}>
-            <Field label="Signed by Ada Lovelace" hint="12 March 2026, 14:05">
+            <Field label="Signed by Saoirse Doyle" hint="12 March 2026, 14:05">
                 <SignaturePad readOnly value={saved} height={120} />
             </Field>
         </div>

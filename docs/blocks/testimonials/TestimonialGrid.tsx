@@ -2,34 +2,34 @@ import { Testimonial02, type Testimonial02Quote } from "@openwarelabs/blocks";
 
 const quotes: Testimonial02Quote[] = [
     {
-        name: "Daniel Osei",
+        name: "Oisín Duffy",
         jobTitle: "Staff engineer, Quarry",
         quote: "The agents are the first automation I've trusted near our payments code. Every step is written down, and when a test fails twice it stops and asks instead of guessing.",
     },
     {
-        name: "Hana Sato",
+        name: "Orla MacNamara",
         jobTitle: "Product engineer, Lumen",
         quote: "⌘K for everything. I haven't opened the sidebar in months.",
         short: true,
     },
     {
-        name: "Marta Kowalska",
+        name: "Caoimhe Brennan",
         jobTitle: "Engineering manager, Oakline",
         quote: "We moved four teams over in a week. The import kept every issue, comment and link, so nobody lost the history behind a decision.",
     },
     {
-        name: "Felix Wagner",
+        name: "Padraig Kavanagh",
         jobTitle: "Head of platform, Pinecrest",
         quote: "Required reviews apply to agents as well as people. That's what got Acme past our security team, and the audit log did the rest.",
     },
     {
-        name: "Nadia Rahman",
+        name: "Clodagh Nolan",
         jobTitle: "Founder, Cobalt",
         quote: "We're five people, so the free plan covers us. It's like having a sixth who only does the chores.",
         short: true,
     },
     {
-        name: "Owen Gallagher",
+        name: "Fionn Gallagher",
         jobTitle: "Lead developer, Halcyon",
         quote: "Rolling back takes one click and no rebuild. We've needed it twice this year, and knowing it's there is why we're happy to ship on a Friday.",
     },

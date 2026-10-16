@@ -29,10 +29,10 @@ const sections = [
         ],
         listTitle: "Latest activity",
         rows: [
-            { title: "Pricing page copy", meta: "marketing-site · Maya Chen", when: "4 min ago", status: "Live", tone: "success" },
-            { title: "Fix invoice dates in the EU", meta: "billing-api · Agent for Tomás Reyes", when: "26 min ago", status: "Building", tone: "active" },
-            { title: "Release 2.4", meta: "mobile-app · Clara Novak", when: "2 h ago", status: "Live", tone: "success" },
-            { title: "Rebuild the search index", meta: "docs · Agent for Jonas Berg", when: "Yesterday", status: "Failed", tone: "danger" },
+            { title: "Pricing page copy", meta: "marketing-site · Siobhan Murphy", when: "4 min ago", status: "Live", tone: "success" },
+            { title: "Fix invoice dates in the EU", meta: "billing-api · Agent for Ciarán Kelly", when: "26 min ago", status: "Building", tone: "active" },
+            { title: "Release 2.4", meta: "mobile-app · Aoife O'Sullivan", when: "2 h ago", status: "Live", tone: "success" },
+            { title: "Rebuild the search index", meta: "docs · Agent for Declan Walsh", when: "Yesterday", status: "Failed", tone: "danger" },
         ] as Row[],
     },
     {
@@ -67,16 +67,16 @@ const sections = [
         ],
         listTitle: "Today",
         rows: [
-            { title: "main · 9f3c2a1", meta: "marketing-site · Maya Chen · 48 s", when: "4 min ago", status: "Live", tone: "success" },
+            { title: "main · 9f3c2a1", meta: "marketing-site · Siobhan Murphy · 48 s", when: "4 min ago", status: "Live", tone: "success" },
             {
                 title: "fix/invoice-dates · 4be71d0",
-                meta: "billing-api · Tomás Reyes · building for 2 min",
+                meta: "billing-api · Ciarán Kelly · building for 2 min",
                 when: "26 min ago",
                 status: "Building",
                 tone: "active",
             },
-            { title: "release/2.4 · c81aa95", meta: "mobile-app · Clara Novak · 3 min 12 s", when: "2 h ago", status: "Live", tone: "success" },
-            { title: "main · 07d5e3f", meta: "design-system · Aiko Tanaka · 1 min 05 s", when: "3 h ago", status: "Live", tone: "success" },
+            { title: "release/2.4 · c81aa95", meta: "mobile-app · Aoife O'Sullivan · 3 min 12 s", when: "2 h ago", status: "Live", tone: "success" },
+            { title: "main · 07d5e3f", meta: "design-system · Niamh Byrne · 1 min 05 s", when: "3 h ago", status: "Live", tone: "success" },
         ] as Row[],
     },
     {
@@ -94,26 +94,26 @@ const sections = [
         rows: [
             {
                 title: "Fix invoice dates in the EU",
-                meta: "billing-api · for Tomás Reyes · 6 files changed",
+                meta: "billing-api · for Ciarán Kelly · 6 files changed",
                 when: "26 min ago",
                 status: "Running",
                 tone: "active",
             },
             {
                 title: "Update React Native to 0.76",
-                meta: "mobile-app · for Clara Novak · 14 files changed",
+                meta: "mobile-app · for Aoife O'Sullivan · 14 files changed",
                 when: "1 h ago",
                 status: "Needs review",
                 tone: "warning",
             },
             {
                 title: "Add alt text to the blog images",
-                meta: "marketing-site · for Sam Okafor · 22 files changed",
+                meta: "marketing-site · for Seán McCarthy · 22 files changed",
                 when: "3 h ago",
                 status: "Merged",
                 tone: "success",
             },
-            { title: "Rebuild the search index", meta: "docs · for Jonas Berg · stopped at step 3 of 5", when: "Yesterday", status: "Failed", tone: "danger" },
+            { title: "Rebuild the search index", meta: "docs · for Declan Walsh · stopped at step 3 of 5", when: "Yesterday", status: "Failed", tone: "danger" },
         ] as Row[],
     },
 ];
@@ -131,7 +131,7 @@ export function ShellTopBar() {
             navigation={sections.map(({ id, label, icon: Icon }) => ({ id, label, icon: <Icon size={15} /> }))}
             current={active}
             onNavigate={setActive}
-            account={{ name: "Maya Chen", email: "maya@example.com" }}
+            account={{ name: "Siobhan Murphy", email: "siobhan@example.com" }}
             accountMenu={[
                 { label: "Profile", icon: <User size={15} /> },
                 { label: "Settings", icon: <Settings size={15} /> },

@@ -14,8 +14,8 @@ const platforms = [
 
 const inbox = [
     { title: "Merge the invoice fix?", project: "billing-api", who: "Agent", status: "Needs you", tone: "warning" },
-    { title: "Pricing page copy", project: "marketing-site", who: "Maya Chen", status: "Approved", tone: "success" },
-    { title: "Release 2.4 checklist", project: "mobile-app", who: "Clara Novak", status: "In review", tone: "active" },
+    { title: "Pricing page copy", project: "marketing-site", who: "Siobhan Murphy", status: "Approved", tone: "success" },
+    { title: "Release 2.4 checklist", project: "mobile-app", who: "Aoife O'Sullivan", status: "In review", tone: "active" },
     { title: "Update the API examples", project: "docs", who: "Agent", status: "Building", tone: "active" },
 ] as const;
 

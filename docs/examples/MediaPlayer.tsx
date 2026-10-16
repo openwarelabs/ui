@@ -94,7 +94,7 @@ export function MinimalControls() {
     const { note, video, poster } = useDemoMedia();
     return (
         <Stack gap="lg" style={{ width: 320, maxWidth: "100%" }}>
-            <MediaPlayer kind="audio" controls="minimal" src={note ?? []} title="Voice note from Sam" />
+            <MediaPlayer kind="audio" controls="minimal" src={note ?? []} title="Voice note from Seán" />
             <MediaPlayer kind="video" controls="minimal" src={video ?? []} poster={poster} aria-label="Clip" />
         </Stack>
     );

@@ -25,11 +25,11 @@ function Frame({ path, label, children }: { path: string[]; label: string; child
                     ))}
                 </span>
                 <AvatarGroup size="sm" max={3} className="features-tabs__people">
-                    <Avatar name="Maya Chen" />
-                    <Avatar name="Tomás Reyes" />
-                    <Avatar name="Clara Novak" />
-                    <Avatar name="Jonas Berg" />
-                    <Avatar name="Aiko Tanaka" />
+                    <Avatar name="Siobhan Murphy" />
+                    <Avatar name="Ciarán Kelly" />
+                    <Avatar name="Aoife O'Sullivan" />
+                    <Avatar name="Declan Walsh" />
+                    <Avatar name="Niamh Byrne" />
                 </AvatarGroup>
             </div>
             <div className="features-tabs__screen">{children}</div>
@@ -52,8 +52,8 @@ const board = [
     {
         column: "Todo",
         issues: [
-            { id: "ACME-421", title: "Export invoices as CSV", label: "billing-api", owner: "Lena Fischer" },
-            { id: "ACME-424", title: "Dark theme for the status page", label: "marketing-site", owner: "Aiko Tanaka" },
+            { id: "ACME-421", title: "Export invoices as CSV", label: "billing-api", owner: "Róisín O'Brien" },
+            { id: "ACME-424", title: "Dark theme for the status page", label: "marketing-site", owner: "Niamh Byrne" },
             { id: "ACME-426", title: "Remove the old pricing table", label: "marketing-site", owner: "Agent" },
         ],
     },
@@ -61,14 +61,14 @@ const board = [
         column: "In progress",
         issues: [
             { id: "ACME-412", title: "Bump the Stripe SDK to v15", label: "billing-api", owner: "Agent", progress: 88 },
-            { id: "ACME-417", title: "Offline drafts on Android", label: "mobile-app", owner: "Clara Novak" },
+            { id: "ACME-417", title: "Offline drafts on Android", label: "mobile-app", owner: "Aoife O'Sullivan" },
         ],
     },
     {
         column: "In review",
         issues: [
-            { id: "ACME-409", title: "Fix invoice dates in the EU", label: "billing-api", owner: "Tomás Reyes" },
-            { id: "ACME-415", title: "Pricing page copy", label: "marketing-site", owner: "Maya Chen" },
+            { id: "ACME-409", title: "Fix invoice dates in the EU", label: "billing-api", owner: "Ciarán Kelly" },
+            { id: "ACME-415", title: "Pricing page copy", label: "marketing-site", owner: "Siobhan Murphy" },
         ],
     },
 ];
@@ -106,7 +106,7 @@ const runs = [
     {
         title: "Bump the Stripe SDK to v15",
         project: "billing-api",
-        for: "Jonas Berg",
+        for: "Declan Walsh",
         state: "Running tests, 212 of 240",
         status: "Running",
         tone: "active",
@@ -115,7 +115,7 @@ const runs = [
     {
         title: "Fix the flaky checkout test",
         project: "mobile-app",
-        for: "Clara Novak",
+        for: "Aoife O'Sullivan",
         state: "Opened pull request #96",
         status: "Ready",
         tone: "success",
@@ -124,7 +124,7 @@ const runs = [
     {
         title: "Rename plans on the pricing page",
         project: "marketing-site",
-        for: "Maya Chen",
+        for: "Siobhan Murphy",
         state: "Asked which names to use",
         status: "Needs you",
         tone: "warning",
@@ -133,8 +133,8 @@ const runs = [
     {
         title: "Translate the API guide into German",
         project: "docs",
-        for: "Lena Fischer",
-        state: "Merged by Lena Fischer",
+        for: "Róisín O'Brien",
+        state: "Merged by Róisín O'Brien",
         status: "Merged",
         tone: "neutral",
         time: "1h",
@@ -187,7 +187,7 @@ const diff = [
     { kind: " ", old: 16, new: 20, code: "}" },
 ];
 
-const checks = ["240 tests passed", "Preview is ready", "Approved by Clara Novak"];
+const checks = ["240 tests passed", "Preview is ready", "Approved by Aoife O'Sullivan"];
 
 function ReviewScreen() {
     return (
@@ -220,7 +220,7 @@ function ReviewScreen() {
             </div>
             <div className="features-tabs__checks">
                 <span className="features-tabs__screen-title">Fix invoice dates in the EU</span>
-                <span className="features-tabs__muted">#311 by Tomás Reyes</span>
+                <span className="features-tabs__muted">#311 by Ciarán Kelly</span>
                 <ul className="features-tabs__check-list">
                     {checks.map((check) => (
                         <li key={check}>
@@ -238,18 +238,18 @@ function ReviewScreen() {
 }
 
 const deploys = [
-    { project: "marketing-site", branch: "main", what: "Pricing page copy", who: "Maya Chen", when: "4 min ago", status: "Live", tone: "success" },
+    { project: "marketing-site", branch: "main", what: "Pricing page copy", who: "Siobhan Murphy", when: "4 min ago", status: "Live", tone: "success" },
     {
         project: "billing-api",
         branch: "fix/invoice-dates",
         what: "Fix invoice dates in the EU",
-        who: "Tomás Reyes",
+        who: "Ciarán Kelly",
         when: "1 min ago",
         status: "Building",
         tone: "active",
     },
-    { project: "mobile-app", branch: "release/2.4", what: "Release 2.4", who: "Clara Novak", when: "2 h ago", status: "Live", tone: "success" },
-    { project: "docs", branch: "spike/new-nav", what: "Try the new navigation", who: "Aiko Tanaka", when: "3 h ago", status: "Failed", tone: "danger" },
+    { project: "mobile-app", branch: "release/2.4", what: "Release 2.4", who: "Aoife O'Sullivan", when: "2 h ago", status: "Live", tone: "success" },
+    { project: "docs", branch: "spike/new-nav", what: "Try the new navigation", who: "Niamh Byrne", when: "3 h ago", status: "Failed", tone: "danger" },
 ] as const;
 
 function ShipScreen() {

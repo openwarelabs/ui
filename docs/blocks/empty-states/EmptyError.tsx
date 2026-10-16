@@ -3,11 +3,11 @@ import { toast } from "@openwarelabs/ui";
 import { Activity, Bot } from "lucide-react";
 
 const runs = [
-    { task: "Fix invoice dates in the EU", project: "billing-api", for: "Tomás Reyes", status: "Running", time: "4 min" },
-    { task: "Add alt text to the pricing page images", project: "marketing-site", for: "Maya Chen", status: "Needs review", time: "12 min" },
-    { task: "Write tests for webhook retries", project: "billing-api", for: "Omar Haddad", status: "Done", time: "18 min" },
-    { task: "Upgrade the date library", project: "mobile-app", for: "Aiko Tanaka", status: "Done", time: "31 min" },
-    { task: "Fix broken links in the API guide", project: "docs", for: "Sam Okafor", status: "Done", time: "9 min" },
+    { task: "Fix invoice dates in the EU", project: "billing-api", for: "Ciarán Kelly", status: "Running", time: "4 min" },
+    { task: "Add alt text to the pricing page images", project: "marketing-site", for: "Siobhan Murphy", status: "Needs review", time: "12 min" },
+    { task: "Write tests for webhook retries", project: "billing-api", for: "Cillian Ryan", status: "Done", time: "18 min" },
+    { task: "Upgrade the date library", project: "mobile-app", for: "Niamh Byrne", status: "Done", time: "31 min" },
+    { task: "Fix broken links in the API guide", project: "docs", for: "Seán McCarthy", status: "Done", time: "9 min" },
 ] as const;
 
 const tone = { Running: "active", "Needs review": "warning", Done: "success" } as const;

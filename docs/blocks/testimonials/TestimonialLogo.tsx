@@ -49,7 +49,7 @@ const stories = [
             { label: "On Acme since", value: "2024" },
         ],
         quote: "We used to batch releases on Thursdays because review was the bottleneck. Now agents clear the routine changes overnight, and our engineers spend their mornings on the work only they can do.",
-        name: "Owen Gallagher",
+        name: "Fionn Gallagher",
         jobTitle: "Lead developer",
     },
     {
@@ -61,7 +61,7 @@ const stories = [
             { label: "On Acme since", value: "2025" },
         ],
         quote: "Our auditors ask who approved every change to the ledger. With Acme the answer is one click away, whether a person or an agent made it.",
-        name: "Daniel Osei",
+        name: "Oisín Duffy",
         jobTitle: "Staff engineer",
     },
     {
@@ -73,7 +73,7 @@ const stories = [
             { label: "On Acme since", value: "2025" },
         ],
         quote: "Every branch has a preview, so our designers review the real thing instead of a screenshot. Half our feedback now arrives before the pull request is even marked ready.",
-        name: "Hana Sato",
+        name: "Orla MacNamara",
         jobTitle: "Product engineer",
     },
     {
@@ -85,7 +85,7 @@ const stories = [
             { label: "On Acme since", value: "2023" },
         ],
         quote: "Required reviews apply to agents exactly as they do to people. That one setting is what got Acme through our security review.",
-        name: "Felix Wagner",
+        name: "Padraig Kavanagh",
         jobTitle: "Head of platform",
     },
 ];
