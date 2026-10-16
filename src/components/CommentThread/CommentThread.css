@@ -1,0 +1,318 @@
+/* CommentThread: comments with their replies nested under them, a line down the left of each chain of replies. */
+.ow-comment-thread {
+    --ow-comment-avatar: 28px;
+    --ow-comment-gap: var(--ow-space-lg);
+    --ow-comment-space: var(--ow-space-4xl);
+    --ow-comment-line: var(--ow-border-strong);
+
+    min-width: 0;
+    color: var(--ow-text);
+    font-family: var(--ow-font-sans);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.ow-comment-thread--compact {
+    --ow-comment-avatar: 24px;
+    --ow-comment-gap: var(--ow-space-md);
+    --ow-comment-space: var(--ow-space-lg);
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.ow-comment-thread__list,
+.ow-comment-thread__replies {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    gap: var(--ow-comment-space);
+    list-style: none;
+}
+
+.ow-comment-thread__item {
+    display: grid;
+    min-width: 0;
+    gap: var(--ow-comment-space);
+}
+
+/* Replies are indented past the parent's avatar, with the thread line down from under it. */
+.ow-comment-thread__replies-wrap {
+    position: relative;
+    display: grid;
+    gap: var(--ow-space-sm);
+    padding-inline-start: calc(var(--ow-comment-avatar) + var(--ow-comment-gap));
+}
+
+.ow-comment-thread__replies-wrap::before {
+    content: "";
+    position: absolute;
+    top: calc(-1 * var(--ow-comment-space) + var(--ow-space-xs));
+    bottom: var(--ow-space-xs);
+    inset-inline-start: calc(var(--ow-comment-avatar) / 2 - 0.5px);
+    border-inline-start: 1px solid var(--ow-comment-line);
+}
+
+.ow-comment-thread__toggle {
+    justify-self: start;
+    margin-inline-start: calc(-1 * var(--ow-space-md));
+    color: var(--ow-primary-text);
+}
+
+.ow-comment-thread__empty {
+    margin: 0;
+    padding: var(--ow-space-2xl) 0;
+    color: var(--ow-text-muted);
+    text-align: center;
+}
+
+/* One comment: the avatar on the left, everything else in a column beside it. */
+.ow-comment {
+    display: flex;
+    min-width: 0;
+    align-items: flex-start;
+    gap: var(--ow-comment-gap);
+}
+
+.ow-comment__avatar {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.ow-comment__main {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+    align-content: start;
+    gap: var(--ow-space-xs);
+}
+
+/* The header's first line sits level with the middle of the avatar. */
+.ow-comment__header {
+    display: flex;
+    min-width: 0;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--ow-space-2xs) var(--ow-space-sm);
+    min-height: var(--ow-comment-avatar);
+    line-height: var(--ow-comment-avatar);
+}
+
+.ow-comment-thread--compact .ow-comment__header {
+    min-height: 0;
+    line-height: 1.4;
+    padding-top: var(--ow-space-3xs);
+}
+
+.ow-comment__name {
+    min-width: 0;
+    overflow: hidden;
+    font-weight: var(--ow-weight-emphasis);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ow-comment__link {
+    border-radius: var(--ow-radius-sm);
+    color: inherit;
+    text-decoration: none;
+}
+
+.ow-comment__link:hover {
+    text-decoration: underline;
+}
+
+.ow-comment__link:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-comment__time,
+.ow-comment__meta {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.ow-comment__time {
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-comment__meta::before {
+    content: "·";
+    margin-inline-end: var(--ow-space-sm);
+}
+
+/* "Replying to @Niamh", above a reply too deep to nest. */
+.ow-comment__context {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.ow-comment__body {
+    min-width: 0;
+    color: var(--ow-text-soft);
+    overflow-wrap: anywhere;
+}
+
+/* Keep the first line up against the header: the comment's rhythm, not the prose's. */
+.ow-comment__body > :first-child {
+    margin-top: 0;
+}
+
+.ow-comment__body > :last-child {
+    margin-bottom: 0;
+}
+
+.ow-comment__deleted {
+    margin: 0;
+    color: var(--ow-text-muted);
+    font-style: italic;
+}
+
+.ow-comment--pending {
+    opacity: 0.6;
+}
+
+/* Reactions: small pills of an emoji and its count, pressed when the reader is one of them. */
+.ow-comment__reactions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ow-space-xs);
+    margin-top: var(--ow-space-2xs);
+}
+
+.ow-comment__reaction {
+    display: inline-flex;
+    height: 26px;
+    align-items: center;
+    gap: var(--ow-space-2xs);
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-surface-muted);
+    padding: 0 var(--ow-space-md);
+    color: var(--ow-text-soft);
+    font: inherit;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    transition:
+        background-color var(--ow-duration-fast) var(--ow-ease-standard),
+        border-color var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+button.ow-comment__reaction {
+    cursor: pointer;
+}
+
+button.ow-comment__reaction:hover {
+    border-color: var(--ow-border-hover);
+    background: var(--ow-hover);
+}
+
+.ow-comment__reaction--pressed {
+    border-color: var(--ow-primary-border);
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+button.ow-comment__reaction--pressed:hover {
+    border-color: var(--ow-primary-focus);
+    background: var(--ow-primary-soft);
+}
+
+.ow-comment__reaction:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+/* The action row: Reply, React and More, ghost buttons flush with the text. */
+.ow-comment__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-2xs);
+    margin-inline-start: calc(-1 * var(--ow-space-md));
+}
+
+.ow-comment__actions .ow-comment__action {
+    height: 28px;
+    min-height: 28px;
+}
+
+.ow-comment__actions .ow-comment__action.ow-button--icon-only {
+    width: 28px;
+}
+
+/* The emoji picker: a row of big emoji buttons. */
+.ow-comment__picker {
+    padding: var(--ow-space-sm);
+}
+
+.ow-comment__picker-row {
+    display: flex;
+    gap: var(--ow-space-2xs);
+}
+
+.ow-comment__emoji {
+    display: inline-flex;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: var(--ow-radius-md);
+    background: transparent;
+    padding: 0;
+    font: inherit;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        background-color var(--ow-duration-fast) var(--ow-ease-standard),
+        transform var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.ow-comment__emoji:hover {
+    background: var(--ow-hover);
+    transform: scale(1.15);
+}
+
+.ow-comment__emoji[aria-pressed="true"] {
+    border-color: var(--ow-primary-border);
+    background: var(--ow-primary-subtle);
+}
+
+.ow-comment__emoji:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 1px;
+}
+
+/* The reply or edit box: the field with Cancel and Submit under it on the right. */
+.ow-comment__composer {
+    display: grid;
+    gap: var(--ow-space-sm);
+    margin-top: var(--ow-space-xs);
+}
+
+.ow-comment__textarea {
+    min-height: 56px;
+}
+
+.ow-comment__composer-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--ow-space-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-comment__reaction,
+    .ow-comment__emoji {
+        transition: none;
+    }
+
+    .ow-comment__emoji:hover {
+        transform: none;
+    }
+}

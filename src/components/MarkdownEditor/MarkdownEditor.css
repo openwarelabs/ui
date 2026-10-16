@@ -1,0 +1,164 @@
+/* MarkdownEditor: one field frame holding a bar (Write and Preview tabs, the formatting toolbar) and the text box
+   or its preview under it. The frame takes the focus and invalid states, as the box inside is bare. */
+.ow-markdown-editor {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--ow-border-strong);
+    border-radius: var(--ow-radius-form);
+    background: var(--ow-surface);
+    container-type: inline-size;
+    container-name: ow-markdown-editor;
+    transition-property: border-color, box-shadow, opacity;
+    transition-duration: var(--ow-duration-base);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-markdown-editor:has(.ow-markdown-editor__box:focus) {
+    border-color: var(--ow-focus-border);
+    box-shadow: var(--ow-shadow-focus);
+}
+
+.ow-markdown-editor--invalid {
+    border-color: var(--ow-danger-line);
+}
+
+.ow-markdown-editor--invalid:has(.ow-markdown-editor__box:focus) {
+    border-color: var(--ow-danger-solid);
+    box-shadow: var(--ow-shadow-focus-danger);
+}
+
+.ow-markdown-editor--disabled {
+    opacity: 0.62;
+}
+
+/* The bar: tabs at the start, the toolbar at the end, wrapping onto two rows when the frame is narrow. */
+.ow-markdown-editor__bar {
+    display: flex;
+    min-width: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-xs);
+    border-bottom: 1px solid var(--ow-border);
+    padding: var(--ow-space-xs);
+}
+
+.ow-markdown-editor__tabs {
+    flex-shrink: 0;
+}
+
+.ow-markdown-editor__toolbar {
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    padding: 0;
+}
+
+.ow-markdown-editor__toolbar-end {
+    display: inline-flex;
+    align-items: center;
+    margin-left: var(--ow-space-xs);
+}
+
+/* The segmented tabs' well sits inside the bar, so the sm size suits it. */
+.ow-markdown-editor .ow-tabs--segmented .ow-tab {
+    min-height: 28px;
+    padding: 0 var(--ow-space-sm);
+    font-size: 13px;
+}
+
+/* The box is bare: the frame draws the field. */
+.ow-markdown-editor__box {
+    min-height: 120px;
+    padding: var(--ow-space-md) var(--ow-space-lg);
+    line-height: 1.55;
+    tab-size: 4;
+}
+
+.ow-markdown-editor__box:disabled {
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+.ow-markdown-editor__box.ow-textarea--bare:focus-visible {
+    outline: 0;
+}
+
+.ow-markdown-editor__panel {
+    min-width: 0;
+    border-radius: 0 0 var(--ow-radius-form) var(--ow-radius-form);
+    animation: none;
+}
+
+.ow-markdown-editor__panel:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
+
+.ow-markdown-editor__preview {
+    min-height: 120px;
+    padding: var(--ow-space-md) var(--ow-space-lg);
+    overflow-wrap: anywhere;
+}
+
+.ow-markdown-editor__empty {
+    margin: 0;
+    color: var(--ow-text-muted);
+    font-size: 14px;
+}
+
+/* Split: the box and its preview side by side, each half the frame, one above the other in a narrow frame. */
+.ow-markdown-editor__split {
+    display: grid;
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.ow-markdown-editor__pane {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+}
+
+.ow-markdown-editor__pane--preview {
+    border-left: 1px solid var(--ow-border);
+    background: var(--ow-surface-muted);
+    border-radius: 0 0 var(--ow-radius-form) 0;
+}
+
+.ow-markdown-editor__pane .ow-markdown-editor__box {
+    flex: 1;
+    height: 100%;
+}
+
+.ow-markdown-editor__pane .ow-markdown-editor__preview {
+    flex: 1;
+}
+
+.ow-markdown-editor__caption {
+    padding: var(--ow-space-xs) var(--ow-space-lg) 0;
+    color: var(--ow-text-muted);
+    font-size: 11px;
+    font-weight: var(--ow-weight-label);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+@container ow-markdown-editor (max-width: 559px) {
+    .ow-markdown-editor__split {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ow-markdown-editor__pane--preview {
+        border-left: 0;
+        border-top: 1px solid var(--ow-border);
+        border-radius: 0 0 var(--ow-radius-form) var(--ow-radius-form);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-markdown-editor {
+        transition: none;
+    }
+}
