@@ -146,6 +146,8 @@ export const catalogue = [
     "SortableList",
     "Kanban",
     "Stat",
+    "Countdown",
+    "RelativeTime",
     "DescriptionList",
     "LineChart",
     "AreaChart",
