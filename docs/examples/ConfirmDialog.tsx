@@ -16,6 +16,7 @@ export const meta: DocMeta = {
     ],
     notes: [
         "Write the title as the question (“Delete recipe-app?”) and the button as the action (“Delete project”).",
+        "It's an alertdialog, so screen readers read the title and description out as soon as it opens, and Cancel has focus first.",
         "If onConfirm throws, its message shows in the dialog and the dialog stays open.",
         "Don't confirm things that can be undone. Do them, and offer Undo in a toast.",
     ],

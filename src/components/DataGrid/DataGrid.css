@@ -1,0 +1,143 @@
+/* DataGrid: Table's bordered card with a bar above it, columns of fixed widths with a drag edge each, and rows of
+   one line, rendered only while in view. */
+.ow-data-grid {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: var(--ow-space-sm);
+}
+
+.ow-data-grid__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-sm) var(--ow-space-lg);
+}
+
+.ow-data-grid__search {
+    width: 260px;
+    max-width: 100%;
+}
+
+.ow-data-grid__status {
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-data-grid__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-xs);
+    margin-inline-start: auto;
+}
+
+.ow-data-grid__scroll {
+    overscroll-behavior: contain;
+}
+
+.ow-data-grid__table {
+    min-width: 100%;
+    table-layout: fixed;
+}
+
+.ow-data-grid__table td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Every row is the same height, so the rows out of view are just space. */
+.ow-data-grid__table tbody tr:not(.ow-data-grid__spacer) td {
+    box-sizing: border-box;
+    height: var(--ow-data-grid-row);
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.ow-data-grid__table .ow-data-grid__spacer td {
+    padding: 0;
+    border: 0;
+    background: none;
+}
+
+.ow-data-grid__table tbody tr.ow-data-grid__spacer:hover td {
+    background: none;
+}
+
+.ow-data-grid__header {
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ow-data-grid__header .ow-table__sort {
+    max-width: 100%;
+}
+
+.ow-data-grid__header-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* The filter boxes sit under the header row and stay in view with it. */
+.ow-data-grid__filters td {
+    position: sticky;
+    top: 36px;
+    z-index: 1;
+    height: auto;
+    border-bottom: 1px solid var(--ow-border);
+    background: var(--ow-surface-muted);
+    padding: 0 var(--ow-space-sm) var(--ow-space-xs);
+}
+
+.ow-data-grid__filters .ow-input-group {
+    width: 100%;
+}
+
+/* A thin bar at the header cell's end edge, wider than it looks so it's easy to catch. */
+.ow-data-grid__resize {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    width: 9px;
+    cursor: col-resize;
+    touch-action: none;
+}
+
+.ow-data-grid__resize::after {
+    position: absolute;
+    inset-block: 8px;
+    inset-inline-end: 4px;
+    width: 1px;
+    background: var(--ow-border);
+    content: "";
+}
+
+.ow-data-grid__resize:hover::after,
+.ow-data-grid__resize--active::after {
+    inset-block: 0;
+    inset-inline-end: 3px;
+    width: 3px;
+    border-radius: 2px;
+    background: var(--ow-primary);
+}
+
+.ow-data-grid__resize:focus-visible {
+    outline: none;
+}
+
+.ow-data-grid__resize:focus-visible::after {
+    inset-block: 2px;
+    inset-inline-end: 3px;
+    width: 3px;
+    border-radius: 2px;
+    background: var(--ow-focus-ring);
+}
+
+:root[data-ow-data-grid-resize],
+:root[data-ow-data-grid-resize] * {
+    cursor: col-resize !important;
+    user-select: none;
+    -webkit-user-select: none;
+}
