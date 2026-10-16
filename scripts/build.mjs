@@ -90,6 +90,7 @@ export const catalogue = [
     "TagInput",
     "MentionInput",
     "Textarea",
+    "MarkdownEditor",
     "Calendar",
     "DatePicker",
     "ColorPicker",

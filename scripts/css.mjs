@@ -108,6 +108,7 @@ export const cssOrder = [
     "components/Marketing/Marketing.css",
     "components/Prose/Prose.css",
     "components/Markdown/Markdown.css",
+    "components/MarkdownEditor/MarkdownEditor.css",
     "components/TextShimmer/TextShimmer.css",
     "components/PromptInput/PromptInput.css",
     "components/PromptInput/PromptSuggestion.css",
