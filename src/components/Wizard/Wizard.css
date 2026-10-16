@@ -1,0 +1,116 @@
+/* Wizard: a Steps strip over (or beside) one step of a form at a time, with Back and Next under it. */
+.ow-wizard {
+    display: grid;
+    min-width: 0;
+    gap: var(--ow-space-2xl);
+}
+
+.ow-wizard--vertical {
+    grid-template-columns: minmax(200px, 260px) minmax(0, 1fr);
+    align-items: start;
+    gap: var(--ow-space-2xl) var(--ow-space-3xl);
+}
+
+.ow-wizard__panel {
+    display: grid;
+    min-width: 0;
+    gap: var(--ow-space-xl);
+}
+
+.ow-wizard__header {
+    display: grid;
+    gap: var(--ow-space-2xs);
+}
+
+.ow-wizard__progress {
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-control);
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-wizard__title {
+    margin: 0;
+    color: var(--ow-text);
+    font-size: 20px;
+    font-weight: var(--ow-weight-title);
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    border-radius: var(--ow-radius-sm);
+}
+
+/* Focus moves here when a step opens; it shows a ring only when it got there by keyboard. */
+.ow-wizard__title:focus {
+    outline: none;
+}
+
+.ow-wizard__title:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 4px;
+}
+
+.ow-wizard__description {
+    margin: 0;
+    color: var(--ow-text-muted);
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.ow-wizard__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-sm);
+    border-top: 1px solid var(--ow-border);
+    padding-top: var(--ow-space-xl);
+}
+
+.ow-wizard__forward {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    margin-inline-start: auto;
+}
+
+/* A done step's title is a button that goes back to it. It keeps the title's look, and underlines on hover. */
+.ow-wizard__jump {
+    all: unset;
+    cursor: pointer;
+    border-radius: var(--ow-radius-sm);
+    color: inherit;
+    font: inherit;
+    text-decoration: inherit;
+    text-decoration-color: inherit;
+    transition: color var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.ow-wizard__jump:hover {
+    color: var(--ow-primary-text);
+    text-decoration-line: underline;
+    text-underline-offset: 3px;
+}
+
+.ow-wizard__jump:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-wizard__jump:disabled {
+    cursor: default;
+    color: inherit;
+}
+
+@media (max-width: 640px) {
+    .ow-wizard--vertical {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--ow-space-2xl);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-wizard__jump {
+        transition: none;
+    }
+}
