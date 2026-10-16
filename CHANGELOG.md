@@ -2,6 +2,14 @@
 
 Every release of @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp. `npm run release` writes it from the commits, and the docs' Releases page shows it.
 
+## 0.23.0 (2026-10-16)
+
+1 improvement.
+
+### Improvements
+
+- **button:** switch buttons to the hairline style ([#95](https://github.com/openwarelabs/ui/pull/95), [2df8dbd](https://github.com/openwarelabs/ui/commit/2df8dbdde0863f443ecdad2aa625f1e0cee63be5))
+
 ## 0.22.1 (2026-10-16)
 
 ### Other changes
