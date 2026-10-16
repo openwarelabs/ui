@@ -159,6 +159,7 @@ export const catalogue = [
     "Container",
     "Section",
     "Splitter",
+    "Collapsible",
     "AspectRatio",
     "VisuallyHidden",
     "VirtualList",
