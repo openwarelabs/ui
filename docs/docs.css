@@ -219,17 +219,99 @@ body {
     flex-shrink: 0;
 }
 
-.docs-aside__scroll {
-    height: 100%;
-    padding: var(--ow-space-xs) var(--ow-space-lg) var(--ow-space-7xl);
-}
-
-/* The sidebar: a search button, then groups under small-capital headings. Components sit two to a line. */
+/*
+ * The sidebar: a search button or the components' filter, then groups under small-capital headings. Beside the page
+ * the head stays put and the lists scroll under it; in the phone drawer, which scrolls itself, it all scrolls together.
+ */
 .docs-side {
     display: grid;
     /* minmax(0, 1fr) all the way down, so a long name truncates instead of widening the sidebar. */
     grid-template-columns: minmax(0, 1fr);
+}
+
+.docs-side--fixed-head {
+    height: 100%;
+    grid-template-rows: auto minmax(0, 1fr);
+}
+
+.docs-side--fixed-head > .docs-side__head {
+    padding: var(--ow-space-xs) var(--ow-space-lg) var(--ow-space-md);
+}
+
+.docs-side__scroll {
+    padding: var(--ow-space-xs) var(--ow-space-lg) var(--ow-space-7xl);
+}
+
+.docs-side__head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--ow-space-md);
+}
+
+.docs-side__body,
+.docs-side-results {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
     gap: var(--ow-space-2xl);
+}
+
+/* The components' filter. The "/" key sits where the clear button goes, until there's text to clear. */
+.docs-side-filter {
+    position: relative;
+}
+
+.docs-side-filter__key {
+    position: absolute;
+    top: 50%;
+    right: var(--ow-space-xs);
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* While filtering: how many match, and that Enter opens the first. */
+.docs-side-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ow-space-sm);
+    padding: 0 var(--ow-space-sm);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+.docs-side-status__text {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.docs-side-status__keys {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 5px;
+}
+
+.docs-side-status .ow-kbd {
+    height: 18px;
+    min-width: 18px;
+    font-size: 11px;
+}
+
+.docs-side-empty {
+    display: grid;
+    justify-items: start;
+    gap: var(--ow-space-md);
+    padding: 0 var(--ow-space-sm);
+}
+
+.docs-side-empty p {
+    margin: 0;
+    color: var(--ow-text-soft);
+    font-size: 13px;
 }
 
 .docs-side-search {
@@ -372,13 +454,125 @@ body {
     font-weight: var(--ow-weight-regular);
 }
 
-/* Brass marks what's new in this release. */
+.docs-side-link__text {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Brass marks what's new in this release: a small pill, readable brass on its soft tint. */
 .docs-side-new {
-    width: 6px;
-    height: 6px;
+    display: inline-flex;
+    height: 16px;
+    box-sizing: border-box;
     flex-shrink: 0;
+    align-items: center;
+    border: 1px solid color-mix(in srgb, var(--ow-brass) 40%, transparent);
     border-radius: var(--ow-radius-pill);
-    background: var(--ow-brass);
+    background: var(--ow-brass-soft);
+    padding: 0 var(--ow-space-xs);
+    color: var(--ow-brass-deep);
+    font-size: 10.5px;
+    font-weight: var(--ow-weight-label);
+    line-height: 1;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+}
+
+/* The letters of a name that match the filter. */
+.docs-side-mark {
+    border-radius: 3px;
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+    font-weight: var(--ow-weight-label);
+    box-shadow: 0 0 0 1px var(--ow-primary-border);
+}
+
+/* "Expand all" or "Collapse all", beside the Categories heading. */
+.docs-side-toggle {
+    border: none;
+    border-radius: var(--ow-radius-sm);
+    background: none;
+    padding: 0;
+    color: var(--ow-text-muted);
+    font: inherit;
+    font-size: 12px;
+    font-weight: var(--ow-weight-control);
+    cursor: pointer;
+    transition: color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.docs-side-toggle:hover {
+    color: var(--ow-text);
+}
+
+.docs-side-toggle:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+/* Categories, and All components above them: taller rows with a count and a chevron. */
+.docs-side-link:has(> .docs-side-chevron) {
+    min-height: 30px;
+    gap: var(--ow-space-md);
+    font-size: 13.5px;
+}
+
+/* A category is a button that folds its components away. */
+.docs-side-category {
+    width: 100%;
+    border: none;
+    background: none;
+    font: inherit;
+    font-size: 13.5px;
+    font-weight: var(--ow-weight-control);
+    text-align: left;
+    cursor: pointer;
+}
+
+.docs-side-category[aria-expanded="true"] .docs-side-link__label,
+.docs-side-category--here .docs-side-link__label {
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+}
+
+/* The category of the page you're on keeps its icon and count in the primary tint, open or closed. */
+.docs-side-category--here .docs-side-link__icon {
+    color: var(--ow-primary-text);
+}
+
+.docs-side-category--here .docs-side-count {
+    border-color: var(--ow-primary-border);
+    background: var(--ow-primary-subtle);
+    color: var(--ow-primary-text);
+}
+
+.docs-side-chevron {
+    width: 15px;
+    flex-shrink: 0;
+    color: var(--ow-icon);
+    transition: transform var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.docs-side-category[aria-expanded="true"] .docs-side-chevron {
+    transform: rotate(90deg);
+}
+
+/* A category's components, on a guide line that drops from its icon. */
+.docs-side-sublist {
+    margin: 2px 0 var(--ow-space-xs) 15px;
+    border-left: 1px solid var(--ow-border);
+    padding-left: var(--ow-space-md);
+}
+
+.docs-side-sublist[hidden] {
+    display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .docs-side-chevron {
+        transition: none;
+    }
 }
 
 /* Blocks: taller rows, each with its category's thumbnail and a count of its blocks. */
@@ -913,14 +1107,18 @@ body {
     font-family: var(--ow-font-mono);
     font-size: 12.5px;
     line-height: 1.55;
-    word-break: break-word;
+    /* Breaks at the spaces in a long type, and inside a name only if the name alone is wider than the column. Unlike
+       word-break, this doesn't let the column shrink to a few letters a line. */
+    overflow-wrap: break-word;
 }
 
+/* Defaults wrap like the types, so a long one ("the locale's first day of the week") can't push the other columns out. */
 .docs-prop__default {
     color: var(--ow-text-soft);
     font-family: var(--ow-font-mono);
     font-size: 12.5px;
-    white-space: nowrap;
+    line-height: 1.55;
+    overflow-wrap: break-word;
 }
 
 .docs-prop__none {
