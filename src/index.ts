@@ -5,6 +5,8 @@
 // Typography
 export { Text } from "./components/Text/Text";
 export type { TextProps, TextVariant, TextTone } from "./components/Text/Text";
+export { Callout } from "./components/Callout/Callout";
+export type { CalloutProps, CalloutTone, CalloutVariant } from "./components/Callout/Callout";
 
 // Buttons
 export { Button, buttonClassName } from "./components/Button/Button";
