@@ -2,7 +2,7 @@
     {
         "name": "@openwarelabs/ui, everything",
         "code": "export * from \"@openwarelabs/ui\";",
-        "limit": "134 KB"
+        "limit": "136 KB"
     },
     {
         "name": "@openwarelabs/ui, only Button",

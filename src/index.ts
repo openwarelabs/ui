@@ -50,6 +50,8 @@ export { TimeField } from "./components/DateField/TimeField";
 export type { TimeFieldProps } from "./components/DateField/TimeField";
 export { Textarea } from "./components/Textarea/Textarea";
 export type { TextareaProps } from "./components/Textarea/Textarea";
+export { MarkdownEditor, defaultMarkdownEditorToolbar } from "./components/MarkdownEditor/MarkdownEditor";
+export type { MarkdownEditorProps, MarkdownEditorLabels, MarkdownEditorTool } from "./components/MarkdownEditor/MarkdownEditor";
 export { InlineEdit } from "./components/InlineEdit/InlineEdit";
 export type { InlineEditProps, InlineEditLabels } from "./components/InlineEdit/InlineEdit";
 export { Select } from "./components/Select/Select";
