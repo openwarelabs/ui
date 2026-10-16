@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
+import { createContext, Fragment, useContext, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
 
 import { Breadcrumbs, type BreadcrumbItem } from "@openwarelabs/ui";
 
@@ -10,6 +10,10 @@ export interface TocItem {
     label: string;
     /** 2 for a section, 3 for a subsection. */
     level: 2 | 3;
+    /** A few muted words after the label: "11 new · 1 fix". */
+    hint?: string;
+    /** A caption over a run of items, shown where it changes: Releases groups its versions by day. */
+    group?: string;
 }
 
 const RouteContext = createContext<Route>({ kind: "missing", path: "" });
@@ -89,7 +93,7 @@ interface Rail {
  */
 function useRail(listRef: RefObject<HTMLUListElement | null>, items: TocItem[]): Rail | null {
     const [rail, setRail] = useState<Rail | null>(null);
-    const key = items.map((item) => `${item.id}:${item.level}`).join("|");
+    const key = items.map((item) => `${item.id}:${item.level}:${item.group ?? ""}`).join("|");
     useLayoutEffect(() => {
         const list = listRef.current;
         if (!list) return undefined;
@@ -104,7 +108,9 @@ function useRail(listRef: RefObject<HTMLUListElement | null>, items: TocItem[]):
                 const top = link.offsetTop + parseFloat(style.paddingTop);
                 const bottom = link.offsetTop + link.offsetHeight - parseFloat(style.paddingBottom);
                 const x = railX(items[index]!.level);
-                d += index === 0 ? `M${x} ${top} L${x} ${bottom}` : ` L${x} ${top} L${x} ${bottom}`;
+                // A new group's caption sits between its links and the last ones, so the line starts again below it.
+                const startsGroup = index > 0 && items[index]!.group !== items[index - 1]!.group;
+                d += index === 0 ? `M${x} ${top} L${x} ${bottom}` : `${startsGroup ? " M" : " L"}${x} ${top} L${x} ${bottom}`;
                 width = Math.max(width, x + 2);
                 spans.push([top, bottom]);
             });
@@ -144,17 +150,22 @@ function Toc({ items }: { items: TocItem[] }) {
                 ) : null}
                 {items.map((item, index) => {
                     const visible = index >= first && index <= last;
+                    const caption = item.group && item.group !== items[index - 1]?.group ? item.group : undefined;
                     return (
-                        <li key={item.id}>
-                            <a
-                                href={sectionHref(route, item.id)}
-                                className={`docs-toc__link docs-toc__link--${item.level}`}
-                                data-visible={visible || undefined}
-                                aria-current={index === first ? "location" : undefined}
-                            >
-                                {item.label}
-                            </a>
-                        </li>
+                        <Fragment key={item.id}>
+                            {caption ? <li className="docs-toc__group">{caption}</li> : null}
+                            <li>
+                                <a
+                                    href={sectionHref(route, item.id)}
+                                    className={`docs-toc__link docs-toc__link--${item.level}${item.hint ? " docs-toc__link--hint" : ""}`}
+                                    data-visible={visible || undefined}
+                                    aria-current={index === first ? "location" : undefined}
+                                >
+                                    {item.label}
+                                    {item.hint ? <span className="docs-toc__hint">{item.hint}</span> : null}
+                                </a>
+                            </li>
+                        </Fragment>
                     );
                 })}
             </ul>
