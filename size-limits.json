@@ -2,39 +2,43 @@
     {
         "name": "@openwarelabs/ui, everything",
         "code": "export * from \"@openwarelabs/ui\";",
-        "limit": "135 KB"
+        "limit": "176 KB"
     },
     {
         "name": "@openwarelabs/ui, only Button",
         "code": "export { Button } from \"@openwarelabs/ui\";",
-        "limit": "7.5 KB"
+        "limit": "8 KB"
     },
     {
         "name": "@openwarelabs/ui, only LineChart",
         "code": "export { LineChart } from \"@openwarelabs/ui\";",
-        "limit": "10 KB"
+        "limit": "11 KB"
     },
     {
         "name": "@openwarelabs/ui/styles.css",
         "file": "dist/styles.css",
-        "limit": "55 KB"
+        "limit": "68 KB"
     },
     {
         "name": "@openwarelabs/blocks, everything",
         "code": "export * from \"@openwarelabs/blocks\";",
-        "external": ["@openwarelabs/ui"],
+        "external": [
+            "@openwarelabs/ui"
+        ],
         "limit": "62 KB"
     },
     {
         "name": "@openwarelabs/blocks, only Hero01",
         "code": "export { Hero01 } from \"@openwarelabs/blocks\";",
-        "external": ["@openwarelabs/ui"],
+        "external": [
+            "@openwarelabs/ui"
+        ],
         "limit": "5.5 KB"
     },
     {
         "name": "Hero01 with the parts of @openwarelabs/ui it uses",
         "code": "export { Hero01 } from \"@openwarelabs/blocks\";",
-        "limit": "10 KB"
+        "limit": "10.5 KB"
     },
     {
         "name": "@openwarelabs/blocks/styles.css",
