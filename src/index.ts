@@ -235,6 +235,8 @@ export { Container } from "./components/Container/Container";
 export type { ContainerProps, ContainerSize } from "./components/Container/Container";
 export { AspectRatio } from "./components/AspectRatio/AspectRatio";
 export type { AspectRatioProps } from "./components/AspectRatio/AspectRatio";
+export { Watermark } from "./components/Watermark/Watermark";
+export type { WatermarkProps, WatermarkTile } from "./components/Watermark/Watermark";
 export { VirtualList } from "./components/VirtualList/VirtualList";
 export type { VirtualListProps, VirtualListHandle, VirtualListLabels } from "./components/VirtualList/VirtualList";
 export { useVirtualizer } from "./components/VirtualList/useVirtualizer";
