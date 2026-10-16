@@ -191,6 +191,8 @@ export { SortableList } from "./components/SortableList/SortableList";
 export type { SortableListProps, SortableListItemState, SortableListLabels } from "./components/SortableList/SortableList";
 export { Kanban } from "./components/Kanban/Kanban";
 export type { KanbanProps, KanbanColumn, KanbanCardState, KanbanMove, KanbanLabels } from "./components/Kanban/Kanban";
+export { Gantt } from "./components/Gantt/Gantt";
+export type { GanttProps, GanttTask, GanttGroup, GanttChange, GanttDate, GanttScale, GanttTaskState, GanttLabels } from "./components/Gantt/Gantt";
 export { LineChart, BarChart, DonutChart, Sparkline } from "./components/Chart/Chart";
 export type {
     BarChartProps,

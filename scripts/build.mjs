@@ -138,6 +138,7 @@ export const catalogue = [
     "Snippet",
     "SortableList",
     "Kanban",
+    "Gantt",
     "Stat",
     "DescriptionList",
     "LineChart",
