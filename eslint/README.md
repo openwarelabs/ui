@@ -87,4 +87,4 @@ Every `--ow-` custom property in the code (in `style` props, template strings, a
 
 ## In this repository
 
-`npm run eslint:build` builds the plugin from `eslint/src` with a fresh manifest of the library (`scripts/eslint-manifest.mjs`), `npm run eslint:test` runs its tests on the result, and `npm run lint` then runs the rules on the docs' examples and the blocks, as an app using the library would. The MCP server bundles the same sources for `check_code` (`scripts/build-mcp.mjs`).
+`npm run eslint:build` builds the plugin from `eslint/src` with a fresh manifest of the library (`scripts/eslint-manifest.mjs`) and type-checks it (the manifest is what its types read, so this is where it's checked, not in `npm run typecheck`), `npm run eslint:test` runs its tests on the result, and `npm run lint` then runs the rules on the docs' examples and the blocks, as an app using the library would. The MCP server bundles the same sources for `check_code` (`scripts/build-mcp.mjs`).

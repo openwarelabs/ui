@@ -46,7 +46,7 @@
     "blocks:build": "node scripts/build-blocks.mjs",
     "docs:build": "node scripts/docs.mjs build",
     "tokens": "node scripts/build-tokens.mjs",
-    "typecheck": "tsc --noEmit && tsc -p docs/tsconfig.json && tsc -p blocks/tsconfig.json && tsc -p eslint/tsconfig.json",
+    "typecheck": "tsc --noEmit && tsc -p docs/tsconfig.json && tsc -p blocks/tsconfig.json",
     "contrast": "node scripts/check-contrast.mjs",
     "blocks:check": "node scripts/check-blocks.mjs",
     "prepare": "npm run build",
