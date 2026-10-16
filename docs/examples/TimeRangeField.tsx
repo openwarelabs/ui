@@ -98,11 +98,10 @@ export function Overnight() {
 }
 Overnight.layout = { align: "start" as const };
 
-/** Small, read-only and disabled. */
+/** Read-only and disabled. */
 export function States() {
     return (
         <Stack gap="md" style={{ width: 360, maxWidth: "100%" }}>
-            <TimeRangeField aria-label="Lunch" locale="en-IE" size="sm" defaultValue={{ start: "12:30", end: "13:30" }} />
             <TimeRangeField aria-label="Last maintenance window" locale="en-IE" defaultValue={{ start: "02:00", end: "04:00" }} readOnly />
             <TimeRangeField aria-label="Weekend hours" locale="en-IE" defaultValue={{ start: null, end: null }} disabled />
         </Stack>
