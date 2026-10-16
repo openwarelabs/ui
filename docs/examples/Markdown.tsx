@@ -26,7 +26,7 @@ export const meta: DocMeta = {
         "Streaming, it's aria-busy, so screen readers wait for the finished answer. Inside a ChatMessage, leave caret off: the message draws its own.",
         "Use headingOffset when the answer sits under a page's own h1 and h2, so its headings still read in order.",
     ],
-    related: ["Prose", "CodeBlock", "ChatMessage", "ChatConversation"],
+    related: ["Prose", "CodeBlock", "ChatMessage", "ChatConversation", "MarkdownEditor"],
     since: "0.16.0",
 };
 

@@ -14,7 +14,7 @@ export const meta: DocMeta = {
     notes: [
         "autoGrow measures cheaply: very long drafts stop measuring once they're past the height cap.",
     ],
-    related: ["Input", "Field"],
+    related: ["Input", "Field", "MarkdownEditor"],
 };
 
 /** A fixed box that the person can resize. */

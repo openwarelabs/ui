@@ -16,7 +16,7 @@ export const meta: DocMeta = {
         "Every variant has an icon and words as well as a colour, so it doesn't rely on colour alone.",
         "For news about something that just happened elsewhere, use a toast instead.",
     ],
-    related: ["Toast", "Badge", "EmptyState"],
+    related: ["Toast", "Badge", "EmptyState", "Callout"],
 };
 
 /** Five variants. Keep the title to a few words and put the detail underneath. */

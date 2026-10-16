@@ -1,0 +1,76 @@
+/* Collapsible: a bare show/hide. The trigger's look is the caller's; the content animates with a 0fr → 1fr grid row,
+   like Disclosure's panel. */
+.ow-collapsible__trigger {
+    margin: 0;
+    border: 0;
+    border-radius: var(--ow-radius-form);
+    background: transparent;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    text-align: inherit;
+    cursor: pointer;
+}
+
+.ow-collapsible__trigger:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-collapsible__trigger:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.ow-collapsible__content {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition:
+        grid-template-rows var(--ow-duration-base) var(--ow-ease-standard),
+        visibility 0s linear var(--ow-duration-base);
+}
+
+.ow-collapsible__content[data-open="true"] {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition:
+        grid-template-rows var(--ow-duration-panel) var(--ow-ease-emphasized),
+        visibility 0s;
+}
+
+.ow-collapsible__clip {
+    min-height: 0;
+    overflow: hidden;
+}
+
+.ow-collapsible__inner {
+    opacity: 0;
+    transform: translateY(-4px);
+    transition:
+        opacity var(--ow-duration-fast) var(--ow-ease-standard),
+        transform var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-collapsible__content[data-open="true"] .ow-collapsible__inner {
+    opacity: 1;
+    transform: none;
+    transition:
+        opacity var(--ow-duration-slow) var(--ow-ease-standard) 60ms,
+        transform var(--ow-duration-panel) var(--ow-ease-emphasized);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-collapsible__content,
+    .ow-collapsible__inner {
+        transition: none;
+    }
+}
+
+.ow-collapsible__inner > :first-child {
+    margin-top: 0;
+}
+
+.ow-collapsible__inner > :last-child {
+    margin-bottom: 0;
+}
