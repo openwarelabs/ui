@@ -1,0 +1,53 @@
+/* Truncate: text cut to the room it has, at the end by CSS, in the middle or at the start by measuring. */
+.ow-truncate {
+    position: relative;
+    display: block;
+    min-width: 0;
+    max-width: 100%;
+}
+
+/* The Tooltip's anchor is inline-flex by default; here it must take the row's width so the text can be cut to it. */
+.ow-truncate > .ow-tooltip {
+    display: flex;
+    min-width: 0;
+}
+
+.ow-truncate__text {
+    display: block;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* A measured cut already fits; clip rather than add a second ellipsis if it's out by a fraction. */
+.ow-truncate--measured .ow-truncate__text {
+    text-overflow: clip;
+}
+
+.ow-truncate--clamp .ow-truncate__text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--ow-truncate-lines, 2);
+    line-clamp: var(--ow-truncate-lines, 2);
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+/* The hidden span candidates are measured on. It inherits the font and takes no room. */
+.ow-truncate__probe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    white-space: pre;
+    pointer-events: none;
+}
+
+/* The full text can be long: let the bubble wrap instead of running off. */
+.ow-truncate .ow-tooltip__bubble {
+    max-width: min(360px, calc(100vw - 2 * var(--ow-space-md)));
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
