@@ -2,6 +2,15 @@
 
 Every release of @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp. `npm run release` writes it from the commits, and the docs' Releases page shows it.
 
+## 0.21.0 (2026-10-16)
+
+3 new components.
+
+### New components
+
+- **[Portal](https://openwarelabs.github.io/ui/#/components/portal)** and **[FocusTrap](https://openwarelabs.github.io/ui/#/components/focus-trap)**: primitives for overlays of your own ([#88](https://github.com/openwarelabs/ui/pull/88), [4edc9fa](https://github.com/openwarelabs/ui/commit/4edc9fab620a7485ba17464226b56437ec477868))
+- **[Affix](https://openwarelabs.github.io/ui/#/components/affix)**: an element that sticks to the top or bottom while you scroll ([#89](https://github.com/openwarelabs/ui/pull/89), [699dc4a](https://github.com/openwarelabs/ui/commit/699dc4af442b0574c3154fbc6f2c5a49f4683b8a))
+
 ## 0.20.0 (2026-10-16)
 
 4 new components.
