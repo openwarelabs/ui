@@ -2,6 +2,13 @@
 
 Every release of @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp. `npm run release` writes it from the commits, and the docs' Releases page shows it.
 
+## 0.16.3 (2026-10-16)
+
+### Other changes
+
+- hide the Blocks section for now ([#61](https://github.com/openwarelabs/ui/pull/61), [e73afff](https://github.com/openwarelabs/ui/commit/e73afff357674b2509161aeecd2fffa8f19a83a1))
+- add a CLAUDE.md with the branch, commit and pull request rules ([#62](https://github.com/openwarelabs/ui/pull/62), [ec4b4de](https://github.com/openwarelabs/ui/commit/ec4b4de61c88155db186a7138d58e6bf6c105ccb))
+
 ## 0.16.2 (2026-10-15)
 
 1 fix.
