@@ -1,0 +1,41 @@
+/* Affix: an element pinned to the top or bottom of the scroll area once it would scroll past. It is sticky by default and
+   sits over the content with a surface behind it; the shadow and hairline appear only while pinned, drawn as shadows so
+   its height never changes. In fixed mode the element's position comes from an inline style. */
+.ow-affix {
+    position: sticky;
+    z-index: 1;
+    box-sizing: border-box;
+    background: var(--ow-surface);
+    transition: box-shadow var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-affix--top {
+    top: var(--ow-affix-offset, 0px);
+}
+
+.ow-affix--bottom {
+    bottom: var(--ow-affix-offset, 0px);
+}
+
+.ow-affix--fixed,
+.ow-affix--disabled {
+    position: static;
+}
+
+.ow-affix--shadow[data-affixed="true"] {
+    box-shadow: 0 1px 0 var(--ow-border), var(--ow-shadow-header);
+}
+
+.ow-affix--shadow.ow-affix--bottom[data-affixed="true"] {
+    box-shadow: 0 -1px 0 var(--ow-border), var(--ow-shadow-header);
+}
+
+.ow-affix__placeholder {
+    display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-affix {
+        transition: none;
+    }
+}

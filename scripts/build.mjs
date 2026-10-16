@@ -160,6 +160,7 @@ export const catalogue = [
     "Section",
     "Splitter",
     "AspectRatio",
+    "Affix",
     "VisuallyHidden",
     "VirtualList",
     "Chip",
