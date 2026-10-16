@@ -1,0 +1,171 @@
+/* Kanban: columns as tinted trays side by side, each holding raised cards. A picked-up card lifts; dragged by the
+   pointer, a copy follows it and a dashed slot shows where it will land. */
+.ow-kanban {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    align-items: flex-start;
+    gap: var(--ow-space-md);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding-bottom: var(--ow-space-2xs);
+}
+
+.ow-kanban__column {
+    position: relative;
+    display: flex;
+    width: 280px;
+    max-height: 100%;
+    flex: none;
+    flex-direction: column;
+    border-radius: calc(var(--ow-radius-container) + 4px);
+    background: var(--ow-track);
+    /* The tray is the canvas's colour, so a hairline keeps it visible on the app's ground. */
+    box-shadow: inset 0 0 0 1px var(--ow-border);
+    padding: 4px;
+}
+
+.ow-kanban--fixed .ow-kanban__column {
+    align-self: stretch;
+}
+
+.ow-kanban__column--target {
+    box-shadow: inset 0 0 0 1px var(--ow-primary-border);
+}
+
+.ow-kanban__head {
+    display: flex;
+    min-height: 36px;
+    align-items: center;
+    gap: var(--ow-space-xs);
+    padding: var(--ow-space-2xs) var(--ow-space-sm) var(--ow-space-2xs) var(--ow-space-md);
+}
+
+.ow-kanban__title {
+    overflow: hidden;
+    margin: 0;
+    color: var(--ow-text);
+    font-size: 13px;
+    font-weight: var(--ow-weight-emphasis);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ow-kanban__count {
+    flex: none;
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-surface);
+    padding: 0 var(--ow-space-xs);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    line-height: 20px;
+}
+
+.ow-kanban__column--over .ow-kanban__count {
+    background: var(--ow-warning-surface);
+    color: var(--ow-warning-text);
+}
+
+.ow-kanban__actions {
+    display: flex;
+    align-items: center;
+    margin-inline-start: auto;
+}
+
+.ow-kanban__list {
+    min-height: 64px;
+    flex: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 2px;
+}
+
+.ow-kanban__cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ow-space-xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-kanban__card {
+    position: relative;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: var(--ow-space-sm) var(--ow-space-md);
+    color: var(--ow-text);
+    font-size: 14px;
+    cursor: grab;
+    outline: none;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.ow-kanban__card:hover {
+    border-color: var(--ow-border-hover);
+}
+
+.ow-kanban__card:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 1px;
+}
+
+/* Carried by keys: it lifts where it would land. */
+.ow-kanban__card--lifted {
+    border-color: var(--ow-border-strong);
+    box-shadow: var(--ow-shadow-menu);
+}
+
+/* Dragged by the pointer: a dashed slot where it would land, and a copy under the pointer. */
+.ow-kanban__card--placeholder {
+    border-style: dashed;
+    border-color: var(--ow-border-strong);
+    background: transparent;
+}
+
+.ow-kanban__card--placeholder > * {
+    visibility: hidden;
+}
+
+.ow-kanban__card--overlay {
+    position: fixed;
+    z-index: 1000;
+    margin: 0;
+    border-color: var(--ow-border-strong);
+    box-shadow: var(--ow-shadow-menu);
+    pointer-events: none;
+    rotate: 1.5deg;
+}
+
+.ow-kanban__empty {
+    margin: 0;
+    padding: var(--ow-space-lg) var(--ow-space-md);
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    text-align: center;
+}
+
+.ow-kanban__footer {
+    padding: var(--ow-space-2xs) 2px 0;
+}
+
+:root[data-ow-kanban-drag],
+:root[data-ow-kanban-drag] * {
+    cursor: grabbing !important;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.ow-kanban--disabled .ow-kanban__card {
+    cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-kanban__card--overlay {
+        rotate: none;
+    }
+}

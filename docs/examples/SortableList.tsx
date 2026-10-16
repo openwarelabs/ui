@@ -25,9 +25,9 @@ export const meta: DocMeta = {
         "Near the edge of a box that scrolls (or of the window), a drag scrolls it. The others slide aside as you go, without the motion when reduced motion is asked for.",
         "Whole rows catch touches, so a long list can't be scrolled by touch over them: use handle there, and whenever rows hold their own buttons, switches or links.",
         "Items are named in what's read out by their text, or by itemLabel. Pass labels to translate the words.",
-        "It sorts within one list. Moving items between lists, as on a kanban board, isn't built in.",
+        "It sorts within one list. To move cards between columns, use Kanban.",
     ],
-    related: ["ListBox", "Table", "Splitter"],
+    related: ["Kanban", "ListBox", "Table", "Splitter"],
     since: "0.15.0",
 };
 
