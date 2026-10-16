@@ -290,6 +290,8 @@ export type { ScrollAreaProps, ScrollAreaOrientation, ScrollAreaType } from "./c
 // Marketing
 export { Chip, SectionHeading, SiteHeader, DotGrid } from "./components/Marketing/Marketing";
 export type { SectionHeadingProps, SiteHeaderProps, DotGridProps } from "./components/Marketing/Marketing";
+export { Marquee } from "./components/Marquee/Marquee";
+export type { MarqueeProps, MarqueeDirection, MarqueeLabels } from "./components/Marquee/Marquee";
 
 // AI
 export { Prose } from "./components/Prose/Prose";

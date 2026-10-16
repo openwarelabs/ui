@@ -114,6 +114,7 @@ export const cssOrder = [
     "components/Affix/Affix.css",
     "components/Watermark/Watermark.css",
     "components/Marketing/Marketing.css",
+    "components/Marquee/Marquee.css",
     "components/Prose/Prose.css",
     "components/Markdown/Markdown.css",
     "components/Callout/Callout.css",
