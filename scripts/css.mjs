@@ -89,6 +89,7 @@ export const cssOrder = [
     "components/Stat/Stat.css",
     "components/Countdown/Countdown.css",
     "components/Carousel/Carousel.css",
+    "components/Lightbox/Lightbox.css",
     "components/DescriptionList/DescriptionList.css",
     "components/Chart/Chart.css",
     "components/ActivityHeatmap/ActivityHeatmap.css",
