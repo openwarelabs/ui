@@ -244,6 +244,8 @@ export type { SectionProps } from "./components/Section/Section";
 export { Splitter, SplitterPanel, SplitterHandle } from "./components/Splitter/Splitter";
 export type { SplitterProps, SplitterPanelProps, SplitterHandleProps, SplitterDirection } from "./components/Splitter/Splitter";
 export type { StackProps, SeparatorProps, ScrollShadowProps, SpaceToken } from "./components/Layout/Layout";
+export { ScrollArea } from "./components/ScrollArea/ScrollArea";
+export type { ScrollAreaProps, ScrollAreaOrientation, ScrollAreaType } from "./components/ScrollArea/ScrollArea";
 
 // Marketing
 export { Chip, SectionHeading, SiteHeader, DotGrid } from "./components/Marketing/Marketing";

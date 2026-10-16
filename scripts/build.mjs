@@ -153,6 +153,7 @@ export const catalogue = [
     "User",
     "Card",
     "ScrollShadow",
+    "ScrollArea",
     "Separator",
     "SettingsRow",
     "Stack",

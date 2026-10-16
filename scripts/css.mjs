@@ -94,6 +94,7 @@ export const cssOrder = [
     "components/NavigationMenu/NavigationMenu.css",
     "components/AppShell/AppShell.css",
     "components/Layout/Layout.css",
+    "components/ScrollArea/ScrollArea.css",
     "components/Container/Container.css",
     "components/Section/Section.css",
     "components/Splitter/Splitter.css",
