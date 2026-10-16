@@ -58,9 +58,9 @@ export function ReadOnly() {
             <Rating readOnly value={4.6} showValue count={1203} />
             <Rating readOnly value={3.2} size="sm" count={48} />
             <Stack direction="row" gap="sm" align="center">
-                <Rating readOnly value={5} size="sm" aria-label="Ada Lovelace" />
+                <Rating readOnly value={5} size="sm" aria-label="Saoirse Doyle" />
                 <Text variant="caption" tone="muted">
-                    Ada Lovelace, 2 days ago
+                    Saoirse Doyle, 2 days ago
                 </Text>
             </Stack>
         </Stack>

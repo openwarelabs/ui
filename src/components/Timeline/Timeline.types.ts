@@ -16,7 +16,7 @@ export interface TimelineProps extends OlHTMLAttributes<HTMLOListElement> {
 }
 
 export interface TimelineItemProps extends Omit<LiHTMLAttributes<HTMLLIElement>, "title"> {
-    /** What happened: a heading in a changelog, or the whole sentence in a feed ("Ana merged #42"). */
+    /** What happened: a heading in a changelog, or the whole sentence in a feed ("Clodagh merged #42"). */
     title?: ReactNode;
     /** When it happened, as people read it: "2h ago", "14 Oct", "v0.13.0 · 14 Oct". */
     time?: ReactNode;

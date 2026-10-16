@@ -36,7 +36,7 @@ export interface Newsletter02Props extends Omit<HTMLAttributes<HTMLElement>, "ti
     successDescription?(email: string): ReactNode;
     /** The people who write it, as avatars at the foot of the card. */
     authors?: string[];
-    /** A line beside the avatars: "Clara, Jonas and Sam write it for 9,400 readers." */
+    /** A line beside the avatars: "Aoife, Declan and Seán write it for 9,400 readers." */
     authorsNote?: ReactNode;
     /** A link at the foot's right, with an arrow: "Read past posts". */
     archiveLink?: BlockLink;

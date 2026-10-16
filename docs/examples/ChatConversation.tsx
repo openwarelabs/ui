@@ -95,15 +95,15 @@ const fix = `export function formatTotal(lines: CartLine[], currency: string) {
     return formatMoney(Math.round(pence) / 100, currency);
 }`;
 
-/** A short conversation: Maya's messages on the right, the agent's answers beside its avatar, and a system line between. */
+/** A short conversation: Siobhan's messages on the right, the agent's answers beside its avatar, and a system line between. */
 export function Basic() {
     return (
         <Panel>
             <ChatConversation>
                 <ChatMessage
                     from="user"
-                    name="Maya Chen"
-                    avatar={<Avatar name="Maya Chen" />}
+                    name="Siobhan Murphy"
+                    avatar={<Avatar name="Siobhan Murphy" />}
                     time="2026-10-14T14:02:00"
                 >
                     The checkout test started failing on main this morning. Can you find out why?
@@ -121,15 +121,15 @@ export function Basic() {
                     </Text>
                 </ChatMessage>
                 <ChatMessage from="system" time="2026-10-14T14:04:00">
-                    Maya Chen changed the model to Claude Sonnet
+                    Siobhan Murphy changed the model to Claude Sonnet
                 </ChatMessage>
                 <ChatMessage
                     from="user"
-                    name="Maya Chen"
-                    avatar={<Avatar name="Maya Chen" />}
+                    name="Siobhan Murphy"
+                    avatar={<Avatar name="Siobhan Murphy" />}
                     time="2026-10-14T14:04:00"
                 >
-                    Yes, open it against main and ask Tomás to review.
+                    Yes, open it against main and ask Ciarán to review.
                 </ChatMessage>
                 <ChatMessage
                     from="assistant"
@@ -138,13 +138,13 @@ export function Basic() {
                     showActions="always"
                     actions={
                         <ChatMessageActions
-                            copyText="Opened pull request #483, “Round checkout totals once”, and asked Tomás Reyes to review it."
+                            copyText="Opened pull request #483, “Round checkout totals once”, and asked Ciarán Kelly to review it."
                             onRetry={() => undefined}
                             onRate={() => undefined}
                         />
                     }
                 >
-                    Opened pull request #483, “Round checkout totals once”, and asked Tomás Reyes to
+                    Opened pull request #483, “Round checkout totals once”, and asked Ciarán Kelly to
                     review it.
                 </ChatMessage>
             </ChatConversation>
@@ -229,7 +229,7 @@ export function Streaming() {
                         {paragraphs(answer.text)}
                     </ChatMessage>
                     {joined ? (
-                        <ChatMessage from="system">Tomás Reyes joined the conversation</ChatMessage>
+                        <ChatMessage from="system">Ciarán Kelly joined the conversation</ChatMessage>
                     ) : null}
                 </ChatConversation>
             </Panel>
@@ -249,7 +249,7 @@ const reply =
     "On it. I'll run the payments suite on `fix/checkout-rounding` and post the results here. If anything else fails, I'll add the fix to #483 rather than open a new pull request.";
 
 /**
- * Sending a message from a PromptInput docked in `footer`: scrollToBottom() on the ref brings Maya back to the bottom, a
+ * Sending a message from a PromptInput docked in `footer`: scrollToBottom() on the ref brings Siobhan back to the bottom, a
  * ChatLoader holds the agent's place, and the answer streams in where the loader was.
  */
 export function Replying() {
@@ -260,7 +260,7 @@ export function Replying() {
         {
             id: 2,
             from: "assistant",
-            text: "Yes: 212 tests passed in 1 minute 48 seconds. #483 is ready for Tomás to review.",
+            text: "Yes: 212 tests passed in 1 minute 48 seconds. #483 is ready for Ciarán to review.",
             status: "done",
         },
     ]);
@@ -425,9 +425,9 @@ export function SidePanel() {
                     Acme agent · #483
                 </Text>
                 <ChatConversation width="full" aria-label="Acme agent on #483">
-                    <ChatMessage from="system">Tomás Reyes asked for changes</ChatMessage>
+                    <ChatMessage from="system">Ciarán Kelly asked for changes</ChatMessage>
                     <ChatMessage from="assistant" avatar={null} name="Acme agent">
-                        Tomás asked for a test with a discount over 100%. I've added one to{" "}
+                        Ciarán asked for a test with a discount over 100%. I've added one to{" "}
                         <Code>checkout.test.ts</Code>, and it passes.
                     </ChatMessage>
                     <ChatMessage from="user">
@@ -485,7 +485,7 @@ const followUp =
     "On it. I'll make both changes on fix/invoice-dates, add the Dublin test, and ask you before I push anything.";
 
 /**
- * A whole run: Maya's question; the agent's reasoning, its tool calls, and its answer in Prose with citations, sources
+ * A whole run: Siobhan's question; the agent's reasoning, its tool calls, and its answer in Prose with citations, sources
  * and actions; and a PromptInput docked under the conversation. Send a follow-up to see the loader take the agent's
  * place.
  */
@@ -532,8 +532,8 @@ export function WholeRun() {
             >
                 <ChatMessage
                     from="user"
-                    name="Maya Chen"
-                    avatar={<Avatar name="Maya Chen" />}
+                    name="Siobhan Murphy"
+                    avatar={<Avatar name="Siobhan Murphy" />}
                     time="2026-10-14T09:41:00"
                     locale="en-GB"
                 >
@@ -643,11 +643,11 @@ export function WholeRun() {
 }
 WholeRun.layout = { fill: true };
 
-/** A follow-up Maya sent, and the agent's answer once it's in. */
+/** A follow-up Siobhan sent, and the agent's answer once it's in. */
 function FollowUp({ text, answered }: { text: string; answered: boolean }) {
     return (
         <>
-            <ChatMessage from="user" name="Maya Chen" avatar={<Avatar name="Maya Chen" />}>
+            <ChatMessage from="user" name="Siobhan Murphy" avatar={<Avatar name="Siobhan Murphy" />}>
                 {text}
             </ChatMessage>
             {answered ? (

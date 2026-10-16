@@ -169,7 +169,7 @@ export function ReasoningOnly() {
         <div style={{ width: 560, maxWidth: "100%" }}>
             <ChainOfThought defaultExpanded duration={4200}>
                 {
-                    "Tomás asked for a clearer test name, nothing else.\nI'll rename it on fix/invoice-dates so it stays in #482, rather than open a new pull request."
+                    "Ciarán asked for a clearer test name, nothing else.\nI'll rename it on fix/invoice-dates so it stays in #482, rather than open a new pull request."
                 }
             </ChainOfThought>
         </div>

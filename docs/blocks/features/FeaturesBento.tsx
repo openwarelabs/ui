@@ -57,9 +57,9 @@ function AgentShot() {
 }
 
 const reviews = [
-    { title: "Invoice dates in the EU", by: "Tomás Reyes", status: "Approved", tone: "success" },
-    { title: "Pricing page copy", by: "Maya Chen", status: "In review", tone: "active" },
-    { title: "Offline drafts", by: "Clara Novak", status: "Changes asked", tone: "warning" },
+    { title: "Invoice dates in the EU", by: "Ciarán Kelly", status: "Approved", tone: "success" },
+    { title: "Pricing page copy", by: "Siobhan Murphy", status: "In review", tone: "active" },
+    { title: "Offline drafts", by: "Aoife O'Sullivan", status: "Changes asked", tone: "warning" },
 ] as const;
 
 function ReviewShot() {

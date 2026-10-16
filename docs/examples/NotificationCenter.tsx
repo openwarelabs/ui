@@ -47,10 +47,10 @@ const minutesAgo = (minutes: number) => new Date(Date.now() - minutes * 60_000);
 const inbox: NotificationItem[] = [
     {
         id: "1",
-        title: "Clara Novak mentioned you in Fix invoice dates",
-        description: "@maya can you check the rounding on the Irish invoices?",
+        title: "Aoife O'Sullivan mentioned you in Fix invoice dates",
+        description: "@siobhan can you check the rounding on the Irish invoices?",
         time: minutesAgo(4),
-        avatar: <Avatar name="Clara Novak" />,
+        avatar: <Avatar name="Aoife O'Sullivan" />,
         href: "#/components/notification-center",
     },
     {
@@ -63,16 +63,16 @@ const inbox: NotificationItem[] = [
     },
     {
         id: "3",
-        title: "Tomás Reyes approved Pricing page copy",
+        title: "Ciarán Kelly approved Pricing page copy",
         time: minutesAgo(70),
-        avatar: <Avatar name="Tomás Reyes" />,
+        avatar: <Avatar name="Ciarán Kelly" />,
         href: "#/components/notification-center",
     },
     {
         id: "4",
-        title: "Aiko Tanaka added you to design-system",
+        title: "Niamh Byrne added you to design-system",
         time: minutesAgo(60 * 27),
-        avatar: <Avatar name="Aiko Tanaka" />,
+        avatar: <Avatar name="Niamh Byrne" />,
         read: true,
         href: "#/components/notification-center",
     },
@@ -99,7 +99,7 @@ export function Grouped() {
         ...inbox,
         {
             id: "5",
-            title: "Sam Okafor invited you to billing-api",
+            title: "Seán McCarthy invited you to billing-api",
             time: minutesAgo(12),
             icon: <UserPlus size={15} />,
             actions: (
@@ -170,9 +170,9 @@ export function InHeader() {
         setItems((all) => [
             {
                 id: String(Date.now()),
-                title: "Jonas Berg commented on Release 2.4",
+                title: "Declan Walsh commented on Release 2.4",
                 time: new Date(),
-                avatar: <Avatar name="Jonas Berg" />,
+                avatar: <Avatar name="Declan Walsh" />,
             },
             ...all,
         ]);
@@ -197,7 +197,7 @@ export function InHeader() {
                             onReadAll={() => setItems((all) => all.map((item) => ({ ...item, read: true })))}
                             onRead={(id) => setItems((all) => all.map((item) => (item.id === id ? { ...item, read: true } : item)))}
                         />
-                        <Avatar name="Maya Chen" size="sm" label="Maya Chen" />
+                        <Avatar name="Siobhan Murphy" size="sm" label="Siobhan Murphy" />
                     </Stack>
                 }
             />

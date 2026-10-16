@@ -11,17 +11,17 @@ const roles = [
 const asRole = (role: string) => (role === "admin" ? "an admin" : `a ${role}`);
 
 const members: Settings04Member[] = [
-    { name: "Maya Chen", email: "maya@example.com", role: "owner", owner: true },
-    { name: "Tomás Reyes", email: "tomas@example.com", role: "admin" },
-    { name: "Clara Novak", email: "clara@example.com", role: "member" },
-    { name: "Jonas Berg", email: "jonas@example.com", role: "member" },
-    { name: "Aiko Tanaka", email: "aiko@example.com", role: "member" },
-    { name: "Sam Okafor", email: "sam@example.com", role: "guest" },
+    { name: "Siobhan Murphy", email: "siobhan@example.com", role: "owner", owner: true },
+    { name: "Ciarán Kelly", email: "ciaran@example.com", role: "admin" },
+    { name: "Aoife O'Sullivan", email: "aoife@example.com", role: "member" },
+    { name: "Declan Walsh", email: "declan@example.com", role: "member" },
+    { name: "Niamh Byrne", email: "niamh@example.com", role: "member" },
+    { name: "Seán McCarthy", email: "sean@example.com", role: "guest" },
 ];
 
 const invites: Settings04Invite[] = [
-    { email: "lena@example.com", role: "member", sent: "2 days ago", invitedBy: "Maya Chen" },
-    { email: "omar@example.com", role: "guest", sent: "5 days ago", invitedBy: "Maya Chen" },
+    { email: "roisin@example.com", role: "member", sent: "2 days ago", invitedBy: "Siobhan Murphy" },
+    { email: "cillian@example.com", role: "guest", sent: "5 days ago", invitedBy: "Siobhan Murphy" },
 ];
 
 // Stands in for the requests to your server.
@@ -40,7 +40,7 @@ export function SettingsMembers() {
             invites={invites}
             roles={roles}
             defaultInviteRole="member"
-            currentUserEmail="maya@example.com"
+            currentUserEmail="siobhan@example.com"
             onInvite={async ({ email, role }) => {
                 await wait(700);
                 toast.success(`Invite sent to ${email}`, { description: `They'll join as ${asRole(role)}.` });

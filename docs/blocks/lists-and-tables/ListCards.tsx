@@ -25,7 +25,7 @@ const projects: Project[] = [
         description: "The public site: the home page, pricing and the blog.",
         status: "Live",
         when: "Deployed 4 min ago",
-        members: ["Maya Chen", "Sam Okafor", "Aiko Tanaka", "Lena Fischer", "Omar Haddad", "Jonas Berg"],
+        members: ["Siobhan Murphy", "Seán McCarthy", "Niamh Byrne", "Róisín O'Brien", "Cillian Ryan", "Declan Walsh"],
         pinned: true,
     },
     {
@@ -34,7 +34,7 @@ const projects: Project[] = [
         description: "Invoices, payments and the EU tax rules behind them.",
         status: "Building",
         when: "Building fix/invoice-dates",
-        members: ["Tomás Reyes", "Clara Novak", "Omar Haddad", "Lena Fischer"],
+        members: ["Ciarán Kelly", "Aoife O'Sullivan", "Cillian Ryan", "Róisín O'Brien"],
         pinned: true,
     },
     {
@@ -43,7 +43,7 @@ const projects: Project[] = [
         description: "The iOS and Android app, built from one codebase.",
         status: "Live",
         when: "Release 2.4, 2 h ago",
-        members: ["Clara Novak", "Jonas Berg", "Aiko Tanaka", "Sam Okafor", "Maya Chen"],
+        members: ["Aoife O'Sullivan", "Declan Walsh", "Niamh Byrne", "Seán McCarthy", "Siobhan Murphy"],
         pinned: true,
     },
     {
@@ -52,7 +52,7 @@ const projects: Project[] = [
         description: "Guides, tutorials and the API reference.",
         status: "Failed",
         when: "Failed yesterday",
-        members: ["Jonas Berg", "Lena Fischer", "Maya Chen"],
+        members: ["Declan Walsh", "Róisín O'Brien", "Siobhan Murphy"],
         pinned: false,
     },
     {
@@ -61,7 +61,7 @@ const projects: Project[] = [
         description: "The components and tokens every Acme app shares.",
         status: "Live",
         when: "Deployed 3 h ago",
-        members: ["Aiko Tanaka", "Maya Chen", "Clara Novak"],
+        members: ["Niamh Byrne", "Siobhan Murphy", "Aoife O'Sullivan"],
         pinned: false,
     },
 ];
@@ -92,7 +92,7 @@ export function ListCards() {
                 description: "A blank project. Connect a repository to deploy it.",
                 status: "Building",
                 when: "Setting up",
-                members: ["Maya Chen"],
+                members: ["Siobhan Murphy"],
                 pinned: false,
             },
         ]);

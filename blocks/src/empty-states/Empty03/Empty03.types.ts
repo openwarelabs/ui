@@ -15,7 +15,7 @@ export interface Empty03Item {
     icon?: ReactNode;
     /** The row's main line. */
     title: ReactNode;
-    /** A caption under it: "billing-api · for Tomás Reyes". */
+    /** A caption under it: "billing-api · for Ciarán Kelly". */
     meta?: ReactNode;
     /** A short figure on the right, such as how long it took. Hidden on phones. */
     time?: ReactNode;

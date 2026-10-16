@@ -27,20 +27,20 @@ export function ActivityFeed() {
     return (
         <Timeline density="compact" aria-label="Activity" style={{ width: 440, maxWidth: "100%" }}>
             <TimelineItem
-                avatar={<Avatar name="Ana Lima" size="sm" />}
+                avatar={<Avatar name="Clodagh Nolan" size="sm" />}
                 title={
                     <>
-                        <strong>Ana Lima</strong> merged <strong>#42 Round VAT per line</strong>
+                        <strong>Clodagh Nolan</strong> merged <strong>#42 Round VAT per line</strong>
                     </>
                 }
                 time="2h ago"
                 dateTime="2026-10-13T12:30"
             />
             <TimelineItem
-                avatar={<Avatar name="Clara Novak" size="sm" />}
+                avatar={<Avatar name="Aoife O'Sullivan" size="sm" />}
                 title={
                     <>
-                        <strong>Clara Novak</strong> commented on <strong>#42</strong>
+                        <strong>Aoife O'Sullivan</strong> commented on <strong>#42</strong>
                     </>
                 }
                 time="3h ago"
@@ -57,7 +57,7 @@ export function ActivityFeed() {
                 tone="brand"
                 title={
                     <>
-                        An agent opened <strong>#42</strong> for Tomás Reyes
+                        An agent opened <strong>#42</strong> for Ciarán Kelly
                     </>
                 }
                 time="5h ago"
@@ -66,10 +66,10 @@ export function ActivityFeed() {
                 6 files changed in billing-api
             </TimelineItem>
             <TimelineItem
-                avatar={<Avatar name="Tomás Reyes" size="sm" />}
+                avatar={<Avatar name="Ciarán Kelly" size="sm" />}
                 title={
                     <>
-                        <strong>Tomás Reyes</strong> created the issue
+                        <strong>Ciarán Kelly</strong> created the issue
                     </>
                 }
                 time="Yesterday"

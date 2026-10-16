@@ -234,7 +234,7 @@ export function ChatAgentRun() {
         {
             id: "review",
             tool: {
-                title: "Ask Tomás Reyes to review",
+                title: "Ask Ciarán Kelly to review",
                 name: "request_review",
                 icon: <UserRoundCheck size={15} />,
                 status: review,
@@ -249,7 +249,7 @@ export function ChatAgentRun() {
             title="Fix invoice dates in the EU"
             project="billing-api"
             branch="fix/invoice-dates"
-            byline="Started by Maya Chen"
+            byline="Started by Siobhan Murphy"
             status={status}
             elapsed={elapsed}
             onStop={() => setRun("stopped")}
@@ -288,7 +288,7 @@ export function ChatAgentRun() {
                 run === "done" ? (
                     <Prose size="sm">
                         <Text variant="copy" tone="default">
-                            Opened <Link href="#">#482 Fix invoice dates in the EU</Link> and asked Tomás Reyes to review it. Invoices are now dated in the
+                            Opened <Link href="#">#482 Fix invoice dates in the EU</Link> and asked Ciarán Kelly to review it. Invoices are now dated in the
                             customer's time zone, on the web {cite(2)} and in the PDF {cite(3)}, and all 86 tests pass.
                         </Text>
                     </Prose>

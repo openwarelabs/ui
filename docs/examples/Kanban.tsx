@@ -44,9 +44,9 @@ const board: Array<KanbanColumn<Task>> = [
         id: "todo",
         title: "To do",
         cards: [
-            { id: "t1", title: "Write the release notes", tag: "Docs", owner: "Ada Lovelace" },
+            { id: "t1", title: "Write the release notes", tag: "Docs", owner: "Saoirse Doyle" },
             { id: "t2", title: "Add a dark map style", tag: "Design" },
-            { id: "t3", title: "Rate-limit the export endpoint", tag: "API", owner: "Linus Torvalds" },
+            { id: "t3", title: "Rate-limit the export endpoint", tag: "API", owner: "Declan Walsh" },
         ],
     },
     {
@@ -54,11 +54,11 @@ const board: Array<KanbanColumn<Task>> = [
         title: "In progress",
         limit: 2,
         cards: [
-            { id: "t4", title: "Fix the login redirect loop", tag: "Bug", owner: "Grace Hopper" },
-            { id: "t5", title: "Move billing to the new plans", tag: "API", owner: "Alan Turing" },
+            { id: "t4", title: "Fix the login redirect loop", tag: "Bug", owner: "Gráinne O'Neill" },
+            { id: "t5", title: "Move billing to the new plans", tag: "API", owner: "Eoin Fitzgerald" },
         ],
     },
-    { id: "review", title: "In review", cards: [{ id: "t6", title: "Onboarding checklist", tag: "Design", owner: "Barbara Liskov" }] },
+    { id: "review", title: "In review", cards: [{ id: "t6", title: "Onboarding checklist", tag: "Design", owner: "Caoimhe Brennan" }] },
     { id: "done", title: "Done", cards: [] },
 ];
 
@@ -128,9 +128,9 @@ interface Candidate {
 }
 
 const pipeline: Array<KanbanColumn<Candidate>> = [
-    { id: "applied", title: "Applied", cards: [{ id: "c1", name: "Radia Perlman", role: "Network engineer" }, { id: "c2", name: "Tim Berners-Lee", role: "Web platform" }] },
-    { id: "screen", title: "Phone screen", cards: [{ id: "c3", name: "Margaret Hamilton", role: "Flight software" }] },
-    { id: "onsite", title: "Onsite", cards: [{ id: "c4", name: "Frances Allen", role: "Compilers" }] },
+    { id: "applied", title: "Applied", cards: [{ id: "c1", name: "Orla MacNamara", role: "Network engineer" }, { id: "c2", name: "Connor O'Conner", role: "Web platform" }] },
+    { id: "screen", title: "Phone screen", cards: [{ id: "c3", name: "Niamh Byrne", role: "Flight software" }] },
+    { id: "onsite", title: "Onsite", cards: [{ id: "c4", name: "Clodagh Nolan", role: "Compilers" }] },
     { id: "offer", title: "Offer", cards: [] },
 ];
 const stages = pipeline.map((column) => column.id);

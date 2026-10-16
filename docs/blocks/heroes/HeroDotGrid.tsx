@@ -19,8 +19,8 @@ function PlanCards({ side }: { side: "start" | "end" }) {
                     </span>
                     <span className="hero-dot-grid__card-title">Fix invoice dates in the EU</span>
                     <span className="hero-dot-grid__card-foot">
-                        <Avatar name="Tomás Reyes" size="sm" />
-                        Tomás Reyes
+                        <Avatar name="Ciarán Kelly" size="sm" />
+                        Ciarán Kelly
                     </span>
                 </div>
                 <div className="hero-dot-grid__card">
@@ -38,7 +38,7 @@ function PlanCards({ side }: { side: "start" | "end" }) {
         );
     }
     return (
-        <div className="hero-dot-grid__side hero-dot-grid__side--end" role="img" aria-label="A review approved by Maya Chen, and a deploy that's live.">
+        <div className="hero-dot-grid__side hero-dot-grid__side--end" role="img" aria-label="A review approved by Siobhan Murphy, and a deploy that's live.">
             <div className="hero-dot-grid__card">
                 <span className="hero-dot-grid__card-top">
                     <span className="hero-dot-grid__card-label">
@@ -51,8 +51,8 @@ function PlanCards({ side }: { side: "start" | "end" }) {
                 </span>
                 <span className="hero-dot-grid__card-title">Pricing page copy</span>
                 <span className="hero-dot-grid__card-foot">
-                    <Avatar name="Maya Chen" size="sm" />
-                    Maya Chen
+                    <Avatar name="Siobhan Murphy" size="sm" />
+                    Siobhan Murphy
                 </span>
             </div>
             <div className="hero-dot-grid__card">

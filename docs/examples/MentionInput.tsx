@@ -45,7 +45,7 @@ export const meta: DocMeta = {
     notes: [
         "The text box is a combobox over a listbox: aria-expanded, aria-controls and aria-activedescendant follow the list, and focus stays in the text.",
         'The number of suggestions, "Loading…" and "No matches" are read out politely as they change.',
-        'A picked option goes in as plain text, such as "@Ada Lovelace ". `mentions` and onMentionsChange find each one in the text again, so deleting it drops it.',
+        'A picked option goes in as plain text, such as "@Saoirse Doyle ". `mentions` and onMentionsChange find each one in the text again, so deleting it drops it.',
         "useMentions listens to the text box directly, so it works with PromptInput as it is: put its ref on PromptInput and render its list. While the list is open, Enter picks instead of sending.",
         "Give it a name and the text is submitted like any input. It takes the id, isInvalid and aria-describedby a Field gives it.",
     ],
@@ -54,11 +54,11 @@ export const meta: DocMeta = {
 };
 
 const people: MentionOption[] = [
-    { id: "u1", label: "Ada Lovelace", description: "Engineering" },
-    { id: "u2", label: "Grace Hopper", description: "Compilers" },
-    { id: "u3", label: "Alan Turing", description: "Research" },
-    { id: "u4", label: "Katherine Johnson", description: "Navigation" },
-    { id: "u5", label: "Edsger Dijkstra", description: "Away until Monday", disabled: true },
+    { id: "u1", label: "Saoirse Doyle", description: "Engineering" },
+    { id: "u2", label: "Gráinne O'Neill", description: "Compilers" },
+    { id: "u3", label: "Eoin Fitzgerald", description: "Research" },
+    { id: "u4", label: "Orla MacNamara", description: "Navigation" },
+    { id: "u5", label: "Tadhg O'Donovan", description: "Away until Monday", disabled: true },
 ].map((person) => ({ ...person, icon: <Avatar name={person.label} size={16} /> }));
 
 /** Type @ and a name. The list follows the caret; the mentions below come with their ids. */
@@ -160,16 +160,16 @@ export function ChatPrompt() {
 ChatPrompt.layout = { fill: true, align: "start" as const };
 
 const directory = [
-    "Ada Lovelace",
-    "Alan Kay",
-    "Barbara Liskov",
-    "Dennis Ritchie",
-    "Donald Knuth",
-    "Frances Allen",
-    "Grace Hopper",
-    "Ken Thompson",
-    "Margaret Hamilton",
-    "Radia Perlman",
+    "Saoirse Doyle",
+    "Fionn Gallagher",
+    "Caoimhe Brennan",
+    "Connor O'Conner",
+    "Padraig Kavanagh",
+    "Clodagh Nolan",
+    "Gráinne O'Neill",
+    "Oisín Duffy",
+    "Niamh Byrne",
+    "Orla MacNamara",
 ].map((name, index) => ({ id: `p${index}`, label: name }));
 
 /** Searching a server: options is a function that returns a promise. A spinner shows while it waits. */
@@ -218,7 +218,7 @@ export function InAField() {
             </Field>
             <Field label="Archived note">
                 <MentionInput
-                    defaultValue="Signed off by @Grace Hopper"
+                    defaultValue="Signed off by @Gráinne O'Neill"
                     triggers={[{ char: "@", options: people }]}
                     disabled
                 />

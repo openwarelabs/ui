@@ -3,7 +3,7 @@ import type { MouseEvent, ReactElement, ReactNode } from "react";
 export interface NotificationItem {
     /** Unique among the items. */
     id: string;
-    /** What happened, in a line: "Clara mentioned you in Pricing". It names the item for screen readers. */
+    /** What happened, in a line: "Aoife mentioned you in Pricing". It names the item for screen readers. */
     title: ReactNode;
     /** A second line: a quote, or where it happened. */
     description?: ReactNode;

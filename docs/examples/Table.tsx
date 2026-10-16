@@ -46,7 +46,7 @@ const runs: Run[] = [
     {
         id: "r2",
         project: "landing-page",
-        owner: "Sam Okafor",
+        owner: "Seán McCarthy",
         status: "Running",
         cost: 0.42,
         minutes: 4,
@@ -54,7 +54,7 @@ const runs: Run[] = [
     {
         id: "r3",
         project: "billing-api",
-        owner: "Clara Novak",
+        owner: "Aoife O'Sullivan",
         status: "Failed",
         cost: 2.9,
         minutes: 21,

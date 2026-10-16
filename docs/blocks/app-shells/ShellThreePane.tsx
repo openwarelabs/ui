@@ -44,8 +44,8 @@ const projects: Project[] = [
         id: "billing-api",
         description: "Invoices, payments and the EU tax rules behind them.",
         color: "var(--ow-success-solid)",
-        owner: "Tomás Reyes",
-        members: ["Tomás Reyes", "Clara Novak", "Omar Haddad", "Lena Fischer"],
+        owner: "Ciarán Kelly",
+        members: ["Ciarán Kelly", "Aoife O'Sullivan", "Cillian Ryan", "Róisín O'Brien"],
         repo: "acme/billing-api",
         branch: "main",
         region: "Frankfurt",
@@ -57,18 +57,18 @@ const projects: Project[] = [
             ["Open reviews", "4"],
         ],
         deploys: [
-            row("Fix invoice dates in the EU", "fix/invoice-dates", "Agent for Tomás Reyes", "26 min ago", "", "Building"),
-            row("Retry failed card payments once", "main", "Omar Haddad", "5 h ago", "2 min 31 s", "Live"),
-            row("Round VAT per line, not per invoice", "main", "Lena Fischer", "Yesterday", "1 min 12 s", "Failed"),
-            row("Send receipts in the customer's language", "main", "Clara Novak", "2 days ago", "2 min 44 s", "Live"),
+            row("Fix invoice dates in the EU", "fix/invoice-dates", "Agent for Ciarán Kelly", "26 min ago", "", "Building"),
+            row("Retry failed card payments once", "main", "Cillian Ryan", "5 h ago", "2 min 31 s", "Live"),
+            row("Round VAT per line, not per invoice", "main", "Róisín O'Brien", "Yesterday", "1 min 12 s", "Failed"),
+            row("Send receipts in the customer's language", "main", "Aoife O'Sullivan", "2 days ago", "2 min 44 s", "Live"),
         ],
     },
     {
         id: "marketing-site",
         description: "The public site: the home page, pricing and the blog.",
         color: "var(--ow-primary)",
-        owner: "Maya Chen",
-        members: ["Maya Chen", "Sam Okafor", "Aiko Tanaka", "Lena Fischer", "Omar Haddad", "Jonas Berg"],
+        owner: "Siobhan Murphy",
+        members: ["Siobhan Murphy", "Seán McCarthy", "Niamh Byrne", "Róisín O'Brien", "Cillian Ryan", "Declan Walsh"],
         repo: "acme/marketing-site",
         branch: "main",
         region: "Frankfurt",
@@ -80,17 +80,17 @@ const projects: Project[] = [
             ["Open reviews", "2"],
         ],
         deploys: [
-            row("Pricing page copy", "main", "Maya Chen", "4 min ago", "48 s", "Live"),
-            row("Add alt text to the blog images", "agent/alt-text", "Agent for Sam Okafor", "3 h ago", "52 s", "Live"),
-            row("Move the changelog to MDX", "main", "Aiko Tanaka", "Yesterday", "1 min 03 s", "Live"),
+            row("Pricing page copy", "main", "Siobhan Murphy", "4 min ago", "48 s", "Live"),
+            row("Add alt text to the blog images", "agent/alt-text", "Agent for Seán McCarthy", "3 h ago", "52 s", "Live"),
+            row("Move the changelog to MDX", "main", "Niamh Byrne", "Yesterday", "1 min 03 s", "Live"),
         ],
     },
     {
         id: "mobile-app",
         description: "The iOS and Android app, built from one codebase.",
         color: "var(--ow-brass)",
-        owner: "Clara Novak",
-        members: ["Clara Novak", "Jonas Berg", "Aiko Tanaka", "Sam Okafor", "Maya Chen"],
+        owner: "Aoife O'Sullivan",
+        members: ["Aoife O'Sullivan", "Declan Walsh", "Niamh Byrne", "Seán McCarthy", "Siobhan Murphy"],
         repo: "acme/mobile-app",
         branch: "release/2.4",
         region: "Dublin",
@@ -102,17 +102,17 @@ const projects: Project[] = [
             ["Open reviews", "3"],
         ],
         deploys: [
-            row("Update React Native to 0.76", "agent/rn-076", "Agent for Clara Novak", "1 h ago", "", "Building"),
-            row("Release 2.4", "release/2.4", "Clara Novak", "2 h ago", "3 min 12 s", "Live"),
-            row("Dark mode for the settings screen", "main", "Jonas Berg", "Yesterday", "3 min 05 s", "Live"),
+            row("Update React Native to 0.76", "agent/rn-076", "Agent for Aoife O'Sullivan", "1 h ago", "", "Building"),
+            row("Release 2.4", "release/2.4", "Aoife O'Sullivan", "2 h ago", "3 min 12 s", "Live"),
+            row("Dark mode for the settings screen", "main", "Declan Walsh", "Yesterday", "3 min 05 s", "Live"),
         ],
     },
     {
         id: "docs",
         description: "Guides, tutorials and the API reference.",
         color: "var(--ow-danger-solid)",
-        owner: "Jonas Berg",
-        members: ["Jonas Berg", "Lena Fischer", "Maya Chen"],
+        owner: "Declan Walsh",
+        members: ["Declan Walsh", "Róisín O'Brien", "Siobhan Murphy"],
         repo: "acme/docs",
         branch: "main",
         region: "Frankfurt",
@@ -124,17 +124,17 @@ const projects: Project[] = [
             ["Open reviews", "1"],
         ],
         deploys: [
-            row("Rebuild the search index", "agent/search-index", "Agent for Jonas Berg", "Yesterday", "4 min 02 s", "Failed"),
-            row("Document the webhooks API", "main", "Lena Fischer", "2 days ago", "1 min 48 s", "Live"),
-            row("Fix broken links in the quickstart", "main", "Jonas Berg", "3 days ago", "1 min 41 s", "Live"),
+            row("Rebuild the search index", "agent/search-index", "Agent for Declan Walsh", "Yesterday", "4 min 02 s", "Failed"),
+            row("Document the webhooks API", "main", "Róisín O'Brien", "2 days ago", "1 min 48 s", "Live"),
+            row("Fix broken links in the quickstart", "main", "Declan Walsh", "3 days ago", "1 min 41 s", "Live"),
         ],
     },
     {
         id: "design-system",
         description: "The components and tokens every Acme app shares.",
         color: "var(--ow-text-muted)",
-        owner: "Aiko Tanaka",
-        members: ["Aiko Tanaka", "Maya Chen", "Clara Novak"],
+        owner: "Niamh Byrne",
+        members: ["Niamh Byrne", "Siobhan Murphy", "Aoife O'Sullivan"],
         repo: "acme/design-system",
         branch: "main",
         region: "Frankfurt",
@@ -146,9 +146,9 @@ const projects: Project[] = [
             ["Open reviews", "2"],
         ],
         deploys: [
-            row("Tooltips flip when there's no room", "main", "Aiko Tanaka", "3 h ago", "1 min 05 s", "Live"),
-            row("New date picker", "feat/date-picker", "Clara Novak", "Yesterday", "1 min 10 s", "Live"),
-            row("Darker borders in dark mode", "main", "Maya Chen", "4 days ago", "58 s", "Live"),
+            row("Tooltips flip when there's no room", "main", "Niamh Byrne", "3 h ago", "1 min 05 s", "Live"),
+            row("New date picker", "feat/date-picker", "Aoife O'Sullivan", "Yesterday", "1 min 10 s", "Live"),
+            row("Darker borders in dark mode", "main", "Siobhan Murphy", "4 days ago", "58 s", "Live"),
         ],
     },
 ];
@@ -171,7 +171,7 @@ export function ShellThreePane() {
 
     const deploy = () => {
         const { id, branch } = project;
-        const next: Deploy = { message: "Deploy from the dashboard", branch, who: "Maya Chen", when: "Just now", duration: "", status: "Building" };
+        const next: Deploy = { message: "Deploy from the dashboard", branch, who: "Siobhan Murphy", when: "Just now", duration: "", status: "Building" };
         setAdded((current) => ({ ...current, [id]: [next, ...(current[id] ?? [])] }));
         toast(`Deploying ${branch} of ${id}`, { description: "It's building now. It goes live as soon as the checks pass." });
         timers.current.push(
@@ -204,7 +204,7 @@ export function ShellThreePane() {
             })}
             selected={selectedId}
             onSelect={setSelectedId}
-            account={{ name: "Maya Chen", email: "maya@example.com" }}
+            account={{ name: "Siobhan Murphy", email: "siobhan@example.com" }}
             accountMenu={[
                 { label: "Profile", icon: <UserIcon size={15} /> },
                 { label: "Settings", icon: <Settings size={15} /> },

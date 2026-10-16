@@ -108,9 +108,9 @@ export function Controlled() {
             <HoverCard
                 open={open}
                 onOpenChange={setOpen}
-                trigger={<Link href="#/people/sam">Sam Rivera</Link>}
+                trigger={<Link href="#/people/fionn">Fionn Gallagher</Link>}
             >
-                <User name="Sam Rivera" description="Engineering · Lisbon" size="lg" />
+                <User name="Fionn Gallagher" description="Engineering · Lisbon" size="lg" />
             </HoverCard>
             <Text variant="caption" tone="muted">
                 The card is {open ? "open" : "closed"}.

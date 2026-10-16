@@ -11,7 +11,7 @@ export interface Notifications01Item {
     /** The icon's circle: the brand's tint, or red for something that failed.
      * @default "primary" */
     tone?: "primary" | "danger";
-    /** What happened, with the names in bold: <><strong>Clara Novak</strong> mentioned you in …</>. */
+    /** What happened, with the names in bold: <><strong>Aoife O'Sullivan</strong> mentioned you in …</>. */
     message: ReactNode;
     /** @deprecated No longer used: an item is named by the text it shows. Kept so code from 0.10.0 still compiles. */
     summary?: string;

@@ -30,7 +30,7 @@ const events: Event[] = [
         tone: "success",
         text: (
             <>
-                <Strong>Maya Chen</Strong> deployed <Strong>Pricing page copy</Strong> to marketing-site
+                <Strong>Siobhan Murphy</Strong> deployed <Strong>Pricing page copy</Strong> to marketing-site
             </>
         ),
         meta: "Live in 48 s · 4 min ago",
@@ -43,7 +43,7 @@ const events: Event[] = [
         tone: "primary",
         text: (
             <>
-                An agent opened <Strong>#219 Fix invoice dates in the EU</Strong> for Tomás Reyes
+                An agent opened <Strong>#219 Fix invoice dates in the EU</Strong> for Ciarán Kelly
             </>
         ),
         meta: "billing-api · 6 files changed · 26 min ago",
@@ -55,7 +55,7 @@ const events: Event[] = [
         icon: <GitMerge size={14} />,
         text: (
             <>
-                <Strong>Clara Novak</Strong> merged <Strong>#306 Cache avatars between launches</Strong>
+                <Strong>Aoife O'Sullivan</Strong> merged <Strong>#306 Cache avatars between launches</Strong>
             </>
         ),
         meta: "mobile-app · 1 h ago",
@@ -67,7 +67,7 @@ const events: Event[] = [
         icon: <GitPullRequest size={14} />,
         text: (
             <>
-                <Strong>Lena Fischer</Strong> asked for changes on <Strong>#217 Round VAT per line</Strong>
+                <Strong>Róisín O'Brien</Strong> asked for changes on <Strong>#217 Round VAT per line</Strong>
             </>
         ),
         meta: "billing-api · 3 comments · 2 h ago",
@@ -92,10 +92,10 @@ const events: Event[] = [
         icon: <UserPlus size={14} />,
         text: (
             <>
-                <Strong>Omar Haddad</Strong> joined the workspace as a member
+                <Strong>Cillian Ryan</Strong> joined the workspace as a member
             </>
         ),
-        meta: "Invited by Maya Chen · Yesterday",
+        meta: "Invited by Siobhan Murphy · Yesterday",
         day: "Yesterday",
     },
     {
@@ -105,7 +105,7 @@ const events: Event[] = [
         tone: "primary",
         text: (
             <>
-                An agent finished <Strong>Rename the colour tokens</Strong> for Aiko Tanaka
+                An agent finished <Strong>Rename the colour tokens</Strong> for Niamh Byrne
             </>
         ),
         meta: "design-system · 152 lines · Yesterday",
@@ -117,7 +117,7 @@ const events: Event[] = [
         icon: <KeyRound size={14} />,
         text: (
             <>
-                <Strong>Jonas Berg</Strong> created the API key <Strong>CI deploys</Strong>
+                <Strong>Declan Walsh</Strong> created the API key <Strong>CI deploys</Strong>
             </>
         ),
         meta: "Expires in 90 days · Yesterday",
@@ -133,7 +133,7 @@ const incoming: Event[] = [
         icon: <GitPullRequest size={14} />,
         text: (
             <>
-                <Strong>Sam Okafor</Strong> approved <Strong>#482 Pricing page copy</Strong>
+                <Strong>Seán McCarthy</Strong> approved <Strong>#482 Pricing page copy</Strong>
             </>
         ),
         meta: "marketing-site · Just now",
@@ -146,7 +146,7 @@ const incoming: Event[] = [
         tone: "success",
         text: (
             <>
-                <Strong>Aiko Tanaka</Strong> deployed <Strong>Tooltips flip when there's no room</Strong> to design-system
+                <Strong>Niamh Byrne</Strong> deployed <Strong>Tooltips flip when there's no room</Strong> to design-system
             </>
         ),
         meta: "Live in 1 min 05 s · Just now",

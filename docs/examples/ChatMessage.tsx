@@ -49,8 +49,8 @@ export function Basic() {
         <Stack gap="6xl">
             <ChatMessage
                 from="user"
-                name="Maya Chen"
-                avatar={<Avatar name="Maya Chen" />}
+                name="Siobhan Murphy"
+                avatar={<Avatar name="Siobhan Murphy" />}
                 time="2026-10-14T09:41:00"
                 locale="en-GB"
             >
@@ -102,14 +102,14 @@ export function Actions() {
                 showActions="always"
                 actions={
                     <ChatMessageActions
-                        copyText="Opened pull request #483, “Round checkout totals once”, and asked Tomás Reyes to review it."
+                        copyText="Opened pull request #483, “Round checkout totals once”, and asked Ciarán Kelly to review it."
                         onRetry={() => undefined}
                         rating={rating}
                         onRate={setRating}
                     />
                 }
             >
-                Opened pull request #483, “Round checkout totals once”, and asked Tomás Reyes to
+                Opened pull request #483, “Round checkout totals once”, and asked Ciarán Kelly to
                 review it.
             </ChatMessage>
             <Text variant="caption">
@@ -212,11 +212,11 @@ export function SystemLines() {
     return (
         <Stack gap="6xl">
             <ChatMessage from="system" time="2026-10-14T09:40:00" locale="en-GB">
-                Maya Chen started the conversation
+                Siobhan Murphy started the conversation
             </ChatMessage>
             <ChatMessage from="user">Use Claude Sonnet for this one.</ChatMessage>
-            <ChatMessage from="system">Maya Chen changed the model to Claude Sonnet</ChatMessage>
-            <ChatMessage from="system">Tomás Reyes joined the conversation</ChatMessage>
+            <ChatMessage from="system">Siobhan Murphy changed the model to Claude Sonnet</ChatMessage>
+            <ChatMessage from="system">Ciarán Kelly joined the conversation</ChatMessage>
         </Stack>
     );
 }

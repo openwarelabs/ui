@@ -42,17 +42,17 @@ const conversation: Chat01Message[] = [
         id: "3",
         from: "user",
         time: "2026-10-14T14:04:00",
-        text: "Yes, open it against main and ask Tomás to review.",
+        text: "Yes, open it against main and ask Ciarán to review.",
     },
     {
         id: "4",
         from: "assistant",
         time: "2026-10-14T14:05:00",
-        text: "Done. It's ready for Tomás Reyes, and I'll fix anything he asks for on the same branch. #482 Fix invoice dates in the EU.",
+        text: "Done. It's ready for Ciarán Kelly, and I'll fix anything he asks for on the same branch. #482 Fix invoice dates in the EU.",
         body: (
             <Prose size="sm">
                 <Text variant="copy" tone="default">
-                    Done. It's ready for Tomás Reyes, and I'll fix anything he asks for on the same branch.
+                    Done. It's ready for Ciarán Kelly, and I'll fix anything he asks for on the same branch.
                 </Text>
                 <Link className="chat-thread__pr" href="#" variant="standalone">
                     <GitPullRequest size={18} />
@@ -140,7 +140,7 @@ export function ChatThread() {
             title={title}
             context="Acme agent · billing-api · main"
             messages={messages}
-            user={{ name: "Maya Chen" }}
+            user={{ name: "Siobhan Murphy" }}
             agentName="Acme agent"
             day="Today"
             thinking={thinking}

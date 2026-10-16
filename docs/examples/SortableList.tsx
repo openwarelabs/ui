@@ -36,7 +36,7 @@ export function Basic() {
     return (
         <SortableList
             label="Priorities"
-            defaultItems={["Fix the login bug", "Write the release notes", "Review Ana's pull request", "Plan the offsite", "Answer support email"]}
+            defaultItems={["Fix the login bug", "Write the release notes", "Review Clodagh's pull request", "Plan the offsite", "Answer support email"]}
             renderItem={(item, { index }) => (
                 <Stack direction="row" gap="sm" align="center">
                     <Text variant="caption" tone="muted" style={{ width: 16 }}>

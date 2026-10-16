@@ -3,7 +3,7 @@ import type { KeyboardEvent, ReactNode, RefCallback } from "react";
 export interface MentionOption {
     /** Identifies what was picked, in `mentions`: a user id, a command name. */
     id: string;
-    /** The text shown in the list, matched as people type, and put in the text after the trigger: "@Ada Lovelace". */
+    /** The text shown in the list, matched as people type, and put in the text after the trigger: "@Saoirse Doyle". */
     label: string;
     /** A muted line under the label in the list; matched too when it's a string. */
     description?: ReactNode;

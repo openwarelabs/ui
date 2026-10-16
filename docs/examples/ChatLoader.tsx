@@ -68,7 +68,7 @@ export function BecomingTheAnswer() {
                 <ChatMessage from="user">Is #483 ready to merge?</ChatMessage>
                 {answered ? (
                     <ChatMessage from="assistant" name="Acme agent">
-                        Yes. Tomás approved it at 10:12, and all 212 checks passed.
+                        Yes. Ciarán approved it at 10:12, and all 212 checks passed.
                     </ChatMessage>
                 ) : (
                     <ChatLoader name="Acme agent" label="Checking #483…" />

@@ -26,7 +26,7 @@ function PullRequest() {
             fade
             className="cta-split__visual"
             role="img"
-            aria-label="An Acme pull request opened by an agent: Fix invoice due dates in the customer's time zone, with tests, type check and preview deploy passing, approved by Maya Chen and deployed to production."
+            aria-label="An Acme pull request opened by an agent: Fix invoice due dates in the customer's time zone, with tests, type check and preview deploy passing, approved by Siobhan Murphy and deployed to production."
         >
             <div className="cta-split__pr">
                 <div className="cta-split__pr-head">
@@ -38,8 +38,8 @@ function PullRequest() {
                         billing-api #482
                         <span className="cta-split__pr-by">
                             · opened by an agent for
-                            <Avatar name="Tomás Reyes" size="sm" />
-                            Tomás
+                            <Avatar name="Ciarán Kelly" size="sm" />
+                            Ciarán
                         </span>
                     </span>
                     <Badge size="sm" variant="success">
@@ -70,8 +70,8 @@ function PullRequest() {
                 </div>
                 <div className="cta-split__pr-foot">
                     <span className="cta-split__approval">
-                        <Avatar name="Maya Chen" size="sm" />
-                        Maya Chen approved
+                        <Avatar name="Siobhan Murphy" size="sm" />
+                        Siobhan Murphy approved
                         <Check size={14} />
                     </span>
                     <span className={`${buttonClassName({ size: "sm" })} cta-split__fake-button`}>Merge and deploy</span>

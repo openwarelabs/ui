@@ -15,7 +15,7 @@ export interface Shell02Labels {
     navigation?: string;
     /** The account menu's name. @default "Account" */
     account?: string;
-    /** The avatar button's name. @default "Account: Maya Chen" */
+    /** The avatar button's name. @default "Account: Siobhan Murphy" */
     accountButton?(name: string): string;
     /** The phone menu button's name. @default "Open navigation" */
     openNavigation?: string;

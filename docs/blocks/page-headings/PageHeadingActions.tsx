@@ -25,9 +25,9 @@ interface Deploy {
 
 // The page goes on with the project's latest deploys; the heading's actions change them.
 const history: Deploy[] = [
-    { id: 3, commit: "4be71d0", message: "Fix invoice dates in the EU", who: "Tomás Reyes", when: "26 min ago", status: "Live" },
-    { id: 2, commit: "e44f1a7", message: "Retry failed card payments once", who: "Omar Haddad", when: "5 h ago", status: "Ready" },
-    { id: 1, commit: "3a9f0b6", message: "Round VAT per line, not per invoice", who: "Lena Fischer", when: "Yesterday", status: "Failed" },
+    { id: 3, commit: "4be71d0", message: "Fix invoice dates in the EU", who: "Ciarán Kelly", when: "26 min ago", status: "Live" },
+    { id: 2, commit: "e44f1a7", message: "Retry failed card payments once", who: "Cillian Ryan", when: "5 h ago", status: "Ready" },
+    { id: 1, commit: "3a9f0b6", message: "Round VAT per line, not per invoice", who: "Róisín O'Brien", when: "Yesterday", status: "Failed" },
 ];
 
 export function PageHeadingActions() {
@@ -59,7 +59,7 @@ export function PageHeadingActions() {
         later(900, () => {
             setQueued(false);
             setStatus("Building");
-            const id = add({ commit: "9f3c2a1", message: "Send receipts in the customer's language", who: "Maya Chen", when: "Just now", status: "Building" });
+            const id = add({ commit: "9f3c2a1", message: "Send receipts in the customer's language", who: "Siobhan Murphy", when: "Just now", status: "Building" });
             toast("Deploying main to production", { description: "9f3c2a1 · Send receipts in the customer's language" });
             later(3500, () => {
                 setStatus("Live");
@@ -74,7 +74,7 @@ export function PageHeadingActions() {
 
     const rollBack = () => {
         if (!previous) return;
-        add({ commit: previous.commit, message: `Roll back to ${previous.commit}`, who: "Maya Chen", when: "Just now", status: "Live" });
+        add({ commit: previous.commit, message: `Roll back to ${previous.commit}`, who: "Siobhan Murphy", when: "Just now", status: "Live" });
         toast.success(`Rolled back to ${previous.commit}`, { description: `Production runs “${previous.message}” again.` });
     };
 

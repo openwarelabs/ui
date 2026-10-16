@@ -78,7 +78,7 @@ const featured: Blog02Post = {
         { label: "Median review", value: "38m" },
         { label: "By agents", value: "31%" },
     ],
-    author: { name: "Jonas Berg", jobTitle: "Customer success" },
+    author: { name: "Declan Walsh", jobTitle: "Customer success" },
     readingTime: "6 min read",
     cover: <Cover kind="horizon" size="fill" />,
 };
@@ -90,7 +90,7 @@ const posts: Blog02Post[] = [
         category: "Product",
         date: "8 Oct 2026",
         dateTime: "2026-10-08",
-        author: { name: "Maya Chen" },
+        author: { name: "Siobhan Murphy" },
         cover: <Cover kind="orbit" size="small" />,
     },
     {
@@ -99,7 +99,7 @@ const posts: Blog02Post[] = [
         category: "Engineering",
         date: "30 Sep 2026",
         dateTime: "2026-09-30",
-        author: { name: "Tomás Reyes" },
+        author: { name: "Ciarán Kelly" },
         cover: <Cover kind="diff" size="small" />,
     },
     {
@@ -108,7 +108,7 @@ const posts: Blog02Post[] = [
         category: "Product",
         date: "22 Sep 2026",
         dateTime: "2026-09-22",
-        author: { name: "Clara Novak" },
+        author: { name: "Aoife O'Sullivan" },
         cover: <Cover kind="bars" size="small" />,
     },
 ];

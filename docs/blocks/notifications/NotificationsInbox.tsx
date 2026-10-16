@@ -16,13 +16,13 @@ const Strong = ({ children }: { children: ReactNode }) => (
 const notifications: Notifications01Item[] = [
     {
         id: "n1",
-        from: "Clara Novak",
+        from: "Aoife O'Sullivan",
         message: (
             <>
-                <Strong>Clara Novak</Strong> mentioned you in <Strong>Fix invoice dates in the EU</Strong>
+                <Strong>Aoife O'Sullivan</Strong> mentioned you in <Strong>Fix invoice dates in the EU</Strong>
             </>
         ),
-        quote: "@maya can you check the rounding on the Irish invoices before we merge?",
+        quote: "@siobhan can you check the rounding on the Irish invoices before we merge?",
         where: "billing-api",
         when: "4 min ago",
         mention: true,
@@ -55,10 +55,10 @@ const notifications: Notifications01Item[] = [
     },
     {
         id: "n4",
-        from: "Tomás Reyes",
+        from: "Ciarán Kelly",
         message: (
             <>
-                <Strong>Tomás Reyes</Strong> approved <Strong>Pricing page copy</Strong>
+                <Strong>Ciarán Kelly</Strong> approved <Strong>Pricing page copy</Strong>
             </>
         ),
         where: "marketing-site",
@@ -66,23 +66,23 @@ const notifications: Notifications01Item[] = [
     },
     {
         id: "n5",
-        from: "Jonas Berg",
+        from: "Declan Walsh",
         message: (
             <>
-                <Strong>Jonas Berg</Strong> mentioned you in <Strong>Release 2.4</Strong>
+                <Strong>Declan Walsh</Strong> mentioned you in <Strong>Release 2.4</Strong>
             </>
         ),
-        quote: "The release notes are ready. @maya, can you sign them off by Thursday?",
+        quote: "The release notes are ready. @siobhan, can you sign them off by Thursday?",
         where: "mobile-app",
         when: "3 h ago",
         mention: true,
     },
     {
         id: "n6",
-        from: "Aiko Tanaka",
+        from: "Niamh Byrne",
         message: (
             <>
-                <Strong>Aiko Tanaka</Strong> added Sam Okafor to <Strong>design-system</Strong>
+                <Strong>Niamh Byrne</Strong> added Seán McCarthy to <Strong>design-system</Strong>
             </>
         ),
         where: "design-system",
@@ -115,7 +115,7 @@ export function NotificationsInbox() {
                 </NavList>
 
                 <Notifications01 notifications={notifications} viewAllHref="#" defaultOpen />
-                <Avatar className="notifications-inbox__me" name="Maya Chen" size="sm" label="Maya Chen" />
+                <Avatar className="notifications-inbox__me" name="Siobhan Murphy" size="sm" label="Siobhan Murphy" />
             </header>
 
             <main className="notifications-inbox__panel">

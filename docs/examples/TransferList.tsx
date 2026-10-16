@@ -21,7 +21,7 @@ export const meta: DocMeta = {
     notes: [
         "Each list is a multiple-selection listbox named by its heading, and described by its count, such as \"3 of 12 selected\".",
         "The move buttons say what they do, such as \"Move 2 selected to Selected\", and are disabled while there's nothing to move.",
-        "A move is read out politely, such as \"Moved Ada and Grace to Selected\", and focus stays in the list you moved from.",
+        "A move is read out politely, such as \"Moved Siobhan and Aoife to Selected\", and focus stays in the list you moved from.",
         "Double-clicking an item moves it. Disabled items stay where they are.",
         "Give it a name and it submits each chosen value in a hidden input, so a Form gets a string[] (or a string, when there is one).",
         "Below 520px wide, the lists stack and the buttons turn to point down and up.",
@@ -51,8 +51,8 @@ export function Permissions() {
 }
 Permissions.layout = { fill: true };
 
-const firstNames = ["Ada", "Grace", "Alan", "Edsger", "Barbara", "Donald", "Frances", "John", "Katherine", "Linus", "Margaret", "Niklaus"];
-const lastNames = ["Lovelace", "Hopper", "Turing", "Dijkstra", "Liskov", "Knuth", "Allen", "Backus", "Johnson", "Torvalds"];
+const firstNames = ["Siobhan", "Aoife", "Declan", "Niamh", "Cillian", "Saoirse", "Eoin", "Padraig", "Orla", "Fionn", "Caoimhe", "Tadhg"];
+const lastNames = ["Murphy", "Kelly", "Walsh", "Byrne", "McCarthy", "Ryan", "Doyle", "Fitzgerald", "Kavanagh", "Brennan"];
 const people = firstNames.flatMap((first, row) =>
     lastNames.slice(0, 5).map((_, column) => {
         const last = lastNames[(row + column) % lastNames.length]!;

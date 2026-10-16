@@ -12,9 +12,9 @@ const contents = [
 ];
 
 const admins = [
-    { value: "Tomás Reyes", label: "Tomás Reyes", description: "Admin · tomas@example.com" },
-    { value: "Clara Novak", label: "Clara Novak", description: "Admin · clara@example.com" },
-    { value: "Jonas Berg", label: "Jonas Berg", description: "Admin · jonas@example.com" },
+    { value: "Ciarán Kelly", label: "Ciarán Kelly", description: "Admin · ciaran@example.com" },
+    { value: "Aoife O'Sullivan", label: "Aoife O'Sullivan", description: "Admin · aoife@example.com" },
+    { value: "Declan Walsh", label: "Declan Walsh", description: "Admin · declan@example.com" },
 ];
 
 // Stands in for the requests to your server.
@@ -30,8 +30,8 @@ export function SettingsDanger() {
                 </>
             }
             project={project}
-            owner="Maya Chen"
-            currentUserName="Maya Chen"
+            owner="Siobhan Murphy"
+            currentUserName="Siobhan Murphy"
             admins={admins}
             contents={contents}
             onTransfer={async (owner) => {

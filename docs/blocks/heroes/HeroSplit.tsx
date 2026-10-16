@@ -8,7 +8,7 @@ const run = [
     { title: "Ticket", description: "BIL-482" },
     { title: "Change", description: "1 file" },
     { title: "Tests", description: "214 passed" },
-    { title: "Review", description: "Clara Novak" },
+    { title: "Review", description: "Aoife O'Sullivan" },
 ];
 
 const diff = [
@@ -26,7 +26,7 @@ function ProductShot() {
         <div
             className="hero-split__shot"
             role="img"
-            aria-label="An agent's pull request in Acme: it fixed invoice dates in billing-api, the tests passed, and it is waiting for Clara Novak's review."
+            aria-label="An agent's pull request in Acme: it fixed invoice dates in billing-api, the tests passed, and it is waiting for Aoife O'Sullivan's review."
         >
             <div className="hero-split__shot-header">
                 <div className="hero-split__pr">
@@ -39,7 +39,7 @@ function ProductShot() {
                     </Badge>
                 </div>
                 <div className="hero-split__pr-meta">
-                    billing-api · <span className="hero-split__mono">fix/invoice-dates</span> · opened by an agent for Tomás Reyes
+                    billing-api · <span className="hero-split__mono">fix/invoice-dates</span> · opened by an agent for Ciarán Kelly
                 </div>
             </div>
 
@@ -74,8 +74,8 @@ function ProductShot() {
 
             <div className="hero-split__shot-footer">
                 <span className="hero-split__reviewer">
-                    <Avatar name="Clara Novak" size="sm" />
-                    <span>Clara Novak is reviewing</span>
+                    <Avatar name="Aoife O'Sullivan" size="sm" />
+                    <span>Aoife O'Sullivan is reviewing</span>
                 </span>
                 <span className="hero-split__buttons">
                     <span className={buttonClassName({ size: "sm" })}>Request changes</span>

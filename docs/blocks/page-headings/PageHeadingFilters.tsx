@@ -23,16 +23,16 @@ function row(number: number, title: string, project: string, author: string, age
 }
 
 const reviews: Review[] = [
-    row(482, "Pricing page copy", "marketing-site", "Maya Chen", false, "Needs review", "12 min ago", 3),
-    row(219, "Fix invoice dates in the EU", "billing-api", "Tomás Reyes", true, "Needs review", "26 min ago", 1),
-    row(311, "Update React Native to 0.76", "mobile-app", "Clara Novak", true, "Needs review", "1 h ago", 0),
-    row(309, "Haptics on pull to refresh", "mobile-app", "Aiko Tanaka", false, "Changes requested", "3 h ago", 5),
-    row(220, "Write tests for the refund flow", "billing-api", "Omar Haddad", true, "Needs review", "4 h ago", 0),
-    row(96, "Document the webhooks API", "docs", "Lena Fischer", false, "Approved", "Yesterday", 4),
-    row(154, "Rename the colour tokens", "design-system", "Aiko Tanaka", true, "Approved", "Yesterday", 1),
-    row(217, "Round VAT per line, not per invoice", "billing-api", "Lena Fischer", false, "Changes requested", "Yesterday", 7),
-    row(481, "Translate the pricing page into German", "marketing-site", "Lena Fischer", true, "Needs review", "2 days ago", 2),
-    row(306, "Cache avatars between launches", "mobile-app", "Sam Okafor", false, "Approved", "2 days ago", 2),
+    row(482, "Pricing page copy", "marketing-site", "Siobhan Murphy", false, "Needs review", "12 min ago", 3),
+    row(219, "Fix invoice dates in the EU", "billing-api", "Ciarán Kelly", true, "Needs review", "26 min ago", 1),
+    row(311, "Update React Native to 0.76", "mobile-app", "Aoife O'Sullivan", true, "Needs review", "1 h ago", 0),
+    row(309, "Haptics on pull to refresh", "mobile-app", "Niamh Byrne", false, "Changes requested", "3 h ago", 5),
+    row(220, "Write tests for the refund flow", "billing-api", "Cillian Ryan", true, "Needs review", "4 h ago", 0),
+    row(96, "Document the webhooks API", "docs", "Róisín O'Brien", false, "Approved", "Yesterday", 4),
+    row(154, "Rename the colour tokens", "design-system", "Niamh Byrne", true, "Approved", "Yesterday", 1),
+    row(217, "Round VAT per line, not per invoice", "billing-api", "Róisín O'Brien", false, "Changes requested", "Yesterday", 7),
+    row(481, "Translate the pricing page into German", "marketing-site", "Róisín O'Brien", true, "Needs review", "2 days ago", 2),
+    row(306, "Cache avatars between launches", "mobile-app", "Seán McCarthy", false, "Approved", "2 days ago", 2),
 ];
 
 /** Each filter menu: what it's called and its choices. */
