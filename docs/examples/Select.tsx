@@ -6,7 +6,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "Select",
-    category: "Choices",
+    category: "Primitives",
     description:
         "A dropdown that opens a list of options in the top layer, so dialogs and scroll areas can't clip it.",
     source: "components/Select/Select.tsx",

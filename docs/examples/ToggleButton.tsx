@@ -7,7 +7,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "ToggleButton",
-    category: "Actions",
+    category: "Primitives",
     description:
         "A button that stays pressed in while something is on: a filter, a format, a follow.",
     source: "components/Button/ButtonGroup.tsx",

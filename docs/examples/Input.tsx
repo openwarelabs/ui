@@ -7,7 +7,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "Input",
-    category: "Inputs",
+    category: "Primitives",
     description:
         "A single-line text field that turns its border brand-coloured, with a soft halo, when focused.",
     source: "components/Input/Input.tsx",

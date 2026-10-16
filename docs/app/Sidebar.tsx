@@ -17,6 +17,7 @@ import {
     Palette,
     Ruler,
     Search,
+    Shapes,
     Sparkles,
     SquareCheck,
     SunMoon,
@@ -178,6 +179,7 @@ function ComponentLink({
 }
 
 const categoryIcons: Record<Category, LucideIcon> = {
+    Primitives: Shapes,
     Typography: Type,
     Actions: MousePointerClick,
     Inputs: TextCursorInput,

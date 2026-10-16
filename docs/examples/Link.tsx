@@ -4,7 +4,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "Link",
-    category: "Typography",
+    category: "Primitives",
     description:
         "A text link in three weights. External links open in a new tab and show an arrow.",
     source: "components/Breadcrumbs/Breadcrumbs.tsx",

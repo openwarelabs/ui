@@ -4,7 +4,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "Kbd",
-    category: "Typography",
+    category: "Primitives",
     description:
         "A keyboard key in running text, with a heavier bottom edge like a real key. Code is its partner for paths and commands.",
     source: "components/Kbd/Kbd.tsx",

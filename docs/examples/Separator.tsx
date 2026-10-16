@@ -4,7 +4,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "Separator",
-    category: "Layout",
+    category: "Primitives",
     description:
         "A hairline between groups of content. Prefer space; use a line when space alone doesn't separate.",
     source: "components/Layout/Layout.tsx",

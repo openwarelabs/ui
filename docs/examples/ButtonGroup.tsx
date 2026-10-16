@@ -6,7 +6,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "ButtonGroup",
-    category: "Actions",
+    category: "Primitives",
     description: "Buttons that belong together, joined into one control or spaced in a row.",
     source: "components/Button/ButtonGroup.tsx",
     notes: [

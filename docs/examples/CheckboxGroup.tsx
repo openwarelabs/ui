@@ -6,7 +6,7 @@ import type { DocMeta } from "../app/types";
 
 export const meta: DocMeta = {
     title: "CheckboxGroup",
-    category: "Choices",
+    category: "Primitives",
     description:
         "Several options under one label, where any number can be chosen. It keeps the list of checked values.",
     source: "components/Checkbox/Checkbox.tsx",
