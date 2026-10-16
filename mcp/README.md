@@ -1,6 +1,6 @@
 # Openware UI MCP server
 
-An [MCP](https://modelcontextprotocol.io) server for [Openware UI](https://github.com/openwarelabs/ui) (`@openwarelabs/ui`). It gives AI coding tools the library's setup, every component's examples and props, every block's code, and the design tokens, so they build with the real components instead of guessing at look-alikes. The same content is in the [docs](https://openwarelabs.github.io/ui/), for people.
+An [MCP](https://modelcontextprotocol.io) server for [Openware UI](https://github.com/openwarelabs/ui) (`@openwarelabs/ui`). It gives AI coding tools the library's setup, every component's examples and props, every block's code, and the design tokens, so they build with the real components instead of guessing at look-alikes, and checks the code they write. The same content is in the [docs](https://openwarelabs.github.io/ui/), for people.
 
 Everything is bundled in: it runs offline, needs nothing but Node 18 or later, and answers for the release it matches.
 
@@ -60,6 +60,7 @@ args = ["-y", "@openwarelabs/ui-mcp"]
 | `get_block` | A block's `.tsx` and `.css`, ready to copy. |
 | `search` | Components and blocks that match what you describe ("date range", "file upload"). |
 | `get_tokens` | The `--ow-…` CSS variables: colours in both themes, type, spacing, corners, shadows, weights, motion. |
+| `check_code` | The problems in a file or snippet it wrote, each with its line and what to use instead: raw controls, props and values that don't exist, unlabelled inputs, hard-coded colours, and tokens, classes and imports that aren't the library's. The same rules as [`@openwarelabs/eslint-plugin-ui`](../eslint/README.md), bundled in. |
 
 The setup and the tokens are also resources, at `openware://setup` and `openware://tokens`.
 

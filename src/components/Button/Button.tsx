@@ -16,6 +16,7 @@ export function buttonClassName({
     size = "md",
     shape = "rounded",
     iconOnly = false,
+    fullWidth = false,
 }: ButtonStyleOptions = {}): string {
     return cx(
         "ow-button",
@@ -23,6 +24,7 @@ export function buttonClassName({
         `ow-button--${size}`,
         shape === "pill" && "ow-button--pill",
         iconOnly && "ow-button--icon-only",
+        fullWidth && "ow-button--full",
     );
 }
 
@@ -54,9 +56,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         <button
             ref={ref}
             className={cx(
-                buttonClassName({ variant, size, shape, iconOnly }),
+                buttonClassName({ variant, size, shape, iconOnly, fullWidth }),
                 loading && "ow-button--loading",
-                fullWidth && "ow-button--full",
                 className,
             )}
             type={type}

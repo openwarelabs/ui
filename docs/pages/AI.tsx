@@ -1,7 +1,7 @@
 import { buttonClassName, CodeBlock, Snippet, Stack, Tab, TabList, TabPanel, Tabs } from "@openwarelabs/ui";
 import { ArrowUpRight } from "lucide-react";
 
-import { mcpPackage, mcpSetup, setupMarkdown } from "../app/ai";
+import { eslintPackage, mcpPackage, mcpSetup, setupMarkdown } from "../app/ai";
 import { hrefOf, showBlocks } from "../app/content";
 import { CopyForAI } from "../app/CopyForAI";
 import { DocPage, Section } from "../app/Page";
@@ -15,7 +15,25 @@ const tools = [
     ["get_block", "A block's .tsx and .css, ready to copy."],
     ["search", "Components and blocks that match what you describe, such as “date range” or “file upload”."],
     ["get_tokens", "The --ow-… variables: colours in both themes, type, spacing, corners, shadows, weights and motion."],
+    ["check_code", "The problems in a file it wrote: raw controls, props and values that don't exist, unlabelled inputs, hard-coded colours, tokens, classes and imports that aren't the library's, each with its line and what to use instead. The same rules as the ESLint plugin below."],
 ] as const;
+
+const lintRules = [
+    ["no-raw-controls", "Button, Input, Select, Textarea, ProgressBar and Meter instead of <button>, <input>, <select>, <textarea>, <progress> and <meter>."],
+    ["no-inline-colour", "No hex, rgb() or named colours in style props: the --ow- tokens, with the token named when one has that colour."],
+    ["input-needs-field", "Every input is in a Field, or has aria-label when its label is elsewhere."],
+    ["valid-props", "Every prop on a component is one it has, and a prop that's a choice of strings gets one of its values, with “did you mean”."],
+    ["import-from-package", "Components from the package itself: no deep imports, no misspelt names, no look-alikes from Radix, MUI, sonner, recharts and the rest, and nothing used without its import (fixed for you)."],
+    ["valid-tokens", "Every --ow- variable and ow- class is one the library ships."],
+] as const;
+
+const lintConfig = `import openware from "${eslintPackage}";
+import tseslint from "typescript-eslint";
+
+export default [
+    { files: ["**/*.{ts,tsx}"], languageOptions: { parser: tseslint.parser } },
+    openware.configs.recommended,
+];`;
 
 const prompts = [
     "Build a settings page for my app with Openware UI.",
@@ -33,6 +51,7 @@ export function AI() {
                 { id: "mcp", label: "The MCP server", level: 2 },
                 { id: "add", label: "Add it to your tool", level: 2 },
                 { id: "try", label: "Try it", level: 2 },
+                { id: "lint", label: "Check the code", level: 2 },
                 { id: "copy", label: "Copy for AI", level: 2 },
                 { id: "llms", label: "llms.txt", level: 2 },
             ]}
@@ -120,6 +139,38 @@ export function AI() {
                         <li key={prompt}>“{prompt}”</li>
                     ))}
                 </ul>
+            </Section>
+
+            <Section
+                id="lint"
+                title="Check the code"
+                description={`${eslintPackage} is the same check as an ESLint plugin, for the project's own lint and CI: six rules, each an error in its recommended config, with the library's exports, props, tokens and classes bundled in for the release it matches. The MCP server's check_code runs them on a file as it's written, so an AI tool fixes its own mistakes before you see them. A JavaScript project leaves the parser line out.`}
+            >
+                <Stack gap="md">
+                    <Snippet value={`npm install -D ${eslintPackage}`} />
+                    <CodeBlock code={lintConfig} title="eslint.config.js" language="js" />
+                    <div className="docs-keyboard">
+                        <table>
+                            <caption className="ow-visually-hidden">The plugin's rules</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Rule</th>
+                                    <th scope="col">What it checks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {lintRules.map(([name, description]) => (
+                                    <tr key={name}>
+                                        <td>
+                                            <code>{name}</code>
+                                        </td>
+                                        <td>{description}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </Stack>
             </Section>
 
             <Section

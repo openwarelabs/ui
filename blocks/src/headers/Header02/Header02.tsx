@@ -210,7 +210,7 @@ export function Header02({
                     </ul>
                 ) : null}
                 {secondaryLink ? (
-                    <a href={secondaryLink.href} className={cx(buttonClassName({ shape: "pill" }), "ow-button--full")} onClick={closePhone}>
+                    <a href={secondaryLink.href} className={buttonClassName({ shape: "pill", fullWidth: true })} onClick={closePhone}>
                         {secondaryLink.label}
                     </a>
                 ) : null}

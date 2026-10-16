@@ -9,6 +9,8 @@ import { z } from "zod";
 
 import registry from "@build/registry.json";
 
+import { checkCode, formatCheck } from "./check";
+
 interface Component {
     name: string;
     slug: string;
@@ -106,6 +108,7 @@ const server = new McpServer(
             "Then call get_component for every component you use, and follow its examples and props: import components from @openwarelabs/ui instead of writing look-alikes.",
             "For whole page sections (headers, heroes, pricing, settings, sign-in, dashboards, chat), call list_blocks and get_block. Blocks with a component (Hero01, Hero02…) come from @openwarelabs/blocks and take their content as props: render the component, don't copy its code. The others are two files to copy.",
             "Use search when you don't know a name, and get_tokens before writing your own CSS: colours, spaces and radii come from the --ow-… variables, never hard-coded values.",
+            "After writing or changing a file, call check_code with its code and fix what it reports before moving on.",
         ].join(" "),
     },
 );
@@ -234,6 +237,26 @@ server.registerTool(
         annotations: { readOnlyHint: true },
     },
     async ({ group }) => text(group ? data.tokens[group]! : data.allTokens),
+);
+
+server.registerTool(
+    "check_code",
+    {
+        title: "Check code written with Openware UI",
+        description:
+            "Checks a file or snippet written with Openware UI, before it's run: components imported from @openwarelabs/ui and nothing used without its import, real props with real values, every input labelled (in a Field or with aria-label), the library's controls instead of raw <button>, <input>, <select> and <textarea>, tokens instead of hard-coded colours, and --ow- variables and ow- classes that exist. Returns each problem with its line, what's wrong and what to use instead. Call it on every file you write or change, and fix what it finds. It's the same check as the @openwarelabs/eslint-plugin-ui package.",
+        inputSchema: {
+            code: z.string().describe("The whole file, or the snippet, as written: TSX, JSX, TypeScript or JavaScript."),
+            filename: z.string().optional().describe('Its name, for the report and to tell TypeScript from JavaScript: "SettingsPage.tsx" by default.'),
+        },
+        annotations: { readOnlyHint: true },
+    },
+    async ({ code, filename = "SettingsPage.tsx" }) => {
+        if (!code.trim()) return failure("There's no code to check: pass the file's contents as code.");
+        const result = checkCode(code, filename);
+        const report = formatCheck(result, filename);
+        return result.parseError && !result.problems.length ? failure(report) : text(report);
+    },
 );
 
 server.registerResource(

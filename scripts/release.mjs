@@ -1,6 +1,6 @@
 // `npm run release`: pulls main, works out the next version from the commits since the last release, checks
 // everything, writes the changelog, then commits, tags and pushes. The tag starts .github/workflows/release.yml, which
-// publishes @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp to npm and makes the GitHub release.
+// publishes @openwarelabs/ui, @openwarelabs/blocks, @openwarelabs/eslint-plugin-ui and @openwarelabs/ui-mcp to npm and makes the GitHub release.
 //
 // The version follows the Conventional Commits in the subjects:
 //   feat: …                         a minor release (0.5.0 → 0.6.0)
@@ -182,8 +182,10 @@ step("Contrast", "npm", ["run", "contrast"]);
 step("Blocks", "npm", ["run", "blocks:check"]);
 step("Library build", "npm", ["run", "build"]);
 step("Blocks build", "npm", ["run", "blocks:build"]);
+step("ESLint plugin build", "npm", ["run", "eslint:build"]);
+step("ESLint plugin tests", "npm", ["run", "eslint:test"]);
 
-// 7. The new version everywhere: the library, its lockfile, and the MCP server, which matches it.
+// 7. The new version everywhere: the library, its lockfile, and the blocks, the ESLint plugin and the MCP server, which match it.
 say(`\n  ${bold(`Releasing ${next}`)}`);
 step("Version in package.json and the lockfile", "npm", ["version", next, "--no-git-tag-version", "--allow-same-version"]);
 const mcp = readJson("mcp/package.json");
@@ -194,7 +196,10 @@ const blocks = readJson("blocks/package.json");
 blocks.version = next;
 blocks.peerDependencies["@openwarelabs/ui"] = `^${next}`;
 writeJson("blocks/package.json", blocks);
-done("Version in the blocks and the MCP server");
+const eslint = readJson("eslint/package.json");
+eslint.version = next;
+writeJson("eslint/package.json", eslint);
+done("Version in the blocks, the ESLint plugin and the MCP server");
 step("MCP server build", "npm", ["run", "mcp:build"]);
 
 const changelogPath = path.join(root, "CHANGELOG.md");
@@ -205,7 +210,7 @@ done("CHANGELOG.md");
 
 // 8. Commit, tag and push, all at once so main and the tag can't disagree.
 const tag = `v${next}`;
-git("add", "package.json", "package-lock.json", "mcp/package.json", "blocks/package.json", "CHANGELOG.md");
+git("add", "package.json", "package-lock.json", "mcp/package.json", "blocks/package.json", "eslint/package.json", "CHANGELOG.md");
 git("commit", "--quiet", "-m", `chore(release): ${next}`);
 git("tag", "-a", tag, "-m", `Release ${next}`);
 done(`Committed and tagged ${tag}`);
