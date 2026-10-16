@@ -280,6 +280,10 @@ export type { SplitterProps, SplitterPanelProps, SplitterHandleProps, SplitterDi
 export { Collapsible, CollapsibleTrigger, CollapsibleContent } from "./components/Collapsible/Collapsible";
 export type { CollapsibleProps, CollapsibleTriggerProps, CollapsibleContentProps, CollapsibleState } from "./components/Collapsible/Collapsible";
 export type { StackProps, SeparatorProps, ScrollShadowProps, SpaceToken } from "./components/Layout/Layout";
+export { Portal } from "./components/Portal/Portal";
+export type { PortalProps } from "./components/Portal/Portal";
+export { FocusTrap } from "./components/FocusTrap/FocusTrap";
+export type { FocusTrapProps } from "./components/FocusTrap/FocusTrap";
 export { ScrollArea } from "./components/ScrollArea/ScrollArea";
 export type { ScrollAreaProps, ScrollAreaOrientation, ScrollAreaType } from "./components/ScrollArea/ScrollArea";
 
@@ -346,6 +350,8 @@ export { useControllableState } from "./hooks/useControllableState";
 export { useFloating, useDismiss } from "./hooks/useFloating";
 export { usePresence } from "./hooks/usePresence";
 export type { Presence } from "./hooks/usePresence";
+export { useFocusTrap, getTabbableElements } from "./hooks/useFocusTrap";
+export type { UseFocusTrapOptions, FocusTrapInitialFocus, FocusTrapDeactivateReason } from "./hooks/useFocusTrap";
 export type { Placement } from "./hooks/useFloating";
 export { cx } from "./utils/cx";
 export { getInitials } from "./utils/text";

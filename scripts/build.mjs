@@ -182,6 +182,8 @@ export const catalogue = [
     "Watermark",
     "VisuallyHidden",
     "VirtualList",
+    "Portal",
+    "FocusTrap",
     "LogViewer",
     "Chip",
     "DotGrid",

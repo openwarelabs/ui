@@ -99,6 +99,7 @@ export const cssOrder = [
     "components/JsonViewer/JsonViewer.css",
     "components/EmptyState/EmptyState.css",
     "components/Card/Card.css",
+    "components/FocusTrap/FocusTrap.css",
     "components/NavList/NavList.css",
     "components/TableOfContents/TableOfContents.css",
     "components/NavigationMenu/NavigationMenu.css",
