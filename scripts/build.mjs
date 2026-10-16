@@ -122,6 +122,7 @@ export const catalogue = [
     "Pagination",
     "Steps",
     "Tabs",
+    "TableOfContents",
     "Avatar",
     "AvatarGroup",
     "Carousel",
