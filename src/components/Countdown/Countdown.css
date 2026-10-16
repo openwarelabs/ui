@@ -1,0 +1,139 @@
+/* RelativeTime: a <time> that reads "3 minutes ago". It takes the type around it; only the numbers are tabular. */
+.ow-relative-time {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Countdown: the time left as segments. Boxes put each number in a card with its unit under it; inline runs them
+   on one line with colons between. Both use tabular numbers so nothing shifts as the seconds tick. */
+.ow-countdown {
+    display: inline-flex;
+    max-width: 100%;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: var(--ow-space-sm);
+    color: var(--ow-text);
+    font-family: var(--ow-font-sans);
+}
+
+.ow-countdown__segment {
+    display: inline-flex;
+    min-width: 0;
+    align-items: stretch;
+}
+
+.ow-countdown__box {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ow-space-2xs);
+}
+
+.ow-countdown__value {
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--ow-weight-display);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.ow-countdown__label {
+    color: var(--ow-text-muted);
+    font-size: 11px;
+    font-weight: var(--ow-weight-control);
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.ow-countdown__separator {
+    display: none;
+    color: var(--ow-text-muted);
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.1;
+}
+
+.ow-countdown__complete {
+    font-weight: var(--ow-weight-display);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+/* Boxes */
+.ow-countdown--boxes .ow-countdown__box {
+    min-width: 3.25em;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-lg);
+    background: var(--ow-surface);
+    padding: var(--ow-space-md) var(--ow-space-lg);
+}
+
+.ow-countdown--boxes.ow-countdown--lg .ow-countdown__box {
+    min-width: 2.75em;
+    border-radius: var(--ow-radius-container);
+    padding: var(--ow-space-lg) var(--ow-space-xl);
+}
+
+.ow-countdown--boxes.ow-countdown--sm .ow-countdown__box {
+    min-width: 3.5em;
+    border-radius: var(--ow-radius-md);
+    padding: var(--ow-space-sm) var(--ow-space-md);
+}
+
+/* Inline: one run of numbers, the units read out but not shown. */
+.ow-countdown--inline {
+    gap: 0;
+    flex-wrap: nowrap;
+}
+
+.ow-countdown--inline .ow-countdown__separator {
+    display: inline;
+    padding: 0 0.08em;
+}
+
+.ow-countdown--inline .ow-countdown__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Sizes: the number's size. The box's min-width is in em, so it follows. */
+.ow-countdown--sm .ow-countdown__value,
+.ow-countdown--sm .ow-countdown__separator,
+.ow-countdown--sm .ow-countdown__complete {
+    font-size: 20px;
+}
+
+.ow-countdown--md .ow-countdown__value,
+.ow-countdown--md .ow-countdown__separator,
+.ow-countdown--md .ow-countdown__complete {
+    font-size: 28px;
+}
+
+.ow-countdown--lg .ow-countdown__value,
+.ow-countdown--lg .ow-countdown__separator,
+.ow-countdown--lg .ow-countdown__complete {
+    font-size: 40px;
+}
+
+.ow-countdown--lg .ow-countdown__label {
+    font-size: 12px;
+}
+
+.ow-countdown--complete .ow-countdown__value {
+    color: var(--ow-text-muted);
+}
+
+@media (max-width: 420px) {
+    .ow-countdown--lg .ow-countdown__value,
+    .ow-countdown--lg .ow-countdown__separator,
+    .ow-countdown--lg .ow-countdown__complete {
+        font-size: 32px;
+    }
+}

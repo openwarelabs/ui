@@ -14,7 +14,7 @@ export const meta: DocMeta = {
         "Actions sit outside the toggle, so pressing one doesn't open or close the section.",
         "Several in a row belong in an Accordion.",
     ],
-    related: ["Accordion"],
+    related: ["Accordion", "Collapsible"],
 };
 
 /** A card with a subtitle and an action. */

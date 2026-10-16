@@ -1,0 +1,206 @@
+/* BottomSheet: a sheet that slides up from the bottom and rests at snap points. The dialog is as tall as the
+   tallest snap point and is translated down to show the active one; the panel inside is as tall as what shows,
+   so the footer stays at the bottom of the screen. Exit uses allow-discrete, like Dialog and Drawer. */
+.ow-bottom-sheet {
+    position: fixed;
+    inset: auto 0 0 0;
+    display: flex;
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    height: auto;
+    max-height: 90dvh;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-width: 1px 0 0;
+    border-radius: var(--ow-radius-container) var(--ow-radius-container) 0 0;
+    background: var(--ow-surface);
+    padding: 0;
+    color: var(--ow-text);
+    font-family: var(--ow-font-sans);
+    font-size: 14px;
+    line-height: 1.45;
+    box-shadow: var(--ow-shadow-menu);
+    transform: translateY(100%);
+    transition:
+        transform var(--ow-duration-base) var(--ow-ease-exit),
+        overlay var(--ow-duration-base) allow-discrete,
+        display var(--ow-duration-base) allow-discrete;
+}
+
+.ow-bottom-sheet--plain {
+    z-index: 50;
+}
+
+.ow-bottom-sheet--measured {
+    height: calc(var(--ow-bottom-sheet-height) + 1px);
+    max-height: none;
+}
+
+.ow-bottom-sheet[open] {
+    transform: none;
+    transition:
+        transform var(--ow-duration-panel) var(--ow-ease-emphasized),
+        overlay var(--ow-duration-panel) allow-discrete,
+        display var(--ow-duration-panel) allow-discrete;
+}
+
+.ow-bottom-sheet--measured[open] {
+    transform: translateY(calc(var(--ow-bottom-sheet-height) - var(--ow-bottom-sheet-visible)));
+}
+
+.ow-bottom-sheet:not([open]) {
+    display: none;
+}
+
+@starting-style {
+    .ow-bottom-sheet[open],
+    .ow-bottom-sheet--measured[open] {
+        transform: translateY(100%);
+    }
+}
+
+.ow-bottom-sheet--dragging,
+.ow-bottom-sheet--dragging .ow-bottom-sheet__panel {
+    transition: none;
+}
+
+.ow-bottom-sheet::backdrop {
+    background-color: rgb(0 0 0 / 0);
+    transition:
+        background-color var(--ow-duration-base) var(--ow-ease-standard),
+        overlay var(--ow-duration-base) allow-discrete,
+        display var(--ow-duration-base) allow-discrete;
+}
+
+.ow-bottom-sheet[open]::backdrop {
+    background-color: var(--ow-backdrop);
+}
+
+@starting-style {
+    .ow-bottom-sheet[open]::backdrop {
+        background-color: rgb(0 0 0 / 0);
+    }
+}
+
+.ow-bottom-sheet__panel {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    transition: height var(--ow-duration-panel) var(--ow-ease-emphasized);
+}
+
+.ow-bottom-sheet--measured .ow-bottom-sheet__panel {
+    height: var(--ow-bottom-sheet-visible);
+}
+
+/* The grip is the touch target around the handle; the handle itself is the bar people see and focus. */
+.ow-bottom-sheet__grip {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    padding: var(--ow-space-sm) 0 var(--ow-space-2xs);
+    cursor: grab;
+    touch-action: none;
+}
+
+.ow-bottom-sheet__handle {
+    width: 40px;
+    height: 20px;
+    border: 0;
+    border-radius: var(--ow-radius-pill);
+    background: transparent;
+    padding: 0;
+    cursor: grab;
+    touch-action: none;
+}
+
+.ow-bottom-sheet__handle::before {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 4px;
+    margin: 8px 0;
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-border-strong);
+}
+
+.ow-bottom-sheet__handle:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.ow-bottom-sheet--dragging .ow-bottom-sheet__grip,
+.ow-bottom-sheet--dragging .ow-bottom-sheet__handle,
+.ow-bottom-sheet--dragging .ow-bottom-sheet__header {
+    cursor: grabbing;
+}
+
+.ow-bottom-sheet__header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: flex-start;
+    gap: var(--ow-space-md);
+    border-bottom: 1px solid var(--ow-border);
+    padding: var(--ow-space-md) var(--ow-space-lg) var(--ow-space-lg) var(--ow-space-2xl);
+    touch-action: none;
+    user-select: none;
+}
+
+.ow-bottom-sheet__titles {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+    gap: var(--ow-space-2xs);
+    padding-top: 5px;
+}
+
+.ow-bottom-sheet__title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: var(--ow-weight-display);
+    line-height: 1.3;
+}
+
+.ow-bottom-sheet__description {
+    margin: 0;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.ow-bottom-sheet__body {
+    min-height: 0;
+    flex: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.ow-bottom-sheet__body:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
+
+.ow-bottom-sheet__content {
+    padding: var(--ow-space-xl) var(--ow-space-2xl);
+}
+
+.ow-bottom-sheet__footer {
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--ow-space-sm);
+    border-top: 1px solid var(--ow-border);
+    padding: var(--ow-space-lg) var(--ow-space-2xl);
+    padding-bottom: max(var(--ow-space-lg), env(safe-area-inset-bottom));
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-bottom-sheet,
+    .ow-bottom-sheet::backdrop,
+    .ow-bottom-sheet__panel {
+        transition: none;
+    }
+}
