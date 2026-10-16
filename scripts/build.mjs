@@ -179,6 +179,7 @@ export const catalogue = [
     "AspectRatio",
     "VisuallyHidden",
     "VirtualList",
+    "LogViewer",
     "Chip",
     "DotGrid",
     "SectionHeading",

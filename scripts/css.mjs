@@ -122,6 +122,7 @@ export const cssOrder = [
     "components/ChatTool/ChatTool.css",
     "components/ChainOfThought/ChainOfThought.css",
     "components/ChatSource/ChatSource.css",
+    "components/LogViewer/LogViewer.css",
 ];
 
 /** Every component stylesheet must be listed, so a new one can't be left out of the build by accident. */
