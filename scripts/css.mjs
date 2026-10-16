@@ -90,6 +90,7 @@ export const cssOrder = [
     "components/TreeView/TreeView.css",
     "components/EmptyState/EmptyState.css",
     "components/Card/Card.css",
+    "components/FocusTrap/FocusTrap.css",
     "components/NavList/NavList.css",
     "components/NavigationMenu/NavigationMenu.css",
     "components/AppShell/AppShell.css",

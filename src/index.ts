@@ -244,6 +244,10 @@ export type { SectionProps } from "./components/Section/Section";
 export { Splitter, SplitterPanel, SplitterHandle } from "./components/Splitter/Splitter";
 export type { SplitterProps, SplitterPanelProps, SplitterHandleProps, SplitterDirection } from "./components/Splitter/Splitter";
 export type { StackProps, SeparatorProps, ScrollShadowProps, SpaceToken } from "./components/Layout/Layout";
+export { Portal } from "./components/Portal/Portal";
+export type { PortalProps } from "./components/Portal/Portal";
+export { FocusTrap } from "./components/FocusTrap/FocusTrap";
+export type { FocusTrapProps } from "./components/FocusTrap/FocusTrap";
 
 // Marketing
 export { Chip, SectionHeading, SiteHeader, DotGrid } from "./components/Marketing/Marketing";
@@ -297,6 +301,8 @@ export { useControllableState } from "./hooks/useControllableState";
 export { useFloating, useDismiss } from "./hooks/useFloating";
 export { usePresence } from "./hooks/usePresence";
 export type { Presence } from "./hooks/usePresence";
+export { useFocusTrap, getTabbableElements } from "./hooks/useFocusTrap";
+export type { UseFocusTrapOptions, FocusTrapInitialFocus, FocusTrapDeactivateReason } from "./hooks/useFocusTrap";
 export type { Placement } from "./hooks/useFloating";
 export { cx } from "./utils/cx";
 export { getInitials } from "./utils/text";

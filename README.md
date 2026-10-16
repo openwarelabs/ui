@@ -54,7 +54,7 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 
 ## Components
 
-123 components, each with a page in the docs.
+125 components, each with a page in the docs.
 
 | Group | Components |
 | --- | --- |
@@ -68,10 +68,10 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 | Navigation | `Tabs`, `Accordion`, `Disclosure`, `Breadcrumbs`, `Pagination`, `Steps`, `NavList` + `NavItem` |
 | Data display | `Table` (sorting, selection), `DataGrid` (thousands of rows: search, column filters, sorting, resizable columns, selection; renders only the rows in view), `Stat`, `FileTree`, `EmptyState`, `Tag`, `ColorSwatch`, `Avatar`, `AvatarGroup`, `User`, `Image` (a placeholder while it loads, a fallback if it fails, `ratio`, `caption`), `Timeline` + `TimelineItem`, `DescriptionList` + `DescriptionItem`, `Carousel` + `CarouselSlide` (scroll-snap, arrows, dots, autoplay), `SortableList` (reorder by dragging or with the keyboard), `Kanban` (cards dragged within and between columns, or moved with the keyboard; WIP limits), `DiffViewer` (code diffs, unified or side by side, from two strings or a patch), `ActivityHeatmap` (a calendar of daily counts in shaded squares), `MediaPlayer` (audio and video with the library's own controls), `QRCode` (drawn as one SVG path, with its own encoder; `encodeQR()`) |
 | AI | `PromptInput` (attachments, stop while streaming) + `PromptSuggestion`, `ChatConversation` (follows the newest message, jump to latest), `ChatMessage` + `ChatMessageActions`, `ChatLoader`, `ChatTool` (a tool call with its status, input, output and approval), `ChainOfThought`, `ChatSource` + `ChatSources`, `TextShimmer`, `Markdown` (a safe renderer for answers as they stream, code in CodeBlock) |
-| Layout | `Card`, `SettingsRow`, `Stack`, `Separator`, `ScrollShadow`, `VisuallyHidden`, `AspectRatio`, `Splitter` + `SplitterPanel` + `SplitterHandle` (panels you resize by dragging or with the arrow keys, collapsible, remembered), `VirtualList` (renders only the rows in view, for 10,000 rows, logs and infinite feeds) |
+| Layout | `Card`, `SettingsRow`, `Stack`, `Separator`, `ScrollShadow`, `VisuallyHidden`, `AspectRatio`, `Splitter` + `SplitterPanel` + `SplitterHandle` (panels you resize by dragging or with the arrow keys, collapsible, remembered), `VirtualList` (renders only the rows in view, for 10,000 rows, logs and infinite feeds), `Portal` (renders children into `document.body` or another element, out of an `overflow: hidden` parent), `FocusTrap` (keeps Tab inside your own overlay and gives focus back after; the native dialogs don't need it) |
 | Marketing | `SiteHeader`, `SectionHeading`, `Chip`, `DotGrid` |
 
-Hooks for your own components: `useControllableState`, `useFloating` (top-layer positioning that flips), `usePresence` (keeps a layer mounted while it animates out), `useDismiss`, `useModalDialog`, `useMenuKeyboard`, `useVirtualizer` (the windowing behind VirtualList). Every prop is typed and described, so your editor explains it on hover.
+Hooks for your own components: `useControllableState`, `useFloating` (top-layer positioning that flips), `usePresence` (keeps a layer mounted while it animates out), `useDismiss`, `useModalDialog`, `useFocusTrap` (the trap behind FocusTrap, for your own element), `useMenuKeyboard`, `useVirtualizer` (the windowing behind VirtualList). Every prop is typed and described, so your editor explains it on hover.
 
 ## Blocks as components
 
