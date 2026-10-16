@@ -11,20 +11,9 @@ import {
 } from "react";
 
 import { cx } from "@/utils/cx";
-import type { ScrollAreaProps } from "./ScrollArea.types";
+import type { Axis, ScrollAreaProps, ThumbState } from "./ScrollArea.types";
 
 export type { ScrollAreaOrientation, ScrollAreaProps, ScrollAreaType } from "./ScrollArea.types";
-
-type Axis = "x" | "y";
-
-interface ThumbState {
-    /** The thumb's length along its track, in pixels. */
-    size: number;
-    /** How far along the track it sits, in pixels. */
-    offset: number;
-    /** Whether the axis has anything to scroll. */
-    overflow: boolean;
-}
 
 const hidden: ThumbState = { size: 0, offset: 0, overflow: false };
 const minThumb = 20;

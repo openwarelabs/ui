@@ -25,3 +25,16 @@ export interface ScrollAreaProps extends HTMLAttributes<HTMLDivElement> {
     viewportRef?: Ref<HTMLDivElement>;
     children: ReactNode;
 }
+
+/** One of the two scroll directions. */
+export type Axis = "x" | "y";
+
+/** Where a thumb sits on its track, from the viewport's scroll geometry. */
+export interface ThumbState {
+    /** The thumb's length along its track, in pixels. */
+    size: number;
+    /** How far along the track it sits, in pixels. */
+    offset: number;
+    /** Whether the axis has anything to scroll. */
+    overflow: boolean;
+}
