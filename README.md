@@ -54,11 +54,11 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 
 ## Components
 
-123 components, each with a page in the docs.
+124 components, each with a page in the docs.
 
 | Group | Components |
 | --- | --- |
-| Typography | `Text` (each style on the Typography page as a variant: hero to caption, code and kbd; tones, `truncate`, `as`), `Link`, `Kbd`, `Code`, `CodeBlock`, `Snippet`, `Prose` (styles rendered Markdown or HTML, at chat or article size), `InlineEdit` (text you click to edit in place; Enter saves, Escape cancels, async saves) |
+| Typography | `Text` (each style on the Typography page as a variant: hero to caption, code and kbd; tones, `truncate`, `as`), `Truncate` (text cut to its room at the end, in the middle for file names and hashes, or at the start for paths; the full text in a Tooltip when it's cut), `Link`, `Kbd`, `Code`, `CodeBlock`, `Snippet`, `Prose` (styles rendered Markdown or HTML, at chat or article size), `InlineEdit` (text you click to edit in place; Enter saves, Escape cancels, async saves) |
 | Actions | `Button` (primary, secondary, ghost, danger; sm, md, lg; `loading`; `shape="pill"`), `buttonClassName()` for links, `ButtonGroup`, `CloseButton`, `CopyButton`, `ToggleButton`, `SegmentedControl`, `ToggleButtonGroup` (one or several on), `Toolbar` + `ToolbarSeparator` (arrow keys across its controls) |
 | Inputs | `Form` (the browser's checks, your own and the server's errors, under each field; `useFormStatus`), `Field`, `Fieldset`, `Input` (start and end content), `Textarea` (`autoGrow`), `NumberField`, `SearchField`, `InputOTP`, `ColorField`, `DateField` and `TimeField` (typed in segments, in the locale's order), `TagInput` (several values as tags, typed or picked from suggestions), `PasswordInput` (show and hide, a strength meter, a checklist of rules; `passwordStrength()`), `MentionInput` (`@` mentions and `/` commands in a list at the caret; `useMentions` for any text box), `SignaturePad` (sign with a mouse, finger or pen, or type instead; sent with a Form) |
 | Choices | `Checkbox`, `CheckboxGroup`, `RadioGroup` (plain or cards), `Switch`, `Select`, `Combobox`, `Slider` (one value or a range), `Rating` (pick a score or show one), `ChoiceCard`, `ListBox` (one or many, on the page), `TreeView` (rows that open, select or check, with children loaded on demand), `TransferList` (two lists with buttons to move items between them, searchable and orderable) |

@@ -1,6 +1,6 @@
 import { Stack, Text } from "@openwarelabs/ui";
 
-import type { DocMeta } from "../app/types";
+import type { DocMeta } from "@docs/app/types";
 
 export const meta: DocMeta = {
     title: "Text",
@@ -14,7 +14,7 @@ export const meta: DocMeta = {
         "Lead, copy, caption and overline are muted unless you give a tone; the rest take the colour around them.",
         "The display styles (hero, page-title, section-title, heading) shrink on screens under 760px wide.",
     ],
-    related: ["SectionHeading", "Code", "Kbd"],
+    related: ["Truncate", "SectionHeading", "Code", "Kbd"],
     since: "0.3.0",
 };
 
