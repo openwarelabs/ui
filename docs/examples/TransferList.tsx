@@ -64,7 +64,7 @@ const people = firstNames.flatMap((first, row) =>
 export function Searchable() {
     return (
         <div style={{ width: 640, maxWidth: "100%", marginInline: "auto" }}>
-            <TransferList options={people} defaultValue={["ada-lovelace"]} sourceLabel="People" targetLabel="Team" searchable showMoveAll height={320} />
+            <TransferList options={people} defaultValue={["siobhan-murphy"]} sourceLabel="People" targetLabel="Team" searchable showMoveAll height={320} />
         </div>
     );
 }
