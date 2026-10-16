@@ -54,7 +54,7 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 
 ## Components
 
-133 components, each with a page in the docs.
+143 components, each with a page in the docs.
 
 | Group | Components |
 | --- | --- |
