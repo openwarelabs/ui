@@ -14,14 +14,15 @@ import {
 
 import { useControllableState } from "@/hooks/useControllableState";
 import { cx } from "@/utils/cx";
-import type { CollapsibleContentProps, CollapsibleProps, CollapsibleState, CollapsibleTriggerProps } from "./Collapsible.types";
+import type {
+    CollapsibleContentProps,
+    CollapsibleContextValue,
+    CollapsibleProps,
+    CollapsibleState,
+    CollapsibleTriggerProps,
+} from "./Collapsible.types";
 
 export type { CollapsibleContentProps, CollapsibleProps, CollapsibleState, CollapsibleTriggerProps } from "./Collapsible.types";
-
-interface CollapsibleContextValue extends CollapsibleState {
-    contentId: string;
-    disabled: boolean;
-}
 
 const CollapsibleContext = createContext<CollapsibleContextValue | null>(null);
 

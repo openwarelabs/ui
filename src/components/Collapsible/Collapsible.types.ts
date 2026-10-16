@@ -35,3 +35,9 @@ export interface CollapsibleContentProps extends HTMLAttributes<HTMLDivElement> 
      * @default false */
     forceMount?: boolean;
 }
+
+/** What `Collapsible` hands its trigger and content through context. */
+export interface CollapsibleContextValue extends CollapsibleState {
+    contentId: string;
+    disabled: boolean;
+}
