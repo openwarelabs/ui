@@ -3,9 +3,7 @@ import { useState, type KeyboardEvent, type PointerEvent } from "react";
 import { cx } from "@/utils/cx";
 import { defaultIndex, defaultTick, defaultValue, niceTicks, seriesColors, textWidth, useWidth, valueOf } from "./chartUtils";
 import { ChartLegend, ChartTable } from "./ChartParts";
-import type { BarChartProps, LineChartProps } from "./Chart.types";
-
-type Props = (LineChartProps & { kind: "line" }) | (BarChartProps & { kind: "bar" });
+import type { CartesianKindProps as Props } from "./Chart.types";
 
 const gap = 2;
 const maxBar = 24;
@@ -57,9 +55,9 @@ export function CartesianChart(props: Props) {
         legend = series.length > 1,
         className,
     } = props;
-    const stacked = kind === "bar" && Boolean(props.stacked);
+    const stacked = kind === "bar" ? Boolean(props.stacked) : kind === "area" ? props.stacked !== false : false;
     const area = kind === "line" && Boolean(props.area);
-    const curved = kind === "line" && Boolean(props.curved);
+    const curved = kind !== "bar" && Boolean(props.curved);
 
     const [plotRef, width] = useWidth<HTMLDivElement>();
     const [active, setActive] = useState<number | null>(null);
@@ -74,7 +72,7 @@ export function CartesianChart(props: Props) {
     const high = ticks[ticks.length - 1]!;
     const tickLabels = ticks.map(formatTick);
 
-    const margin = { top: 8, right: kind === "line" ? 10 : 4, bottom: 26, left: Math.ceil(Math.max(...tickLabels.map(textWidth))) + 12 };
+    const margin = { top: 8, right: kind === "bar" ? 4 : 10, bottom: 26, left: Math.ceil(Math.max(...tickLabels.map(textWidth))) + 12 };
     const plotWidth = Math.max(0, width - margin.left - margin.right);
     const plotHeight = Math.max(0, height - margin.top - margin.bottom);
     const y = (value: number) => margin.top + plotHeight - ((value - low) / (high - low || 1)) * plotHeight;
@@ -89,7 +87,7 @@ export function CartesianChart(props: Props) {
     const indexLabels = data.map((row) => formatIndex(row[index]));
     const spacing = kind === "bar" ? band : step || plotWidth;
     const every = Math.max(1, Math.ceil((Math.max(0, ...indexLabels.map(textWidth)) + 14) / (spacing || 1)));
-    const labelled = data.map((_, i) => i).filter((i) => (kind === "line" ? (count - 1 - i) % every === 0 : i % every === 0));
+    const labelled = data.map((_, i) => i).filter((i) => (kind === "bar" ? i % every === 0 : (count - 1 - i) % every === 0));
 
     const pick = (event: PointerEvent<SVGRectElement>) => {
         const left = event.currentTarget.getBoundingClientRect().left - margin.left;
@@ -141,6 +139,29 @@ export function CartesianChart(props: Props) {
                 const d = value >= 0 ? barPath(left, y(value), barWidth, y(0), true) : y(value) > y(0) ? flipped(left, y(0), barWidth, y(value)) : "";
                 return d ? <path key={`${i}-${s}`} d={d} fill={colors[s]} /> : null;
             });
+        });
+
+    // Where each series sits at each row: stacked areas pile up, everything else is the value itself.
+    const stackTop = (i: number, s: number) =>
+        stacked ? series.slice(0, s + 1).reduce((sum, entry) => sum + Math.max(0, valueOf(data[i], entry.key)), 0) : valueOf(data[i], series[s]!.key);
+    const baseline = y(Math.max(low, 0));
+
+    const areas = () =>
+        series.map((entry, s) => {
+            const top = data.map((_, i) => [x(i), y(stackTop(i, s))] as [number, number]);
+            if (!top.length) return null;
+            const edge = linePath(top, curved);
+            const bottom =
+                stacked && s > 0
+                    ? `L${linePath(data.map((_, i) => [x(i), y(stackTop(i, s - 1))] as [number, number]).reverse(), curved).slice(1)}`
+                    : `L${top[top.length - 1]![0].toFixed(1)} ${baseline}L${top[0]![0].toFixed(1)} ${baseline}`;
+            return (
+                <g key={entry.key}>
+                    <path className={cx("ow-chart__fill", !stacked && "ow-chart__fill--overlay")} d={`${edge}${bottom}Z`} fill={colors[s]} />
+                    <path className="ow-chart__edge" d={edge} stroke={colors[s]} />
+                    {count === 1 ? <circle className="ow-chart__point" cx={top[0]![0]} cy={top[0]![1]} r={4} fill={colors[s]} /> : null}
+                </g>
+            );
         });
 
     const lines = () =>
@@ -205,7 +226,7 @@ export function CartesianChart(props: Props) {
                                 x={x(i)}
                                 y={height - 6}
                                 textAnchor={
-                                    kind === "line" && count > 1 && i === 0 ? "start" : kind === "line" && count > 1 && i === count - 1 ? "end" : "middle"
+                                    kind !== "bar" && count > 1 && i === 0 ? "start" : kind !== "bar" && count > 1 && i === count - 1 ? "end" : "middle"
                                 }
                             >
                                 {indexLabels[i]}
@@ -214,8 +235,8 @@ export function CartesianChart(props: Props) {
                         {kind === "bar" && shown !== null ? (
                             <rect className="ow-chart__band" x={x(shown) - band / 2} y={margin.top} width={band} height={plotHeight} rx={6} />
                         ) : null}
-                        {kind === "bar" ? bars() : lines()}
-                        {kind === "line" && shown !== null ? (
+                        {kind === "bar" ? bars() : kind === "area" ? areas() : lines()}
+                        {kind !== "bar" && shown !== null ? (
                             <>
                                 <line className="ow-chart__crosshair" x1={x(shown)} x2={x(shown)} y1={margin.top} y2={margin.top + plotHeight} />
                                 {series.map((entry, s) => (
@@ -223,7 +244,7 @@ export function CartesianChart(props: Props) {
                                         key={entry.key}
                                         className="ow-chart__point"
                                         cx={x(shown)}
-                                        cy={y(valueOf(data[shown], entry.key))}
+                                        cy={y(kind === "area" ? stackTop(shown, s) : valueOf(data[shown], entry.key))}
                                         r={4}
                                         fill={colors[s]}
                                     />
