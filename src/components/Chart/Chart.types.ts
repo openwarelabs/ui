@@ -51,6 +51,17 @@ export interface BarChartProps extends CartesianChartProps {
     stacked?: boolean;
 }
 
+export interface AreaChartProps extends CartesianChartProps {
+    /**
+     * Stacks the areas on each other, so the top edge is the total and each band is one series' part of it. With
+     * `false` the areas overlap, each translucent from the baseline, for comparing shapes rather than totals.
+     * @default true
+     */
+    stacked?: boolean;
+    /** Joins the points with smooth curves instead of straight lines. @default false */
+    curved?: boolean;
+}
+
 export interface DonutChartSlice {
     label: string;
     value: number;
@@ -71,6 +82,67 @@ export interface DonutChartProps {
     /** Diameter in pixels. @default 180 */
     size?: number;
     /** Shows the legend, with each slice's value and share, beside the ring. @default true */
+    legend?: boolean;
+    className?: string;
+}
+
+export type PieChartSlice = DonutChartSlice;
+
+export interface PieChartProps {
+    /** One slice each, largest first reads best; at most eight. Fold the smallest into an "Other" slice past that. */
+    data: PieChartSlice[];
+    /** What the chart shows, e.g. "Sales by region". Read out by screen readers and used as the table's caption. */
+    label: string;
+    /** @default the locale's format */
+    formatValue?(value: number): string;
+    /** Writes each slice's share on it, when the slice is big enough to hold it (about 8% and up). @default true */
+    labels?: boolean;
+    /** Where the first slice starts, in degrees clockwise from 12 o'clock. @default 0 */
+    startAngle?: number;
+    /** Diameter in pixels. @default 180 */
+    size?: number;
+    /** Shows the legend, with each slice's value and share, beside the disc. @default true */
+    legend?: boolean;
+    className?: string;
+}
+
+export interface ScatterChartProps {
+    /** One row per point, e.g. `{ name: "Aoife", hours: 12, score: 84 }`. */
+    data: ChartRow[];
+    /** The key in each row for the x axis; a number. */
+    x: string;
+    /** The key in each row for the y axis; a number. */
+    y: string;
+    /**
+     * The key in each row whose value names the point's series: points with the same value share a colour and a legend
+     * entry, in the order they first appear. Without it every point is in one series.
+     */
+    series?: string;
+    /** A palette slot (1–8) or a CSS colour per series, by its value in the `series` key. By default they take the slots in order. */
+    colors?: Record<string, ChartColor>;
+    /** The key in each row for a bubble's size: its area follows the number. Without it every point is the same size. */
+    size?: string;
+    /** The key in each row that names the point, for the readout's title and the table, e.g. "name". @default its series, or "Point 3" */
+    name?: string;
+    /** What the chart shows, e.g. "Study hours against exam score". Read out by screen readers and used as the table's caption. */
+    label: string;
+    /** The x axis' name, in the readout, the table and under the axis. @default the x key */
+    xLabel?: string;
+    /** The y axis' name, in the readout, the table and along the axis. @default the y key */
+    yLabel?: string;
+    /** The size's name, in the readout and the table. @default the size key */
+    sizeLabel?: string;
+    /** Height of the plot in pixels, axes included. @default 280 */
+    height?: number;
+    /** Turns an x value into the text in the readout and the table. @default the locale's format */
+    formatX?(value: number): string;
+    /** Turns a y value into the text in the readout and the table. @default the locale's format */
+    formatY?(value: number): string;
+    /** Turns a size value into the text in the readout and the table. @default the locale's format */
+    formatSize?(value: number): string;
+    /** Turns a number into an axis label, on both axes. @default compact: 1.2K, 3M */
+    formatTick?(value: number): string;
+    /** Shows the legend above the plot. @default true when there's more than one series */
     legend?: boolean;
     className?: string;
 }
