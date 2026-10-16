@@ -2,6 +2,20 @@
 
 Every release of @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp. `npm run release` writes it from the commits, and the docs' Releases page shows it.
 
+## 0.22.0 (2026-10-16)
+
+3 new components.
+
+### New components
+
+- **[TimeRangeField](https://openwarelabs.github.io/ui/#/components/time-range-field)** and **[DurationField](https://openwarelabs.github.io/ui/#/components/duration-field)**: a start and an end time, and a length of time typed in segments ([#80](https://github.com/openwarelabs/ui/pull/80), [00ad9a8](https://github.com/openwarelabs/ui/commit/00ad9a87014df61e6bc81093532f59663aebad69))
+- **[Marquee](https://openwarelabs.github.io/ui/#/components/marquee)**: a strip of logos, figures or tags that travel endlessly ([#81](https://github.com/openwarelabs/ui/pull/81), [05ea166](https://github.com/openwarelabs/ui/commit/05ea166a1a2a766e856a99501878e39ca3381b0d))
+
+### Other changes
+
+- tidy after the component batch, README count, duplicated AI line and size-limits formatting ([#92](https://github.com/openwarelabs/ui/pull/92), [f195a5b](https://github.com/openwarelabs/ui/commit/f195a5b1bec6308b642113651a96621508985055))
+- show new components' previews and counts on Releases ([#91](https://github.com/openwarelabs/ui/pull/91), [4dcf7c8](https://github.com/openwarelabs/ui/commit/4dcf7c87bcd3e565cb2f1e14cf53de3046f0028b))
+
 ## 0.21.0 (2026-10-16)
 
 3 new components.
