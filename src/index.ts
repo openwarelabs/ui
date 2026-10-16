@@ -179,6 +179,8 @@ export type { AppShellProps, AppShellState, SidebarSectionProps, SidebarTogglePr
 // Data display
 export { Table } from "./components/Table/Table";
 export type { TableProps, TableColumn, TableSort } from "./components/Table/Table";
+export { DataGrid } from "./components/DataGrid/DataGrid";
+export type { DataGridProps, DataGridColumn, DataGridSort, DataGridLabels } from "./components/DataGrid/DataGrid";
 export { Stat } from "./components/Stat/Stat";
 export type { StatProps } from "./components/Stat/Stat";
 export { DescriptionList, DescriptionItem } from "./components/DescriptionList/DescriptionList";
@@ -187,6 +189,8 @@ export { Timeline, TimelineItem } from "./components/Timeline/Timeline";
 export type { TimelineProps, TimelineItemProps, TimelineTone } from "./components/Timeline/Timeline";
 export { SortableList } from "./components/SortableList/SortableList";
 export type { SortableListProps, SortableListItemState, SortableListLabels } from "./components/SortableList/SortableList";
+export { Kanban } from "./components/Kanban/Kanban";
+export type { KanbanProps, KanbanColumn, KanbanCardState, KanbanMove, KanbanLabels } from "./components/Kanban/Kanban";
 export { LineChart, BarChart, DonutChart, Sparkline } from "./components/Chart/Chart";
 export type {
     BarChartProps,
