@@ -2,6 +2,13 @@
 
 Every release of @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp. `npm run release` writes it from the commits, and the docs' Releases page shows it.
 
+## 0.17.1 (2026-10-16)
+
+### Other changes
+
+- fold the components sidebar into categories, with a filter and New pills ([#67](https://github.com/openwarelabs/ui/pull/67), [d0a71d4](https://github.com/openwarelabs/ui/commit/d0a71d420fca1f0bea2c45373b661bdca1e8208e))
+- use an Irish cast of example names ([#66](https://github.com/openwarelabs/ui/pull/66), [b9c482e](https://github.com/openwarelabs/ui/commit/b9c482e171533263da1c7f0533a25dba91257d9e))
+
 ## 0.17.0 (2026-10-16)
 
 2 new components and 1 fix.

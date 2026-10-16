@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { Badge, Button, CommandPalette, Drawer, Kbd, Popover, ScrollShadow, SegmentedControl, Toaster, type Command } from "@openwarelabs/ui";
+import { Badge, Button, CommandPalette, Drawer, Kbd, Popover, SegmentedControl, Toaster, type Command } from "@openwarelabs/ui";
 import { ArrowUpRight, Book, Component, LayoutTemplate, Menu as MenuIcon, Monitor, Moon, Search, Sun } from "lucide-react";
 
 import { blockCategories } from "./blocks";
@@ -9,18 +9,18 @@ import { ComponentPage, repository } from "./ComponentPage";
 import { componentDocs, componentsInBlocks, guides, hrefOf, listedComponents, showBlocks, slugify, type Route } from "./content";
 import { useMinWidth, useRoute, useTheme, type ThemeChoice } from "./hooks";
 import { RouteProvider } from "./Page";
-import { Sidebar, sectionLinks as sections, sectionOf } from "./Sidebar";
+import { focusComponentFilter, Sidebar, sectionLinks as sections, sectionOf } from "./Sidebar";
 import { version } from "./version";
-import { BlockCategoryPage, BlocksIndex } from "../pages/Blocks";
-import { ComponentsIndex } from "../pages/ComponentsIndex";
-import { Colours } from "../pages/Colours";
-import { Installation } from "../pages/Installation";
-import { AI } from "../pages/AI";
-import { Introduction } from "../pages/Introduction";
-import { Releases } from "../pages/Releases";
-import { Theming } from "../pages/Theming";
-import { Tokens } from "../pages/Tokens";
-import { Typography } from "../pages/Typography";
+import { BlockCategoryPage, BlocksIndex } from "@docs/pages/Blocks";
+import { ComponentsIndex } from "@docs/pages/ComponentsIndex";
+import { Colours } from "@docs/pages/Colours";
+import { Installation } from "@docs/pages/Installation";
+import { AI } from "@docs/pages/AI";
+import { Introduction } from "@docs/pages/Introduction";
+import { Releases } from "@docs/pages/Releases";
+import { Theming } from "@docs/pages/Theming";
+import { Tokens } from "@docs/pages/Tokens";
+import { Typography } from "@docs/pages/Typography";
 
 /** One key per page, not per section, so moving between pages animates but jumping to a heading doesn't. */
 const pageKey = (route: Route) =>
@@ -61,13 +61,16 @@ export function App() {
         if (wide) setNavOpen(false);
     }, [wide]);
 
-    // ⌘K, Ctrl+K or / opens search.
+    // ⌘K or Ctrl+K opens search. So does /, except beside the components, where it goes to their filter.
     useEffect(() => {
         const onKeyDown = (event: KeyboardEvent) => {
             const typing = event.target instanceof HTMLElement && event.target.closest("input, textarea, [contenteditable]");
-            if ((event.key === "k" && (event.metaKey || event.ctrlKey)) || (event.key === "/" && !typing)) {
+            if (event.key === "k" && (event.metaKey || event.ctrlKey)) {
                 event.preventDefault();
                 setSearchOpen(true);
+            } else if (event.key === "/" && !typing) {
+                event.preventDefault();
+                if (!focusComponentFilter()) setSearchOpen(true);
             }
         };
         window.addEventListener("keydown", onKeyDown);
@@ -228,9 +231,7 @@ export function App() {
             <div className="docs-body">
                 {wide ? (
                     <aside className="docs-aside" aria-label="Documentation">
-                        <ScrollShadow className="docs-aside__scroll" size={24}>
-                            <Sidebar route={route} onSearch={() => setSearchOpen(true)} />
-                        </ScrollShadow>
+                        <Sidebar route={route} onSearch={() => setSearchOpen(true)} />
                     </aside>
                 ) : null}
                 <main id="main" className="docs-panel" tabIndex={-1}>
@@ -247,7 +248,7 @@ export function App() {
                         setNavOpen(false);
                         setSearchOpen(true);
                     }}
-                    showSections
+                    inDrawer
                 />
             </Drawer>
             <CommandPalette open={searchOpen} onClose={() => setSearchOpen(false)} commands={commands} placeholder={showBlocks ? "Search components, blocks, examples and guides…" : "Search components, examples and guides…"} />

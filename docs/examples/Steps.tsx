@@ -15,7 +15,7 @@ export const meta: DocMeta = {
     notes: [
         'It\'s an ordered list. The current step has aria-current="step", and done steps say so to screen readers.',
     ],
-    related: ["ProgressBar", "Tabs"],
+    related: ["Wizard", "ProgressBar", "Tabs"],
 };
 
 /** A vertical checklist with an action on the current step. */
