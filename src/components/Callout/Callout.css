@@ -1,0 +1,204 @@
+/* Callout: a note set apart from running text. Each tone sets four colours, and the variant decides which it shows:
+   soft tints the panel, outline draws its border, bar draws a rule down the start edge. */
+.ow-callout {
+    --ow-callout-text: var(--ow-text);
+    --ow-callout-surface: var(--ow-surface-muted);
+    --ow-callout-border: var(--ow-border);
+    --ow-callout-line: var(--ow-border-strong);
+    --ow-callout-x: var(--ow-space-2xl);
+    --ow-callout-y: var(--ow-space-xl);
+    box-sizing: border-box;
+    min-width: 0;
+    margin: 0;
+    border: 1px solid transparent;
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-callout-surface);
+    padding: var(--ow-callout-y) var(--ow-callout-x);
+    color: var(--ow-text);
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+}
+
+.ow-callout--outline {
+    border-color: var(--ow-callout-border);
+    background: var(--ow-surface);
+}
+
+.ow-callout--bar {
+    border: 0;
+    border-inline-start: 3px solid var(--ow-callout-line);
+    border-radius: var(--ow-radius-sm);
+    background: none;
+    padding-inline: var(--ow-space-3xl) 0;
+}
+
+.ow-callout__header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--ow-space-sm);
+    color: var(--ow-callout-text);
+}
+
+.ow-callout__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    padding-top: 0.18em;
+}
+
+.ow-callout__title {
+    min-width: 0;
+    flex: 1;
+    color: inherit;
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.ow-callout__header + .ow-callout__body {
+    margin-top: var(--ow-space-xs);
+}
+
+/* Prose skips what's inside a component, so the body sets its own flow. */
+.ow-callout__body > * {
+    margin-block: 0;
+}
+
+.ow-callout__body > * + * {
+    margin-top: var(--ow-space-sm);
+}
+
+.ow-callout__body > :where(ul, ol) {
+    padding-inline-start: var(--ow-space-5xl);
+}
+
+/* Inline code and keys, as Prose sets them, since Prose doesn't reach in here. */
+.ow-callout__body :where(code):not(pre code, [class^="ow-"], [class*=" ow-"]) {
+    border-radius: var(--ow-radius-code);
+    background: var(--ow-code-ground);
+    padding: 2px 4px;
+    font-family: var(--ow-font-mono);
+    font-size: 0.88em;
+    font-variant-ligatures: none;
+}
+
+.ow-callout__body :where(kbd):not([class^="ow-"], [class*=" ow-"]) {
+    border: 1px solid var(--ow-border-strong);
+    border-bottom-width: 2px;
+    border-radius: var(--ow-radius-md);
+    background: var(--ow-key-ground);
+    padding: 0 var(--ow-space-xs);
+    font-family: var(--ow-font-mono);
+    font-size: 0.85em;
+    white-space: nowrap;
+}
+
+/* Collapsible: the header is a details summary, with a chevron that turns as it opens. The details stretches back out to
+   the panel's edges so the whole header row is the button. */
+.ow-callout__details {
+    margin: calc(-1 * var(--ow-callout-y)) calc(-1 * var(--ow-callout-x));
+}
+
+.ow-callout--bar .ow-callout__details {
+    margin-inline: calc(-1 * var(--ow-space-3xl)) 0;
+}
+
+.ow-callout__details > .ow-callout__header {
+    border-radius: inherit;
+    padding: var(--ow-callout-y) var(--ow-callout-x);
+    list-style: none;
+    cursor: pointer;
+}
+
+.ow-callout--bar .ow-callout__details > .ow-callout__header {
+    padding-inline: var(--ow-space-3xl) 0;
+}
+
+.ow-callout__details > .ow-callout__header::-webkit-details-marker {
+    display: none;
+}
+
+.ow-callout__details > .ow-callout__header:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -4px;
+}
+
+.ow-callout__chevron {
+    display: inline-flex;
+    flex-shrink: 0;
+    padding-top: 0.18em;
+    color: var(--ow-text-muted);
+    transition: transform var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+.ow-callout__chevron:dir(rtl) {
+    transform: scaleX(-1);
+}
+
+.ow-callout__header:hover > .ow-callout__chevron {
+    color: var(--ow-text);
+}
+
+.ow-callout__details[open] > .ow-callout__header > .ow-callout__chevron {
+    transform: rotate(90deg);
+}
+
+.ow-callout__details > .ow-callout__body {
+    padding: 0 var(--ow-callout-x) var(--ow-callout-y);
+}
+
+.ow-callout--bar .ow-callout__details > .ow-callout__body {
+    padding-inline: var(--ow-space-3xl) 0;
+}
+
+/* Tones. */
+.ow-callout--tip {
+    --ow-callout-text: var(--ow-brass-deep);
+    --ow-callout-surface: var(--ow-brass-soft);
+    --ow-callout-border: color-mix(in srgb, var(--ow-brass) 45%, transparent);
+    --ow-callout-line: var(--ow-brass);
+}
+
+.ow-callout--info {
+    --ow-callout-text: var(--ow-primary-text);
+    --ow-callout-surface: var(--ow-primary-subtle);
+    --ow-callout-border: var(--ow-primary-border);
+    --ow-callout-line: var(--ow-primary);
+}
+
+.ow-callout--success {
+    --ow-callout-text: var(--ow-success-text);
+    --ow-callout-surface: var(--ow-success-surface);
+    --ow-callout-border: var(--ow-success-border);
+    --ow-callout-line: var(--ow-success-solid);
+}
+
+.ow-callout--warning {
+    --ow-callout-text: var(--ow-warning-text);
+    --ow-callout-surface: var(--ow-warning-surface);
+    --ow-callout-border: var(--ow-warning-border);
+    --ow-callout-line: var(--ow-warning-solid);
+}
+
+.ow-callout--danger {
+    --ow-callout-text: var(--ow-danger-text);
+    --ow-callout-surface: var(--ow-danger-surface);
+    --ow-callout-border: var(--ow-danger-border);
+    --ow-callout-line: var(--ow-danger-solid);
+}
+
+/* In an article, the callout takes the text's size and leading; Prose gives it a block's margins. */
+.ow-prose--md .ow-callout {
+    font-size: inherit;
+    line-height: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-callout__chevron {
+        transition: none;
+    }
+}
+
+@media (forced-colors: active) {
+    .ow-callout {
+        border-color: CanvasText;
+    }
+}

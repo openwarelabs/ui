@@ -1,0 +1,273 @@
+/* JsonViewer: a JSON document as a tree of monospace rows, coloured by type. TreeView's roving focus, CodeBlock's font. */
+.ow-json {
+    --ow-json-indent: 20px;
+    display: grid;
+    min-width: 0;
+    gap: var(--ow-space-sm);
+    color: var(--ow-text);
+}
+
+.ow-json__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-sm) var(--ow-space-md);
+}
+
+.ow-json__search {
+    width: 260px;
+    max-width: 100%;
+}
+
+.ow-json__status {
+    min-width: 0;
+    flex: 1;
+    color: var(--ow-text-muted);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-json__copy {
+    margin-inline-start: auto;
+}
+
+.ow-json__scroll {
+    min-width: 0;
+    overflow: auto;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    padding: var(--ow-space-sm) var(--ow-space-xs);
+}
+
+.ow-json__tree,
+.ow-json__group {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-json__tree {
+    font-family: var(--ow-font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    tab-size: 4;
+}
+
+.ow-json__item {
+    outline: none;
+}
+
+.ow-json__row,
+.ow-json__close {
+    display: flex;
+    min-height: 26px;
+    align-items: flex-start;
+    border-radius: var(--ow-radius-form);
+    padding-block: 2px;
+    padding-inline-end: var(--ow-space-xs);
+}
+
+.ow-json__row {
+    cursor: default;
+    transition: background-color var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.ow-json__row:hover {
+    background: var(--ow-surface-muted);
+}
+
+.ow-json__item:focus-visible > .ow-json__row {
+    box-shadow: 0 0 0 2px var(--ow-focus-ring);
+}
+
+.ow-json__close {
+    color: var(--ow-text-muted);
+}
+
+.ow-json__toggle {
+    display: inline-flex;
+    width: 20px;
+    height: 22px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    color: var(--ow-text-muted);
+}
+
+.ow-json__toggle svg {
+    transition: transform var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-json__toggle:dir(rtl) svg {
+    transform: scaleX(-1);
+}
+
+[aria-expanded="true"] > .ow-json__row .ow-json__toggle svg {
+    transform: rotate(90deg);
+}
+
+.ow-json__text {
+    min-width: 0;
+    flex: 1;
+    overflow-wrap: anywhere;
+}
+
+.ow-json__key {
+    color: var(--ow-text);
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.ow-json__key--index,
+.ow-json__colon,
+.ow-json__bracket {
+    color: var(--ow-text-muted);
+    font-weight: var(--ow-weight-regular);
+}
+
+.ow-json__count {
+    padding-inline: 1px;
+    color: var(--ow-text-soft);
+    font-size: 12px;
+}
+
+.ow-json__value--string {
+    color: var(--ow-success-text);
+}
+
+.ow-json__value--number {
+    color: var(--ow-primary-text);
+}
+
+.ow-json__value--boolean {
+    color: var(--ow-warning-text);
+}
+
+.ow-json__value--null,
+.ow-json__value--other {
+    color: var(--ow-text-muted);
+    font-style: italic;
+}
+
+.ow-json__type {
+    margin-inline-start: var(--ow-space-sm);
+    color: var(--ow-text-soft);
+    font-family: var(--ow-font-sans);
+    font-size: 11px;
+}
+
+.ow-json__mark {
+    border-radius: var(--ow-radius-sm);
+    background: var(--ow-warning-surface);
+    color: inherit;
+    box-shadow: 0 0 0 1px var(--ow-warning-border);
+}
+
+.ow-json__more {
+    margin: 0 0 0 var(--ow-space-xs);
+    border: 0;
+    border-radius: var(--ow-radius-sm);
+    background: transparent;
+    padding: 0 var(--ow-space-2xs);
+    color: var(--ow-primary-text);
+    font: inherit;
+    font-family: var(--ow-font-sans);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.ow-json__more:hover {
+    text-decoration: underline;
+}
+
+.ow-json__more:focus-visible,
+.ow-json__action:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 1px;
+}
+
+/* A row's copy buttons show when the pointer rests on it or it has focus. */
+.ow-json__actions {
+    display: inline-flex;
+    flex-shrink: 0;
+    gap: 2px;
+    margin-inline-start: var(--ow-space-xs);
+    opacity: 0;
+    transition: opacity var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.ow-json__row:hover .ow-json__actions,
+.ow-json__item:focus-visible > .ow-json__row .ow-json__actions,
+.ow-json__actions:focus-within {
+    opacity: 1;
+}
+
+.ow-json__action {
+    display: inline-flex;
+    width: 22px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border: 1px solid transparent;
+    border-radius: var(--ow-radius-sm);
+    background: transparent;
+    padding: 0;
+    color: var(--ow-text-muted);
+    cursor: pointer;
+    transition-property: color, background-color, border-color;
+    transition-duration: var(--ow-duration-fast);
+    transition-timing-function: var(--ow-ease-standard);
+}
+
+.ow-json__action:hover {
+    border-color: var(--ow-border);
+    background: var(--ow-surface);
+    color: var(--ow-text);
+}
+
+.ow-json__error {
+    display: grid;
+    gap: var(--ow-space-sm);
+    border: 1px solid var(--ow-danger-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-danger-surface);
+    padding: var(--ow-space-md) var(--ow-space-lg);
+}
+
+.ow-json__error-text {
+    margin: 0;
+    color: var(--ow-danger-text);
+    font-size: 14px;
+}
+
+.ow-json__error-detail {
+    font-family: var(--ow-font-mono);
+    font-size: 13px;
+}
+
+.ow-json__raw {
+    margin: 0;
+    overflow: auto;
+    color: var(--ow-text);
+    font-family: var(--ow-font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+@media (hover: none) {
+    .ow-json__actions {
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-json__row,
+    .ow-json__toggle svg,
+    .ow-json__actions,
+    .ow-json__action {
+        transition: none;
+    }
+}

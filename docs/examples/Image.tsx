@@ -18,7 +18,7 @@ export const meta: DocMeta = {
         "If the image fails or there's no src, a muted box with an icon takes its place, announced with the alt text; pass fallback for your own.",
         "With a caption it comes in a <figure>, with the caption as its <figcaption>.",
     ],
-    related: ["AspectRatio", "Avatar", "Skeleton"],
+    related: ["AspectRatio", "Avatar", "Skeleton", "Lightbox"],
     since: "0.14.0",
 };
 

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 /** The series' names, each beside its colour, above the plot. */
-export function ChartLegend({ items, shape }: { items: Array<{ label: ReactNode; color: string; value?: ReactNode }>; shape: "line" | "square" }) {
+export function ChartLegend({ items, shape }: { items: Array<{ label: ReactNode; color: string; value?: ReactNode }>; shape: "line" | "square" | "dot" }) {
     return (
         <ul className="ow-chart__legend">
             {items.map((item, i) => (
