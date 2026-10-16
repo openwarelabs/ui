@@ -18,7 +18,7 @@ export const meta: DocMeta = {
         "It's a modal dialog underneath, with the same focus trap and backdrop as Dialog.",
         "The footer stays put while the body scrolls.",
     ],
-    related: ["Dialog", "Popover"],
+    related: ["Dialog", "BottomSheet", "Popover"],
 };
 
 /** From the right, with a form and a footer. */
