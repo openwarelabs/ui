@@ -1,0 +1,24 @@
+/* Watermark: tiled text or an image over its children, for drafts and previews. The layer sits over the content,
+   lets every pointer event through and is hidden from assistive technology. Its default colour is the text colour
+   at 10%, so the content under it stays readable on both themes. */
+.ow-watermark {
+    position: relative;
+}
+
+.ow-watermark__layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-repeat: repeat;
+    color: color-mix(in srgb, var(--ow-text) 10%, transparent);
+}
+
+.ow-watermark__layer--full-page {
+    position: fixed;
+}
+
+@media print {
+    .ow-watermark__layer {
+        print-color-adjust: exact;
+    }
+}
