@@ -1,0 +1,369 @@
+/* Gantt: a column of titles that stays put, a two-tier header of months over days that stays on top, and a bar per
+   task over a hairline grid with the weekends shaded. Bars are a pale wash of their colour, filled deeper up to
+   their progress; the text on them stays in the text colour. Arrows join dependent tasks; a line marks today. */
+.ow-gantt {
+    position: relative;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    color: var(--ow-text);
+}
+
+.ow-gantt__scroll {
+    overflow: auto;
+    overscroll-behavior: contain;
+}
+
+.ow-gantt__canvas {
+    position: relative;
+}
+
+/* Behind the rows: weekends, the lines between days, weeks or months, and a band behind each group's heading. */
+.ow-gantt__columns {
+    position: absolute;
+    top: var(--ow-gantt-head);
+    z-index: 0;
+}
+
+.ow-gantt__weekend,
+.ow-gantt__line,
+.ow-gantt__band {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+.ow-gantt__weekend {
+    background: var(--ow-hover);
+}
+
+.ow-gantt__line {
+    border-inline-start: 1px solid var(--ow-chart-grid);
+}
+
+.ow-gantt__band {
+    inset-inline: 0;
+    background: var(--ow-surface-muted);
+}
+
+/* No z-index of its own, so the titles and header (z 3 and 4) stack above the arrows and today line (z 2). */
+.ow-gantt__grid {
+    position: relative;
+}
+
+.ow-gantt__head {
+    position: sticky;
+    z-index: 4;
+    top: 0;
+    display: flex;
+    height: var(--ow-gantt-head);
+    border-bottom: 1px solid var(--ow-border);
+    background: var(--ow-surface);
+}
+
+.ow-gantt__corner,
+.ow-gantt__title {
+    position: sticky;
+    inset-inline-start: 0;
+    display: flex;
+    width: var(--ow-gantt-label);
+    flex: none;
+    align-items: center;
+    border-inline-end: 1px solid var(--ow-border);
+    background: var(--ow-surface);
+    padding: 0 var(--ow-space-md);
+}
+
+.ow-gantt__corner {
+    z-index: 5;
+    align-items: flex-end;
+    padding-bottom: var(--ow-space-xs);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-label);
+}
+
+.ow-gantt__timeline {
+    position: relative;
+    flex: none;
+    height: 100%;
+}
+
+.ow-gantt__tier {
+    position: relative;
+    height: 50%;
+    border-bottom: 1px solid var(--ow-chart-grid);
+}
+
+.ow-gantt__tier--fine {
+    border-bottom: 0;
+}
+
+.ow-gantt__segment {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    border-inline-start: 1px solid var(--ow-chart-grid);
+    padding: 0 var(--ow-space-xs);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.ow-gantt__tier--fine .ow-gantt__segment {
+    overflow: hidden;
+    justify-content: center;
+    padding: 0 2px;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+}
+
+.ow-gantt__segment-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* A month's name stays in view while its days scroll by under the header, until its last day leaves. */
+.ow-gantt__tier:not(.ow-gantt__tier--fine) .ow-gantt__segment-text {
+    position: sticky;
+    inset-inline-start: calc(var(--ow-gantt-label) + var(--ow-space-xs));
+}
+
+.ow-gantt__segment--weekend {
+    color: var(--ow-text-soft);
+}
+
+.ow-gantt__row {
+    display: flex;
+    height: var(--ow-gantt-row);
+}
+
+.ow-gantt__title {
+    z-index: 3;
+    overflow: hidden;
+    border-bottom: 1px solid var(--ow-chart-grid);
+    font-size: 13px;
+}
+
+.ow-gantt__title-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ow-gantt__title--group {
+    gap: var(--ow-space-xs);
+    background: var(--ow-surface-muted);
+    font-weight: var(--ow-weight-emphasis);
+}
+
+.ow-gantt__swatch {
+    width: 8px;
+    height: 8px;
+    flex: none;
+    border-radius: var(--ow-radius-pill);
+}
+
+.ow-gantt__track {
+    position: relative;
+    flex: none;
+    height: 100%;
+    border-bottom: 1px solid var(--ow-chart-grid);
+}
+
+.ow-gantt__bar {
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    display: flex;
+    overflow: hidden;
+    box-sizing: border-box;
+    align-items: center;
+    border: 1px solid color-mix(in srgb, var(--ow-gantt-color) 55%, transparent);
+    border-radius: var(--ow-radius-sm);
+    background: color-mix(in srgb, var(--ow-gantt-color) 18%, var(--ow-surface));
+    padding: 0 var(--ow-space-xs);
+    font-size: 12px;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.ow-gantt__bar:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 1px;
+}
+
+.ow-gantt__bar--clickable {
+    cursor: pointer;
+}
+
+.ow-gantt--editable .ow-gantt__bar {
+    cursor: grab;
+    touch-action: pan-y;
+}
+
+.ow-gantt__bar--dragging {
+    z-index: 2;
+    border-color: var(--ow-gantt-color);
+    box-shadow: var(--ow-shadow-lift);
+}
+
+.ow-gantt__progress {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    inset-inline-start: 0;
+    background: color-mix(in srgb, var(--ow-gantt-color) 38%, var(--ow-surface));
+}
+
+.ow-gantt__bar-text {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ow-gantt__link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.ow-gantt__link:hover {
+    text-decoration: underline;
+}
+
+/* The edges of a bar, when it can be resized: a grip shows when the pointer is over them. */
+.ow-gantt__handle {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    cursor: ew-resize;
+}
+
+.ow-gantt__handle--start {
+    inset-inline-start: 0;
+}
+
+.ow-gantt__handle--end {
+    inset-inline-end: 0;
+}
+
+.ow-gantt__handle::before {
+    position: absolute;
+    top: 25%;
+    bottom: 25%;
+    inset-inline-start: 3px;
+    width: 2px;
+    border-radius: 1px;
+    background: var(--ow-gantt-color);
+    content: "";
+    opacity: 0;
+    transition: opacity var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.ow-gantt__bar:hover .ow-gantt__handle::before,
+.ow-gantt__bar:focus-visible .ow-gantt__handle::before {
+    opacity: 1;
+}
+
+/* A milestone: a diamond on its day, with its title beside it. */
+.ow-gantt__bar--milestone {
+    width: calc(var(--ow-gantt-row) - 14px);
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    padding: 0;
+    translate: -50% 0;
+}
+
+.ow-gantt__bar--milestone:dir(rtl) {
+    translate: 50% 0;
+}
+
+.ow-gantt__diamond {
+    position: absolute;
+    inset: 1px;
+    background: var(--ow-gantt-color);
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+.ow-gantt__bar-text--beside {
+    position: absolute;
+    inset-inline-start: 100%;
+    overflow: visible;
+    margin-inline-start: var(--ow-space-xs);
+    color: var(--ow-text-muted);
+}
+
+/* Over the rows but under the titles and header: arrows between dependent tasks, and the today line. */
+.ow-gantt__arrows,
+.ow-gantt__today {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.ow-gantt__arrows path {
+    fill: none;
+    stroke: var(--ow-text-muted);
+    stroke-width: 1.5;
+}
+
+.ow-gantt__arrows marker path {
+    fill: var(--ow-text-muted);
+    stroke: none;
+}
+
+.ow-gantt__today {
+    width: 2px;
+    border-radius: 1px;
+    background: var(--ow-primary);
+    translate: -1px 0;
+}
+
+.ow-gantt__today::before {
+    position: absolute;
+    top: 0;
+    left: -3px;
+    width: 8px;
+    height: 8px;
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-primary);
+    content: "";
+}
+
+.ow-gantt__tip {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+:root[data-ow-gantt-drag],
+:root[data-ow-gantt-drag] * {
+    cursor: grabbing !important;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+:root[data-ow-gantt-drag="resize"],
+:root[data-ow-gantt-drag="resize"] * {
+    cursor: ew-resize !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-gantt__handle::before {
+        transition: none;
+    }
+}

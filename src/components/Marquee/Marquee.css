@@ -1,0 +1,151 @@
+/* Marquee: items that travel endlessly in one direction, with a button to stop them. */
+.ow-marquee {
+    position: relative;
+    min-width: 0;
+    color: var(--ow-text);
+}
+
+.ow-marquee--vertical {
+    height: 100%;
+}
+
+/* The items can't be scrolled by hand, so focus never shifts them; the fade hides the ends. */
+.ow-marquee__viewport {
+    overflow: hidden;
+    overflow: clip;
+}
+
+.ow-marquee--vertical .ow-marquee__viewport {
+    height: 100%;
+}
+
+.ow-marquee--fade.ow-marquee--horizontal .ow-marquee__viewport {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+.ow-marquee--fade.ow-marquee--vertical .ow-marquee__viewport {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent);
+}
+
+/* Two matching halves side by side; moving them by half the track starts the loop again unseen. */
+.ow-marquee__track {
+    display: flex;
+    width: max-content;
+}
+
+.ow-marquee--vertical .ow-marquee__track {
+    flex-direction: column;
+    width: auto;
+    height: max-content;
+}
+
+.ow-marquee[data-ready] .ow-marquee__track {
+    animation: ow-marquee-x var(--ow-marquee-duration, 20s) linear infinite var(--ow-marquee-direction, normal);
+}
+
+.ow-marquee--vertical[data-ready] .ow-marquee__track {
+    animation-name: ow-marquee-y;
+}
+
+.ow-marquee--right,
+.ow-marquee--down {
+    --ow-marquee-direction: reverse;
+}
+
+.ow-marquee[data-paused] .ow-marquee__track,
+.ow-marquee--pause-focus .ow-marquee__viewport:focus-within .ow-marquee__track {
+    animation-play-state: paused;
+}
+
+/* The pointer over the items, not over the button: play should start again on the click. */
+@media (hover: hover) {
+    .ow-marquee--pause-hover .ow-marquee__viewport:hover .ow-marquee__track {
+        animation-play-state: paused;
+    }
+}
+
+@keyframes ow-marquee-x {
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes ow-marquee-y {
+    to {
+        transform: translateY(-50%);
+    }
+}
+
+/* Each group ends with one gap, so the seam between groups is spaced like the items inside them. */
+.ow-marquee__group {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--ow-marquee-gap);
+    padding-inline-end: var(--ow-marquee-gap);
+}
+
+.ow-marquee--vertical .ow-marquee__group {
+    flex-direction: column;
+    align-items: stretch;
+    padding-inline-end: 0;
+    padding-block-end: var(--ow-marquee-gap);
+}
+
+.ow-marquee__group > * {
+    flex: none;
+}
+
+/* The pause button sits in the faded corner at the end. */
+.ow-marquee__control {
+    position: absolute;
+    right: var(--ow-space-2xs);
+    bottom: var(--ow-space-2xs);
+    z-index: 1;
+    border-radius: 50%;
+}
+
+/* With reduced motion nothing moves: one copy of the items, in a row that wraps, with no fade or button. */
+.ow-marquee--static .ow-marquee__viewport,
+.ow-marquee--static.ow-marquee--fade .ow-marquee__viewport {
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+}
+
+/* A vertical marquee's set height is for the moving column; standing still, the items take the height they need. */
+.ow-marquee--static.ow-marquee--vertical {
+    height: auto !important;
+}
+
+.ow-marquee--static .ow-marquee__track {
+    display: block;
+    width: auto;
+    height: auto;
+    animation: none;
+}
+
+.ow-marquee--static .ow-marquee__group {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+}
+
+.ow-marquee--static.ow-marquee--vertical .ow-marquee__group {
+    flex-direction: row;
+    align-items: center;
+}
+
+.ow-marquee--static .ow-marquee__group--copy,
+.ow-marquee--static .ow-marquee__control {
+    display: none;
+}
+
+/* The same, before the script has asked the system. */
+@media (prefers-reduced-motion: reduce) {
+    .ow-marquee .ow-marquee__track {
+        animation: none;
+    }
+}
