@@ -199,8 +199,9 @@ export { SortableList } from "./components/SortableList/SortableList";
 export type { SortableListProps, SortableListItemState, SortableListLabels } from "./components/SortableList/SortableList";
 export { Kanban } from "./components/Kanban/Kanban";
 export type { KanbanProps, KanbanColumn, KanbanCardState, KanbanMove, KanbanLabels } from "./components/Kanban/Kanban";
-export { LineChart, BarChart, DonutChart, Sparkline } from "./components/Chart/Chart";
+export { LineChart, AreaChart, BarChart, DonutChart, PieChart, ScatterChart, Sparkline } from "./components/Chart/Chart";
 export type {
+    AreaChartProps,
     BarChartProps,
     CartesianChartProps,
     ChartColor,
@@ -209,6 +210,9 @@ export type {
     DonutChartProps,
     DonutChartSlice,
     LineChartProps,
+    PieChartProps,
+    PieChartSlice,
+    ScatterChartProps,
     SparklineProps,
 } from "./components/Chart/Chart";
 export { ActivityHeatmap } from "./components/ActivityHeatmap/ActivityHeatmap";
