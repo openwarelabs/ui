@@ -2,6 +2,26 @@
 
 Every release of @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp. `npm run release` writes it from the commits, and the docs' Releases page shows it.
 
+## 0.18.0 (2026-10-16)
+
+11 new components and 1 fix.
+
+### New components
+
+- **[Truncate](https://openwarelabs.github.io/ui/#/components/truncate)**: text cut in the middle for file names, at the start for paths, or clamped to lines, with the full text in a Tooltip ([#84](https://github.com/openwarelabs/ui/pull/84), [08599c6](https://github.com/openwarelabs/ui/commit/08599c6c0e859961249e92aaa57575b8ea53ad22))
+- **[MarkdownEditor](https://openwarelabs.github.io/ui/#/components/markdown-editor)**: a Markdown text box with a formatting toolbar and a preview ([#77](https://github.com/openwarelabs/ui/pull/77), [d97468a](https://github.com/openwarelabs/ui/commit/d97468a6e26934a60178a480ef71e24df3d0b210))
+- **[AreaChart](https://openwarelabs.github.io/ui/#/components/area-chart)** and **[PieChart](https://openwarelabs.github.io/ui/#/components/pie-chart)** and **[ScatterChart](https://openwarelabs.github.io/ui/#/components/scatter-chart)**: stacked areas, a disc with shares on it and points on two numeric axes ([#73](https://github.com/openwarelabs/ui/pull/73), [d56ffb2](https://github.com/openwarelabs/ui/commit/d56ffb2f631aedccba9623748d6f6f6251ffd495))
+- **[Collapsible](https://openwarelabs.github.io/ui/#/components/collapsible)**: show and hide content under your own trigger ([#69](https://github.com/openwarelabs/ui/pull/69), [27dc1e9](https://github.com/openwarelabs/ui/commit/27dc1e9a208140b582dd0da56074648da2cdcc3d))
+- **[BottomSheet](https://openwarelabs.github.io/ui/#/components/bottom-sheet)**: a swipeable sheet from the bottom of the screen with snap points ([#72](https://github.com/openwarelabs/ui/pull/72), [52d7d17](https://github.com/openwarelabs/ui/commit/52d7d175efbad662a2d71f6a0df95631496d991b))
+- **[ImageCropper](https://openwarelabs.github.io/ui/#/components/image-cropper)**: move and zoom a picture under a frame for an avatar or a banner ([#76](https://github.com/openwarelabs/ui/pull/76), [e12b2d6](https://github.com/openwarelabs/ui/commit/e12b2d6e7b0717fa93250635bd73d4f5e67093a2))
+- **[Wizard](https://openwarelabs.github.io/ui/#/components/wizard)**: a form in pages with a Steps strip, checks per step and Back and Next ([#71](https://github.com/openwarelabs/ui/pull/71), [7bf86eb](https://github.com/openwarelabs/ui/commit/7bf86ebe49c157b0113c92121413ae8af639b94c))
+- **[TableOfContents](https://openwarelabs.github.io/ui/#/components/table-of-contents)**: a page's headings as links that follow the scroll ([#70](https://github.com/openwarelabs/ui/pull/70), [1cc8722](https://github.com/openwarelabs/ui/commit/1cc8722f9af8a91c9fca85036249f457ac4d8666))
+- **[ScrollArea](https://openwarelabs.github.io/ui/#/components/scroll-area)**: a scrolling area with thin theme-coloured scrollbars that show on hover or while scrolling ([#68](https://github.com/openwarelabs/ui/pull/68), [d5f63c8](https://github.com/openwarelabs/ui/commit/d5f63c8e46eed1dd76cd7bf5b4937cbdd5014a0e))
+
+### Fixes
+
+- stop two-line options overlapping in a scrolling list, and props tables squeezing the Type column ([#74](https://github.com/openwarelabs/ui/pull/74), [69cbdef](https://github.com/openwarelabs/ui/commit/69cbdefc356b2af61346182c504a263ad9669e5f))
+
 ## 0.17.1 (2026-10-16)
 
 ### Other changes
