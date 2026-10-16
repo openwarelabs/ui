@@ -21,6 +21,10 @@ export interface DialogProps {
     dismissible?: boolean;
     /** Makes the dialog a form; its submit button submits it. */
     onSubmit?(event: FormEvent<HTMLFormElement>): void;
+    /** `alertdialog` for one that interrupts to ask about an action, so screen readers read it out at once, as
+     * ConfirmDialog does.
+     * @default "dialog" */
+    role?: "dialog" | "alertdialog";
     className?: string;
 }
 
@@ -38,6 +42,7 @@ export function Dialog({
     width = 420,
     dismissible = true,
     onSubmit,
+    role,
     className,
 }: DialogProps) {
     const titleId = useId();
@@ -69,6 +74,7 @@ export function Dialog({
         <dialog
             ref={dialogRef}
             className={cx("ow-dialog", className)}
+            role={role === "alertdialog" ? role : undefined}
             style={{ width: `min(${width}px, calc(100% - 32px))` }}
             aria-labelledby={titleId}
             aria-describedby={description ? descriptionId : undefined}
@@ -146,6 +152,7 @@ export function ConfirmDialog({
             dismissible={!isWorking}
             width={380}
             className="ow-dialog--confirm"
+            role="alertdialog"
             title={
                 <>
                     {destructive ? (
