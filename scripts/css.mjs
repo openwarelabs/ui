@@ -100,6 +100,7 @@ export const cssOrder = [
     "components/VirtualList/VirtualList.css",
     "components/AspectRatio/AspectRatio.css",
     "components/Marketing/Marketing.css",
+    "components/Marquee/Marquee.css",
     "components/Prose/Prose.css",
     "components/Markdown/Markdown.css",
     "components/TextShimmer/TextShimmer.css",

@@ -166,6 +166,7 @@ export const catalogue = [
     "DotGrid",
     "SectionHeading",
     "SiteHeader",
+    "Marquee",
 ];
 
 const header = `/* @ds-bundle: ${JSON.stringify({ format: 4, namespace: "OpenwareUI", components: catalogue.map((name) => ({ name })) })} */\n`;
