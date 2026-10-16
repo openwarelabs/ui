@@ -2,6 +2,18 @@
 
 Every release of @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp. `npm run release` writes it from the commits, and the docs' Releases page shows it.
 
+## 0.17.0 (2026-10-16)
+
+2 new components and 1 fix.
+
+### New components
+
+- **[DataGrid](https://openwarelabs.github.io/ui/#/components/data-grid)** and **[Kanban](https://openwarelabs.github.io/ui/#/components/kanban)**: a table for thousands of rows and a board of cards to drag between columns ([#65](https://github.com/openwarelabs/ui/pull/65), [c649aa7](https://github.com/openwarelabs/ui/commit/c649aa706a8511d1ad790d77dcf809d19a0b5cf2))
+
+### Fixes
+
+- **tokens:** soften every bold weight so headings, buttons and labels look less thick ([#64](https://github.com/openwarelabs/ui/pull/64), [c60dea3](https://github.com/openwarelabs/ui/commit/c60dea33a9357445c60565b3470ae36b9be425a7))
+
 ## 0.16.3 (2026-10-16)
 
 ### Other changes
