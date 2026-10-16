@@ -121,6 +121,7 @@ export const catalogue = [
     "AppShell",
     "Pagination",
     "Steps",
+    "Wizard",
     "Tabs",
     "TableOfContents",
     "Avatar",

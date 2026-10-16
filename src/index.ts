@@ -34,6 +34,8 @@ export { Field } from "./components/Field/Field";
 export type { FieldProps } from "./components/Field/Field";
 export { Form, FormError, useFormStatus } from "./components/Form/Form";
 export type { FormProps, FormErrorProps, FormStatus, FormValues, FormErrors, ValidityCheck, ValidityMessages } from "./components/Form/Form";
+export { Wizard } from "./components/Wizard/Wizard";
+export type { WizardProps, WizardStep, WizardStepContext, WizardLabels, WizardValues, WizardErrors } from "./components/Wizard/Wizard";
 export { Input } from "./components/Input/Input";
 export type { InputProps } from "./components/Input/Input";
 export { SearchField } from "./components/SearchField/SearchField";
