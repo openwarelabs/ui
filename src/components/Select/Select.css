@@ -81,6 +81,9 @@
     position: fixed;
     z-index: 50;
     display: grid;
+    /* Each row as tall as its content. Left to auto, rows shrink to the option's 36px min-height once the list is
+       taller than its max-height or height, and a description spills out over the next row. */
+    grid-auto-rows: max-content;
     min-width: 160px;
     align-content: start;
     gap: var(--ow-space-2xs);
