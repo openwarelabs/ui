@@ -150,6 +150,7 @@ export const catalogue = [
     "Tag",
     "TransferList",
     "Timeline",
+    "CommentThread",
     "User",
     "Card",
     "ScrollShadow",

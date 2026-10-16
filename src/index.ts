@@ -191,6 +191,8 @@ export { SortableList } from "./components/SortableList/SortableList";
 export type { SortableListProps, SortableListItemState, SortableListLabels } from "./components/SortableList/SortableList";
 export { Kanban } from "./components/Kanban/Kanban";
 export type { KanbanProps, KanbanColumn, KanbanCardState, KanbanMove, KanbanLabels } from "./components/Kanban/Kanban";
+export { CommentThread } from "./components/CommentThread/CommentThread";
+export type { CommentThreadProps, Comment, CommentAuthor, CommentReaction, CommentThreadLabels } from "./components/CommentThread/CommentThread";
 export { LineChart, BarChart, DonutChart, Sparkline } from "./components/Chart/Chart";
 export type {
     BarChartProps,
