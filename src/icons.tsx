@@ -236,6 +236,28 @@ export const PauseIcon = icon(
     </>,
 );
 export const PlayIcon = icon(<polygon points="6 3 20 12 6 21 6 3" />);
+export const SmilePlusIcon = icon(
+    <>
+        <path d="M22 11v1a10 10 0 1 1-9-10" />
+        <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+        <line x1="9" x2="9.01" y1="9" y2="9" />
+        <line x1="15" x2="15.01" y1="9" y2="9" />
+        <path d="M16 5h6" />
+        <path d="M19 2v6" />
+    </>,
+);
+export const PencilIcon = icon(
+    <>
+        <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+        <path d="m15 5 4 4" />
+    </>,
+);
+export const ReplyIcon = icon(
+    <>
+        <polyline points="9 17 4 12 9 7" />
+        <path d="M20 18v-2a4 4 0 0 0-4-4H4" />
+    </>,
+);
 export const RouteIcon = icon(
     <>
         <circle cx="6" cy="19" r="3" />

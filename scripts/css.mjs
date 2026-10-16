@@ -118,6 +118,7 @@ export const cssOrder = [
     "components/PromptInput/PromptInput.css",
     "components/PromptInput/PromptSuggestion.css",
     "components/Chat/Chat.css",
+    "components/CommentThread/CommentThread.css",
     "components/ChatTool/ChatTool.css",
     "components/ChainOfThought/ChainOfThought.css",
     "components/ChatSource/ChatSource.css",
