@@ -1,0 +1,88 @@
+/* TableOfContents: a page's headings as links down a thin rail; a brand bar slides to the current one. */
+.ow-toc {
+    position: relative;
+    display: grid;
+    align-content: start;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.ow-toc__title {
+    display: block;
+    margin-bottom: var(--ow-space-xs);
+    padding-left: var(--ow-space-sm);
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-weight: var(--ow-weight-control);
+}
+
+.ow-toc__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ow-toc > .ow-toc__list {
+    border-left: 1px solid var(--ow-border);
+}
+
+.ow-toc__link {
+    display: block;
+    padding: var(--ow-space-2xs) var(--ow-space-sm);
+    padding-left: calc(var(--ow-space-sm) + var(--ow-toc-depth, 0) * var(--ow-space-md));
+    color: var(--ow-text-muted);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    outline: none;
+    transition: color var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-toc__link:hover {
+    color: var(--ow-text);
+}
+
+.ow-toc__link:focus-visible {
+    border-radius: var(--ow-radius-sm);
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
+
+.ow-toc__link--active {
+    color: var(--ow-primary-text);
+    font-weight: var(--ow-weight-emphasis);
+}
+
+/* Until useIndicator has measured, the current link paints its own bar, so nothing jumps on first paint. */
+.ow-toc:not([data-indicator]) .ow-toc__link--active {
+    box-shadow: inset 2px 0 0 var(--ow-primary);
+}
+
+.ow-toc > .ow-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: var(--ow-indicator-h);
+    border-radius: 1px;
+    background: var(--ow-primary);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(var(--ow-indicator-y));
+}
+
+.ow-toc[data-indicator] > .ow-indicator {
+    opacity: 1;
+}
+
+.ow-toc[data-indicator="ready"] > .ow-indicator {
+    transition:
+        transform var(--ow-duration-slow) var(--ow-ease-emphasized),
+        height var(--ow-duration-slow) var(--ow-ease-emphasized);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-toc__link,
+    .ow-toc[data-indicator="ready"] > .ow-indicator {
+        transition: none;
+    }
+}
