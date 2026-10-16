@@ -181,7 +181,9 @@
     color: var(--ow-text-disabled);
 }
 
-/* The shortcut hint at the end of a button: plain, quieter text, no key cap. */
+/* The shortcut hint at the end of a button: plain text, smaller and lighter than the label, no key cap. On
+   secondary and ghost it's ow-text-muted; on a filled button it keeps the label's colour, since a dimmed white
+   falls under 4.5:1 on lighter brand colours and on the danger fill. */
 .ow-button__shortcut {
     display: inline-flex;
     align-items: center;
@@ -190,15 +192,15 @@
     border: 0;
     background: none;
     color: inherit;
-    opacity: 0.72;
     font-family: var(--ow-font-sans);
     font-size: 12px;
     font-weight: var(--ow-weight-regular);
     letter-spacing: 0.02em;
     line-height: 1;
 }
-.ow-button:disabled .ow-button__shortcut {
-    opacity: 1;
+.ow-button--secondary:not(:disabled) .ow-button__shortcut,
+.ow-button--ghost:not(:disabled) .ow-button__shortcut {
+    color: var(--ow-text-muted);
 }
 
 .ow-button--full {
