@@ -158,7 +158,7 @@ export function CommentEditor() {
                 rows={4}
                 defaultValue="The agent's migration looks right. Can we keep the old webhook route for a week before we remove it?"
                 style={{
-                    fontWeight: marks.includes("bold") ? 700 : undefined,
+                    fontWeight: marks.includes("bold") ? "var(--ow-weight-heavy)" : undefined,
                     fontStyle: marks.includes("italic") ? "italic" : undefined,
                     textDecoration: marks.includes("underline") ? "underline" : undefined,
                     fontFamily: marks.includes("code") ? "var(--ow-font-mono)" : undefined,

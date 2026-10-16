@@ -78,7 +78,7 @@ export function Multiple() {
             <p
                 style={{
                     margin: 0,
-                    fontWeight: marks.includes("bold") ? 700 : 400,
+                    fontWeight: marks.includes("bold") ? "var(--ow-weight-heavy)" : 400,
                     fontStyle: marks.includes("italic") ? "italic" : undefined,
                     textDecoration: marks.includes("underline") ? "underline" : undefined,
                     fontFamily: marks.includes("code") ? "var(--ow-font-mono)" : undefined,
