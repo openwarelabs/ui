@@ -49,6 +49,7 @@ export const cssOrder = [
     "components/Skeleton/Skeleton.css",
     "components/Dialog/Dialog.css",
     "components/Drawer/Drawer.css",
+    "components/BottomSheet/BottomSheet.css",
     "components/Popover/Popover.css",
     "components/NotificationCenter/NotificationCenter.css",
     "components/Tour/Tour.css",

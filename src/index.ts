@@ -140,6 +140,8 @@ export { Dialog, ConfirmDialog } from "./components/Dialog/Dialog";
 export type { DialogProps, ConfirmDialogProps } from "./components/Dialog/Dialog";
 export { Drawer } from "./components/Drawer/Drawer";
 export type { DrawerProps } from "./components/Drawer/Drawer";
+export { BottomSheet } from "./components/BottomSheet/BottomSheet";
+export type { BottomSheetLabels, BottomSheetProps, BottomSheetSnapPoint } from "./components/BottomSheet/BottomSheet";
 export { Popover } from "./components/Popover/Popover";
 export type { PopoverProps } from "./components/Popover/Popover";
 export { NotificationCenter, NotificationList } from "./components/NotificationCenter/NotificationCenter";

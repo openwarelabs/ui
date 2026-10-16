@@ -108,6 +108,7 @@ export const catalogue = [
     "ContextMenu",
     "Dialog",
     "Drawer",
+    "BottomSheet",
     "Menu",
     "Popover",
     "NotificationCenter",
