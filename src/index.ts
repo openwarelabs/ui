@@ -175,6 +175,8 @@ export { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuG
 export type { NavigationMenuProps, NavigationMenuItemProps, NavigationMenuLinkProps, NavigationMenuGroupProps } from "./components/NavigationMenu/NavigationMenu";
 export { AppShell, SidebarHeader, SidebarContent, SidebarFooter, SidebarToggle, useAppShell } from "./components/AppShell/AppShell";
 export type { AppShellProps, AppShellState, SidebarSectionProps, SidebarToggleProps } from "./components/AppShell/AppShell";
+export { TableOfContents } from "./components/TableOfContents/TableOfContents";
+export type { TableOfContentsProps, TocItem } from "./components/TableOfContents/TableOfContents";
 
 // Data display
 export { Table } from "./components/Table/Table";
