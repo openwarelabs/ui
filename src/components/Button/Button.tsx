@@ -1,42 +1,11 @@
-import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
+import { forwardRef } from "react";
 
-import { cx } from "../../utils/cx";
-import { toAriaShortcut } from "../../utils/text";
-import { Spinner } from "../Spinner/Spinner";
+import { Spinner } from "@/components/Spinner/Spinner";
+import { cx } from "@/utils/cx";
+import { toAriaShortcut } from "@/utils/text";
+import type { ButtonProps, ButtonStyleOptions } from "./Button.types";
 
-export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
-export type ButtonSize = "sm" | "md" | "lg";
-/** `rounded` is the app's 8px corner; `pill` is the marketing site's. */
-export type ButtonShape = "rounded" | "pill";
-
-export interface ButtonStyleOptions {
-    /** primary for the one main action, secondary for the rest, ghost for low-stakes actions, danger for destructive ones.
-     * @default "secondary" */
-    variant?: ButtonVariant;
-    /** sm 32px, md 40px, lg 44px (36, 40 and 46px as pills).
-     * @default "md" */
-    size?: ButtonSize;
-    /** @default "rounded" */
-    shape?: ButtonShape;
-    /** A square button holding only an icon. Give it an aria-label.
-     * @default false */
-    iconOnly?: boolean;
-}
-
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, ButtonStyleOptions {
-    /** An icon before the label, usually a 16px lucide-react icon. */
-    startIcon?: ReactNode;
-    /** An icon after the label, such as an arrow or a chevron. */
-    endIcon?: ReactNode;
-    /** Keyboard shortcut shown at the end, e.g. "⌘N". Only pass one that actually works. */
-    shortcut?: string;
-    /** Shows a spinner in place of the start icon and disables the button, keeping its width.
-     * @default false */
-    loading?: boolean;
-    /** Stretches the button to its container's width.
-     * @default false */
-    fullWidth?: boolean;
-}
+export type { ButtonProps, ButtonShape, ButtonSize, ButtonStyleOptions, ButtonVariant } from "./Button.types";
 
 /**
  * The class names of a button, for things that must be another element: a router <Link>, an <a>.
@@ -58,8 +27,8 @@ export function buttonClassName({
 }
 
 /**
- * A tactile button: a light top-to-bottom gradient, a highlight along the top edge and a soft shadow,
- * pressed in by a pixel on click.
+ * A hairline button: a flat fill inside a 1px border. Pressing changes its colour, not its position; danger is
+ * an outline that fills red when you aim at it.
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
     {
@@ -86,7 +55,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
             ref={ref}
             className={cx(
                 buttonClassName({ variant, size, shape, iconOnly }),
-                shortcut && !iconOnly && "ow-button--with-shortcut",
                 loading && "ow-button--loading",
                 fullWidth && "ow-button--full",
                 className,

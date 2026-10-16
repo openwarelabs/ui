@@ -66,7 +66,7 @@ export function referencedTypes(name: string, props: Record<string, PropsDoc>, s
 export function setupMarkdown(version?: string) {
     return join([
         `# Openware UI${version ? ` ${version}` : ""}`,
-        `React components and design tokens on npm as \`${packageName}\`: a midnight brand colour, a small brass accent, cool slate surfaces, tactile buttons and Inter, in light and dark themes, with a brand colour you can swap.`,
+        `React components and design tokens on npm as \`${packageName}\`: a midnight brand colour, a small brass accent, cool slate surfaces, hairline buttons and Inter, in light and dark themes, with a brand colour you can swap.`,
         "## Install",
         fence(`npm install ${packageName} lucide-react`, "sh"),
         `React 18 or 19 is a peer dependency. \`lucide-react\` is for icons; the library's examples and blocks use it.`,

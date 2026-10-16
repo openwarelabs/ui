@@ -3,13 +3,13 @@ import { useState } from "react";
 import { Button, buttonClassName, Stack } from "@openwarelabs/ui";
 import { ArrowRight, Download, Plus, Trash } from "lucide-react";
 
-import type { DocMeta } from "../app/types";
+import type { DocMeta } from "@docs/app/types";
 
 export const meta: DocMeta = {
     title: "Button",
     category: "Primitives",
     description:
-        "A tactile button: a soft gradient, a light top edge and a shadow, pressed in by a pixel when clicked.",
+        "A hairline button: a flat fill inside a 1px border. Pressing deepens its colour; danger is an outline that fills red when you aim at it.",
     imports: ["Button", "buttonClassName"],
     source: "components/Button/Button.tsx",
     keyboard: [
