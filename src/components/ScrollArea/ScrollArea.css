@@ -1,0 +1,121 @@
+/* ScrollArea: a scrolling viewport with its native scrollbar hidden and thin overlay thumbs drawn in its place. */
+.ow-scroll-area {
+    --ow-scroll-area-size: 10px;
+    --ow-scroll-area-thumb: 6px;
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    border-radius: inherit;
+}
+
+/* The viewport is the real scroll container: the wheel, touch and the keyboard all scroll it as usual. */
+.ow-scroll-area__viewport {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+    border-radius: inherit;
+}
+
+.ow-scroll-area__viewport::-webkit-scrollbar {
+    display: none;
+}
+
+.ow-scroll-area--vertical .ow-scroll-area__viewport {
+    overflow-x: hidden;
+}
+
+.ow-scroll-area--horizontal .ow-scroll-area__viewport {
+    overflow-y: hidden;
+}
+
+.ow-scroll-area__viewport:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
+
+.ow-scroll-area__content {
+    display: flow-root;
+    min-width: 100%;
+}
+
+.ow-scroll-area--horizontal .ow-scroll-area__content,
+.ow-scroll-area--both .ow-scroll-area__content {
+    width: max-content;
+}
+
+/* The track: a strip along one edge that holds the thumb and catches clicks to page. */
+.ow-scroll-area__scrollbar {
+    position: absolute;
+    display: flex;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    opacity: 0;
+    transition: opacity var(--ow-duration-base) var(--ow-ease-standard);
+}
+
+.ow-scroll-area__scrollbar--vertical {
+    top: 2px;
+    bottom: 2px;
+    right: 2px;
+    width: var(--ow-scroll-area-size);
+    flex-direction: column;
+}
+
+.ow-scroll-area__scrollbar--horizontal {
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    height: var(--ow-scroll-area-size);
+}
+
+.ow-scroll-area--both .ow-scroll-area__scrollbar--vertical {
+    bottom: calc(var(--ow-scroll-area-size) + 2px);
+}
+
+.ow-scroll-area--both .ow-scroll-area__scrollbar--horizontal {
+    right: calc(var(--ow-scroll-area-size) + 2px);
+}
+
+.ow-scroll-area__thumb {
+    position: relative;
+    flex-shrink: 0;
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-text-muted);
+    opacity: 0.55;
+    will-change: transform;
+    transition: opacity var(--ow-duration-fast) var(--ow-ease-standard);
+}
+
+.ow-scroll-area__scrollbar--vertical .ow-scroll-area__thumb {
+    width: var(--ow-scroll-area-thumb);
+    margin-inline: auto;
+}
+
+.ow-scroll-area__scrollbar--horizontal .ow-scroll-area__thumb {
+    height: var(--ow-scroll-area-thumb);
+    margin-block: auto;
+}
+
+.ow-scroll-area__scrollbar:hover .ow-scroll-area__thumb,
+.ow-scroll-area__scrollbar--dragging .ow-scroll-area__thumb {
+    opacity: 0.85;
+}
+
+/* When the thumbs show. A thumb is only in the page while its axis overflows. */
+.ow-scroll-area--always .ow-scroll-area__scrollbar,
+.ow-scroll-area--scrolling .ow-scroll-area__scrollbar,
+.ow-scroll-area__scrollbar--dragging,
+.ow-scroll-area--hover:hover .ow-scroll-area__scrollbar,
+.ow-scroll-area--hover:focus-within .ow-scroll-area__scrollbar {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-scroll-area__scrollbar,
+    .ow-scroll-area__thumb {
+        transition: none;
+    }
+}
