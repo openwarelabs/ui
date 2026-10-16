@@ -26,9 +26,12 @@ export const componentDocs: ComponentDoc[] = pages
     }))
     .sort((a, b) => categories.indexOf(a.meta.category) - categories.indexOf(b.meta.category) || a.meta.title.localeCompare(b.meta.title));
 
+/** Whether the Blocks section is in the docs. Hidden for now, while the focus is the components and the design system. */
+export const showBlocks = false;
+
 /** Components whose page lives in Blocks, beside the blocks built from them: their slug → that block category. */
 export const componentsInBlocks = new Map<string, BlockCategory>(
-    blockCategories.flatMap((category) => (category.component ? [[kebab(category.component), category] as const] : [])),
+    (showBlocks ? blockCategories : []).flatMap((category) => (category.component ? [[kebab(category.component), category] as const] : [])),
 );
 
 /** The components listed under Components: every documented one except those that live in Blocks. */
@@ -74,7 +77,7 @@ export function resolve(hash: string): Route {
         if (categories.some((category) => slugify(category) === parts[1])) return { kind: "components", section: parts[1] };
         return { kind: "missing", path: hash };
     }
-    if (parts[0] === "blocks") {
+    if (parts[0] === "blocks" && showBlocks) {
         if (!parts[1] || blockGroups.some((group) => slugify(group.name) === parts[1])) return { kind: "blocks", section: parts[1] };
         const category = blockCategories.find((entry) => entry.slug === parts[1]);
         return category ? { kind: "block-category", category, section: parts[2] } : { kind: "missing", path: hash };

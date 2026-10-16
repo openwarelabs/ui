@@ -4,7 +4,7 @@ import { Kbd, Text } from "@openwarelabs/ui";
 import { BookOpen, Clock, History, LayoutGrid, Package, Palette, Ruler, Search, Sparkles, SunMoon, Type, type LucideIcon } from "lucide-react";
 
 import { blockCategories, blockGroups, blockVariantCount } from "./blocks";
-import { guides, hrefOf, listedComponents, type Route } from "./content";
+import { guides, hrefOf, listedComponents, showBlocks, type Route } from "./content";
 import { MiniSketch } from "./MiniSketch";
 import { categories, type ComponentDoc } from "./types";
 import { version } from "./version";
@@ -267,11 +267,12 @@ interface SidebarProps {
     onSearch: () => void;
 }
 
-const sectionLinks: Array<{ name: SectionName; label: string; href: string }> = [
+const allSectionLinks: Array<{ name: SectionName; label: string; href: string }> = [
     { name: "docs", label: "Docs", href: hrefOf.guide("introduction") },
     { name: "components", label: "Components", href: hrefOf.components() },
     { name: "blocks", label: "Blocks", href: hrefOf.blocks() },
 ];
+const sectionLinks = allSectionLinks.filter((entry) => showBlocks || entry.name !== "blocks");
 
 /** The part of the docs the page is in: the guides, the components or the blocks. On phones it starts with the three sections. */
 export function Sidebar({ showSections = false, ...props }: SidebarProps & { showSections?: boolean }) {

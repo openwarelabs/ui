@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Badge, Button, Card, Chip, Field, Input, SegmentedControl, Stack, Switch, buttonClassName, toast } from "@openwarelabs/ui";
 import { ArrowRight } from "lucide-react";
 
-import { hrefOf, listedComponents, slugify } from "../app/content";
+import { hrefOf, listedComponents, showBlocks, slugify } from "../app/content";
 import { DocPage, Section } from "../app/Page";
 import { categories } from "../app/types";
 import { version } from "../app/version";
@@ -173,10 +173,12 @@ export function Introduction() {
                         <span className="docs-feature__title">Components</span>
                         <span className="docs-feature__text">All {listedComponents.length} of them, grouped by what they're for.</span>
                     </a>
-                    <a className="docs-feature docs-feature--link" href={hrefOf.blocks()}>
-                        <span className="docs-feature__title">Blocks</span>
-                        <span className="docs-feature__text">Whole sections of a page, from headers to settings, live at any width, to copy and change.</span>
-                    </a>
+                    {showBlocks ? (
+                        <a className="docs-feature docs-feature--link" href={hrefOf.blocks()}>
+                            <span className="docs-feature__title">Blocks</span>
+                            <span className="docs-feature__text">Whole sections of a page, from headers to settings, live at any width, to copy and change.</span>
+                        </a>
+                    ) : null}
                 </div>
             </Section>
         </DocPage>

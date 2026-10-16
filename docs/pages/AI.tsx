@@ -2,7 +2,7 @@ import { buttonClassName, CodeBlock, Snippet, Stack, Tab, TabList, TabPanel, Tab
 import { ArrowUpRight } from "lucide-react";
 
 import { mcpPackage, mcpSetup, setupMarkdown } from "../app/ai";
-import { hrefOf } from "../app/content";
+import { hrefOf, showBlocks } from "../app/content";
 import { CopyForAI } from "../app/CopyForAI";
 import { DocPage, Section } from "../app/Page";
 import { version } from "../app/version";
@@ -129,7 +129,14 @@ export function AI() {
             >
                 <p className="docs-text">
                     Starting a project? Copy the setup: how to install it, what to import once and the rules to follow. Then browse the{" "}
-                    <a href={hrefOf.components()}>components</a> and <a href={hrefOf.blocks()}>blocks</a>.
+                    <a href={hrefOf.components()}>components</a>
+                    {showBlocks ? (
+                        <>
+                            {" "}
+                            and <a href={hrefOf.blocks()}>blocks</a>
+                        </>
+                    ) : null}
+                    .
                 </p>
                 <div>
                     <CopyForAI

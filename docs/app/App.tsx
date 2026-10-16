@@ -6,7 +6,7 @@ import { ArrowUpRight, Book, Component, LayoutTemplate, Menu as MenuIcon, Monito
 import { blockCategories } from "./blocks";
 import { BrandPicker } from "./BrandPicker";
 import { ComponentPage, repository } from "./ComponentPage";
-import { componentDocs, componentsInBlocks, guides, hrefOf, listedComponents, slugify, type Route } from "./content";
+import { componentDocs, componentsInBlocks, guides, hrefOf, listedComponents, showBlocks, slugify, type Route } from "./content";
 import { useMinWidth, useRoute, useTheme, type ThemeChoice } from "./hooks";
 import { RouteProvider } from "./Page";
 import { Sidebar, sectionLinks as sections, sectionOf } from "./Sidebar";
@@ -109,7 +109,7 @@ export function App() {
                       ]
                     : [];
             }),
-            ...blockCategories.map((category) => ({
+            ...(showBlocks ? blockCategories : []).map((category) => ({
                 id: `blocks-${category.slug}`,
                 title: category.title,
                 group: "Blocks",
@@ -118,7 +118,7 @@ export function App() {
                 keywords: `${category.group} ${category.description} ${category.variants.map((variant) => variant.name).join(" ")}`,
                 run: () => (window.location.hash = hrefOf.blocks(category.slug)),
             })),
-            ...blockCategories.flatMap((category) =>
+            ...(showBlocks ? blockCategories : []).flatMap((category) =>
                 category.variants.map((variant) => ({
                     id: `block-${category.slug}-${variant.id}`,
                     title: `${category.title}: ${variant.name}`,
@@ -250,7 +250,7 @@ export function App() {
                     showSections
                 />
             </Drawer>
-            <CommandPalette open={searchOpen} onClose={() => setSearchOpen(false)} commands={commands} placeholder="Search components, blocks, examples and guides…" />
+            <CommandPalette open={searchOpen} onClose={() => setSearchOpen(false)} commands={commands} placeholder={showBlocks ? "Search components, blocks, examples and guides…" : "Search components, examples and guides…"} />
             <Toaster />
         </RouteProvider>
     );
