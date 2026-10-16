@@ -3,9 +3,7 @@ import { useState, type KeyboardEvent, type PointerEvent } from "react";
 import { cx } from "@/utils/cx";
 import { defaultIndex, defaultTick, defaultValue, niceTicks, seriesColors, textWidth, useWidth, valueOf } from "./chartUtils";
 import { ChartLegend, ChartTable } from "./ChartParts";
-import type { AreaChartProps, BarChartProps, LineChartProps } from "./Chart.types";
-
-type Props = (LineChartProps & { kind: "line" }) | (BarChartProps & { kind: "bar" }) | (AreaChartProps & { kind: "area" });
+import type { CartesianKindProps as Props } from "./Chart.types";
 
 const gap = 2;
 const maxBar = 24;

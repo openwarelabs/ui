@@ -62,6 +62,9 @@ export interface AreaChartProps extends CartesianChartProps {
     curved?: boolean;
 }
 
+/** What CartesianChart takes: a line, bar or area chart's props with the kind to draw. */
+export type CartesianKindProps = (LineChartProps & { kind: "line" }) | (BarChartProps & { kind: "bar" }) | (AreaChartProps & { kind: "area" });
+
 export interface DonutChartSlice {
     label: string;
     value: number;
