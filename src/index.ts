@@ -5,6 +5,8 @@
 // Typography
 export { Text } from "./components/Text/Text";
 export type { TextProps, TextVariant, TextTone } from "./components/Text/Text";
+export { Truncate } from "./components/Truncate/Truncate";
+export type { TruncateProps, TruncatePosition } from "./components/Truncate/Truncate";
 
 // Buttons
 export { Button, buttonClassName } from "./components/Button/Button";

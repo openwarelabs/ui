@@ -45,6 +45,7 @@ export const cssOrder = [
     "components/Meter/Meter.css",
     "components/PasswordInput/PasswordInput.css",
     "components/Tooltip/Tooltip.css",
+    "components/Truncate/Truncate.css",
     "components/Toast/Toast.css",
     "components/Skeleton/Skeleton.css",
     "components/Dialog/Dialog.css",
