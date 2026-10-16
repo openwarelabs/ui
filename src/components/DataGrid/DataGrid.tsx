@@ -16,7 +16,7 @@ import { cx } from "@/utils/cx";
 import { Checkbox } from "../Checkbox/Checkbox";
 import { SearchField } from "../SearchField/SearchField";
 import { useVirtualizer } from "../VirtualList/useVirtualizer";
-import type { DataGridColumn, DataGridProps, DataGridSort } from "./DataGrid.types";
+import type { DataGridColumn, DataGridProps, DataGridResizeHandleProps, DataGridSort } from "./DataGrid.types";
 
 export type { DataGridColumn, DataGridLabels, DataGridProps, DataGridSort } from "./DataGrid.types";
 
@@ -52,17 +52,8 @@ function textOf<Row extends object>(row: Row, column: DataGridColumn<Row>) {
     return value == null ? "" : String(value);
 }
 
-interface ResizeHandleProps {
-    label: string;
-    width: number;
-    min: number;
-    max: number;
-    onResize(width: number): void;
-    onReset(): void;
-}
-
 /** The edge of a header cell: drag it, or focus it and use the arrow keys, to change the column's width. */
-function ResizeHandle({ label, width, min, max, onResize, onReset }: ResizeHandleProps) {
+function ResizeHandle({ label, width, min, max, onResize, onReset }: DataGridResizeHandleProps) {
     const [active, setActive] = useState(false);
 
     function onPointerDown(event: ReactPointerEvent<HTMLDivElement>) {

@@ -123,3 +123,13 @@ export interface DataGridProps<Row> {
     labels?: DataGridLabels;
     className?: string;
 }
+
+/** A column's resize handle. Internal. */
+export interface DataGridResizeHandleProps {
+    label: string;
+    width: number;
+    min: number;
+    max: number;
+    onResize(width: number): void;
+    onReset(): void;
+}
