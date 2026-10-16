@@ -1,0 +1,310 @@
+/* LogViewer: streaming terminal output that follows its newest line, with ANSI colours, on the code ground. */
+.ow-log-viewer {
+    --ow-log-viewer-ground: var(--ow-code-ground);
+    /* The 16 ANSI colours, as they read on the light code ground: 4.5:1 or better. */
+    --ow-log-viewer-ansi-0: var(--ow-text);
+    --ow-log-viewer-ansi-1: #b42318;
+    --ow-log-viewer-ansi-2: #15803d;
+    --ow-log-viewer-ansi-3: #854d0e;
+    --ow-log-viewer-ansi-4: #1d4ed8;
+    --ow-log-viewer-ansi-5: #a21caf;
+    --ow-log-viewer-ansi-6: #0e7490;
+    --ow-log-viewer-ansi-7: var(--ow-text-muted);
+    --ow-log-viewer-ansi-8: var(--ow-text-muted);
+    --ow-log-viewer-ansi-9: #c2410c;
+    --ow-log-viewer-ansi-10: #047857;
+    --ow-log-viewer-ansi-11: #9a5b00;
+    --ow-log-viewer-ansi-12: #2563eb;
+    --ow-log-viewer-ansi-13: #b31fc2;
+    --ow-log-viewer-ansi-14: #0f766e;
+    --ow-log-viewer-ansi-15: var(--ow-gray-700);
+    position: relative;
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-log-viewer-ground);
+}
+
+/* On the dark ground the colours are the lighter terminal ones. */
+[data-theme="dark"] .ow-log-viewer {
+    --ow-log-viewer-ansi-0: var(--ow-text-muted);
+    --ow-log-viewer-ansi-1: #ff7b72;
+    --ow-log-viewer-ansi-2: #5fd36e;
+    --ow-log-viewer-ansi-3: #f5c542;
+    --ow-log-viewer-ansi-4: #79b8ff;
+    --ow-log-viewer-ansi-5: #e9a1ff;
+    --ow-log-viewer-ansi-6: #56d4dd;
+    --ow-log-viewer-ansi-7: var(--ow-text);
+    --ow-log-viewer-ansi-8: #b2b8c2;
+    --ow-log-viewer-ansi-9: #ffa198;
+    --ow-log-viewer-ansi-10: #8ff09a;
+    --ow-log-viewer-ansi-11: #ffe066;
+    --ow-log-viewer-ansi-12: #a5d6ff;
+    --ow-log-viewer-ansi-13: #f2b8ff;
+    --ow-log-viewer-ansi-14: #8ae8ef;
+    --ow-log-viewer-ansi-15: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+    [data-theme="system"] .ow-log-viewer {
+        --ow-log-viewer-ansi-0: var(--ow-text-muted);
+        --ow-log-viewer-ansi-1: #ff7b72;
+        --ow-log-viewer-ansi-2: #5fd36e;
+        --ow-log-viewer-ansi-3: #f5c542;
+        --ow-log-viewer-ansi-4: #79b8ff;
+        --ow-log-viewer-ansi-5: #e9a1ff;
+        --ow-log-viewer-ansi-6: #56d4dd;
+        --ow-log-viewer-ansi-7: var(--ow-text);
+        --ow-log-viewer-ansi-8: #b2b8c2;
+        --ow-log-viewer-ansi-9: #ffa198;
+        --ow-log-viewer-ansi-10: #8ff09a;
+        --ow-log-viewer-ansi-11: #ffe066;
+        --ow-log-viewer-ansi-12: #a5d6ff;
+        --ow-log-viewer-ansi-13: #f2b8ff;
+        --ow-log-viewer-ansi-14: #8ae8ef;
+        --ow-log-viewer-ansi-15: #ffffff;
+    }
+}
+
+.ow-log-viewer__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-xs) var(--ow-space-sm);
+    border-bottom: 1px solid var(--ow-border);
+    background: var(--ow-surface);
+    padding: var(--ow-space-sm);
+}
+
+.ow-log-viewer__search {
+    width: 220px;
+    max-width: 100%;
+    flex: 1 1 160px;
+}
+
+.ow-log-viewer__matches {
+    min-width: 0;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.ow-log-viewer__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--ow-space-xs);
+    margin-inline-start: auto;
+}
+
+.ow-log-viewer__actions:empty {
+    display: none;
+}
+
+.ow-log-viewer__viewport {
+    position: relative;
+    min-height: 0;
+}
+
+.ow-log-viewer__scroll {
+    height: 100%;
+    overflow: auto;
+    /* The viewer keeps its own place as lines are measured or added; the browser's anchoring would double it. */
+    overflow-anchor: none;
+    overscroll-behavior: contain;
+    color: var(--ow-text);
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
+    line-height: 20px;
+    tab-size: 4;
+}
+
+.ow-log-viewer--wrap .ow-log-viewer__scroll {
+    overflow-x: hidden;
+}
+
+.ow-log-viewer__scroll:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: -2px;
+}
+
+.ow-log-viewer__inner {
+    position: relative;
+    width: 100%;
+}
+
+/* Rows are placed by their offset from the top. The gutter border is tinted by the line's level. */
+.ow-log-viewer__row {
+    position: absolute;
+    top: 0;
+    display: flex;
+    inset-inline: 0;
+    align-items: flex-start;
+    gap: 12px;
+    border-inline-start: 3px solid transparent;
+    padding: 0 12px 0 9px;
+}
+
+.ow-log-viewer__row[data-level="error"] {
+    border-color: var(--ow-danger-text);
+}
+
+.ow-log-viewer__row[data-level="warn"] {
+    border-color: var(--ow-warning-text);
+}
+
+.ow-log-viewer__row[data-level="info"] {
+    border-color: var(--ow-primary);
+}
+
+.ow-log-viewer__row[data-level="debug"] {
+    border-color: var(--ow-border-strong);
+}
+
+.ow-log-viewer__row--current {
+    background: var(--ow-primary-subtle);
+}
+
+.ow-log-viewer__number {
+    width: calc(var(--ow-log-viewer-digits, 1) * 1ch);
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+    text-align: end;
+    user-select: none;
+}
+
+.ow-log-viewer__time {
+    width: var(--ow-log-viewer-time, auto);
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+    white-space: pre;
+}
+
+.ow-log-viewer__text {
+    min-width: 0;
+    flex: 1 1 auto;
+    white-space: pre;
+}
+
+.ow-log-viewer--wrap .ow-log-viewer__text {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.ow-log-viewer__ansi--bold {
+    font-weight: var(--ow-weight-strong);
+}
+
+.ow-log-viewer__ansi--dim {
+    opacity: 0.65;
+}
+
+.ow-log-viewer__ansi--italic {
+    font-style: italic;
+}
+
+.ow-log-viewer__ansi--underline {
+    text-decoration: underline;
+}
+
+.ow-log-viewer__ansi--strike {
+    text-decoration: line-through;
+}
+
+.ow-log-viewer__ansi--underline.ow-log-viewer__ansi--strike {
+    text-decoration: underline line-through;
+}
+
+.ow-log-viewer__match {
+    border-radius: 2px;
+    background: var(--ow-warning-surface);
+    box-shadow: 0 0 0 1px var(--ow-warning-border);
+    color: inherit;
+}
+
+.ow-log-viewer__match--current {
+    background: var(--ow-warning-solid);
+    box-shadow: none;
+    color: var(--ow-gray-950);
+}
+
+/* The cursor at the end of a streaming log. */
+.ow-log-viewer__cursor {
+    display: inline-block;
+    width: 0.6em;
+    height: 1.1em;
+    margin-inline-start: 1px;
+    background: currentColor;
+    vertical-align: text-bottom;
+    animation: ow-log-viewer-blink 1s steps(2, start) infinite;
+}
+
+@keyframes ow-log-viewer-blink {
+    to {
+        visibility: hidden;
+    }
+}
+
+/* "Jump to latest": floats at the bottom in the middle once the reader scrolls up. */
+.ow-log-viewer__jump {
+    position: absolute;
+    right: 0;
+    bottom: var(--ow-space-lg);
+    left: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    animation: ow-log-viewer-rise var(--ow-duration-base) var(--ow-ease-emphasized);
+}
+
+.ow-log-viewer__jump[data-state="closed"] {
+    animation: ow-log-viewer-sink var(--ow-duration-exit) var(--ow-ease-exit) forwards;
+}
+
+.ow-log-viewer__jump > .ow-button {
+    pointer-events: auto;
+    box-shadow: var(--ow-shadow-button-secondary), var(--ow-shadow-menu);
+}
+
+.ow-log-viewer__count {
+    display: inline-flex;
+    height: 20px;
+    align-items: center;
+    margin-right: calc(-1 * var(--ow-space-xs));
+    border: 1px solid var(--ow-primary-border);
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-primary-subtle);
+    padding: 0 var(--ow-space-sm);
+    color: var(--ow-primary-text);
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+}
+
+@keyframes ow-log-viewer-rise {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes ow-log-viewer-sink {
+    to {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ow-log-viewer__jump,
+    .ow-log-viewer__cursor {
+        animation: none;
+    }
+}

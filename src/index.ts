@@ -279,6 +279,17 @@ export { ChainOfThought } from "./components/ChainOfThought/ChainOfThought";
 export type { ChainOfThoughtProps, ChainOfThoughtStep, ChainOfThoughtStatus } from "./components/ChainOfThought/ChainOfThought";
 export { ChatSource, ChatSources } from "./components/ChatSource/ChatSource";
 export type { ChatSourceProps, ChatSourcesProps, ChatSourceItem } from "./components/ChatSource/ChatSource";
+export { LogViewer, parseAnsi, stripAnsi } from "./components/LogViewer/LogViewer";
+export type {
+    LogViewerProps,
+    LogViewerHandle,
+    LogViewerLabels,
+    LogViewerLine,
+    LogViewerEntry,
+    LogViewerLevel,
+    AnsiSegment,
+    AnsiStyle,
+} from "./components/LogViewer/LogViewer";
 
 // Hooks and helpers
 export { ColorField, ColorPicker } from "./components/ColorPicker/ColorPicker";

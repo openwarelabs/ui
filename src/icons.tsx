@@ -172,6 +172,13 @@ export const ArrowDownIcon = icon(
         <path d="m19 12-7 7-7-7" />
     </>,
 );
+export const DownloadIcon = icon(
+    <>
+        <path d="M12 15V3" />
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <path d="m7 10 5 5 5-5" />
+    </>,
+);
 export const ChevronsUpDownIcon = icon(
     <>
         <path d="m7 15 5 5 5-5" />
