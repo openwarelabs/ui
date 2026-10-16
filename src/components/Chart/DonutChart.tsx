@@ -1,18 +1,11 @@
 import { useState, type KeyboardEvent } from "react";
 
 import { cx } from "@/utils/cx";
-import { colorOf, defaultValue } from "./chartUtils";
+import { arcPath, arcs, colorOf, defaultValue, wholePath } from "./chartUtils";
 import { ChartLegend, ChartTable } from "./ChartParts";
 import type { DonutChartProps } from "./Chart.types";
 
 const percent = new Intl.NumberFormat(undefined, { style: "percent", maximumFractionDigits: 1 });
-
-/** One slice of a ring, from one angle to another (radians, clockwise from 12 o'clock). */
-function slicePath(cx: number, cy: number, outer: number, inner: number, start: number, end: number) {
-    const point = (r: number, a: number) => `${(cx + r * Math.sin(a)).toFixed(2)} ${(cy - r * Math.cos(a)).toFixed(2)}`;
-    const large = end - start > Math.PI ? 1 : 0;
-    return `M${point(outer, start)}A${outer} ${outer} 0 ${large} 1 ${point(outer, end)}L${point(inner, end)}A${inner} ${inner} 0 ${large} 0 ${point(inner, start)}Z`;
-}
 
 /**
  * Parts of a whole as a ring, with the total in the middle and each part's value and share beside it. Best with two
@@ -28,12 +21,7 @@ export function DonutChart({ data, label, formatValue = defaultValue, center, ce
     const inner = outer - Math.max(14, Math.round(size * 0.13));
     // A 2px gap between slices, the same width at the inner and outer edge.
     const pad = (radius: number) => (slices.filter((slice) => slice.value > 0).length > 1 ? 1 / radius : 0);
-    let angle = 0;
-    const arcs = slices.map((slice) => {
-        const start = angle;
-        angle += total ? (slice.value / total) * Math.PI * 2 : 0;
-        return { start, end: angle };
-    });
+    const angles = arcs(slices.map((slice) => slice.value));
 
     const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
         if (!slices.length) return;
@@ -70,12 +58,10 @@ export function DonutChart({ data, label, formatValue = defaultValue, center, ce
                 <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
                     {total === 0 ? <circle className="ow-chart__empty" cx={outer} cy={outer} r={(outer + inner) / 2} strokeWidth={outer - inner} /> : null}
                     {slices.map((slice, i) => {
-                        const { start, end } = arcs[i]!;
+                        const { start, end } = angles[i]!;
                         if (end - start <= 0) return null;
                         const whole = end - start >= Math.PI * 2 - 1e-6;
-                        const d = whole
-                            ? `${slicePath(outer, outer, outer, inner, 0, Math.PI)}${slicePath(outer, outer, outer, inner, Math.PI, Math.PI * 2)}`
-                            : innerPadded(outer, inner, start, end, pad(outer), pad(inner));
+                        const d = whole ? wholePath(outer, outer, outer, inner) : arcPath(outer, outer, outer, inner, start, end, pad(outer), pad(inner));
                         return (
                             <path
                                 key={i}
@@ -108,17 +94,4 @@ export function DonutChart({ data, label, formatValue = defaultValue, center, ce
             />
         </figure>
     );
-}
-
-/** A slice with its ends pulled in: by padOuter at the outer edge and padInner at the inner, so the gap is even. */
-function innerPadded(outer: number, inner: number, start: number, end: number, padOuter: number, padInner: number) {
-    const c = outer;
-    const point = (r: number, a: number) => `${(c + r * Math.sin(a)).toFixed(2)} ${(c - r * Math.cos(a)).toFixed(2)}`;
-    const os = start + padOuter;
-    const oe = Math.max(os, end - padOuter);
-    const is = start + padInner;
-    const ie = Math.max(is, end - padInner);
-    const largeOuter = oe - os > Math.PI ? 1 : 0;
-    const largeInner = ie - is > Math.PI ? 1 : 0;
-    return `M${point(outer, os)}A${outer} ${outer} 0 ${largeOuter} 1 ${point(outer, oe)}L${point(inner, ie)}A${inner} ${inner} 0 ${largeInner} 0 ${point(inner, is)}Z`;
 }
