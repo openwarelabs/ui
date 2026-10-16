@@ -1,0 +1,32 @@
+/* TimeRangeField: two TimeFields side by side with the word between them. Each time is drawn by DateField.css. */
+.ow-time-range-field {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    align-items: center;
+    gap: var(--ow-space-sm);
+    color: var(--ow-text);
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.ow-time-range-field--sm {
+    gap: var(--ow-space-xs);
+    font-size: 13px;
+}
+
+/* The two times share the width; each shrinks to its segments rather than pushing past a narrow column. */
+.ow-time-range-field__time.ow-date-field {
+    flex: 1 1 0;
+    width: auto;
+}
+
+.ow-time-range-field__to {
+    flex-shrink: 0;
+    color: var(--ow-text-muted);
+    user-select: none;
+}
+
+.ow-time-range-field--disabled .ow-time-range-field__to {
+    opacity: 0.62;
+}
