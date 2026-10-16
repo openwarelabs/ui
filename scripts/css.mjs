@@ -82,6 +82,7 @@ export const cssOrder = [
     "components/Table/Table.css",
     "components/DataGrid/DataGrid.css",
     "components/Stat/Stat.css",
+    "components/Countdown/Countdown.css",
     "components/Carousel/Carousel.css",
     "components/DescriptionList/DescriptionList.css",
     "components/Chart/Chart.css",
