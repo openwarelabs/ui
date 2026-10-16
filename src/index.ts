@@ -34,6 +34,8 @@ export { Field } from "./components/Field/Field";
 export type { FieldProps } from "./components/Field/Field";
 export { Form, FormError, useFormStatus } from "./components/Form/Form";
 export type { FormProps, FormErrorProps, FormStatus, FormValues, FormErrors, ValidityCheck, ValidityMessages } from "./components/Form/Form";
+export { Wizard } from "./components/Wizard/Wizard";
+export type { WizardProps, WizardStep, WizardStepContext, WizardLabels, WizardValues, WizardErrors } from "./components/Wizard/Wizard";
 export { Input } from "./components/Input/Input";
 export type { InputProps } from "./components/Input/Input";
 export { SearchField } from "./components/SearchField/SearchField";
@@ -90,6 +92,8 @@ export { Rating } from "./components/Rating/Rating";
 export type { RatingProps, RatingLabels } from "./components/Rating/Rating";
 export { FileDropZone } from "./components/FileDropZone/FileDropZone";
 export type { FileDropZoneProps } from "./components/FileDropZone/FileDropZone";
+export { ImageCropper } from "./components/ImageCropper/ImageCropper";
+export type { ImageCrop, ImageCropperHandle, ImageCropperLabels, ImageCropperOutput, ImageCropperProps } from "./components/ImageCropper/ImageCropper";
 export { UploadList, useUploadQueue } from "./components/UploadList/UploadList";
 export type {
     UploadListProps,
@@ -179,6 +183,8 @@ export { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuG
 export type { NavigationMenuProps, NavigationMenuItemProps, NavigationMenuLinkProps, NavigationMenuGroupProps } from "./components/NavigationMenu/NavigationMenu";
 export { AppShell, SidebarHeader, SidebarContent, SidebarFooter, SidebarToggle, useAppShell } from "./components/AppShell/AppShell";
 export type { AppShellProps, AppShellState, SidebarSectionProps, SidebarToggleProps } from "./components/AppShell/AppShell";
+export { TableOfContents } from "./components/TableOfContents/TableOfContents";
+export type { TableOfContentsProps, TocItem } from "./components/TableOfContents/TableOfContents";
 
 // Data display
 export { Table } from "./components/Table/Table";
@@ -248,6 +254,8 @@ export type { SectionProps } from "./components/Section/Section";
 export { Splitter, SplitterPanel, SplitterHandle } from "./components/Splitter/Splitter";
 export type { SplitterProps, SplitterPanelProps, SplitterHandleProps, SplitterDirection } from "./components/Splitter/Splitter";
 export type { StackProps, SeparatorProps, ScrollShadowProps, SpaceToken } from "./components/Layout/Layout";
+export { ScrollArea } from "./components/ScrollArea/ScrollArea";
+export type { ScrollAreaProps, ScrollAreaOrientation, ScrollAreaType } from "./components/ScrollArea/ScrollArea";
 
 // Marketing
 export { Chip, SectionHeading, SiteHeader, DotGrid } from "./components/Marketing/Marketing";

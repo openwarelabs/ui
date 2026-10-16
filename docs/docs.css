@@ -1107,14 +1107,18 @@ body {
     font-family: var(--ow-font-mono);
     font-size: 12.5px;
     line-height: 1.55;
-    word-break: break-word;
+    /* Breaks at the spaces in a long type, and inside a name only if the name alone is wider than the column. Unlike
+       word-break, this doesn't let the column shrink to a few letters a line. */
+    overflow-wrap: break-word;
 }
 
+/* Defaults wrap like the types, so a long one ("the locale's first day of the week") can't push the other columns out. */
 .docs-prop__default {
     color: var(--ow-text-soft);
     font-family: var(--ow-font-mono);
     font-size: 12.5px;
-    white-space: nowrap;
+    line-height: 1.55;
+    overflow-wrap: break-word;
 }
 
 .docs-prop__none {
