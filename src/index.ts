@@ -52,6 +52,8 @@ export { TimeField } from "./components/DateField/TimeField";
 export type { TimeFieldProps } from "./components/DateField/TimeField";
 export { Textarea } from "./components/Textarea/Textarea";
 export type { TextareaProps } from "./components/Textarea/Textarea";
+export { MarkdownEditor, defaultMarkdownEditorToolbar } from "./components/MarkdownEditor/MarkdownEditor";
+export type { MarkdownEditorProps, MarkdownEditorLabels, MarkdownEditorTool } from "./components/MarkdownEditor/MarkdownEditor";
 export { InlineEdit } from "./components/InlineEdit/InlineEdit";
 export type { InlineEditProps, InlineEditLabels } from "./components/InlineEdit/InlineEdit";
 export { Select } from "./components/Select/Select";
@@ -140,6 +142,8 @@ export { Dialog, ConfirmDialog } from "./components/Dialog/Dialog";
 export type { DialogProps, ConfirmDialogProps } from "./components/Dialog/Dialog";
 export { Drawer } from "./components/Drawer/Drawer";
 export type { DrawerProps } from "./components/Drawer/Drawer";
+export { BottomSheet } from "./components/BottomSheet/BottomSheet";
+export type { BottomSheetLabels, BottomSheetProps, BottomSheetSnapPoint } from "./components/BottomSheet/BottomSheet";
 export { Popover } from "./components/Popover/Popover";
 export type { PopoverProps } from "./components/Popover/Popover";
 export { NotificationCenter, NotificationList } from "./components/NotificationCenter/NotificationCenter";
@@ -197,8 +201,9 @@ export { SortableList } from "./components/SortableList/SortableList";
 export type { SortableListProps, SortableListItemState, SortableListLabels } from "./components/SortableList/SortableList";
 export { Kanban } from "./components/Kanban/Kanban";
 export type { KanbanProps, KanbanColumn, KanbanCardState, KanbanMove, KanbanLabels } from "./components/Kanban/Kanban";
-export { LineChart, BarChart, DonutChart, Sparkline } from "./components/Chart/Chart";
+export { LineChart, AreaChart, BarChart, DonutChart, PieChart, ScatterChart, Sparkline } from "./components/Chart/Chart";
 export type {
+    AreaChartProps,
     BarChartProps,
     CartesianChartProps,
     ChartColor,
@@ -207,6 +212,9 @@ export type {
     DonutChartProps,
     DonutChartSlice,
     LineChartProps,
+    PieChartProps,
+    PieChartSlice,
+    ScatterChartProps,
     SparklineProps,
 } from "./components/Chart/Chart";
 export { ActivityHeatmap } from "./components/ActivityHeatmap/ActivityHeatmap";
@@ -251,6 +259,8 @@ export { Section } from "./components/Section/Section";
 export type { SectionProps } from "./components/Section/Section";
 export { Splitter, SplitterPanel, SplitterHandle } from "./components/Splitter/Splitter";
 export type { SplitterProps, SplitterPanelProps, SplitterHandleProps, SplitterDirection } from "./components/Splitter/Splitter";
+export { Collapsible, CollapsibleTrigger, CollapsibleContent } from "./components/Collapsible/Collapsible";
+export type { CollapsibleProps, CollapsibleTriggerProps, CollapsibleContentProps, CollapsibleState } from "./components/Collapsible/Collapsible";
 export type { StackProps, SeparatorProps, ScrollShadowProps, SpaceToken } from "./components/Layout/Layout";
 export { ScrollArea } from "./components/ScrollArea/ScrollArea";
 export type { ScrollAreaProps, ScrollAreaOrientation, ScrollAreaType } from "./components/ScrollArea/ScrollArea";
