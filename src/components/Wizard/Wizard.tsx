@@ -6,7 +6,15 @@ import { Steps, type StepItem } from "@/components/Steps/Steps";
 import { useControllableState } from "@/hooks/useControllableState";
 import { cx } from "@/utils/cx";
 
-import type { WizardErrors, WizardLabels, WizardProps, WizardStep, WizardStepContext, WizardValues } from "./Wizard.types";
+import type {
+    WizardErrors,
+    WizardLabels,
+    WizardProps,
+    WizardSaved,
+    WizardStep,
+    WizardStepContext,
+    WizardValues,
+} from "./Wizard.types";
 
 export type { WizardErrors, WizardLabels, WizardProps, WizardStep, WizardStepContext, WizardValues } from "./Wizard.types";
 
@@ -20,13 +28,6 @@ const defaultLabels: Required<WizardLabels> = {
 };
 
 const empty: WizardValues = {};
-
-/** What's saved under `persist`. */
-interface Saved {
-    step?: number;
-    values?: WizardValues;
-    completed?: string[];
-}
 
 /** The step's values take the place of what was saved under the same names, so an unticked box doesn't keep its old value. */
 function merge(previous: WizardValues, form: HTMLFormElement | null, fresh: WizardValues): WizardValues {
@@ -115,7 +116,7 @@ export function Wizard({
         if (!persist) return;
         try {
             const raw = window.sessionStorage.getItem(persist);
-            const saved: Saved = raw ? (JSON.parse(raw) as Saved) : {};
+            const saved: WizardSaved = raw ? (JSON.parse(raw) as WizardSaved) : {};
             if (saved.values) setValues(saved.values);
             if (saved.completed) setCompleted(new Set(saved.completed));
             if (typeof saved.step === "number") setStepIndex(saved.step);
@@ -128,7 +129,7 @@ export function Wizard({
     useEffect(() => {
         if (!persist || !restored) return;
         try {
-            const saved: Saved = { step: index, values, completed: [...completed] };
+            const saved: WizardSaved = { step: index, values, completed: [...completed] };
             window.sessionStorage.setItem(persist, JSON.stringify(saved));
         } catch {
             // Nothing to do when storage is off.

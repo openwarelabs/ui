@@ -110,3 +110,10 @@ export interface WizardProps {
     children?: (context: WizardStepContext) => ReactNode;
     className?: string;
 }
+
+/** What's saved in sessionStorage under `persist`. */
+export interface WizardSaved {
+    step?: number;
+    values?: WizardValues;
+    completed?: string[];
+}
