@@ -36,7 +36,7 @@ export const meta: DocMeta = {
         "The locale decides the clock, the separators and the AM/PM words; hourCycle overrides the clock.",
         "With name, a hidden input carries the value, so forms submit it.",
     ],
-    related: ["DateField", "NumberField", "Input"],
+    related: ["DateField", "TimeRangeField", "DurationField", "NumberField", "Input"],
     since: "0.4.0",
 };
 

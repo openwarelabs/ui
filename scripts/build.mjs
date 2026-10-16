@@ -95,6 +95,8 @@ export const catalogue = [
     "DatePicker",
     "ColorPicker",
     "ColorField",
+    "TimeRangeField",
+    "DurationField",
     "Alert",
     "Banner",
     "Callout",
