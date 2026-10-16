@@ -265,6 +265,8 @@ export { Container } from "./components/Container/Container";
 export type { ContainerProps, ContainerSize } from "./components/Container/Container";
 export { AspectRatio } from "./components/AspectRatio/AspectRatio";
 export type { AspectRatioProps } from "./components/AspectRatio/AspectRatio";
+export { Affix } from "./components/Affix/Affix";
+export type { AffixProps, AffixMode, AffixPosition, AffixState } from "./components/Affix/Affix";
 export { Watermark } from "./components/Watermark/Watermark";
 export type { WatermarkProps, WatermarkTile } from "./components/Watermark/Watermark";
 export { VirtualList } from "./components/VirtualList/VirtualList";

@@ -178,6 +178,7 @@ export const catalogue = [
     "Splitter",
     "Collapsible",
     "AspectRatio",
+    "Affix",
     "Watermark",
     "VisuallyHidden",
     "VirtualList",
