@@ -54,7 +54,7 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 
 ## Components
 
-123 components, each with a page in the docs.
+124 components, each with a page in the docs.
 
 | Group | Components |
 | --- | --- |
@@ -62,7 +62,7 @@ import { Button, Field, Input, Toaster, toast } from "@openwarelabs/ui";
 | Actions | `Button` (primary, secondary, ghost, danger; sm, md, lg; `loading`; `shape="pill"`), `buttonClassName()` for links, `ButtonGroup`, `CloseButton`, `CopyButton`, `ToggleButton`, `SegmentedControl`, `ToggleButtonGroup` (one or several on), `Toolbar` + `ToolbarSeparator` (arrow keys across its controls) |
 | Inputs | `Form` (the browser's checks, your own and the server's errors, under each field; `useFormStatus`), `Field`, `Fieldset`, `Input` (start and end content), `Textarea` (`autoGrow`), `NumberField`, `SearchField`, `InputOTP`, `ColorField`, `DateField` and `TimeField` (typed in segments, in the locale's order), `TagInput` (several values as tags, typed or picked from suggestions), `PasswordInput` (show and hide, a strength meter, a checklist of rules; `passwordStrength()`), `MentionInput` (`@` mentions and `/` commands in a list at the caret; `useMentions` for any text box), `SignaturePad` (sign with a mouse, finger or pen, or type instead; sent with a Form) |
 | Choices | `Checkbox`, `CheckboxGroup`, `RadioGroup` (plain or cards), `Switch`, `Select`, `Combobox`, `Slider` (one value or a range), `Rating` (pick a score or show one), `ChoiceCard`, `ListBox` (one or many, on the page), `TreeView` (rows that open, select or check, with children loaded on demand), `TransferList` (two lists with buttons to move items between them, searchable and orderable) |
-| Pickers | `Calendar`, `DatePicker`, `RangeCalendar`, `DateRangePicker` (with presets), `ColorPicker`, `ColorArea`, `ColorSlider`, `ColorSwatchPicker`, `FileDropZone`, `UploadList` (files uploading with progress, retry, cancel and remove; `useUploadQueue`) |
+| Pickers | `Calendar`, `DatePicker`, `RangeCalendar`, `DateRangePicker` (with presets), `ColorPicker`, `ColorArea`, `ColorSlider`, `ColorSwatchPicker`, `FileDropZone`, `ImageCropper` (move and zoom a picture under a frame for an avatar or a banner; the cropped image through a ref or with a Form), `UploadList` (files uploading with progress, retry, cancel and remove; `useUploadQueue`) |
 | Feedback | `Alert`, `Badge`, `ProgressBar`, `ProgressCircle`, `Meter` (an amount in a range, toned by thresholds), `Spinner`, `Skeleton`, `SkeletonRows`, `Toaster` + `toast()` (sonner: stacked, swipeable, with actions and promises), `Tooltip`, `Banner` (an announcement bar across the top, dismissible and remembered) |
 | Overlays | `Dialog`, `ConfirmDialog`, `Drawer`, `Popover`, `HoverCard` (a preview when the pointer rests on a link), `Menu` + `MenuItem`, `CommandPalette`, `ContextMenu` (right-click, long press or Shift+F10, with the same items), `Tour` (steps that point at parts of the page, with an optional spotlight) + `Coachmark`, `NavigationMenu` + `NavigationMenuItem` + `NavigationMenuLink` (a site's top nav with dropdown panels and mega-menus), `NotificationCenter` (a bell with an unread count that opens a popover inbox) + `NotificationList` |
 | Navigation | `Tabs`, `Accordion`, `Disclosure`, `Breadcrumbs`, `Pagination`, `Steps`, `NavList` + `NavItem` |

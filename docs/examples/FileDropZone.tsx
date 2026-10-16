@@ -16,7 +16,7 @@ export const meta: DocMeta = {
         "A visually hidden file input inside a label does the picking, so it works from the keyboard and screen readers.",
         "Problems (wrong type, too big) replace the hint and are announced.",
     ],
-    related: ["Field", "ProgressBar"],
+    related: ["Field", "ImageCropper", "UploadList"],
 };
 
 /** Drop images here, or press it to browse. The files you add are listed below. */
