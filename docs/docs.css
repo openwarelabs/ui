@@ -819,6 +819,35 @@ body {
     padding-left: 32px;
 }
 
+/* A caption over a run of links, such as the day on Releases. */
+.docs-toc__group {
+    margin: var(--ow-space-2xl) 0 var(--ow-space-2xs);
+    padding-left: 20px;
+    color: var(--ow-text-muted);
+    font-size: 11px;
+    font-weight: var(--ow-weight-emphasis);
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+}
+
+.docs-toc__list > .docs-toc__group:first-of-type {
+    margin-top: 0;
+}
+
+.docs-toc__link--hint {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--ow-space-sm);
+}
+
+.docs-toc__hint {
+    flex: none;
+    color: var(--ow-text-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
 .docs-toc__link:hover {
     color: var(--ow-text);
 }
@@ -2858,25 +2887,94 @@ a.docs-block-uses__item:focus-visible {
     margin-top: var(--ow-space-sm);
 }
 
-/* Releases: each version's date and summary, its new components as cards, then lists of the rest. */
+/* Releases: each version's counts, its new components as cards with their first example, then lists of the rest. */
+.docs-article__header + .docs-release {
+    margin-top: var(--ow-space-7xl);
+}
+
+.docs-release + .docs-release {
+    margin-top: 48px;
+    border-top: 1px solid var(--ow-border);
+    padding-top: 40px;
+}
+
+.docs-release > .docs-section > .docs-h2 {
+    margin: 0 0 var(--ow-space-lg);
+    font-size: 28px;
+    letter-spacing: -0.025em;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Patch releases: a smaller heading, since they rarely add much. */
+.docs-release--patch > .docs-section > .docs-h2 {
+    font-size: 21px;
+    letter-spacing: -0.02em;
+}
+
 .docs-release__title {
     display: inline-flex;
     align-items: center;
-    gap: var(--ow-space-sm);
+    gap: var(--ow-space-md);
 }
 
 .docs-release__meta {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--ow-space-2xs) var(--ow-space-xs);
-    margin: 0 0 var(--ow-space-lg);
+    justify-content: space-between;
+    gap: var(--ow-space-sm) var(--ow-space-2xl);
+    margin: 0 0 var(--ow-space-4xl);
+}
+
+.docs-release__counts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ow-space-xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.docs-release__count {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 26px;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-surface-muted);
+    padding: 0 11px;
+    color: var(--ow-text-soft);
+    font-size: 12.5px;
+    font-weight: var(--ow-weight-emphasis);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.docs-release__count::before {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--ow-radius-pill);
+    background: var(--ow-icon);
+    content: "";
+}
+
+/* Brass marks what's new, as it marks the list bullets. */
+.docs-release__count--new::before {
+    background: var(--ow-brass);
+}
+
+.docs-release__when {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ow-space-xs);
     color: var(--ow-text-muted);
     font-size: 14px;
 }
 
 .docs-release__group {
-    margin: var(--ow-space-lg) 0 var(--ow-space-sm);
+    margin: var(--ow-space-4xl) 0 var(--ow-space-md);
     color: var(--ow-text);
     font-size: 14px;
     font-weight: var(--ow-weight-emphasis);
@@ -2884,62 +2982,124 @@ a.docs-block-uses__item:focus-visible {
 
 .docs-release-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
-    gap: var(--ow-space-sm);
-    margin: 0 0 var(--ow-space-lg);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    gap: var(--ow-space-lg);
+    margin: 0;
     padding: 0;
     list-style: none;
 }
 
 .docs-release-card {
-    display: grid;
-    align-content: start;
-    gap: var(--ow-space-2xs);
-    border: 1px solid var(--ow-border);
-    border-radius: var(--ow-radius-container);
-    background: var(--ow-surface);
-    padding: var(--ow-space-md) var(--ow-space-lg);
+    grid-template-rows: auto 1fr;
+    align-content: stretch;
+}
+
+.docs-release-card__preview {
+    height: 128px;
+}
+
+.docs-release-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: var(--ow-space-lg) var(--ow-space-xl) var(--ow-space-xl);
 }
 
 .docs-release-card__head {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-between;
-    gap: var(--ow-space-xs);
+    gap: 2px var(--ow-space-sm);
 }
 
-.docs-release-card__name {
-    color: var(--ow-text);
-    font-weight: var(--ow-weight-emphasis);
-    text-decoration: none;
+.docs-release-card .docs-card__name {
+    font-size: 15px;
 }
 
-.docs-release-card__name:hover {
-    text-decoration: underline;
+.docs-release-card__category {
+    color: var(--ow-text-muted);
+    font-size: 12px;
 }
 
 .docs-release-card__text {
+    font-size: 13px;
+    -webkit-line-clamp: 3;
+    text-wrap: pretty;
+}
+
+.docs-release-card .docs-release__refs {
+    margin-top: auto;
+    padding-top: var(--ow-space-sm);
+}
+
+/* The pull request and commit: quiet, and above the card's stretched link so they stay clickable. */
+.docs-release__refs {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    gap: var(--ow-space-sm);
+    color: var(--ow-text-muted);
+    font-family: var(--ow-font-mono);
+    font-size: 11.5px;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+.docs-release__ref {
+    border-radius: var(--ow-radius-sm);
+    color: inherit;
+    text-decoration: none;
+}
+
+.docs-release__ref:hover {
+    color: var(--ow-text);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.docs-release__ref:focus-visible {
+    outline: 2px solid var(--ow-focus-ring);
+    outline-offset: 2px;
+}
+
+.docs-release-notes {
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--ow-border);
+    border-radius: var(--ow-radius-container);
+    background: var(--ow-surface);
+    list-style: none;
+}
+
+.docs-release-note {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--ow-space-2xs) var(--ow-space-2xl);
+    padding: var(--ow-space-lg) var(--ow-space-2xl);
+}
+
+.docs-release-note + .docs-release-note {
+    border-top: 1px solid var(--ow-border);
+}
+
+.docs-release-note__text {
+    flex: 1 1 320px;
+    min-width: 0;
     color: var(--ow-text-soft);
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.55;
+    text-wrap: pretty;
 }
 
-.docs-release__list {
-    margin-bottom: var(--ow-space-lg);
-}
-
-.docs-release__refs {
-    display: inline-flex;
-    gap: var(--ow-space-xs);
-    color: var(--ow-text-muted);
-    font-size: 13px;
-}
-
-.docs-release__refs a {
-    color: inherit;
-}
-
-.docs-release__refs a:hover {
+.docs-release-note__scope {
+    margin-right: var(--ow-space-sm);
+    border-radius: var(--ow-radius-code);
+    background: var(--ow-code-ground);
+    padding: 1px 6px;
     color: var(--ow-text);
+    font-family: var(--ow-font-mono);
+    font-size: 12px;
 }
