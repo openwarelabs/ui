@@ -35,7 +35,7 @@ export function Profile() {
         <HoverCard trigger={<Link href="#/people/alex">@alexsilver</Link>}>
             <User name="Alex Silver" description="@alexsilver" size="lg" />
             <Text variant="body">
-                Designs and builds Openware UI. Midnight, brass and tactile buttons.
+                Designs and builds Openware UI. Midnight, brass and hairline buttons.
             </Text>
             <Stack direction="row" justify="between" align="center">
                 <Text variant="caption" tone="muted">
