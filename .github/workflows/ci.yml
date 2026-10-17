@@ -1,4 +1,4 @@
-# Checks every pull request and every push to main: the library, the blocks package, the MCP server and the docs. "Checks" and "Cleaner" are required to merge into main
+# Checks every pull request and every push to main: the library, the blocks package, the ESLint plugin, the MCP server and the docs. "Checks" and "Cleaner" are required to merge into main
 # (scripts/setup-github.sh sets that up), alongside "PR title" from pr-title.yml, "Visual" from visual.yml and "Accessibility" from accessibility.yml.
 name: CI
 
@@ -19,7 +19,9 @@ jobs:
           cache: npm
       - run: npm ci # also builds dist/, through the prepare script
       - run: npm run typecheck
-      - run: npm run lint # React's hooks rules; eslint-suppressions.json holds the old problems
+      - run: npm run eslint:build # the plugin, which lint then runs on the docs and the blocks
+      - run: npm run eslint:test
+      - run: npm run lint # React's hooks rules, and the plugin's; eslint-suppressions.json holds the old problems
       - run: npm run contrast
       - run: npm run blocks:check
       - run: npm run blocks:build

@@ -17,7 +17,7 @@ export function BlockActionButton({ action, variant, size = "lg", shape = "pill"
     if (href !== undefined) {
         return (
             <a
-                className={cx(buttonClassName({ variant, size, shape }), fullWidth && "ow-button--full", className)}
+                className={cx(buttonClassName({ variant, size, shape, fullWidth }), className)}
                 href={href}
                 target={target}
                 rel={target === "_blank" ? "noopener noreferrer" : undefined}

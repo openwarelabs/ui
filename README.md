@@ -102,7 +102,16 @@ codex mcp add openware-ui -- npx -y @openwarelabs/ui-mcp    # Codex
 
 Cursor and most other clients take `{ "mcpServers": { "openware-ui": { "command": "npx", "args": ["-y", "@openwarelabs/ui-mcp"] } } }`. [mcp/README.md](mcp/README.md) has every tool and client.
 
-In the docs, every component and block has a **Copy for AI** button: a prompt with its whole reference (examples and props, or a block's two files) to paste into any AI tool. The built docs also have `llms.txt`, `llms-full.txt` and a Markdown copy of every page under `ai/`. `npm run mcp:build` rebuilds the server from the docs.
+Its `check_code` tool checks a file the tool wrote, before it runs: components imported from the package and nothing used without its import, real props with real values, every input labelled, the library's controls instead of raw `<button>` and `<input>`, tokens instead of hard-coded colours, and `--ow-` names that exist. The same rules are an ESLint plugin for the project's own lint and CI, [`@openwarelabs/eslint-plugin-ui`](eslint/README.md):
+
+```js
+// eslint.config.js
+import openware from "@openwarelabs/eslint-plugin-ui";
+
+export default [openware.configs.recommended];
+```
+
+In the docs, every component and block has a **Copy for AI** button: a prompt with its whole reference (examples and props, or a block's two files) to paste into any AI tool. The built docs also have `llms.txt`, `llms-full.txt` and a Markdown copy of every page under `ai/`. `npm run mcp:build` rebuilds the server from the docs, and `npm run eslint:build` the plugin.
 
 ## Tokens
 

@@ -111,7 +111,23 @@ export function readBlocks() {
 
 
 // Props, from the source of truth: the exported interfaces in src/.
-const elementNames = { HTMLButtonElement: "button", HTMLInputElement: "input", HTMLTextAreaElement: "textarea", HTMLAnchorElement: "a", HTMLDivElement: "div", HTMLSpanElement: "span", HTMLElement: "element" };
+const elementNames = {
+    HTMLButtonElement: "button",
+    HTMLInputElement: "input",
+    HTMLTextAreaElement: "textarea",
+    HTMLSelectElement: "select",
+    HTMLAnchorElement: "a",
+    HTMLImageElement: "img",
+    HTMLFormElement: "form",
+    HTMLOListElement: "ol",
+    HTMLUListElement: "ul",
+    HTMLLIElement: "li",
+    HTMLDListElement: "dl",
+    HTMLTimeElement: "time",
+    HTMLDivElement: "div",
+    HTMLSpanElement: "span",
+    HTMLElement: "element",
+};
 
 export function readProps() {
     // The library and the blocks package, with the aliases their tsconfig files give them.
@@ -143,6 +159,9 @@ export function readProps() {
                 const text = type.getText();
                 const match = /HTMLAttributes<(\w+)>/.exec(text);
                 if (match) return elementNames[match[1]] ?? "element";
+                // ComponentPropsWithoutRef<"svg"> and the like name the element directly.
+                const direct = /ComponentProps(?:WithoutRef|WithRef)?<"(\w+)">/.exec(text);
+                if (direct) return direct[1];
                 for (const [name, other] of interfaces) {
                     if (!seen.has(name) && new RegExp(`\\b${name}\\b`).test(text)) {
                         seen.add(name);

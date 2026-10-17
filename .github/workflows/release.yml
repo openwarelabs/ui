@@ -1,6 +1,6 @@
 # Publishes a release when `npm run release` pushes its tag (v1.2.3): checks everything again, then publishes
-# @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp to npm with trusted publishing (no npm token, with provenance), and
-# makes the GitHub release from the changelog. Safe to re-run: anything already published is skipped.
+# @openwarelabs/ui, @openwarelabs/blocks, @openwarelabs/eslint-plugin-ui and @openwarelabs/ui-mcp to npm with trusted publishing
+# (no npm token, with provenance), and makes the GitHub release from the changelog. Safe to re-run: anything already published is skipped.
 name: Release
 
 on:
@@ -36,8 +36,9 @@ jobs:
           ui=$(node -p "require('./package.json').version")
           mcp=$(node -p "require('./mcp/package.json').version")
           blocks=$(node -p "require('./blocks/package.json').version")
-          if [ "$tag" != "$ui" ] || [ "$tag" != "$mcp" ] || [ "$tag" != "$blocks" ]; then
-            echo "::error::The tag is $GITHUB_REF_NAME, but package.json says $ui, mcp/package.json $mcp and blocks/package.json $blocks."
+          eslint=$(node -p "require('./eslint/package.json').version")
+          if [ "$tag" != "$ui" ] || [ "$tag" != "$mcp" ] || [ "$tag" != "$blocks" ] || [ "$tag" != "$eslint" ]; then
+            echo "::error::The tag is $GITHUB_REF_NAME, but package.json says $ui, mcp/package.json $mcp, blocks/package.json $blocks and eslint/package.json $eslint."
             exit 1
           fi
           echo "VERSION=$tag" >> "$GITHUB_ENV"
@@ -47,6 +48,8 @@ jobs:
       - run: npm run contrast
       - run: npm run blocks:check
       - run: npm run blocks:build
+      - run: npm run eslint:build
+      - run: npm run eslint:test
       - run: npm run mcp:build
 
       - name: Publish @openwarelabs/ui
@@ -62,6 +65,15 @@ jobs:
         run: |
           if npm view "@openwarelabs/blocks@$VERSION" version > /dev/null 2>&1; then
             echo "@openwarelabs/blocks@$VERSION is already on npm."
+          else
+            npm publish
+          fi
+
+      - name: Publish @openwarelabs/eslint-plugin-ui
+        working-directory: eslint
+        run: |
+          if npm view "@openwarelabs/eslint-plugin-ui@$VERSION" version > /dev/null 2>&1; then
+            echo "@openwarelabs/eslint-plugin-ui@$VERSION is already on npm."
           else
             npm publish
           fi
@@ -88,7 +100,7 @@ jobs:
           [ -s notes.md ] || echo "Release $VERSION." > notes.md
           cat >> notes.md <<NOTES
 
-          **npm:** [@openwarelabs/ui@$VERSION](https://www.npmjs.com/package/@openwarelabs/ui/v/$VERSION) · [@openwarelabs/blocks@$VERSION](https://www.npmjs.com/package/@openwarelabs/blocks/v/$VERSION) · [@openwarelabs/ui-mcp@$VERSION](https://www.npmjs.com/package/@openwarelabs/ui-mcp/v/$VERSION)
+          **npm:** [@openwarelabs/ui@$VERSION](https://www.npmjs.com/package/@openwarelabs/ui/v/$VERSION) · [@openwarelabs/blocks@$VERSION](https://www.npmjs.com/package/@openwarelabs/blocks/v/$VERSION) · [@openwarelabs/eslint-plugin-ui@$VERSION](https://www.npmjs.com/package/@openwarelabs/eslint-plugin-ui/v/$VERSION) · [@openwarelabs/ui-mcp@$VERSION](https://www.npmjs.com/package/@openwarelabs/ui-mcp/v/$VERSION)
           NOTES
           if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
             gh release edit "$GITHUB_REF_NAME" --notes-file notes.md

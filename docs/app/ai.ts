@@ -8,6 +8,7 @@ import type { DocMeta, PropsDoc, TokensFile } from "./types";
 export const packageName = "@openwarelabs/ui";
 export const mcpPackage = "@openwarelabs/ui-mcp";
 export const mcpName = "openware-ui";
+export const eslintPackage = "@openwarelabs/eslint-plugin-ui";
 
 /** How to add the MCP server to each tool. */
 export const mcpSetup = {
@@ -136,6 +137,7 @@ export function setupMarkdown(version?: string) {
             "- For a signature, use `SignaturePad` in a `Field`: drawn with a mouse, finger or pen, or typed (\"Type instead\"), its `value` is a PNG data URL (`format=\"svg\"` for SVG); `name` and `required` work in a `Form`, and `readOnly` shows a saved one. Don't build your own canvas.",
             `- Tailwind v4: \`@import "${packageName}/tailwind.css";\` after \`@import "tailwindcss";\` gives \`bg-surface\`, \`text-text-muted\`, \`rounded-container\`, \`p-lg\` and the rest.`,
             `- Rebrand with \`applyBrand("#0d9488")\` (or a preset from \`brandPresets\`); the primary button, focus ring and tints follow in both themes.`,
+            `- Check what you wrote: the MCP server's \`check_code\` tool, or \`${eslintPackage}\` in the project's ESLint config, reports raw controls, props and values that don't exist, unlabelled inputs, hard-coded colours, and tokens, classes and imports that aren't the library's. Fix what it finds.`,
         ].join("\n"),
         "## Blocks",
         `Every block in the docs, all 95 whole page sections (headers, heroes, pricing, app shells, settings, sign-in, dashboards, chat and the rest), comes as a component in \`${blocksPackage}\`: \`npm install ${blocksPackage}\`, \`import "${blocksPackage}/styles.css";\` once after the library's styles, then \`<Hero01 title="…" description="…" primaryAction={{ label: "Start for free", href: "/signup" }} />\`. Content is props; use them rather than copying their code. Each block's reference lists its props.`,

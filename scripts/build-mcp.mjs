@@ -1,11 +1,13 @@
-// Builds the MCP server, @openwarelabs/ui-mcp, into mcp/dist/server.mjs: one file with the docs' data and the
-// MCP SDK bundled in, so `npx -y @openwarelabs/ui-mcp` starts without installing anything else.
+// Builds the MCP server, @openwarelabs/ui-mcp, into mcp/dist/server.mjs: one file with the docs' data, the MCP
+// SDK, and ESLint's core with the plugin's rules (for check_code) bundled in, so `npx -y @openwarelabs/ui-mcp`
+// starts without installing anything else.
 import fs from "node:fs";
 import path from "node:path";
 import * as esbuild from "esbuild";
 
 import { readAiData } from "./ai-data.mjs";
 import { root } from "./css.mjs";
+import { buildManifest } from "./eslint-manifest.mjs";
 
 const mcp = path.join(root, "mcp");
 const data = await readAiData();
@@ -14,6 +16,8 @@ const data = await readAiData();
 const json = JSON.stringify(data).replace(/Commandr['’]s/g, "Openware's").replace(/Commandr/g, "Openware");
 fs.mkdirSync(path.join(mcp, "build"), { recursive: true });
 fs.writeFileSync(path.join(mcp, "build/registry.json"), json);
+// What the rules know about the library (eslint/src reads it as @build/manifest.json).
+fs.writeFileSync(path.join(mcp, "build/manifest.json"), JSON.stringify(buildManifest()));
 
 await esbuild.build({
     entryPoints: [path.join(mcp, "src/server.ts")],
@@ -22,6 +26,9 @@ await esbuild.build({
     platform: "node",
     format: "esm",
     target: "node18",
+    tsconfig: path.join(mcp, "tsconfig.json"),
+    // ESLint loads config files with jiti; the server never does, so it stays out of the bundle.
+    external: ["jiti"],
     minify: true,
     legalComments: "linked",
     banner: { js: '#!/usr/bin/env node\nimport { createRequire as __createRequire } from "node:module"; const require = __createRequire(import.meta.url);' },

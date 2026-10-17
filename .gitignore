@@ -4,3 +4,4 @@ docs/build
 docs-dist
 .tmp
 mcp/build
+eslint/build

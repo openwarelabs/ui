@@ -17,6 +17,9 @@ export interface ButtonStyleOptions {
     /** A square button holding only an icon. Give it an aria-label.
      * @default false */
     iconOnly?: boolean;
+    /** Stretches the button to its container's width.
+     * @default false */
+    fullWidth?: boolean;
 }
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, ButtonStyleOptions {
@@ -29,7 +32,4 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, Bu
     /** Shows a spinner in place of the start icon and disables the button, keeping its width.
      * @default false */
     loading?: boolean;
-    /** Stretches the button to its container's width.
-     * @default false */
-    fullWidth?: boolean;
 }

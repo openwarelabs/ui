@@ -5,7 +5,7 @@
     "target": "ES2022",
     "lib": ["ES2022"],
     "types": [],
-    "paths": { "@build/*": ["./build/*"] }
+    "paths": { "@build/*": ["./build/*"], "@plugin/*": ["../eslint/src/*"] }
   },
   "include": ["src"]
 }

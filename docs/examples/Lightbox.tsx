@@ -101,7 +101,7 @@ export function Gallery() {
                             padding: 0,
                             background: "none",
                             cursor: "zoom-in",
-                            borderRadius: "var(--ow-radius-control)",
+                            borderRadius: "var(--ow-radius-form)",
                         }}
                     >
                         <Image
