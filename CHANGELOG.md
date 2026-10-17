@@ -2,6 +2,14 @@
 
 Every release of @openwarelabs/ui, @openwarelabs/blocks and @openwarelabs/ui-mcp. `npm run release` writes it from the commits, and the docs' Releases page shows it.
 
+## 0.24.0 (2026-10-17)
+
+1 improvement.
+
+### Improvements
+
+- **eslint:** add an ESLint plugin for code written with Openware UI, and check_code in the MCP server ([#96](https://github.com/openwarelabs/ui/pull/96), [66c7898](https://github.com/openwarelabs/ui/commit/66c78986e3a7bddefb31f85d5bcefe9715943a9a))
+
 ## 0.23.0 (2026-10-16)
 
 1 improvement.

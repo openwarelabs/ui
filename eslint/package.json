@@ -1,6 +1,6 @@
 {
   "name": "@openwarelabs/eslint-plugin-ui",
-  "version": "0.23.0",
+  "version": "0.24.0",
   "description": "ESLint rules for code written with Openware UI: the library's components instead of raw controls or look-alikes, real props and values, labelled inputs, and tokens instead of hard-coded colours.",
   "license": "MIT",
   "author": "Alexander Silver",
